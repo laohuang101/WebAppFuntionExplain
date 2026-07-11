@@ -1,6 +1,6 @@
 # dashboard.js
 **Source:** `Pages/Lecturer/Scripts/dashboard.js`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,60 +15,78 @@ Lecturer home: course stats, recent submissions, charts. Backed by LecturerRepos
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 3:** `__chartJsLoading` — script-level `const`/`let`/`var` — **Holds “chart Js Loading” for this scope.**
-- **Line 4:** `__chartPending` — script-level `const`/`let`/`var` — **Holds “chart Pending” for this scope.**
-- **Line 10:** `s` — script-level `const`/`let`/`var` — **String value or submission-related object.**
-- **Line 21:** `targets` — script-level `const`/`let`/`var` — **Often a collection related to targets (plural name).**
-- **Line 27:** `done` — script-level `const`/`let`/`var` — **Holds “done” for this scope.**
-- **Line 28:** `io` — script-level `const`/`let`/`var` — **Holds “io” for this scope.**
-- **Line 41:** `enrollmentChart` — script-level `const`/`let`/`var` — **Holds “enrollment Chart” for this scope.**
-- **Line 43:** `gradeChart` — script-level `const`/`let`/`var` — **Holds “grade Chart” for this scope.**
-- **Line 53:** `ctxEl` — script-level `const`/`let`/`var` — **Holds “ctx El” for this scope.**
-- **Line 55:** `ctx` — script-level `const`/`let`/`var` — **Current HTTP request context (Request, Response, Session).**
-- **Line 82:** `labels` — script-level `const`/`let`/`var` — **Often a collection related to labels (plural name).**
-- **Line 84:** `values` — script-level `const`/`let`/`var` — **Often a collection related to values (plural name).**
-- **Line 116:** `defaultLabels` — script-level `const`/`let`/`var` — **Often a collection related to default Labels (plural name).**
-- **Line 169:** `currentSubmissionId` — script-level `const`/`let`/`var` — **Holds “current Submission Id” for this scope.**
-- **Line 171:** `dashSubmissionsDt` — script-level `const`/`let`/`var` — **Holds “dash Submissions Dt” for this scope.**
-- **Line 172:** `dashSubmissionsMap` — script-level `const`/`let`/`var` — **Holds “dash Submissions Map” for this scope.**
-- **Line 180:** `wrap` — script-level `const`/`let`/`var` — **Holds “wrap” for this scope.**
-- **Line 182:** `colors` — script-level `const`/`let`/`var` — **Often a collection related to colors (plural name).**
-- **Line 228:** `rows` — script-level `const`/`let`/`var` — **Collection of rows.**
-- **Line 236:** `sub` — script-level `const`/`let`/`var` — **Holds “sub” for this scope.**
-- **Line 251:** `res` — script-level `const`/`let`/`var` — **Result object returned from fetch/WebMethod (`data.d` unwrapped).**
-- **Line 253:** `blob` — script-level `const`/`let`/`var` — **Holds “blob” for this scope.**
-- **Line 254:** `a` — script-level `const`/`let`/`var` — **Holds “a” for this scope.**
-- **Line 276:** `resObj` — script-level `const`/`let`/`var` — **Holds “res Obj” for this scope.**
-- **Line 304:** `enrollData` — script-level `const`/`let`/`var` — **Holds “enroll Data” for this scope.**
-- **Line 306:** `gradeData` — script-level `const`/`let`/`var` — **Holds “grade Data” for this scope.**
-- **Line 332:** `avatar` — script-level `const`/`let`/`var` — **Holds “avatar” for this scope.**
-- **Line 343:** `txtScore` — script-level `const`/`let`/`var` — **UI control reference (txt Score).**
-- **Line 352:** `myModal` — script-level `const`/`let`/`var` — **Holds “my Modal” for this scope.**
-- **Line 357:** `score` — script-level `const`/`let`/`var` — **Points earned or max points depending on context.**
-- **Line 358:** `review` — script-level `const`/`let`/`var` — **Holds “review” for this scope.**
-- **Line 359:** `errDiv` — script-level `const`/`let`/`var` — **Holds “err Div” for this scope.**
-- **Line 387:** `modalEl` — script-level `const`/`let`/`var` — **Holds “modal El” for this scope.**
-- **Line 388:** `modal` — script-level `const`/`let`/`var` — **Holds “modal” for this scope.**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `__chartJsLoading` | `const/let/var` | Holds “chart Js Loading” for this scope. |
+| `__chartPending` | `const/let/var` | Holds “chart Pending” for this scope. |
+| `s` | `const/let/var` | String value or submission-related object. |
+| `targets` | `const/let/var` | Often a collection related to targets (plural name). |
+| `done` | `const/let/var` | Holds “done” for this scope. |
+| `io` | `const/let/var` | Holds “io” for this scope. |
+| `enrollmentChart` | `const/let/var` | Holds “enrollment Chart” for this scope. |
+| `gradeChart` | `const/let/var` | Holds “grade Chart” for this scope. |
+| `ctxEl` | `const/let/var` | Holds “ctx El” for this scope. |
+| `ctx` | `const/let/var` | Current HTTP request context (Request, Response, Session). |
+| `labels` | `const/let/var` | Often a collection related to labels (plural name). |
+| `values` | `const/let/var` | Often a collection related to values (plural name). |
+| `defaultLabels` | `const/let/var` | Often a collection related to default Labels (plural name). |
+| `currentSubmissionId` | `const/let/var` | Holds “current Submission Id” for this scope. |
+| `dashSubmissionsDt` | `const/let/var` | Holds “dash Submissions Dt” for this scope. |
+| `dashSubmissionsMap` | `const/let/var` | Holds “dash Submissions Map” for this scope. |
+| `wrap` | `const/let/var` | Holds “wrap” for this scope. |
+| `colors` | `const/let/var` | Often a collection related to colors (plural name). |
+| `rows` | `const/let/var` | Collection of rows. |
+| `sub` | `const/let/var` | Holds “sub” for this scope. |
+| `res` | `const/let/var` | Result object returned from fetch/WebMethod (`data.d` unwrapped). |
+| `blob` | `const/let/var` | Holds “blob” for this scope. |
+| `a` | `const/let/var` | Holds “a” for this scope. |
+| `resObj` | `const/let/var` | Holds “res Obj” for this scope. |
+| `enrollData` | `const/let/var` | Holds “enroll Data” for this scope. |
+| `gradeData` | `const/let/var` | Holds “grade Data” for this scope. |
+| `avatar` | `const/let/var` | Holds “avatar” for this scope. |
+| `txtScore` | `const/let/var` | UI control reference (txt Score). |
+| `myModal` | `const/let/var` | Holds “my Modal” for this scope. |
+| `score` | `const/let/var` | Points earned or max points depending on context. |
+| `review` | `const/let/var` | Holds “review” for this scope. |
+| `errDiv` | `const/let/var` | Holds “err Div” for this scope. |
+| `modalEl` | `const/let/var` | Holds “modal El” for this scope. |
+| `modal` | `const/let/var` | Holds “modal” for this scope. |
 
 ## Functions / methods (18 found)
 
 ### `ensureChartJs` — lines 4–18
 
+#### Signature
+
 ```javascript
 function ensureChartJs(cb)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ensureChartJs`.
-- **Parameters (what each means):**
-- `cb` — Holds “cb” for this scope.
-- **Local variables (what each means):**
-- `s` — String value or submission-related object.
+Makes sure **Chart Js** exists or is valid before the rest of the code continues.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `ensureChartJs`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cb` | `—` | Holds “cb” for this scope. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `s` | `—` | String value or submission-related object. |
+
+#### Code
 
 ```javascript
    4 | 
@@ -88,34 +106,42 @@ function ensureChartJs(cb)
   18 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L6:** Dashboard chart/visualization.
-- **L7:** Dashboard chart/visualization.
-- **L10:** `s` means: String value or submission-related object.
-- **L11:** Dashboard chart/visualization.
-- **L14:** Dashboard chart/visualization.
-
 ---
 
 ### `whenChartsVisible` — lines 18–40
+
+#### Signature
 
 ```javascript
 function whenChartsVisible(run)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `whenChartsVisible`.
-- **Parameters (what each means):**
-- `run` — Holds “run” for this scope.
-- **Local variables (what each means):**
-- `targets` — Often a collection related to targets (plural name).
-- `done` — Holds “done” for this scope.
-- `io` — Holds “io” for this scope.  Newly constructed object.
-- `i` — Loop index (0-based counter in for-loops).  Literal number `0`.
+Function `whenChartsVisible` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `whenChartsVisible`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `run` | `—` | Holds “run” for this scope. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `targets` | `—` | Often a collection related to targets (plural name). |
+| `done` | `—` | Holds “done” for this scope. |
+| `io` | `—` | Holds “io” for this scope.  Newly constructed object. |
+| `i` | `—` | Loop index (0-based counter in for-loops).  Literal number `0`. |
+
+#### Code
 
 ```javascript
   18 | 
@@ -143,35 +169,42 @@ function whenChartsVisible(run)
   40 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L20:** Dashboard chart/visualization.
-- **L21:** `targets` means: Often a collection related to targets (plural name).
-- **L22:** Get HTML element by id.
-- **L23:** Get HTML element by id.
-- **L27:** `done` means: Holds “done” for this scope.
-- **L28:** `io` means: Holds “io” for this scope.  Newly constructed object.
-
 ---
 
 ### `renderEnrollmentTrendWithChart` — lines 43–112
+
+#### Signature
 
 ```javascript
 function renderEnrollmentTrendWithChart(data)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `renderEnrollmentTrendWithChart`.
-- **Parameters (what each means):**
-- `data` — Holds “data” for this scope.
-- **Local variables (what each means):**
-- `ctxEl` — Holds “ctx El” for this scope.  DOM element from the page.
-- `ctx` — Current HTTP request context (Request, Response, Session).
-- `labels` — Often a collection related to labels (plural name).
-- `values` — Often a collection related to values (plural name).
+Updates the page HTML for **render Enrollment Trend With Chart**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `renderEnrollmentTrendWithChart`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `data` | `—` | Holds “data” for this scope. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctxEl` | `—` | Holds “ctx El” for this scope.  DOM element from the page. |
+| `ctx` | `—` | Current HTTP request context (Request, Response, Session). |
+| `labels` | `—` | Often a collection related to labels (plural name). |
+| `values` | `—` | Often a collection related to values (plural name). |
+
+#### Code
 
 ```javascript
   43 | 
@@ -246,46 +279,42 @@ function renderEnrollmentTrendWithChart(data)
  112 |   }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L45:** Dashboard chart/visualization.
-- **L46:** Error handling block.
-- **L49:** Dashboard chart/visualization.
-- **L50:** Error handling block.
-- **L51:** Dashboard chart/visualization.
-- **L53:** Get HTML element by id. | `ctxEl` means: Holds “ctx El” for this scope.  DOM element from the page.
-- **L55:** `ctx` means: Current HTTP request context (Request, Response, Session).
-- **L67:** Dashboard chart/visualization.
-- **L68:** Dashboard chart/visualization.
-- **L70:** Get HTML element by id. | `ctxEl` means: Holds “ctx El” for this scope.  DOM element from the page.
-- **L72:** `ctx` means: Current HTTP request context (Request, Response, Session).
-- **L78:** Dashboard chart/visualization.
-- **L83:** `labels` means: Often a collection related to labels (plural name).
-- **L84:** `values` means: Often a collection related to values (plural name).
-- **L85:** Get HTML element by id. | `ctx` means: Current HTTP request context (Request, Response, Session).  DOM element from the page.
-- **L86:** Dashboard chart/visualization.
-- **L87:** Dashboard chart/visualization.
-
 ---
 
 ### `renderGradeDistributionWithChart` — lines 112–163
+
+#### Signature
 
 ```javascript
 function renderGradeDistributionWithChart(data)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `renderGradeDistributionWithChart`.
-- **Parameters (what each means):**
-- `data` — Holds “data” for this scope.
-- **Local variables (what each means):**
-- `defaultLabels` — Often a collection related to default Labels (plural name).
-- `ctx` — Current HTTP request context (Request, Response, Session).  DOM element from the page.
-- `labels` — Often a collection related to labels (plural name).
-- `values` — Often a collection related to values (plural name).
+Updates the page HTML for **render Grade Distribution With Chart**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `renderGradeDistributionWithChart`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `data` | `—` | Holds “data” for this scope. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `defaultLabels` | `—` | Often a collection related to default Labels (plural name). |
+| `ctx` | `—` | Current HTTP request context (Request, Response, Session).  DOM element from the page. |
+| `labels` | `—` | Often a collection related to labels (plural name). |
+| `values` | `—` | Often a collection related to values (plural name). |
+
+#### Code
 
 ```javascript
  112 | 
@@ -342,56 +371,64 @@ function renderGradeDistributionWithChart(data)
  163 |   }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L114:** Dashboard chart/visualization.
-- **L115:** Error handling block.
-- **L116:** `defaultLabels` means: Often a collection related to default Labels (plural name).
-- **L119:** Dashboard chart/visualization.
-- **L120:** Get HTML element by id. | `ctx` means: Current HTTP request context (Request, Response, Session).  DOM element from the page.
-- **L121:** Dashboard chart/visualization.
-- **L140:** `labels` means: Often a collection related to labels (plural name).
-- **L141:** `values` means: Often a collection related to values (plural name).
-- **L142:** Get HTML element by id. | `ctx` means: Current HTTP request context (Request, Response, Session).  DOM element from the page.
-- **L143:** Dashboard chart/visualization.
-- **L144:** Dashboard chart/visualization.
-
 ---
 
 ### `escapeHtmlDash` — lines 172–404
+
+#### Signature
 
 ```javascript
 function escapeHtmlDash(str)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `escapeHtmlDash`.
-- **ASP.NET WebMethod:** Called from browser JS via `Page.aspx/MethodName` POST JSON.
-- **AJAX:** Browser calls server endpoints asynchronously.
-- **Parameters (what each means):**
-- `str` — String value: str.
-- **Local variables (what each means):**
-- `wrap` — Holds “wrap” for this scope.  DOM element from the page.
-- `colors` — Often a collection related to colors (plural name).
-- `rows` — Collection of rows.
-- `sub` — Holds “sub” for this scope.
-- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- `blob` — Holds “blob” for this scope.  Newly constructed object.
-- `a` — Holds “a” for this scope.
-- `resObj` — Holds “res Obj” for this scope.
-- `enrollData` — Holds “enroll Data” for this scope.
-- `gradeData` — Holds “grade Data” for this scope.
-- `avatar` — Holds “avatar” for this scope.  DOM element from the page.
-- `txtScore` — UI control reference (txt Score).  DOM element from the page.
-- `myModal` — Holds “my Modal” for this scope.  DOM element from the page.
-- `score` — Points earned or max points depending on context.  DOM element from the page.
-- `review` — Holds “review” for this scope.  DOM element from the page.
-- `errDiv` — Holds “err Div” for this scope.  DOM element from the page.
-- `modalEl` — Holds “modal El” for this scope.  DOM element from the page.
-- `modal` — Holds “modal” for this scope.
+Browser-side function `escapeHtmlDash` — talks to the server and updates the page.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Call the server with `fetch` (AJAX) and wait for the JSON result.
+2. Convert a JavaScript object into a JSON string for the server.
+3. Parse the server JSON response into a JavaScript object.
+4. Show a simple popup message to the user.
+5. Call the server with `fetch` (AJAX) and wait for the JSON result.
+6. Parse the server JSON response into a JavaScript object.
+7. If the previous step failed, show the error and stop.
+8. Update a page element (text, HTML, value, or enabled/disabled).
+9. Call the server with `fetch` (AJAX) and wait for the JSON result.
+10. Convert a JavaScript object into a JSON string for the server.
+11. Parse the server JSON response into a JavaScript object.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `str` | `—` | String value: str. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `wrap` | `—` | Holds “wrap” for this scope.  DOM element from the page. |
+| `colors` | `—` | Often a collection related to colors (plural name). |
+| `rows` | `—` | Collection of rows. |
+| `sub` | `—` | Holds “sub” for this scope. |
+| `res` | `—` | Result object returned from fetch/WebMethod (`data.d` unwrapped). |
+| `blob` | `—` | Holds “blob” for this scope.  Newly constructed object. |
+| `a` | `—` | Holds “a” for this scope. |
+| `resObj` | `—` | Holds “res Obj” for this scope. |
+| `enrollData` | `—` | Holds “enroll Data” for this scope. |
+| `gradeData` | `—` | Holds “grade Data” for this scope. |
+| `avatar` | `—` | Holds “avatar” for this scope.  DOM element from the page. |
+| `txtScore` | `—` | UI control reference (txt Score).  DOM element from the page. |
+| `myModal` | `—` | Holds “my Modal” for this scope.  DOM element from the page. |
+| `score` | `—` | Points earned or max points depending on context.  DOM element from the page. |
+| `review` | `—` | Holds “review” for this scope.  DOM element from the page. |
+| `errDiv` | `—` | Holds “err Div” for this scope.  DOM element from the page. |
+| `modalEl` | `—` | Holds “modal El” for this scope.  DOM element from the page. |
+| `modal` | `—` | Holds “modal” for this scope. |
+
+#### Code
 
 ```javascript
  172 | 
@@ -629,75 +666,41 @@ function escapeHtmlDash(str)
  404 | 
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L174:** Encode text to reduce XSS risk.
-- **L180:** Get HTML element by id. | `wrap` means: Holds “wrap” for this scope.  DOM element from the page.
-- **L182:** `colors` means: Often a collection related to colors (plural name).
-- **L186:** In-memory result set from ADO.NET.
-- **L187:** Update page HTML.
-- **L191:** In-memory result set from ADO.NET.
-- **L203:** Encode text to reduce XSS risk.
-- **L204:** Encode text to reduce XSS risk.
-- **L228:** `rows` means: Collection of rows.
-- **L236:** `sub` means: Holds “sub” for this scope.
-- **L242:** CSV export.
-- **L243:** HTTP request to server WebMethod/ashx.
-- **L246:** JS object ↔ JSON text.
-- **L251:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L253:** CSV export. | `blob` means: Holds “blob” for this scope.  Newly constructed object.
-- **L254:** `a` means: Holds “a” for this scope.
-- **L256:** CSV export.
-- **L266:** HTTP request to server WebMethod/ashx.
-- **L276:** `resObj` means: Holds “res Obj” for this scope.
-- **L294:** Get HTML element by id.
-- **L295:** Get HTML element by id.
-- **L296:** Get HTML element by id.
-- **L298:** Get HTML element by id.
-- **L300:** Get HTML element by id.
-- **L304:** `enrollData` means: Holds “enroll Data” for this scope.
-- **L306:** `gradeData` means: Holds “grade Data” for this scope.
-- **L308:** Dashboard chart/visualization.
-- **L309:** Dashboard chart/visualization.
-- **L310:** Dashboard chart/visualization.
-- **L311:** Dashboard chart/visualization.
-- **L332:** Get HTML element by id. | `avatar` means: Holds “avatar” for this scope.  DOM element from the page.
-- **L335:** Get HTML element by id.
-- **L338:** Get HTML element by id.
-- **L339:** Get HTML element by id.
-- **L340:** Get HTML element by id.
-- **L343:** Get HTML element by id. | `txtScore` means: UI control reference (txt Score).  DOM element from the page.
-- **L346:** Get HTML element by id.
-- **L349:** Get HTML element by id.
-- **L352:** Get HTML element by id. | `myModal` means: Holds “my Modal” for this scope.  DOM element from the page.
-- **L357:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
-- **L358:** Get HTML element by id. | `review` means: Holds “review” for this scope.  DOM element from the page.
-- **L359:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
-- **L370:** HTTP request to server WebMethod/ashx.
-- **L375:** JS object ↔ JSON text.
-- **L383:** `resObj` means: Holds “res Obj” for this scope.
-- **L387:** Get HTML element by id. | `modalEl` means: Holds “modal El” for this scope.  DOM element from the page.
-- **L388:** `modal` means: Holds “modal” for this scope.
-
 ---
 
 ### `renderDashSubmissions` — lines 177–233
+
+#### Signature
 
 ```javascript
 function renderDashSubmissions(list)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `renderDashSubmissions`.
-- **Parameters (what each means):**
-- `list` — In-memory collection being built for JSON return.
-- **Local variables (what each means):**
-- `wrap` — Holds “wrap” for this scope.  DOM element from the page.
-- `colors` — Often a collection related to colors (plural name).
-- `rows` — Collection of rows.
+Updates the page HTML for **render Dash Submissions**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `renderDashSubmissions`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `list` | `—` | In-memory collection being built for JSON return. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `wrap` | `—` | Holds “wrap” for this scope.  DOM element from the page. |
+| `colors` | `—` | Often a collection related to colors (plural name). |
+| `rows` | `—` | Collection of rows. |
+
+#### Code
 
 ```javascript
  177 | 
@@ -759,33 +762,38 @@ function renderDashSubmissions(list)
  233 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L180:** Get HTML element by id. | `wrap` means: Holds “wrap” for this scope.  DOM element from the page.
-- **L182:** `colors` means: Often a collection related to colors (plural name).
-- **L186:** In-memory result set from ADO.NET.
-- **L187:** Update page HTML.
-- **L191:** In-memory result set from ADO.NET.
-- **L203:** Encode text to reduce XSS risk.
-- **L204:** Encode text to reduce XSS risk.
-- **L228:** `rows` means: Collection of rows.
-
 ---
 
 ### `render` — lines 201–205
+
+#### Signature
 
 ```javascript
 function render(sub, i)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `render`.
-- **Parameters (what each means):**
-- `sub` — Holds “sub” for this scope.
-- `i` — Loop index (0-based counter in for-loops).
+Updates the page HTML for **render**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `render`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sub` | `—` | Holds “sub” for this scope. |
+| `i` | `—` | Loop index (0-based counter in for-loops). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  201 |   render: function (sub, i) {
@@ -795,26 +803,37 @@ function render(sub, i)
  205 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L203:** Encode text to reduce XSS risk.
-- **L204:** Encode text to reduce XSS risk.
-
 ---
 
 ### `searchValue` — lines 206–206
+
+#### Signature
 
 ```javascript
 function searchValue(s)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `searchValue`.
-- **Parameters (what each means):**
-- `s` — String value or submission-related object.
+Function `searchValue` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `searchValue`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `s` | `—` | String value or submission-related object. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  206 | searchValue: function (s) { return (s.studentName || '') + ' ' + (s.studentEmail || ''); }
@@ -824,17 +843,33 @@ function searchValue(s)
 
 ### `sortValue` — lines 211–211
 
+#### Signature
+
 ```javascript
 function sortValue(s)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `sortValue`.
-- **Parameters (what each means):**
-- `s` — String value or submission-related object.
+Function `sortValue` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `sortValue`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `s` | `—` | String value or submission-related object. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  211 | sortValue: function (s) { return s.timestamp || s.timeText || ''; }
@@ -844,17 +879,33 @@ function sortValue(s)
 
 ### `render` — lines 214–220
 
+#### Signature
+
 ```javascript
 function render(sub)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `render`.
-- **Parameters (what each means):**
-- `sub` — Holds “sub” for this scope.
+Updates the page HTML for **render**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `render`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sub` | `—` | Holds “sub” for this scope. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  214 | render: function (sub) {
@@ -870,17 +921,33 @@ function render(sub)
 
 ### `sortValue` — lines 221–221
 
+#### Signature
+
 ```javascript
 function sortValue(s)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `sortValue`.
-- **Parameters (what each means):**
-- `s` — String value or submission-related object.
+Function `sortValue` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `sortValue`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `s` | `—` | String value or submission-related object. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  221 | sortValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; }
@@ -890,17 +957,33 @@ function sortValue(s)
 
 ### `searchValue` — lines 222–222
 
+#### Signature
+
 ```javascript
 function searchValue(s)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `searchValue`.
-- **Parameters (what each means):**
-- `s` — String value or submission-related object.
+Function `searchValue` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `searchValue`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `s` | `—` | String value or submission-related object. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  222 | searchValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; }
@@ -910,19 +993,35 @@ function searchValue(s)
 
 ### `openGradeModalBySid` — lines 233–238
 
+#### Signature
+
 ```javascript
 function openGradeModalBySid(sid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `openGradeModalBySid`.
-- **Parameters (what each means):**
-- `sid` — Submission ID (CWSubmissions.SID).
-- **Local variables (what each means):**
-- `sub` — Holds “sub” for this scope.
+Function `openGradeModalBySid` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `openGradeModalBySid`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sid` | `—` | Submission ID (CWSubmissions.SID). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sub` | `—` | Holds “sub” for this scope. |
+
+#### Code
 
 ```javascript
  233 | 
@@ -933,29 +1032,40 @@ function openGradeModalBySid(sid)
  238 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L236:** `sub` means: Holds “sub” for this scope.
-
 ---
 
 ### `exportDashGradesCsv` — lines 240–262
+
+#### Signature
 
 ```javascript
 function exportDashGradesCsv()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `exportDashGradesCsv`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **AJAX:** Browser calls server endpoints asynchronously.
-- **Local variables (what each means):**
-- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- `blob` — Holds “blob” for this scope.  Newly constructed object.
-- `a` — Holds “a” for this scope.
+Browser-side function `exportDashGradesCsv` — talks to the server and updates the page.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Call the server with `fetch` (AJAX) and wait for the JSON result.
+2. Convert a JavaScript object into a JSON string for the server.
+3. Parse the server JSON response into a JavaScript object.
+4. Show a simple popup message to the user.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `res` | `—` | Result object returned from fetch/WebMethod (`data.d` unwrapped). |
+| `blob` | `—` | Holds “blob” for this scope.  Newly constructed object. |
+| `a` | `—` | Holds “a” for this scope. |
+
+#### Code
 
 ```javascript
  240 | 
@@ -983,37 +1093,39 @@ function exportDashGradesCsv()
  262 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L242:** CSV export.
-- **L243:** HTTP request to server WebMethod/ashx.
-- **L246:** JS object ↔ JSON text.
-- **L251:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L253:** CSV export. | `blob` means: Holds “blob” for this scope.  Newly constructed object.
-- **L254:** `a` means: Holds “a” for this scope.
-- **L256:** CSV export.
-
 ---
 
 ### `loadDashboardData` — lines 262–322
+
+#### Signature
 
 ```javascript
 function loadDashboardData()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `loadDashboardData`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **AJAX:** Browser calls server endpoints asynchronously.
-- **Navigation:** Redirects the browser.
-- **Pattern:** Read/load data for display.
-- **Local variables (what each means):**
-- `resObj` — Holds “res Obj” for this scope.
-- `enrollData` — Holds “enroll Data” for this scope.
-- `gradeData` — Holds “grade Data” for this scope.
+Reads/loads data related to **Dashboard Data** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Call the server with `fetch` (AJAX) and wait for the JSON result.
+2. Parse the server JSON response into a JavaScript object.
+3. If the previous step failed, show the error and stop.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `resObj` | `—` | Holds “res Obj” for this scope. |
+| `enrollData` | `—` | Holds “enroll Data” for this scope. |
+| `gradeData` | `—` | Holds “grade Data” for this scope. |
+
+#### Code
 
 ```javascript
  262 | 
@@ -1079,37 +1191,37 @@ function loadDashboardData()
  322 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L266:** HTTP request to server WebMethod/ashx.
-- **L276:** `resObj` means: Holds “res Obj” for this scope.
-- **L294:** Get HTML element by id.
-- **L295:** Get HTML element by id.
-- **L296:** Get HTML element by id.
-- **L298:** Get HTML element by id.
-- **L300:** Get HTML element by id.
-- **L304:** `enrollData` means: Holds “enroll Data” for this scope.
-- **L306:** `gradeData` means: Holds “grade Data” for this scope.
-- **L308:** Dashboard chart/visualization.
-- **L309:** Dashboard chart/visualization.
-- **L310:** Dashboard chart/visualization.
-- **L311:** Dashboard chart/visualization.
-
 ---
 
 ### `formatNumber` — lines 322–326
+
+#### Signature
 
 ```javascript
 function formatNumber(num)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `formatNumber`.
-- **Parameters (what each means):**
-- `num` — Numeric count of items related to `num`.
+Converts or cleans **format Number** into a usable form.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `formatNumber`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `num` | `—` | Numeric count of items related to `num`. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  322 | 
@@ -1123,21 +1235,35 @@ function formatNumber(num)
 
 ### `openGradeModal` — lines 326–354
 
+#### Signature
+
 ```javascript
 function openGradeModal(sub)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `openGradeModal`.
-- **Parameters (what each means):**
-- `sub` — Holds “sub” for this scope.
-- **Local variables (what each means):**
-- `avatar` — Holds “avatar” for this scope.  DOM element from the page.
-- `txtScore` — UI control reference (txt Score).  DOM element from the page.
-- `myModal` — Holds “my Modal” for this scope.  DOM element from the page.
+Function `openGradeModal` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sub` | `—` | Holds “sub” for this scope. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `avatar` | `—` | Holds “avatar” for this scope.  DOM element from the page. |
+| `txtScore` | `—` | UI control reference (txt Score).  DOM element from the page. |
+| `myModal` | `—` | Holds “my Modal” for this scope.  DOM element from the page. |
+
+#### Code
 
 ```javascript
  326 | 
@@ -1171,41 +1297,43 @@ function openGradeModal(sub)
  354 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L332:** Get HTML element by id. | `avatar` means: Holds “avatar” for this scope.  DOM element from the page.
-- **L335:** Get HTML element by id.
-- **L338:** Get HTML element by id.
-- **L339:** Get HTML element by id.
-- **L340:** Get HTML element by id.
-- **L343:** Get HTML element by id. | `txtScore` means: UI control reference (txt Score).  DOM element from the page.
-- **L346:** Get HTML element by id.
-- **L349:** Get HTML element by id.
-- **L352:** Get HTML element by id. | `myModal` means: Holds “my Modal” for this scope.  DOM element from the page.
-
 ---
 
 ### `submitGrading` — lines 354–403
+
+#### Signature
 
 ```javascript
 function submitGrading()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `submitGrading`.
-- **ASP.NET WebMethod:** Called from browser JS via `Page.aspx/MethodName` POST JSON.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **AJAX:** Browser calls server endpoints asynchronously.
-- **Local variables (what each means):**
-- `score` — Points earned or max points depending on context.  DOM element from the page.
-- `review` — Holds “review” for this scope.  DOM element from the page.
-- `errDiv` — Holds “err Div” for this scope.  DOM element from the page.
-- `resObj` — Holds “res Obj” for this scope.
-- `modalEl` — Holds “modal El” for this scope.  DOM element from the page.
-- `modal` — Holds “modal” for this scope.
+Browser-side function `submitGrading` — talks to the server and updates the page.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+2. Call the server with `fetch` (AJAX) and wait for the JSON result.
+3. Convert a JavaScript object into a JSON string for the server.
+4. Parse the server JSON response into a JavaScript object.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `score` | `—` | Points earned or max points depending on context.  DOM element from the page. |
+| `review` | `—` | Holds “review” for this scope.  DOM element from the page. |
+| `errDiv` | `—` | Holds “err Div” for this scope.  DOM element from the page. |
+| `resObj` | `—` | Holds “res Obj” for this scope. |
+| `modalEl` | `—` | Holds “modal El” for this scope.  DOM element from the page. |
+| `modal` | `—` | Holds “modal” for this scope. |
+
+#### Code
 
 ```javascript
  354 | 
@@ -1260,22 +1388,11 @@ function submitGrading()
  403 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L357:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
-- **L358:** Get HTML element by id. | `review` means: Holds “review” for this scope.  DOM element from the page.
-- **L359:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
-- **L370:** HTTP request to server WebMethod/ashx.
-- **L375:** JS object ↔ JSON text.
-- **L383:** `resObj` means: Holds “res Obj” for this scope.
-- **L387:** Get HTML element by id. | `modalEl` means: Holds “modal El” for this scope.  DOM element from the page.
-- **L388:** `modal` means: Holds “modal” for this scope.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```javascript
    1 | 
@@ -1682,511 +1799,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  402 | });
  403 | }
  404 | 
-```
-
-**Line notes** (what code + variables mean)
-
-- **L3:** `__chartJsLoading` means: Holds “chart Js Loading” for this scope.
-- **L4:** `__chartPending` means: Holds “chart Pending” for this scope.
-- **L6:** Dashboard chart/visualization.
-- **L7:** Dashboard chart/visualization.
-- **L10:** `s` means: String value or submission-related object.
-- **L11:** Dashboard chart/visualization.
-- **L14:** Dashboard chart/visualization.
-- **L20:** Dashboard chart/visualization.
-- **L21:** `targets` means: Often a collection related to targets (plural name).
-- **L22:** Get HTML element by id.
-- **L23:** Get HTML element by id.
-- **L27:** `done` means: Holds “done” for this scope.
-- **L28:** `io` means: Holds “io” for this scope.  Newly constructed object.
-- **L42:** Dashboard chart/visualization. | `enrollmentChart` means: Holds “enrollment Chart” for this scope.
-- **L43:** Dashboard chart/visualization. | `gradeChart` means: Holds “grade Chart” for this scope.
-- **L45:** Dashboard chart/visualization.
-- **L46:** Error handling block.
-- **L49:** Dashboard chart/visualization.
-- **L50:** Error handling block.
-- **L51:** Dashboard chart/visualization.
-- **L53:** Get HTML element by id. | `ctxEl` means: Holds “ctx El” for this scope.  DOM element from the page.
-- **L55:** `ctx` means: Current HTTP request context (Request, Response, Session).
-- **L67:** Dashboard chart/visualization.
-- **L68:** Dashboard chart/visualization.
-- **L70:** Get HTML element by id. | `ctxEl` means: Holds “ctx El” for this scope.  DOM element from the page.
-- **L72:** `ctx` means: Current HTTP request context (Request, Response, Session).
-- **L78:** Dashboard chart/visualization.
-- **L83:** `labels` means: Often a collection related to labels (plural name).
-- **L84:** `values` means: Often a collection related to values (plural name).
-- **L85:** Get HTML element by id. | `ctx` means: Current HTTP request context (Request, Response, Session).  DOM element from the page.
-- **L86:** Dashboard chart/visualization.
-- **L87:** Dashboard chart/visualization.
-- **L114:** Dashboard chart/visualization.
-- **L115:** Error handling block.
-- **L116:** `defaultLabels` means: Often a collection related to default Labels (plural name).
-- **L119:** Dashboard chart/visualization.
-- **L120:** Get HTML element by id. | `ctx` means: Current HTTP request context (Request, Response, Session).  DOM element from the page.
-- **L121:** Dashboard chart/visualization.
-- **L140:** `labels` means: Often a collection related to labels (plural name).
-- **L141:** `values` means: Often a collection related to values (plural name).
-- **L142:** Get HTML element by id. | `ctx` means: Current HTTP request context (Request, Response, Session).  DOM element from the page.
-- **L143:** Dashboard chart/visualization.
-- **L144:** Dashboard chart/visualization.
-- **L166:** DOM event handler.
-- **L170:** `currentSubmissionId` means: Holds “current Submission Id” for this scope.
-- **L171:** `dashSubmissionsDt` means: Holds “dash Submissions Dt” for this scope.
-- **L172:** `dashSubmissionsMap` means: Holds “dash Submissions Map” for this scope.
-- **L174:** Encode text to reduce XSS risk.
-- **L180:** Get HTML element by id. | `wrap` means: Holds “wrap” for this scope.  DOM element from the page.
-- **L182:** `colors` means: Often a collection related to colors (plural name).
-- **L186:** In-memory result set from ADO.NET.
-- **L187:** Update page HTML.
-- **L191:** In-memory result set from ADO.NET.
-- **L203:** Encode text to reduce XSS risk.
-- **L204:** Encode text to reduce XSS risk.
-- **L228:** `rows` means: Collection of rows.
-- **L236:** `sub` means: Holds “sub” for this scope.
-- **L242:** CSV export.
-- **L243:** HTTP request to server WebMethod/ashx.
-- **L246:** JS object ↔ JSON text.
-- **L251:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L253:** CSV export. | `blob` means: Holds “blob” for this scope.  Newly constructed object.
-- **L254:** `a` means: Holds “a” for this scope.
-- **L256:** CSV export.
-- **L266:** HTTP request to server WebMethod/ashx.
-- **L276:** `resObj` means: Holds “res Obj” for this scope.
-- **L294:** Get HTML element by id.
-- **L295:** Get HTML element by id.
-- **L296:** Get HTML element by id.
-- **L298:** Get HTML element by id.
-- **L300:** Get HTML element by id.
-- **L304:** `enrollData` means: Holds “enroll Data” for this scope.
-- **L306:** `gradeData` means: Holds “grade Data” for this scope.
-- **L308:** Dashboard chart/visualization.
-- **L309:** Dashboard chart/visualization.
-- **L310:** Dashboard chart/visualization.
-- **L311:** Dashboard chart/visualization.
-- **L332:** Get HTML element by id. | `avatar` means: Holds “avatar” for this scope.  DOM element from the page.
-- **L335:** Get HTML element by id.
-- **L338:** Get HTML element by id.
-- **L339:** Get HTML element by id.
-- **L340:** Get HTML element by id.
-- **L343:** Get HTML element by id. | `txtScore` means: UI control reference (txt Score).  DOM element from the page.
-- **L346:** Get HTML element by id.
-- **L349:** Get HTML element by id.
-- **L352:** Get HTML element by id. | `myModal` means: Holds “my Modal” for this scope.  DOM element from the page.
-- **L357:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
-- **L358:** Get HTML element by id. | `review` means: Holds “review” for this scope.  DOM element from the page.
-- **L359:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
-- **L370:** HTTP request to server WebMethod/ashx.
-- **L375:** JS object ↔ JSON text.
-- **L383:** `resObj` means: Holds “res Obj” for this scope.
-- **L387:** Get HTML element by id. | `modalEl` means: Holds “modal El” for this scope.  DOM element from the page.
-- **L388:** `modal` means: Holds “modal” for this scope.
-
-## Source snapshot (raw)
-
-```javascript
-
-/* Lazy Chart.js loader — only fetch when chart canvases are near viewport */
-var __chartJsLoading = null;
-var __chartPending = { enrollment: null, grade: null };
-
-function ensureChartJs(cb) {
-    if (typeof Chart !== 'undefined') { cb && cb(); return; }
-    if (__chartJsLoading) { __chartJsLoading.then(function () { cb && cb(); }); return; }
-    __chartJsLoading = new Promise(function (resolve, reject) {
-        var s = document.createElement('script');
-        s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
-        s.async = true;
-        s.onload = function () { resolve(); };
-        s.onerror = function () { reject(new Error('Chart.js failed to load')); };
-        document.head.appendChild(s);
-    });
-    __chartJsLoading.then(function () { cb && cb(); }).catch(function (e) { console.error(e); });
-}
-
-function whenChartsVisible(run) {
-    var targets = [
-        document.getElementById('chartEnrollmentTrend'),
-        document.getElementById('chartGradeDistribution')
-    ].filter(Boolean);
-    if (!targets.length) { run(); return; }
-    if (!('IntersectionObserver' in window)) { run(); return; }
-    var done = false;
-    var io = new IntersectionObserver(function (entries) {
-        if (done) return;
-        for (var i = 0; i < entries.length; i++) {
-            if (entries[i].isIntersecting) {
-                done = true;
-                io.disconnect();
-                run();
-                break;
-            }
-        }
-    }, { rootMargin: '120px', threshold: 0.05 });
-    targets.forEach(function (el) { io.observe(el); });
-}
-
-let enrollmentChart = null;
-  let gradeChart = null;
-
-  function renderEnrollmentTrendWithChart(data) {
-  try {
-  if (!data || !Array.isArray(data) || data.length === 0) {
-  // destroy existing chart and show empty state
-  if (enrollmentChart) {
-  try { enrollmentChart.destroy(); } catch(e){}
-  enrollmentChart = null;
-  }
-  const ctxEl = document.getElementById('chartEnrollmentTrend');
-  if (ctxEl) {
-  const ctx = ctxEl.getContext('2d');
-  ctx.clearRect(0, 0, ctxEl.width, ctxEl.height);
-  // draw "No data" text
-  ctx.font = '16px Arial';
-  ctx.fillStyle = '#9ca3af';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText('No enrollment data', ctxEl.width / 2, ctxEl.height / 2);
-  }
-  return;
-  }
-
-  if (typeof Chart === 'undefined') {
-  console.warn('Chart.js not available; cannot render enrollment chart.');
-  // draw simple text as fallback
-  const ctxEl = document.getElementById('chartEnrollmentTrend');
-  if (ctxEl) {
-  const ctx = ctxEl.getContext('2d');
-  ctx.clearRect(0, 0, ctxEl.width, ctxEl.height);
-  ctx.font = '16px Arial';
-  ctx.fillStyle = '#9ca3af';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText('Chart library blocked by browser. Enable CDN or use local file.', ctxEl.width / 2, ctxEl.height / 2);
-  }
-  return;
-  }
-
-  const labels = data.map(d => d.label);
-  const values = data.map(d => d.value);
-  const ctx = document.getElementById('chartEnrollmentTrend').getContext('2d');
-  if (enrollmentChart) enrollmentChart.destroy();
-  enrollmentChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-  labels: labels,
-  datasets: [{
-  label: 'Enrollments',
-  data: values,
-  fill: true,
-  backgroundColor: 'rgba(241,127,84,0.12)',
-  borderColor: '#f17f54',
-  tension: 0.4,
-  pointRadius: 3
-  }]
-  },
-  options: {
-  responsive: true,
-  maintainAspectRatio: false,
-  scales: {
-  y: { beginAtZero: true, ticks: { precision: 0 } }
-  }
-  }
-  });
-  } catch (err) {
-  console.error('Error rendering enrollment chart:', err);
-  }
-  }
-
-  function renderGradeDistributionWithChart(data) {
-  try {
-  const defaultLabels = ['A', 'B', 'C', 'D', 'F'];
-  if (!data || !Array.isArray(data) || data.length === 0) {
-  // render zeroed chart so layout is consistent
-  if (gradeChart) gradeChart.destroy();
-  const ctx = document.getElementById('chartGradeDistribution').getContext('2d');
-  gradeChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-  labels: defaultLabels,
-  datasets: [{
-  label: 'Students',
-  data: [0, 0, 0, 0, 0],
-  backgroundColor: ['#f17f54','#3b82f6','#10b981','#f59e0b','#ef4444']
-  }]
-  },
-  options: {
-  responsive: true,
-  maintainAspectRatio: false,
-  scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
-  }
-  });
-  return;
-  }
-
-  const labels = data.map(d => d.label);
-  const values = data.map(d => d.value);
-  const ctx = document.getElementById('chartGradeDistribution').getContext('2d');
-  if (gradeChart) gradeChart.destroy();
-  gradeChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-  labels: labels,
-  datasets: [{
-  label: 'Students',
-  data: values,
-  backgroundColor: ['#f17f54','#3b82f6','#10b981','#f59e0b','#ef4444']
-  }]
-  },
-  options: {
-  responsive: true,
-  maintainAspectRatio: false,
-  scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
-  }
-  });
-  } catch (err) {
-  console.error('Error rendering grade distribution chart:', err);
-  }
-  }
-
-  // Initialize dashboard when page loads
-  document.addEventListener('DOMContentLoaded', function () {
-  loadDashboardData();
-});
-
-let currentSubmissionId = null;
-    let dashSubmissionsDt = null;
-    let dashSubmissionsMap = {};
-
-    function escapeHtmlDash(str) {
-    if (str == null) return '';
-    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  function renderDashSubmissions(list) {
-  var wrap = document.getElementById('dashSubmissionsWrap');
-  if (!wrap) return;
-  var colors = ['#f59e0b', '#3b82f6', '#10b981', '#ec4899', '#8b5cf6'];
-  dashSubmissionsMap = {};
-  (list || []).forEach(function (s) { dashSubmissionsMap[s.sid] = s; });
-
-  if (typeof EduDataTable === 'undefined') {
-  wrap.innerHTML = '<div class="text-muted p-3">No table component.</div>';
-  return;
-  }
-  if (!dashSubmissionsDt) {
-  dashSubmissionsDt = EduDataTable.create({
-  container: wrap,
-  pageSize: 8,
-  pageSizeOptions: [5, 8, 15, 25],
-  searchPlaceholder: 'Search student, assignment, course...',
-  emptyMessage: 'No recent submissions found.',
-  tableClass: 'table table-hover submissions-table mb-0 edt-table',
-  columns: [
-  {
-  key: 'studentName', title: 'Student', sortable: true,
-  render: function (sub, i) {
-  return '<div class="d-flex align-items-center"><div class="student-avatar me-2" style="background-color:' +
-    colors[i % colors.length] + ';">' + escapeHtmlDash(sub.initials || '?') +
-    '</div><span class="fw-semibold text-dark">' + escapeHtmlDash(sub.studentName) + '</span></div>';
-},
-searchValue: function (s) { return (s.studentName || '') + ' ' + (s.studentEmail || ''); }
-},
-{ key: 'assignmentTitle', title: 'Assignment', sortable: true, filter: true, filterLabel: 'Assignment' },
-{ key: 'courseName', title: 'Course', sortable: true, filter: true, filterLabel: 'Course' },
-{ key: 'timeText', title: 'Time', sortable: true, cellClass: 'text-muted small',
-sortValue: function (s) { return s.timestamp || s.timeText || ''; }, type: 'date' },
-{
-key: 'status', title: 'Action', sortable: true, filter: true, filterLabel: 'Status',
-render: function (sub) {
-if (sub.isGraded) {
-return '<span class="badge-graded"><i class="fa-solid fa-circle-check"></i> Graded</span>';
-}
-return '<button type="button" class="btn btn-grade-now" onclick="openGradeModalBySid(' +
-sub.sid + ')">Grade Now</button>';
-},
-sortValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; },
-searchValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; }
-}
-]
-});
-}
-// Normalize status field for filter
-var rows = (list || []).map(function (s) {
-s.status = s.isGraded ? 'Graded' : 'Pending';
-return s;
-});
-dashSubmissionsDt.setData(rows);
-}
-
-function openGradeModalBySid(sid) {
-var sub = dashSubmissionsMap[sid];
-if (sub) openGradeModal(sub);
-}
-
-// dashboard initialization is deferred until Chart.js and chart helper functions are available (handled at bottom of page)
-
-function exportDashGradesCsv() {
-  fetch(window.location.pathname + '/ExportGradesCsv', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ cid: 0 }),
-    credentials: 'same-origin'
-  })
-  .then(function (r) { return r.json(); })
-  .then(function (data) {
-    var res = (data && data.d) ? (data.d.d || data.d) : data;
-    if (!res || !res.success) { alert((res && res.message) || 'Export failed'); return; }
-    var blob = new Blob([res.csv || ''], { type: 'text/csv;charset=utf-8;' });
-    var a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = res.fileName || 'grades.csv';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 400);
-  })
-  .catch(function () { alert('Network error exporting grades.'); });
-}
-
-function loadDashboardData() {
-// Fetch dashboard statistics and submissions from code-behind
-fetch(window.location.pathname + '/GetDashboardData', {
-method: 'POST',
-headers: {
-'Content-Type': 'application/json'
-}
-})
-.then(res => res.json())
-.then(data => {
-// Normalize ASP.NET PageMethod response which may be wrapped as { d: {...} }
-// In some environments it can be double-wrapped: { d: { d: {...} } }
-let resObj = null;
-if (data && data.d) {
-resObj = data.d.d ? data.d.d : data.d;
-} else {
-resObj = data;
-}
-if (!resObj || resObj.notAuthenticated) {
-// Redirect to login
-window.location.href = '/Pages/Authentication/Login.aspx';
-return;
-}
-if (!resObj.success) {
-console.error('Failed to load dashboard:', resObj.message || resObj);
-return;
-}
-
-if (resObj.success) {
-// Update Stats
-document.getElementById('lblTotalStudents').innerText = formatNumber(resObj.totalStudents);
-document.getElementById('lblActiveCourses').innerText = resObj.activeCourses;
-document.getElementById('lblPendingGrading').innerText = resObj.pendingGrading;
-if (!resObj.hasGrades) {
-document.getElementById('lblAverageGrade').innerText = "N/A";
-} else {
-document.getElementById('lblAverageGrade').innerText = resObj.averageGrade + "%";
-}
-
-// Stats + table first; charts only when visible (lazy Chart.js CDN)
-var enrollData = (resObj.enrollmentTrends && Array.isArray(resObj.enrollmentTrends))
-  ? resObj.enrollmentTrends : [];
-var gradeData = (resObj.gradeDistribution && Array.isArray(resObj.gradeDistribution))
-  ? resObj.gradeDistribution : [];
-whenChartsVisible(function () {
-  ensureChartJs(function () {
-    renderEnrollmentTrendWithChart(enrollData);
-    renderGradeDistributionWithChart(gradeData);
-  });
-});
-
-// Submissions table with search / sort / filter / pagination
-renderDashSubmissions(resObj.submissions || []);
-}
-})
-.catch(err => {
-console.error("Error loading dashboard data: ", err);
-});
-}
-
-function formatNumber(num) {
-return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-function openGradeModal(sub) {
-currentSubmissionId = sub.sid;
-
-// Set student initials and name
-const avatar = document.getElementById('modalStudentAvatar');
-avatar.innerText = sub.initials;
-avatar.style.backgroundColor = '#f17f54';
-document.getElementById('modalStudentName').innerText = sub.studentName;
-
-// Set details
-document.getElementById('modalAssignment').innerText = sub.assignmentTitle;
-document.getElementById('modalAnswer').innerText = sub.studentAnswer;
-document.getElementById('lblMaxScore').innerText = "/ " + sub.maxScore;
-
-// Reset inputs
-const txtScore = document.getElementById('txtScore');
-txtScore.value = 0;
-txtScore.max = sub.maxScore;
-document.getElementById('txtReview').value = '';
-
-// Hide error
-document.getElementById('modalErrorMessage').style.display = 'none';
-
-// Show modal
-const myModal = new bootstrap.Modal(document.getElementById('gradingModal'));
-myModal.show();
-}
-
-function submitGrading() {
-const score = parseInt(document.getElementById('txtScore').value);
-const review = document.getElementById('txtReview').value.trim();
-const errDiv = document.getElementById('modalErrorMessage');
-
-errDiv.style.display = 'none';
-
-if (isNaN(score) || score < 0) {
-errDiv.innerText = "Please enter a valid score.";
-errDiv.style.display = 'block';
-return;
-}
-
-// Call SaveGrade WebMethod
-fetch(window.location.pathname + '/SaveGrade', {
-method: 'POST',
-headers: {
-'Content-Type': 'application/json'
-},
-body: JSON.stringify({
-sid: currentSubmissionId,
-score: score,
-review: review
-})
-})
-.then(res => res.json())
-.then(data => {
-let resObj = null;
-if (data && data.d) resObj = data.d.d ? data.d.d : data.d; else resObj = data;
-if (resObj && resObj.success) {
-// Close Modal
-const modalEl = document.getElementById('gradingModal');
-const modal = bootstrap.Modal.getInstance(modalEl);
-modal.hide();
-
-// Refresh dashboard data
-loadDashboardData();
-} else {
-errDiv.innerText = resObj.message || "Failed to save grade.";
-errDiv.style.display = 'block';
-}
-})
-.catch(err => {
-errDiv.innerText = "Network error. Please try again.";
-errDiv.style.display = 'block';
-console.error(err);
-});
-}
-
-
 ```

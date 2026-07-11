@@ -1,6 +1,6 @@
 # CoursePreview.aspx.cs
 **Source:** `Pages/Lecturer/CoursePreview.aspx.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,31 +15,41 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-_No classic field declarations detected (or mostly locals inside methods — see each function’s **Local variables** section)._
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (1 found)
 
 ### `Page_Load` — lines 9–19
 
+#### Signature
+
 ```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Page_Load`.
-- **ASP.NET WebMethod:** Called from browser JS via `Page.aspx/MethodName` POST JSON.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Navigation:** Redirects the browser.
-- **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+Runs automatically when the ASP.NET page opens or posts back; sets up the page and security checks.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Check the visitor is logged in with an allowed role; if not, redirect to login and stop.
+2. Redirect the browser to another page.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
    9 |         protected void Page_Load(object sender, EventArgs e)
@@ -55,17 +65,11 @@ protected void Page_Load(object sender, EventArgs e)
   19 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L9:** Page load entry (GET or postback).
-- **L11:** Authorization — block wrong role / anonymous.
-- **L17:** Navigate browser to another URL.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -89,41 +93,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   19 |         }
   20 |     }
   21 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L5:** C# namespace grouping.
-- **L9:** Page load entry (GET or postback).
-- **L11:** Authorization — block wrong role / anonymous.
-- **L17:** Navigate browser to another URL.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Web.UI;
-using WebAppAssignment.Data.Security;
-
-namespace WebAppAssignment.Pages.Lecturer
-{
-    public partial class CoursePreview : Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))
-                return;
-// Preview data is loaded client-side via CourseCreation WebMethods
-            // (same pure-SQL endpoints) using ?cid=
-            if (string.IsNullOrWhiteSpace(Request.QueryString["cid"]))
-            {
-                Response.Redirect("~/Pages/Lecturer/CourseCreation.aspx");
-            }
-        }
-    }
-}
-
 ```

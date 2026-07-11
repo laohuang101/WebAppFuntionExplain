@@ -1,6 +1,6 @@
 # csrf.js
 **Source:** `Shared/Scripts/csrf.js`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,33 +15,51 @@ Client helper: attach X-CSRF-Token header to fetch/XHR from meta/cookie.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 9:** `m` — script-level `const`/`let`/`var` — **Holds “m” for this scope.**
-- **Line 14:** `meta` — script-level `const`/`let`/`var` — **Extra settings packed as JSON (dueDate, requireFile, …).**
-- **Line 26:** `h` — script-level `const`/`let`/`var` — **Holds “h” for this scope.**
-- **Line 33:** `_fetch` — script-level `const`/`let`/`var` — **Holds “fetch” for this scope.**
-- **Line 36:** `method` — script-level `const`/`let`/`var` — **HTTP method (GET/POST) or MFA method (totp/email).**
-- **Line 47:** `_open` — script-level `const`/`let`/`var` — **Holds “open” for this scope.**
-- **Line 48:** `_send` — script-level `const`/`let`/`var` — **Holds “send” for this scope.**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `m` | `const/let/var` | Holds “m” for this scope. |
+| `meta` | `const/let/var` | Extra settings packed as JSON (dueDate, requireFile, …). |
+| `h` | `const/let/var` | Holds “h” for this scope. |
+| `_fetch` | `const/let/var` | Holds “fetch” for this scope. |
+| `method` | `const/let/var` | HTTP method (GET/POST) or MFA method (totp/email). |
+| `_open` | `const/let/var` | Holds “open” for this scope. |
+| `_send` | `const/let/var` | Holds “send” for this scope. |
 
 ## Functions / methods (3 found)
 
 ### `readCookie` — lines 6–11
 
+#### Signature
+
 ```javascript
 function readCookie(name)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `readCookie`.
-- **Parameters (what each means):**
-- `name` — Display name of user/course/criterion.
-- **Local variables (what each means):**
-- `m` — Holds “m” for this scope.  Newly constructed object.
+Reads/loads data related to **read Cookie** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `readCookie`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `name` | `—` | Display name of user/course/criterion. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `m` | `—` | Holds “m” for this scope.  Newly constructed object. |
+
+#### Code
 
 ```javascript
    6 | 
@@ -52,27 +70,37 @@ function readCookie(name)
   11 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L9:** `m` means: Holds “m” for this scope.  Newly constructed object.
-
 ---
 
 ### `getToken` — lines 11–17
+
+#### Signature
 
 ```javascript
 function getToken()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `getToken`.
-- **CSRF:** Validates anti-forgery token on mutating request.
-- **Pattern:** Read/load data for display.
-- **Local variables (what each means):**
-- `meta` — Extra settings packed as JSON (dueDate, requireFile, …).
+Reads/loads data related to **Token** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `getToken`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `meta` | `—` | Extra settings packed as JSON (dueDate, requireFile, …). |
+
+#### Code
 
 ```javascript
   11 | 
@@ -84,30 +112,40 @@ function getToken()
   17 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L14:** CSRF anti-forgery protection. | `meta` means: Extra settings packed as JSON (dueDate, requireFile, …).
-- **L16:** CSRF anti-forgery protection.
-
 ---
 
 ### `applyHeaders` — lines 17–29
+
+#### Signature
 
 ```javascript
 function applyHeaders(headers, token)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `applyHeaders`.
-- **CSRF:** Validates anti-forgery token on mutating request.
-- **Parameters (what each means):**
-- `headers` — HTTP headers object for fetch.
-- `token` — JWT or CSRF token string.
-- **Local variables (what each means):**
-- `h` — Holds “h” for this scope.
+Function `applyHeaders` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `applyHeaders`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `headers` | `—` | HTTP headers object for fetch. |
+| `token` | `—` | JWT or CSRF token string. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `h` | `—` | Holds “h” for this scope. |
+
+#### Code
 
 ```javascript
   17 | 
@@ -125,17 +163,11 @@ function applyHeaders(headers, token)
   29 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L23:** CSRF token ensure/validate.
-- **L26:** `h` means: Holds “h” for this scope.
-- **L27:** CSRF anti-forgery protection.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```javascript
    1 | /**
@@ -203,93 +235,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   63 | 
   64 |     global.EduCsrf = { getToken: getToken };
   65 | })(window);
-```
-
-**Line notes** (what code + variables mean)
-
-- **L9:** `m` means: Holds “m” for this scope.  Newly constructed object.
-- **L14:** CSRF anti-forgery protection. | `meta` means: Extra settings packed as JSON (dueDate, requireFile, …).
-- **L16:** CSRF anti-forgery protection.
-- **L23:** CSRF token ensure/validate.
-- **L26:** `h` means: Holds “h” for this scope.
-- **L27:** CSRF anti-forgery protection.
-- **L33:** `_fetch` means: Holds “fetch” for this scope.
-- **L36:** `method` means: HTTP method (GET/POST) or MFA method (totp/email).
-- **L47:** `_open` means: Holds “open” for this scope.
-- **L48:** `_send` means: Holds “send” for this scope.
-- **L50:** CSRF anti-forgery protection.
-- **L54:** Error handling block.
-- **L55:** CSRF anti-forgery protection. | `m` means: Holds “m” for this scope.
-- **L57:** CSRF token ensure/validate.
-- **L64:** CSRF anti-forgery protection.
-
-## Source snapshot (raw)
-
-```javascript
-/**
- * EduLMS CSRF helper — attaches X-CSRF-Token to mutating fetch/XHR.
- * Token from <meta name="csrf-token"> or EduLMS.Csrf cookie.
- */
-(function (global) {
-    'use strict';
-
-    function readCookie(name) {
-        var m = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/\./g, '\\.') + '=([^;]*)'));
-        return m ? decodeURIComponent(m[1]) : '';
-    }
-
-    function getToken() {
-        var meta = document.querySelector('meta[name="csrf-token"]');
-        if (meta && meta.content) return meta.content;
-        return readCookie('EduLMS.Csrf') || (global.__CSRF_TOKEN__ || '');
-    }
-
-    function applyHeaders(headers, token) {
-        if (!token) return headers;
-        if (!headers) headers = {};
-        if (typeof Headers !== 'undefined' && headers instanceof Headers) {
-            if (!headers.has('X-CSRF-Token')) headers.set('X-CSRF-Token', token);
-            return headers;
-        }
-        var h = headers;
-        if (!h['X-CSRF-Token'] && !h['x-csrf-token']) h['X-CSRF-Token'] = token;
-        return h;
-    }
-
-    // Patch fetch
-    if (typeof global.fetch === 'function') {
-        var _fetch = global.fetch;
-        global.fetch = function (input, init) {
-            init = init || {};
-            var method = (init.method || 'GET').toUpperCase();
-            if (method !== 'GET' && method !== 'HEAD' && method !== 'OPTIONS') {
-                init.headers = applyHeaders(init.headers || {}, getToken());
-            }
-            if (!init.credentials) init.credentials = 'same-origin';
-            return _fetch.call(this, input, init);
-        };
-    }
-
-    // Patch XHR open/send
-    if (global.XMLHttpRequest) {
-        var _open = XMLHttpRequest.prototype.open;
-        var _send = XMLHttpRequest.prototype.send;
-        XMLHttpRequest.prototype.open = function (method) {
-            this.__csrfMethod = (method || 'GET').toUpperCase();
-            return _open.apply(this, arguments);
-        };
-        XMLHttpRequest.prototype.send = function () {
-            try {
-                var m = this.__csrfMethod || 'GET';
-                if (m !== 'GET' && m !== 'HEAD' && m !== 'OPTIONS') {
-                    this.setRequestHeader('X-CSRF-Token', getToken());
-                }
-            } catch (e) { /* header may already be set */ }
-            return _send.apply(this, arguments);
-        };
-    }
-
-    global.EduCsrf = { getToken: getToken };
-})(window);
-
 ```

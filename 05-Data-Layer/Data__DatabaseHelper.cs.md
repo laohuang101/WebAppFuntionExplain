@@ -1,6 +1,6 @@
 # DatabaseHelper.cs
 **Source:** `Data/DatabaseHelper.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,32 +15,48 @@ Legacy/alternate connection helper (same MyDbConn). Prefer DbHelper for new code
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 10:** `ConnString` (`string`) — **Holds “Conn String” for this scope. (text)**
-- **Line 24:** `dt` (`DataTable`) — **DataTable — full result set from SQL (many rows/columns).**
-- **Line 26:** `dt` (`return`) — **DataTable — full result set from SQL (many rows/columns).**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ConnString` | `string` | Holds “Conn String” for this scope. (text) |
 
 ## Functions / methods (3 found)
 
 ### `ExecuteQuery` — lines 11–30
 
+#### Signature
+
 ```csharp
 public static DataTable ExecuteQuery(string query, SqlParameter[] parameters = null)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ExecuteQuery`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `query` (`string`) — Holds “query” for this scope. (text)
-- `parameters` (`SqlParameter[]`) — Array of SQL parameters (@Name values) for a query.
-- **Local variables (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
-- `dt` (`DataTable`) — DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
+Runs a SELECT SQL query and returns all matching rows as a DataTable.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Open a database connection.
+2. Create a SqlCommand with the SQL text and attach any parameters.
+3. Use a SqlDataAdapter to fill a DataTable with all result rows.
+4. Return that DataTable to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `query` | `string` | Holds “query” for this scope. (text) |
+| `parameters` | `SqlParameter[]` | Array of SQL parameters (@Name values) for a query. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object. |
+| `dt` | `DataTable` | DataTable — full result set from SQL (many rows/columns).  Newly constructed object. |
+
+#### Code
 
 ```csharp
   11 | 
@@ -65,33 +81,40 @@ public static DataTable ExecuteQuery(string query, SqlParameter[] parameters = n
   30 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L12:** Run SQL; return table / rows / scalar.
-- **L14:** Import namespace/types.
-- **L16:** Import namespace/types.
-- **L22:** Import namespace/types.
-- **L24:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
-
 ---
 
 ### `ExecuteNonQuery` — lines 31–46
+
+#### Signature
 
 ```csharp
 public static int ExecuteNonQuery(string query, SqlParameter[] parameters = null)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ExecuteNonQuery`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `query` (`string`) — Holds “query” for this scope. (text)
-- `parameters` (`SqlParameter[]`) — Array of SQL parameters (@Name values) for a query.
-- **Local variables (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+Runs INSERT/UPDATE/DELETE SQL and returns how many rows changed.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Open a database connection.
+2. Create a SqlCommand with INSERT/UPDATE/DELETE SQL and parameters.
+3. Execute the command and return how many rows were changed.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `query` | `string` | Holds “query” for this scope. (text) |
+| `parameters` | `SqlParameter[]` | Array of SQL parameters (@Name values) for a query. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object. |
+
+#### Code
 
 ```csharp
   31 | 
@@ -112,32 +135,40 @@ public static int ExecuteNonQuery(string query, SqlParameter[] parameters = null
   46 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L32:** Run SQL; return table / rows / scalar.
-- **L34:** Import namespace/types.
-- **L36:** Import namespace/types.
-- **L43:** Run SQL; return table / rows / scalar.
-
 ---
 
 ### `ExecuteScalar` — lines 47–62
+
+#### Signature
 
 ```csharp
 public static object ExecuteScalar(string query, SqlParameter[] parameters = null)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ExecuteScalar`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `query` (`string`) — Holds “query” for this scope. (text)
-- `parameters` (`SqlParameter[]`) — Array of SQL parameters (@Name values) for a query.
-- **Local variables (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+Runs SQL that returns a single value (for example COUNT or a new ID).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Run SQL that returns one value (count, id, flag).
+2. Open a connection to the LocalDB / SQL Server database.
+3. Run SQL that returns one value (count, id, flag).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `query` | `string` | Holds “query” for this scope. (text) |
+| `parameters` | `SqlParameter[]` | Array of SQL parameters (@Name values) for a query. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object. |
+
+#### Code
 
 ```csharp
   47 | 
@@ -158,18 +189,11 @@ public static object ExecuteScalar(string query, SqlParameter[] parameters = nul
   62 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L48:** Run SQL; return table / rows / scalar.
-- **L50:** Import namespace/types.
-- **L52:** Import namespace/types.
-- **L59:** Run SQL; return table / rows / scalar.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -236,95 +260,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   62 |         }
   63 |     }
   64 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L6:** C# namespace grouping.
-- **L12:** Run SQL; return table / rows / scalar.
-- **L14:** Import namespace/types.
-- **L16:** Import namespace/types.
-- **L22:** Import namespace/types.
-- **L24:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
-- **L32:** Run SQL; return table / rows / scalar.
-- **L34:** Import namespace/types.
-- **L36:** Import namespace/types.
-- **L43:** Run SQL; return table / rows / scalar.
-- **L48:** Run SQL; return table / rows / scalar.
-- **L50:** Import namespace/types.
-- **L52:** Import namespace/types.
-- **L59:** Run SQL; return table / rows / scalar.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-
-namespace WebAppAssignment.Data
-{
-    public static class DatabaseHelper
-    {
-        private static readonly string ConnString = ConfigurationManager.ConnectionStrings["MyDbConn"].ConnectionString;
-
-        public static DataTable ExecuteQuery(string query, SqlParameter[] parameters = null)
-        {
-            using (SqlConnection conn = new SqlConnection(ConnString))
-            {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    if (parameters != null)
-                    {
-                        cmd.Parameters.AddRange(parameters);
-                    }
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
-                    {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-                        return dt;
-                    }
-                }
-            }
-        }
-
-        public static int ExecuteNonQuery(string query, SqlParameter[] parameters = null)
-        {
-            using (SqlConnection conn = new SqlConnection(ConnString))
-            {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    if (parameters != null)
-                    {
-                        cmd.Parameters.AddRange(parameters);
-                    }
-                    conn.Open();
-                    return cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public static object ExecuteScalar(string query, SqlParameter[] parameters = null)
-        {
-            using (SqlConnection conn = new SqlConnection(ConnString))
-            {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    if (parameters != null)
-                    {
-                        cmd.Parameters.AddRange(parameters);
-                    }
-                    conn.Open();
-                    return cmd.ExecuteScalar();
-                }
-            }
-        }
-    }
-}
-
 ```

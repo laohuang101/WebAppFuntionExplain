@@ -1,6 +1,6 @@
 # Dashboard.aspx.cs
 **Source:** `Pages/Lecturer/Dashboard.aspx.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,33 +15,42 @@ Lecturer home: course stats, recent submissions, charts. Backed by LecturerRepos
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 29:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 45:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 50:** `ctx` (`var`) — **Current HTTP request context (Request, Response, Session).**
-- **Line 72:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 88:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 90:** `csv` (`string`) — **Holds “csv” for this scope. (text)**
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (6 found)
 
 ### `Page_Load` — lines 12–16
 
+#### Signature
+
 ```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Page_Load`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+Runs automatically when the ASP.NET page opens or posts back; sets up the page and security checks.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. ASP.NET calls this automatically on every request.
+2. On first load (`!IsPostBack`), initialize UI or redirect if already logged in.
+3. On postback, button handlers run separately after this method.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   12 |         protected void Page_Load(object sender, EventArgs e)
@@ -51,25 +60,33 @@ protected void Page_Load(object sender, EventArgs e)
   16 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L12:** Page load entry (GET or postback).
-- **L14:** Authorization — block wrong role / anonymous.
-
 ---
 
 ### `CurrentUid` — lines 17–21
+
+#### Signature
 
 ```csharp
 private static int CurrentUid()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `CurrentUid`.
-- **Security:** Uses AuthGate — requires logged-in role.
+Function `CurrentUid` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Check the caller’s role (Lecturer/Student/Admin). If not allowed, return an error and stop.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   17 | 
@@ -79,28 +96,35 @@ private static int CurrentUid()
   21 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L20:** Authorization — block wrong role / anonymous.
-
 ---
 
 ### `GetDashboardData` — lines 25–37
+
+#### Signature
 
 ```csharp
 public static object GetDashboardData()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GetDashboardData`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Read/load data for display.
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+Reads/loads data related to **Dashboard Data** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+
+#### Code
 
 ```csharp
   25 |         public static object GetDashboardData()
@@ -118,37 +142,41 @@ public static object GetDashboardData()
   37 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L27:** Error handling block.
-- **L29:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L30:** Authorization — block wrong role / anonymous.
-- **L33:** Handle/log exception.
-
 ---
 
 ### `SaveGrade` — lines 41–64
+
+#### Signature
 
 ```csharp
 public static object SaveGrade(int sid, int score, string review)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `SaveGrade`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **Session:** Reads/writes ASP.NET Session.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `sid` (`int`) — Submission ID (CWSubmissions.SID).
-- `score` (`int`) — Points earned or max points depending on context.
-- `review` (`string`) — Holds “review” for this scope. (text)
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `ctx` (`var`) — Current HTTP request context (Request, Response, Session).
+Saves marks and feedback for a student submission.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Clear Session data (logout or end of multi-step flow).
+2. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sid` | `int` | Submission ID (CWSubmissions.SID). |
+| `score` | `int` | Points earned or max points depending on context. |
+| `review` | `string` | Holds “review” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `ctx` | `var` | Current HTTP request context (Request, Response, Session). |
+
+#### Code
 
 ```csharp
   41 |         public static object SaveGrade(int sid, int score, string review)
@@ -177,34 +205,35 @@ public static object SaveGrade(int sid, int score, string review)
   64 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L43:** Error handling block.
-- **L45:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L46:** Authorization — block wrong role / anonymous.
-- **L48:** Error handling block.
-- **L50:** `ctx` means: Current HTTP request context (Request, Response, Session).
-- **L57:** Handle/log exception.
-- **L60:** Handle/log exception.
-
 ---
 
 ### `GetPendingCount` — lines 68–80
+
+#### Signature
 
 ```csharp
 public static object GetPendingCount()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GetPendingCount`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Read/load data for display.
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+Reads/loads data related to **Pending Count** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+
+#### Code
 
 ```csharp
   68 |         public static object GetPendingCount()
@@ -222,33 +251,38 @@ public static object GetPendingCount()
   80 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L70:** Error handling block.
-- **L72:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L73:** Authorization — block wrong role / anonymous.
-- **L76:** Handle/log exception.
-
 ---
 
 ### `ExportGradesCsv` — lines 84–102
+
+#### Signature
 
 ```csharp
 public static object ExportGradesCsv(int cid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ExportGradesCsv`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters (what each means):**
-- `cid` (`int`) — Course ID (Courses.CID).
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `csv` (`string`) — Holds “csv” for this scope. (text)
+Function `ExportGradesCsv` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cid` | `int` | Course ID (Courses.CID). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `csv` | `string` | Holds “csv” for this scope. (text) |
+
+#### Code
 
 ```csharp
   84 |         public static object ExportGradesCsv(int cid)
@@ -272,22 +306,11 @@ public static object ExportGradesCsv(int cid)
  102 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L84:** CSV export.
-- **L86:** Error handling block.
-- **L88:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L89:** Authorization — block wrong role / anonymous.
-- **L90:** CSV export. | `csv` means: Holds “csv” for this scope. (text)
-- **L94:** CSV export.
-- **L95:** CSV export.
-- **L98:** Handle/log exception.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -394,154 +417,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  102 |         }
  103 |     }
  104 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L5:** Import namespace/types.
-- **L6:** Import namespace/types.
-- **L8:** C# namespace grouping.
-- **L12:** Page load entry (GET or postback).
-- **L14:** Authorization — block wrong role / anonymous.
-- **L20:** Authorization — block wrong role / anonymous.
-- **L23:** Expose method to AJAX JSON calls.
-- **L27:** Error handling block.
-- **L29:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L30:** Authorization — block wrong role / anonymous.
-- **L33:** Handle/log exception.
-- **L39:** Expose method to AJAX JSON calls.
-- **L43:** Error handling block.
-- **L45:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L46:** Authorization — block wrong role / anonymous.
-- **L48:** Error handling block.
-- **L50:** `ctx` means: Current HTTP request context (Request, Response, Session).
-- **L57:** Handle/log exception.
-- **L60:** Handle/log exception.
-- **L66:** Expose method to AJAX JSON calls.
-- **L70:** Error handling block.
-- **L72:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L73:** Authorization — block wrong role / anonymous.
-- **L76:** Handle/log exception.
-- **L82:** Expose method to AJAX JSON calls.
-- **L84:** CSV export.
-- **L86:** Error handling block.
-- **L88:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L89:** Authorization — block wrong role / anonymous.
-- **L90:** CSV export. | `csv` means: Holds “csv” for this scope. (text)
-- **L94:** CSV export.
-- **L95:** CSV export.
-- **L98:** Handle/log exception.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Web.Script.Services;
-using System.Web.Services;
-using System.Web.UI;
-using WebAppAssignment.Data;
-using WebAppAssignment.Data.Security;
-
-namespace WebAppAssignment.Pages.Lecturer
-{
-    public partial class Dashboard : Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))
-                return;
-        }
-
-        private static int CurrentUid()
-        {
-            return AuthGate.RequireLecturer();
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object GetDashboardData()
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                return LecturerRepository.GetDashboardData(uid);
-            }
-            catch
-            {
-                return new { success = false, message = "Could not load dashboard." };
-            }
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object SaveGrade(int sid, int score, string review)
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                LecturerRepository.SaveGrade(uid, sid, score, review ?? "");
-                try
-                {
-                    var ctx = System.Web.HttpContext.Current;
-                    if (ctx != null && ctx.Session != null)
-                    {
-                        ctx.Session.Remove("PendingGradeCount");
-                        ctx.Session.Remove("PendingGradeCountAt");
-                    }
-                }
-                catch { }
-                return new { success = true };
-            }
-            catch
-            {
-                return new { success = false, message = "Could not save grade." };
-            }
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object GetPendingCount()
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                return new { success = true, pending = LecturerRepository.CountPendingGrading(uid) };
-            }
-            catch
-            {
-                return new { success = false, pending = 0 };
-            }
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object ExportGradesCsv(int cid)
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                string csv = LecturerRepository.BuildGradesCsv(uid, cid);
-                return new
-                {
-                    success = true,
-                    csv = csv,
-                    fileName = cid > 0 ? "grades-course-" + cid + ".csv" : "grades-all.csv"
-                };
-            }
-            catch
-            {
-                return new { success = false, message = "Could not export grades." };
-            }
-        }
-    }
-}
-
 ```

@@ -1,6 +1,6 @@
 # DbIndexes.cs
 **Source:** `Data/DbIndexes.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,33 +15,42 @@ Creates useful nonclustered indexes if missing (LecturerUID, IsPublished, CWSubm
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 12:** `Gate` (`object`) — **Holds “Gate” for this scope.**
-- **Line 13:** `_done` (`bool`) — **Holds “done” for this scope. (true/false)**
-- **Line 67:** `table` (`string`) — **DataTable or HTML table container.**
-- **Line 68:** `on` (`int`) — **Holds “on” for this scope. (integer)**
-- **Line 71:** `rest` (`string`) — **Holds “rest” for this scope. (text)**
-- **Line 72:** `sp` (`int`) — **Holds “sp” for this scope. (integer)**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `Gate` | `object` | Holds “Gate” for this scope. |
+| `_done` | `bool` | Holds “done” for this scope. (true/false) |
 
 ## Functions / methods (2 found)
 
 ### `Ensure` — lines 14–57
 
+#### Signature
+
 ```csharp
 public static void Ensure()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Ensure`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.
-- **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
+Makes sure **** exists or is valid before the rest of the code continues.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Open a connection to the LocalDB / SQL Server database.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+
+#### Code
 
 ```csharp
   14 | 
@@ -90,46 +99,45 @@ public static void Ensure()
   57 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L21:** Error handling block.
-- **L23:** Import namespace/types.
-- **L26:** Idempotent schema/index ensure (safe to run many times).
-- **L27:** Course publish flag for Landing catalog.
-- **L30:** Idempotent schema/index ensure (safe to run many times).
-- **L31:** Owner lecturer foreign key.
-- **L34:** Idempotent schema/index ensure (safe to run many times).
-- **L35:** Course publish flag for Landing catalog.
-- **L38:** Idempotent schema/index ensure (safe to run many times).
-- **L42:** Idempotent schema/index ensure (safe to run many times).
-- **L46:** Idempotent schema/index ensure (safe to run many times).
-- **L50:** Idempotent schema/index ensure (safe to run many times).
-- **L54:** Handle/log exception.
-
 ---
 
 ### `EnsureIndex` — lines 58–89
+
+#### Signature
 
 ```csharp
 private static void EnsureIndex(SqlConnection conn, string indexName, string createSql)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `EnsureIndex`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `indexName` (`string`) — Holds “index Name” for this scope. (text)
-- `createSql` (`string`) — Holds “create Sql” for this scope. (text)
-- **Local variables (what each means):**
-- `check` (`var`) — Holds “check” for this scope.  Newly constructed object.
-- `on` (`int`) — Holds “on” for this scope. (integer)
-- `rest` (`string`) — Holds “rest” for this scope. (text)
-- `sp` (`int`) — Holds “sp” for this scope. (integer)
-- `create` (`var`) — Holds “create” for this scope.  Assigned from rows-affected of INSERT/UPDATE/DELETE.
+Makes sure **Index** exists or is valid before the rest of the code continues.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+2. Run SQL that returns one value (count, id, flag).
+3. Run INSERT/UPDATE/DELETE SQL against the database.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `indexName` | `string` | Holds “index Name” for this scope. (text) |
+| `createSql` | `string` | Holds “create Sql” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `check` | `var` | Holds “check” for this scope.  Newly constructed object. |
+| `on` | `int` | Holds “on” for this scope. (integer) |
+| `rest` | `string` | Holds “rest” for this scope. (text) |
+| `sp` | `int` | Holds “sp” for this scope. (integer) |
+| `create` | `var` | Holds “create” for this scope.  Assigned from rows-affected of INSERT/UPDATE/DELETE. |
+
+#### Code
 
 ```csharp
   58 | 
@@ -166,28 +174,11 @@ private static void EnsureIndex(SqlConnection conn, string indexName, string cre
   89 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L59:** Database access (pure SQL).
-- **L61:** Error handling block.
-- **L63:** Import namespace/types.
-- **L64:** Inspect live database catalog for existing columns/tables.
-- **L67:** `table` means: DataTable or HTML table container.
-- **L68:** `on` means: Holds “on” for this scope. (integer)
-- **L71:** `rest` means: Holds “rest” for this scope. (text)
-- **L72:** `sp` means: Holds “sp” for this scope. (integer)
-- **L77:** Parameterized SQL — prevents classic SQL injection.
-- **L78:** Parameterized SQL — prevents classic SQL injection.
-- **L79:** Run SQL; return table / rows / scalar.
-- **L82:** Import namespace/types.
-- **L83:** Run SQL; return table / rows / scalar.
-- **L85:** Handle/log exception.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -281,134 +272,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   89 |         }
   90 |     }
   91 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L4:** C# namespace grouping.
-- **L21:** Error handling block.
-- **L23:** Import namespace/types.
-- **L26:** Idempotent schema/index ensure (safe to run many times).
-- **L27:** Course publish flag for Landing catalog.
-- **L30:** Idempotent schema/index ensure (safe to run many times).
-- **L31:** Owner lecturer foreign key.
-- **L34:** Idempotent schema/index ensure (safe to run many times).
-- **L35:** Course publish flag for Landing catalog.
-- **L38:** Idempotent schema/index ensure (safe to run many times).
-- **L42:** Idempotent schema/index ensure (safe to run many times).
-- **L46:** Idempotent schema/index ensure (safe to run many times).
-- **L50:** Idempotent schema/index ensure (safe to run many times).
-- **L54:** Handle/log exception.
-- **L59:** Database access (pure SQL).
-- **L61:** Error handling block.
-- **L63:** Import namespace/types.
-- **L64:** Inspect live database catalog for existing columns/tables.
-- **L67:** `table` means: DataTable or HTML table container.
-- **L68:** `on` means: Holds “on” for this scope. (integer)
-- **L71:** `rest` means: Holds “rest” for this scope. (text)
-- **L72:** `sp` means: Holds “sp” for this scope. (integer)
-- **L77:** Parameterized SQL — prevents classic SQL injection.
-- **L78:** Parameterized SQL — prevents classic SQL injection.
-- **L79:** Run SQL; return table / rows / scalar.
-- **L82:** Import namespace/types.
-- **L83:** Run SQL; return table / rows / scalar.
-- **L85:** Handle/log exception.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Data.SqlClient;
-
-namespace WebAppAssignment.Data
-{
-    /// <summary>
-    /// Best-effort nonclustered indexes for common lecturer/landing queries.
-    /// Safe to run repeatedly (checks sys.indexes first).
-    /// </summary>
-    public static class DbIndexes
-    {
-        private static readonly object Gate = new object();
-        private static bool _done;
-
-        public static void Ensure()
-        {
-            if (_done) return;
-            lock (Gate)
-            {
-                if (_done) return;
-                try
-                {
-                    using (var conn = DbHelper.OpenConnection())
-                    {
-                        // Courses by lecturer (course manager, ownership)
-                        EnsureIndex(conn, "IX_Courses_LecturerUID",
-                            "CREATE NONCLUSTERED INDEX IX_Courses_LecturerUID ON Courses (LecturerUID) INCLUDE (Name, IsPublished)");
-
-                        // Fallback without IsPublished if include failed
-                        EnsureIndex(conn, "IX_Courses_LecturerUID",
-                            "CREATE NONCLUSTERED INDEX IX_Courses_LecturerUID ON Courses (LecturerUID)");
-
-                        // Published catalogue
-                        EnsureIndex(conn, "IX_Courses_IsPublished",
-                            "CREATE NONCLUSTERED INDEX IX_Courses_IsPublished ON Courses (IsPublished) INCLUDE (Name, Rating, Categories, Level)");
-
-                        // Submissions by coursework (grading queue)
-                        EnsureIndex(conn, "IX_CWSubmissions_CWID",
-                            "CREATE NONCLUSTERED INDEX IX_CWSubmissions_CWID ON CWSubmissions (CWID) INCLUDE (StudentUID, SubmissionDate)");
-
-                        // Markings by submission (pending grade NOT EXISTS)
-                        EnsureIndex(conn, "IX_CWMarkings_SID",
-                            "CREATE NONCLUSTERED INDEX IX_CWMarkings_SID ON CWMarkings (SID)");
-
-                        // Chapters by course (curriculum)
-                        EnsureIndex(conn, "IX_Chapters_CID",
-                            "CREATE NONCLUSTERED INDEX IX_Chapters_CID ON Chapters (CID)");
-
-                        // Enrollments by course
-                        EnsureIndex(conn, "IX_Enrollments_CID",
-                            "CREATE NONCLUSTERED INDEX IX_Enrollments_CID ON Enrollments (CID) INCLUDE (StudentUID, Progress)");
-                    }
-                }
-                catch { }
-                _done = true;
-            }
-        }
-
-        private static void EnsureIndex(SqlConnection conn, string indexName, string createSql)
-        {
-            try
-            {
-                using (var check = new SqlCommand(
-                    "SELECT 1 FROM sys.indexes WHERE name = @n AND object_id = OBJECT_ID(@t)", conn))
-                {
-                    // Infer table from CREATE ... ON TableName
-                    string table = null;
-                    int on = createSql.IndexOf(" ON ", StringComparison.OrdinalIgnoreCase);
-                    if (on > 0)
-                    {
-                        string rest = createSql.Substring(on + 4).Trim();
-                        int sp = rest.IndexOfAny(new[] { ' ', '(' });
-                        table = sp > 0 ? rest.Substring(0, sp).Trim() : rest;
-                    }
-                    if (string.IsNullOrEmpty(table)) return;
-
-                    check.Parameters.AddWithValue("@n", indexName);
-                    check.Parameters.AddWithValue("@t", "dbo." + table);
-                    if (check.ExecuteScalar() != null) return;
-                }
-
-                using (var create = new SqlCommand(createSql, conn))
-                    create.ExecuteNonQuery();
-            }
-            catch
-            {
-                // Column/table missing or include list invalid — ignore
-            }
-        }
-    }
-}
-
 ```

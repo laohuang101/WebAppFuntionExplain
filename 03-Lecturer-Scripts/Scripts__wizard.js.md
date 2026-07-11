@@ -1,6 +1,6 @@
 # wizard.js
 **Source:** `Pages/Lecturer/Scripts/wizard.js`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,17 +15,17 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-_No top-level variables detected by scanner._
+_No top-level script variables found._
 
 ## Functions / methods (0 found)
 
-_No methods matched the scanner (markup-only or unconventional structure). See full file listing below._
+_No methods matched the scanner (markup-only or unconventional structure). See the code listing at the bottom._
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```javascript
    1 | // wizard.js: lightweight wizard controls for CourseCreation modal
@@ -35,17 +35,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
    5 |         console.log('wizard controls initialized');
    6 |     };
    7 | })();
-```
-
-## Source snapshot (raw)
-
-```javascript
-// wizard.js: lightweight wizard controls for CourseCreation modal
-(function(){
-    window.initWizardControls = function(){
-        // nothing fancy here; page includes functions used by markup. Keep init hook for future
-        console.log('wizard controls initialized');
-    };
-})();
-
 ```

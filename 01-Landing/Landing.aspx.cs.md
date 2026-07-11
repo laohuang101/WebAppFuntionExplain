@@ -1,6 +1,6 @@
 # Landing.aspx.cs
 **Source:** `Pages/Landing/Landing.aspx.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,42 +15,42 @@ Public marketing + course catalog. Shows published courses only (`IsPublished`).
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 18:** `cs` (`var`) — **Connection string text.**
-- **Line 40:** `role` (`string`) — **User role code or name (Admin/Student/Lecturer).**
-- **Line 42:** `dash` (`string`) — **Holds “dash” for this scope. (text)**
-- **Line 108:** `sql` (`string`) — **SQL query text (should use parameters, not raw user input).**
-- **Line 113:** `r` (`SqlDataReader`) — **Usually one database row (DataRow) in query loops.**
-- **Line 114:** `cmd` (`SqlCommand`) — **SqlCommand — the SQL statement + parameters object.**
-- **Line 132:** `grid` (`var`) — **Identifier (`grid`) — database primary/foreign key.**
-- **Line 137:** `count` (`int`) — **Number of matching records.**
-- **Line 141:** `name` (`string`) — **Display name of user/course/criterion.**
-- **Line 142:** `desc` (`string`) — **Description text (may embed <<<META>>> JSON).**
-- **Line 143:** `bg` (`string`) — **Holds “bg” for this scope. (text)**
-- **Line 144:** `cat` (`string`) — **Date/time value. (text)**
-- **Line 145:** `level` (`string`) — **Holds “level” for this scope. (text)**
-- **Line 146:** `rating` (`decimal`) — **Holds “rating” for this scope. (number/score)**
-- **Line 147:** `img` (`string`) — **Image element or image path.**
-- **Line 202:** `o` (`var`) — **Holds “o” for this scope.**
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (6 found)
 
 ### `Page_Load` — lines 22–31
 
+#### Signature
+
 ```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Page_Load`.
-- **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+Runs automatically when the ASP.NET page opens or posts back; sets up the page and security checks.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. ASP.NET calls this automatically on every request.
+2. On first load (`!IsPostBack`), initialize UI or redirect if already logged in.
+3. On postback, button handlers run separately after this method.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   22 | 
@@ -65,28 +65,39 @@ protected void Page_Load(object sender, EventArgs e)
   31 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L23:** Page load entry (GET or postback).
-- **L25:** False on first open; true after postback.
-
 ---
 
 ### `BindAuthChrome` — lines 32–55
+
+#### Signature
 
 ```csharp
 private void BindAuthChrome()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `BindAuthChrome`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Local variables (what each means):**
-- `role` (`string`) — User role code or name (Admin/Student/Lecturer).  Read from ASP.NET Session.
-- `dash` (`string`) — Holds “dash” for this scope. (text)
+Function `BindAuthChrome` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Save temporary state in Session (`Session["UserID"] !`).
+2. Save temporary state in Session (`Session["UserName"] as string ?? "User");`).
+3. Save temporary state in Session (`Session["UserRole"] as string ?? "").Trim().ToLowerInvariant();`).
+4. If the user is Admin, complete login without MFA; otherwise require MFA.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `role` | `string` | User role code or name (Admin/Student/Lecturer).  Read from ASP.NET Session. |
+| `dash` | `string` | Holds “dash” for this scope. (text) |
+
+#### Code
 
 ```csharp
   32 | 
@@ -115,31 +126,35 @@ private void BindAuthChrome()
   55 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L35:** Server session for logged-in user.
-- **L39:** Server session for logged-in user.
-- **L41:** Server session for logged-in user. | `role` means: User role code or name (Admin/Student/Lecturer).  Read from ASP.NET Session.
-- **L42:** `dash` means: Holds “dash” for this scope. (text)
-
 ---
 
 ### `LoadStats` — lines 56–96
+
+#### Signature
 
 ```csharp
 private void LoadStats()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `LoadStats`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Pattern:** Read/load data for display.
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+Reads/loads data related to **Stats** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Open a connection to the LocalDB / SQL Server database.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object. |
+
+#### Code
 
 ```csharp
   56 | 
@@ -185,46 +200,46 @@ private void LoadStats()
   96 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L59:** Error handling block.
-- **L61:** Import namespace/types.
-- **L68:** Error handling block.
-- **L73:** Handle/log exception.
-- **L79:** Error handling block.
-- **L82:** Owner lecturer foreign key.
-- **L84:** Handle/log exception.
-- **L90:** Handle/log exception.
-
 ---
 
 ### `LoadCourses` — lines 97–196
+
+#### Signature
 
 ```csharp
 private void LoadCourses()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `LoadCourses`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.
-- **Pattern:** Read/load data for display.
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
-- `cmd` (`SqlCommand`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
-- `grid` (`var`) — Identifier (`grid`) — database primary/foreign key.  Newly constructed object.
-- `count` (`int`) — Number of matching records.  Literal number `0`.
-- `name` (`string`) — Display name of user/course/criterion.
-- `desc` (`string`) — Description text (may embed <<<META>>> JSON).
-- `bg` (`string`) — Holds “bg” for this scope. (text)
-- `cat` (`string`) — Date/time value. (text)
-- `level` (`string`) — Holds “level” for this scope. (text)
-- `rating` (`decimal`) — Holds “rating” for this scope. (number/score)
-- `img` (`string`) — Image element or image path.
+Browser JS: load the lecturer’s courses into a dropdown.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Open a connection to the LocalDB / SQL Server database.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object. |
+| `sql` | `string` | SQL query text (should use parameters, not raw user input). |
+| `cmd` | `SqlCommand` | SqlCommand — the SQL statement + parameters object.  Newly constructed object. |
+| `grid` | `var` | Identifier (`grid`) — database primary/foreign key.  Newly constructed object. |
+| `count` | `int` | Number of matching records.  Literal number `0`. |
+| `name` | `string` | Display name of user/course/criterion. |
+| `desc` | `string` | Description text (may embed <<<META>>> JSON). |
+| `bg` | `string` | Holds “bg” for this scope. (text) |
+| `cat` | `string` | Date/time value. (text) |
+| `level` | `string` | Holds “level” for this scope. (text) |
+| `rating` | `decimal` | Holds “rating” for this scope. (number/score) |
+| `img` | `string` | Image element or image path. |
+
+#### Code
 
 ```csharp
   97 | 
@@ -329,53 +344,38 @@ private void LoadCourses()
  196 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L101:** Error handling block.
-- **L103:** Error handling block.
-- **L105:** Import namespace/types.
-- **L108:** `sql` means: SQL query text (should use parameters, not raw user input).
-- **L111:** Course publish flag for Landing catalog.
-- **L114:** Database access (pure SQL). | `cmd` means: SqlCommand — the SQL statement + parameters object.  Newly constructed object.
-- **L115:** Error handling block.
-- **L119:** Handle/log exception.
-- **L122:** Database access (pure SQL).
-- **L129:** Import namespace/types.
-- **L130:** Import namespace/types.
-- **L132:** `grid` means: Identifier (`grid`) — database primary/foreign key.  Newly constructed object.
-- **L137:** `count` means: Number of matching records.  Literal number `0`.
-- **L141:** `name` means: Display name of user/course/criterion.
-- **L142:** `desc` means: Description text (may embed <<<META>>> JSON).
-- **L143:** `bg` means: Holds “bg” for this scope. (text)
-- **L144:** `cat` means: Date/time value. (text)
-- **L145:** `level` means: Holds “level” for this scope. (text)
-- **L146:** Null-safe read from database values. | `rating` means: Holds “rating” for this scope. (number/score)
-- **L148:** `img` means: Image element or image path.
-- **L159:** Encode text to reduce XSS risk.
-- **L161:** Encode text to reduce XSS risk.
-- **L163:** Encode text to reduce XSS risk.
-- **L164:** Encode text to reduce XSS risk.
-- **L192:** Handle/log exception.
-
 ---
 
 ### `ScalarInt` — lines 197–206
+
+#### Signature
 
 ```csharp
 private static int ScalarInt(SqlConnection conn, string sql)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ScalarInt`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
-- **Local variables (what each means):**
-- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
+Function `ScalarInt` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Run SQL that returns one value (count, id, flag).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `sql` | `string` | SQL query text (should use parameters, not raw user input). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cmd` | `var` | SqlCommand — the SQL statement + parameters object.  Newly constructed object. |
+
+#### Code
 
 ```csharp
  197 | 
@@ -390,28 +390,37 @@ private static int ScalarInt(SqlConnection conn, string sql)
  206 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L198:** Database access (pure SQL).
-- **L200:** Import namespace/types.
-- **L202:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L203:** Null-safe read from database values.
-
 ---
 
 ### `Safe` — lines 207–212
+
+#### Signature
 
 ```csharp
 private static string Safe(object o)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Safe`.
-- **Parameters (what each means):**
-- `o` (`object`) — Holds “o” for this scope.
+Function `Safe` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `Safe`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `o` | `object` | Holds “o” for this scope. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  207 | 
@@ -422,15 +431,11 @@ private static string Safe(object o)
  212 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L210:** Null-safe read from database values.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -647,281 +652,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  212 |         }
  213 |     }
  214 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L5:** Import namespace/types.
-- **L6:** Import namespace/types.
-- **L7:** Import namespace/types.
-- **L8:** Import namespace/types.
-- **L10:** C# namespace grouping.
-- **L18:** `cs` means: Connection string text.  Read from Web.config.
-- **L23:** Page load entry (GET or postback).
-- **L25:** False on first open; true after postback.
-- **L35:** Server session for logged-in user.
-- **L39:** Server session for logged-in user.
-- **L41:** Server session for logged-in user. | `role` means: User role code or name (Admin/Student/Lecturer).  Read from ASP.NET Session.
-- **L42:** `dash` means: Holds “dash” for this scope. (text)
-- **L59:** Error handling block.
-- **L61:** Import namespace/types.
-- **L68:** Error handling block.
-- **L73:** Handle/log exception.
-- **L79:** Error handling block.
-- **L82:** Owner lecturer foreign key.
-- **L84:** Handle/log exception.
-- **L90:** Handle/log exception.
-- **L101:** Error handling block.
-- **L103:** Error handling block.
-- **L105:** Import namespace/types.
-- **L108:** `sql` means: SQL query text (should use parameters, not raw user input).
-- **L111:** Course publish flag for Landing catalog.
-- **L114:** Database access (pure SQL). | `cmd` means: SqlCommand — the SQL statement + parameters object.  Newly constructed object.
-- **L115:** Error handling block.
-- **L119:** Handle/log exception.
-- **L122:** Database access (pure SQL).
-- **L129:** Import namespace/types.
-- **L130:** Import namespace/types.
-- **L132:** `grid` means: Identifier (`grid`) — database primary/foreign key.  Newly constructed object.
-- **L137:** `count` means: Number of matching records.  Literal number `0`.
-- **L141:** `name` means: Display name of user/course/criterion.
-- **L142:** `desc` means: Description text (may embed <<<META>>> JSON).
-- **L143:** `bg` means: Holds “bg” for this scope. (text)
-- **L144:** `cat` means: Date/time value. (text)
-- **L145:** `level` means: Holds “level” for this scope. (text)
-- **L146:** Null-safe read from database values. | `rating` means: Holds “rating” for this scope. (number/score)
-- **L148:** `img` means: Image element or image path.
-- **L159:** Encode text to reduce XSS risk.
-- **L161:** Encode text to reduce XSS risk.
-- **L163:** Encode text to reduce XSS risk.
-- **L164:** Encode text to reduce XSS risk.
-- **L192:** Handle/log exception.
-- **L198:** Database access (pure SQL).
-- **L200:** Import namespace/types.
-- **L202:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L203:** Null-safe read from database values.
-- **L210:** Null-safe read from database values.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-
-namespace WebAppAssignment.Pages.Landing
-{
-    public partial class Landing : Page
-    {
-        private string ConnString
-        {
-            get
-            {
-                var cs = ConfigurationManager.ConnectionStrings["MyDbConn"];
-                return cs != null ? cs.ConnectionString : string.Empty;
-            }
-        }
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!IsPostBack)
-            {
-                BindAuthChrome();
-                LoadStats();
-                LoadCourses();
-            }
-        }
-
-        private void BindAuthChrome()
-        {
-            if (Session["UserID"] != null)
-            {
-                phGuest.Visible = false;
-                phUser.Visible = true;
-                litUserName.Text = HttpUtility.HtmlEncode(Session["UserName"] as string ?? "User");
-
-                string role = (Session["UserRole"] as string ?? "").Trim().ToLowerInvariant();
-                string dash = ResolveUrl("~/Pages/Landing/Landing.aspx");
-                if (role == "0" || role == "admin")
-                dash = ResolveUrl("~/Pages/Admin/ADashboard.aspx");
-                else if (role == "2" || role == "teacher" || role == "lecturer")
-                dash = ResolveUrl("~/Pages/Lecturer/Dashboard.aspx");
-
-                lnkDashboard.HRef = dash;
-            }
-            else
-            {
-                phGuest.Visible = true;
-                phUser.Visible = false;
-            }
-        }
-
-        private void LoadStats()
-        {
-            try
-            {
-                using (var conn = new SqlConnection(ConnString))
-                {
-                    conn.Open();
-
-                    litCourseCount.Text = ScalarInt(conn, "SELECT COUNT(*) FROM Courses").ToString("N0");
-
-                    // Distinct enrolled students
-                    try
-                    {
-                        litStudentCount.Text = ScalarInt(conn,
-                        "SELECT COUNT(DISTINCT StudentUID) FROM Enrollments").ToString("N0");
-                    }
-                    catch
-                    {
-                        litStudentCount.Text = ScalarInt(conn,
-                        "SELECT COUNT(*) FROM Users WHERE Role IN ('1','Student','student')").ToString("N0");
-                    }
-
-                    try
-                    {
-                        litLecturerCount.Text = ScalarInt(conn,
-                        "SELECT COUNT(DISTINCT LecturerUID) FROM Courses").ToString("N0");
-                    }
-                    catch
-                    {
-                        litLecturerCount.Text = "0";
-                    }
-                }
-            }
-            catch
-            {
-                litCourseCount.Text = "0";
-                litStudentCount.Text = "0";
-                litLecturerCount.Text = "0";
-            }
-        }
-
-        private void LoadCourses()
-        {
-            phCourses.Controls.Clear();
-            try
-            {
-                try { WebAppAssignment.Data.CourseSchema.Ensure(); } catch { }
-
-                using (var conn = new SqlConnection(ConnString))
-                {
-                    conn.Open();
-                    string sql = @"
-SELECT TOP 12 CID, Name, Description, Rating, BgImg, Categories, Level
-FROM Courses
-WHERE ISNULL(IsPublished, 1) = 1
-ORDER BY CID DESC";
-                    SqlDataReader r = null;
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    try
-                    {
-                        r = cmd.ExecuteReader();
-                    }
-                    catch
-                    {
-                        cmd.Dispose();
-                        cmd = new SqlCommand(@"
-SELECT TOP 12 CID, Name, Description, Rating, BgImg, Categories, Level
-FROM Courses
-ORDER BY CID DESC", conn);
-                        r = cmd.ExecuteReader();
-                    }
-
-                    using (cmd)
-                    using (r)
-                    {
-                        var grid = new StringBuilder();
-                        grid.Append("<div class='course-carousel' id='courseCarousel'>");
-                        grid.Append("<button type='button' class='cc-arrow cc-prev' aria-label='Previous courses'><i class='fa-solid fa-chevron-left'></i></button>");
-                        grid.Append("<div class='cc-viewport'>");
-                        grid.Append("<div class='cc-track' id='courseTrack'>");
-                        int count = 0;
-                        while (r.Read())
-                        {
-                            count++;
-                            string name = Safe(r["Name"]);
-                            string desc = Safe(r["Description"]);
-                            string bg = Safe(r["BgImg"]);
-                            string cat = Safe(r["Categories"]);
-                            string level = Safe(r["Level"]);
-                            decimal rating = r["Rating"] == DBNull.Value ? 0 : Convert.ToDecimal(r["Rating"]);
-
-                            string img = string.IsNullOrWhiteSpace(bg)
-                                ? "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600"
-                                : bg;
-
-                            grid.Append("<article class='course-card'>");
-                            grid.AppendFormat(
-                                "<img class='thumb' src='{0}' alt='{1}' onerror=\"this.src='https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600'\" />",
-                                HttpUtility.HtmlAttributeEncode(img), HttpUtility.HtmlAttributeEncode(name));
-                            grid.Append("<div class='body'>");
-                            grid.Append("<div class='meta'>");
-                            if (!string.IsNullOrEmpty(cat))
-                                grid.AppendFormat("<span class='pill'>{0}</span>", HttpUtility.HtmlEncode(cat));
-                            if (!string.IsNullOrEmpty(level))
-                                grid.AppendFormat("<span class='pill level'>{0}</span>", HttpUtility.HtmlEncode(level));
-                            grid.Append("</div>");
-                            grid.AppendFormat("<h3>{0}</h3>", HttpUtility.HtmlEncode(name));
-                            grid.AppendFormat("<p class='desc'>{0}</p>", HttpUtility.HtmlEncode(
-                                string.IsNullOrWhiteSpace(desc) ? "No description provided." : desc));
-                            grid.Append("<div class='card-footer-row'>");
-                            if (rating > 0)
-                                grid.AppendFormat("<span class='rating'><i class='fa-solid fa-star'></i> {0:0.0}</span>", rating);
-                            else
-                                grid.Append("<span class='text-muted'>New</span>");
-                            grid.AppendFormat(
-                                "<a class='btn-accent' style='padding:0.35rem 0.85rem;font-size:0.8rem;' href='{0}'>Enroll</a>",
-                                ResolveUrl("~/Pages/Authentication/Login.aspx"));
-                            grid.Append("</div></div></article>");
-                        }
-                        grid.Append("</div></div>");
-                        grid.Append("<button type='button' class='cc-arrow cc-next' aria-label='Next courses'><i class='fa-solid fa-chevron-right'></i></button>");
-                        grid.Append("</div>");
-
-                        if (count == 0)
-                        {
-                            phEmpty.Visible = true;
-                        }
-                        else
-                        {
-                            phEmpty.Visible = false;
-                            phCourses.Controls.Add(new LiteralControl(grid.ToString()));
-                        }
-                    }
-                }
-            }
-            catch
-            {
-                phEmpty.Visible = true;
-            }
-        }
-
-        private static int ScalarInt(SqlConnection conn, string sql)
-        {
-            using (var cmd = new SqlCommand(sql, conn))
-            {
-                var o = cmd.ExecuteScalar();
-                if (o == null || o == DBNull.Value) return 0;
-                return Convert.ToInt32(o);
-            }
-        }
-
-        private static string Safe(object o)
-        {
-            if (o == null || o == DBNull.Value) return "";
-            return o.ToString();
-        }
-    }
-}
-
 ```

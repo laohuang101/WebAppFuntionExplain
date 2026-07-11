@@ -1,6 +1,6 @@
 # cc-curriculum.js
 **Source:** `Pages/Lecturer/Scripts/cc-curriculum.js`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,67 +15,83 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 4:** `view` — script-level `const`/`let`/`var` — **Holds “view” for this scope.**
-- **Line 21:** `chapters` — script-level `const`/`let`/`var` — **Often a collection related to chapters (plural name).**
-- **Line 30:** `secDiv` — script-level `const`/`let`/`var` — **Holds “sec Div” for this scope.**
-- **Line 33:** `lessonsHtml` — script-level `const`/`let`/`var` — **Holds “lessons Html” for this scope.**
-- **Line 35:** `lessons` — script-level `const`/`let`/`var` — **Often a collection related to lessons (plural name).**
-- **Line 38:** `type` — script-level `const`/`let`/`var` — **Holds “type” for this scope.**
-- **Line 39:** `typeClass` — script-level `const`/`let`/`var` — **Often a collection related to type Class (plural name).**
-- **Line 120:** `title` — script-level `const`/`let`/`var` — **Title of course work / page heading.**
-- **Line 121:** `errDiv` — script-level `const`/`let`/`var` — **Holds “err Div” for this scope.**
-- **Line 136:** `chid` — script-level `const`/`let`/`var` — **Chapter ID (Chapters.ChID).**
-- **Line 137:** `saveBtn` — script-level `const`/`let`/`var` — **Holds “save Btn” for this scope.**
-- **Line 185:** `htmlEditor` — script-level `const`/`let`/`var` — **Holds “html Editor” for this scope.**
-- **Line 189:** `mediaPrev` — script-level `const`/`let`/`var` — **Holds “media Prev” for this scope.**
-- **Line 191:** `mediaMsg` — script-level `const`/`let`/`var` — **Holds “media Msg” for this scope.**
-- **Line 193:** `matMsg` — script-level `const`/`let`/`var` — **Holds “mat Msg” for this scope.**
-- **Line 211:** `lessonType` — script-level `const`/`let`/`var` — **Holds “lesson Type” for this scope.**
-- **Line 221:** `mats` — script-level `const`/`let`/`var` — **Often a collection related to mats (plural name).**
-- **Line 222:** `cleaned` — script-level `const`/`let`/`var` — **Holds “cleaned” for this scope.**
-- **Line 234:** `vUrl` — script-level `const`/`let`/`var` — **URL string.**
-- **Line 252:** `lbl` — script-level `const`/`let`/`var` — **UI control reference (lbl).**
-- **Line 253:** `textarea` — script-level `const`/`let`/`var` — **Holds “textarea” for this scope.**
-- **Line 256:** `editorToolbar` — script-level `const`/`let`/`var` — **Holds “editor Toolbar” for this scope.**
-- **Line 257:** `mediaDZ` — script-level `const`/`let`/`var` — **Holds “media DZ” for this scope.**
-- **Line 258:** `materialDZ` — script-level `const`/`let`/`var` — **Holds “material DZ” for this scope.**
-- **Line 259:** `attachments` — script-level `const`/`let`/`var` — **Often a collection related to attachments (plural name).**
-- **Line 309:** `content` — script-level `const`/`let`/`var` — **Submission body text or JSON payload in CWSubmissions.**
-- **Line 321:** `materialsField` — script-level `const`/`let`/`var` — **Holds “materials Field” for this scope.**
-- **Line 323:** `materialsRaw` — script-level `const`/`let`/`var` — **Holds “materials Raw” for this scope.**
-- **Line 324:** `materialsArr` — script-level `const`/`let`/`var` — **Holds “materials Arr” for this scope.**
-- **Line 330:** `url` — script-level `const`/`let`/`var` — **HTTP URL to media or page.**
-- **Line 354:** `firstUrl` — script-level `const`/`let`/`var` — **URL string.**
-- **Line 355:** `firstName` — script-level `const`/`let`/`var` — **Holds “first Name” for this scope.**
-- **Line 356:** `kind` — script-level `const`/`let`/`var` — **Upload kind (material/video/thumbnail/submission).**
-- **Line 361:** `plain` — script-level `const`/`let`/`var` — **Text without META trailer (student-visible instructions).**
-- **Line 371:** `schid` — script-level `const`/`let`/`var` — **SubChapter / lesson ID.**
-- **Line 375:** `matsJson` — script-level `const`/`let`/`var` — **Holds “mats Json” for this scope.**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `view` | `const/let/var` | Holds “view” for this scope. |
+| `chapters` | `const/let/var` | Often a collection related to chapters (plural name). |
+| `secDiv` | `const/let/var` | Holds “sec Div” for this scope. |
+| `lessonsHtml` | `const/let/var` | Holds “lessons Html” for this scope. |
+| `lessons` | `const/let/var` | Often a collection related to lessons (plural name). |
+| `type` | `const/let/var` | Holds “type” for this scope. |
+| `typeClass` | `const/let/var` | Often a collection related to type Class (plural name). |
+| `title` | `const/let/var` | Title of course work / page heading. |
+| `errDiv` | `const/let/var` | Holds “err Div” for this scope. |
+| `chid` | `const/let/var` | Chapter ID (Chapters.ChID). |
+| `saveBtn` | `const/let/var` | Holds “save Btn” for this scope. |
+| `htmlEditor` | `const/let/var` | Holds “html Editor” for this scope. |
+| `mediaPrev` | `const/let/var` | Holds “media Prev” for this scope. |
+| `mediaMsg` | `const/let/var` | Holds “media Msg” for this scope. |
+| `matMsg` | `const/let/var` | Holds “mat Msg” for this scope. |
+| `lessonType` | `const/let/var` | Holds “lesson Type” for this scope. |
+| `mats` | `const/let/var` | Often a collection related to mats (plural name). |
+| `cleaned` | `const/let/var` | Holds “cleaned” for this scope. |
+| `vUrl` | `const/let/var` | URL string. |
+| `lbl` | `const/let/var` | UI control reference (lbl). |
+| `textarea` | `const/let/var` | Holds “textarea” for this scope. |
+| `editorToolbar` | `const/let/var` | Holds “editor Toolbar” for this scope. |
+| `mediaDZ` | `const/let/var` | Holds “media DZ” for this scope. |
+| `materialDZ` | `const/let/var` | Holds “material DZ” for this scope. |
+| `attachments` | `const/let/var` | Often a collection related to attachments (plural name). |
+| `content` | `const/let/var` | Submission body text or JSON payload in CWSubmissions. |
+| `materialsField` | `const/let/var` | Holds “materials Field” for this scope. |
+| `materialsRaw` | `const/let/var` | Holds “materials Raw” for this scope. |
+| `materialsArr` | `const/let/var` | Holds “materials Arr” for this scope. |
+| `url` | `const/let/var` | HTTP URL to media or page. |
+| `firstUrl` | `const/let/var` | URL string. |
+| `firstName` | `const/let/var` | Holds “first Name” for this scope. |
+| `kind` | `const/let/var` | Upload kind (material/video/thumbnail/submission). |
+| `plain` | `const/let/var` | Text without META trailer (student-visible instructions). |
+| `schid` | `const/let/var` | SubChapter / lesson ID. |
+| `matsJson` | `const/let/var` | Holds “mats Json” for this scope. |
 
 ## Functions / methods (10 found)
 
 ### `loadCurriculumView` — lines 2–101
 
+#### Signature
+
 ```javascript
 function loadCurriculumView()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `loadCurriculumView`.
-- **Pattern:** Read/load data for display.
-- **Local variables (what each means):**
-- `view` — Holds “view” for this scope.  DOM element from the page.
-- `chapters` — Often a collection related to chapters (plural name).
-- `secDiv` — Holds “sec Div” for this scope.
-- `lessonsHtml` — Holds “lessons Html” for this scope.  Literal text string.
-- `lessons` — Often a collection related to lessons (plural name).
-- `type` — Holds “type” for this scope.
-- `typeClass` — Often a collection related to type Class (plural name).  Literal text string.
+Reads/loads data related to **Curriculum View** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. If the previous step failed, show the error and stop.
+2. Attach a browser event handler (click, load, change, …).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `view` | `—` | Holds “view” for this scope.  DOM element from the page. |
+| `chapters` | `—` | Often a collection related to chapters (plural name). |
+| `secDiv` | `—` | Holds “sec Div” for this scope. |
+| `lessonsHtml` | `—` | Holds “lessons Html” for this scope.  Literal text string. |
+| `lessons` | `—` | Often a collection related to lessons (plural name). |
+| `type` | `—` | Holds “type” for this scope. |
+| `typeClass` | `—` | Often a collection related to type Class (plural name).  Literal text string. |
+
+#### Code
 
 ```javascript
    2 | 
@@ -180,46 +196,33 @@ function loadCurriculumView()
  101 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L4:** Get HTML element by id. | `view` means: Holds “view” for this scope.  DOM element from the page.
-- **L8:** Update page HTML.
-- **L12:** Update page HTML.
-- **L17:** Update page HTML.
-- **L18:** Encode text to reduce XSS risk.
-- **L22:** `chapters` means: Often a collection related to chapters (plural name).
-- **L24:** Update page HTML.
-- **L28:** Update page HTML.
-- **L30:** `secDiv` means: Holds “sec Div” for this scope.
-- **L34:** `lessonsHtml` means: Holds “lessons Html” for this scope.  Literal text string.
-- **L35:** `lessons` means: Often a collection related to lessons (plural name).
-- **L38:** `type` means: Holds “type” for this scope.
-- **L39:** `typeClass` means: Often a collection related to type Class (plural name).  Literal text string.
-- **L44:** Encode text to reduce XSS risk.
-- **L45:** Encode text to reduce XSS risk.
-- **L56:** Update page HTML.
-- **L58:** Encode text to reduce XSS risk.
-- **L60:** Encode text to reduce XSS risk.
-- **L72:** DOM event handler.
-- **L77:** DOM event handler.
-- **L82:** DOM event handler.
-- **L87:** DOM event handler.
-- **L92:** DOM event handler.
-- **L99:** Update page HTML.
-
 ---
 
 ### `showAddSectionModal` — lines 101–109
+
+#### Signature
 
 ```javascript
 function showAddSectionModal()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `showAddSectionModal`.
+Updates the page HTML for **show Add Section Modal**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  101 | 
@@ -233,28 +236,36 @@ function showAddSectionModal()
  109 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L105:** Get HTML element by id.
-- **L106:** Get HTML element by id.
-- **L107:** Get HTML element by id.
-
 ---
 
 ### `editSection` — lines 109–117
+
+#### Signature
 
 ```javascript
 function editSection(chid, title)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `editSection`.
-- **Parameters (what each means):**
-- `chid` — Chapter ID (Chapters.ChID).
-- `title` — Title of course work / page heading.
+Function `editSection` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `chid` | `—` | Chapter ID (Chapters.ChID). |
+| `title` | `—` | Title of course work / page heading. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  109 | 
@@ -268,32 +279,38 @@ function editSection(chid, title)
  117 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L113:** Get HTML element by id.
-- **L114:** Get HTML element by id.
-- **L115:** Get HTML element by id.
-
 ---
 
 ### `saveSection` — lines 117–163
+
+#### Signature
 
 ```javascript
 function saveSection()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `saveSection`.
-- **ASP.NET WebMethod:** Called from browser JS via `Page.aspx/MethodName` POST JSON.
-- **Pattern:** Persist changes.
-- **Local variables (what each means):**
-- `title` — Title of course work / page heading.  DOM element from the page.
-- `errDiv` — Holds “err Div” for this scope.  DOM element from the page.
-- `chid` — Chapter ID (Chapters.ChID).
-- `saveBtn` — Holds “save Btn” for this scope.
+Saves or updates **save Section** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `title` | `—` | Title of course work / page heading.  DOM element from the page. |
+| `errDiv` | `—` | Holds “err Div” for this scope.  DOM element from the page. |
+| `chid` | `—` | Chapter ID (Chapters.ChID). |
+| `saveBtn` | `—` | Holds “save Btn” for this scope. |
+
+#### Code
 
 ```javascript
  117 | 
@@ -345,29 +362,35 @@ function saveSection()
  163 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L120:** Get HTML element by id. | `title` means: Title of course work / page heading.  DOM element from the page.
-- **L121:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
-- **L136:** `chid` means: Chapter ID (Chapters.ChID).
-- **L138:** `saveBtn` means: Holds “save Btn” for this scope.
-
 ---
 
 ### `deleteSection` — lines 163–174
+
+#### Signature
 
 ```javascript
 function deleteSection(chid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `deleteSection`.
-- **Pattern:** Delete/clear data.
-- **Parameters (what each means):**
-- `chid` — Chapter ID (Chapters.ChID).
+Deletes or clears **delete Section** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Show a simple popup message to the user.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `chid` | `—` | Chapter ID (Chapters.ChID). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  163 | 
@@ -388,22 +411,36 @@ function deleteSection(chid)
 
 ### `showAddLessonModal` — lines 174–199
 
+#### Signature
+
 ```javascript
 function showAddLessonModal(chid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `showAddLessonModal`.
-- **Parameters (what each means):**
-- `chid` — Chapter ID (Chapters.ChID).
-- **Local variables (what each means):**
-- `htmlEditor` — Holds “html Editor” for this scope.  DOM element from the page.
-- `mediaPrev` — Holds “media Prev” for this scope.  DOM element from the page.
-- `mediaMsg` — Holds “media Msg” for this scope.
-- `matMsg` — Holds “mat Msg” for this scope.
+Updates the page HTML for **show Add Lesson Modal**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `chid` | `—` | Chapter ID (Chapters.ChID). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `htmlEditor` | `—` | Holds “html Editor” for this scope.  DOM element from the page. |
+| `mediaPrev` | `—` | Holds “media Prev” for this scope.  DOM element from the page. |
+| `mediaMsg` | `—` | Holds “media Msg” for this scope. |
+| `matMsg` | `—` | Holds “mat Msg” for this scope. |
+
+#### Code
 
 ```javascript
  174 | 
@@ -434,47 +471,44 @@ function showAddLessonModal(chid)
  199 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L179:** Get HTML element by id.
-- **L180:** Get HTML element by id.
-- **L181:** Get HTML element by id.
-- **L182:** Get HTML element by id.
-- **L183:** Get HTML element by id.
-- **L184:** Get HTML element by id.
-- **L186:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
-- **L187:** Update page HTML.
-- **L188:** Get HTML element by id.
-- **L189:** Get HTML element by id. | `mediaPrev` means: Holds “media Prev” for this scope.  DOM element from the page.
-- **L190:** Update page HTML.
-- **L191:** `mediaMsg` means: Holds “media Msg” for this scope.
-- **L192:** Update page HTML.
-- **L193:** `matMsg` means: Holds “mat Msg” for this scope.
-- **L194:** Update page HTML.
-
 ---
 
 ### `editLesson` — lines 199–248
+
+#### Signature
 
 ```javascript
 function editLesson(schid, chid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `editLesson`.
-- **Parameters (what each means):**
-- `schid` — SubChapter / lesson ID.
-- `chid` — Chapter ID (Chapters.ChID).
-- **Local variables (what each means):**
-- `lessonType` — Holds “lesson Type” for this scope.
-- `htmlEditor` — Holds “html Editor” for this scope.  DOM element from the page.
-- `mats` — Often a collection related to mats (plural name).
-- `cleaned` — Holds “cleaned” for this scope.
-- `mediaPrev` — Holds “media Prev” for this scope.  DOM element from the page.
-- `vUrl` — URL string.
+Function `editLesson` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+2. Show a simple popup message to the user.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `schid` | `—` | SubChapter / lesson ID. |
+| `chid` | `—` | Chapter ID (Chapters.ChID). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `lessonType` | `—` | Holds “lesson Type” for this scope. |
+| `htmlEditor` | `—` | Holds “html Editor” for this scope.  DOM element from the page. |
+| `mats` | `—` | Often a collection related to mats (plural name). |
+| `cleaned` | `—` | Holds “cleaned” for this scope. |
+| `mediaPrev` | `—` | Holds “media Prev” for this scope.  DOM element from the page. |
+| `vUrl` | `—` | URL string. |
+
+#### Code
 
 ```javascript
  199 | 
@@ -529,47 +563,42 @@ function editLesson(schid, chid)
  248 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L204:** Get HTML element by id.
-- **L205:** Get HTML element by id.
-- **L210:** Get HTML element by id.
-- **L211:** `lessonType` means: Holds “lesson Type” for this scope.
-- **L214:** Get HTML element by id.
-- **L215:** Get HTML element by id.
-- **L216:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
-- **L218:** Update page HTML.
-- **L221:** `mats` means: Often a collection related to mats (plural name).
-- **L222:** `cleaned` means: Holds “cleaned” for this scope.
-- **L231:** Get HTML element by id.
-- **L232:** Get HTML element by id. | `mediaPrev` means: Holds “media Prev” for this scope.  DOM element from the page.
-- **L234:** `vUrl` means: URL string.
-- **L235:** Update page HTML.
-- **L236:** Encode text to reduce XSS risk.
-- **L237:** Encode text to reduce XSS risk.
-
 ---
 
 ### `toggleLessonContentFields` — lines 248–290
+
+#### Signature
 
 ```javascript
 function toggleLessonContentFields()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `toggleLessonContentFields`.
-- **Local variables (what each means):**
-- `type` — Holds “type” for this scope.  DOM element from the page.
-- `lbl` — UI control reference (lbl).  DOM element from the page.
-- `textarea` — Holds “textarea” for this scope.  DOM element from the page.
-- `htmlEditor` — Holds “html Editor” for this scope.  DOM element from the page.
-- `editorToolbar` — Holds “editor Toolbar” for this scope.  DOM element from the page.
-- `mediaDZ` — Holds “media DZ” for this scope.  DOM element from the page.
-- `materialDZ` — Holds “material DZ” for this scope.  DOM element from the page.
-- `attachments` — Often a collection related to attachments (plural name).  DOM element from the page.
+Function `toggleLessonContentFields` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `type` | `—` | Holds “type” for this scope.  DOM element from the page. |
+| `lbl` | `—` | UI control reference (lbl).  DOM element from the page. |
+| `textarea` | `—` | Holds “textarea” for this scope.  DOM element from the page. |
+| `htmlEditor` | `—` | Holds “html Editor” for this scope.  DOM element from the page. |
+| `editorToolbar` | `—` | Holds “editor Toolbar” for this scope.  DOM element from the page. |
+| `mediaDZ` | `—` | Holds “media DZ” for this scope.  DOM element from the page. |
+| `materialDZ` | `—` | Holds “material DZ” for this scope.  DOM element from the page. |
+| `attachments` | `—` | Often a collection related to attachments (plural name).  DOM element from the page. |
+
+#### Code
 
 ```javascript
  248 | 
@@ -617,48 +646,54 @@ function toggleLessonContentFields()
  290 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L251:** Get HTML element by id. | `type` means: Holds “type” for this scope.  DOM element from the page.
-- **L252:** Get HTML element by id. | `lbl` means: UI control reference (lbl).  DOM element from the page.
-- **L253:** Get HTML element by id. | `textarea` means: Holds “textarea” for this scope.  DOM element from the page.
-- **L255:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
-- **L256:** Get HTML element by id. | `editorToolbar` means: Holds “editor Toolbar” for this scope.  DOM element from the page.
-- **L257:** Get HTML element by id. | `mediaDZ` means: Holds “media DZ” for this scope.  DOM element from the page.
-- **L258:** Get HTML element by id. | `materialDZ` means: Holds “material DZ” for this scope.  DOM element from the page.
-- **L259:** Get HTML element by id. | `attachments` means: Often a collection related to attachments (plural name).  DOM element from the page.
-
 ---
 
 ### `saveLesson` — lines 290–408
+
+#### Signature
 
 ```javascript
 function saveLesson()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `saveLesson`.
-- **Pattern:** Persist changes.
-- **Local variables (what each means):**
-- `title` — Title of course work / page heading.  DOM element from the page.
-- `type` — Holds “type” for this scope.  DOM element from the page.
-- `errDiv` — Holds “err Div” for this scope.  DOM element from the page.
-- `content` — Submission body text or JSON payload in CWSubmissions.  Literal text string.
-- `htmlEditor` — Holds “html Editor” for this scope.  DOM element from the page.
-- `materialsField` — Holds “materials Field” for this scope.  DOM element from the page.
-- `materialsRaw` — Holds “materials Raw” for this scope.
-- `materialsArr` — Holds “materials Arr” for this scope.
-- `url` — HTTP URL to media or page.
-- `firstUrl` — URL string.
-- `firstName` — Holds “first Name” for this scope.
-- `kind` — Upload kind (material/video/thumbnail/submission).
-- `plain` — Text without META trailer (student-visible instructions).
-- `schid` — SubChapter / lesson ID.
-- `saveBtn` — Holds “save Btn” for this scope.
-- `matsJson` — Holds “mats Json” for this scope.  JSON serialize/parse result.
+Saves or updates **save Lesson** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+2. Parse the server JSON response into a JavaScript object.
+3. Validate input; if invalid, stop and return an error/message.
+4. Convert a JavaScript object into a JSON string for the server.
+5. Show a simple popup message to the user.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `title` | `—` | Title of course work / page heading.  DOM element from the page. |
+| `type` | `—` | Holds “type” for this scope.  DOM element from the page. |
+| `errDiv` | `—` | Holds “err Div” for this scope.  DOM element from the page. |
+| `content` | `—` | Submission body text or JSON payload in CWSubmissions.  Literal text string. |
+| `htmlEditor` | `—` | Holds “html Editor” for this scope.  DOM element from the page. |
+| `materialsField` | `—` | Holds “materials Field” for this scope.  DOM element from the page. |
+| `materialsRaw` | `—` | Holds “materials Raw” for this scope. |
+| `materialsArr` | `—` | Holds “materials Arr” for this scope. |
+| `url` | `—` | HTTP URL to media or page. |
+| `firstUrl` | `—` | URL string. |
+| `firstName` | `—` | Holds “first Name” for this scope. |
+| `kind` | `—` | Upload kind (material/video/thumbnail/submission). |
+| `plain` | `—` | Text without META trailer (student-visible instructions). |
+| `schid` | `—` | SubChapter / lesson ID. |
+| `saveBtn` | `—` | Holds “save Btn” for this scope. |
+| `matsJson` | `—` | Holds “mats Json” for this scope.  JSON serialize/parse result. |
+
+#### Code
 
 ```javascript
  290 | 
@@ -782,45 +817,35 @@ function saveLesson()
  408 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L293:** Get HTML element by id. | `title` means: Title of course work / page heading.  DOM element from the page.
-- **L294:** Get HTML element by id. | `type` means: Holds “type” for this scope.  DOM element from the page.
-- **L295:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
-- **L310:** `content` means: Submission body text or JSON payload in CWSubmissions.  Literal text string.
-- **L312:** Get HTML element by id.
-- **L314:** Get HTML element by id.
-- **L316:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
-- **L317:** Get HTML element by id.
-- **L322:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
-- **L323:** `materialsRaw` means: Holds “materials Raw” for this scope.
-- **L324:** `materialsArr` means: Holds “materials Arr” for this scope.
-- **L325:** JS object ↔ JSON text.
-- **L330:** `url` means: HTTP URL to media or page.
-- **L354:** `firstUrl` means: URL string.
-- **L355:** `firstName` means: Holds “first Name” for this scope.
-- **L356:** `kind` means: Upload kind (material/video/thumbnail/submission).
-- **L361:** `plain` means: Text without META trailer (student-visible instructions).
-- **L372:** `schid` means: SubChapter / lesson ID.
-- **L373:** `saveBtn` means: Holds “save Btn” for this scope.
-- **L376:** JS object ↔ JSON text. | `matsJson` means: Holds “mats Json” for this scope.  JSON serialize/parse result.
-
 ---
 
 ### `deleteLesson` — lines 408–419
+
+#### Signature
 
 ```javascript
 function deleteLesson(schid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `deleteLesson`.
-- **Pattern:** Delete/clear data.
-- **Parameters (what each means):**
-- `schid` — SubChapter / lesson ID.
+Deletes or clears **delete Lesson** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Show a simple popup message to the user.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `schid` | `—` | SubChapter / lesson ID. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  408 | 
@@ -839,9 +864,9 @@ function deleteLesson(schid)
 
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```javascript
    1 | // Course Creation — sections & lessons
@@ -1264,526 +1289,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  418 |     .catch(function (err) { console.error(err); alert((err && err.message) || 'Network error.'); });
  419 | }
  420 | 
-```
-
-**Line notes** (what code + variables mean)
-
-- **L4:** Get HTML element by id. | `view` means: Holds “view” for this scope.  DOM element from the page.
-- **L8:** Update page HTML.
-- **L12:** Update page HTML.
-- **L17:** Update page HTML.
-- **L18:** Encode text to reduce XSS risk.
-- **L22:** `chapters` means: Often a collection related to chapters (plural name).
-- **L24:** Update page HTML.
-- **L28:** Update page HTML.
-- **L30:** `secDiv` means: Holds “sec Div” for this scope.
-- **L34:** `lessonsHtml` means: Holds “lessons Html” for this scope.  Literal text string.
-- **L35:** `lessons` means: Often a collection related to lessons (plural name).
-- **L38:** `type` means: Holds “type” for this scope.
-- **L39:** `typeClass` means: Often a collection related to type Class (plural name).  Literal text string.
-- **L44:** Encode text to reduce XSS risk.
-- **L45:** Encode text to reduce XSS risk.
-- **L56:** Update page HTML.
-- **L58:** Encode text to reduce XSS risk.
-- **L60:** Encode text to reduce XSS risk.
-- **L72:** DOM event handler.
-- **L77:** DOM event handler.
-- **L82:** DOM event handler.
-- **L87:** DOM event handler.
-- **L92:** DOM event handler.
-- **L99:** Update page HTML.
-- **L105:** Get HTML element by id.
-- **L106:** Get HTML element by id.
-- **L107:** Get HTML element by id.
-- **L113:** Get HTML element by id.
-- **L114:** Get HTML element by id.
-- **L115:** Get HTML element by id.
-- **L120:** Get HTML element by id. | `title` means: Title of course work / page heading.  DOM element from the page.
-- **L121:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
-- **L136:** `chid` means: Chapter ID (Chapters.ChID).
-- **L138:** `saveBtn` means: Holds “save Btn” for this scope.
-- **L179:** Get HTML element by id.
-- **L180:** Get HTML element by id.
-- **L181:** Get HTML element by id.
-- **L182:** Get HTML element by id.
-- **L183:** Get HTML element by id.
-- **L184:** Get HTML element by id.
-- **L186:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
-- **L187:** Update page HTML.
-- **L188:** Get HTML element by id.
-- **L189:** Get HTML element by id. | `mediaPrev` means: Holds “media Prev” for this scope.  DOM element from the page.
-- **L190:** Update page HTML.
-- **L191:** `mediaMsg` means: Holds “media Msg” for this scope.
-- **L192:** Update page HTML.
-- **L193:** `matMsg` means: Holds “mat Msg” for this scope.
-- **L194:** Update page HTML.
-- **L204:** Get HTML element by id.
-- **L205:** Get HTML element by id.
-- **L210:** Get HTML element by id.
-- **L211:** `lessonType` means: Holds “lesson Type” for this scope.
-- **L214:** Get HTML element by id.
-- **L215:** Get HTML element by id.
-- **L216:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
-- **L218:** Update page HTML.
-- **L221:** `mats` means: Often a collection related to mats (plural name).
-- **L222:** `cleaned` means: Holds “cleaned” for this scope.
-- **L231:** Get HTML element by id.
-- **L232:** Get HTML element by id. | `mediaPrev` means: Holds “media Prev” for this scope.  DOM element from the page.
-- **L234:** `vUrl` means: URL string.
-- **L235:** Update page HTML.
-- **L236:** Encode text to reduce XSS risk.
-- **L237:** Encode text to reduce XSS risk.
-- **L251:** Get HTML element by id. | `type` means: Holds “type” for this scope.  DOM element from the page.
-- **L252:** Get HTML element by id. | `lbl` means: UI control reference (lbl).  DOM element from the page.
-- **L253:** Get HTML element by id. | `textarea` means: Holds “textarea” for this scope.  DOM element from the page.
-- **L255:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
-- **L256:** Get HTML element by id. | `editorToolbar` means: Holds “editor Toolbar” for this scope.  DOM element from the page.
-- **L257:** Get HTML element by id. | `mediaDZ` means: Holds “media DZ” for this scope.  DOM element from the page.
-- **L258:** Get HTML element by id. | `materialDZ` means: Holds “material DZ” for this scope.  DOM element from the page.
-- **L259:** Get HTML element by id. | `attachments` means: Often a collection related to attachments (plural name).  DOM element from the page.
-- **L293:** Get HTML element by id. | `title` means: Title of course work / page heading.  DOM element from the page.
-- **L294:** Get HTML element by id. | `type` means: Holds “type” for this scope.  DOM element from the page.
-- **L295:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
-- **L310:** `content` means: Submission body text or JSON payload in CWSubmissions.  Literal text string.
-- **L312:** Get HTML element by id.
-- **L314:** Get HTML element by id.
-- **L316:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
-- **L317:** Get HTML element by id.
-- **L322:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
-- **L323:** `materialsRaw` means: Holds “materials Raw” for this scope.
-- **L324:** `materialsArr` means: Holds “materials Arr” for this scope.
-- **L325:** JS object ↔ JSON text.
-- **L330:** `url` means: HTTP URL to media or page.
-- **L354:** `firstUrl` means: URL string.
-- **L355:** `firstName` means: Holds “first Name” for this scope.
-- **L356:** `kind` means: Upload kind (material/video/thumbnail/submission).
-- **L361:** `plain` means: Text without META trailer (student-visible instructions).
-- **L372:** `schid` means: SubChapter / lesson ID.
-- **L373:** `saveBtn` means: Holds “save Btn” for this scope.
-- **L376:** JS object ↔ JSON text. | `matsJson` means: Holds “mats Json” for this scope.  JSON serialize/parse result.
-
-## Source snapshot (raw)
-
-```javascript
-// Course Creation — sections & lessons
-// depends on: cc-core.js, cc-media.js
-function loadCurriculumView() {
-    const view = document.getElementById('curriculumView');
-    if (!view) return;
-
-    if (!currentCourseId) {
-        view.innerHTML = '<div class="text-center py-4 text-muted">Save basic info first (step 1) before adding sections.</div>';
-        return;
-    }
-
-    view.innerHTML = '<div class="text-center py-4"><i class="fa-solid fa-circle-notch fa-spin me-2 text-muted"></i>Loading curriculum...</div>';
-
-    curriculumApi('get', { cid: currentCourseId })
-    .then(function (resObj) {
-        if (!resObj || !resObj.success) {
-            view.innerHTML = '<div class="text-danger py-4 text-center">Failed to load curriculum: ' +
-            escapeHtml((resObj && resObj.message) || 'Unknown error') + '</div>';
-            return;
-        }
-
-        const chapters = resObj.chapters || [];
-        if (chapters.length === 0) {
-            view.innerHTML = '<div class="text-center py-4 text-muted">No sections added yet. Click "+ Add New Section" to start building your course.</div>';
-            return;
-        }
-
-        view.innerHTML = '';
-        chapters.forEach(function (ch) {
-            const secDiv = document.createElement('div');
-            secDiv.className = 'section-item';
-            secDiv.setAttribute('data-chid', ch.chid);
-
-            let lessonsHtml = '';
-            const lessons = ch.lessons || [];
-            if (lessons.length > 0) {
-                lessons.forEach(function (les, idx) {
-                    const type = (les.type || 'Text');
-                    const typeClass = 'lesson-type-' + String(type).toLowerCase();
-                    lessonsHtml +=
-                    '<div class="lesson-item">' +
-                    '<div class="lesson-meta d-flex align-items-center gap-2">' +
-                    '<span class="text-muted small">' + (idx + 1) + '.</span>' +
-                    '<span class="lesson-type-badge ' + typeClass + '">' + escapeHtml(type) + '</span>' +
-                    '<span class="fw-semibold">' + escapeHtml(les.title || '') + '</span>' +
-                    '</div>' +
-                    '<div class="d-flex gap-2">' +
-                    '<button type="button" class="btn btn-sm btn-link p-0 text-secondary" data-edit-lesson="' + les.schid + '" data-chid="' + ch.chid + '" title="Edit Lesson"><i class="fa-solid fa-pencil"></i></button>' +
-                    '<button type="button" class="btn btn-sm btn-link p-0 text-danger" data-del-lesson="' + les.schid + '" title="Delete Lesson"><i class="fa-solid fa-trash"></i></button>' +
-                    '</div></div>';
-                });
-            } else {
-                lessonsHtml = '<div class="text-muted small py-2 px-1">No lessons added to this section.</div>';
-            }
-
-            secDiv.innerHTML =
-            '<div class="section-header">' +
-            '<span class="fw-bold">' + escapeHtml(ch.title || '') + '</span>' +
-            '<div class="d-flex gap-2">' +
-            '<button type="button" class="btn btn-sm btn-link p-0 text-secondary" data-edit-section="' + ch.chid + '" data-title="' + escapeHtml(ch.title || '') + '" title="Edit Section Title"><i class="fa-solid fa-pencil"></i></button>' +
-            '<button type="button" class="btn btn-sm btn-link p-0 text-danger" data-del-section="' + ch.chid + '" title="Delete Section"><i class="fa-solid fa-trash"></i></button>' +
-            '</div></div>' +
-            '<div class="lesson-list">' + lessonsHtml +
-            '<button type="button" class="btn btn-sm btn-light border w-100 text-muted py-2 mt-2" data-add-lesson="' + ch.chid + '" style="border-style: dashed !important;">' +
-            '<i class="fa-solid fa-plus me-1"></i> Add New Lesson</button></div>';
-
-            view.appendChild(secDiv);
-        });
-
-        // Bind section/lesson actions without inline onclick (avoids quote bugs)
-        view.querySelectorAll('[data-edit-section]').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                editSection(parseInt(btn.getAttribute('data-edit-section'), 10), btn.getAttribute('data-title') || '');
-            });
-        });
-        view.querySelectorAll('[data-del-section]').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                deleteSection(parseInt(btn.getAttribute('data-del-section'), 10));
-            });
-        });
-        view.querySelectorAll('[data-add-lesson]').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                showAddLessonModal(parseInt(btn.getAttribute('data-add-lesson'), 10));
-            });
-        });
-        view.querySelectorAll('[data-edit-lesson]').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                editLesson(parseInt(btn.getAttribute('data-edit-lesson'), 10), parseInt(btn.getAttribute('data-chid'), 10));
-            });
-        });
-        view.querySelectorAll('[data-del-lesson]').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                deleteLesson(parseInt(btn.getAttribute('data-del-lesson'), 10));
-            });
-        });
-    })
-    .catch(function (err) {
-        console.error('Error loading curriculum: ', err);
-        view.innerHTML = '<div class="text-danger py-4 text-center">Failed to load curriculum.</div>';
-    });
-}
-
-function showAddSectionModal() {
-    editingSectionId = null;
-    document.getElementById('txtSectionTitle').value = '';
-    document.getElementById('sectionModalTitle').innerText = 'Add New Section';
-    document.getElementById('sectionModalError').style.display = 'none';
-    showModal('sectionModal');
-}
-
-function editSection(chid, title) {
-    editingSectionId = chid;
-    document.getElementById('txtSectionTitle').value = title || '';
-    document.getElementById('sectionModalTitle').innerText = 'Edit Section';
-    document.getElementById('sectionModalError').style.display = 'none';
-    showModal('sectionModal');
-}
-
-function saveSection() {
-    const title = document.getElementById('txtSectionTitle').value.trim();
-    const errDiv = document.getElementById('sectionModalError');
-    errDiv.style.display = 'none';
-
-    if (!title) {
-        errDiv.innerText = 'Please enter a section title.';
-        errDiv.style.display = 'block';
-        return;
-    }
-    if (!currentCourseId) {
-        errDiv.innerText = 'Course is not saved yet. Go back to step 1.';
-        errDiv.style.display = 'block';
-        return;
-    }
-
-    // Send 0 instead of null - ASP.NET WebMethods often reject null int?
-    const chid = editingSectionId ? parseInt(editingSectionId, 10) : 0;
-
-    const saveBtn = document.querySelector('#sectionModal .btn-pill-accent');
-    if (saveBtn) { saveBtn.disabled = true; saveBtn.innerText = 'Saving...'; }
-
-    curriculumApi('save_section', {
-        chid: chid,
-        cid: currentCourseId,
-        title: title
-    })
-    .then(function (resObj) {
-        if (resObj && resObj.success) {
-            hideModal('sectionModal');
-            setTimeout(function () { loadCurriculumView(); }, 150);
-        } else {
-            errDiv.innerText = (resObj && resObj.message) || 'Failed to save section.';
-            errDiv.style.display = 'block';
-        }
-    })
-    .catch(function (err) {
-        errDiv.innerText = (err && err.message) || 'Network error saving section.';
-        errDiv.style.display = 'block';
-        console.error(err);
-    })
-    .finally(function () {
-        if (saveBtn) { saveBtn.disabled = false; saveBtn.innerText = 'Save Section'; }
-    });
-}
-
-function deleteSection(chid) {
-    if (!confirm('Are you sure you want to delete this section? All lessons inside will be deleted too!')) return;
-
-    curriculumApi('delete_section', { chid: chid })
-    .then(function (resObj) {
-        if (resObj && resObj.success) loadCurriculumView();
-        else alert('Delete failed: ' + ((resObj && resObj.message) || 'Unknown error'));
-    })
-    .catch(function (err) { console.error(err); alert((err && err.message) || 'Network error.'); });
-}
-
-function showAddLessonModal(chid) {
-    targetChapterId = chid;
-    editingLessonId = null;
-    document.getElementById('txtLessonTitle').value = '';
-    document.getElementById('ddlLessonType').value = 'Text';
-    document.getElementById('txtLessonContent').value = '';
-    document.getElementById('lessonModalTitle').innerText = 'Add New Lesson';
-    document.getElementById('lessonModalError').style.display = 'none';
-    document.getElementById('lessonModalError').innerText = '';
-
-    var htmlEditor = document.getElementById('htmlEditor');
-    if (htmlEditor) htmlEditor.innerHTML = '';
-    document.getElementById('lessonMaterials').value = '[]';
-    var mediaPrev = document.getElementById('lessonMediaPreview');
-    if (mediaPrev) { mediaPrev.innerHTML = ''; mediaPrev.classList.add('d-none'); }
-    var mediaMsg = document.querySelector('#mediaDropzone .dz-inner');
-    if (mediaMsg) mediaMsg.innerHTML = '<i class="fa-solid fa-cloud-arrow-up d-block mb-2 fs-4"></i>Click or drag a video here (mp4 / webm / mov, up to 200MB)';
-    var matMsg = document.querySelector('#materialDropzone .dz-inner');
-    if (matMsg) matMsg.innerHTML = '<i class="fa-solid fa-file-arrow-up d-block mb-2 fs-4"></i>Click or drag materials (pdf, pptx, docx, images, up to 30MB)';
-    if (typeof renderAttachmentsList === 'function') renderAttachmentsList();
-
-    toggleLessonContentFields();
-    showModal('lessonModal');
-}
-
-function editLesson(schid, chid) {
-    targetChapterId = chid;
-    editingLessonId = schid;
-    document.getElementById('lessonModalTitle').innerText = 'Edit Lesson';
-    document.getElementById('lessonModalError').style.display = 'none';
-
-    curriculumApi('get_lesson', { schid: schid })
-    .then(function (resObj) {
-        if (resObj && resObj.success) {
-            document.getElementById('txtLessonTitle').value = resObj.title || '';
-            var lessonType = resObj.type || 'Text';
-            // Map DB types that are not in the dropdown
-            if (['PDF', 'Image', 'File'].indexOf(lessonType) >= 0) lessonType = 'Text';
-            document.getElementById('ddlLessonType').value = lessonType;
-            document.getElementById('txtLessonContent').value = resObj.content || '';
-            var htmlEditor = document.getElementById('htmlEditor');
-            if (htmlEditor && lessonType === 'Text') {
-                htmlEditor.innerHTML = resObj.content || '';
-            }
-            // Restore file materials so re-save does not wipe them
-            var mats = resObj.materials || [];
-            var cleaned = (mats || []).filter(function (m) {
-                return m && (m.url || m.mediaLink);
-            }).map(function (m) {
-                return {
-                    url: m.url || m.mediaLink,
-                    fileName: m.fileName || m.textContent || 'file',
-                    type: m.type || ''
-                };
-            });
-            document.getElementById('lessonMaterials').value = JSON.stringify(cleaned);
-            var mediaPrev = document.getElementById('lessonMediaPreview');
-            if (mediaPrev && lessonType === 'Video' && resObj.content) {
-                var vUrl = resolveMediaUrl(resObj.content, false);
-                mediaPrev.innerHTML = buildMaterialPreviewHtml(vUrl, 'video', 'Lesson video') +
-                '<div class="mt-1"><a class="small" href="' + escapeHtml(vUrl) + '" target="_blank">Open</a> · ' +
-                '<a class="small" href="' + escapeHtml(resolveMediaUrl(resObj.content, true)) + '">Download</a></div>';
-                mediaPrev.classList.remove('d-none');
-            }
-            toggleLessonContentFields();
-            renderAttachmentsList();
-            showModal('lessonModal');
-        } else {
-            alert('Failed to load lesson details: ' + ((resObj && resObj.message) || ''));
-        }
-    })
-    .catch(function (err) { console.error(err); alert((err && err.message) || 'Network error.'); });
-}
-
-function toggleLessonContentFields() {
-    const type = document.getElementById('ddlLessonType').value;
-    const lbl = document.getElementById('lblLessonContent');
-    const textarea = document.getElementById('txtLessonContent');
-
-    const htmlEditor = document.getElementById('htmlEditor');
-    const editorToolbar = document.getElementById('editorToolbar');
-    const mediaDZ = document.getElementById('mediaDropzone');
-    const materialDZ = document.getElementById('materialDropzone');
-    const attachments = document.getElementById('lessonAttachments');
-
-    // Hide all optional areas first
-    if(htmlEditor) htmlEditor.style.display = 'none';
-    if(editorToolbar) editorToolbar.style.display = 'none';
-    if(textarea) textarea.classList.add('d-none');
-    if(mediaDZ) mediaDZ.style.display = 'none';
-    if(materialDZ) materialDZ.style.display = 'none';
-    if(attachments) attachments.style.display = 'none';
-
-    if (type === 'Video') {
-        lbl.innerText = 'Video URL / Upload';
-        if(mediaDZ) mediaDZ.style.display = 'block';
-        if(textarea) textarea.classList.remove('d-none');
-        textarea.placeholder = 'e.g., https://example.com/video.mp4 or upload below';
-        // Extra file materials still allowed for Video lessons
-        if(materialDZ) materialDZ.style.display = 'block';
-        if(attachments) attachments.style.display = 'block';
-    } else if (type === 'Quiz') {
-        lbl.innerText = 'Quiz Question Description';
-        if(textarea) textarea.classList.remove('d-none');
-        textarea.placeholder = 'Provide the quiz questions or description for the student...';
-        if(materialDZ) materialDZ.style.display = 'block';
-        if(attachments) attachments.style.display = 'block';
-    } else {
-        lbl.innerText = 'Content Body';
-        if(editorToolbar) editorToolbar.style.display = 'flex';
-        if(htmlEditor) htmlEditor.style.display = 'block';
-        if(materialDZ) materialDZ.style.display = 'block';
-        if(attachments) attachments.style.display = 'block';
-    }
-}
-
-function saveLesson() {
-    var title = document.getElementById('txtLessonTitle').value.trim();
-    var type = document.getElementById('ddlLessonType').value;
-    var errDiv = document.getElementById('lessonModalError');
-    errDiv.style.display = 'none';
-    errDiv.innerText = '';
-
-    if (!title) {
-        errDiv.innerText = 'Please enter a lesson title.';
-        errDiv.style.display = 'block';
-        return;
-    }
-    if (!targetChapterId) {
-        errDiv.innerText = 'No section selected. Close and open Add Lesson from a section.';
-        errDiv.style.display = 'block';
-        return;
-    }
-
-    var content = '';
-    if (type === 'Video') {
-        content = document.getElementById('txtLessonContent').value.trim();
-    } else if (type === 'Quiz') {
-        content = document.getElementById('txtLessonContent').value.trim();
-    } else {
-        var htmlEditor = document.getElementById('htmlEditor');
-        content = htmlEditor ? htmlEditor.innerHTML.trim() : document.getElementById('txtLessonContent').value.trim();
-        // treat empty editor shells as empty
-        if (content === '<br>' || content === '<div><br></div>' || content === '<p><br></p>') content = '';
-    }
-
-    var materialsField = document.getElementById('lessonMaterials');
-    var materialsRaw = materialsField ? (materialsField.value || '').trim() : '';
-    var materialsArr = [];
-    try { materialsArr = materialsRaw ? JSON.parse(materialsRaw) : []; } catch (e) { materialsArr = []; }
-    if (!Array.isArray(materialsArr)) materialsArr = [];
-
-    // Normalize each material to storePath + url for the server
-    materialsArr = materialsArr.map(function (m) {
-        var url = (m && (m.storePath || m.url || m.mediaLink)) || '';
-        return {
-            storePath: m.storePath || url,
-            url: url,
-            fileName: (m && m.fileName) || 'file',
-            serveUrl: (m && m.serveUrl) || '',
-            downloadUrl: (m && m.downloadUrl) || ''
-        };
-    }).filter(function (m) { return !!m.url; });
-
-    // Allow save if we have content OR at least one uploaded material
-    if (!content && materialsArr.length === 0 && type !== 'Quiz') {
-        errDiv.innerText = type === 'Video'
-        ? 'Upload a video or paste a video URL.'
-        : 'Enter lesson content or upload at least one material file.';
-        errDiv.style.display = 'block';
-        return;
-    }
-    if (type === 'Quiz' && !content) {
-        content = 'Quiz / assignment';
-    }
-
-    // Promote first uploaded file so preview always gets a real media path
-    if (materialsArr.length > 0) {
-        var firstUrl = materialsArr[0].storePath || materialsArr[0].url || '';
-        var firstName = materialsArr[0].fileName || firstUrl;
-        var kind = mediaKind(firstName + ' ' + firstUrl);
-        if (type === 'Text' || type === 'Video') {
-            // Video lesson: ensure content is the video path
-            if (type === 'Video' && firstUrl && !content) content = firstUrl;
-            // Text lesson with only a short placeholder body → use file as primary media
-            var plain = (content || '').replace(/<[^>]+>/g, '').trim();
-            if (type === 'Text' && firstUrl && (plain.length < 40 || plain === title)) {
-                if (kind === 'video') type = 'Video';
-                else if (kind === 'pdf') type = 'PDF';
-                else if (kind === 'image') type = 'Image';
-                else type = 'PDF';
-                content = firstUrl;
-            }
-        }
-    }
-
-    var schid = editingLessonId ? parseInt(editingLessonId, 10) : 0;
-    var saveBtn = document.querySelector('#lessonModal .btn-pill-accent');
-    if (saveBtn) { saveBtn.disabled = true; saveBtn.textContent = 'Saving...'; }
-
-    var matsJson = materialsArr.length ? JSON.stringify(materialsArr) : '[]';
-
-    curriculumApi('save_lesson', {
-        schid: schid,
-        chid: parseInt(targetChapterId, 10),
-        title: title,
-        type: type,
-        content: content,
-        materialsJson: matsJson
-    })
-    .then(function (resObj) {
-        if (resObj && resObj.success) {
-            if (resObj.warning) console.warn('Lesson warning:', resObj.warning);
-            if (materialsArr.length && resObj.materialsSaved === 0) {
-                alert('Lesson saved, but materials may not have been stored (materialsSaved=0). Check StudyMats.MediaLink. Warning: ' +
-                (resObj.warning || 'none'));
-            }
-            hideModal('lessonModal');
-            setTimeout(function () { loadCurriculumView(); }, 200);
-        } else {
-            errDiv.innerText = (resObj && resObj.message) || 'Failed to save lesson.';
-            errDiv.style.display = 'block';
-        }
-    })
-    .catch(function (err) {
-        errDiv.innerText = (err && err.message) ? err.message : 'Network error saving lesson.';
-        errDiv.style.display = 'block';
-        console.error(err);
-    })
-    .finally(function () {
-        if (saveBtn) { saveBtn.disabled = false; saveBtn.textContent = 'Save Lesson'; }
-    });
-}
-
-function deleteLesson(schid) {
-    if (!confirm('Are you sure you want to delete this lesson?')) return;
-
-    curriculumApi('delete_lesson', { schid: schid })
-    .then(function (resObj) {
-        if (resObj && resObj.success) loadCurriculumView();
-        else alert('Delete failed: ' + ((resObj && resObj.message) || 'Unknown error'));
-    })
-    .catch(function (err) { console.error(err); alert((err && err.message) || 'Network error.'); });
-}
-
-
 ```

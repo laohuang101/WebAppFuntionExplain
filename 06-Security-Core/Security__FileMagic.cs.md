@@ -1,6 +1,6 @@
 # FileMagic.cs
 **Source:** `Data/Security/FileMagic.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,48 +15,41 @@ Upload content-type validation by magic bytes (PDF, images, video, office docs).
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 18:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 29:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 31:** `ext` (`string`) — **File extension (.pdf, .mp4, …).**
-- **Line 34:** `pos` (`long`) — **Holds “pos” for this scope. (integer)**
-- **Line 37:** `header` (`byte[]`) — **Holds “header” for this scope. (type `byte[]`)**
-- **Line 39:** `read` (`int`) — **Holds “read” for this scope. (integer)**
-- **Line 47:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 57:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 65:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 70:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 76:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 81:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 87:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 92:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 99:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 104:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 113:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 120:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 125:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 130:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 136:** `bytes` (`var`) — **Byte array (hash, random, file content).**
-- **Line 140:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (3 found)
 
 ### `LooksValid` — lines 12–21
 
+#### Signature
+
 ```csharp
 public static bool LooksValid(HttpPostedFile file, string extension, out string message)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `LooksValid`.
-- **Parameters (what each means):**
-- `file` (`HttpPostedFile`) — Uploaded file object or file name.
-- `extension` (`string`) — Holds “extension” for this scope. (text)
-- `message` (`string`) — Status text for the UI.
+Function `LooksValid` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Return `false` to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `file` | `HttpPostedFile` | Uploaded file object or file name. |
+| `extension` | `string` | Holds “extension” for this scope. (text) |
+| `message` | `string` | Status text for the UI. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   12 |         public static bool LooksValid(HttpPostedFile file, string extension, out string message)
@@ -75,23 +68,40 @@ public static bool LooksValid(HttpPostedFile file, string extension, out string 
 
 ### `LooksValid` — lines 22–132
 
+#### Signature
+
 ```csharp
 public static bool LooksValid(Stream stream, string extension, out string message)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `LooksValid`.
-- **Parameters (what each means):**
-- `stream` (`Stream`) — String value: eam. (type `Stream`)
-- `extension` (`string`) — Holds “extension” for this scope. (text)
-- `message` (`string`) — Status text for the UI.
-- **Local variables (what each means):**
-- `ext` (`string`) — File extension (.pdf, .mp4, …).
-- `pos` (`long`) — Holds “pos” for this scope. (integer)  Literal number `0`.
-- `header` (`byte[]`) — Holds “header” for this scope. (type `byte[]`)  Newly constructed object.
+Function `LooksValid` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Return `false` to the caller.
+2. Return `true` to the caller.
+3. Return `false` to the caller.
+4. Return `true` to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `stream` | `Stream` | String value: eam. (type `Stream`) |
+| `extension` | `string` | Holds “extension” for this scope. (text) |
+| `message` | `string` | Status text for the UI. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ext` | `string` | File extension (.pdf, .mp4, …). |
+| `pos` | `long` | Holds “pos” for this scope. (integer)  Literal number `0`. |
+| `header` | `byte[]` | Holds “header” for this scope. (type `byte[]`)  Newly constructed object. |
+
+#### Code
 
 ```csharp
   22 | 
@@ -207,36 +217,40 @@ public static bool LooksValid(Stream stream, string extension, out string messag
  132 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L32:** `ext` means: File extension (.pdf, .mp4, …).
-- **L35:** `pos` means: Holds “pos” for this scope. (integer)  Literal number `0`.
-- **L36:** Error handling block.
-- **L40:** Error handling block.
-- **L44:** Handle/log exception.
-- **L51:** Error handling block.
-- **L64:** File magic-byte validation on upload.
-
 ---
 
 ### `StartsWith` — lines 133–141
+
+#### Signature
 
 ```csharp
 private static bool StartsWith(byte[] buf, int len, string ascii)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `StartsWith`.
-- **Parameters (what each means):**
-- `buf` (`byte[]`) — Holds “buf” for this scope. (type `byte[]`)
-- `len` (`int`) — Length of string/array.
-- `ascii` (`string`) — Holds “ascii” for this scope. (text)
-- **Local variables (what each means):**
-- `bytes` (`var`) — Byte array (hash, random, file content).
-- `i` (`int`) — Loop index (0-based counter in for-loops).  Literal number `0`.
+Function `StartsWith` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Return `true` to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `buf` | `byte[]` | Holds “buf” for this scope. (type `byte[]`) |
+| `len` | `int` | Length of string/array. |
+| `ascii` | `string` | Holds “ascii” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `bytes` | `var` | Byte array (hash, random, file content). |
+| `i` | `int` | Loop index (0-based counter in for-loops).  Literal number `0`. |
+
+#### Code
 
 ```csharp
  133 | 
@@ -250,15 +264,11 @@ private static bool StartsWith(byte[] buf, int len, string ascii)
  141 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L136:** `bytes` means: Byte array (hash, random, file content).
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System.IO;
@@ -404,169 +414,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  141 |         }
  142 |     }
  143 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L5:** C# namespace grouping.
-- **L10:** Validate upload by file signature.
-- **L32:** `ext` means: File extension (.pdf, .mp4, …).
-- **L35:** `pos` means: Holds “pos” for this scope. (integer)  Literal number `0`.
-- **L36:** Error handling block.
-- **L40:** Error handling block.
-- **L44:** Handle/log exception.
-- **L51:** Error handling block.
-- **L64:** File magic-byte validation on upload.
-- **L136:** `bytes` means: Byte array (hash, random, file content).
-
-## Source snapshot (raw)
-
-```csharp
-using System.IO;
-using System.Text;
-using System.Web;
-
-namespace WebAppAssignment.Data.Security
-{
-    /// <summary>
-    /// Lightweight magic-byte checks so extension spoofing is harder.
-    /// </summary>
-    public static class FileMagic
-    {
-        public static bool LooksValid(HttpPostedFile file, string extension, out string message)
-        {
-            message = null;
-            if (file == null || file.ContentLength <= 0 || file.InputStream == null)
-            {
-                message = "Empty upload.";
-                return false;
-            }
-            return LooksValid(file.InputStream, extension, out message);
-        }
-
-        public static bool LooksValid(Stream stream, string extension, out string message)
-        {
-            message = null;
-            if (stream == null || !stream.CanRead)
-            {
-                message = "Cannot read upload stream.";
-                return false;
-            }
-
-            string ext = (extension ?? "").ToLowerInvariant();
-            if (!ext.StartsWith(".")) ext = "." + ext;
-
-            long pos = 0;
-            try { pos = stream.Position; } catch { }
-
-            byte[] header = new byte[16];
-            int read;
-            try
-            {
-                read = stream.Read(header, 0, header.Length);
-            }
-            catch
-            {
-                message = "Failed to read file header.";
-                return false;
-            }
-            finally
-            {
-                try { stream.Position = pos; } catch { }
-            }
-
-            if (read < 4)
-            {
-                message = "File is too small or empty.";
-                return false;
-            }
-
-            switch (ext)
-            {
-                case ".pdf":
-                    if (!StartsWith(header, read, "%PDF"))
-                    { message = "Not a valid PDF (magic bytes)."; return false; }
-                    return true;
-
-                case ".png":
-                    if (!(read >= 8 && header[0] == 0x89 && header[1] == 0x50 && header[2] == 0x4E && header[3] == 0x47))
-                    { message = "Not a valid PNG."; return false; }
-                    return true;
-
-                case ".jpg":
-                case ".jpeg":
-                    if (!(header[0] == 0xFF && header[1] == 0xD8 && header[2] == 0xFF))
-                    { message = "Not a valid JPEG."; return false; }
-                    return true;
-
-                case ".gif":
-                    if (!StartsWith(header, read, "GIF8"))
-                    { message = "Not a valid GIF."; return false; }
-                    return true;
-
-                case ".webp":
-                    if (!(read >= 12 && header[0] == 'R' && header[1] == 'I' && header[2] == 'F' && header[3] == 'F'
-                          && header[8] == 'W' && header[9] == 'E' && header[10] == 'B' && header[11] == 'P'))
-                    { message = "Not a valid WEBP."; return false; }
-                    return true;
-
-                case ".bmp":
-                    if (!(header[0] == 'B' && header[1] == 'M'))
-                    { message = "Not a valid BMP."; return false; }
-                    return true;
-
-                case ".mp4":
-                case ".mov":
-                    // ISO BMFF — ftyp often at offset 4; be permissive for assignment demos
-                    if (read >= 8) return true;
-                    message = "Not a valid MP4/MOV container.";
-                    return false;
-
-                case ".webm":
-                    if (!(header[0] == 0x1A && header[1] == 0x45 && header[2] == 0xDF && header[3] == 0xA3))
-                    { message = "Not a valid WebM."; return false; }
-                    return true;
-
-                case ".zip":
-                case ".docx":
-                case ".pptx":
-                case ".xlsx":
-                case ".pptm":
-                    if (!(header[0] == 'P' && header[1] == 'K'))
-                    { message = "Not a valid Office/ZIP package."; return false; }
-                    return true;
-
-                case ".doc":
-                case ".ppt":
-                case ".xls":
-                    if (!(header[0] == 0xD0 && header[1] == 0xCF && header[2] == 0x11 && header[3] == 0xE0))
-                    { message = "Not a valid legacy Office document."; return false; }
-                    return true;
-
-                case ".txt":
-                    if (header[0] == 'M' && header[1] == 'Z')
-                    { message = "Executable content not allowed as text."; return false; }
-                    return true;
-
-                default:
-                    if (header[0] == 'M' && header[1] == 'Z')
-                    { message = "Executable files are not allowed."; return false; }
-                    return true;
-            }
-        }
-
-        private static bool StartsWith(byte[] buf, int len, string ascii)
-        {
-            var bytes = Encoding.ASCII.GetBytes(ascii);
-            if (len < bytes.Length) return false;
-            for (int i = 0; i < bytes.Length; i++)
-                if (buf[i] != bytes[i]) return false;
-            return true;
-        }
-    }
-}
-
 ```

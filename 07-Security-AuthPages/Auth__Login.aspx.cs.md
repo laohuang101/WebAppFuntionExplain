@@ -1,6 +1,6 @@
 # Login.aspx.cs
 **Source:** `Pages/Authentication/Login.aspx.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,35 +15,44 @@ Email + password; Student/Lecturer redirected to MFA; Admin password-only comple
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 14:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 25:** `email` (`string`) — **Account email address (usually lowercased).**
-- **Line 26:** `password` (`string`) — **Plain password from the form (never log this).**
-- **Line 37:** `result` (`var`) — **AuthResult or API result { success, message, … }.**
-- **Line 70:** `normalizedRole` (`string`) — **Holds “normalized Role” for this scope. (text)**
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (3 found)
 
 ### `Page_Load` — lines 10–21
 
+#### Signature
+
 ```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Page_Load`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Navigation:** Redirects the browser.
-- **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+Runs automatically when the ASP.NET page opens or posts back; sets up the page and security checks.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. ASP.NET calls this automatically on every request.
+2. On first load (`!IsPostBack`), initialize UI or redirect if already logged in.
+3. On postback, button handlers run separately after this method.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous). |
+
+#### Code
 
 ```csharp
   10 |         protected void Page_Load(object sender, EventArgs e)
@@ -60,36 +69,45 @@ protected void Page_Load(object sender, EventArgs e)
   21 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L10:** Page load entry (GET or postback).
-- **L14:** Restore/validate user from Session or JWT; reject stale UIDs. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
-- **L16:** False on first open; true after postback.
-- **L18:** Server session for logged-in user.
-- **L19:** Server session for logged-in user.
-
 ---
 
 ### `btnLogin_Click` — lines 22–66
+
+#### Signature
 
 ```csharp
 protected void btnLogin_Click(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `btnLogin_Click`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Navigation:** Redirects the browser.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
-- **Local variables (what each means):**
-- `email` (`string`) — Account email address (usually lowercased).
-- `password` (`string`) — Plain password from the form (never log this).
-- `result` (`var`) — AuthResult or API result { success, message, … }.
+Button handler: when the user clicks Login, check password and go to MFA or dashboard.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Read email and password from the text boxes.
+2. If either is empty, show an error and stop.
+3. Call AuthService.LoginPassword.
+4. If login failed, show the error message.
+5. If MFA is required, store MfaPendingUid in Session and redirect to MfaVerify.
+6. Otherwise call CompleteLogin and redirect by role (Admin / Lecturer / Student).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `email` | `string` | Account email address (usually lowercased). |
+| `password` | `string` | Plain password from the form (never log this). |
+| `result` | `var` | AuthResult or API result { success, message, … }. |
+
+#### Code
 
 ```csharp
   22 | 
@@ -139,37 +157,38 @@ protected void btnLogin_Click(object sender, EventArgs e)
   66 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L25:** `email` means: Account email address (usually lowercased).
-- **L26:** `password` means: Plain password from the form (never log this).
-- **L34:** Error handling block.
-- **L37:** `result` means: AuthResult or API result { success, message, … }.
-- **L48:** Server session for logged-in user.
-- **L49:** Server session for logged-in user.
-- **L51:** Server session for logged-in user.
-- **L52:** Navigate browser to another URL.
-- **L57:** Issue Session + JWT after successful auth.
-- **L61:** Handle/log exception.
-
 ---
 
 ### `RedirectUser` — lines 67–78
+
+#### Signature
 
 ```csharp
 private void RedirectUser(string role)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `RedirectUser`.
-- **Navigation:** Redirects the browser.
-- **Parameters (what each means):**
-- `role` (`string`) — User role code or name (Admin/Student/Lecturer).
-- **Local variables (what each means):**
-- `normalizedRole` (`string`) — Holds “normalized Role” for this scope. (text)
+Function `RedirectUser` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. If the user is Admin, complete login without MFA; otherwise require MFA.
+2. Redirect the browser to another page.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `role` | `string` | User role code or name (Admin/Student/Lecturer). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `normalizedRole` | `string` | Holds “normalized Role” for this scope. (text) |
+
+#### Code
 
 ```csharp
   67 | 
@@ -186,18 +205,11 @@ private void RedirectUser(string role)
   78 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L70:** Map role codes/names to Admin/Student/Lecturer. | `normalizedRole` means: Holds “normalized Role” for this scope. (text)
-- **L73:** Navigate browser to another URL.
-- **L75:** Navigate browser to another URL.
-- **L77:** Navigate browser to another URL.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -280,117 +292,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   78 |         }
   79 |     }
   80 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L6:** C# namespace grouping.
-- **L10:** Page load entry (GET or postback).
-- **L14:** Restore/validate user from Session or JWT; reject stale UIDs. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
-- **L16:** False on first open; true after postback.
-- **L18:** Server session for logged-in user.
-- **L19:** Server session for logged-in user.
-- **L25:** `email` means: Account email address (usually lowercased).
-- **L26:** `password` means: Plain password from the form (never log this).
-- **L34:** Error handling block.
-- **L37:** `result` means: AuthResult or API result { success, message, … }.
-- **L48:** Server session for logged-in user.
-- **L49:** Server session for logged-in user.
-- **L51:** Server session for logged-in user.
-- **L52:** Navigate browser to another URL.
-- **L57:** Issue Session + JWT after successful auth.
-- **L61:** Handle/log exception.
-- **L70:** Map role codes/names to Admin/Student/Lecturer. | `normalizedRole` means: Holds “normalized Role” for this scope. (text)
-- **L73:** Navigate browser to another URL.
-- **L75:** Navigate browser to another URL.
-- **L77:** Navigate browser to another URL.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Web.UI;
-using WebAppAssignment.Data.Security;
-using WebAppAssignment.Shared.DebugLog;
-
-namespace WebAppAssignment.Pages.Authentication
-{
-    public partial class Login : Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            AuthSchema.Ensure();
-            // Only treat as logged-in if UID still exists in Users (avoids stale JWT after DB reset)
-            int uid = AuthService.GetValidatedUserId(Context);
-
-            if (!IsPostBack && uid > 0)
-            {
-                Logger.Info("User already logged in. Redirecting. " + uid + " " + Session["UserRole"]);
-                RedirectUser(Session["UserRole"] as string ?? "");
-            }
-        }
-
-        protected void btnLogin_Click(object sender, EventArgs e)
-        {
-            string email = (txtEmail.Text ?? "").Trim();
-            string password = txtPassword.Text ?? "";
-
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
-            {
-                lblError.Text = "Please enter email and password.";
-                return;
-            }
-
-            try
-            {
-                Logger.Info("Login attempt for: " + email);
-                var result = AuthService.LoginPassword(email, password);
-
-                if (!result.Success)
-                {
-                    lblError.Text = result.Message ?? "Invalid email or password.";
-                    Logger.Info("Login failed for: " + email);
-                    return;
-                }
-
-                if (result.RequiresMfa)
-                {
-                    Session["MfaPendingUid"] = result.User.UID;
-                    Session["MfaMethod"] = result.MfaMethod ?? "totp";
-                    if (!string.IsNullOrEmpty(result.DemoEmailOtp))
-                    Session["MfaDemoOtp"] = result.DemoEmailOtp;
-                    Response.Redirect("~/Pages/Authentication/MfaVerify.aspx", false);
-                    Context.ApplicationInstance.CompleteRequest();
-                    return;
-                }
-
-                AuthService.CompleteLogin(Context, result.User, result.Token);
-                Logger.Info("Authenticated user role: " + result.User.RoleNormalized);
-                RedirectUser(result.User.RoleNormalized);
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex, "Login failed");
-                lblError.Text = "Sign-in error. Please try again.";
-            }
-        }
-
-        private void RedirectUser(string role)
-        {
-            string normalizedRole = AuthService.NormalizeRole(role).ToLowerInvariant();
-
-            if (normalizedRole == "admin")
-            Response.Redirect("~/Pages/Admin/ADashboard.aspx");
-            else if (normalizedRole == "lecturer")
-            Response.Redirect("~/Pages/Lecturer/Dashboard.aspx");
-            else
-            Response.Redirect("~/Pages/Landing/Landing.aspx");
-        }
-    }
-}
-
 ```

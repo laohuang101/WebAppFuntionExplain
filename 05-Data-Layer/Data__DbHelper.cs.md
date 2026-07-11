@@ -1,6 +1,6 @@
 # DbHelper.cs
 **Source:** `Data/DbHelper.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,32 +15,39 @@ Primary SQL helper: open connection from Web.config MyDbConn, ExecuteQuery / Non
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 17:** `cs` (`var`) — **Connection string text.**
-- **Line 26:** `conn` (`var`) — **SqlConnection — open link to LocalDB/SQL Server.**
-- **Line 28:** `conn` (`return`) — **SqlConnection — open link to LocalDB/SQL Server.**
-- **Line 40:** `dt` (`var`) — **DataTable — full result set from SQL (many rows/columns).**
-- **Line 42:** `dt` (`return`) — **DataTable — full result set from SQL (many rows/columns).**
-- **Line 71:** `result` (`var`) — **AuthResult or API result { success, message, … }.**
-- **Line 78:** `result` (`var`) — **AuthResult or API result { success, message, … }.**
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (11 found)
 
 ### `OpenConnection` — lines 23–29
 
+#### Signature
+
 ```csharp
 public static SqlConnection OpenConnection()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `OpenConnection`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+Opens a new SQL Server / LocalDB connection using the `MyDbConn` connection string.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Open a connection to the LocalDB / SQL Server database.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object. |
+
+#### Code
 
 ```csharp
   23 | 
@@ -52,31 +59,42 @@ public static SqlConnection OpenConnection()
   29 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L24:** Database access (pure SQL).
-- **L26:** Database access (pure SQL). | `conn` means: SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
-
 ---
 
 ### `ExecuteQuery` — lines 30–45
+
+#### Signature
 
 ```csharp
 public static DataTable ExecuteQuery(string sql, params SqlParameter[] parameters)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ExecuteQuery`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
-- `parameters` (`SqlParameter[]`) — Array of SQL parameters (@Name values) for a query.
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
-- `adapter` (`var`) — SqlDataAdapter — fills a DataTable from a SqlCommand.  Newly constructed object.
+Runs a SELECT SQL query and returns all matching rows as a DataTable.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Open a database connection.
+2. Create a SqlCommand with the SQL text and attach any parameters.
+3. Use a SqlDataAdapter to fill a DataTable with all result rows.
+4. Return that DataTable to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sql` | `string` | SQL query text (should use parameters, not raw user input). |
+| `parameters` | `SqlParameter[]` | Array of SQL parameters (@Name values) for a query. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object. |
+| `adapter` | `var` | SqlDataAdapter — fills a DataTable from a SqlCommand.  Newly constructed object. |
+
+#### Code
 
 ```csharp
   30 | 
@@ -97,33 +115,40 @@ public static DataTable ExecuteQuery(string sql, params SqlParameter[] parameter
   45 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L31:** Run SQL; return table / rows / scalar.
-- **L33:** Import namespace/types.
-- **L34:** Import namespace/types.
-- **L38:** Import namespace/types.
-- **L40:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
-
 ---
 
 ### `ExecuteNonQuery` — lines 46–56
+
+#### Signature
 
 ```csharp
 public static int ExecuteNonQuery(string sql, params SqlParameter[] parameters)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ExecuteNonQuery`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
-- `parameters` (`SqlParameter[]`) — Array of SQL parameters (@Name values) for a query.
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+Runs INSERT/UPDATE/DELETE SQL and returns how many rows changed.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Open a database connection.
+2. Create a SqlCommand with INSERT/UPDATE/DELETE SQL and parameters.
+3. Execute the command and return how many rows were changed.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sql` | `string` | SQL query text (should use parameters, not raw user input). |
+| `parameters` | `SqlParameter[]` | Array of SQL parameters (@Name values) for a query. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object. |
+
+#### Code
 
 ```csharp
   46 | 
@@ -139,32 +164,40 @@ public static int ExecuteNonQuery(string sql, params SqlParameter[] parameters)
   56 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L47:** Run SQL; return table / rows / scalar.
-- **L49:** Import namespace/types.
-- **L50:** Import namespace/types.
-- **L54:** Run SQL; return table / rows / scalar.
-
 ---
 
 ### `ExecuteScalar` — lines 57–67
+
+#### Signature
 
 ```csharp
 public static object ExecuteScalar(string sql, params SqlParameter[] parameters)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ExecuteScalar`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
-- `parameters` (`SqlParameter[]`) — Array of SQL parameters (@Name values) for a query.
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+Runs SQL that returns a single value (for example COUNT or a new ID).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Run SQL that returns one value (count, id, flag).
+2. Open a connection to the LocalDB / SQL Server database.
+3. Run SQL that returns one value (count, id, flag).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sql` | `string` | SQL query text (should use parameters, not raw user input). |
+| `parameters` | `SqlParameter[]` | Array of SQL parameters (@Name values) for a query. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object. |
+
+#### Code
 
 ```csharp
   57 | 
@@ -180,32 +213,38 @@ public static object ExecuteScalar(string sql, params SqlParameter[] parameters)
   67 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L58:** Run SQL; return table / rows / scalar.
-- **L60:** Import namespace/types.
-- **L61:** Import namespace/types.
-- **L65:** Run SQL; return table / rows / scalar.
-
 ---
 
 ### `ExecuteScalarInt` — lines 68–74
+
+#### Signature
 
 ```csharp
 public static int ExecuteScalarInt(string sql, params SqlParameter[] parameters)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ExecuteScalarInt`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
-- `parameters` (`SqlParameter[]`) — Array of SQL parameters (@Name values) for a query.
-- **Local variables (what each means):**
-- `result` (`var`) — AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY).
+Runs SQL and returns a single integer value (COUNT or identity).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Run SQL that returns one value (count, id, flag).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sql` | `string` | SQL query text (should use parameters, not raw user input). |
+| `parameters` | `SqlParameter[]` | Array of SQL parameters (@Name values) for a query. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `result` | `var` | AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY). |
+
+#### Code
 
 ```csharp
   68 | 
@@ -217,31 +256,38 @@ public static int ExecuteScalarInt(string sql, params SqlParameter[] parameters)
   74 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L69:** Run SQL; return table / rows / scalar.
-- **L71:** Run SQL; return table / rows / scalar. | `result` means: AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L72:** Null-safe read from database values.
-
 ---
 
 ### `ExecuteScalarDecimal` — lines 75–81
+
+#### Signature
 
 ```csharp
 public static decimal ExecuteScalarDecimal(string sql, params SqlParameter[] parameters)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ExecuteScalarDecimal`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
-- `parameters` (`SqlParameter[]`) — Array of SQL parameters (@Name values) for a query.
-- **Local variables (what each means):**
-- `result` (`var`) — AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY).
+Function `ExecuteScalarDecimal` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Run SQL that returns one value (count, id, flag).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sql` | `string` | SQL query text (should use parameters, not raw user input). |
+| `parameters` | `SqlParameter[]` | Array of SQL parameters (@Name values) for a query. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `result` | `var` | AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY). |
+
+#### Code
 
 ```csharp
   75 | 
@@ -253,29 +299,38 @@ public static decimal ExecuteScalarDecimal(string sql, params SqlParameter[] par
   81 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L76:** Run SQL; return table / rows / scalar.
-- **L78:** Run SQL; return table / rows / scalar. | `result` means: AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L79:** Null-safe read from database values.
-
 ---
 
 ### `P` — lines 82–86
+
+#### Signature
 
 ```csharp
 public static SqlParameter P(string name, object value)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `P`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `name` (`string`) — Display name of user/course/criterion.
-- `value` (`object`) — Holds “value” for this scope.
+Creates one SQL parameter (`@Name` + value) so user input is never concatenated into SQL.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `P`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `name` | `string` | Display name of user/course/criterion. |
+| `value` | `object` | Holds “value” for this scope. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   82 | 
@@ -285,26 +340,37 @@ public static SqlParameter P(string name, object value)
   86 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L83:** Parameterized SQL — prevents classic SQL injection.
-- **L85:** Parameterized SQL — prevents classic SQL injection.
-
 ---
 
 ### `SafeString` — lines 87–92
+
+#### Signature
 
 ```csharp
 public static string SafeString(object value)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `SafeString`.
-- **Parameters (what each means):**
-- `value` (`object`) — Holds “value” for this scope.
+Reads a database column as text safely (empty string if the value is NULL).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `SafeString`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `value` | `object` | Holds “value” for this scope. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   87 | 
@@ -315,26 +381,37 @@ public static string SafeString(object value)
   92 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L88:** Null-safe read from database values.
-- **L90:** Null-safe read from database values.
-
 ---
 
 ### `SafeInt` — lines 93–98
+
+#### Signature
 
 ```csharp
 public static int? SafeInt(object value)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `SafeInt`.
-- **Parameters (what each means):**
-- `value` (`object`) — Holds “value” for this scope.
+Function `SafeInt` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `SafeInt`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `value` | `object` | Holds “value” for this scope. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   93 | 
@@ -345,25 +422,37 @@ public static int? SafeInt(object value)
   98 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L96:** Null-safe read from database values.
-
 ---
 
 ### `SafeDecimal` — lines 99–104
+
+#### Signature
 
 ```csharp
 public static decimal? SafeDecimal(object value)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `SafeDecimal`.
-- **Parameters (what each means):**
-- `value` (`object`) — Holds “value” for this scope.
+Function `SafeDecimal` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `SafeDecimal`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `value` | `object` | Holds “value” for this scope. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   99 | 
@@ -374,25 +463,37 @@ public static decimal? SafeDecimal(object value)
  104 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L102:** Null-safe read from database values.
-
 ---
 
 ### `SafeDate` — lines 105–110
+
+#### Signature
 
 ```csharp
 public static DateTime? SafeDate(object value)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `SafeDate`.
-- **Parameters (what each means):**
-- `value` (`object`) — Holds “value” for this scope.
+Function `SafeDate` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `SafeDate`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `value` | `object` | Holds “value” for this scope. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  105 | 
@@ -403,15 +504,11 @@ public static DateTime? SafeDate(object value)
  110 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L108:** Null-safe read from database values.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -526,160 +623,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  110 |         }
  111 |     }
  112 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L6:** C# namespace grouping.
-- **L11:** Database access (pure SQL).
-- **L17:** `cs` means: Connection string text.  Read from Web.config.
-- **L24:** Database access (pure SQL).
-- **L26:** Database access (pure SQL). | `conn` means: SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
-- **L31:** Run SQL; return table / rows / scalar.
-- **L33:** Import namespace/types.
-- **L34:** Import namespace/types.
-- **L38:** Import namespace/types.
-- **L40:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
-- **L47:** Run SQL; return table / rows / scalar.
-- **L49:** Import namespace/types.
-- **L50:** Import namespace/types.
-- **L54:** Run SQL; return table / rows / scalar.
-- **L58:** Run SQL; return table / rows / scalar.
-- **L60:** Import namespace/types.
-- **L61:** Import namespace/types.
-- **L65:** Run SQL; return table / rows / scalar.
-- **L69:** Run SQL; return table / rows / scalar.
-- **L71:** Run SQL; return table / rows / scalar. | `result` means: AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L72:** Null-safe read from database values.
-- **L76:** Run SQL; return table / rows / scalar.
-- **L78:** Run SQL; return table / rows / scalar. | `result` means: AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L79:** Null-safe read from database values.
-- **L83:** Parameterized SQL — prevents classic SQL injection.
-- **L85:** Parameterized SQL — prevents classic SQL injection.
-- **L88:** Null-safe read from database values.
-- **L90:** Null-safe read from database values.
-- **L96:** Null-safe read from database values.
-- **L102:** Null-safe read from database values.
-- **L108:** Null-safe read from database values.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-
-namespace WebAppAssignment.Data
-{
-    /// <summary>
-    /// Centralized SQL helper bound to EduDB.mdf via Web.config MyDbConn.
-    /// </summary>
-    public static class DbHelper
-    {
-        public static string ConnectionString
-        {
-            get
-            {
-                var cs = ConfigurationManager.ConnectionStrings["MyDbConn"];
-                if (cs == null || string.IsNullOrWhiteSpace(cs.ConnectionString))
-                throw new InvalidOperationException("Connection string 'MyDbConn' is missing from Web.config.");
-                return cs.ConnectionString;
-            }
-        }
-
-        public static SqlConnection OpenConnection()
-        {
-            var conn = new SqlConnection(ConnectionString);
-            conn.Open();
-            return conn;
-        }
-
-        public static DataTable ExecuteQuery(string sql, params SqlParameter[] parameters)
-        {
-            using (var conn = OpenConnection())
-            using (var cmd = new SqlCommand(sql, conn))
-            {
-                if (parameters != null && parameters.Length > 0)
-                cmd.Parameters.AddRange(parameters);
-                using (var adapter = new SqlDataAdapter(cmd))
-                {
-                    var dt = new DataTable();
-                    adapter.Fill(dt);
-                    return dt;
-                }
-            }
-        }
-
-        public static int ExecuteNonQuery(string sql, params SqlParameter[] parameters)
-        {
-            using (var conn = OpenConnection())
-            using (var cmd = new SqlCommand(sql, conn))
-            {
-                if (parameters != null && parameters.Length > 0)
-                cmd.Parameters.AddRange(parameters);
-                return cmd.ExecuteNonQuery();
-            }
-        }
-
-        public static object ExecuteScalar(string sql, params SqlParameter[] parameters)
-        {
-            using (var conn = OpenConnection())
-            using (var cmd = new SqlCommand(sql, conn))
-            {
-                if (parameters != null && parameters.Length > 0)
-                cmd.Parameters.AddRange(parameters);
-                return cmd.ExecuteScalar();
-            }
-        }
-
-        public static int ExecuteScalarInt(string sql, params SqlParameter[] parameters)
-        {
-            var result = ExecuteScalar(sql, parameters);
-            if (result == null || result == DBNull.Value) return 0;
-            return Convert.ToInt32(result);
-        }
-
-        public static decimal ExecuteScalarDecimal(string sql, params SqlParameter[] parameters)
-        {
-            var result = ExecuteScalar(sql, parameters);
-            if (result == null || result == DBNull.Value) return 0m;
-            return Convert.ToDecimal(result);
-        }
-
-        public static SqlParameter P(string name, object value)
-        {
-            return new SqlParameter(name, value ?? DBNull.Value);
-        }
-
-        public static string SafeString(object value)
-        {
-            if (value == null || value == DBNull.Value) return string.Empty;
-            return value.ToString();
-        }
-
-        public static int? SafeInt(object value)
-        {
-            if (value == null || value == DBNull.Value) return null;
-            return Convert.ToInt32(value);
-        }
-
-        public static decimal? SafeDecimal(object value)
-        {
-            if (value == null || value == DBNull.Value) return null;
-            return Convert.ToDecimal(value);
-        }
-
-        public static DateTime? SafeDate(object value)
-        {
-            if (value == null || value == DBNull.Value) return null;
-            return Convert.ToDateTime(value);
-        }
-    }
-}
-
 ```

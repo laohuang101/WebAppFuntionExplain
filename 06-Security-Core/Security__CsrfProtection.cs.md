@@ -1,6 +1,6 @@
 # CsrfProtection.cs
 **Source:** `Data/Security/CsrfProtection.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,43 +15,45 @@ Session CSRF token + cookie + meta tag; validates X-CSRF-Token / form field on P
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 21:** `token` (`string`) — **JWT or CSRF token string.**
-- **Line 24:** `bytes` (`var`) — **Byte array (hash, random, file content).**
-- **Line 35:** `cookie` (`var`) — **HTTP cookie (JWT or CSRF).**
-- **Line 45:** `token` (`return`) — **JWT or CSRF token string.**
-- **Line 53:** `method` (`return`) — **HTTP method (GET/POST) or MFA method (totp/email).**
-- **Line 64:** `sessionToken` (`string`) — **Security token (JWT or CSRF). (text)**
-- **Line 69:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 71:** `provided` (`string`) — **Holds “provided” for this scope. (text)**
-- **Line 83:** `c` (`var`) — **Temporary value (character, course, or counter depending on loop).**
-- **Line 106:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 112:** `diff` (`int`) — **Holds “diff” for this scope. (integer)**
-- **Line 115:** `diff` (`return`) — **Holds “diff” for this scope. (type `return`)**
-- **Line 120:** `t` (`string`) — **Temporary string/token/time value.**
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (6 found)
 
 ### `EnsureToken` — lines 17–47
 
+#### Signature
+
 ```csharp
 public static string EnsureToken(HttpContext ctx)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `EnsureToken`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- **Local variables (what each means):**
-- `token` (`string`) — JWT or CSRF token string.  Read from ASP.NET Session.
-- `bytes` (`var`) — Byte array (hash, random, file content).  Newly constructed object.
-- `rng` (`var`) — Holds “rng” for this scope.
-- `cookie` (`var`) — HTTP cookie (JWT or CSRF).  Newly constructed object.
+Makes sure **Token** exists or is valid before the rest of the code continues.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Save temporary state in Session (`Session[SessionKey] as string;`).
+2. Save temporary state in Session (`Session[SessionKey]`).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `token` | `string` | JWT or CSRF token string.  Read from ASP.NET Session. |
+| `bytes` | `var` | Byte array (hash, random, file content).  Newly constructed object. |
+| `rng` | `var` | Holds “rng” for this scope. |
+| `cookie` | `var` | HTTP cookie (JWT or CSRF).  Newly constructed object. |
+
+#### Code
 
 ```csharp
   17 | 
@@ -87,33 +89,35 @@ public static string EnsureToken(HttpContext ctx)
   47 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L18:** CSRF token ensure/validate.
-- **L21:** Server session for logged-in user. | `token` means: JWT or CSRF token string.  Read from ASP.NET Session.
-- **L24:** `bytes` means: Byte array (hash, random, file content).  Newly constructed object.
-- **L25:** Import namespace/types.
-- **L29:** Server session for logged-in user.
-- **L33:** Error handling block.
-- **L35:** `cookie` means: HTTP cookie (JWT or CSRF).  Newly constructed object.
-- **L41:** Error handling block.
-- **L44:** Handle/log exception.
-
 ---
 
 ### `IsSafeMethod` — lines 48–54
+
+#### Signature
 
 ```csharp
 public static bool IsSafeMethod(string method)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `IsSafeMethod`.
-- **Parameters (what each means):**
-- `method` (`string`) — HTTP method (GET/POST) or MFA method (totp/email).
+Checks a condition related to **Is Safe Method** and returns true/false (or tries an action safely).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `method` | `string` | HTTP method (GET/POST) or MFA method (totp/email). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   48 | 
@@ -129,22 +133,37 @@ public static bool IsSafeMethod(string method)
 
 ### `Validate` — lines 57–89
 
+#### Signature
+
 ```csharp
 public static bool Validate(HttpContext ctx)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Validate`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- **Local variables (what each means):**
-- `sessionToken` (`string`) — Security token (JWT or CSRF). (text)  Read from ASP.NET Session.
-- `provided` (`string`) — Holds “provided” for this scope. (text)
-- `c` (`var`) — Temporary value (character, course, or counter depending on loop).
+Function `Validate` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Save temporary state in Session (`Session[SessionKey] as string;`).
+2. Return `false` to the caller.
+3. Validate input; if invalid, stop and return an error/message.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sessionToken` | `string` | Security token (JWT or CSRF). (text)  Read from ASP.NET Session. |
+| `provided` | `string` | Holds “provided” for this scope. (text) |
+| `c` | `var` | Temporary value (character, course, or counter depending on loop). |
+
+#### Code
 
 ```csharp
   57 |         public static bool Validate(HttpContext ctx)
@@ -182,34 +201,39 @@ public static bool Validate(HttpContext ctx)
   89 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L64:** Server session for logged-in user. | `sessionToken` means: Security token (JWT or CSRF). (text)  Read from ASP.NET Session.
-- **L68:** CSRF token ensure/validate.
-- **L72:** `provided` means: Holds “provided” for this scope. (text)
-- **L83:** `c` means: Temporary value (character, course, or counter depending on loop).
-- **L88:** Constant-time string compare (reduce timing leaks).
-
 ---
 
 ### `ValidateOrReject` — lines 90–107
+
+#### Signature
 
 ```csharp
 public static bool ValidateOrReject(HttpContext ctx, bool writeJsonError = true)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ValidateOrReject`.
-- **CSRF:** Validates anti-forgery token on mutating request.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- `writeJsonError` (`bool`) — Holds “write Json Error” for this scope. (true/false)
-- **Local variables (what each means):**
-- `writeJsonError` (`bool`) — Holds “write Json Error” for this scope. (true/false)
+Function `ValidateOrReject` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Write the HTTP response body (JSON, file bytes, or text).
+2. Return `false` to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+| `writeJsonError` | `bool` | Holds “write Json Error” for this scope. (true/false) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `writeJsonError` | `bool` | Holds “write Json Error” for this scope. (true/false) |
+
+#### Code
 
 ```csharp
   90 | 
@@ -232,31 +256,41 @@ public static bool ValidateOrReject(HttpContext ctx, bool writeJsonError = true)
  107 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L96:** Error handling block.
-- **L102:** CSRF anti-forgery protection.
-- **L104:** Handle/log exception.
-
 ---
 
 ### `FixedTimeEquals` — lines 108–116
+
+#### Signature
 
 ```csharp
 private static bool FixedTimeEquals(string a, string b)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `FixedTimeEquals`.
-- **Parameters (what each means):**
-- `a` (`string`) — Holds “a” for this scope. (text)
-- `b` (`string`) — Holds “b” for this scope. (text)
-- **Local variables (what each means):**
-- `diff` (`int`) — Holds “diff” for this scope. (integer)  Literal number `0`.
-- `i` (`int`) — Loop index (0-based counter in for-loops).  Literal number `0`.
+Function `FixedTimeEquals` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `FixedTimeEquals`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `a` | `string` | Holds “a” for this scope. (text) |
+| `b` | `string` | Holds “b” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `diff` | `int` | Holds “diff” for this scope. (integer)  Literal number `0`. |
+| `i` | `int` | Loop index (0-based counter in for-loops).  Literal number `0`. |
+
+#### Code
 
 ```csharp
  108 | 
@@ -270,29 +304,39 @@ private static bool FixedTimeEquals(string a, string b)
  116 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L109:** Constant-time string compare (reduce timing leaks).
-- **L112:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
-
 ---
 
 ### `MetaTag` — lines 117–122
+
+#### Signature
 
 ```csharp
 public static string MetaTag(HttpContext ctx)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `MetaTag`.
-- **CSRF:** Validates anti-forgery token on mutating request.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- **Local variables (what each means):**
-- `t` (`string`) — Temporary string/token/time value.
+Function `MetaTag` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `MetaTag`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `t` | `string` | Temporary string/token/time value. |
+
+#### Code
 
 ```csharp
  117 | 
@@ -303,16 +347,11 @@ public static string MetaTag(HttpContext ctx)
  122 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L120:** CSRF token ensure/validate. | `t` means: Temporary string/token/time value.
-- **L121:** CSRF anti-forgery protection.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -439,167 +478,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  122 |         }
  123 |     }
  124 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L6:** C# namespace grouping.
-- **L11:** CSRF anti-forgery protection.
-- **L13:** CSRF token ensure/validate.
-- **L15:** CSRF anti-forgery protection.
-- **L16:** CSRF anti-forgery protection.
-- **L18:** CSRF token ensure/validate.
-- **L21:** Server session for logged-in user. | `token` means: JWT or CSRF token string.  Read from ASP.NET Session.
-- **L24:** `bytes` means: Byte array (hash, random, file content).  Newly constructed object.
-- **L25:** Import namespace/types.
-- **L29:** Server session for logged-in user.
-- **L33:** Error handling block.
-- **L35:** `cookie` means: HTTP cookie (JWT or CSRF).  Newly constructed object.
-- **L41:** Error handling block.
-- **L44:** Handle/log exception.
-- **L64:** Server session for logged-in user. | `sessionToken` means: Security token (JWT or CSRF). (text)  Read from ASP.NET Session.
-- **L68:** CSRF token ensure/validate.
-- **L72:** `provided` means: Holds “provided” for this scope. (text)
-- **L83:** `c` means: Temporary value (character, course, or counter depending on loop).
-- **L88:** Constant-time string compare (reduce timing leaks).
-- **L96:** Error handling block.
-- **L102:** CSRF anti-forgery protection.
-- **L104:** Handle/log exception.
-- **L109:** Constant-time string compare (reduce timing leaks).
-- **L112:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
-- **L120:** CSRF token ensure/validate. | `t` means: Temporary string/token/time value.
-- **L121:** CSRF anti-forgery protection.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Security.Cryptography;
-using System.Text;
-using System.Web;
-
-namespace WebAppAssignment.Data.Security
-{
-    /// <summary>
-    /// Session CSRF token + JS-readable cookie. Clients send X-CSRF-Token on mutating requests.
-    /// </summary>
-    public static class CsrfProtection
-    {
-        public const string HeaderName = "X-CSRF-Token";
-        public const string FormFieldName = "__RequestVerificationToken";
-        public const string CookieName = "EduLMS.Csrf";
-        public const string SessionKey = "EduLMS.CsrfToken";
-
-        public static string EnsureToken(HttpContext ctx)
-        {
-            if (ctx == null || ctx.Session == null) return "";
-            string token = ctx.Session[SessionKey] as string;
-            if (string.IsNullOrEmpty(token))
-            {
-                var bytes = new byte[32];
-                using (var rng = RandomNumberGenerator.Create())
-                    rng.GetBytes(bytes);
-                token = Convert.ToBase64String(bytes)
-                    .TrimEnd('=').Replace('+', '-').Replace('/', '_');
-                ctx.Session[SessionKey] = token;
-            }
-
-            // Non-HttpOnly so JS can read for AJAX (double-submit with session)
-            try
-            {
-                var cookie = new HttpCookie(CookieName, token)
-                {
-                    HttpOnly = false,
-                    Path = "/",
-                    Secure = ctx.Request != null && ctx.Request.IsSecureConnection
-                };
-                try { cookie.SameSite = SameSiteMode.Lax; } catch { }
-                ctx.Response.Cookies.Set(cookie);
-            }
-            catch { }
-
-            return token;
-        }
-
-        public static bool IsSafeMethod(string method)
-        {
-            if (string.IsNullOrEmpty(method)) return true;
-            method = method.ToUpperInvariant();
-            return method == "GET" || method == "HEAD" || method == "OPTIONS" || method == "TRACE";
-        }
-
-        /// <summary>Validate CSRF for mutating requests. Safe methods always pass.</summary>
-        public static bool Validate(HttpContext ctx)
-        {
-            if (ctx == null || ctx.Request == null) return false;
-            if (IsSafeMethod(ctx.Request.HttpMethod)) return true;
-
-            // Ensure session exists
-            if (ctx.Session == null) return false;
-            string sessionToken = ctx.Session[SessionKey] as string;
-            if (string.IsNullOrEmpty(sessionToken))
-            {
-                // First mutating call without prior page load — issue token but reject this request
-                EnsureToken(ctx);
-                return false;
-            }
-
-            string provided = ctx.Request.Headers[HeaderName];
-            if (string.IsNullOrEmpty(provided))
-                provided = ctx.Request.Headers["RequestVerificationToken"];
-            if (string.IsNullOrEmpty(provided))
-                provided = ctx.Request.Form[FormFieldName];
-            if (string.IsNullOrEmpty(provided))
-                provided = ctx.Request[FormFieldName];
-
-            // Fallback: cookie must match session (double-submit)
-            if (string.IsNullOrEmpty(provided))
-            {
-                var c = ctx.Request.Cookies[CookieName];
-                if (c != null) provided = c.Value;
-            }
-
-            if (string.IsNullOrEmpty(provided)) return false;
-            return FixedTimeEquals(sessionToken, provided.Trim());
-        }
-
-        public static bool ValidateOrReject(HttpContext ctx, bool writeJsonError = true)
-        {
-            if (Validate(ctx)) return true;
-            if (writeJsonError && ctx != null && ctx.Response != null)
-            {
-                try
-                {
-                    ctx.Response.Clear();
-                    ctx.Response.StatusCode = 403;
-                    ctx.Response.TrySkipIisCustomErrors = true;
-                    ctx.Response.ContentType = "application/json; charset=utf-8";
-                    ctx.Response.Write("{\"success\":false,\"csrf\":true,\"message\":\"CSRF validation failed. Refresh the page and try again.\"}");
-                }
-                catch { }
-            }
-            return false;
-        }
-
-        private static bool FixedTimeEquals(string a, string b)
-        {
-            if (a == null || b == null || a.Length != b.Length) return false;
-            int diff = 0;
-            for (int i = 0; i < a.Length; i++)
-                diff |= a[i] ^ b[i];
-            return diff == 0;
-        }
-
-        public static string MetaTag(HttpContext ctx)
-        {
-            string t = HttpUtility.HtmlAttributeEncode(EnsureToken(ctx));
-            return "<meta name=\"csrf-token\" content=\"" + t + "\" />";
-        }
-    }
-}
-
 ```

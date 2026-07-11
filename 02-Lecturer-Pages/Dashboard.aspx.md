@@ -1,6 +1,6 @@
 # Dashboard.aspx
 **Source:** `Pages/Lecturer/Dashboard.aspx`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,17 +15,17 @@ Lecturer home: course stats, recent submissions, charts. Backed by LecturerRepos
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
+Markup file — variables live in the matching `.cs` / `.js` companion docs.
 
 ## Functions / methods (0 found)
 
-_No methods matched the scanner (markup-only or unconventional structure). See full file listing below._
+_No methods matched the scanner (markup-only or unconventional structure). See the code listing at the bottom._
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```html
    1 | <%@ Page Title="" Language="C#" MasterPageFile="~/Shared/Header&Footer.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="WebAppAssignment.Pages.Lecturer.Dashboard" %>
@@ -194,181 +194,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  164 |   <!-- Chart.js is lazy-loaded by dashboard.js when charts enter the viewport -->
  165 |   <script src="Scripts/dashboard.js"></script>
  166 | </asp:Content>
-```
-
-**Line notes** (what code + variables mean)
-
-- **L12:** CSV export.
-- **L13:** CSV export.
-
-## Source snapshot (raw)
-
-```html
-<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/Header&Footer.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="WebAppAssignment.Pages.Lecturer.Dashboard" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-  <link rel="stylesheet" href="Style/dashboard.css" />
-</asp:Content>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-  <div class="dashboard-container container-fluid px-0">
-    <div class="d-flex flex-wrap justify-content-end gap-2 mb-3">
-      <a href="<%= ResolveUrl("~/Pages/Lecturer/Grading.aspx?filter=pending") %>" class="btn btn-sm btn-outline-warning rounded-pill px-3">
-        <i class="fa-solid fa-inbox me-1"></i> Grade pending
-      </a>
-      <button type="button" class="btn btn-sm btn-outline-dark rounded-pill px-3" onclick="exportDashGradesCsv()">
-        <i class="fa-solid fa-file-csv me-1"></i> Export grades CSV
-      </button>
-    </div>
-    <!-- Top Metrics Row -->
-    <div class="row g-4 mb-4">
-      <!-- Total Students -->
-      <div class="col-xl-3 col-md-6">
-        <div class="glass-card stat-card-1 p-3 d-flex align-items-center">
-          <div class="stat-icon stat-icon-1 me-3">
-            <i class="fa-solid fa-users"></i>
-          </div>
-          <div>
-            <div class="stat-value" id="lblTotalStudents">0</div>
-            <div class="stat-label">Total Students</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Active Courses -->
-      <div class="col-xl-3 col-md-6">
-        <div class="glass-card stat-card-2 p-3 d-flex align-items-center">
-          <div class="stat-icon stat-icon-2 me-3">
-            <i class="fa-solid fa-book-open"></i>
-          </div>
-          <div>
-            <div class="stat-value" id="lblActiveCourses">0</div>
-            <div class="stat-label">Active Courses</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pending Grading (click → grading queue) -->
-      <div class="col-xl-3 col-md-6">
-        <a href="<%= ResolveUrl("~/Pages/Lecturer/Grading.aspx?filter=pending") %>" class="text-decoration-none">
-        <div class="glass-card stat-card-3 p-3 d-flex align-items-center" style="cursor:pointer;" title="Open pending grading">
-          <div class="stat-icon stat-icon-3 me-3">
-            <i class="fa-solid fa-file-signature"></i>
-          </div>
-          <div>
-            <div class="stat-value" id="lblPendingGrading">0</div>
-            <div class="stat-label">Pending Grading</div>
-          </div>
-        </div>
-        </a>
-      </div>
-
-      <!-- Average Grade -->
-      <div class="col-xl-3 col-md-6">
-        <div class="glass-card stat-card-4 p-3 d-flex align-items-center">
-          <div class="stat-icon stat-icon-4 me-3">
-            <i class="fa-solid fa-chart-line"></i>
-          </div>
-          <div>
-            <div class="stat-value" id="lblAverageGrade">84%</div>
-            <div class="stat-label">Average Grade</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Charts Row -->
-    <div class="row g-4 mb-4">
-      <!-- Enrollment Trends -->
-      <div class="col-lg-6">
-        <div class="glass-card p-4">
-          <h5 class="fw-bold mb-3 text-dark" style="font-size: 1.05rem;">Enrollment Trends</h5>
-          <div class="chart-container">
-            <!-- Chart.js canvas for Enrollment Trends -->
-            <canvas id="chartEnrollmentTrend" class="w-100 h-100"></canvas>
-          </div>
-        </div>
-      </div>
-
-      <!-- Grade Distribution -->
-      <div class="col-lg-6">
-        <div class="glass-card p-4">
-          <h5 class="fw-bold mb-3 text-dark" style="font-size: 1.05rem;">Grade Distribution</h5>
-          <div class="chart-container">
-            <canvas id="chartGradeDistribution" class="w-100 h-100"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Recent Submissions Table -->
-    <div class="glass-card mb-4">
-      <div class="p-4 d-flex justify-content-between align-items-center border-bottom border-light">
-        <h5 class="fw-bold mb-0 text-dark" style="font-size: 1.05rem;">Recent Submissions</h5>
-        <a href="<%= ResolveUrl("~/Pages/Lecturer/Grading.aspx") %>" class="text-decoration-none fw-semibold" style="color: var(--primary-accent); font-size: 0.88rem;">View All</a>
-      </div>
-
-      <div class="p-3 pt-0" id="dashSubmissionsWrap">
-        <div class="text-center py-4 text-muted">
-          <i class="fa-solid fa-circle-notch fa-spin me-2"></i>Loading submissions...
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Grading Modal -->
-  <div class="modal fade" id="gradingModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content modal-glass border-0">
-        <div class="modal-header border-bottom border-light">
-          <h5 class="modal-title fw-bold text-dark" id="modalTitle">Grade Submission</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body p-4">
-          <div class="mb-3">
-            <label class="form-label text-muted small fw-bold uppercase">Student</label>
-            <div class="d-flex align-items-center">
-              <div id="modalStudentAvatar" class="student-avatar me-2 bg-secondary"></div>
-              <span id="modalStudentName" class="fw-semibold text-dark"></span>
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label text-muted small fw-bold">Assignment Question</label>
-            <p id="modalAssignment" class="p-3 rounded bg-light text-secondary border border-light small mb-0"></p>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label text-muted small fw-bold">Student's Answer</label>
-            <div id="modalAnswer" class="p-3 rounded bg-white border border-light text-dark small overflow-auto" style="max-height: 120px; white-space: pre-wrap;"></div>
-          </div>
-
-          <div class="row g-3 mb-3">
-            <div class="col-md-6">
-              <label class="form-label text-muted small fw-bold">Score</label>
-              <div class="input-group">
-                <input type="number" id="txtScore" class="form-control" min="0" value="0" />
-                <span class="input-group-text bg-light text-muted small" id="lblMaxScore">/ 10</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label text-muted small fw-bold">Feedback / Review</label>
-            <textarea id="txtReview" class="form-control" rows="3" placeholder="Provide feedback to the student..."></textarea>
-          </div>
-
-          <div id="modalErrorMessage" class="text-danger small mb-3" style="display:none;"></div>
-        </div>
-        <div class="modal-footer border-top border-light">
-          <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" id="btnSubmitGrade" class="btn text-white rounded-pill px-4" style="background-color: var(--primary-accent);" onclick="submitGrading()">Save Grade</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Chart.js is lazy-loaded by dashboard.js when charts enter the viewport -->
-  <script src="Scripts/dashboard.js"></script>
-</asp:Content>
-
 ```

@@ -1,6 +1,6 @@
 # CourseCreation.aspx.cs
 **Source:** `Pages/Lecturer/CourseCreation.aspx.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,54 +15,42 @@ Create/edit courses, curriculum (chapters/lessons), media, publish/draft.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 35:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 37:** `courses` (`var`) — **Often a collection related to courses (plural name).**
-- **Line 52:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 56:** `existing` (`int?`) — **Holds “existing” for this scope. (type `int?`)**
-- **Line 58:** `newCid` (`int`) — **Identifier (`newCid`) — database primary/foreign key. (integer)**
-- **Line 74:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 77:** `state` (`bool`) — **Holds “state” for this scope. (true/false)**
-- **Line 96:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 98:** `chapters` (`var`) — **Often a collection related to chapters (plural name).**
-- **Line 113:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 118:** `existing` (`int?`) — **Holds “existing” for this scope. (type `int?`)**
-- **Line 119:** `id` (`int`) — **Generic primary key / identifier.**
-- **Line 134:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 151:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 157:** `body` (`string`) — **HTTP request body.**
-- **Line 158:** `materialsJson` (`string`) — **Holds “materials Json” for this scope. (text)**
-- **Line 160:** `idx` (`int`) — **Holds “idx” for this scope. (integer)**
-- **Line 166:** `existing` (`int?`) — **Holds “existing” for this scope. (type `int?`)**
-- **Line 168:** `id` (`int`) — **Generic primary key / identifier.**
-- **Line 183:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 200:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 217:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 221:** `titleObj` (`var`) — **Holds “title Obj” for this scope.**
-- **Line 226:** `title` (`string`) — **Title of course work / page heading.**
-- **Line 228:** `type` (`string`) — **Holds “type” for this scope. (text)**
-- **Line 229:** `content` (`string`) — **Submission body text or JSON payload in CWSubmissions.**
-- **Line 230:** `mats` (`var`) — **Often a collection related to mats (plural name).**
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (13 found)
 
 ### `Page_Load` — lines 12–16
 
+#### Signature
+
 ```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Page_Load`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+Runs automatically when the ASP.NET page opens or posts back; sets up the page and security checks.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. ASP.NET calls this automatically on every request.
+2. On first load (`!IsPostBack`), initialize UI or redirect if already logged in.
+3. On postback, button handlers run separately after this method.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   12 |         protected void Page_Load(object sender, EventArgs e)
@@ -72,25 +60,33 @@ protected void Page_Load(object sender, EventArgs e)
   16 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L12:** Page load entry (GET or postback).
-- **L14:** Authorization — block wrong role / anonymous.
-
 ---
 
 ### `CurrentUid` — lines 17–22
+
+#### Signature
 
 ```csharp
 private static int CurrentUid()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `CurrentUid`.
-- **Security:** Uses AuthGate — requires logged-in role.
+Function `CurrentUid` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Check the caller’s role (Lecturer/Student/Admin). If not allowed, return an error and stop.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   17 | 
@@ -101,25 +97,35 @@ private static int CurrentUid()
   22 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L21:** Authorization — block wrong role / anonymous.
-
 ---
 
 ### `Fail` — lines 23–27
+
+#### Signature
 
 ```csharp
 private static object Fail(string message)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Fail`.
-- **Parameters (what each means):**
-- `message` (`string`) — Status text for the UI.
+Function `Fail` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `message` | `string` | Status text for the UI. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   23 | 
@@ -133,21 +139,33 @@ private static object Fail(string message)
 
 ### `GetCoursesData` — lines 31–44
 
+#### Signature
+
 ```csharp
 public static object GetCoursesData()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GetCoursesData`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Read/load data for display.
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `courses` (`var`) — Often a collection related to courses (plural name).
+Reads/loads data related to **Courses Data** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Build and return the result object (success or data for the UI).
+2. On bad input or failed check, return a failure message and stop.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `courses` | `var` | Often a collection related to courses (plural name). |
+
+#### Code
 
 ```csharp
   31 |         public static object GetCoursesData()
@@ -166,40 +184,44 @@ public static object GetCoursesData()
   44 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L33:** Error handling block.
-- **L35:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L36:** Authorization — block wrong role / anonymous.
-- **L37:** `courses` means: Often a collection related to courses (plural name).
-- **L40:** Handle/log exception.
-
 ---
 
 ### `SaveCourseInfo` — lines 48–66
+
+#### Signature
 
 ```csharp
 public static object SaveCourseInfo(string name, string desc, string category, string level, string bgImg, int cid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `SaveCourseInfo`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `name` (`string`) — Display name of user/course/criterion.
-- `desc` (`string`) — Description text (may embed <<<META>>> JSON).
-- `category` (`string`) — Holds “category” for this scope. (text)
-- `level` (`string`) — Holds “level” for this scope. (text)
-- `bgImg` (`string`) — Holds “bg Img” for this scope. (text)
-- `cid` (`int`) — Course ID (Courses.CID).
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `newCid` (`int`) — Identifier (`newCid`) — database primary/foreign key. (integer)
+Saves or updates **Save Course Info** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. On bad input or failed check, return a failure message and stop.
+2. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `name` | `string` | Display name of user/course/criterion. |
+| `desc` | `string` | Description text (may embed <<<META>>> JSON). |
+| `category` | `string` | Holds “category” for this scope. (text) |
+| `level` | `string` | Holds “level” for this scope. (text) |
+| `bgImg` | `string` | Holds “bg Img” for this scope. (text) |
+| `cid` | `int` | Course ID (Courses.CID). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `newCid` | `int` | Identifier (`newCid`) — database primary/foreign key. (integer) |
+
+#### Code
 
 ```csharp
   48 |         public static object SaveCourseInfo(string name, string desc, string category, string level, string bgImg, int cid)
@@ -223,37 +245,40 @@ public static object SaveCourseInfo(string name, string desc, string category, s
   66 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L50:** Error handling block.
-- **L52:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L54:** Authorization — block wrong role / anonymous.
-- **L58:** `newCid` means: Identifier (`newCid`) — database primary/foreign key. (integer)
-- **L62:** Handle/log exception.
-
 ---
 
 ### `SetCoursePublished` — lines 70–88
+
+#### Signature
 
 ```csharp
 public static object SetCoursePublished(int cid, bool published)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `SetCoursePublished`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `cid` (`int`) — Course ID (Courses.CID).
-- `published` (`bool`) — UI/publish intent flag when saving a course/work.
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `state` (`bool`) — Holds “state” for this scope. (true/false)
+Sets Courses.IsPublished so the course shows or hides on Landing.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. On bad input or failed check, return a failure message and stop.
+2. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cid` | `int` | Course ID (Courses.CID). |
+| `published` | `bool` | UI/publish intent flag when saving a course/work. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `state` | `bool` | Holds “state” for this scope. (true/false) |
+
+#### Code
 
 ```csharp
   70 |         public static object SetCoursePublished(int cid, bool published)
@@ -277,37 +302,39 @@ public static object SetCoursePublished(int cid, bool published)
   88 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L72:** Error handling block.
-- **L74:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L75:** Authorization — block wrong role / anonymous.
-- **L77:** `state` means: Holds “state” for this scope. (true/false)
-- **L80:** Handle/log exception.
-- **L82:** Authorization — block wrong role / anonymous.
-- **L84:** Handle/log exception.
-
 ---
 
 ### `GetCourseCurriculum` — lines 92–105
+
+#### Signature
 
 ```csharp
 public static object GetCourseCurriculum(int cid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GetCourseCurriculum`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Read/load data for display.
-- **Parameters (what each means):**
-- `cid` (`int`) — Course ID (Courses.CID).
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `chapters` (`var`) — Often a collection related to chapters (plural name).
+Reads/loads data related to **Course Curriculum** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Build and return the result object (success or data for the UI).
+2. On bad input or failed check, return a failure message and stop.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cid` | `int` | Course ID (Courses.CID). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `chapters` | `var` | Often a collection related to chapters (plural name). |
+
+#### Code
 
 ```csharp
   92 |         public static object GetCourseCurriculum(int cid)
@@ -326,37 +353,41 @@ public static object GetCourseCurriculum(int cid)
  105 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L94:** Error handling block.
-- **L96:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L97:** Authorization — block wrong role / anonymous.
-- **L98:** `chapters` means: Often a collection related to chapters (plural name).
-- **L101:** Handle/log exception.
-
 ---
 
 ### `SaveChapter` — lines 109–126
+
+#### Signature
 
 ```csharp
 public static object SaveChapter(int chid, int cid, string title)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `SaveChapter`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `chid` (`int`) — Chapter ID (Chapters.ChID).
-- `cid` (`int`) — Course ID (Courses.CID).
-- `title` (`string`) — Title of course work / page heading.
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `id` (`int`) — Generic primary key / identifier.
+Saves or updates **Save Chapter** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. On bad input or failed check, return a failure message and stop.
+2. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `chid` | `int` | Chapter ID (Chapters.ChID). |
+| `cid` | `int` | Course ID (Courses.CID). |
+| `title` | `string` | Title of course work / page heading. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `id` | `int` | Generic primary key / identifier. |
+
+#### Code
 
 ```csharp
  109 |         public static object SaveChapter(int chid, int cid, string title)
@@ -379,34 +410,38 @@ public static object SaveChapter(int chid, int cid, string title)
  126 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L111:** Error handling block.
-- **L113:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L114:** Authorization — block wrong role / anonymous.
-- **L119:** `id` means: Generic primary key / identifier.
-- **L122:** Handle/log exception.
-
 ---
 
 ### `DeleteChapter` — lines 130–143
+
+#### Signature
 
 ```csharp
 public static object DeleteChapter(int chid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `DeleteChapter`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Delete/clear data.
-- **Parameters (what each means):**
-- `chid` (`int`) — Chapter ID (Chapters.ChID).
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+Deletes or clears **Delete Chapter** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Build and return the result object (success or data for the UI).
+2. On bad input or failed check, return a failure message and stop.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `chid` | `int` | Chapter ID (Chapters.ChID). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+
+#### Code
 
 ```csharp
  130 |         public static object DeleteChapter(int chid)
@@ -425,42 +460,47 @@ public static object DeleteChapter(int chid)
  143 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L132:** Error handling block.
-- **L134:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L135:** Authorization — block wrong role / anonymous.
-- **L139:** Handle/log exception.
-
 ---
 
 ### `SaveSubChapter` — lines 147–175
+
+#### Signature
 
 ```csharp
 public static object SaveSubChapter(int schid, int chid, string title, string type, string content)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `SaveSubChapter`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `schid` (`int`) — SubChapter / lesson ID.
-- `chid` (`int`) — Chapter ID (Chapters.ChID).
-- `title` (`string`) — Title of course work / page heading.
-- `type` (`string`) — Holds “type” for this scope. (text)
-- `content` (`string`) — Submission body text or JSON payload in CWSubmissions.
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `body` (`string`) — HTTP request body.
-- `materialsJson` (`string`) — Holds “materials Json” for this scope. (text)
-- `sep` (`string`) — Holds “sep” for this scope. (text)  Literal text string.
-- `idx` (`int`) — Holds “idx” for this scope. (integer)
-- `id` (`int`) — Generic primary key / identifier.
+Saves or updates **Save Sub Chapter** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. On bad input or failed check, return a failure message and stop.
+2. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `schid` | `int` | SubChapter / lesson ID. |
+| `chid` | `int` | Chapter ID (Chapters.ChID). |
+| `title` | `string` | Title of course work / page heading. |
+| `type` | `string` | Holds “type” for this scope. (text) |
+| `content` | `string` | Submission body text or JSON payload in CWSubmissions. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `body` | `string` | HTTP request body. |
+| `materialsJson` | `string` | Holds “materials Json” for this scope. (text) |
+| `sep` | `string` | Holds “sep” for this scope. (text)  Literal text string. |
+| `idx` | `int` | Holds “idx” for this scope. (integer) |
+| `id` | `int` | Generic primary key / identifier. |
+
+#### Code
 
 ```csharp
  147 |         public static object SaveSubChapter(int schid, int chid, string title, string type, string content)
@@ -494,37 +534,38 @@ public static object SaveSubChapter(int schid, int chid, string title, string ty
  175 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L149:** Error handling block.
-- **L151:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L152:** Authorization — block wrong role / anonymous.
-- **L157:** `body` means: HTTP request body.
-- **L158:** `materialsJson` means: Holds “materials Json” for this scope. (text)
-- **L160:** `idx` means: Holds “idx” for this scope. (integer)
-- **L168:** `id` means: Generic primary key / identifier.
-- **L171:** Handle/log exception.
-
 ---
 
 ### `DeleteSubChapter` — lines 179–192
+
+#### Signature
 
 ```csharp
 public static object DeleteSubChapter(int schid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `DeleteSubChapter`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Delete/clear data.
-- **Parameters (what each means):**
-- `schid` (`int`) — SubChapter / lesson ID.
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+Deletes or clears **Delete Sub Chapter** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Build and return the result object (success or data for the UI).
+2. On bad input or failed check, return a failure message and stop.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `schid` | `int` | SubChapter / lesson ID. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+
+#### Code
 
 ```csharp
  179 |         public static object DeleteSubChapter(int schid)
@@ -543,33 +584,38 @@ public static object DeleteSubChapter(int schid)
  192 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L181:** Error handling block.
-- **L183:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L184:** Authorization — block wrong role / anonymous.
-- **L188:** Handle/log exception.
-
 ---
 
 ### `DeleteCourse` — lines 196–209
+
+#### Signature
 
 ```csharp
 public static object DeleteCourse(int cid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `DeleteCourse`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Delete/clear data.
-- **Parameters (what each means):**
-- `cid` (`int`) — Course ID (Courses.CID).
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+Deletes or clears **Delete Course** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Build and return the result object (success or data for the UI).
+2. On bad input or failed check, return a failure message and stop.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cid` | `int` | Course ID (Courses.CID). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+
+#### Code
 
 ```csharp
  196 |         public static object DeleteCourse(int cid)
@@ -588,39 +634,45 @@ public static object DeleteCourse(int cid)
  209 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L198:** Error handling block.
-- **L200:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L201:** Authorization — block wrong role / anonymous.
-- **L205:** Handle/log exception.
-
 ---
 
 ### `GetLessonDetails` — lines 213–249
+
+#### Signature
 
 ```csharp
 public static object GetLessonDetails(int schid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GetLessonDetails`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Read/load data for display.
-- **Parameters (what each means):**
-- `schid` (`int`) — SubChapter / lesson ID.
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `titleObj` (`var`) — Holds “title Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
-- `title` (`string`) — Title of course work / page heading.
-- `type` (`string`) — Holds “type” for this scope. (text)  Literal text string.
-- `content` (`string`) — Submission body text or JSON payload in CWSubmissions.  Literal text string.
-- `mats` (`var`) — Often a collection related to mats (plural name).  Assigned from SQL SELECT result set.
+Reads/loads data related to **Lesson Details** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Run SQL that returns one value (count, id, flag).
+2. On bad input or failed check, return a failure message and stop.
+3. Run a SELECT query and load the matching rows into memory.
+4. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `schid` | `int` | SubChapter / lesson ID. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `titleObj` | `var` | Holds “title Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY). |
+| `title` | `string` | Title of course work / page heading. |
+| `type` | `string` | Holds “type” for this scope. (text)  Literal text string. |
+| `content` | `string` | Submission body text or JSON payload in CWSubmissions.  Literal text string. |
+| `mats` | `var` | Often a collection related to mats (plural name).  Assigned from SQL SELECT result set. |
+
+#### Code
 
 ```csharp
  213 |         public static object GetLessonDetails(int schid)
@@ -662,30 +714,11 @@ public static object GetLessonDetails(int schid)
  249 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L215:** Error handling block.
-- **L217:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L218:** Authorization — block wrong role / anonymous.
-- **L221:** Database access (pure SQL). | `titleObj` means: Holds “title Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L223:** Database access (pure SQL).
-- **L224:** Null-safe read from database values.
-- **L227:** `title` means: Title of course work / page heading.
-- **L228:** `type` means: Holds “type” for this scope. (text)  Literal text string.
-- **L229:** `content` means: Submission body text or JSON payload in CWSubmissions.  Literal text string.
-- **L231:** Database access (pure SQL). | `mats` means: Often a collection related to mats (plural name).  Assigned from SQL SELECT result set.
-- **L233:** Database access (pure SQL).
-- **L236:** Database access (pure SQL).
-- **L238:** Database access (pure SQL).
-- **L239:** Database access (pure SQL).
-- **L240:** Database access (pure SQL).
-- **L245:** Handle/log exception.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -939,347 +972,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  249 |         }
  250 |     }
  251 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L5:** Import namespace/types.
-- **L6:** Import namespace/types.
-- **L8:** C# namespace grouping.
-- **L12:** Page load entry (GET or postback).
-- **L14:** Authorization — block wrong role / anonymous.
-- **L21:** Authorization — block wrong role / anonymous.
-- **L29:** Expose method to AJAX JSON calls.
-- **L33:** Error handling block.
-- **L35:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L36:** Authorization — block wrong role / anonymous.
-- **L37:** `courses` means: Often a collection related to courses (plural name).
-- **L40:** Handle/log exception.
-- **L46:** Expose method to AJAX JSON calls.
-- **L50:** Error handling block.
-- **L52:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L54:** Authorization — block wrong role / anonymous.
-- **L58:** `newCid` means: Identifier (`newCid`) — database primary/foreign key. (integer)
-- **L62:** Handle/log exception.
-- **L68:** Expose method to AJAX JSON calls.
-- **L72:** Error handling block.
-- **L74:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L75:** Authorization — block wrong role / anonymous.
-- **L77:** `state` means: Holds “state” for this scope. (true/false)
-- **L80:** Handle/log exception.
-- **L82:** Authorization — block wrong role / anonymous.
-- **L84:** Handle/log exception.
-- **L90:** Expose method to AJAX JSON calls.
-- **L94:** Error handling block.
-- **L96:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L97:** Authorization — block wrong role / anonymous.
-- **L98:** `chapters` means: Often a collection related to chapters (plural name).
-- **L101:** Handle/log exception.
-- **L107:** Expose method to AJAX JSON calls.
-- **L111:** Error handling block.
-- **L113:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L114:** Authorization — block wrong role / anonymous.
-- **L119:** `id` means: Generic primary key / identifier.
-- **L122:** Handle/log exception.
-- **L128:** Expose method to AJAX JSON calls.
-- **L132:** Error handling block.
-- **L134:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L135:** Authorization — block wrong role / anonymous.
-- **L139:** Handle/log exception.
-- **L145:** Expose method to AJAX JSON calls.
-- **L149:** Error handling block.
-- **L151:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L152:** Authorization — block wrong role / anonymous.
-- **L157:** `body` means: HTTP request body.
-- **L158:** `materialsJson` means: Holds “materials Json” for this scope. (text)
-- **L160:** `idx` means: Holds “idx” for this scope. (integer)
-- **L168:** `id` means: Generic primary key / identifier.
-- **L171:** Handle/log exception.
-- **L177:** Expose method to AJAX JSON calls.
-- **L181:** Error handling block.
-- **L183:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L184:** Authorization — block wrong role / anonymous.
-- **L188:** Handle/log exception.
-- **L194:** Expose method to AJAX JSON calls.
-- **L198:** Error handling block.
-- **L200:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L201:** Authorization — block wrong role / anonymous.
-- **L205:** Handle/log exception.
-- **L211:** Expose method to AJAX JSON calls.
-- **L215:** Error handling block.
-- **L217:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L218:** Authorization — block wrong role / anonymous.
-- **L221:** Database access (pure SQL). | `titleObj` means: Holds “title Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L223:** Database access (pure SQL).
-- **L224:** Null-safe read from database values.
-- **L227:** `title` means: Title of course work / page heading.
-- **L228:** `type` means: Holds “type” for this scope. (text)  Literal text string.
-- **L229:** `content` means: Submission body text or JSON payload in CWSubmissions.  Literal text string.
-- **L231:** Database access (pure SQL). | `mats` means: Often a collection related to mats (plural name).  Assigned from SQL SELECT result set.
-- **L233:** Database access (pure SQL).
-- **L236:** Database access (pure SQL).
-- **L238:** Database access (pure SQL).
-- **L239:** Database access (pure SQL).
-- **L240:** Database access (pure SQL).
-- **L245:** Handle/log exception.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Web.Script.Services;
-using System.Web.Services;
-using System.Web.UI;
-using WebAppAssignment.Data;
-using WebAppAssignment.Data.Security;
-
-namespace WebAppAssignment.Pages.Lecturer
-{
-    public partial class Course_Creation : Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))
-                return;
-        }
-
-        private static int CurrentUid()
-        {
-            // Lecturer or Admin only for course APIs
-            return AuthGate.RequireLecturer();
-        }
-
-        private static object Fail(string message)
-        {
-            return new { success = false, message = message ?? "Request failed." };
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object GetCoursesData()
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                var courses = LecturerRepository.GetCoursesForLecturer(uid);
-                return new { success = true, courses = courses };
-            }
-            catch
-            {
-                return Fail("Could not load courses.");
-            }
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object SaveCourseInfo(string name, string desc, string category, string level, string bgImg, int cid)
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0)
-                    return AuthGate.NotAuthenticatedJson("Lecturer sign-in required. Please log out and log in again.");
-                if (string.IsNullOrWhiteSpace(name)) return Fail("Course title is required.");
-
-                int? existing = cid > 0 ? cid : (int?)null;
-                int newCid = LecturerRepository.SaveCourse(
-                    uid, existing, name.Trim(), desc ?? "", bgImg, category ?? "", level ?? "");
-                return new { success = true, cid = newCid };
-            }
-            catch
-            {
-                return Fail("Could not save course.");
-            }
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object SetCoursePublished(int cid, bool published)
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                if (cid <= 0) return Fail("Invalid course.");
-                bool state = LecturerRepository.SetCoursePublished(uid, cid, published);
-                return new { success = true, isPublished = state, status = state ? "Published" : "Draft" };
-            }
-            catch (UnauthorizedAccessException)
-            {
-                return AuthGate.ForbiddenJson();
-            }
-            catch
-            {
-                return Fail("Could not update publish state.");
-            }
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object GetCourseCurriculum(int cid)
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                var chapters = LecturerRepository.GetCurriculum(uid, cid);
-                return new { success = true, chapters = chapters };
-            }
-            catch (Exception ex)
-            {
-                return Fail("Request failed.");
-            }
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object SaveChapter(int chid, int cid, string title)
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                if (string.IsNullOrWhiteSpace(title)) return Fail("Section title is required.");
-                if (cid <= 0) return Fail("Invalid course id.");
-                // chid == 0 means create new section
-                int? existing = chid > 0 ? chid : (int?)null;
-                int id = LecturerRepository.SaveChapter(uid, existing, cid, title.Trim());
-                return new { success = true, chid = id };
-            }
-            catch (Exception ex)
-            {
-                return Fail("Request failed.");
-            }
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object DeleteChapter(int chid)
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                LecturerRepository.DeleteChapter(uid, chid);
-                return new { success = true };
-            }
-            catch (Exception ex)
-            {
-                return Fail("Request failed.");
-            }
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object SaveSubChapter(int schid, int chid, string title, string type, string content)
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                if (string.IsNullOrWhiteSpace(title)) return Fail("Lesson title is required.");
-                if (chid <= 0) return Fail("Invalid section id.");
-
-                // Materials may be appended after separator from client
-                string body = content ?? "";
-                string materialsJson = null;
-                const string sep = "\n--MATERIALS--\n";
-                int idx = body.IndexOf(sep, StringComparison.Ordinal);
-                if (idx >= 0)
-                {
-                    materialsJson = body.Substring(idx + sep.Length);
-                    body = body.Substring(0, idx);
-                }
-
-                int? existing = schid > 0 ? schid : (int?)null;
-                int id = LecturerRepository.SaveSubChapter(uid, existing, chid, title.Trim(), type, body, materialsJson);
-                return new { success = true, schid = id };
-            }
-            catch (Exception ex)
-            {
-                return Fail("Request failed.");
-            }
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object DeleteSubChapter(int schid)
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                LecturerRepository.DeleteSubChapter(uid, schid);
-                return new { success = true };
-            }
-            catch (Exception ex)
-            {
-                return Fail("Request failed.");
-            }
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object DeleteCourse(int cid)
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                LecturerRepository.DeleteCourse(uid, cid);
-                return new { success = true };
-            }
-            catch (Exception ex)
-            {
-                return Fail("Request failed.");
-            }
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object GetLessonDetails(int schid)
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-
-                // Pure SQL: SubChapters (plural) + first StudyMat for type/content
-                var titleObj = DbHelper.ExecuteScalar(
-                "SELECT Title FROM SubChapters WHERE SchID = @SchID",
-                DbHelper.P("@SchID", schid));
-                if (titleObj == null || titleObj == System.DBNull.Value)
-                return Fail("Lesson not found.");
-
-                string title = titleObj.ToString();
-                string type = "Text";
-                string content = "";
-
-                var mats = DbHelper.ExecuteQuery(
-                "SELECT TOP 1 Type, TextContent, MediaLink FROM StudyMats WHERE SchID = @SchID ORDER BY [Index], SMID",
-                DbHelper.P("@SchID", schid));
-                if (mats.Rows.Count > 0)
-                {
-                    type = DbHelper.SafeString(mats.Rows[0]["Type"]);
-                    if (string.IsNullOrEmpty(type)) type = "Text";
-                    content = !string.IsNullOrEmpty(DbHelper.SafeString(mats.Rows[0]["MediaLink"]))
-                    ? DbHelper.SafeString(mats.Rows[0]["MediaLink"])
-                    : DbHelper.SafeString(mats.Rows[0]["TextContent"]);
-                }
-
-                return new { success = true, title = title, type = type, content = content };
-            }
-            catch (Exception ex)
-            {
-                return Fail("Request failed.");
-            }
-        }
-    }
-}
-
 ```

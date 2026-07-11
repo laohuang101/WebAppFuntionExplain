@@ -1,6 +1,6 @@
 # assignments.js
 **Source:** `Pages/Lecturer/Scripts/assignments.js`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,63 +15,80 @@ Build CourseWorks with due date, rubric or objective quiz. Due date closes stude
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 2:** `builderType` — script-level `const`/`let`/`var` — **Assignment builder mode: Text vs Objective.**
-- **Line 4:** `rubricRows` — script-level `const`/`let`/`var` — **UI state: grading rubric criteria rows.**
-- **Line 5:** `objectiveQuestions` — script-level `const`/`let`/`var` — **UI state: quiz questions being edited.**
-- **Line 6:** `ASSIGNMENT_TOTAL_PTS` — script-level `const`/`let`/`var` — **Often a collection related to ASSIGNMENT TOTAL PTS (plural name).**
-- **Line 43:** `res` — script-level `const`/`let`/`var` — **Result object returned from fetch/WebMethod (`data.d` unwrapped).**
-- **Line 44:** `ddl` — script-level `const`/`let`/`var` — **Drop-down list (select) element.**
-- **Line 48:** `opt` — script-level `const`/`let`/`var` — **Option element or optional label.**
-- **Line 57:** `existingWorksDt` — script-level `const`/`let`/`var` — **Holds “existing Works Dt” for this scope.**
-- **Line 70:** `box` — script-level `const`/`let`/`var` — **Container element for lists/tables.**
-- **Line 76:** `items` — script-level `const`/`let`/`var` — **Array of rows for UI tables.**
-- **Line 105:** `closed` — script-level `const`/`let`/`var` — **Holds “closed” for this scope.**
-- **Line 106:** `badge` — script-level `const`/`let`/`var` — **Holds “badge” for this scope.**
-- **Line 147:** `list` — script-level `const`/`let`/`var` — **In-memory collection being built for JSON return.**
-- **Line 150:** `div` — script-level `const`/`let`/`var` — **Holds “div” for this scope.**
-- **Line 167:** `total` — script-level `const`/`let`/`var` — **Sum of points or total items.**
-- **Line 168:** `el` — script-level `const`/`let`/`var` — **Generic DOM element.**
-- **Line 178:** `hint` — script-level `const`/`let`/`var` — **Holds “hint” for this scope.**
-- **Line 202:** `opts` — script-level `const`/`let`/`var` — **Often a collection related to opts (plural name).**
-- **Line 203:** `keys` — script-level `const`/`let`/`var` — **Often a collection related to keys (plural name).**
-- **Line 204:** `next` — script-level `const`/`let`/`var` — **Holds “next” for this scope.**
-- **Line 218:** `card` — script-level `const`/`let`/`var` — **Holds “card” for this scope.**
-- **Line 220:** `optionsHtml` — script-level `const`/`let`/`var` — **Holds “options Html” for this scope.**
-- **Line 263:** `m` — script-level `const`/`let`/`var` — **Holds “m” for this scope.**
-- **Line 265:** `end` — script-level `const`/`let`/`var` — **Range end or string end index.**
-- **Line 270:** `err` — script-level `const`/`let`/`var` — **Error message string or error element.**
-- **Line 271:** `ok` — script-level `const`/`let`/`var` — **Boolean success flag.**
-- **Line 274:** `title` — script-level `const`/`let`/`var` — **Title of course work / page heading.**
-- **Line 276:** `instructions` — script-level `const`/`let`/`var` — **Student-facing assignment instructions (plain part of Description).**
-- **Line 277:** `cid` — script-level `const`/`let`/`var` — **Course ID (Courses.CID).**
-- **Line 278:** `cwidRaw` — script-level `const`/`let`/`var` — **Holds “cwid Raw” for this scope.**
-- **Line 279:** `cwid` — script-level `const`/`let`/`var` — **CourseWork ID (assignment) (CourseWorks.CWID).**
-- **Line 280:** `dueDate` — script-level `const`/`let`/`var` — **Assignment deadline (date); after end of that day submissions close.**
-- **Line 292:** `score` — script-level `const`/`let`/`var` — **Points earned or max points depending on context.**
-- **Line 293:** `rubricJson` — script-level `const`/`let`/`var` — **Holds “rubric Json” for this scope.**
-- **Line 294:** `objectiveQuestionsJson` — script-level `const`/`let`/`var` — **Holds “objective Questions Json” for this scope.**
-- **Line 297:** `rubricSum` — script-level `const`/`let`/`var` — **Holds “rubric Sum” for this scope.**
-- **Line 313:** `perQ` — script-level `const`/`let`/`var` — **Holds “per Q” for this scope.**
-- **Line 321:** `extra` — script-level `const`/`let`/`var` — **Dictionary of optional fields inside META.**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `builderType` | `const/let/var` | Assignment builder mode: Text vs Objective. |
+| `rubricRows` | `const/let/var` | UI state: grading rubric criteria rows. |
+| `objectiveQuestions` | `const/let/var` | UI state: quiz questions being edited. |
+| `ASSIGNMENT_TOTAL_PTS` | `const/let/var` | Often a collection related to ASSIGNMENT TOTAL PTS (plural name). |
+| `res` | `const/let/var` | Result object returned from fetch/WebMethod (`data.d` unwrapped). |
+| `ddl` | `const/let/var` | Drop-down list (select) element. |
+| `opt` | `const/let/var` | Option element or optional label. |
+| `existingWorksDt` | `const/let/var` | Holds “existing Works Dt” for this scope. |
+| `box` | `const/let/var` | Container element for lists/tables. |
+| `items` | `const/let/var` | Array of rows for UI tables. |
+| `closed` | `const/let/var` | Holds “closed” for this scope. |
+| `badge` | `const/let/var` | Holds “badge” for this scope. |
+| `list` | `const/let/var` | In-memory collection being built for JSON return. |
+| `div` | `const/let/var` | Holds “div” for this scope. |
+| `total` | `const/let/var` | Sum of points or total items. |
+| `el` | `const/let/var` | Generic DOM element. |
+| `hint` | `const/let/var` | Holds “hint” for this scope. |
+| `opts` | `const/let/var` | Often a collection related to opts (plural name). |
+| `keys` | `const/let/var` | Often a collection related to keys (plural name). |
+| `next` | `const/let/var` | Holds “next” for this scope. |
+| `card` | `const/let/var` | Holds “card” for this scope. |
+| `optionsHtml` | `const/let/var` | Holds “options Html” for this scope. |
+| `m` | `const/let/var` | Holds “m” for this scope. |
+| `end` | `const/let/var` | Range end or string end index. |
+| `err` | `const/let/var` | Error message string or error element. |
+| `ok` | `const/let/var` | Boolean success flag. |
+| `title` | `const/let/var` | Title of course work / page heading. |
+| `instructions` | `const/let/var` | Student-facing assignment instructions (plain part of Description). |
+| `cid` | `const/let/var` | Course ID (Courses.CID). |
+| `cwidRaw` | `const/let/var` | Holds “cwid Raw” for this scope. |
+| `cwid` | `const/let/var` | CourseWork ID (assignment) (CourseWorks.CWID). |
+| `dueDate` | `const/let/var` | Assignment deadline (date); after end of that day submissions close. |
+| `score` | `const/let/var` | Points earned or max points depending on context. |
+| `rubricJson` | `const/let/var` | Holds “rubric Json” for this scope. |
+| `objectiveQuestionsJson` | `const/let/var` | Holds “objective Questions Json” for this scope. |
+| `rubricSum` | `const/let/var` | Holds “rubric Sum” for this scope. |
+| `perQ` | `const/let/var` | Holds “per Q” for this scope. |
+| `extra` | `const/let/var` | Dictionary of optional fields inside META. |
 
 ## Functions / methods (22 found)
 
 ### `setBuilderType` — lines 19–33
 
+#### Signature
+
 ```javascript
 function setBuilderType(type)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `setBuilderType`.
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `type` — Holds “type” for this scope.
+Saves or updates **set Builder Type** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `setBuilderType`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `type` | `—` | Holds “type” for this scope. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
   19 | 
@@ -91,35 +108,38 @@ function setBuilderType(type)
   33 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L23:** Get HTML element by id.
-- **L24:** Get HTML element by id.
-- **L25:** Get HTML element by id.
-- **L26:** Get HTML element by id.
-- **L27:** Get HTML element by id.
-- **L28:** Get HTML element by id.
-
 ---
 
 ### `loadCourses` — lines 33–56
+
+#### Signature
 
 ```javascript
 function loadCourses()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `loadCourses`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **AJAX:** Browser calls server endpoints asynchronously.
-- **Pattern:** Read/load data for display.
-- **Local variables (what each means):**
-- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- `ddl` — Drop-down list (select) element.  DOM element from the page.
-- `opt` — Option element or optional label.
+Browser JS: load the lecturer’s courses into a dropdown.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Call the server with `fetch` (AJAX) and wait for the JSON result.
+2. Parse the server JSON response into a JavaScript object.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `res` | `—` | Result object returned from fetch/WebMethod (`data.d` unwrapped). |
+| `ddl` | `—` | Drop-down list (select) element.  DOM element from the page. |
+| `opt` | `—` | Option element or optional label. |
+
+#### Code
 
 ```javascript
   33 | 
@@ -148,36 +168,42 @@ function loadCourses()
   56 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L36:** HTTP request to server WebMethod/ashx.
-- **L43:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L44:** Get HTML element by id. | `ddl` means: Drop-down list (select) element.  DOM element from the page.
-- **L45:** Update page HTML.
-- **L48:** `opt` means: Option element or optional label.
-
 ---
 
 ### `loadExisting` — lines 58–129
+
+#### Signature
 
 ```javascript
 function loadExisting()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `loadExisting`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **AJAX:** Browser calls server endpoints asynchronously.
-- **Pattern:** Read/load data for display.
-- **Local variables (what each means):**
-- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- `box` — Container element for lists/tables.  DOM element from the page.
-- `items` — Array of rows for UI tables.
-- `closed` — Holds “closed” for this scope.
-- `badge` — Holds “badge” for this scope.
+Browser JS: load and display existing assignments in a table.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Call the server with `fetch` (AJAX) and wait for the JSON result.
+2. Parse the server JSON response into a JavaScript object.
+3. If the previous step failed, show the error and stop.
+4. Use the assignment due date to decide if submissions are still open.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `res` | `—` | Result object returned from fetch/WebMethod (`data.d` unwrapped). |
+| `box` | `—` | Container element for lists/tables.  DOM element from the page. |
+| `items` | `—` | Array of rows for UI tables. |
+| `closed` | `—` | Holds “closed” for this scope. |
+| `badge` | `—` | Holds “badge” for this scope. |
+
+#### Code
 
 ```javascript
   58 | 
@@ -254,39 +280,37 @@ function loadExisting()
  129 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L61:** HTTP request to server WebMethod/ashx.
-- **L69:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L70:** Get HTML element by id. | `box` means: Container element for lists/tables.  DOM element from the page.
-- **L73:** Update page HTML.
-- **L76:** `items` means: Array of rows for UI tables.
-- **L77:** In-memory result set from ADO.NET.
-- **L78:** Update page HTML.
-- **L80:** Update page HTML.
-- **L85:** In-memory result set from ADO.NET.
-- **L96:** Encode text to reduce XSS risk.
-- **L102:** Assignment deadline; submissions close after due day.
-- **L104:** Assignment deadline; submissions close after due day.
-- **L105:** Assignment deadline; submissions close after due day. | `closed` means: Holds “closed” for this scope.
-- **L106:** `badge` means: Holds “badge” for this scope.
-- **L109:** Assignment deadline; submissions close after due day.
-
 ---
 
 ### `render` — lines 95–97
+
+#### Signature
 
 ```javascript
 function render(item)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `render`.
-- **Parameters (what each means):**
-- `item` — Holds “item” for this scope.
+Updates the page HTML for **render**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `render`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `item` | `—` | Holds “item” for this scope. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
   95 |                     render: function (item) {
@@ -294,29 +318,38 @@ function render(item)
   97 |                     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L96:** Encode text to reduce XSS risk.
-
 ---
 
 ### `render` — lines 103–110
+
+#### Signature
 
 ```javascript
 function render(item)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `render`.
-- **Due date:** Related to assignment closing after the due day.
-- **Parameters (what each means):**
-- `item` — Holds “item” for this scope.
-- **Local variables (what each means):**
-- `closed` — Holds “closed” for this scope.
-- `badge` — Holds “badge” for this scope.
+Updates the page HTML for **render**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Use the assignment due date to decide if submissions are still open.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `item` | `—` | Holds “item” for this scope. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `closed` | `—` | Holds “closed” for this scope. |
+| `badge` | `—` | Holds “badge” for this scope. |
+
+#### Code
 
 ```javascript
  103 |                     render: function (item) {
@@ -329,26 +362,35 @@ function render(item)
  110 |                     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L104:** Assignment deadline; submissions close after due day.
-- **L105:** Assignment deadline; submissions close after due day. | `closed` means: Holds “closed” for this scope.
-- **L106:** `badge` means: Holds “badge” for this scope.
-- **L109:** Assignment deadline; submissions close after due day.
-
 ---
 
 ### `render` — lines 114–114
+
+#### Signature
 
 ```javascript
 function render()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `render`.
+Updates the page HTML for **render**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `render`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  114 |                     render: function () { return '100'; }
@@ -358,17 +400,33 @@ function render()
 
 ### `render` — lines 118–121
 
+#### Signature
+
 ```javascript
 function render(item)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `render`.
-- **Parameters (what each means):**
-- `item` — Holds “item” for this scope.
+Updates the page HTML for **render**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `render`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `item` | `—` | Holds “item” for this scope. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  118 |                     render: function (item) {
@@ -381,18 +439,34 @@ function render(item)
 
 ### `addRubricRow` — lines 129–135
 
+#### Signature
+
 ```javascript
 function addRubricRow(name, pts)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `addRubricRow`.
-- **Parameters (what each means):**
-- `name` — Display name of user/course/criterion.
-- `pts` — Holds “pts” for this scope.
+Saves or updates **add Rubric Row** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `addRubricRow`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `name` | `—` | Display name of user/course/criterion. |
+| `pts` | `—` | Holds “pts” for this scope. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  129 | 
@@ -408,16 +482,31 @@ function addRubricRow(name, pts)
 
 ### `getRubricTotal` — lines 135–139
 
+#### Signature
+
 ```javascript
 function getRubricTotal()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `getRubricTotal`.
-- **Pattern:** Read/load data for display.
+Reads/loads data related to **Rubric Total** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `getRubricTotal`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  135 | 
@@ -431,18 +520,33 @@ function getRubricTotal()
 
 ### `removeRubricRow` — lines 139–144
 
+#### Signature
+
 ```javascript
 function removeRubricRow(i)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `removeRubricRow`.
-- **Pattern:** Delete/clear data.
-- **Parameters (what each means):**
-- `i` — Loop index (0-based counter in for-loops).
+Deletes or clears **remove Rubric Row** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `removeRubricRow`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `i` | `—` | Loop index (0-based counter in for-loops). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  139 | 
@@ -457,18 +561,34 @@ function removeRubricRow(i)
 
 ### `renderRubric` — lines 144–164
 
+#### Signature
+
 ```javascript
 function renderRubric()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `renderRubric`.
-- **Local variables (what each means):**
-- `list` — In-memory collection being built for JSON return.  DOM element from the page.
-- `div` — Holds “div” for this scope.
+Updates the page HTML for **render Rubric**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `renderRubric`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `list` | `—` | In-memory collection being built for JSON return.  DOM element from the page. |
+| `div` | `—` | Holds “div” for this scope. |
+
+#### Code
 
 ```javascript
  144 | 
@@ -494,31 +614,39 @@ function renderRubric()
  164 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L147:** Get HTML element by id. | `list` means: In-memory collection being built for JSON return.  DOM element from the page.
-- **L148:** Update page HTML.
-- **L150:** `div` means: Holds “div” for this scope.
-- **L152:** Update page HTML.
-
 ---
 
 ### `updateRubricTotal` — lines 164–183
+
+#### Signature
 
 ```javascript
 function updateRubricTotal()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `updateRubricTotal`.
-- **Pattern:** Persist changes.
-- **Local variables (what each means):**
-- `total` — Sum of points or total items.
-- `el` — Generic DOM element.  DOM element from the page.
-- `hint` — Holds “hint” for this scope.  DOM element from the page.
+Saves or updates **update Rubric Total** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `updateRubricTotal`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `total` | `—` | Sum of points or total items. |
+| `el` | `—` | Generic DOM element.  DOM element from the page. |
+| `hint` | `—` | Holds “hint” for this scope.  DOM element from the page. |
+
+#### Code
 
 ```javascript
  164 | 
@@ -543,25 +671,35 @@ function updateRubricTotal()
  183 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L167:** `total` means: Sum of points or total items.
-- **L168:** Get HTML element by id. | `el` means: Generic DOM element.  DOM element from the page.
-- **L178:** Get HTML element by id. | `hint` means: Holds “hint” for this scope.  DOM element from the page.
-
 ---
 
 ### `addObjectiveQuestion` — lines 183–194
+
+#### Signature
 
 ```javascript
 function addObjectiveQuestion()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `addObjectiveQuestion`.
+Saves or updates **add Objective Question** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `addObjectiveQuestion`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  183 | 
@@ -582,18 +720,33 @@ function addObjectiveQuestion()
 
 ### `removeObjectiveQuestion` — lines 194–199
 
+#### Signature
+
 ```javascript
 function removeObjectiveQuestion(i)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `removeObjectiveQuestion`.
-- **Pattern:** Delete/clear data.
-- **Parameters (what each means):**
-- `i` — Loop index (0-based counter in for-loops).
+Deletes or clears **remove Objective Question** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `removeObjectiveQuestion`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `i` | `—` | Loop index (0-based counter in for-loops). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  194 | 
@@ -608,21 +761,37 @@ function removeObjectiveQuestion(i)
 
 ### `addOption` — lines 199–207
 
+#### Signature
+
 ```javascript
 function addOption(qi)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `addOption`.
-- **Parameters (what each means):**
-- `qi` — Holds “qi” for this scope.
-- **Local variables (what each means):**
-- `opts` — Often a collection related to opts (plural name).
-- `keys` — Often a collection related to keys (plural name).
-- `next` — Holds “next” for this scope.  Literal text string.
+Saves or updates **add Option** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `addOption`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `qi` | `—` | Holds “qi” for this scope. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `opts` | `—` | Often a collection related to opts (plural name). |
+| `keys` | `—` | Often a collection related to keys (plural name). |
+| `next` | `—` | Holds “next” for this scope.  Literal text string. |
+
+#### Code
 
 ```javascript
  199 | 
@@ -636,29 +805,38 @@ function addOption(qi)
  207 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L202:** `opts` means: Often a collection related to opts (plural name).
-- **L203:** `keys` means: Often a collection related to keys (plural name).
-- **L204:** `next` means: Holds “next” for this scope.  Literal text string.
-
 ---
 
 ### `removeOption` — lines 207–212
+
+#### Signature
 
 ```javascript
 function removeOption(qi, key)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `removeOption`.
-- **Pattern:** Delete/clear data.
-- **Parameters (what each means):**
-- `qi` — Holds “qi” for this scope.
-- `key` — HMAC key bytes or dictionary key.
+Deletes or clears **remove Option** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `removeOption`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `qi` | `—` | Holds “qi” for this scope. |
+| `key` | `—` | HMAC key bytes or dictionary key. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  207 | 
@@ -673,19 +851,35 @@ function removeOption(qi, key)
 
 ### `renderQuestions` — lines 212–258
 
+#### Signature
+
 ```javascript
 function renderQuestions()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `renderQuestions`.
-- **Local variables (what each means):**
-- `list` — In-memory collection being built for JSON return.  DOM element from the page.
-- `card` — Holds “card” for this scope.
-- `optionsHtml` — Holds “options Html” for this scope.  Literal text string.
+Updates the page HTML for **render Questions**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `renderQuestions`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `list` | `—` | In-memory collection being built for JSON return.  DOM element from the page. |
+| `card` | `—` | Holds “card” for this scope. |
+| `optionsHtml` | `—` | Holds “options Html” for this scope.  Literal text string. |
+
+#### Code
 
 ```javascript
  212 | 
@@ -737,34 +931,38 @@ function renderQuestions()
  258 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L215:** Get HTML element by id. | `list` means: In-memory collection being built for JSON return.  DOM element from the page.
-- **L216:** Update page HTML.
-- **L218:** `card` means: Holds “card” for this scope.
-- **L220:** `optionsHtml` means: Holds “options Html” for this scope.  Literal text string.
-- **L234:** Update page HTML.
-- **L254:** Encode text to reduce XSS risk.
-
 ---
 
 ### `isDueClosed` — lines 260–267
+
+#### Signature
 
 ```javascript
 function isDueClosed(dueDateStr)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `isDueClosed`.
-- **Due date:** Related to assignment closing after the due day.
-- **Parameters (what each means):**
-- `dueDateStr` — Date/time value.
-- **Local variables (what each means):**
-- `m` — Holds “m” for this scope.
-- `end` — Range end or string end index.  Newly constructed object.
+Checks a condition related to **is Due Closed** and returns true/false (or tries an action safely).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Use the assignment due date to decide if submissions are still open.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `dueDateStr` | `—` | Date/time value. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `m` | `—` | Holds “m” for this scope. |
+| `end` | `—` | Range end or string end index.  Newly constructed object. |
+
+#### Code
 
 ```javascript
  260 | 
@@ -777,48 +975,54 @@ function isDueClosed(dueDateStr)
  267 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L261:** Assignment deadline; submissions close after due day.
-- **L262:** Assignment deadline; submissions close after due day.
-- **L263:** Assignment deadline; submissions close after due day. | `m` means: Holds “m” for this scope.
-- **L265:** `end` means: Range end or string end index.  Newly constructed object.
-
 ---
 
 ### `saveAssignment` — lines 267–363
+
+#### Signature
 
 ```javascript
 function saveAssignment(publish)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `saveAssignment`.
-- **Due date:** Related to assignment closing after the due day.
-- **Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.
-- **AJAX:** Browser calls server endpoints asynchronously.
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `publish` — Holds “publish” for this scope.
-- **Local variables (what each means):**
-- `err` — Error message string or error element.  DOM element from the page.
-- `ok` — Boolean success flag.  DOM element from the page.
-- `title` — Title of course work / page heading.  DOM element from the page.
-- `instructions` — Student-facing assignment instructions (plain part of Description).  DOM element from the page.
-- `cid` — Course ID (Courses.CID).  DOM element from the page.
-- `cwidRaw` — Holds “cwid Raw” for this scope.  DOM element from the page.
-- `cwid` — CourseWork ID (assignment) (CourseWorks.CWID).
-- `dueDate` — Assignment deadline (date); after end of that day submissions close.  DOM element from the page.
-- `score` — Points earned or max points depending on context.
-- `rubricJson` — Holds “rubric Json” for this scope.
-- `objectiveQuestionsJson` — Holds “objective Questions Json” for this scope.
-- `rubricSum` — Holds “rubric Sum” for this scope.
-- `perQ` — Holds “per Q” for this scope.
-- `extra` — Dictionary of optional fields inside META.
-- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
+Browser JS: collect assignment form fields and POST them to the server WebMethod.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Read title, instructions, course, due date, rubric/questions from the form.
+2. Require a due date when publishing.
+3. POST the data to Assignments.aspx/SaveCourseWork as JSON.
+4. Show success or error on the page and refresh the list.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `publish` | `—` | Holds “publish” for this scope. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `err` | `—` | Error message string or error element.  DOM element from the page. |
+| `ok` | `—` | Boolean success flag.  DOM element from the page. |
+| `title` | `—` | Title of course work / page heading.  DOM element from the page. |
+| `instructions` | `—` | Student-facing assignment instructions (plain part of Description).  DOM element from the page. |
+| `cid` | `—` | Course ID (Courses.CID).  DOM element from the page. |
+| `cwidRaw` | `—` | Holds “cwid Raw” for this scope.  DOM element from the page. |
+| `cwid` | `—` | CourseWork ID (assignment) (CourseWorks.CWID). |
+| `dueDate` | `—` | Assignment deadline (date); after end of that day submissions close.  DOM element from the page. |
+| `score` | `—` | Points earned or max points depending on context. |
+| `rubricJson` | `—` | Holds “rubric Json” for this scope. |
+| `objectiveQuestionsJson` | `—` | Holds “objective Questions Json” for this scope. |
+| `rubricSum` | `—` | Holds “rubric Sum” for this scope. |
+| `perQ` | `—` | Holds “per Q” for this scope. |
+| `extra` | `—` | Dictionary of optional fields inside META. |
+| `res` | `—` | Result object returned from fetch/WebMethod (`data.d` unwrapped). |
+
+#### Code
 
 ```javascript
  267 | 
@@ -920,54 +1124,40 @@ function saveAssignment(publish)
  363 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L270:** Get HTML element by id. | `err` means: Error message string or error element.  DOM element from the page.
-- **L271:** Get HTML element by id. | `ok` means: Boolean success flag.  DOM element from the page.
-- **L275:** Get HTML element by id. | `title` means: Title of course work / page heading.  DOM element from the page.
-- **L276:** Get HTML element by id. | `instructions` means: Student-facing assignment instructions (plain part of Description).  DOM element from the page.
-- **L277:** Get HTML element by id. | `cid` means: Course ID (Courses.CID).  DOM element from the page.
-- **L278:** Get HTML element by id. | `cwidRaw` means: Holds “cwid Raw” for this scope.  DOM element from the page.
-- **L279:** `cwid` means: CourseWork ID (assignment) (CourseWorks.CWID).
-- **L280:** Assignment deadline; submissions close after due day. | `dueDate` means: Assignment deadline (date); after end of that day submissions close.  DOM element from the page.
-- **L285:** Assignment deadline; submissions close after due day.
-- **L292:** `score` means: Points earned or max points depending on context.
-- **L293:** `rubricJson` means: Holds “rubric Json” for this scope.
-- **L294:** `objectiveQuestionsJson` means: Holds “objective Questions Json” for this scope.
-- **L297:** `rubricSum` means: Holds “rubric Sum” for this scope.
-- **L304:** JS object ↔ JSON text.
-- **L313:** `perQ` means: Holds “per Q” for this scope.
-- **L318:** JS object ↔ JSON text.
-- **L322:** `extra` means: Dictionary of optional fields inside META.
-- **L323:** Assignment deadline; submissions close after due day.
-- **L324:** Get HTML element by id.
-- **L325:** Get HTML element by id.
-- **L329:** HTTP request to server WebMethod/ashx.
-- **L332:** JS object ↔ JSON text.
-- **L341:** JS object ↔ JSON text.
-- **L347:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L349:** Get HTML element by id.
-
 ---
 
 ### `deleteWork` — lines 363–379
+
+#### Signature
 
 ```javascript
 function deleteWork(cwid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `deleteWork`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **AJAX:** Browser calls server endpoints asynchronously.
-- **Pattern:** Delete/clear data.
-- **Parameters (what each means):**
-- `cwid` — CourseWork ID (assignment) (CourseWorks.CWID).
-- **Local variables (what each means):**
-- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
+Deletes or clears **delete Work** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Call the server with `fetch` (AJAX) and wait for the JSON result.
+2. Convert a JavaScript object into a JSON string for the server.
+3. Parse the server JSON response into a JavaScript object.
+4. Show a simple popup message to the user.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cwid` | `—` | CourseWork ID (assignment) (CourseWorks.CWID). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `res` | `—` | Result object returned from fetch/WebMethod (`data.d` unwrapped). |
+
+#### Code
 
 ```javascript
  363 | 
@@ -989,27 +1179,37 @@ function deleteWork(cwid)
  379 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L367:** HTTP request to server WebMethod/ashx.
-- **L370:** JS object ↔ JSON text.
-- **L374:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-
 ---
 
 ### `escapeHtml` — lines 379–387
+
+#### Signature
 
 ```javascript
 function escapeHtml(str)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `escapeHtml`.
-- **Parameters (what each means):**
-- `str` — String value: str.
+Function `escapeHtml` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `escapeHtml`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `str` | `—` | String value: str. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  379 | 
@@ -1023,26 +1223,37 @@ function escapeHtml(str)
  387 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L381:** Encode text to reduce XSS risk.
-- **L386:** Encode text to reduce XSS risk.
-
 ---
 
 ### `escapeAttr` — lines 384–387
+
+#### Signature
 
 ```javascript
 function escapeAttr(str)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `escapeAttr`.
-- **Parameters (what each means):**
-- `str` — String value: str.
+Function `escapeAttr` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `escapeAttr`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `str` | `—` | String value: str. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  384 | 
@@ -1051,15 +1262,11 @@ function escapeAttr(str)
  387 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L386:** Encode text to reduce XSS risk.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```javascript
    1 | /* Assignment Builder - pure-SQL CourseWorks / ObjectiveQuestions UI */
@@ -1449,482 +1656,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  385 | function escapeAttr(str) {
  386 |     return escapeHtml(str).replace(/'/g, '&#39;');
  387 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L3:** `builderType` means: Assignment builder mode: Text vs Objective.  Literal text string.
-- **L4:** `rubricRows` means: UI state: grading rubric criteria rows.
-- **L5:** `objectiveQuestions` means: UI state: quiz questions being edited.
-- **L7:** `ASSIGNMENT_TOTAL_PTS` means: Often a collection related to ASSIGNMENT TOTAL PTS (plural name).  Literal number `100`.
-- **L9:** DOM event handler.
-- **L23:** Get HTML element by id.
-- **L24:** Get HTML element by id.
-- **L25:** Get HTML element by id.
-- **L26:** Get HTML element by id.
-- **L27:** Get HTML element by id.
-- **L28:** Get HTML element by id.
-- **L36:** HTTP request to server WebMethod/ashx.
-- **L43:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L44:** Get HTML element by id. | `ddl` means: Drop-down list (select) element.  DOM element from the page.
-- **L45:** Update page HTML.
-- **L48:** `opt` means: Option element or optional label.
-- **L58:** `existingWorksDt` means: Holds “existing Works Dt” for this scope.
-- **L61:** HTTP request to server WebMethod/ashx.
-- **L69:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L70:** Get HTML element by id. | `box` means: Container element for lists/tables.  DOM element from the page.
-- **L73:** Update page HTML.
-- **L76:** `items` means: Array of rows for UI tables.
-- **L77:** In-memory result set from ADO.NET.
-- **L78:** Update page HTML.
-- **L80:** Update page HTML.
-- **L85:** In-memory result set from ADO.NET.
-- **L96:** Encode text to reduce XSS risk.
-- **L102:** Assignment deadline; submissions close after due day.
-- **L104:** Assignment deadline; submissions close after due day.
-- **L105:** Assignment deadline; submissions close after due day. | `closed` means: Holds “closed” for this scope.
-- **L106:** `badge` means: Holds “badge” for this scope.
-- **L109:** Assignment deadline; submissions close after due day.
-- **L147:** Get HTML element by id. | `list` means: In-memory collection being built for JSON return.  DOM element from the page.
-- **L148:** Update page HTML.
-- **L150:** `div` means: Holds “div” for this scope.
-- **L152:** Update page HTML.
-- **L167:** `total` means: Sum of points or total items.
-- **L168:** Get HTML element by id. | `el` means: Generic DOM element.  DOM element from the page.
-- **L178:** Get HTML element by id. | `hint` means: Holds “hint” for this scope.  DOM element from the page.
-- **L202:** `opts` means: Often a collection related to opts (plural name).
-- **L203:** `keys` means: Often a collection related to keys (plural name).
-- **L204:** `next` means: Holds “next” for this scope.  Literal text string.
-- **L215:** Get HTML element by id. | `list` means: In-memory collection being built for JSON return.  DOM element from the page.
-- **L216:** Update page HTML.
-- **L218:** `card` means: Holds “card” for this scope.
-- **L220:** `optionsHtml` means: Holds “options Html” for this scope.  Literal text string.
-- **L234:** Update page HTML.
-- **L254:** Encode text to reduce XSS risk.
-- **L261:** Assignment deadline; submissions close after due day.
-- **L262:** Assignment deadline; submissions close after due day.
-- **L263:** Assignment deadline; submissions close after due day. | `m` means: Holds “m” for this scope.
-- **L265:** `end` means: Range end or string end index.  Newly constructed object.
-- **L270:** Get HTML element by id. | `err` means: Error message string or error element.  DOM element from the page.
-- **L271:** Get HTML element by id. | `ok` means: Boolean success flag.  DOM element from the page.
-- **L275:** Get HTML element by id. | `title` means: Title of course work / page heading.  DOM element from the page.
-- **L276:** Get HTML element by id. | `instructions` means: Student-facing assignment instructions (plain part of Description).  DOM element from the page.
-- **L277:** Get HTML element by id. | `cid` means: Course ID (Courses.CID).  DOM element from the page.
-- **L278:** Get HTML element by id. | `cwidRaw` means: Holds “cwid Raw” for this scope.  DOM element from the page.
-- **L279:** `cwid` means: CourseWork ID (assignment) (CourseWorks.CWID).
-- **L280:** Assignment deadline; submissions close after due day. | `dueDate` means: Assignment deadline (date); after end of that day submissions close.  DOM element from the page.
-- **L285:** Assignment deadline; submissions close after due day.
-- **L292:** `score` means: Points earned or max points depending on context.
-- **L293:** `rubricJson` means: Holds “rubric Json” for this scope.
-- **L294:** `objectiveQuestionsJson` means: Holds “objective Questions Json” for this scope.
-- **L297:** `rubricSum` means: Holds “rubric Sum” for this scope.
-- **L304:** JS object ↔ JSON text.
-- **L313:** `perQ` means: Holds “per Q” for this scope.
-- **L318:** JS object ↔ JSON text.
-- **L322:** `extra` means: Dictionary of optional fields inside META.
-- **L323:** Assignment deadline; submissions close after due day.
-- **L324:** Get HTML element by id.
-- **L325:** Get HTML element by id.
-- **L329:** HTTP request to server WebMethod/ashx.
-- **L332:** JS object ↔ JSON text.
-- **L341:** JS object ↔ JSON text.
-- **L347:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L349:** Get HTML element by id.
-- **L367:** HTTP request to server WebMethod/ashx.
-- **L370:** JS object ↔ JSON text.
-- **L374:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L381:** Encode text to reduce XSS risk.
-- **L386:** Encode text to reduce XSS risk.
-
-## Source snapshot (raw)
-
-```javascript
-/* Assignment Builder - pure-SQL CourseWorks / ObjectiveQuestions UI */
-
-let builderType = 'Text'; // Text | Objective
-let rubricRows = [];
-let objectiveQuestions = [];
-
-const ASSIGNMENT_TOTAL_PTS = 100;
-
-document.addEventListener('DOMContentLoaded', function () {
-    loadCourses();
-    loadExisting();
-    setBuilderType('Text');
-    if (rubricRows.length === 0) {
-        // Defaults always sum to 100 pts
-        addRubricRow('Content & understanding', 40);
-        addRubricRow('Structure & clarity', 30);
-        addRubricRow('Presentation / quality', 30);
-    }
-});
-
-function setBuilderType(type) {
-    builderType = type === 'Objective' ? 'Objective' : 'Text';
-    document.getElementById('btnTypeAssignment').classList.toggle('active', builderType === 'Text');
-    document.getElementById('btnTypeQuiz').classList.toggle('active', builderType === 'Objective');
-    document.getElementById('panelRubric').style.display = builderType === 'Text' ? 'block' : 'none';
-    document.getElementById('panelQuestions').style.display = builderType === 'Objective' ? 'block' : 'none';
-    document.getElementById('timeLimitGroup').style.display = builderType === 'Objective' ? 'block' : 'none';
-    document.getElementById('requireFileGroup').style.display = builderType === 'Text' ? 'block' : 'none';
-
-    if (builderType === 'Objective' && objectiveQuestions.length === 0) {
-        addObjectiveQuestion();
-    }
-}
-
-function loadCourses() {
-    fetch('Assignments.aspx/GetCourses', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: '{}'
-    })
-    .then(r => r.json())
-    .then(data => {
-        const res = data.d || data;
-        const ddl = document.getElementById('ddlCourse');
-        ddl.innerHTML = '<option value="">Select course...</option>';
-        if (res.success && res.courses) {
-            res.courses.forEach(c => {
-                const opt = document.createElement('option');
-                opt.value = c.cid;
-                opt.textContent = c.name;
-                ddl.appendChild(opt);
-            });
-        }
-    })
-    .catch(console.error);
-}
-
-let existingWorksDt = null;
-
-function loadExisting() {
-    fetch('Assignments.aspx/GetCourseWorks', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: '{}',
-        credentials: 'same-origin'
-    })
-    .then(r => r.json())
-    .then(data => {
-        const res = data.d || data;
-        const box = document.getElementById('existingList');
-        if (!box) return;
-        if (!res.success) {
-            box.innerHTML = '<div class="text-danger small">' + escapeHtml(res.message || 'Failed') + '</div>';
-            return;
-        }
-        const items = res.items || [];
-        if (typeof EduDataTable === 'undefined') {
-            box.innerHTML = items.length ? '' : '<div class="text-muted small">No courseworks yet.</div>';
-            items.forEach(function (item) {
-                box.innerHTML += '<div class="existing-item">' + escapeHtml(item.title) + '</div>';
-            });
-            return;
-        }
-        if (!existingWorksDt) {
-            existingWorksDt = EduDataTable.create({
-                container: box,
-                pageSize: 8,
-                pageSizeOptions: [5, 8, 15, 25],
-                searchPlaceholder: 'Search title or course...',
-                emptyMessage: 'No courseworks yet.',
-                tableClass: 'table table-sm table-hover mb-0 edt-table',
-                columns: [
-                {
-                    key: 'title', title: 'Title', sortable: true,
-                    render: function (item) {
-                        return '<div class="fw-semibold small text-dark">' + escapeHtml(item.title || 'Untitled') + '</div>';
-                    }
-                },
-                { key: 'courseName', title: 'Course', sortable: true, filter: true, filterLabel: 'Course' },
-                { key: 'type', title: 'Type', sortable: true, filter: true, filterLabel: 'Type' },
-                {
-                    key: 'dueDate', title: 'Due', sortable: true,
-                    render: function (item) {
-                        if (!item.dueDate) return '<span class="text-muted small">—</span>';
-                        var closed = isDueClosed(item.dueDate);
-                        var badge = closed
-                            ? '<span class="badge rounded-pill text-bg-secondary ms-1">Closed</span>'
-                            : '<span class="badge rounded-pill text-bg-success ms-1">Open</span>';
-                        return '<span class="small">' + escapeHtml(item.dueDate) + '</span>' + badge;
-                    }
-                },
-                {
-                    key: 'score', title: 'Pts', sortable: true, type: 'number',
-                    render: function () { return '100'; }
-                },
-                {
-                    key: '_actions', title: '', sortable: false, search: false, cellClass: 'text-end',
-                    render: function (item) {
-                        return '<button type="button" class="btn btn-sm btn-link text-danger p-0" title="Delete" onclick="deleteWork(' +
-                        item.cwid + ')"><i class="fa-regular fa-trash-can"></i></button>';
-                    }
-                }
-                ]
-            });
-        }
-        existingWorksDt.setData(items);
-    })
-    .catch(console.error);
-}
-
-function addRubricRow(name, pts) {
-    // New empty rows get 0; user redistributes to keep total 100
-    rubricRows.push({ name: name || '', pts: pts != null ? pts : 0 });
-    renderRubric();
-}
-
-function getRubricTotal() {
-    return rubricRows.reduce(function (s, r) { return s + (Number(r.pts) || 0); }, 0);
-}
-
-function removeRubricRow(i) {
-    rubricRows.splice(i, 1);
-    renderRubric();
-}
-
-function renderRubric() {
-    const list = document.getElementById('rubricList');
-    list.innerHTML = '';
-    rubricRows.forEach((row, i) => {
-        const div = document.createElement('div');
-        div.className = 'd-flex align-items-center gap-2 mb-2';
-        div.innerHTML = `
-        <i class="fa-solid fa-grip-vertical text-muted"></i>
-        <input type="text" class="form-control form-control-sm" placeholder="Criterion" value="${escapeAttr(row.name)}"
-        oninput="rubricRows[${i}].name=this.value" />
-        <input type="number" class="form-control form-control-sm" style="max-width:80px;" min="0" max="100" value="${row.pts}"
-        oninput="rubricRows[${i}].pts=parseFloat(this.value)||0; updateRubricTotal();" />
-        <button type="button" class="btn btn-sm btn-link text-danger p-0" onclick="removeRubricRow(${i})">
-        <i class="fa-regular fa-trash-can"></i>
-        </button>`;
-        list.appendChild(div);
-    });
-    updateRubricTotal();
-}
-
-function updateRubricTotal() {
-    const total = getRubricTotal();
-    const el = document.getElementById('lblRubricTotal');
-    // Always show "out of 100"
-    el.innerText = total + ' / ' + ASSIGNMENT_TOTAL_PTS;
-    if (total === ASSIGNMENT_TOTAL_PTS) {
-        el.classList.remove('text-danger');
-        el.classList.add('text-success');
-    } else {
-        el.classList.remove('text-success');
-        el.classList.add('text-danger');
-    }
-    const hint = document.getElementById('rubricTotalHint');
-    if (hint) {
-        hint.style.display = total === ASSIGNMENT_TOTAL_PTS ? 'none' : 'block';
-        hint.textContent = 'Rubric criteria must total exactly ' + ASSIGNMENT_TOTAL_PTS + ' pts (currently ' + total + ').';
-    }
-}
-
-function addObjectiveQuestion() {
-    objectiveQuestions.push({
-        question: '',
-        options: { option1: '', option2: '', option3: '', option4: '' },
-        answer: 'option1',
-        explanation: '',
-        oneOrMultipleAnswer: true
-    });
-    renderQuestions();
-}
-
-function removeObjectiveQuestion(i) {
-    objectiveQuestions.splice(i, 1);
-    renderQuestions();
-}
-
-function addOption(qi) {
-    const opts = objectiveQuestions[qi].options;
-    const keys = Object.keys(opts);
-    const next = 'option' + (keys.length + 1);
-    opts[next] = '';
-    renderQuestions();
-}
-
-function removeOption(qi, key) {
-    delete objectiveQuestions[qi].options[key];
-    renderQuestions();
-}
-
-function renderQuestions() {
-    const list = document.getElementById('questionsList');
-    list.innerHTML = '';
-    objectiveQuestions.forEach((q, qi) => {
-        const card = document.createElement('div');
-        card.className = 'glass-card p-4 mb-3';
-        let optionsHtml = '';
-        Object.keys(q.options).forEach(key => {
-            optionsHtml += `
-            <div class="d-flex align-items-center gap-2 mb-2">
-            <input type="radio" name="ans_${qi}" ${q.answer === key ? 'checked' : ''}
-            onchange="objectiveQuestions[${qi}].answer='${key}'" />
-            <input type="text" class="form-control form-control-sm" placeholder="Option"
-            value="${escapeAttr(q.options[key])}"
-            oninput="objectiveQuestions[${qi}].options['${key}']=this.value" />
-            <button type="button" class="btn btn-sm btn-link text-danger p-0" onclick="removeOption(${qi},'${key}')">
-            <i class="fa-regular fa-trash-can"></i>
-            </button>
-            </div>`;
-        });
-        card.innerHTML = `
-        <div class="d-flex justify-content-between align-items-center mb-3">
-        <span class="fw-bold"><i class="fa-solid fa-grip-vertical text-muted me-2"></i>Question ${qi + 1}</span>
-        <button type="button" class="btn btn-sm btn-link text-danger p-0" onclick="removeObjectiveQuestion(${qi})">
-        <i class="fa-regular fa-trash-can"></i>
-        </button>
-        </div>
-        <input type="text" class="form-control mb-3" placeholder="Question text"
-        value="${escapeAttr(q.question)}"
-        oninput="objectiveQuestions[${qi}].question=this.value" />
-        ${optionsHtml}
-        <button type="button" class="btn btn-link btn-sm p-0 mb-3" style="color:var(--primary-accent);" onclick="addOption(${qi})">+ Add Option</button>
-        <div class="mb-2">
-        <label class="form-label small text-muted mb-1">Answer key (option id)</label>
-        <input type="text" class="form-control form-control-sm" value="${escapeAttr(q.answer)}"
-        oninput="objectiveQuestions[${qi}].answer=this.value" placeholder="e.g. option1" />
-        </div>
-        <div>
-        <label class="form-label small text-muted mb-1">Explanation</label>
-        <textarea class="form-control form-control-sm" rows="2"
-        oninput="objectiveQuestions[${qi}].explanation=this.value">${escapeHtml(q.explanation || '')}</textarea>
-        </div>`;
-        list.appendChild(card);
-    });
-}
-
-/** Due date (yyyy-MM-dd) is open all that calendar day; closed from next midnight. */
-function isDueClosed(dueDateStr) {
-    if (!dueDateStr) return false;
-    var m = String(dueDateStr).match(/^(\d{4})-(\d{2})-(\d{2})/);
-    if (!m) return false;
-    var end = new Date(parseInt(m[1], 10), parseInt(m[2], 10) - 1, parseInt(m[3], 10) + 1, 0, 0, 0, 0);
-    return Date.now() >= end.getTime();
-}
-
-function saveAssignment(publish) {
-    const err = document.getElementById('saveError');
-    const ok = document.getElementById('saveOk');
-    err.style.display = 'none';
-    ok.style.display = 'none';
-
-    const title = document.getElementById('txtTitle').value.trim();
-    const instructions = document.getElementById('txtInstructions').value.trim();
-    const cid = parseInt(document.getElementById('ddlCourse').value, 10) || 0;
-    const cwidRaw = document.getElementById('hfCwid').value;
-    const cwid = cwidRaw ? parseInt(cwidRaw, 10) : null;
-    const dueDate = (document.getElementById('txtDueDate').value || '').trim();
-
-    if (!title) { err.innerText = 'Title is required.'; err.style.display = 'block'; return; }
-    if (!cid) { err.innerText = 'Select a target course.'; err.style.display = 'block'; return; }
-    // Due date required when publishing so closing is explicit in demos
-    if (publish && !dueDate) {
-        err.innerText = 'Set a due date before publishing (students cannot submit after that day).';
-        err.style.display = 'block';
-        return;
-    }
-
-    // All assignments / quizzes are always out of 100 pts
-    let score = ASSIGNMENT_TOTAL_PTS;
-    let rubricJson = null;
-    let objectiveQuestionsJson = null;
-
-    if (builderType === 'Text') {
-        const rubricSum = getRubricTotal();
-        if (rubricSum !== ASSIGNMENT_TOTAL_PTS) {
-            err.innerText = 'Grading rubric must total exactly ' + ASSIGNMENT_TOTAL_PTS +
-            ' pts (currently ' + rubricSum + '). Adjust the criterion points.';
-            err.style.display = 'block';
-            return;
-        }
-        rubricJson = JSON.stringify(rubricRows);
-        score = ASSIGNMENT_TOTAL_PTS;
-    } else {
-        if (objectiveQuestions.length === 0) {
-            err.innerText = 'Add at least one quiz question.';
-            err.style.display = 'block';
-            return;
-        }
-        // Evenly distribute 100 pts across questions (for display in meta)
-        const perQ = Math.round((ASSIGNMENT_TOTAL_PTS / objectiveQuestions.length) * 100) / 100;
-        objectiveQuestions = objectiveQuestions.map(function (q) {
-            q.points = perQ;
-            return q;
-        });
-        objectiveQuestionsJson = JSON.stringify(objectiveQuestions);
-        score = ASSIGNMENT_TOTAL_PTS;
-    }
-
-    const extra = {
-        dueDate: dueDate || null,
-        timeLimit: document.getElementById('txtTimeLimit').value || null,
-        requireFile: document.getElementById('chkRequireFile').checked,
-        published: !!publish
-    };
-
-    fetch('Assignments.aspx/SaveCourseWork', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            cwid: cwid,
-            cid: cid,
-            title: title,
-            instructions: instructions,
-            type: builderType,
-            score: score,
-            creditGiven: score,
-            rubricJson: rubricJson,
-            extraMetaJson: JSON.stringify(extra),
-            objectiveQuestionsJson: objectiveQuestionsJson
-        })
-    })
-    .then(r => r.json())
-    .then(data => {
-        const res = data.d || data;
-        if (res.success) {
-            document.getElementById('hfCwid').value = res.cwid;
-            ok.innerText = publish ? 'Published successfully.' : 'Draft saved.';
-            ok.style.display = 'block';
-            loadExisting();
-        } else {
-            err.innerText = res.message || 'Save failed.';
-            err.style.display = 'block';
-        }
-    })
-    .catch(e => {
-        err.innerText = 'Network error.';
-        err.style.display = 'block';
-        console.error(e);
-    });
-}
-
-function deleteWork(cwid) {
-    if (!confirm('Delete this coursework? This cannot be undone.')) return;
-    fetch('Assignments.aspx/DeleteCourseWork', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cwid: cwid })
-    })
-    .then(r => r.json())
-    .then(data => {
-        const res = data.d || data;
-        if (res.success) loadExisting();
-        else alert(res.message || 'Delete failed');
-    })
-    .catch(console.error);
-}
-
-function escapeHtml(str) {
-    if (!str) return '';
-    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-function escapeAttr(str) {
-    return escapeHtml(str).replace(/'/g, '&#39;');
-}
-
 ```

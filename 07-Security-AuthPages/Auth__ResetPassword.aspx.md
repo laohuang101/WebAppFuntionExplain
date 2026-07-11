@@ -1,6 +1,6 @@
 # ResetPassword.aspx
 **Source:** `Pages/Authentication/ResetPassword.aspx`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,17 +15,17 @@ One-shot TOTP + new password form (uses AuthService.ResetPasswordWithTotp).
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
+Markup file — variables live in the matching `.cs` / `.js` companion docs.
 
 ## Functions / methods (0 found)
 
-_No methods matched the scanner (markup-only or unconventional structure). See full file listing below._
+_No methods matched the scanner (markup-only or unconventional structure). See the code listing at the bottom._
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```html
    1 | <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ResetPassword.aspx.cs" Inherits="WebAppAssignment.Pages.Authentication.ResetPassword" %>
@@ -87,73 +87,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   57 |     </form>
   58 | </body>
   59 | </html>
-```
-
-**Line notes** (what code + variables mean)
-
-- **L8:** CSRF anti-forgery protection.
-
-## Source snapshot (raw)
-
-```html
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ResetPassword.aspx.cs" Inherits="WebAppAssignment.Pages.Authentication.ResetPassword" %>
-
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <meta charset="utf-8" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <%= WebAppAssignment.Data.Security.CsrfProtection.MetaTag(Context) %>
-    <title>EduLMS - Reset password</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="<%= ResolveUrl("~/Shared/Style/auth.css") %>" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div class="container d-flex justify-content-center align-items-center vh-100">
-            <div class="card card-auth p-4 w-100" style="max-width: 400px;">
-                <div class="text-center mb-3">
-                    <i class="fa-solid fa-lock-open fa-2x" style="color:#f17f54;"></i>
-                    <h3 class="mt-2 fw-bold">Set new password</h3>
-                    <p class="text-muted small mb-0">
-                        Prove identity with your <strong>authenticator MFA code</strong>, then choose a new password.
-                    </p>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label small fw-semibold text-muted">Email</label>
-                    <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label small fw-semibold text-muted">Authenticator code (MFA)</label>
-                    <asp:TextBox ID="txtCode" runat="server" CssClass="form-control text-center"
-                        MaxLength="8" placeholder="000000" autocomplete="one-time-code"
-                        style="letter-spacing:.3em;font-weight:700;font-size:1.15rem;"></asp:TextBox>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label small fw-semibold text-muted">New password</label>
-                    <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" placeholder="Min 8 chars, letters + numbers"></asp:TextBox>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label small fw-semibold text-muted">Confirm password</label>
-                    <asp:TextBox ID="txtPassword2" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
-                </div>
-
-                <asp:Button ID="btnReset" runat="server" Text="Update password" CssClass="btn btn-accent w-100 text-white"
-                    OnClick="btnReset_Click" />
-                <asp:Label ID="lblMsg" runat="server" CssClass="d-block mt-3 text-center small"></asp:Label>
-
-                <div class="text-center mt-3">
-                    <a href="<%= ResolveUrl("~/Pages/Authentication/Login.aspx") %>" class="small text-decoration-none" style="color:#f17f54;">Back to login</a>
-                    ·
-                    <a href="<%= ResolveUrl("~/Pages/Authentication/ForgotPassword.aspx") %>" class="small text-decoration-none text-muted">Forgot password</a>
-                </div>
-            </div>
-        </div>
-    </form>
-</body>
-</html>
-
 ```

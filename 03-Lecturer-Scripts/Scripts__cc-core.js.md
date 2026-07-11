@@ -1,6 +1,6 @@
 # cc-core.js
 **Source:** `Pages/Lecturer/Scripts/cc-core.js`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,39 +15,57 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 4:** `courses` — script-level `const`/`let`/`var` — **Often a collection related to courses (plural name).**
-- **Line 6:** `currentCourseId` — script-level `const`/`let`/`var` — **Holds “current Course Id” for this scope.**
-- **Line 7:** `activeWizardStep` — script-level `const`/`let`/`var` — **Holds “active Wizard Step” for this scope.**
-- **Line 8:** `editingSectionId` — script-level `const`/`let`/`var` — **Holds “editing Section Id” for this scope.**
-- **Line 10:** `targetChapterId` — script-level `const`/`let`/`var` — **Holds “target Chapter Id” for this scope.**
-- **Line 11:** `editingLessonId` — script-level `const`/`let`/`var` — **Holds “editing Lesson Id” for this scope.**
-- **Line 17:** `x` — script-level `const`/`let`/`var` — **Generic temporary / coordinate / exception alias.**
-- **Line 32:** `parsed` — script-level `const`/`let`/`var` — **Holds “parsed” for this scope.**
-- **Line 37:** `msg` — script-level `const`/`let`/`var` — **Human-readable message (error or success).**
-- **Line 47:** `body` — script-level `const`/`let`/`var` — **HTTP request body.**
-- **Line 53:** `el` — script-level `const`/`let`/`var` — **Generic DOM element.**
-- **Line 55:** `inst` — script-level `const`/`let`/`var` — **Holds “inst” for this scope.**
-- **Line 69:** `open` — script-level `const`/`let`/`var` — **Holds “open” for this scope.**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `courses` | `const/let/var` | Often a collection related to courses (plural name). |
+| `currentCourseId` | `const/let/var` | Holds “current Course Id” for this scope. |
+| `activeWizardStep` | `const/let/var` | Holds “active Wizard Step” for this scope. |
+| `editingSectionId` | `const/let/var` | Holds “editing Section Id” for this scope. |
+| `targetChapterId` | `const/let/var` | Holds “target Chapter Id” for this scope. |
+| `editingLessonId` | `const/let/var` | Holds “editing Lesson Id” for this scope. |
+| `x` | `const/let/var` | Generic temporary / coordinate / exception alias. |
+| `parsed` | `const/let/var` | Holds “parsed” for this scope. |
+| `msg` | `const/let/var` | Human-readable message (error or success). |
+| `body` | `const/let/var` | HTTP request body. |
+| `el` | `const/let/var` | Generic DOM element. |
+| `inst` | `const/let/var` | Holds “inst” for this scope. |
+| `open` | `const/let/var` | Holds “open” for this scope. |
 
 ## Functions / methods (5 found)
 
 ### `unwrap` — lines 13–21
 
+#### Signature
+
 ```javascript
 function unwrap(data)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `unwrap`.
-- **Parameters (what each means):**
-- `data` — Holds “data” for this scope.
-- **Local variables (what each means):**
-- `x` — Generic temporary / coordinate / exception alias.
+Function `unwrap` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `unwrap`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `data` | `—` | Holds “data” for this scope. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `x` | `—` | Generic temporary / coordinate / exception alias. |
+
+#### Code
 
 ```javascript
   13 | 
@@ -61,31 +79,42 @@ function unwrap(data)
   21 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L17:** `x` means: Generic temporary / coordinate / exception alias.
-
 ---
 
 ### `postJson` — lines 21–43
+
+#### Signature
 
 ```javascript
 function postJson(url, body)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `postJson`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **AJAX:** Browser calls server endpoints asynchronously.
-- **Parameters (what each means):**
-- `url` — HTTP URL to media or page.
-- `body` — HTTP request body.
-- **Local variables (what each means):**
-- `parsed` — Holds “parsed” for this scope.
-- `msg` — Human-readable message (error or success).
+Browser-side function `postJson` — talks to the server and updates the page.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Call the server with `fetch` (AJAX) and wait for the JSON result.
+2. Convert a JavaScript object into a JSON string for the server.
+3. Parse the server JSON response into a JavaScript object.
+4. Stop with an error (invalid access or bad input).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `url` | `—` | HTTP URL to media or page. |
+| `body` | `—` | HTTP request body. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `parsed` | `—` | Holds “parsed” for this scope. |
+| `msg` | `—` | Human-readable message (error or success). |
+
+#### Code
 
 ```javascript
   21 | 
@@ -113,33 +142,40 @@ function postJson(url, body)
   43 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L25:** HTTP request to server WebMethod/ashx.
-- **L28:** JS object ↔ JSON text.
-- **L32:** `parsed` means: Holds “parsed” for this scope.
-- **L33:** JS object ↔ JSON text.
-- **L37:** `msg` means: Human-readable message (error or success).
-
 ---
 
 ### `curriculumApi` — lines 45–49
+
+#### Signature
 
 ```javascript
 function curriculumApi(action, payload)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `curriculumApi`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters (what each means):**
-- `action` — Holds “action” for this scope.
-- `payload` — Object about to be JSON-serialized or sent over network.
-- **Local variables (what each means):**
-- `body` — HTTP request body.
+Function `curriculumApi` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `curriculumApi`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `action` | `—` | Holds “action” for this scope. |
+| `payload` | `—` | Object about to be JSON-serialized or sent over network. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `body` | `—` | HTTP request body. |
+
+#### Code
 
 ```javascript
   45 | 
@@ -149,28 +185,40 @@ function curriculumApi(action, payload)
   49 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L47:** `body` means: HTTP request body.
-
 ---
 
 ### `hideModal` — lines 51–58
+
+#### Signature
 
 ```javascript
 function hideModal(id)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `hideModal`.
-- **Parameters (what each means):**
-- `id` — Generic primary key / identifier.
-- **Local variables (what each means):**
-- `el` — Generic DOM element.  DOM element from the page.
-- `inst` — Holds “inst” for this scope.
+Function `hideModal` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `hideModal`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `id` | `—` | Generic primary key / identifier. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `el` | `—` | Generic DOM element.  DOM element from the page. |
+| `inst` | `—` | Holds “inst” for this scope. |
+
+#### Code
 
 ```javascript
   51 | 
@@ -183,28 +231,39 @@ function hideModal(id)
   58 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L53:** Get HTML element by id. | `el` means: Generic DOM element.  DOM element from the page.
-- **L55:** `inst` means: Holds “inst” for this scope.
-
 ---
 
 ### `showModal` — lines 58–65
+
+#### Signature
 
 ```javascript
 function showModal(id)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `showModal`.
-- **Parameters (what each means):**
-- `id` — Generic primary key / identifier.
-- **Local variables (what each means):**
-- `el` — Generic DOM element.  DOM element from the page.
+Updates the page HTML for **show Modal**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `showModal`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `id` | `—` | Generic primary key / identifier. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `el` | `—` | Generic DOM element.  DOM element from the page. |
+
+#### Code
 
 ```javascript
   58 | 
@@ -217,15 +276,11 @@ function showModal(id)
   65 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L61:** Get HTML element by id. | `el` means: Generic DOM element.  DOM element from the page.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```javascript
    1 | // Course Creation — core helpers (API, modals)
@@ -302,105 +357,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   72 |     }
   73 | });
   74 | 
-```
-
-**Line notes** (what code + variables mean)
-
-- **L5:** `courses` means: Often a collection related to courses (plural name).
-- **L6:** `currentCourseId` means: Holds “current Course Id” for this scope.
-- **L7:** `activeWizardStep` means: Holds “active Wizard Step” for this scope.  Literal number `1`.
-- **L9:** `editingSectionId` means: Holds “editing Section Id” for this scope.
-- **L10:** `targetChapterId` means: Holds “target Chapter Id” for this scope.
-- **L11:** `editingLessonId` means: Holds “editing Lesson Id” for this scope.
-- **L17:** `x` means: Generic temporary / coordinate / exception alias.
-- **L25:** HTTP request to server WebMethod/ashx.
-- **L28:** JS object ↔ JSON text.
-- **L32:** `parsed` means: Holds “parsed” for this scope.
-- **L33:** JS object ↔ JSON text.
-- **L37:** `msg` means: Human-readable message (error or success).
-- **L47:** `body` means: HTTP request body.
-- **L53:** Get HTML element by id. | `el` means: Generic DOM element.  DOM element from the page.
-- **L55:** `inst` means: Holds “inst” for this scope.
-- **L61:** Get HTML element by id. | `el` means: Generic DOM element.  DOM element from the page.
-- **L68:** DOM event handler.
-- **L69:** `open` means: Holds “open” for this scope.
-
-## Source snapshot (raw)
-
-```javascript
-// Course Creation — core helpers (API, modals)
-// Course Creation script (moved from CourseCreation.aspx)
-// Handles course grid, wizard, curriculum, and thumbnail upload via dropzone
-
-let courses = [];
-let currentCourseId = null;
-let activeWizardStep = 1;
-
-let editingSectionId = null; // for section add/edit
-let targetChapterId = null; // for lesson adding
-let editingLessonId = null; // for lesson editing
-
-/** Prefer shared EduApi (csrf + unwrap) from master page when available */
-function unwrap(data) {
-    if (window.EduApi && EduApi.unwrap) return EduApi.unwrap(data);
-    if (!data) return data;
-    let x = data;
-    if (x.d !== undefined) x = x.d;
-    if (x && x.d !== undefined) x = x.d;
-    return x;
-}
-
-function postJson(url, body) {
-    if (window.EduApi && EduApi.postJson) return EduApi.postJson(url, body);
-    return fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json; charset=utf-8' },
-        body: JSON.stringify(body || {}),
-        credentials: 'same-origin'
-    }).then(function (res) {
-        return res.text().then(function (text) {
-            var parsed = null;
-            try { parsed = text ? JSON.parse(text) : null; } catch (e) {
-                throw new Error('Server returned non-JSON (HTTP ' + res.status + '): ' + text.slice(0, 200));
-            }
-            if (!res.ok) {
-                var msg = (parsed && (parsed.message || parsed.Message)) || ('HTTP ' + res.status);
-                throw new Error(msg);
-            }
-            return unwrap(parsed);
-        });
-    });
-}
-
-/** Curriculum API (ashx) - reliable lesson/section CRUD */
-function curriculumApi(action, payload) {
-    var body = Object.assign({ action: action }, payload || {});
-    return postJson('CurriculumApi.ashx', body);
-}
-
-/** Safely hide a Bootstrap modal (handles missing instance) */
-function hideModal(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    var inst = bootstrap.Modal.getInstance(el);
-    if (!inst) inst = bootstrap.Modal.getOrCreateInstance(el);
-    inst.hide();
-}
-
-function showModal(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    // Nested modals: keep parent wizard open
-    bootstrap.Modal.getOrCreateInstance(el, { backdrop: true, keyboard: true }).show();
-}
-
-/** Keep body scroll + multiple backdrops clean when nested modals close */
-document.addEventListener('hidden.bs.modal', function () {
-    var open = document.querySelectorAll('.modal.show');
-    if (open.length) {
-        document.body.classList.add('modal-open');
-    }
-});
-
-
 ```

@@ -1,6 +1,6 @@
 # editor.js
 **Source:** `Pages/Lecturer/Scripts/editor.js`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,33 +15,51 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 5:** `url` — script-level `const`/`let`/`var` — **HTTP URL to media or page.**
-- **Line 14:** `htmlEditor` — script-level `const`/`let`/`var` — **Holds “html Editor” for this scope.**
-- **Line 19:** `hidden` — script-level `const`/`let`/`var` — **Holds “hidden” for this scope.**
-- **Line 27:** `toolbar` — script-level `const`/`let`/`var` — **Holds “toolbar” for this scope.**
-- **Line 30:** `btn` — script-level `const`/`let`/`var` — **Button DOM element.**
-- **Line 32:** `cmd` — script-level `const`/`let`/`var` — **SqlCommand — the SQL statement + parameters object.**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `url` | `const/let/var` | HTTP URL to media or page. |
+| `htmlEditor` | `const/let/var` | Holds “html Editor” for this scope. |
+| `hidden` | `const/let/var` | Holds “hidden” for this scope. |
+| `toolbar` | `const/let/var` | Holds “toolbar” for this scope. |
+| `btn` | `const/let/var` | Button DOM element. |
+| `cmd` | `const/let/var` | SqlCommand — the SQL statement + parameters object. |
 
 ## Functions / methods (2 found)
 
 ### `execCmd` — lines 2–11
 
+#### Signature
+
 ```javascript
 function execCmd(cmd, value)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `execCmd`.
-- **Parameters (what each means):**
-- `cmd` — SqlCommand — the SQL statement + parameters object.
-- `value` — Holds “value” for this scope.
-- **Local variables (what each means):**
-- `url` — HTTP URL to media or page.
+Function `execCmd` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `execCmd`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cmd` | `—` | SqlCommand — the SQL statement + parameters object. |
+| `value` | `—` | Holds “value” for this scope. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `url` | `—` | HTTP URL to media or page. |
+
+#### Code
 
 ```javascript
    2 | 
@@ -56,25 +74,37 @@ function execCmd(cmd, value)
   11 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L5:** `url` means: HTTP URL to media or page.
-
 ---
 
 ### `sync` — lines 17–21
+
+#### Signature
 
 ```javascript
 function sync()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `sync`.
-- **Local variables (what each means):**
-- `hidden` — Holds “hidden” for this scope.  DOM element from the page.
+Function `sync` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `sync`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `hidden` | `—` | Holds “hidden” for this scope.  DOM element from the page. |
+
+#### Code
 
 ```javascript
   17 | 
@@ -84,16 +114,11 @@ function sync()
   21 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L19:** Get HTML element by id. | `hidden` means: Holds “hidden” for this scope.  DOM element from the page.
-- **L20:** Update page HTML.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```javascript
    1 | // editor.js: small helpers for lesson editor
@@ -137,64 +162,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   39 |         window.__editorSync = sync;
   40 |     };
   41 | })();
-```
-
-**Line notes** (what code + variables mean)
-
-- **L5:** `url` means: HTTP URL to media or page.
-- **L14:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
-- **L19:** Get HTML element by id. | `hidden` means: Holds “hidden” for this scope.  DOM element from the page.
-- **L20:** Update page HTML.
-- **L23:** DOM event handler.
-- **L24:** DOM event handler.
-- **L27:** Get HTML element by id. | `toolbar` means: Holds “toolbar” for this scope.  DOM element from the page.
-- **L29:** DOM event handler.
-- **L30:** `btn` means: Button DOM element.
-- **L32:** `cmd` means: SqlCommand — the SQL statement + parameters object.
-
-## Source snapshot (raw)
-
-```javascript
-// editor.js: small helpers for lesson editor
-(function(){
-    function execCmd(cmd, value) {
-        if(cmd === 'createLink'){
-            const url = prompt('Enter URL');
-            if(!url) return;
-            document.execCommand('createLink', false, url);
-            return;
-        }
-        document.execCommand(cmd, false, value || null);
-    }
-
-    window.initEditor = function(){
-        const htmlEditor = document.getElementById('htmlEditor');
-        if(!htmlEditor) return;
-
-        // sync to hidden textarea
-        function sync(){
-            const hidden = document.getElementById('txtLessonContent');
-            if(hidden) hidden.value = htmlEditor.innerHTML;
-        }
-
-        htmlEditor.addEventListener('input', sync);
-        htmlEditor.addEventListener('blur', sync);
-
-        // toolbar bindings
-        const toolbar = document.getElementById('editorToolbar');
-        if(toolbar){
-            toolbar.addEventListener('click', function(e){
-                const btn = e.target.closest('button[data-cmd]');
-                if(!btn) return;
-                const cmd = btn.getAttribute('data-cmd');
-                execCmd(cmd);
-                sync();
-            });
-        }
-
-        // expose quick API
-        window.__editorSync = sync;
-    };
-})();
-
 ```

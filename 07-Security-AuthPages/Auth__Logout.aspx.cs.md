@@ -1,6 +1,6 @@
 # Logout.aspx.cs
 **Source:** `Pages/Authentication/Logout.aspx.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,28 +15,42 @@ Clears session, abandons session, clears JWT auth cookie.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-_No classic field declarations detected (or mostly locals inside methods — see each function’s **Local variables** section)._
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (1 found)
 
 ### `Page_Load` — lines 9–13
 
+#### Signature
+
 ```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Page_Load`.
-- **Navigation:** Redirects the browser.
-- **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+Runs automatically when the ASP.NET page opens or posts back; sets up the page and security checks.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. ASP.NET calls this automatically on every request.
+2. On first load (`!IsPostBack`), initialize UI or redirect if already logged in.
+3. On postback, button handlers run separately after this method.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
    9 |         protected void Page_Load(object sender, EventArgs e)
@@ -46,16 +60,11 @@ protected void Page_Load(object sender, EventArgs e)
   13 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L9:** Page load entry (GET or postback).
-- **L12:** Navigate browser to another URL.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -73,34 +82,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   13 |         }
   14 |     }
   15 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L5:** C# namespace grouping.
-- **L9:** Page load entry (GET or postback).
-- **L12:** Navigate browser to another URL.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Web.UI;
-using WebAppAssignment.Data.Security;
-
-namespace WebAppAssignment.Pages.Authentication
-{
-    public partial class Logout : Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            AuthService.Logout(Context);
-            Response.Redirect("~/Pages/Landing/Landing.aspx", true);
-        }
-    }
-}
-
 ```

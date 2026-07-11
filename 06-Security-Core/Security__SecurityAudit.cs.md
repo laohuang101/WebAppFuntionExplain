@@ -1,6 +1,6 @@
 # SecurityAudit.cs
 **Source:** `Data/Security/SecurityAudit.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,43 +15,50 @@ Append-only security event log (login, register, reset, seed, uploads) for Admin
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 18:** `ip` (`string`) — **Client IP address for throttle/audit.**
-- **Line 19:** `path` (`string`) — **File path under Uploads or URL path.**
-- **Line 22:** `ctx` (`var`) — **Current HTTP request context (Request, Response, Session).**
-- **Line 59:** `sql` (`string`) — **SQL query text (should use parameters, not raw user input).**
-- **Line 74:** `dt` (`var`) — **DataTable — full result set from SQL (many rows/columns).**
-- **Line 76:** `dt` (`return`) — **DataTable — full result set from SQL (many rows/columns).**
-- **Line 83:** `list` (`var`) — **In-memory collection being built for JSON return.**
-- **Line 84:** `dt` (`var`) — **DataTable — full result set from SQL (many rows/columns).**
-- **Line 99:** `list` (`return`) — **In-memory collection being built for JSON return.**
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (4 found)
 
 ### `Log` — lines 13–53
 
+#### Signature
+
 ```csharp
 public static void Log(string action, int? userId = null, string detail = null, string email = null)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Log`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `action` (`string`) — Holds “action” for this scope. (text)
-- `userId` (`int?`) — Identifier (`userId`) — database primary/foreign key. (type `int?`)
-- `detail` (`string`) — Holds “detail” for this scope. (text)
-- `email` (`string`) — Account email address (usually lowercased).
-- **Local variables (what each means):**
-- `ip` (`string`) — Client IP address for throttle/audit.
-- `path` (`string`) — File path under Uploads or URL path.
-- `ctx` (`var`) — Current HTTP request context (Request, Response, Session).
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+Writes one security event row (login, register, reset, etc.) for the audit log.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Save temporary state in Session (`Session !`).
+2. Save temporary state in Session (`Session["UserID"]);`).
+3. Open a connection to the LocalDB / SQL Server database.
+4. Run INSERT/UPDATE/DELETE SQL against the database.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `action` | `string` | Holds “action” for this scope. (text) |
+| `userId` | `int?` | Identifier (`userId`) — database primary/foreign key. (type `int?`) |
+| `detail` | `string` | Holds “detail” for this scope. (text) |
+| `email` | `string` | Account email address (usually lowercased). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ip` | `string` | Client IP address for throttle/audit. |
+| `path` | `string` | File path under Uploads or URL path. |
+| `ctx` | `var` | Current HTTP request context (Request, Response, Session). |
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object. |
+
+#### Code
 
 ```csharp
   13 |         public static void Log(string action, int? userId = null, string detail = null, string email = null)
@@ -97,51 +104,41 @@ public static void Log(string action, int? userId = null, string detail = null, 
   53 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L15:** Error handling block.
-- **L18:** `ip` means: Client IP address for throttle/audit.
-- **L19:** `path` means: File path under Uploads or URL path.
-- **L20:** Error handling block.
-- **L22:** `ctx` means: Current HTTP request context (Request, Response, Session).
-- **L27:** Server session for logged-in user.
-- **L28:** Server session for logged-in user.
-- **L31:** Handle/log exception.
-- **L33:** Import namespace/types.
-- **L34:** Import namespace/types.
-- **L35:** Write/read security audit events.
-- **L38:** Parameterized SQL — prevents classic SQL injection.
-- **L39:** Parameterized SQL — prevents classic SQL injection.
-- **L41:** Parameterized SQL — prevents classic SQL injection.
-- **L42:** Parameterized SQL — prevents classic SQL injection.
-- **L43:** Parameterized SQL — prevents classic SQL injection.
-- **L44:** Parameterized SQL — prevents classic SQL injection.
-- **L45:** Parameterized SQL — prevents classic SQL injection.
-- **L46:** Run SQL; return table / rows / scalar.
-- **L49:** Handle/log exception.
-
 ---
 
 ### `Query` — lines 54–79
+
+#### Signature
 
 ```csharp
 public static DataTable Query(int take = 100, string actionFilter = null)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Query`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `take` (`int`) — Holds “take” for this scope. (integer)
-- `actionFilter` (`string`) — Holds “action Filter” for this scope. (text)
-- **Local variables (what each means):**
-- `take` (`int`) — Holds “take” for this scope. (integer)
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
-- `da` (`var`) — Holds “da” for this scope.  Newly constructed object.
+Reads recent security audit events for the Admin audit page.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Open a connection to the LocalDB / SQL Server database.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `take` | `int` | Holds “take” for this scope. (integer) |
+| `actionFilter` | `string` | Holds “action Filter” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `take` | `int` | Holds “take” for this scope. (integer) |
+| `sql` | `string` | SQL query text (should use parameters, not raw user input). |
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object. |
+| `da` | `var` | Holds “da” for this scope.  Newly constructed object. |
+
+#### Code
 
 ```csharp
   54 | 
@@ -172,38 +169,42 @@ public static DataTable Query(int take = 100, string actionFilter = null)
   79 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L55:** In-memory result set from ADO.NET.
-- **L59:** `sql` means: SQL query text (should use parameters, not raw user input).
-- **L61:** Write/read security audit events.
-- **L66:** Import namespace/types.
-- **L67:** Import namespace/types.
-- **L69:** Parameterized SQL — prevents classic SQL injection.
-- **L71:** Parameterized SQL — prevents classic SQL injection.
-- **L72:** Import namespace/types.
-- **L74:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
-
 ---
 
 ### `QueryObjects` — lines 80–100
+
+#### Signature
 
 ```csharp
 public static List<object> QueryObjects(int take = 100, string actionFilter = null)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `QueryObjects`.
-- **Parameters (what each means):**
-- `take` (`int`) — Holds “take” for this scope. (integer)
-- `actionFilter` (`string`) — Holds “action Filter” for this scope. (text)
-- **Local variables (what each means):**
-- `take` (`int`) — Holds “take” for this scope. (integer)  Newly constructed object.
-- `dt` (`var`) — DataTable — full result set from SQL (many rows/columns).
-- `r` — Usually one database row (DataRow) in query loops.
+Function `QueryObjects` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `QueryObjects`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `take` | `int` | Holds “take” for this scope. (integer) |
+| `actionFilter` | `string` | Holds “action Filter” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `take` | `int` | Holds “take” for this scope. (integer)  Newly constructed object. |
+| `dt` | `var` | DataTable — full result set from SQL (many rows/columns). |
+| `r` | `—` | Usually one database row (DataRow) in query loops. |
+
+#### Code
 
 ```csharp
   80 | 
@@ -229,34 +230,36 @@ public static List<object> QueryObjects(int take = 100, string actionFilter = nu
  100 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L83:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
-- **L84:** `dt` means: DataTable — full result set from SQL (many rows/columns).
-- **L85:** In-memory result set from ADO.NET.
-- **L91:** Null-safe read from database values.
-- **L92:** Null-safe read from database values.
-- **L93:** Null-safe read from database values.
-- **L94:** Null-safe read from database values.
-- **L95:** Null-safe read from database values.
-- **L96:** Null-safe read from database values.
-
 ---
 
 ### `Truncate` — lines 101–106
+
+#### Signature
 
 ```csharp
 private static string Truncate(string s, int max)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Truncate`.
-- **Parameters (what each means):**
-- `s` (`string`) — String being cleaned or built.
-- `max` (`int`) — Holds “max” for this scope. (integer)
+Function `Truncate` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `s` | `string` | String being cleaned or built. |
+| `max` | `int` | Holds “max” for this scope. (integer) |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  101 | 
@@ -269,9 +272,9 @@ private static string Truncate(string s, int max)
 
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -382,167 +385,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  106 |         }
  107 |     }
  108 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L5:** Import namespace/types.
-- **L6:** Import namespace/types.
-- **L8:** C# namespace grouping.
-- **L11:** Write/read security audit events.
-- **L15:** Error handling block.
-- **L18:** `ip` means: Client IP address for throttle/audit.
-- **L19:** `path` means: File path under Uploads or URL path.
-- **L20:** Error handling block.
-- **L22:** `ctx` means: Current HTTP request context (Request, Response, Session).
-- **L27:** Server session for logged-in user.
-- **L28:** Server session for logged-in user.
-- **L31:** Handle/log exception.
-- **L33:** Import namespace/types.
-- **L34:** Import namespace/types.
-- **L35:** Write/read security audit events.
-- **L38:** Parameterized SQL — prevents classic SQL injection.
-- **L39:** Parameterized SQL — prevents classic SQL injection.
-- **L41:** Parameterized SQL — prevents classic SQL injection.
-- **L42:** Parameterized SQL — prevents classic SQL injection.
-- **L43:** Parameterized SQL — prevents classic SQL injection.
-- **L44:** Parameterized SQL — prevents classic SQL injection.
-- **L45:** Parameterized SQL — prevents classic SQL injection.
-- **L46:** Run SQL; return table / rows / scalar.
-- **L49:** Handle/log exception.
-- **L55:** In-memory result set from ADO.NET.
-- **L59:** `sql` means: SQL query text (should use parameters, not raw user input).
-- **L61:** Write/read security audit events.
-- **L66:** Import namespace/types.
-- **L67:** Import namespace/types.
-- **L69:** Parameterized SQL — prevents classic SQL injection.
-- **L71:** Parameterized SQL — prevents classic SQL injection.
-- **L72:** Import namespace/types.
-- **L74:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
-- **L83:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
-- **L84:** `dt` means: DataTable — full result set from SQL (many rows/columns).
-- **L85:** In-memory result set from ADO.NET.
-- **L91:** Null-safe read from database values.
-- **L92:** Null-safe read from database values.
-- **L93:** Null-safe read from database values.
-- **L94:** Null-safe read from database values.
-- **L95:** Null-safe read from database values.
-- **L96:** Null-safe read from database values.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Web;
-using WebAppAssignment.Data;
-
-namespace WebAppAssignment.Data.Security
-{
-    /// <summary>Append-only security / admin audit trail.</summary>
-    public static class SecurityAudit
-    {
-        public static void Log(string action, int? userId = null, string detail = null, string email = null)
-        {
-            try
-            {
-                AuthSchema.Ensure();
-                string ip = null;
-                string path = null;
-                try
-                {
-                    var ctx = HttpContext.Current;
-                    if (ctx != null && ctx.Request != null)
-                    {
-                        ip = ctx.Request.UserHostAddress;
-                        path = ctx.Request.RawUrl;
-                        if (userId == null && ctx.Session != null && ctx.Session["UserID"] != null)
-                            userId = Convert.ToInt32(ctx.Session["UserID"]);
-                    }
-                }
-                catch { }
-
-                using (var conn = DbHelper.OpenConnection())
-                using (var cmd = new SqlCommand(@"
-INSERT INTO AuditLog (OccurredAt, Action, UserId, Email, Detail, IpAddress, Path)
-VALUES (@At, @Action, @UserId, @Email, @Detail, @Ip, @Path)", conn))
-                {
-                    cmd.Parameters.AddWithValue("@At", DateTime.UtcNow);
-                    cmd.Parameters.AddWithValue("@Action", (action ?? "unknown").Length > 80
-                        ? (action ?? "").Substring(0, 80) : (action ?? "unknown"));
-                    cmd.Parameters.AddWithValue("@UserId", (object)userId ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Email", (object)Truncate(email, 120) ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Detail", (object)Truncate(detail, 500) ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Ip", (object)Truncate(ip, 64) ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Path", (object)Truncate(path, 260) ?? DBNull.Value);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch
-            {
-                // Never break main flow if audit fails
-            }
-        }
-
-        public static DataTable Query(int take = 100, string actionFilter = null)
-        {
-            AuthSchema.Ensure();
-            take = Math.Max(1, Math.Min(500, take));
-            string sql = @"
-SELECT TOP (@Take) LogId, OccurredAt, Action, UserId, Email, Detail, IpAddress, Path
-FROM AuditLog";
-            if (!string.IsNullOrWhiteSpace(actionFilter))
-                sql += " WHERE Action LIKE @A";
-            sql += " ORDER BY LogId DESC";
-
-            using (var conn = DbHelper.OpenConnection())
-            using (var cmd = new SqlCommand(sql, conn))
-            {
-                cmd.Parameters.AddWithValue("@Take", take);
-                if (!string.IsNullOrWhiteSpace(actionFilter))
-                    cmd.Parameters.AddWithValue("@A", "%" + actionFilter.Trim() + "%");
-                using (var da = new SqlDataAdapter(cmd))
-                {
-                    var dt = new DataTable();
-                    da.Fill(dt);
-                    return dt;
-                }
-            }
-        }
-
-        public static List<object> QueryObjects(int take = 100, string actionFilter = null)
-        {
-            var list = new List<object>();
-            var dt = Query(take, actionFilter);
-            foreach (DataRow r in dt.Rows)
-            {
-                list.Add(new
-                {
-                    logId = Convert.ToInt32(r["LogId"]),
-                    at = Convert.ToDateTime(r["OccurredAt"]).ToString("yyyy-MM-dd HH:mm:ss") + " UTC",
-                    action = r["Action"] == DBNull.Value ? "" : r["Action"].ToString(),
-                    userId = r["UserId"] == DBNull.Value ? (int?)null : Convert.ToInt32(r["UserId"]),
-                    email = r["Email"] == DBNull.Value ? "" : r["Email"].ToString(),
-                    detail = r["Detail"] == DBNull.Value ? "" : r["Detail"].ToString(),
-                    ip = r["IpAddress"] == DBNull.Value ? "" : r["IpAddress"].ToString(),
-                    path = r["Path"] == DBNull.Value ? "" : r["Path"].ToString()
-                });
-            }
-            return list;
-        }
-
-        private static string Truncate(string s, int max)
-        {
-            if (string.IsNullOrEmpty(s)) return s;
-            return s.Length <= max ? s : s.Substring(0, max);
-        }
-    }
-}
-
 ```

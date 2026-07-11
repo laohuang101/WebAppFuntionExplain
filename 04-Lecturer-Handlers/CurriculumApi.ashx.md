@@ -1,6 +1,6 @@
 # CurriculumApi.ashx
 **Source:** `Pages/Lecturer/CurriculumApi.ashx`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,33 +15,45 @@ JSON ashx API for curriculum CRUD with ownership (`LecturerUID`) checks.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
+Markup file — variables live in the matching `.cs` / `.js` companion docs.
 
 ## Functions / methods (32 found)
 
 ### `ProcessRequest` — lines 22–94
 
+#### Signature
+
 ```html
 public void ProcessRequest(HttpContext context)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ProcessRequest`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters (what each means):**
-- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
-- `action` (`string`) — Holds “action” for this scope. (text)  Comes from HTTP request.
-- `body` (`string`) — HTTP request body.
-- `reader` (`var`) — SqlDataReader for streaming query results.  Newly constructed object.
-- `data` (`Dictionary<string, object>`) — Holds “data” for this scope. (text)
+Main entry point for an `.ashx` HTTP handler — handles one browser request from start to finish.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Check the caller’s role (Lecturer/Student/Admin). If not allowed, return an error and stop.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `context` | `HttpContext` | Holds “context” for this scope. (current HTTP request) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous). |
+| `action` | `string` | Holds “action” for this scope. (text)  Comes from HTTP request. |
+| `body` | `string` | HTTP request body. |
+| `reader` | `var` | SqlDataReader for streaming query results.  Newly constructed object. |
+| `data` | `Dictionary<string, object>` | Holds “data” for this scope. (text) |
+
+#### Code
 
 ```html
   22 | 
@@ -119,60 +131,59 @@ public void ProcessRequest(HttpContext context)
   94 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L23:** IHttpHandler entry for ashx.
-- **L28:** Error handling block.
-- **L30:** Authorization — block wrong role / anonymous. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
-- **L33:** Authorization — block wrong role / anonymous.
-- **L39:** `action` means: Holds “action” for this scope. (text)  Comes from HTTP request.
-- **L40:** `body` means: HTTP request body.
-- **L44:** Import namespace/types.
-- **L48:** `data` means: Holds “data” for this scope. (text)
-- **L51:** Error handling block.
-- **L90:** Handle/log exception.
-
 ---
 
 ### `GetCurriculum` — lines 99–276
+
+#### Signature
 
 ```html
 private object GetCurriculum(int lecturerUid, int cid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GetCurriculum`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Pattern:** Read/load data for display.
-- **Parameters (what each means):**
-- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
-- `cid` (`int`) — Course ID (Courses.CID).
-- **Local variables (what each means):**
-- `chapters` (`var`) — Often a collection related to chapters (plural name).  Newly constructed object.
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
-- `chDt` (`DataTable`) — Holds “ch Dt” for this scope. (`DataTable` = SQL result grid)
-- `chid` (`int`) — Chapter ID (Chapters.ChID).
-- `lessons` (`var`) — Often a collection related to lessons (plural name).  Newly constructed object.
-- `schid` (`int`) — SubChapter / lesson ID.
-- `materials` (`var`) — Often a collection related to materials (plural name).
-- `matSql` (`string`) — Holds “mat Sql” for this scope. (text)
-- `mats` (`var`) — Often a collection related to mats (plural name).
-- `lessonTitle` (`string`) — Holds “lesson Title” for this scope. (text)
-- `text` (`var`) — Holds “text” for this scope.
-- `media` (`var`) — Holds “media” for this scope.
-- `t` (`var`) — Temporary string/token/time value.
-- `smid` (`int`) — Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
-- `i` (`int`) — Loop index (0-based counter in for-loops).  Literal number `0`.
-- `type` (`string`) — Holds “type” for this scope. (text)
-- `content` (`string`) — Submission body text or JSON payload in CWSubmissions.
-- `p` (`int`) — Parameter, path, or password fragment depending on context.
-- `ch` — Holds “ch” for this scope.
-- `sc` — Holds “sc” for this scope.
-- `m` — Holds “m” for this scope.
+Reads/loads data related to **Curriculum** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+2. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `lecturerUid` | `int` | Users.UID of the course owner (lecturer). |
+| `cid` | `int` | Course ID (Courses.CID). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `chapters` | `var` | Often a collection related to chapters (plural name).  Newly constructed object. |
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+| `chDt` | `DataTable` | Holds “ch Dt” for this scope. (`DataTable` = SQL result grid) |
+| `chid` | `int` | Chapter ID (Chapters.ChID). |
+| `lessons` | `var` | Often a collection related to lessons (plural name).  Newly constructed object. |
+| `schid` | `int` | SubChapter / lesson ID. |
+| `materials` | `var` | Often a collection related to materials (plural name). |
+| `matSql` | `string` | Holds “mat Sql” for this scope. (text) |
+| `mats` | `var` | Often a collection related to mats (plural name). |
+| `lessonTitle` | `string` | Holds “lesson Title” for this scope. (text) |
+| `text` | `var` | Holds “text” for this scope. |
+| `media` | `var` | Holds “media” for this scope. |
+| `t` | `var` | Temporary string/token/time value. |
+| `smid` | `int` | Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`. |
+| `i` | `int` | Loop index (0-based counter in for-loops).  Literal number `0`. |
+| `type` | `string` | Holds “type” for this scope. (text) |
+| `content` | `string` | Submission body text or JSON payload in CWSubmissions. |
+| `p` | `int` | Parameter, path, or password fragment depending on context. |
+| `ch` | `—` | Holds “ch” for this scope. |
+| `sc` | `—` | Holds “sc” for this scope. |
+| `m` | `—` | Holds “m” for this scope. |
+
+#### Code
 
 ```html
   99 | 
@@ -355,89 +366,61 @@ private object GetCurriculum(int lecturerUid, int cid)
  276 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L104:** `chapters` means: Often a collection related to chapters (plural name).  Newly constructed object.
-- **L105:** Import namespace/types.
-- **L107:** Ownership check — prevent IDOR.
-- **L123:** Parameterized SQL — prevents classic SQL injection. | `chDt` means: Holds “ch Dt” for this scope. (`DataTable` = SQL result grid)
-- **L125:** In-memory result set from ADO.NET.
-- **L127:** `chid` means: Chapter ID (Chapters.ChID).
-- **L128:** `lessons` means: Often a collection related to lessons (plural name).  Newly constructed object.
-- **L147:** In-memory result set from ADO.NET.
-- **L148:** Error handling block.
-- **L150:** Parameterized SQL — prevents classic SQL injection.
-- **L152:** Handle/log exception.
-- **L163:** In-memory result set from ADO.NET.
-- **L165:** `schid` means: SubChapter / lesson ID.
-- **L168:** `materials` means: Often a collection related to materials (plural name).
-- **L176:** Error handling block.
-- **L178:** `matSql` means: Holds “mat Sql” for this scope. (text)
-- **L179:** Parameterized SQL — prevents classic SQL injection. | `mats` means: Often a collection related to mats (plural name).
-- **L180:** `lessonTitle` means: Holds “lesson Title” for this scope. (text)
-- **L184:** In-memory result set from ADO.NET.
-- **L186:** `text` means: Holds “text” for this scope.
-- **L187:** `media` means: Holds “media” for this scope.
-- **L188:** `t` means: Temporary string/token/time value.
-- **L200:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
-- **L201:** Error handling block.
-- **L205:** Handle/log exception.
-- **L221:** Error handling block.
-- **L223:** `matSql` means: Holds “mat Sql” for this scope. (text)
-- **L224:** Parameterized SQL — prevents classic SQL injection. | `mats` means: Often a collection related to mats (plural name).
-- **L225:** `i` means: Loop index (0-based counter in for-loops).  Literal number `0`.
-- **L226:** In-memory result set from ADO.NET.
-- **L229:** `type` means: Holds “type” for this scope. (text)
-- **L231:** `media` means: Holds “media” for this scope.
-- **L232:** `text` means: Holds “text” for this scope.
-- **L233:** `content` means: Submission body text or JSON payload in CWSubmissions.
-- **L234:** `lessonTitle` means: Holds “lesson Title” for this scope. (text)  Literal text string.
-- **L237:** `p` means: Parameter, path, or password fragment depending on context.
-- **L250:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
-- **L251:** Error handling block.
-- **L263:** Handle/log exception.
-
 ---
 
 ### `LoadMats` — lines 277–426
+
+#### Signature
 
 ```html
 private List<object> LoadMats(SqlConnection conn, int parentId, out string type, out string content)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `LoadMats`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Pattern:** Read/load data for display.
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `parentId` (`int`) — Holds “parent Id” for this scope. (integer)
-- `type` (`string`) — Holds “type” for this scope. (text)
-- `content` (`string`) — Submission body text or JSON payload in CWSubmissions.
-- **Local variables (what each means):**
-- `materials` (`var`) — Often a collection related to materials (plural name).  Newly constructed object.
-- `mats` (`DataTable`) — Often a collection related to mats (plural name). (`DataTable` = SQL result grid)
-- `orderBy` (`string`) — Holds “order By” for this scope. (text)
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
-- `bodyRow` (`DataRow`) — Holds “body Row” for this scope. (`DataRow` = one SQL row)
-- `fileRow` (`DataRow`) — Holds “file Row” for this scope. (`DataRow` = one SQL row)
-- `media0` (`var`) — Holds “media0” for this scope.
-- `t0` (`var`) — Holds “t0” for this scope.
-- `mediaB` (`var`) — Holds “media B” for this scope.
-- `textB` (`var`) — Holds “text B” for this scope.
-- `smid` (`int`) — Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
-- `media` (`var`) — Holds “media” for this scope.
-- `text` (`var`) — Holds “text” for this scope.
-- `t` (`var`) — Temporary string/token/time value.
-- `bareName` (`string`) — Holds “bare Name” for this scope. (text)
-- `fn` (`string`) — Holds “fn” for this scope. (text)
-- `rel` (`string`) — Holds “rel” for this scope. (text)
-- `linkOut` (`string`) — Holds “link Out” for this scope. (text)
-- `r` — Usually one database row (DataRow) in query loops.
-- `m` — Holds “m” for this scope.
+Reads/loads data related to **Mats** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `LoadMats`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `parentId` | `int` | Holds “parent Id” for this scope. (integer) |
+| `type` | `string` | Holds “type” for this scope. (text) |
+| `content` | `string` | Submission body text or JSON payload in CWSubmissions. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `materials` | `var` | Often a collection related to materials (plural name).  Newly constructed object. |
+| `mats` | `DataTable` | Often a collection related to mats (plural name). (`DataTable` = SQL result grid) |
+| `orderBy` | `string` | Holds “order By” for this scope. (text) |
+| `sql` | `string` | SQL query text (should use parameters, not raw user input). |
+| `bodyRow` | `DataRow` | Holds “body Row” for this scope. (`DataRow` = one SQL row) |
+| `fileRow` | `DataRow` | Holds “file Row” for this scope. (`DataRow` = one SQL row) |
+| `media0` | `var` | Holds “media0” for this scope. |
+| `t0` | `var` | Holds “t0” for this scope. |
+| `mediaB` | `var` | Holds “media B” for this scope. |
+| `textB` | `var` | Holds “text B” for this scope. |
+| `smid` | `int` | Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`. |
+| `media` | `var` | Holds “media” for this scope. |
+| `text` | `var` | Holds “text” for this scope. |
+| `t` | `var` | Temporary string/token/time value. |
+| `bareName` | `string` | Holds “bare Name” for this scope. (text) |
+| `fn` | `string` | Holds “fn” for this scope. (text) |
+| `rel` | `string` | Holds “rel” for this scope. (text) |
+| `linkOut` | `string` | Holds “link Out” for this scope. (text) |
+| `r` | `—` | Usually one database row (DataRow) in query loops. |
+| `m` | `—` | Holds “m” for this scope. |
+
+#### Code
 
 ```html
  277 | 
@@ -592,64 +575,39 @@ private List<object> LoadMats(SqlConnection conn, int parentId, out string type,
  426 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L278:** Database access (pure SQL).
-- **L282:** `materials` means: Often a collection related to materials (plural name).  Newly constructed object.
-- **L283:** Error handling block.
-- **L285:** In-memory result set from ADO.NET. | `mats` means: Often a collection related to mats (plural name). (`DataTable` = SQL result grid)
-- **L287:** Error handling block.
-- **L291:** `orderBy` means: Holds “order By” for this scope. (text)
-- **L294:** `sql` means: SQL query text (should use parameters, not raw user input).
-- **L296:** Parameterized SQL — prevents classic SQL injection.
-- **L299:** Handle/log exception.
-- **L303:** Error handling block.
-- **L307:** Parameterized SQL — prevents classic SQL injection.
-- **L309:** Handle/log exception.
-- **L311:** Error handling block.
-- **L315:** Parameterized SQL — prevents classic SQL injection.
-- **L317:** In-memory result set from ADO.NET.
-- **L324:** In-memory result set from ADO.NET. | `bodyRow` means: Holds “body Row” for this scope. (`DataRow` = one SQL row)
-- **L325:** In-memory result set from ADO.NET. | `fileRow` means: Holds “file Row” for this scope. (`DataRow` = one SQL row)
-- **L326:** In-memory result set from ADO.NET.
-- **L328:** `media0` means: Holds “media0” for this scope.
-- **L329:** `t0` means: Holds “t0” for this scope.
-- **L340:** In-memory result set from ADO.NET.
-- **L342:** `t0` means: Holds “t0” for this scope.
-- **L343:** `media0` means: Holds “media0” for this scope.
-- **L363:** `mediaB` means: Holds “media B” for this scope.
-- **L364:** `textB` means: Holds “text B” for this scope.
-- **L370:** In-memory result set from ADO.NET.
-- **L372:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
-- **L373:** Error handling block.
-- **L374:** `media` means: Holds “media” for this scope.
-- **L375:** `text` means: Holds “text” for this scope.
-- **L376:** `t` means: Temporary string/token/time value.
-- **L382:** `bareName` means: Holds “bare Name” for this scope. (text)
-- **L389:** `fn` means: Holds “fn” for this scope. (text)
-- **L396:** Error handling block.
-- **L398:** `rel` means: Holds “rel” for this scope. (text)
-- **L404:** Handle/log exception.
-- **L408:** `linkOut` means: Holds “link Out” for this scope. (text)
-- **L424:** Handle/log exception.
-
 ---
 
 ### `BuildMatSelect` — lines 427–442
+
+#### Signature
 
 ```html
 private static string BuildMatSelect()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `BuildMatSelect`.
-- **Local variables (what each means):**
-- `typeExpr` (`string`) — Holds “type Expr” for this scope. (text)
-- `textExpr` (`string`) — Holds “text Expr” for this scope. (text)
-- `mediaExpr` (`string`) — Holds “media Expr” for this scope. (text)
+Creates/builds **Build Mat Select** (object, string, secret, or UI content).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `BuildMatSelect`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `typeExpr` | `string` | Holds “type Expr” for this scope. (text) |
+| `textExpr` | `string` | Holds “text Expr” for this scope. (text) |
+| `mediaExpr` | `string` | Holds “media Expr” for this scope. (text) |
+
+#### Code
 
 ```html
  427 | 
@@ -670,37 +628,43 @@ private static string BuildMatSelect()
  442 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L430:** `typeExpr` means: Holds “type Expr” for this scope. (text)
-- **L432:** `textExpr` means: Holds “text Expr” for this scope. (text)
-- **L434:** `mediaExpr` means: Holds “media Expr” for this scope. (text)
-
 ---
 
 ### `SaveSection` — lines 447–485
+
+#### Signature
 
 ```html
 private object SaveSection(int lecturerUid, int chid, int cid, string title)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `SaveSection`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
-- `chid` (`int`) — Chapter ID (Chapters.ChID).
-- `cid` (`int`) — Course ID (Courses.CID).
-- `title` (`string`) — Title of course work / page heading.
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
-- `next` (`int`) — Holds “next” for this scope. (integer)
+Saves or updates **Save Section** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+2. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `lecturerUid` | `int` | Users.UID of the course owner (lecturer). |
+| `chid` | `int` | Chapter ID (Chapters.ChID). |
+| `cid` | `int` | Course ID (Courses.CID). |
+| `title` | `string` | Title of course work / page heading. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+| `sql` | `string` | SQL query text (should use parameters, not raw user input). |
+| `next` | `int` | Holds “next” for this scope. (integer) |
+
+#### Code
 
 ```html
  447 | 
@@ -744,39 +708,39 @@ private object SaveSection(int lecturerUid, int chid, int cid, string title)
  485 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L453:** Import namespace/types.
-- **L455:** Ownership check — prevent IDOR.
-- **L458:** `sql` means: SQL query text (should use parameters, not raw user input).
-- **L460:** Parameterized SQL — prevents classic SQL injection.
-- **L467:** `next` means: Holds “next” for this scope. (integer)
-- **L470:** Parameterized SQL — prevents classic SQL injection.
-- **L472:** Return new identity/UID after INSERT.
-- **L474:** Parameterized SQL — prevents classic SQL injection.
-- **L479:** Return new identity/UID after INSERT.
-- **L481:** Parameterized SQL — prevents classic SQL injection.
-
 ---
 
 ### `DeleteSection` — lines 486–531
+
+#### Signature
 
 ```html
 private object DeleteSection(int lecturerUid, int chid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `DeleteSection`.
-- **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Pattern:** Delete/clear data.
-- **Parameters (what each means):**
-- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
-- `chid` (`int`) — Chapter ID (Chapters.ChID).
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
+Deletes or clears **Delete Section** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+2. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `lecturerUid` | `int` | Users.UID of the course owner (lecturer). |
+| `chid` | `int` | Chapter ID (Chapters.ChID). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+
+#### Code
 
 ```html
  486 | 
@@ -827,59 +791,55 @@ private object DeleteSection(int lecturerUid, int chid)
  531 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L490:** Import namespace/types.
-- **L492:** `cid` means: Course ID (Courses.CID).
-- **L495:** Parameterized SQL — prevents classic SQL injection.
-- **L497:** Ownership check — prevent IDOR.
-- **L502:** Error handling block.
-- **L505:** Join related tables (courses ↔ chapters ↔ works ↔ users).
-- **L507:** Parameterized SQL — prevents classic SQL injection.
-- **L509:** Handle/log exception.
-- **L510:** Error handling block.
-- **L513:** Parameterized SQL — prevents classic SQL injection.
-- **L515:** Handle/log exception.
-- **L519:** Error handling block.
-- **L522:** Parameterized SQL — prevents classic SQL injection.
-- **L524:** Handle/log exception.
-- **L528:** Parameterized SQL — prevents classic SQL injection.
-
 ---
 
 ### `SaveLesson` — lines 536–690
+
+#### Signature
 
 ```html
 private object SaveLesson(int lecturerUid, int schid, int chid, string title, string type, string content, string materialsJson)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `SaveLesson`.
-- **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
-- `schid` (`int`) — SubChapter / lesson ID.
-- `chid` (`int`) — Chapter ID (Chapters.ChID).
-- `title` (`string`) — Title of course work / page heading.
-- `type` (`string`) — Holds “type” for this scope. (text)
-- `content` (`string`) — Submission body text or JSON payload in CWSubmissions.
-- `materialsJson` (`string`) — Holds “materials Json” for this scope. (text)
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
-- `matType` (`string`) — Holds “mat Type” for this scope. (text)
-- `n` (`int`) — Integer count (rows, items, or length).
-- `next` (`int`) — Holds “next” for this scope. (integer)
-- `matParent` (`int`) — Holds “mat Parent” for this scope. (integer)
-- `storeText` (`string`) — Holds “store Text” for this scope. (text)
-- `warn` (`string`) — Holds “warn” for this scope. (text)
-- `matsSaved` (`int`) — Holds “mats Saved” for this scope. (integer)  Literal number `0`.
-- `extra` (`int`) — Dictionary of optional fields inside META.
-- `updErr` (`string`) — Holds “upd Err” for this scope. (text)
+Saves or updates **Save Lesson** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+2. Build and return the result object (success or data for the UI).
+3. If the previous step failed, show the error and stop.
+4. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `lecturerUid` | `int` | Users.UID of the course owner (lecturer). |
+| `schid` | `int` | SubChapter / lesson ID. |
+| `chid` | `int` | Chapter ID (Chapters.ChID). |
+| `title` | `string` | Title of course work / page heading. |
+| `type` | `string` | Holds “type” for this scope. (text) |
+| `content` | `string` | Submission body text or JSON payload in CWSubmissions. |
+| `materialsJson` | `string` | Holds “materials Json” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+| `matType` | `string` | Holds “mat Type” for this scope. (text) |
+| `n` | `int` | Integer count (rows, items, or length). |
+| `next` | `int` | Holds “next” for this scope. (integer) |
+| `matParent` | `int` | Holds “mat Parent” for this scope. (integer) |
+| `storeText` | `string` | Holds “store Text” for this scope. (text) |
+| `warn` | `string` | Holds “warn” for this scope. (text) |
+| `matsSaved` | `int` | Holds “mats Saved” for this scope. (integer)  Literal number `0`. |
+| `extra` | `int` | Dictionary of optional fields inside META. |
+| `updErr` | `string` | Holds “upd Err” for this scope. (text) |
+
+#### Code
 
 ```html
  536 | 
@@ -1039,61 +999,41 @@ private object SaveLesson(int lecturerUid, int schid, int chid, string title, st
  690 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L542:** Import namespace/types.
-- **L544:** `cid` means: Course ID (Courses.CID).
-- **L547:** Parameterized SQL — prevents classic SQL injection.
-- **L549:** Ownership check — prevent IDOR.
-- **L551:** `matType` means: Holds “mat Type” for this scope. (text)
-- **L563:** `n` means: Integer count (rows, items, or length).
-- **L566:** Parameterized SQL — prevents classic SQL injection.
-- **L572:** Error handling block.
-- **L575:** Parameterized SQL — prevents classic SQL injection.
-- **L577:** Handle/log exception.
-- **L579:** Parameterized SQL — prevents classic SQL injection.
-- **L580:** Parameterized SQL — prevents classic SQL injection.
-- **L584:** Error handling block.
-- **L588:** `next` means: Holds “next” for this scope. (integer)
-- **L591:** Parameterized SQL — prevents classic SQL injection.
-- **L593:** Return new identity/UID after INSERT.
-- **L595:** Parameterized SQL — prevents classic SQL injection.
-- **L600:** Return new identity/UID after INSERT.
-- **L602:** Parameterized SQL — prevents classic SQL injection.
-- **L605:** Handle/log exception.
-- **L620:** `matParent` means: Holds “mat Parent” for this scope. (integer)
-- **L622:** `storeText` means: Holds “store Text” for this scope. (text)
-- **L633:** `warn` means: Holds “warn” for this scope. (text)
-- **L634:** `matsSaved` means: Holds “mats Saved” for this scope. (integer)  Literal number `0`.
-- **L638:** `extra` means: Dictionary of optional fields inside META.
-- **L661:** `storeText` means: Holds “store Text” for this scope. (text)
-- **L662:** `matParent` means: Holds “mat Parent” for this scope. (integer)
-- **L666:** `updErr` means: Holds “upd Err” for this scope. (text)
-- **L672:** `warn` means: Holds “warn” for this scope. (text)
-- **L676:** Parameterized SQL — prevents classic SQL injection.
-
 ---
 
 ### `DeleteLesson` — lines 691–735
+
+#### Signature
 
 ```html
 private object DeleteLesson(int lecturerUid, int schid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `DeleteLesson`.
-- **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Pattern:** Delete/clear data.
-- **Parameters (what each means):**
-- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
-- `schid` (`int`) — SubChapter / lesson ID.
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
-- `cid` (`int`) — Course ID (Courses.CID).
-- `chid` (`int`) — Chapter ID (Chapters.ChID).
+Deletes or clears **Delete Lesson** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+2. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `lecturerUid` | `int` | Users.UID of the course owner (lecturer). |
+| `schid` | `int` | SubChapter / lesson ID. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+| `cid` | `int` | Course ID (Courses.CID). |
+| `chid` | `int` | Chapter ID (Chapters.ChID). |
+
+#### Code
 
 ```html
  691 | 
@@ -1143,53 +1083,48 @@ private object DeleteLesson(int lecturerUid, int schid)
  735 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L695:** Import namespace/types.
-- **L699:** `chid` means: Chapter ID (Chapters.ChID).
-- **L702:** Parameterized SQL — prevents classic SQL injection.
-- **L703:** `cid` means: Course ID (Courses.CID).
-- **L706:** Parameterized SQL — prevents classic SQL injection.
-- **L708:** Ownership check — prevent IDOR.
-- **L709:** Error handling block.
-- **L712:** Parameterized SQL — prevents classic SQL injection.
-- **L714:** Handle/log exception.
-- **L716:** Parameterized SQL — prevents classic SQL injection.
-- **L721:** `chid` means: Chapter ID (Chapters.ChID).
-- **L724:** Parameterized SQL — prevents classic SQL injection.
-- **L725:** `cid` means: Course ID (Courses.CID).
-- **L728:** Parameterized SQL — prevents classic SQL injection.
-- **L729:** Ownership check — prevent IDOR.
-- **L731:** Parameterized SQL — prevents classic SQL injection.
-
 ---
 
 ### `GetLesson` — lines 736–789
+
+#### Signature
 
 ```html
 private object GetLesson(int lecturerUid, int schid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GetLesson`.
-- **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Pattern:** Read/load data for display.
-- **Parameters (what each means):**
-- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
-- `schid` (`int`) — SubChapter / lesson ID.
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
-- `chid` (`int`) — Chapter ID (Chapters.ChID).
-- `cid` (`int`) — Course ID (Courses.CID).
-- `materials` (`var`) — Often a collection related to materials (plural name).
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
-- `dt` (`var`) — DataTable — full result set from SQL (many rows/columns).
-- `type2` (`string`) — Holds “type2” for this scope. (text)
-- `media2` (`var`) — Holds “media2” for this scope.
-- `text2` (`var`) — Holds “text2” for this scope.
+Reads/loads data related to **Lesson** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `GetLesson`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `lecturerUid` | `int` | Users.UID of the course owner (lecturer). |
+| `schid` | `int` | SubChapter / lesson ID. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+| `chid` | `int` | Chapter ID (Chapters.ChID). |
+| `cid` | `int` | Course ID (Courses.CID). |
+| `materials` | `var` | Often a collection related to materials (plural name). |
+| `sql` | `string` | SQL query text (should use parameters, not raw user input). |
+| `dt` | `var` | DataTable — full result set from SQL (many rows/columns). |
+| `type2` | `string` | Holds “type2” for this scope. (text) |
+| `media2` | `var` | Holds “media2” for this scope. |
+| `text2` | `var` | Holds “text2” for this scope. |
+
+#### Code
 
 ```html
  736 | 
@@ -1248,49 +1183,49 @@ private object GetLesson(int lecturerUid, int schid)
  789 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L739:** Import namespace/types.
-- **L743:** `dt` means: DataTable — full result set from SQL (many rows/columns).
-- **L746:** Parameterized SQL — prevents classic SQL injection.
-- **L748:** `chid` means: Chapter ID (Chapters.ChID).
-- **L749:** `cid` means: Course ID (Courses.CID).
-- **L752:** Parameterized SQL — prevents classic SQL injection.
-- **L753:** Ownership check — prevent IDOR.
-- **L756:** `materials` means: Often a collection related to materials (plural name).
-- **L770:** `sql` means: SQL query text (should use parameters, not raw user input).
-- **L771:** Parameterized SQL — prevents classic SQL injection. | `dt` means: DataTable — full result set from SQL (many rows/columns).
-- **L773:** `type2` means: Holds “type2” for this scope. (text)
-- **L775:** `media2` means: Holds “media2” for this scope.
-- **L776:** `text2` means: Holds “text2” for this scope.
-
 ---
 
 ### `FilterFileMaterials` — lines 792–834
+
+#### Signature
 
 ```html
 private static List<object> FilterFileMaterials(List<object> materials)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `FilterFileMaterials`.
-- **Parameters (what each means):**
-- `materials` (`List<object>`) — Often a collection related to materials (plural name). (`List<object>` collection)
-- **Local variables (what each means):**
-- `list` (`var`) — In-memory collection being built for JSON return.  Newly constructed object.
-- `d` (`var`) — Often a dictionary payload or date value.
-- `media` (`string`) — Holds “media” for this scope. (text)
-- `smid` (`int`) — Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
-- `t` (`var`) — Temporary string/token/time value.
-- `pMedia` (`var`) — Holds “p Media” for this scope.
-- `pText` (`var`) — Holds “p Text” for this scope.
-- `pType` (`var`) — Holds “p Type” for this scope.
-- `pId` (`var`) — Identifier (`pId`) — database primary/foreign key.
-- `fn` (`string`) — Holds “fn” for this scope. (text)
-- `o` — Holds “o” for this scope.
+Function `FilterFileMaterials` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `FilterFileMaterials`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `materials` | `List<object>` | Often a collection related to materials (plural name). (`List<object>` collection) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `list` | `var` | In-memory collection being built for JSON return.  Newly constructed object. |
+| `d` | `var` | Often a dictionary payload or date value. |
+| `media` | `string` | Holds “media” for this scope. (text) |
+| `smid` | `int` | Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`. |
+| `t` | `var` | Temporary string/token/time value. |
+| `pMedia` | `var` | Holds “p Media” for this scope. |
+| `pText` | `var` | Holds “p Text” for this scope. |
+| `pType` | `var` | Holds “p Type” for this scope. |
+| `pId` | `var` | Identifier (`pId`) — database primary/foreign key. |
+| `fn` | `string` | Holds “fn” for this scope. (text) |
+| `o` | `—` | Holds “o” for this scope. |
+
+#### Code
 
 ```html
  792 |     private static List<object> FilterFileMaterials(List<object> materials)
@@ -1338,35 +1273,37 @@ private static List<object> FilterFileMaterials(List<object> materials)
  834 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L794:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
-- **L798:** `d` means: Often a dictionary payload or date value.
-- **L799:** `media` means: Holds “media” for this scope. (text)
-- **L800:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
-- **L811:** `t` means: Temporary string/token/time value.
-- **L812:** `pMedia` means: Holds “p Media” for this scope.
-- **L813:** `pText` means: Holds “p Text” for this scope.
-- **L814:** `pType` means: Holds “p Type” for this scope.
-- **L815:** `pId` means: Identifier (`pId`) — database primary/foreign key.
-- **L820:** Error handling block.
-- **L823:** `fn` means: Holds “fn” for this scope. (text)
-
 ---
 
 ### `LooksLikeFileUrl` — lines 835–840
+
+#### Signature
 
 ```html
 private static bool LooksLikeFileUrl(string s)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `LooksLikeFileUrl`.
-- **Parameters (what each means):**
-- `s` (`string`) — String being cleaned or built.
+Function `LooksLikeFileUrl` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `LooksLikeFileUrl`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `s` | `string` | String being cleaned or built. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```html
  835 | 
@@ -1381,19 +1318,35 @@ private static bool LooksLikeFileUrl(string s)
 
 ### `GuessTypeFromUrl` — lines 841–849
 
+#### Signature
+
 ```html
 private static string GuessTypeFromUrl(string url)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GuessTypeFromUrl`.
-- **Parameters (what each means):**
-- `url` (`string`) — HTTP URL to media or page.
-- **Local variables (what each means):**
-- `low` (`var`) — Holds “low” for this scope.
+Function `GuessTypeFromUrl` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `GuessTypeFromUrl`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `url` | `string` | HTTP URL to media or page. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `low` | `var` | Holds “low” for this scope. |
+
+#### Code
 
 ```html
  841 | 
@@ -1407,38 +1360,48 @@ private static string GuessTypeFromUrl(string url)
  849 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L844:** `low` means: Holds “low” for this scope.
-
 ---
 
 ### `InsertMat` — lines 854–936
+
+#### Signature
 
 ```html
 private string InsertMat(SqlConnection conn, int parentId, string type, string text, string media, int index)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `InsertMat`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `parentId` (`int`) — Holds “parent Id” for this scope. (integer)
-- `type` (`string`) — Holds “type” for this scope. (text)
-- `text` (`string`) — Holds “text” for this scope. (text)
-- `media` (`string`) — Holds “media” for this scope. (text)
-- `index` (`int`) — Holds “index” for this scope. (integer)
-- **Local variables (what each means):**
-- `errors` (`var`) — Often a collection related to errors (plural name).  Newly constructed object.
-- `cols` (`var`) — Often a collection related to cols (plural name).  Newly constructed object.
-- `vals` (`var`) — Often a collection related to vals (plural name).  Newly constructed object.
-- `pars` (`var`) — Often a collection related to pars (plural name).  Newly constructed object.
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).  Literal text string.
+Saves or updates **Insert Mat** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `InsertMat`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `parentId` | `int` | Holds “parent Id” for this scope. (integer) |
+| `type` | `string` | Holds “type” for this scope. (text) |
+| `text` | `string` | Holds “text” for this scope. (text) |
+| `media` | `string` | Holds “media” for this scope. (text) |
+| `index` | `int` | Holds “index” for this scope. (integer) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `errors` | `var` | Often a collection related to errors (plural name).  Newly constructed object. |
+| `cols` | `var` | Often a collection related to cols (plural name).  Newly constructed object. |
+| `vals` | `var` | Often a collection related to vals (plural name).  Newly constructed object. |
+| `pars` | `var` | Often a collection related to pars (plural name).  Newly constructed object. |
+| `sql` | `string` | SQL query text (should use parameters, not raw user input).  Literal text string. |
+
+#### Code
 
 ```html
  854 | 
@@ -1526,55 +1489,45 @@ private string InsertMat(SqlConnection conn, int parentId, string type, string t
  936 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L855:** Database access (pure SQL).
-- **L861:** `errors` means: Often a collection related to errors (plural name).  Newly constructed object.
-- **L873:** Error handling block.
-- **L876:** Parameterized SQL — prevents classic SQL injection.
-- **L877:** Parameterized SQL — prevents classic SQL injection.
-- **L878:** Parameterized SQL — prevents classic SQL injection.
-- **L879:** Parameterized SQL — prevents classic SQL injection.
-- **L880:** Parameterized SQL — prevents classic SQL injection.
-- **L883:** Handle/log exception.
-- **L887:** Error handling block.
-- **L891:** `cols` means: Often a collection related to cols (plural name).  Newly constructed object.
-- **L892:** `vals` means: Often a collection related to vals (plural name).  Newly constructed object.
-- **L893:** Parameterized SQL — prevents classic SQL injection. | `pars` means: Often a collection related to pars (plural name).  Newly constructed object.
-- **L897:** Parameterized SQL — prevents classic SQL injection.
-- **L903:** Parameterized SQL — prevents classic SQL injection.
-- **L909:** Parameterized SQL — prevents classic SQL injection.
-- **L915:** Parameterized SQL — prevents classic SQL injection.
-- **L921:** Parameterized SQL — prevents classic SQL injection.
-- **L926:** `sql` means: SQL query text (should use parameters, not raw user input).  Literal text string.
-- **L933:** Handle/log exception.
-
 ---
 
 ### `PromotePrimaryFromMaterials` — lines 937–970
+
+#### Signature
 
 ```html
 private static void PromotePrimaryFromMaterials(
         ref string matType, ref string textContent, ref string mediaLink, string materialsJson)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `PromotePrimaryFromMaterials`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters (what each means):**
-- `matType` (`string`) — Holds “mat Type” for this scope. (text)
-- `textContent` (`string`) — Holds “text Content” for this scope. (text)
-- `mediaLink` (`string`) — Holds “media Link” for this scope. (text)
-- `materialsJson` (`string`) — Holds “materials Json” for this scope. (text)
-- **Local variables (what each means):**
-- `hasMedia` (`bool`) — Boolean flag: has Media. (true/false)
-- `mats` (`var`) — Often a collection related to mats (plural name).  JSON serialize/parse result.
-- `m` (`var`) — Holds “m” for this scope.
-- `url` (`string`) — HTTP URL to media or page.  Literal text string.
-- `fn` (`string`) — Holds “fn” for this scope. (text)
+Function `PromotePrimaryFromMaterials` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `matType` | `string` | Holds “mat Type” for this scope. (text) |
+| `textContent` | `string` | Holds “text Content” for this scope. (text) |
+| `mediaLink` | `string` | Holds “media Link” for this scope. (text) |
+| `materialsJson` | `string` | Holds “materials Json” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `hasMedia` | `bool` | Boolean flag: has Media. (true/false) |
+| `mats` | `var` | Often a collection related to mats (plural name).  JSON serialize/parse result. |
+| `m` | `var` | Holds “m” for this scope. |
+| `url` | `string` | HTTP URL to media or page.  Literal text string. |
+| `fn` | `string` | Holds “fn” for this scope. (text) |
+
+#### Code
 
 ```html
  937 | 
@@ -1613,41 +1566,45 @@ private static void PromotePrimaryFromMaterials(
  970 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L943:** `hasMedia` means: Boolean flag: has Media. (true/false)
-- **L950:** Error handling block.
-- **L952:** `mats` means: Often a collection related to mats (plural name).  JSON serialize/parse result.
-- **L954:** `m` means: Holds “m” for this scope.
-- **L955:** `url` means: HTTP URL to media or page.  Literal text string.
-- **L961:** `fn` means: Holds “fn” for this scope. (text)
-- **L969:** Handle/log exception.
-
 ---
 
 ### `UpdateMat` — lines 971–1004
+
+#### Signature
 
 ```html
 private string UpdateMat(SqlConnection conn, int id, string type, string text, string media)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `UpdateMat`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `id` (`int`) — Generic primary key / identifier.
-- `type` (`string`) — Holds “type” for this scope. (text)
-- `text` (`string`) — Holds “text” for this scope. (text)
-- `media` (`string`) — Holds “media” for this scope. (text)
-- **Local variables (what each means):**
-- `sets` (`var`) — Often a collection related to sets (plural name).  Newly constructed object.
-- `pars` (`var`) — Often a collection related to pars (plural name).  Newly constructed object.
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).  Literal text string.
+Saves or updates **Update Mat** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `UpdateMat`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `id` | `int` | Generic primary key / identifier. |
+| `type` | `string` | Holds “type” for this scope. (text) |
+| `text` | `string` | Holds “text” for this scope. (text) |
+| `media` | `string` | Holds “media” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sets` | `var` | Often a collection related to sets (plural name).  Newly constructed object. |
+| `pars` | `var` | Often a collection related to pars (plural name).  Newly constructed object. |
+| `sql` | `string` | SQL query text (should use parameters, not raw user input).  Literal text string. |
+
+#### Code
 
 ```html
  971 | 
@@ -1686,49 +1643,47 @@ private string UpdateMat(SqlConnection conn, int id, string type, string text, s
 1004 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L972:** Database access (pure SQL).
-- **L974:** Error handling block.
-- **L976:** `sets` means: Often a collection related to sets (plural name).  Newly constructed object.
-- **L977:** Parameterized SQL — prevents classic SQL injection. | `pars` means: Often a collection related to pars (plural name).  Newly constructed object.
-- **L981:** Parameterized SQL — prevents classic SQL injection.
-- **L986:** Parameterized SQL — prevents classic SQL injection.
-- **L991:** Parameterized SQL — prevents classic SQL injection.
-- **L994:** Parameterized SQL — prevents classic SQL injection.
-- **L995:** `sql` means: SQL query text (should use parameters, not raw user input).  Literal text string.
-- **L1000:** Handle/log exception.
-
 ---
 
 ### `InsertExtraMaterials` — lines 1007–1052
+
+#### Signature
 
 ```html
 private int InsertExtraMaterials(SqlConnection conn, int parentId, string materialsJson)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `InsertExtraMaterials`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `parentId` (`int`) — Holds “parent Id” for this scope. (integer)
-- `materialsJson` (`string`) — Holds “materials Json” for this scope. (text)
-- **Local variables (what each means):**
-- `mats` (`var`) — Often a collection related to mats (plural name).  JSON serialize/parse result.
-- `i` (`int`) — Loop index (0-based counter in for-loops).  Literal number `1`.
-- `saved` (`int`) — Holds “saved” for this scope. (integer)  Literal number `0`.
-- `url` (`string`) — HTTP URL to media or page.  Literal text string.
-- `fn` (`string`) — Holds “fn” for this scope. (text)
-- `t` (`string`) — Temporary string/token/time value.
-- `low` (`var`) — Holds “low” for this scope.
-- `warn` (`string`) — Holds “warn” for this scope. (text)
-- `m` — Holds “m” for this scope.
+Saves or updates **Insert Extra Materials** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `parentId` | `int` | Holds “parent Id” for this scope. (integer) |
+| `materialsJson` | `string` | Holds “materials Json” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `mats` | `var` | Often a collection related to mats (plural name).  JSON serialize/parse result. |
+| `i` | `int` | Loop index (0-based counter in for-loops).  Literal number `1`. |
+| `saved` | `int` | Holds “saved” for this scope. (integer)  Literal number `0`. |
+| `url` | `string` | HTTP URL to media or page.  Literal text string. |
+| `fn` | `string` | Holds “fn” for this scope. (text) |
+| `t` | `string` | Temporary string/token/time value. |
+| `low` | `var` | Holds “low” for this scope. |
+| `warn` | `string` | Holds “warn” for this scope. (text) |
+| `m` | `—` | Holds “m” for this scope. |
+
+#### Code
 
 ```html
 1007 |     private int InsertExtraMaterials(SqlConnection conn, int parentId, string materialsJson)
@@ -1779,37 +1734,41 @@ private int InsertExtraMaterials(SqlConnection conn, int parentId, string materi
 1052 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L1007:** Database access (pure SQL).
-- **L1010:** `mats` means: Often a collection related to mats (plural name).  JSON serialize/parse result.
-- **L1012:** `i` means: Loop index (0-based counter in for-loops).  Literal number `1`.
-- **L1013:** `saved` means: Holds “saved” for this scope. (integer)  Literal number `0`.
-- **L1018:** `url` means: HTTP URL to media or page.  Literal text string.
-- **L1025:** `fn` means: Holds “fn” for this scope. (text)
-- **L1037:** `t` means: Temporary string/token/time value.
-- **L1040:** `low` means: Holds “low” for this scope.
-- **L1047:** `warn` means: Holds “warn” for this scope. (text)
-
 ---
 
 ### `IsStoredMediaPath` — lines 1057–1080
+
+#### Signature
 
 ```html
 private static bool IsStoredMediaPath(string s)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `IsStoredMediaPath`.
-- **Parameters (what each means):**
-- `s` (`string`) — String being cleaned or built.
-- **Local variables (what each means):**
-- `name` (`string`) — Display name of user/course/criterion.
-- `hex` (`bool`) — Holds “hex” for this scope. (true/false)
-- `c` — Temporary value (character, course, or counter depending on loop).
+Checks a condition related to **Is Stored Media Path** and returns true/false (or tries an action safely).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+2. Return `true` to the caller.
+3. Return `false` to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `s` | `string` | String being cleaned or built. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `name` | `string` | Display name of user/course/criterion. |
+| `hex` | `bool` | Holds “hex” for this scope. (true/false) |
+| `c` | `—` | Temporary value (character, course, or counter depending on loop). |
+
+#### Code
 
 ```html
 1057 |     private static bool IsStoredMediaPath(string s)
@@ -1838,33 +1797,42 @@ private static bool IsStoredMediaPath(string s)
 1080 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L1069:** `name` means: Display name of user/course/criterion.
-- **L1074:** `hex` means: Holds “hex” for this scope. (true/false)
-
 ---
 
 ### `NormalizeStoredMediaPath` — lines 1083–1137
+
+#### Signature
 
 ```html
 private static string NormalizeStoredMediaPath(string url)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `NormalizeStoredMediaPath`.
-- **Parameters (what each means):**
-- `url` (`string`) — HTTP URL to media or page.
-- **Local variables (what each means):**
-- `uri` (`var`) — otpauth:// or other URI string.  Newly constructed object.
-- `sp` (`int`) — Holds “sp” for this scope. (integer)
-- `rest` (`string`) — Holds “rest” for this scope. (text)
-- `eq` (`int`) — Holds “eq” for this scope. (integer)
-- `amp` (`int`) — Holds “amp” for this scope. (integer)
-- `up` (`int`) — Holds “up” for this scope. (integer)
+Converts or cleans **Normalize Stored Media Path** into a usable form.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `url` | `string` | HTTP URL to media or page. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uri` | `var` | otpauth:// or other URI string.  Newly constructed object. |
+| `sp` | `int` | Holds “sp” for this scope. (integer) |
+| `rest` | `string` | Holds “rest” for this scope. (text) |
+| `eq` | `int` | Holds “eq” for this scope. (integer) |
+| `amp` | `int` | Holds “amp” for this scope. (integer) |
+| `up` | `int` | Holds “up” for this scope. (integer) |
+
+#### Code
 
 ```html
 1083 |     private static string NormalizeStoredMediaPath(string url)
@@ -1924,33 +1892,35 @@ private static string NormalizeStoredMediaPath(string url)
 1137 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L1087:** Error handling block.
-- **L1092:** `uri` means: otpauth:// or other URI string.  Newly constructed object.
-- **L1101:** Handle/log exception.
-- **L1107:** `sp` means: Holds “sp” for this scope. (integer)
-- **L1111:** `rest` means: Holds “rest” for this scope. (text)
-- **L1112:** `eq` means: Holds “eq” for this scope. (integer)
-- **L1114:** `amp` means: Holds “amp” for this scope. (integer)
-- **L1116:** Error handling block.
-- **L1124:** `up` means: Holds “up” for this scope. (integer)
-
 ---
 
 ### `NormalizeType` — lines 1138–1150
+
+#### Signature
 
 ```html
 private static string NormalizeType(string type)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `NormalizeType`.
-- **Parameters (what each means):**
-- `type` (`string`) — Holds “type” for this scope. (text)
+Converts or cleans **Normalize Type** into a usable form.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `type` | `string` | Holds “type” for this scope. (text) |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```html
 1138 | 
@@ -1972,21 +1942,37 @@ private static string NormalizeType(string type)
 
 ### `SplitContent` — lines 1151–1176
 
+#### Signature
+
 ```html
 private static void SplitContent(string matType, string content, string title, out string text, out string media)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `SplitContent`.
-- **Parameters (what each means):**
-- `matType` (`string`) — Holds “mat Type” for this scope. (text)
-- `content` (`string`) — Submission body text or JSON payload in CWSubmissions.
-- `title` (`string`) — Title of course work / page heading.
-- `text` (`string`) — Holds “text” for this scope. (text)
-- `media` (`string`) — Holds “media” for this scope. (text)
+Function `SplitContent` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `SplitContent`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `matType` | `string` | Holds “mat Type” for this scope. (text) |
+| `content` | `string` | Submission body text or JSON payload in CWSubmissions. |
+| `title` | `string` | Title of course work / page heading. |
+| `text` | `string` | Holds “text” for this scope. (text) |
+| `media` | `string` | Holds “media” for this scope. (text) |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```html
 1151 | 
@@ -2021,17 +2007,33 @@ private static void SplitContent(string matType, string content, string title, o
 
 ### `Q` — lines 1181–1182
 
+#### Signature
+
 ```html
 private static string Q(string ident)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Q`.
-- **Parameters (what each means):**
-- `ident` (`string`) — Holds “ident” for this scope. (text)
+Function `Q` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `Q`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ident` | `string` | Holds “ident” for this scope. (text) |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```html
 1181 | 
@@ -2042,23 +2044,35 @@ private static string Q(string ident)
 
 ### `AssertOwner` — lines 1183–1189
 
+#### Signature
+
 ```html
 private static void AssertOwner(SqlConnection conn, int lecturerUid, int cid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `AssertOwner`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
-- `cid` (`int`) — Course ID (Courses.CID).
-- **Local variables (what each means):**
-- `owner` (`int`) — LecturerUID looked up for ownership check.
+Function `AssertOwner` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Stop with an error (invalid access or bad input).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `lecturerUid` | `int` | Users.UID of the course owner (lecturer). |
+| `cid` | `int` | Course ID (Courses.CID). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `owner` | `int` | LecturerUID looked up for ownership check. |
+
+#### Code
 
 ```html
 1183 | 
@@ -2070,27 +2084,35 @@ private static void AssertOwner(SqlConnection conn, int lecturerUid, int cid)
 1189 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L1184:** Database access (pure SQL).
-- **L1186:** Parameterized SQL — prevents classic SQL injection. | `owner` means: LecturerUID looked up for ownership check.
-
 ---
 
 ### `Open` — lines 1195–1201
+
+#### Signature
 
 ```html
 private static SqlConnection Open()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Open`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Local variables (what each means):**
-- `c` (`var`) — Temporary value (character, course, or counter depending on loop).  Newly constructed object.
+Function `Open` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Open a connection to the LocalDB / SQL Server database.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `c` | `var` | Temporary value (character, course, or counter depending on loop).  Newly constructed object. |
+
+#### Code
 
 ```html
 1195 | 
@@ -2102,28 +2124,38 @@ private static SqlConnection Open()
 1201 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L1196:** Database access (pure SQL).
-- **L1198:** Database access (pure SQL). | `c` means: Temporary value (character, course, or counter depending on loop).  Newly constructed object.
-
 ---
 
 ### `P` — lines 1202–1206
+
+#### Signature
 
 ```html
 private static SqlParameter P(string n, object v)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `P`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `n` (`string`) — Numeric count or temporary integer.
-- `v` (`object`) — Generic value (version flag in JSON, or loop value).
+Creates one SQL parameter (`@Name` + value) so user input is never concatenated into SQL.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `P`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `n` | `string` | Numeric count or temporary integer. |
+| `v` | `object` | Generic value (version flag in JSON, or loop value). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```html
 1202 | 
@@ -2133,32 +2165,42 @@ private static SqlParameter P(string n, object v)
 1206 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L1203:** Parameterized SQL — prevents classic SQL injection.
-- **L1205:** Parameterized SQL — prevents classic SQL injection.
-
 ---
 
 ### `Query` — lines 1207–1220
+
+#### Signature
 
 ```html
 private static DataTable Query(SqlConnection conn, string sql, params SqlParameter[] ps)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Query`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
-- `ps` (`SqlParameter[]`) — Holds “ps” for this scope. (type `SqlParameter[]`)
-- **Local variables (what each means):**
-- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
-- `da` (`var`) — Holds “da” for this scope.  Newly constructed object.
+Reads recent security audit events for the Admin audit page.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `Query`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `sql` | `string` | SQL query text (should use parameters, not raw user input). |
+| `ps` | `SqlParameter[]` | Holds “ps” for this scope. (type `SqlParameter[]`) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cmd` | `var` | SqlCommand — the SQL statement + parameters object.  Newly constructed object. |
+| `da` | `var` | Holds “da” for this scope.  Newly constructed object. |
+
+#### Code
 
 ```html
 1207 | 
@@ -2177,33 +2219,39 @@ private static DataTable Query(SqlConnection conn, string sql, params SqlParamet
 1220 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L1208:** Database access (pure SQL).
-- **L1210:** Import namespace/types.
-- **L1213:** Import namespace/types.
-- **L1215:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
-
 ---
 
 ### `Exec` — lines 1221–1229
+
+#### Signature
 
 ```html
 private static int Exec(SqlConnection conn, string sql, params SqlParameter[] ps)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Exec`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
-- `ps` (`SqlParameter[]`) — Holds “ps” for this scope. (type `SqlParameter[]`)
-- **Local variables (what each means):**
-- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
+Function `Exec` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Run INSERT/UPDATE/DELETE SQL against the database.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `sql` | `string` | SQL query text (should use parameters, not raw user input). |
+| `ps` | `SqlParameter[]` | Holds “ps” for this scope. (type `SqlParameter[]`) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cmd` | `var` | SqlCommand — the SQL statement + parameters object.  Newly constructed object. |
+
+#### Code
 
 ```html
 1221 | 
@@ -2217,33 +2265,40 @@ private static int Exec(SqlConnection conn, string sql, params SqlParameter[] ps
 1229 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L1222:** Database access (pure SQL).
-- **L1224:** Import namespace/types.
-- **L1227:** Run SQL; return table / rows / scalar.
-
 ---
 
 ### `ScalarInt` — lines 1230–1240
+
+#### Signature
 
 ```html
 private static int ScalarInt(SqlConnection conn, string sql, params SqlParameter[] ps)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ScalarInt`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
-- `ps` (`SqlParameter[]`) — Holds “ps” for this scope. (type `SqlParameter[]`)
-- **Local variables (what each means):**
-- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
-- `o` (`var`) — Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
+Function `ScalarInt` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Run SQL that returns one value (count, id, flag).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `sql` | `string` | SQL query text (should use parameters, not raw user input). |
+| `ps` | `SqlParameter[]` | Holds “ps” for this scope. (type `SqlParameter[]`) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cmd` | `var` | SqlCommand — the SQL statement + parameters object.  Newly constructed object. |
+| `o` | `var` | Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY). |
+
+#### Code
 
 ```html
 1230 | 
@@ -2259,28 +2314,37 @@ private static int ScalarInt(SqlConnection conn, string sql, params SqlParameter
 1240 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L1231:** Database access (pure SQL).
-- **L1233:** Import namespace/types.
-- **L1236:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L1237:** Null-safe read from database values.
-
 ---
 
 ### `Safe` — lines 1241–1246
+
+#### Signature
 
 ```html
 private static string Safe(object o)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Safe`.
-- **Parameters (what each means):**
-- `o` (`object`) — Holds “o” for this scope.
+Function `Safe` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `Safe`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `o` | `object` | Holds “o” for this scope. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```html
 1241 | 
@@ -2291,28 +2355,40 @@ private static string Safe(object o)
 1246 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L1244:** Null-safe read from database values.
-
 ---
 
 ### `Col` — lines 1247–1257
+
+#### Signature
 
 ```html
 private static string Col(DataRow r, params string[] names)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Col`.
-- **Parameters (what each means):**
-- `r` (`DataRow`) — One DataRow from a SQL result.
-- `names` (`string[]`) — Often a collection related to names (plural name). (text)
-- **Local variables (what each means):**
-- `n` — Numeric count or temporary integer.
+Function `Col` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `Col`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `r` | `DataRow` | One DataRow from a SQL result. |
+| `names` | `string[]` | Often a collection related to names (plural name). (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `n` | `—` | Numeric count or temporary integer. |
+
+#### Code
 
 ```html
 1247 | 
@@ -2328,29 +2404,39 @@ private static string Col(DataRow r, params string[] names)
 1257 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L1248:** In-memory result set from ADO.NET.
-- **L1253:** Null-safe read from database values.
-
 ---
 
 ### `GetInt` — lines 1258–1269
+
+#### Signature
 
 ```html
 private static int GetInt(Dictionary<string, object> data, HttpContext ctx, string key)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GetInt`.
-- **Pattern:** Read/load data for display.
-- **Parameters (what each means):**
-- `data` (`Dictionary<string, object>`) — Holds “data” for this scope. (text)
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- `key` (`string`) — HMAC key bytes or dictionary key.
+Reads/loads data related to **Int** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `GetInt`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `data` | `Dictionary<string, object>` | Holds “data” for this scope. (text) |
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+| `key` | `string` | HMAC key bytes or dictionary key. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```html
 1258 | 
@@ -2371,20 +2457,35 @@ private static int GetInt(Dictionary<string, object> data, HttpContext ctx, stri
 
 ### `GetStr` — lines 1270–1276
 
+#### Signature
+
 ```html
 private static string GetStr(Dictionary<string, object> data, HttpContext ctx, string key)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GetStr`.
-- **Pattern:** Read/load data for display.
-- **Parameters (what each means):**
-- `data` (`Dictionary<string, object>`) — Holds “data” for this scope. (text)
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- `key` (`string`) — HMAC key bytes or dictionary key.
+Reads/loads data related to **Str** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `GetStr`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `data` | `Dictionary<string, object>` | Holds “data” for this scope. (text) |
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+| `key` | `string` | HMAC key bytes or dictionary key. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```html
 1270 | 
@@ -2400,19 +2501,32 @@ private static string GetStr(Dictionary<string, object> data, HttpContext ctx, s
 
 ### `Write` — lines 1277–1281
 
+#### Signature
+
 ```html
 private static void Write(HttpContext ctx, object obj)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Write`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- `obj` (`object`) — Holds “obj” for this scope.
+Function `Write` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Write the HTTP response body (JSON, file bytes, or text).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+| `obj` | `object` | Holds “obj” for this scope. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```html
 1277 | 
@@ -2424,9 +2538,9 @@ private static void Write(HttpContext ctx, object obj)
 
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```html
    1 | <%@ WebHandler Language="C#" Class="CurriculumApi" %>
@@ -3331,223 +3445,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  900 |                 {
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L5:** Import namespace/types.
-- **L6:** Import namespace/types.
-- **L7:** Import namespace/types.
-- **L8:** Import namespace/types.
-- **L9:** Import namespace/types.
-- **L10:** Import namespace/types.
-- **L11:** Import namespace/types.
-- **L12:** Import namespace/types.
-- **L13:** Import namespace/types.
-- **L19:** Class declaration for this page/service.
-- **L23:** IHttpHandler entry for ashx.
-- **L28:** Error handling block.
-- **L30:** Authorization — block wrong role / anonymous. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
-- **L33:** Authorization — block wrong role / anonymous.
-- **L39:** `action` means: Holds “action” for this scope. (text)  Comes from HTTP request.
-- **L40:** `body` means: HTTP request body.
-- **L44:** Import namespace/types.
-- **L48:** `data` means: Holds “data” for this scope. (text)
-- **L51:** Error handling block.
-- **L90:** Handle/log exception.
-- **L104:** `chapters` means: Often a collection related to chapters (plural name).  Newly constructed object.
-- **L105:** Import namespace/types.
-- **L107:** Ownership check — prevent IDOR.
-- **L123:** Parameterized SQL — prevents classic SQL injection. | `chDt` means: Holds “ch Dt” for this scope. (`DataTable` = SQL result grid)
-- **L125:** In-memory result set from ADO.NET.
-- **L127:** `chid` means: Chapter ID (Chapters.ChID).
-- **L128:** `lessons` means: Often a collection related to lessons (plural name).  Newly constructed object.
-- **L147:** In-memory result set from ADO.NET.
-- **L148:** Error handling block.
-- **L150:** Parameterized SQL — prevents classic SQL injection.
-- **L152:** Handle/log exception.
-- **L163:** In-memory result set from ADO.NET.
-- **L165:** `schid` means: SubChapter / lesson ID.
-- **L168:** `materials` means: Often a collection related to materials (plural name).
-- **L176:** Error handling block.
-- **L178:** `matSql` means: Holds “mat Sql” for this scope. (text)
-- **L179:** Parameterized SQL — prevents classic SQL injection. | `mats` means: Often a collection related to mats (plural name).
-- **L180:** `lessonTitle` means: Holds “lesson Title” for this scope. (text)
-- **L184:** In-memory result set from ADO.NET.
-- **L186:** `text` means: Holds “text” for this scope.
-- **L187:** `media` means: Holds “media” for this scope.
-- **L188:** `t` means: Temporary string/token/time value.
-- **L200:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
-- **L201:** Error handling block.
-- **L205:** Handle/log exception.
-- **L221:** Error handling block.
-- **L223:** `matSql` means: Holds “mat Sql” for this scope. (text)
-- **L224:** Parameterized SQL — prevents classic SQL injection. | `mats` means: Often a collection related to mats (plural name).
-- **L225:** `i` means: Loop index (0-based counter in for-loops).  Literal number `0`.
-- **L226:** In-memory result set from ADO.NET.
-- **L229:** `type` means: Holds “type” for this scope. (text)
-- **L231:** `media` means: Holds “media” for this scope.
-- **L232:** `text` means: Holds “text” for this scope.
-- **L233:** `content` means: Submission body text or JSON payload in CWSubmissions.
-- **L234:** `lessonTitle` means: Holds “lesson Title” for this scope. (text)  Literal text string.
-- **L237:** `p` means: Parameter, path, or password fragment depending on context.
-- **L250:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
-- **L251:** Error handling block.
-- **L263:** Handle/log exception.
-- **L278:** Database access (pure SQL).
-- **L282:** `materials` means: Often a collection related to materials (plural name).  Newly constructed object.
-- **L283:** Error handling block.
-- **L285:** In-memory result set from ADO.NET. | `mats` means: Often a collection related to mats (plural name). (`DataTable` = SQL result grid)
-- **L287:** Error handling block.
-- **L291:** `orderBy` means: Holds “order By” for this scope. (text)
-- **L294:** `sql` means: SQL query text (should use parameters, not raw user input).
-- **L296:** Parameterized SQL — prevents classic SQL injection.
-- **L299:** Handle/log exception.
-- **L303:** Error handling block.
-- **L307:** Parameterized SQL — prevents classic SQL injection.
-- **L309:** Handle/log exception.
-- **L311:** Error handling block.
-- **L315:** Parameterized SQL — prevents classic SQL injection.
-- **L317:** In-memory result set from ADO.NET.
-- **L324:** In-memory result set from ADO.NET. | `bodyRow` means: Holds “body Row” for this scope. (`DataRow` = one SQL row)
-- **L325:** In-memory result set from ADO.NET. | `fileRow` means: Holds “file Row” for this scope. (`DataRow` = one SQL row)
-- **L326:** In-memory result set from ADO.NET.
-- **L328:** `media0` means: Holds “media0” for this scope.
-- **L329:** `t0` means: Holds “t0” for this scope.
-- **L340:** In-memory result set from ADO.NET.
-- **L342:** `t0` means: Holds “t0” for this scope.
-- **L343:** `media0` means: Holds “media0” for this scope.
-- **L363:** `mediaB` means: Holds “media B” for this scope.
-- **L364:** `textB` means: Holds “text B” for this scope.
-- **L370:** In-memory result set from ADO.NET.
-- **L372:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
-- **L373:** Error handling block.
-- **L374:** `media` means: Holds “media” for this scope.
-- **L375:** `text` means: Holds “text” for this scope.
-- **L376:** `t` means: Temporary string/token/time value.
-- **L382:** `bareName` means: Holds “bare Name” for this scope. (text)
-- **L389:** `fn` means: Holds “fn” for this scope. (text)
-- **L396:** Error handling block.
-- **L398:** `rel` means: Holds “rel” for this scope. (text)
-- **L404:** Handle/log exception.
-- **L408:** `linkOut` means: Holds “link Out” for this scope. (text)
-- **L424:** Handle/log exception.
-- **L430:** `typeExpr` means: Holds “type Expr” for this scope. (text)
-- **L432:** `textExpr` means: Holds “text Expr” for this scope. (text)
-- **L434:** `mediaExpr` means: Holds “media Expr” for this scope. (text)
-- **L453:** Import namespace/types.
-- **L455:** Ownership check — prevent IDOR.
-- **L458:** `sql` means: SQL query text (should use parameters, not raw user input).
-- **L460:** Parameterized SQL — prevents classic SQL injection.
-- **L467:** `next` means: Holds “next” for this scope. (integer)
-- **L470:** Parameterized SQL — prevents classic SQL injection.
-- **L472:** Return new identity/UID after INSERT.
-- **L474:** Parameterized SQL — prevents classic SQL injection.
-- **L479:** Return new identity/UID after INSERT.
-- **L481:** Parameterized SQL — prevents classic SQL injection.
-- **L490:** Import namespace/types.
-- **L492:** `cid` means: Course ID (Courses.CID).
-- **L495:** Parameterized SQL — prevents classic SQL injection.
-- **L497:** Ownership check — prevent IDOR.
-- **L502:** Error handling block.
-- **L505:** Join related tables (courses ↔ chapters ↔ works ↔ users).
-- **L507:** Parameterized SQL — prevents classic SQL injection.
-- **L509:** Handle/log exception.
-- **L510:** Error handling block.
-- **L513:** Parameterized SQL — prevents classic SQL injection.
-- **L515:** Handle/log exception.
-- **L519:** Error handling block.
-- **L522:** Parameterized SQL — prevents classic SQL injection.
-- **L524:** Handle/log exception.
-- **L528:** Parameterized SQL — prevents classic SQL injection.
-- **L542:** Import namespace/types.
-- **L544:** `cid` means: Course ID (Courses.CID).
-- **L547:** Parameterized SQL — prevents classic SQL injection.
-- **L549:** Ownership check — prevent IDOR.
-- **L551:** `matType` means: Holds “mat Type” for this scope. (text)
-- **L563:** `n` means: Integer count (rows, items, or length).
-- **L566:** Parameterized SQL — prevents classic SQL injection.
-- **L572:** Error handling block.
-- **L575:** Parameterized SQL — prevents classic SQL injection.
-- **L577:** Handle/log exception.
-- **L579:** Parameterized SQL — prevents classic SQL injection.
-- **L580:** Parameterized SQL — prevents classic SQL injection.
-- **L584:** Error handling block.
-- **L588:** `next` means: Holds “next” for this scope. (integer)
-- **L591:** Parameterized SQL — prevents classic SQL injection.
-- **L593:** Return new identity/UID after INSERT.
-- **L595:** Parameterized SQL — prevents classic SQL injection.
-- **L600:** Return new identity/UID after INSERT.
-- **L602:** Parameterized SQL — prevents classic SQL injection.
-- **L605:** Handle/log exception.
-- **L620:** `matParent` means: Holds “mat Parent” for this scope. (integer)
-- **L622:** `storeText` means: Holds “store Text” for this scope. (text)
-- **L633:** `warn` means: Holds “warn” for this scope. (text)
-- **L634:** `matsSaved` means: Holds “mats Saved” for this scope. (integer)  Literal number `0`.
-- **L638:** `extra` means: Dictionary of optional fields inside META.
-- **L661:** `storeText` means: Holds “store Text” for this scope. (text)
-- **L662:** `matParent` means: Holds “mat Parent” for this scope. (integer)
-- **L666:** `updErr` means: Holds “upd Err” for this scope. (text)
-- **L672:** `warn` means: Holds “warn” for this scope. (text)
-- **L676:** Parameterized SQL — prevents classic SQL injection.
-- **L695:** Import namespace/types.
-- **L699:** `chid` means: Chapter ID (Chapters.ChID).
-- **L702:** Parameterized SQL — prevents classic SQL injection.
-- **L703:** `cid` means: Course ID (Courses.CID).
-- **L706:** Parameterized SQL — prevents classic SQL injection.
-- **L708:** Ownership check — prevent IDOR.
-- **L709:** Error handling block.
-- **L712:** Parameterized SQL — prevents classic SQL injection.
-- **L714:** Handle/log exception.
-- **L716:** Parameterized SQL — prevents classic SQL injection.
-- **L721:** `chid` means: Chapter ID (Chapters.ChID).
-- **L724:** Parameterized SQL — prevents classic SQL injection.
-- **L725:** `cid` means: Course ID (Courses.CID).
-- **L728:** Parameterized SQL — prevents classic SQL injection.
-- **L729:** Ownership check — prevent IDOR.
-- **L731:** Parameterized SQL — prevents classic SQL injection.
-- **L739:** Import namespace/types.
-- **L743:** `dt` means: DataTable — full result set from SQL (many rows/columns).
-- **L746:** Parameterized SQL — prevents classic SQL injection.
-- **L748:** `chid` means: Chapter ID (Chapters.ChID).
-- **L749:** `cid` means: Course ID (Courses.CID).
-- **L752:** Parameterized SQL — prevents classic SQL injection.
-- **L753:** Ownership check — prevent IDOR.
-- **L756:** `materials` means: Often a collection related to materials (plural name).
-- **L770:** `sql` means: SQL query text (should use parameters, not raw user input).
-- **L771:** Parameterized SQL — prevents classic SQL injection. | `dt` means: DataTable — full result set from SQL (many rows/columns).
-- **L773:** `type2` means: Holds “type2” for this scope. (text)
-- **L775:** `media2` means: Holds “media2” for this scope.
-- **L776:** `text2` means: Holds “text2” for this scope.
-- **L794:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
-- **L798:** `d` means: Often a dictionary payload or date value.
-- **L799:** `media` means: Holds “media” for this scope. (text)
-- **L800:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
-- **L811:** `t` means: Temporary string/token/time value.
-- **L812:** `pMedia` means: Holds “p Media” for this scope.
-- **L813:** `pText` means: Holds “p Text” for this scope.
-- **L814:** `pType` means: Holds “p Type” for this scope.
-- **L815:** `pId` means: Identifier (`pId`) — database primary/foreign key.
-- **L820:** Error handling block.
-- **L823:** `fn` means: Holds “fn” for this scope. (text)
-- **L844:** `low` means: Holds “low” for this scope.
-- **L855:** Database access (pure SQL).
-- **L861:** `errors` means: Often a collection related to errors (plural name).  Newly constructed object.
-- **L873:** Error handling block.
-- **L876:** Parameterized SQL — prevents classic SQL injection.
-- **L877:** Parameterized SQL — prevents classic SQL injection.
-- **L878:** Parameterized SQL — prevents classic SQL injection.
-- **L879:** Parameterized SQL — prevents classic SQL injection.
-- **L880:** Parameterized SQL — prevents classic SQL injection.
-- **L883:** Handle/log exception.
-- **L887:** Error handling block.
-- **L891:** `cols` means: Often a collection related to cols (plural name).  Newly constructed object.
-- **L892:** `vals` means: Often a collection related to vals (plural name).  Newly constructed object.
-- **L893:** Parameterized SQL — prevents classic SQL injection. | `pars` means: Often a collection related to pars (plural name).  Newly constructed object.
-- **L897:** Parameterized SQL — prevents classic SQL injection.
-
-_… truncated: 384 more lines in source. Open the original file for the rest._
-
-## Source snapshot (raw)
-
-_File has 1284 lines — raw dump omitted here to keep Markdown readable. Open `Pages/Lecturer/CurriculumApi.ashx` in the project._
+_… truncated: 384 more lines. Open `Pages/Lecturer/CurriculumApi.ashx` for the rest._

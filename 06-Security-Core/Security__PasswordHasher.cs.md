@@ -1,6 +1,6 @@
 # PasswordHasher.cs
 **Source:** `Data/Security/PasswordHasher.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,35 +15,45 @@ PBKDF2 password hashing and verification; upgrades legacy plain-text on successf
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 21:** `salt` (`var`) — **Random salt for PBKDF2.**
-- **Line 24:** `hash` (`var`) — **Password hash (PBKDF2) stored in DB.**
-- **Line 40:** `parts` (`var`) — **Split path or name segments.**
-- **Line 42:** `iterations` (`int`) — **Often a collection related to iterations (plural name). (integer)**
-- **Line 51:** `actual` (`var`) — **Holds “actual” for this scope.**
-- **Line 75:** `diff` (`int`) — **Holds “diff” for this scope. (integer)**
-- **Line 78:** `diff` (`return`) — **Holds “diff” for this scope. (type `return`)**
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (5 found)
 
 ### `Hash` — lines 17–31
 
+#### Signature
+
 ```csharp
 public static string Hash(string password)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Hash`.
-- **Parameters (what each means):**
-- `password` (`string`) — Plain password from the form (never log this).
-- **Local variables (what each means):**
-- `salt` (`var`) — Random salt for PBKDF2.  Newly constructed object.
-- `rng` (`var`) — Holds “rng” for this scope.
-- `hash` (`var`) — Password hash (PBKDF2) stored in DB.
+Turns a plain password into a stored PBKDF2 hash.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `Hash`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `password` | `string` | Plain password from the form (never log this). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `salt` | `var` | Random salt for PBKDF2.  Newly constructed object. |
+| `rng` | `var` | Holds “rng” for this scope. |
+| `hash` | `var` | Password hash (PBKDF2) stored in DB. |
+
+#### Code
 
 ```csharp
   17 | 
@@ -63,31 +73,39 @@ public static string Hash(string password)
   31 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L21:** `salt` means: Random salt for PBKDF2.  Newly constructed object.
-- **L22:** Import namespace/types.
-- **L25:** `hash` means: Password hash (PBKDF2) stored in DB.
-
 ---
 
 ### `Verify` — lines 32–58
+
+#### Signature
 
 ```csharp
 public static bool Verify(string password, string stored)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Verify`.
-- **Parameters (what each means):**
-- `password` (`string`) — Plain password from the form (never log this).
-- `stored` (`string`) — Holds “stored” for this scope. (text)
-- **Local variables (what each means):**
-- `parts` (`var`) — Split path or name segments.
-- `actual` (`var`) — Holds “actual” for this scope.
+Checks whether a typed password matches the stored hash.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `password` | `string` | Plain password from the form (never log this). |
+| `stored` | `string` | Holds “stored” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `parts` | `var` | Split path or name segments. |
+| `actual` | `var` | Holds “actual” for this scope. |
+
+#### Code
 
 ```csharp
   32 | 
@@ -119,29 +137,37 @@ public static bool Verify(string password, string stored)
   58 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L40:** `parts` means: Split path or name segments.
-- **L45:** Error handling block.
-- **L50:** Handle/log exception.
-- **L52:** `actual` means: Holds “actual” for this scope.
-- **L53:** Constant-time string compare (reduce timing leaks).
-
 ---
 
 ### `IsHashed` — lines 59–63
+
+#### Signature
 
 ```csharp
 public static bool IsHashed(string stored)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `IsHashed`.
-- **Parameters (what each means):**
-- `stored` (`string`) — Holds “stored” for this scope. (text)
+Checks a condition related to **Is Hashed** and returns true/false (or tries an action safely).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `IsHashed`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `stored` | `string` | Holds “stored” for this scope. (text) |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   59 | 
@@ -155,22 +181,38 @@ public static bool IsHashed(string stored)
 
 ### `Pbkdf2` — lines 64–70
 
+#### Signature
+
 ```csharp
 private static byte[] Pbkdf2(string password, byte[] salt, int iterations, int length)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Pbkdf2`.
-- **Parameters (what each means):**
-- `password` (`string`) — Plain password from the form (never log this).
-- `salt` (`byte[]`) — Random salt for PBKDF2.
-- `iterations` (`int`) — Often a collection related to iterations (plural name). (integer)
-- `length` (`int`) — Holds “length” for this scope. (integer)
-- **Local variables (what each means):**
-- `pbkdf2` (`var`) — Holds “pbkdf2” for this scope.  Newly constructed object.
+Function `Pbkdf2` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `Pbkdf2`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `password` | `string` | Plain password from the form (never log this). |
+| `salt` | `byte[]` | Random salt for PBKDF2. |
+| `iterations` | `int` | Often a collection related to iterations (plural name). (integer) |
+| `length` | `int` | Holds “length” for this scope. (integer) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `pbkdf2` | `var` | Holds “pbkdf2” for this scope.  Newly constructed object. |
+
+#### Code
 
 ```csharp
   64 | 
@@ -182,29 +224,41 @@ private static byte[] Pbkdf2(string password, byte[] salt, int iterations, int l
   70 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L68:** Import namespace/types.
-
 ---
 
 ### `FixedTimeEquals` — lines 71–79
+
+#### Signature
 
 ```csharp
 private static bool FixedTimeEquals(byte[] a, byte[] b)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `FixedTimeEquals`.
-- **Parameters (what each means):**
-- `a` (`byte[]`) — Holds “a” for this scope. (type `byte[]`)
-- `b` (`byte[]`) — Holds “b” for this scope. (type `byte[]`)
-- **Local variables (what each means):**
-- `diff` (`int`) — Holds “diff” for this scope. (integer)  Literal number `0`.
-- `i` (`int`) — Loop index (0-based counter in for-loops).  Literal number `0`.
+Function `FixedTimeEquals` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `FixedTimeEquals`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `a` | `byte[]` | Holds “a” for this scope. (type `byte[]`) |
+| `b` | `byte[]` | Holds “b” for this scope. (type `byte[]`) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `diff` | `int` | Holds “diff” for this scope. (integer)  Literal number `0`. |
+| `i` | `int` | Loop index (0-based counter in for-loops).  Literal number `0`. |
+
+#### Code
 
 ```csharp
   71 | 
@@ -218,16 +272,11 @@ private static bool FixedTimeEquals(byte[] a, byte[] b)
   79 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L72:** Constant-time string compare (reduce timing leaks).
-- **L75:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -311,110 +360,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   79 |         }
   80 |     }
   81 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L5:** C# namespace grouping.
-- **L11:** Password hashing (PBKDF2).
-- **L21:** `salt` means: Random salt for PBKDF2.  Newly constructed object.
-- **L22:** Import namespace/types.
-- **L25:** `hash` means: Password hash (PBKDF2) stored in DB.
-- **L40:** `parts` means: Split path or name segments.
-- **L45:** Error handling block.
-- **L50:** Handle/log exception.
-- **L52:** `actual` means: Holds “actual” for this scope.
-- **L53:** Constant-time string compare (reduce timing leaks).
-- **L68:** Import namespace/types.
-- **L72:** Constant-time string compare (reduce timing leaks).
-- **L75:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace WebAppAssignment.Data.Security
-{
-    /// <summary>
-    /// PBKDF2-SHA256 password hashing (no external packages).
-    /// Stored format: v1.{iterations}.{saltB64}.{hashB64}
-    /// </summary>
-    public static class PasswordHasher
-    {
-        private const int SaltSize = 16;
-        private const int KeySize = 32;
-        private const int DefaultIterations = 100_000;
-        private const string Prefix = "v1";
-
-        public static string Hash(string password)
-        {
-            if (password == null) password = "";
-            var salt = new byte[SaltSize];
-            using (var rng = RandomNumberGenerator.Create())
-            rng.GetBytes(salt);
-
-            var hash = Pbkdf2(password, salt, DefaultIterations, KeySize);
-            return string.Format("{0}.{1}.{2}.{3}",
-            Prefix,
-            DefaultIterations,
-            Convert.ToBase64String(salt),
-            Convert.ToBase64String(hash));
-        }
-
-        public static bool Verify(string password, string stored)
-        {
-            if (string.IsNullOrEmpty(stored)) return false;
-
-            // Already hashed format
-            if (stored.StartsWith(Prefix + ".", StringComparison.Ordinal))
-            {
-                var parts = stored.Split('.');
-                if (parts.Length != 4) return false;
-                int iterations;
-                if (!int.TryParse(parts[1], out iterations)) return false;
-                byte[] salt, expected;
-                try
-                {
-                    salt = Convert.FromBase64String(parts[2]);
-                    expected = Convert.FromBase64String(parts[3]);
-                }
-                catch { return false; }
-
-                var actual = Pbkdf2(password ?? "", salt, iterations, expected.Length);
-                return FixedTimeEquals(actual, expected);
-            }
-
-            // Legacy plain-text (upgrade path)
-            return string.Equals(password ?? "", stored, StringComparison.Ordinal);
-        }
-
-        public static bool IsHashed(string stored)
-        {
-            return !string.IsNullOrEmpty(stored) && stored.StartsWith(Prefix + ".", StringComparison.Ordinal);
-        }
-
-        private static byte[] Pbkdf2(string password, byte[] salt, int iterations, int length)
-        {
-            // 3-arg ctor uses HMAC-SHA1 (widely available on .NET Framework 4.7.2)
-            using (var pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations))
-            return pbkdf2.GetBytes(length);
-        }
-
-        private static bool FixedTimeEquals(byte[] a, byte[] b)
-        {
-            if (a == null || b == null || a.Length != b.Length) return false;
-            int diff = 0;
-            for (int i = 0; i < a.Length; i++)
-            diff |= a[i] ^ b[i];
-            return diff == 0;
-        }
-    }
-}
-
 ```

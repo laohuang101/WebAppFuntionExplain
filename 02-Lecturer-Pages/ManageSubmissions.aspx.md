@@ -1,6 +1,6 @@
 # ManageSubmissions.aspx
 **Source:** `Pages/Lecturer/ManageSubmissions.aspx`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,17 +15,17 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
+Markup file — variables live in the matching `.cs` / `.js` companion docs.
 
 ## Functions / methods (0 found)
 
-_No methods matched the scanner (markup-only or unconventional structure). See full file listing below._
+_No methods matched the scanner (markup-only or unconventional structure). See the code listing at the bottom._
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```html
    1 | <%@ Page Title="Manage Submissions" Language="C#" MasterPageFile="~/Shared/Header&Footer.Master" AutoEventWireup="true" CodeBehind="ManageSubmissions.aspx.cs" Inherits="WebAppAssignment.Pages.Lecturer.ManageSubmissions" %>
@@ -93,75 +93,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   63 | 
   64 |   <script src="Scripts/manage-submissions.js"></script>
   65 | </asp:Content>
-```
-
-## Source snapshot (raw)
-
-```html
-<%@ Page Title="Manage Submissions" Language="C#" MasterPageFile="~/Shared/Header&Footer.Master" AutoEventWireup="true" CodeBehind="ManageSubmissions.aspx.cs" Inherits="WebAppAssignment.Pages.Lecturer.ManageSubmissions" %>
-
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-  <link rel="stylesheet" href="Style/course-creation.css" />
-</asp:Content>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-  <div class="container-fluid">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <div>
-        <h3 class="fw-bold text-dark mb-1">Manage Submissions</h3>
-        <p class="text-muted small mb-0">View and grade student submissions for your assignments.</p>
-      </div>
-    </div>
-
-    <div class="row g-3">
-      <div class="col-md-4">
-        <div class="glass-card p-3">
-          <label class="form-label small text-muted">Assignment</label>
-          <select id="ddlAssignments" class="form-select mb-2"></select>
-          <button id="btnLoadSubs" class="btn btn-sm btn-pill-accent">Load Submissions</button>
-        </div>
-      </div>
-      <div class="col-md-8">
-        <div class="glass-card p-3">
-          <h6 class="fw-bold">Submissions</h6>
-          <div id="submissionsList" class="mt-2">
-            <div class="text-muted">No assignment selected.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Grading Modal -->
-  <div class="modal fade" id="gradeModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content modal-glass border-0">
-        <div class="modal-header border-bottom border-light">
-          <h5 class="modal-title">Grade Submission</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body p-4">
-          <div id="gradeSubmissionBody"></div>
-          <div class="mb-3 mt-3">
-            <label class="form-label small text-muted">Score</label>
-            <input type="number" id="txtGradeScore" class="form-control" min="0" />
-          </div>
-          <div class="mb-3">
-            <label class="form-label small text-muted">Feedback</label>
-            <textarea id="txtGradeFeedback" class="form-control" rows="3"></textarea>
-          </div>
-          <div id="gradeError" class="text-danger small" style="display:none"></div>
-        </div>
-        <div class="modal-footer border-top border-light">
-          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" id="btnSubmitGrade" class="btn btn-pill-accent">Save Grade</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="Scripts/manage-submissions.js"></script>
-</asp:Content>
-
 ```

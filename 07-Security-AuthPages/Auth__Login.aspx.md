@@ -1,6 +1,6 @@
 # Login.aspx
 **Source:** `Pages/Authentication/Login.aspx`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,17 +15,17 @@ Email + password; Student/Lecturer redirected to MFA; Admin password-only comple
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
+Markup file — variables live in the matching `.cs` / `.js` companion docs.
 
 ## Functions / methods (0 found)
 
-_No methods matched the scanner (markup-only or unconventional structure). See full file listing below._
+_No methods matched the scanner (markup-only or unconventional structure). See the code listing at the bottom._
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```html
    1 | <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="WebAppAssignment.Pages.Authentication.Login" %>
@@ -94,82 +94,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   64 |     <script src="<%= ResolveUrl("~/Shared/Scripts/csrf.js") %>"></script>
   65 |   </body>
   66 | </html>
-```
-
-**Line notes** (what code + variables mean)
-
-- **L8:** CSRF anti-forgery protection.
-- **L58:** Password hashing (PBKDF2).
-- **L64:** CSRF anti-forgery protection.
-
-## Source snapshot (raw)
-
-```html
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="WebAppAssignment.Pages.Authentication.Login" %>
-
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head runat="server">
-    <meta charset="utf-8" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <%= WebAppAssignment.Data.Security.CsrfProtection.MetaTag(Context) %>
-    <title>EduLMS - Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="<%= ResolveUrl("~/Shared/Style/auth.css") %>" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    </head>
-  <body>
-    <form id="form1" runat="server">
-      <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="card card-auth p-4 w-100" style="max-width: 380px;">
-          <div class="text-center mb-4">
-            <a href="<%= ResolveUrl("~/Pages/Landing/Landing.aspx") %>" class="text-decoration-none">
-              <i class="fa-solid fa-graduation-cap fa-3x" style="color: #f17f54 !important;"></i>
-            </a>
-            <h3 class="mt-2 fw-bold">EduLMS Login</h3>
-            <p class="text-muted small mb-0">Secure sign-in · Student/Lecturer use MFA · Admin password only</p>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label small fw-semibold text-muted">Email Address</label>
-            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="you@example.com"></asp:TextBox>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label small fw-semibold text-muted">Password</label>
-            <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" placeholder="••••••••"></asp:TextBox>
-          </div>
-
-          <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="btn btn-accent w-100 fw-bold text-white"
-          OnClick="btnLogin_Click" />
-
-          <asp:Label ID="lblError" runat="server" ForeColor="Red" CssClass="d-block mt-3 text-center" style="font-size: 0.85rem;"></asp:Label>
-
-          <div class="text-center mt-3">
-            <a href="<%= ResolveUrl("~/Pages/Authentication/ForgotPassword.aspx") %>" class="small text-decoration-none text-muted d-block mb-2">
-              Forgot password?
-            </a>
-            <a href="<%= ResolveUrl("~/Pages/Authentication/Register.aspx") %>" class="small text-decoration-none" style="color:#f17f54;font-weight:600;">
-              Create a Student or Lecturer account
-            </a>
-          </div>
-
-          <div class="text-center mt-3">
-            <a href="<%= ResolveUrl("~/Pages/Landing/Landing.aspx") %>" class="text-muted small text-decoration-none">
-              <i class="fa-solid fa-arrow-left me-1"></i> Back to home
-            </a>
-          </div>
-
-          <div class="text-center mt-3 sec-badge">
-            <i class="fa-solid fa-lock me-1"></i> PBKDF2 · JWT · MFA required
-          </div>
-        </div>
-      </div>
-    </form>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<%= ResolveUrl("~/Shared/Scripts/csrf.js") %>"></script>
-  </body>
-</html>
-
 ```

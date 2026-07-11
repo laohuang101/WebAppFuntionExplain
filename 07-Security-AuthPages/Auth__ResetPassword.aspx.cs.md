@@ -1,6 +1,6 @@
 # ResetPassword.aspx.cs
 **Source:** `Pages/Authentication/ResetPassword.aspx.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,33 +15,44 @@ One-shot TOTP + new password form (uses AuthService.ResetPasswordWithTotp).
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 15:** `email` (`string`) — **Account email address (usually lowercased).**
-- **Line 24:** `p1` (`string`) — **New password field (first entry).**
-- **Line 25:** `p2` (`string`) — **Confirm password field (must match p1).**
-- **Line 31:** `result` (`var`) — **AuthResult or API result { success, message, … }.**
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (2 found)
 
 ### `Page_Load` — lines 9–19
 
+#### Signature
+
 ```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Page_Load`.
-- **CSRF:** Validates anti-forgery token on mutating request.
-- **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
-- **Local variables (what each means):**
-- `email` (`string`) — Account email address (usually lowercased).  Comes from HTTP request.
+Runs automatically when the ASP.NET page opens or posts back; sets up the page and security checks.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. ASP.NET calls this automatically on every request.
+2. On first load (`!IsPostBack`), initialize UI or redirect if already logged in.
+3. On postback, button handlers run separately after this method.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `email` | `string` | Account email address (usually lowercased).  Comes from HTTP request. |
+
+#### Code
 
 ```csharp
    9 |         protected void Page_Load(object sender, EventArgs e)
@@ -57,34 +68,42 @@ protected void Page_Load(object sender, EventArgs e)
   19 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L9:** Page load entry (GET or postback).
-- **L12:** CSRF anti-forgery protection.
-- **L13:** False on first open; true after postback.
-- **L15:** `email` means: Account email address (usually lowercased).  Comes from HTTP request.
-
 ---
 
 ### `btnReset_Click` — lines 20–42
+
+#### Signature
 
 ```csharp
 protected void btnReset_Click(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `btnReset_Click`.
-- **Navigation:** Redirects the browser.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
-- **Local variables (what each means):**
-- `p1` (`string`) — New password field (first entry).
-- `p2` (`string`) — Confirm password field (must match p1).
-- `result` (`var`) — AuthResult or API result { success, message, … }.
+Button handler: save the new password after MFA was already verified.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `btnReset_Click`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `p1` | `string` | New password field (first entry). |
+| `p2` | `string` | Confirm password field (must match p1). |
+| `result` | `var` | AuthResult or API result { success, message, … }. |
+
+#### Code
 
 ```csharp
   20 | 
@@ -112,17 +131,11 @@ protected void btnReset_Click(object sender, EventArgs e)
   42 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L24:** `p1` means: New password field (first entry).
-- **L25:** `p2` means: Confirm password field (must match p1).
-- **L32:** `result` means: AuthResult or API result { success, message, … }.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -169,68 +182,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   42 |         }
   43 |     }
   44 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L5:** C# namespace grouping.
-- **L9:** Page load entry (GET or postback).
-- **L12:** CSRF anti-forgery protection.
-- **L13:** False on first open; true after postback.
-- **L15:** `email` means: Account email address (usually lowercased).  Comes from HTTP request.
-- **L24:** `p1` means: New password field (first entry).
-- **L25:** `p2` means: Confirm password field (must match p1).
-- **L32:** `result` means: AuthResult or API result { success, message, … }.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Web.UI;
-using WebAppAssignment.Data.Security;
-
-namespace WebAppAssignment.Pages.Authentication
-{
-    public partial class ResetPassword : Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            AuthSchema.Ensure();
-            CsrfProtection.EnsureToken(Context);
-            if (!IsPostBack)
-            {
-                string email = Request.QueryString["email"];
-                if (!string.IsNullOrEmpty(email))
-                    txtEmail.Text = email.Trim();
-            }
-        }
-
-        protected void btnReset_Click(object sender, EventArgs e)
-        {
-            lblMsg.CssClass = "d-block mt-3 text-center small text-danger";
-            string p1 = txtPassword.Text ?? "";
-            string p2 = txtPassword2.Text ?? "";
-            if (p1 != p2)
-            {
-                lblMsg.Text = "Passwords do not match.";
-                return;
-            }
-
-            var result = AuthService.ResetPasswordWithTotp(txtEmail.Text, txtCode.Text, p1);
-            if (!result.Success)
-            {
-                lblMsg.Text = result.Message ?? "Could not reset password.";
-                return;
-            }
-
-            lblMsg.CssClass = "d-block mt-3 text-center small text-success";
-            lblMsg.Text = result.Message + " Redirecting to login…";
-            Response.AddHeader("Refresh", "2;url=" + ResolveUrl("~/Pages/Authentication/Login.aspx"));
-        }
-    }
-}
-
 ```

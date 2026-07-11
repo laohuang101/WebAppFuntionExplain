@@ -1,6 +1,6 @@
 # UploadPathGuard.cs
 **Source:** `Data/Security/UploadPathGuard.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,43 +15,47 @@ Normalize/sanitize paths under ~/Uploads; block traversal and illegal folders.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 13:** `AllowedRoots` (`string[]`) — **Often a collection related to Allowed Roots (plural name). (text)**
-- **Line 24:** `f` (`string`) — **Holds “f” for this scope. (text)**
-- **Line 40:** `parts` (`var`) — **Split path or name segments.**
-- **Line 47:** `null` (`return`) — **Holds “null” for this scope. (type `return`)**
-- **Line 51:** `allowed` (`bool`) — **Boolean — path/role is permitted.**
-- **Line 72:** `rel` (`string`) — **Holds “rel” for this scope. (text)**
-- **Line 74:** `uploadsRoot` (`string`) — **Holds “uploads Root” for this scope. (text)**
-- **Line 80:** `full` (`string`) — **Fully resolved absolute path.**
-- **Line 81:** `rootFull` (`string`) — **Holds “root Full” for this scope. (text)**
-- **Line 84:** `rootWithSep` (`string`) — **Holds “root With Sep” for this scope. (text)**
-- **Line 89:** `null` (`return`) — **Holds “null” for this scope. (type `return`)**
-- **Line 91:** `full` (`return`) — **Fully resolved absolute path.**
-- **Line 100:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `AllowedRoots` | `string[]` | Often a collection related to Allowed Roots (plural name). (text) |
 
 ## Functions / methods (3 found)
 
 ### `NormalizeRelative` — lines 21–64
 
+#### Signature
+
 ```csharp
 public static string NormalizeRelative(string raw)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `NormalizeRelative`.
-- **Parameters (what each means):**
-- `raw` (`string`) — Raw bytes or unprocessed input string.
-- **Local variables (what each means):**
-- `f` (`string`) — Holds “f” for this scope. (text)
-- `parts` (`var`) — Split path or name segments.
-- `allowed` (`bool`) — Boolean — path/role is permitted.
-- `p` — Parameter, path, or password fragment depending on context.
-- `root` — Root directory path (Uploads).
+Cleans a client file path and forces it under allowed Uploads folders only.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `raw` | `string` | Raw bytes or unprocessed input string. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `f` | `string` | Holds “f” for this scope. (text) |
+| `parts` | `var` | Split path or name segments. |
+| `allowed` | `bool` | Boolean — path/role is permitted. |
+| `p` | `—` | Parameter, path, or password fragment depending on context. |
+| `root` | `—` | Root directory path (Uploads). |
+
+#### Code
 
 ```csharp
   21 |         public static string NormalizeRelative(string raw)
@@ -100,35 +104,41 @@ public static string NormalizeRelative(string raw)
   64 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L21:** Path sandbox under Uploads.
-- **L24:** `f` means: Holds “f” for this scope. (text)
-- **L27:** Error handling block.
-- **L41:** `parts` means: Split path or name segments.
-- **L51:** `allowed` means: Boolean — path/role is permitted.
-
 ---
 
 ### `ToPhysical` — lines 69–92
+
+#### Signature
 
 ```csharp
 public static string ToPhysical(HttpContext ctx, string relativeUnderUploads)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ToPhysical`.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- `relativeUnderUploads` (`string`) — Often a collection related to relative Under Uploads (plural name). (text)
-- **Local variables (what each means):**
-- `rel` (`string`) — Holds “rel” for this scope. (text)
-- `full` (`string`) — Fully resolved absolute path.
-- `rootFull` (`string`) — Holds “root Full” for this scope. (text)
-- `rootWithSep` (`string`) — Holds “root With Sep” for this scope. (text)
+Turns a relative Uploads path into a full disk path (or null if unsafe).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+| `relativeUnderUploads` | `string` | Often a collection related to relative Under Uploads (plural name). (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `rel` | `string` | Holds “rel” for this scope. (text) |
+| `full` | `string` | Fully resolved absolute path. |
+| `rootFull` | `string` | Holds “root Full” for this scope. (text) |
+| `rootWithSep` | `string` | Holds “root With Sep” for this scope. (text) |
+
+#### Code
 
 ```csharp
   69 |         public static string ToPhysical(HttpContext ctx, string relativeUnderUploads)
@@ -157,33 +167,39 @@ public static string ToPhysical(HttpContext ctx, string relativeUnderUploads)
   92 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L72:** Path sandbox under Uploads. | `rel` means: Holds “rel” for this scope. (text)
-- **L76:** Error handling block.
-- **L77:** Handle/log exception.
-- **L80:** `full` means: Fully resolved absolute path.
-- **L81:** `rootFull` means: Holds “root Full” for this scope. (text)
-- **L84:** `rootWithSep` means: Holds “root With Sep” for this scope. (text)
-
 ---
 
 ### `IsAllowedExtension` — lines 93–101
+
+#### Signature
 
 ```csharp
 public static bool IsAllowedExtension(string ext, string[] allow)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `IsAllowedExtension`.
-- **Parameters (what each means):**
-- `ext` (`string`) — File extension (.pdf, .mp4, …).
-- `allow` (`string[]`) — Holds “allow” for this scope. (text)
-- **Local variables (what each means):**
-- `a` — Holds “a” for this scope.
+Checks a condition related to **Is Allowed Extension** and returns true/false (or tries an action safely).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+2. Return `false` to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ext` | `string` | File extension (.pdf, .mp4, …). |
+| `allow` | `string[]` | Holds “allow” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `a` | `—` | Holds “a” for this scope. |
+
+#### Code
 
 ```csharp
   93 | 
@@ -199,9 +215,9 @@ public static bool IsAllowedExtension(string ext, string[] allow)
 
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -307,132 +323,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  101 |         }
  102 |     }
  103 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L5:** C# namespace grouping.
-- **L11:** Sandbox path under ~/Uploads.
-- **L21:** Path sandbox under Uploads.
-- **L24:** `f` means: Holds “f” for this scope. (text)
-- **L27:** Error handling block.
-- **L41:** `parts` means: Split path or name segments.
-- **L51:** `allowed` means: Boolean — path/role is permitted.
-- **L72:** Path sandbox under Uploads. | `rel` means: Holds “rel” for this scope. (text)
-- **L76:** Error handling block.
-- **L77:** Handle/log exception.
-- **L80:** `full` means: Fully resolved absolute path.
-- **L81:** `rootFull` means: Holds “root Full” for this scope. (text)
-- **L84:** `rootWithSep` means: Holds “root With Sep” for this scope. (text)
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.IO;
-using System.Web;
-
-namespace WebAppAssignment.Data.Security
-{
-    /// <summary>
-    /// Resolve upload paths only under ~/Uploads and known subfolders.
-    /// Blocks path traversal and absolute paths.
-    /// </summary>
-    public static class UploadPathGuard
-    {
-        public static readonly string[] AllowedRoots =
-        {
-            "CourseMaterials", "CourseVideos", "CourseThumbnails", "CourseSubmissions"
-        };
-
-        /// <summary>
-        /// Normalize client path to "Folder/file.ext" under Uploads, or null if invalid.
-        /// </summary>
-        public static string NormalizeRelative(string raw)
-        {
-            if (string.IsNullOrWhiteSpace(raw)) return null;
-            string f = raw.Replace('\\', '/').Trim();
-            if (f.IndexOf('%') >= 0)
-            {
-                try { f = HttpUtility.UrlDecode(f); } catch { }
-                f = (f ?? "").Replace('\\', '/').Trim();
-            }
-
-            while (f.StartsWith("/")) f = f.Substring(1);
-            if (f.StartsWith("~/")) f = f.Substring(2);
-            if (f.StartsWith("Uploads/", StringComparison.OrdinalIgnoreCase))
-                f = f.Substring("Uploads/".Length);
-            if (f.StartsWith("Uploads\\", StringComparison.OrdinalIgnoreCase))
-                f = f.Substring("Uploads\\".Length);
-
-            if (string.IsNullOrEmpty(f)) return null;
-            if (f.IndexOf(':') >= 0) return null; // drive letter / scheme
-
-            var parts = f.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-            if (parts.Length < 1) return null;
-
-            foreach (var p in parts)
-            {
-                if (p == "." || p == ".." || p.IndexOf('\0') >= 0)
-                    return null;
-            }
-
-            // Must start with allowed root when multi-segment or single-folder style
-            bool allowed = false;
-            foreach (var root in AllowedRoots)
-            {
-                if (string.Equals(parts[0], root, StringComparison.OrdinalIgnoreCase))
-                {
-                    allowed = true;
-                    parts[0] = root; // canonical casing
-                    break;
-                }
-            }
-            if (!allowed) return null;
-
-            return string.Join("/", parts);
-        }
-
-        /// <summary>
-        /// Map relative Folder/file to physical path under Uploads; null if outside sandbox.
-        /// </summary>
-        public static string ToPhysical(HttpContext ctx, string relativeUnderUploads)
-        {
-            if (ctx == null || string.IsNullOrEmpty(relativeUnderUploads)) return null;
-            string rel = NormalizeRelative(relativeUnderUploads);
-            if (string.IsNullOrEmpty(rel)) return null;
-
-            string uploadsRoot;
-            try { uploadsRoot = ctx.Server.MapPath("~/Uploads"); }
-            catch { return null; }
-
-            if (string.IsNullOrEmpty(uploadsRoot)) return null;
-            string full = Path.GetFullPath(Path.Combine(uploadsRoot, rel.Replace('/', Path.DirectorySeparatorChar)));
-            string rootFull = Path.GetFullPath(uploadsRoot);
-
-            // Ensure full is under root (trailing separator avoids prefix tricks)
-            string rootWithSep = rootFull.TrimEnd(Path.DirectorySeparatorChar)
-                                 + Path.DirectorySeparatorChar;
-            if (!full.StartsWith(rootWithSep, StringComparison.OrdinalIgnoreCase)
-                && !string.Equals(full, rootFull, StringComparison.OrdinalIgnoreCase))
-            {
-                return null;
-            }
-            return full;
-        }
-
-        public static bool IsAllowedExtension(string ext, string[] allow)
-        {
-            if (string.IsNullOrEmpty(ext) || allow == null) return false;
-            ext = ext.ToLowerInvariant();
-            foreach (var a in allow)
-                if (string.Equals(a, ext, StringComparison.OrdinalIgnoreCase)) return true;
-            return false;
-        }
-    }
-}
-
 ```

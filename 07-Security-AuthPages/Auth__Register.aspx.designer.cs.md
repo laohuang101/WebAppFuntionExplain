@@ -1,6 +1,6 @@
 # Register.aspx.designer.cs
 **Source:** `Pages/Authentication/Register.aspx.designer.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,17 +15,17 @@ Two-step: form → Session pending → QR/MFA confirm → only then INSERT user.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-_No classic field declarations detected (or mostly locals inside methods — see each function’s **Local variables** section)._
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (0 found)
 
-_No methods matched the scanner (markup-only or unconventional structure). See full file listing below._
+_No methods matched the scanner (markup-only or unconventional structure). See the code listing at the bottom._
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | namespace WebAppAssignment.Pages.Authentication
@@ -54,40 +54,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   24 |         protected global::System.Web.UI.WebControls.Literal litDoneMsg;
   25 |     }
   26 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** C# namespace grouping.
-
-## Source snapshot (raw)
-
-```csharp
-namespace WebAppAssignment.Pages.Authentication
-{
-    public partial class Register
-    {
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        protected global::System.Web.UI.WebControls.Panel pnlForm;
-        protected global::System.Web.UI.WebControls.RadioButtonList rblRole;
-        protected global::System.Web.UI.WebControls.TextBox txtName;
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
-        protected global::System.Web.UI.WebControls.TextBox txtConfirm;
-        protected global::System.Web.UI.WebControls.Button btnRegister;
-        protected global::System.Web.UI.WebControls.Label lblError;
-        protected global::System.Web.UI.WebControls.Panel pnlMfaSetup;
-        protected global::System.Web.UI.WebControls.Image imgQr;
-        protected global::System.Web.UI.WebControls.Literal litMfaSecret;
-        protected global::System.Web.UI.WebControls.HiddenField hidMfaSecret;
-        protected global::System.Web.UI.WebControls.HiddenField hidMfaEmail;
-        protected global::System.Web.UI.WebControls.TextBox txtSetupCode;
-        protected global::System.Web.UI.WebControls.Button btnConfirmMfa;
-        protected global::System.Web.UI.WebControls.Label lblMfaError;
-        protected global::System.Web.UI.WebControls.LinkButton lnkCancelMfa;
-        protected global::System.Web.UI.WebControls.Panel pnlDone;
-        protected global::System.Web.UI.WebControls.Literal litDoneMsg;
-    }
-}
-
 ```

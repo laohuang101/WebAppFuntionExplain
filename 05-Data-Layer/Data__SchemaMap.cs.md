@@ -1,6 +1,6 @@
 # SchemaMap.cs
 **Source:** `Data/SchemaMap.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,58 +15,61 @@ Discovers real table/column names in the attached MDF (SubChapters vs Lessons, e
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 15:** `Gate` (`object`) — **Holds “Gate” for this scope.**
-- **Line 16:** `_loaded` (`bool`) — **Holds “loaded” for this scope. (true/false)**
-- **Line 17:** `_loadError` (`string`) — **Holds “load Error” for this scope. (text)**
-- **Line 20:** `SubTable` (`string`) — **Holds “Sub Table” for this scope. (text)**
-- **Line 21:** `SubPk` (`string`) — **Holds “Sub Pk” for this scope. (text)**
-- **Line 22:** `SubChapterFk` (`string`) — **Holds “Sub Chapter Fk” for this scope. (text)**
-- **Line 23:** `SubTitle` (`string`) — **Holds “Sub Title” for this scope. (text)**
-- **Line 24:** `SubIndex` (`string`) — **Holds “Sub Index” for this scope. (text)**
-- **Line 27:** `MatTable` (`string`) — **Holds “Mat Table” for this scope. (text)**
-- **Line 28:** `MatPk` (`string`) — **Holds “Mat Pk” for this scope. (text)**
-- **Line 29:** `MatSubFk` (`string`) — **Holds “Mat Sub Fk” for this scope. (text)**
-- **Line 30:** `MatLinksToSub` (`bool`) — **Holds “Mat Links To Sub” for this scope. (true/false)**
-- **Line 31:** `MatType` (`string`) — **Holds “Mat Type” for this scope. (text)**
-- **Line 32:** `MatText` (`string`) — **Holds “Mat Text” for this scope. (text)**
-- **Line 33:** `MatMedia` (`string`) — **Holds “Mat Media” for this scope. (text)**
-- **Line 34:** `MatIndex` (`string`) — **Holds “Mat Index” for this scope. (text)**
-- **Line 37:** `ChTable` (`string`) — **Holds “Ch Table” for this scope. (text)**
-- **Line 38:** `ChPk` (`string`) — **Holds “Ch Pk” for this scope. (text)**
-- **Line 39:** `ChCourseFk` (`string`) — **Holds “Ch Course Fk” for this scope. (text)**
-- **Line 40:** `ChTitle` (`string`) — **Holds “Ch Title” for this scope. (text)**
-- **Line 41:** `ChIndex` (`string`) — **Holds “Ch Index” for this scope. (text)**
-- **Line 74:** `chCols` (`var`) — **Often a collection related to ch Cols (plural name).**
-- **Line 79:** `chPk` (`var`) — **Holds “ch Pk” for this scope.**
-- **Line 87:** `subTable` (`string`) — **Holds “sub Table” for this scope. (text)**
-- **Line 96:** `sc` (`var`) — **Holds “sc” for this scope.**
-- **Line 97:** `pk` (`var`) — **Holds “pk” for this scope.**
-- **Line 107:** `matTable` (`string`) — **Holds “mat Table” for this scope. (text)**
-- **Line 115:** `mc` (`var`) — **Holds “mc” for this scope.**
-- **Line 116:** `mPk` (`var`) — **Holds “m Pk” for this scope.**
-- **Line 163:** `list` (`var`) — **In-memory collection being built for JSON return.**
-- **Line 173:** `list` (`return`) — **In-memory collection being built for JSON return.**
-- **Line 192:** `o` (`var`) — **Holds “o” for this scope.**
-- **Line 193:** `o` (`return`) — **Holds “o” for this scope. (type `return`)**
-- **Line 201:** `hit` (`var`) — **Holds “hit” for this scope.**
-- **Line 213:** `hit` (`var`) — **Holds “hit” for this scope.**
-- **Line 216:** `null` (`return`) — **Holds “null” for this scope. (type `return`)**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `Gate` | `object` | Holds “Gate” for this scope. |
+| `_loaded` | `bool` | Holds “loaded” for this scope. (true/false) |
+| `_loadError` | `string` | Holds “load Error” for this scope. (text) |
+| `SubTable` | `string` | Holds “Sub Table” for this scope. (text) |
+| `SubPk` | `string` | Holds “Sub Pk” for this scope. (text) |
+| `SubChapterFk` | `string` | Holds “Sub Chapter Fk” for this scope. (text) |
+| `SubTitle` | `string` | Holds “Sub Title” for this scope. (text) |
+| `SubIndex` | `string` | Holds “Sub Index” for this scope. (text) |
+| `MatTable` | `string` | Holds “Mat Table” for this scope. (text) |
+| `MatPk` | `string` | Holds “Mat Pk” for this scope. (text) |
+| `MatSubFk` | `string` | Holds “Mat Sub Fk” for this scope. (text) |
+| `MatLinksToSub` | `bool` | Holds “Mat Links To Sub” for this scope. (true/false) |
+| `MatType` | `string` | Holds “Mat Type” for this scope. (text) |
+| `MatText` | `string` | Holds “Mat Text” for this scope. (text) |
+| `MatMedia` | `string` | Holds “Mat Media” for this scope. (text) |
+| `MatIndex` | `string` | Holds “Mat Index” for this scope. (text) |
+| `ChTable` | `string` | Holds “Ch Table” for this scope. (text) |
+| `ChPk` | `string` | Holds “Ch Pk” for this scope. (text) |
+| `ChCourseFk` | `string` | Holds “Ch Course Fk” for this scope. (text) |
+| `ChTitle` | `string` | Holds “Ch Title” for this scope. (text) |
+| `ChIndex` | `string` | Holds “Ch Index” for this scope. (text) |
 
 ## Functions / methods (11 found)
 
 ### `Ensure` — lines 44–62
 
+#### Signature
+
 ```csharp
 public static void Ensure()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Ensure`.
+Makes sure **** exists or is valid before the rest of the code continues.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `Ensure`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   44 | 
@@ -90,24 +93,35 @@ public static void Ensure()
   62 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L51:** Error handling block.
-- **L56:** Handle/log exception.
-
 ---
 
 ### `Reset` — lines 63–67
+
+#### Signature
 
 ```csharp
 public static void Reset()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Reset`.
+Function `Reset` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `Reset`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   63 | 
@@ -121,26 +135,39 @@ public static void Reset()
 
 ### `Discover` — lines 68–149
 
+#### Signature
+
 ```csharp
 private static void Discover()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Discover`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
-- `chPk` (`var`) — Holds “ch Pk” for this scope.
-- `subTable` (`string`) — Holds “sub Table” for this scope. (text)
-- `sc` (`var`) — Holds “sc” for this scope.
-- `pk` (`var`) — Holds “pk” for this scope.
-- `matTable` (`string`) — Holds “mat Table” for this scope. (text)
-- `mc` (`var`) — Holds “mc” for this scope.
-- `mPk` (`var`) — Holds “m Pk” for this scope.
-- `t` — Temporary string/token/time value.
+Function `Discover` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Open a connection to the LocalDB / SQL Server database.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+| `chPk` | `var` | Holds “ch Pk” for this scope. |
+| `subTable` | `string` | Holds “sub Table” for this scope. (text) |
+| `sc` | `var` | Holds “sc” for this scope. |
+| `pk` | `var` | Holds “pk” for this scope. |
+| `matTable` | `string` | Holds “mat Table” for this scope. (text) |
+| `mc` | `var` | Holds “mc” for this scope. |
+| `mPk` | `var` | Holds “m Pk” for this scope. |
+| `t` | `—` | Temporary string/token/time value. |
+
+#### Code
 
 ```csharp
   68 | 
@@ -227,37 +254,38 @@ private static void Discover()
  149 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L71:** Import namespace/types.
-- **L74:** `chCols` means: Often a collection related to ch Cols (plural name).
-- **L79:** `chPk` means: Holds “ch Pk” for this scope.
-- **L87:** `subTable` means: Holds “sub Table” for this scope. (text)
-- **L96:** `sc` means: Holds “sc” for this scope.
-- **L97:** `pk` means: Holds “pk” for this scope.
-- **L107:** `matTable` means: Holds “mat Table” for this scope. (text)
-- **L115:** `mc` means: Holds “mc” for this scope.
-- **L116:** `mPk` means: Holds “m Pk” for this scope.
-
 ---
 
 ### `TableExists` — lines 150–159
+
+#### Signature
 
 ```csharp
 private static bool TableExists(SqlConnection conn, string name)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `TableExists`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `name` (`string`) — Display name of user/course/criterion.
-- **Local variables (what each means):**
-- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
+Function `TableExists` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Run SQL that returns one value (count, id, flag).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `name` | `string` | Display name of user/course/criterion. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cmd` | `var` | SqlCommand — the SQL statement + parameters object.  Newly constructed object. |
+
+#### Code
 
 ```csharp
  150 | 
@@ -272,34 +300,42 @@ private static bool TableExists(SqlConnection conn, string name)
  159 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L151:** Database access (pure SQL).
-- **L153:** Import namespace/types.
-- **L156:** Parameterized SQL — prevents classic SQL injection.
-- **L157:** Run SQL; return table / rows / scalar.
-
 ---
 
 ### `Cols` — lines 160–174
+
+#### Signature
 
 ```csharp
 private static List<string> Cols(SqlConnection conn, string table)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Cols`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `table` (`string`) — DataTable or HTML table container.
-- **Local variables (what each means):**
-- `list` (`var`) — In-memory collection being built for JSON return.  Newly constructed object.
-- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
-- `r` (`var`) — Usually one database row (DataRow) in query loops.
+Function `Cols` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `Cols`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `table` | `string` | DataTable or HTML table container. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `list` | `var` | In-memory collection being built for JSON return.  Newly constructed object. |
+| `cmd` | `var` | SqlCommand — the SQL statement + parameters object.  Newly constructed object. |
+| `r` | `var` | Usually one database row (DataRow) in query loops. |
+
+#### Code
 
 ```csharp
  160 | 
@@ -319,30 +355,38 @@ private static List<string> Cols(SqlConnection conn, string table)
  174 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L161:** Database access (pure SQL).
-- **L163:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
-- **L164:** Import namespace/types.
-- **L167:** Parameterized SQL — prevents classic SQL injection.
-- **L168:** Import namespace/types.
-
 ---
 
 ### `Has` — lines 175–179
+
+#### Signature
 
 ```csharp
 private static bool Has(List<string> cols, string name)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Has`.
-- **Parameters (what each means):**
-- `cols` (`List<string>`) — Often a collection related to cols (plural name). (text)
-- `name` (`string`) — Display name of user/course/criterion.
+Checks a condition related to **Has** and returns true/false (or tries an action safely).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `Has`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cols` | `List<string>` | Often a collection related to cols (plural name). (text) |
+| `name` | `string` | Display name of user/course/criterion. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  175 | 
@@ -356,22 +400,35 @@ private static bool Has(List<string> cols, string name)
 
 ### `PrimaryKey` — lines 180–195
 
+#### Signature
+
 ```csharp
 private static string PrimaryKey(SqlConnection conn, string table)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `PrimaryKey`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `table` (`string`) — DataTable or HTML table container.
-- **Local variables (what each means):**
-- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
-- `o` (`var`) — Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
+Function `PrimaryKey` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Run SQL that returns one value (count, id, flag).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `table` | `string` | DataTable or HTML table container. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cmd` | `var` | SqlCommand — the SQL statement + parameters object.  Newly constructed object. |
+| `o` | `var` | Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY). |
+
+#### Code
 
 ```csharp
  180 | 
@@ -392,34 +449,39 @@ private static string PrimaryKey(SqlConnection conn, string table)
  195 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L181:** Database access (pure SQL).
-- **L183:** Import namespace/types.
-- **L186:** Join related tables (courses ↔ chapters ↔ works ↔ users).
-- **L191:** Parameterized SQL — prevents classic SQL injection.
-- **L192:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L193:** Null-safe read from database values.
-
 ---
 
 ### `Pick` — lines 196–207
+
+#### Signature
 
 ```csharp
 private static string Pick(List<string> cols, params string[] candidates)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Pick`.
-- **Parameters (what each means):**
-- `cols` (`List<string>`) — Often a collection related to cols (plural name). (text)
-- `candidates` (`string[]`) — Boolean flag: candidates. (text)
-- **Local variables (what each means):**
-- `hit` (`var`) — Holds “hit” for this scope.
-- `c` — Temporary value (character, course, or counter depending on loop).
+Function `Pick` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Stop with an error (invalid access or bad input).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cols` | `List<string>` | Often a collection related to cols (plural name). (text) |
+| `candidates` | `string[]` | Boolean flag: candidates. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `hit` | `var` | Holds “hit” for this scope. |
+| `c` | `—` | Temporary value (character, course, or counter depending on loop). |
+
+#### Code
 
 ```csharp
  196 | 
@@ -436,29 +498,41 @@ private static string Pick(List<string> cols, params string[] candidates)
  207 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L201:** `hit` means: Holds “hit” for this scope.
-
 ---
 
 ### `PickOptional` — lines 208–217
+
+#### Signature
 
 ```csharp
 private static string PickOptional(List<string> cols, params string[] candidates)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `PickOptional`.
-- **Parameters (what each means):**
-- `cols` (`List<string>`) — Often a collection related to cols (plural name). (text)
-- `candidates` (`string[]`) — Boolean flag: candidates. (text)
-- **Local variables (what each means):**
-- `hit` (`var`) — Holds “hit” for this scope.
-- `c` — Temporary value (character, course, or counter depending on loop).
+Function `PickOptional` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `PickOptional`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cols` | `List<string>` | Often a collection related to cols (plural name). (text) |
+| `candidates` | `string[]` | Boolean flag: candidates. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `hit` | `var` | Holds “hit” for this scope. |
+| `c` | `—` | Temporary value (character, course, or counter depending on loop). |
+
+#### Code
 
 ```csharp
  208 | 
@@ -473,25 +547,35 @@ private static string PickOptional(List<string> cols, params string[] candidates
  217 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L213:** `hit` means: Holds “hit” for this scope.
-
 ---
 
 ### `Q` — lines 218–224
+
+#### Signature
 
 ```csharp
 public static string Q(string ident)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Q`.
-- **Parameters (what each means):**
-- `ident` (`string`) — Holds “ident” for this scope. (text)
+Function `Q` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ident` | `string` | Holds “ident” for this scope. (text) |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  218 | 
@@ -507,15 +591,31 @@ public static string Q(string ident)
 
 ### `DebugInfo` — lines 225–236
 
+#### Signature
+
 ```csharp
 public static object DebugInfo()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `DebugInfo`.
+Function `DebugInfo` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `DebugInfo`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  225 | 
@@ -534,9 +634,9 @@ public static object DebugInfo()
 
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -777,285 +877,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  236 |         }
  237 |     }
  238 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L5:** Import namespace/types.
-- **L7:** C# namespace grouping.
-- **L51:** Error handling block.
-- **L56:** Handle/log exception.
-- **L71:** Import namespace/types.
-- **L74:** `chCols` means: Often a collection related to ch Cols (plural name).
-- **L79:** `chPk` means: Holds “ch Pk” for this scope.
-- **L87:** `subTable` means: Holds “sub Table” for this scope. (text)
-- **L96:** `sc` means: Holds “sc” for this scope.
-- **L97:** `pk` means: Holds “pk” for this scope.
-- **L107:** `matTable` means: Holds “mat Table” for this scope. (text)
-- **L115:** `mc` means: Holds “mc” for this scope.
-- **L116:** `mPk` means: Holds “m Pk” for this scope.
-- **L151:** Database access (pure SQL).
-- **L153:** Import namespace/types.
-- **L156:** Parameterized SQL — prevents classic SQL injection.
-- **L157:** Run SQL; return table / rows / scalar.
-- **L161:** Database access (pure SQL).
-- **L163:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
-- **L164:** Import namespace/types.
-- **L167:** Parameterized SQL — prevents classic SQL injection.
-- **L168:** Import namespace/types.
-- **L181:** Database access (pure SQL).
-- **L183:** Import namespace/types.
-- **L186:** Join related tables (courses ↔ chapters ↔ works ↔ users).
-- **L191:** Parameterized SQL — prevents classic SQL injection.
-- **L192:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L193:** Null-safe read from database values.
-- **L201:** `hit` means: Holds “hit” for this scope.
-- **L213:** `hit` means: Holds “hit” for this scope.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-
-namespace WebAppAssignment.Data
-{
-    /// <summary>
-    /// Discovers real column names from EduDB via INFORMATION_SCHEMA
-    /// so curriculum SQL works even when PK names differ (SchID vs ID etc.).
-    /// </summary>
-    public static class SchemaMap
-    {
-        private static readonly object Gate = new object();
-        private static bool _loaded;
-        private static string _loadError;
-
-        // SubChapters
-        public static string SubTable = null;
-        public static string SubPk = null;
-        public static string SubChapterFk = null;
-        public static string SubTitle = null;
-        public static string SubIndex = null; // optional
-
-        // StudyMats
-        public static string MatTable = null;
-        public static string MatPk = null;
-        public static string MatSubFk = null; // SchID or ChID
-        public static bool MatLinksToSub = false;
-        public static string MatType = null;
-        public static string MatText = null;
-        public static string MatMedia = null;
-        public static string MatIndex = null;
-
-        // Chapters
-        public static string ChTable = "Chapters";
-        public static string ChPk = "ChID";
-        public static string ChCourseFk = "CID";
-        public static string ChTitle = "Title";
-        public static string ChIndex = null;
-
-        public static string LoadError { get { Ensure(); return _loadError; } }
-
-        public static void Ensure()
-        {
-            if (_loaded) return;
-            lock (Gate)
-            {
-                if (_loaded) return;
-                try
-                {
-                    Discover();
-                    _loadError = null;
-                }
-                catch (Exception ex)
-                {
-                    _loadError = ex.Message;
-                }
-                _loaded = true;
-            }
-        }
-
-        public static void Reset()
-        {
-            lock (Gate) { _loaded = false; _loadError = null; }
-        }
-
-        private static void Discover()
-        {
-            using (var conn = DbHelper.OpenConnection())
-            {
-                // Chapters
-                var chCols = Cols(conn, "Chapters");
-                if (chCols.Count == 0) chCols = Cols(conn, "Chapter");
-                if (chCols.Count > 0)
-                {
-                    ChTable = TableExists(conn, "Chapters") ? "Chapters" : "Chapter";
-                    var chPk = PrimaryKey(conn, ChTable);
-                    ChPk = !string.IsNullOrEmpty(chPk) ? chPk : Pick(chCols, "ChID", "ChapterID", "ID", "Id");
-                    ChCourseFk = Pick(chCols, "CID", "CourseID", "CourseId");
-                    ChTitle = Pick(chCols, "Title", "Name");
-                    ChIndex = PickOptional(chCols, "Index", "Order", "OrderIndex", "SortOrder", "Idx");
-                }
-
-                // SubChapters / SubChapter / Lessons
-                string subTable = null;
-                foreach (var t in new[] { "SubChapters", "SubChapter", "Lessons", "Lesson" })
-                {
-                    if (TableExists(conn, t)) { subTable = t; break; }
-                }
-
-                if (subTable != null)
-                {
-                    SubTable = subTable;
-                    var sc = Cols(conn, subTable);
-                    var pk = PrimaryKey(conn, subTable);
-                    SubPk = !string.IsNullOrEmpty(pk)
-                    ? pk
-                    : Pick(sc, "SchID", "SChID", "SubChapterID", "SubChapterId", "LessonID", "LessonId", "ID", "Id");
-                    SubChapterFk = Pick(sc, "ChID", "ChapterID", "ChapterId");
-                    SubTitle = Pick(sc, "Title", "Name", "LessonTitle");
-                    SubIndex = PickOptional(sc, "Index", "Order", "OrderIndex", "SortOrder", "Idx");
-                }
-
-                // StudyMats
-                string matTable = null;
-                foreach (var t in new[] { "StudyMats", "StudyMat", "StudyMaterials", "Materials" })
-                {
-                    if (TableExists(conn, t)) { matTable = t; break; }
-                }
-                if (matTable != null)
-                {
-                    MatTable = matTable;
-                    var mc = Cols(conn, matTable);
-                    var mPk = PrimaryKey(conn, matTable);
-                    MatPk = !string.IsNullOrEmpty(mPk) ? mPk : Pick(mc, "SMID", "MID", "MaterialID", "ID", "Id");
-                    MatType = PickOptional(mc, "Type", "MaterialType", "ContentType");
-                    MatText = PickOptional(mc, "TextContent", "Content", "Text", "Body");
-                    MatMedia = PickOptional(mc, "MediaLink", "MediaUrl", "Link", "Url", "FilePath");
-                    MatIndex = PickOptional(mc, "Index", "Order", "OrderIndex", "SortOrder", "Idx");
-
-                    // Prefer SubChapter FK if present, else Chapter FK (legacy)
-                    if (Has(mc, "SchID") || Has(mc, "SChID") || Has(mc, "SubChapterID") || Has(mc, "LessonID"))
-                    {
-                        MatSubFk = Pick(mc, "SchID", "SChID", "SubChapterID", "SubChapterId", "LessonID", "LessonId");
-                        MatLinksToSub = true;
-                    }
-                    else if (Has(mc, "ChID") || Has(mc, "ChapterID"))
-                    {
-                        MatSubFk = Pick(mc, "ChID", "ChapterID", "ChapterId");
-                        MatLinksToSub = false;
-                    }
-                    else if (!string.IsNullOrEmpty(SubTable) && !string.IsNullOrEmpty(SubPk) && Has(mc, SubPk))
-                    {
-                        MatSubFk = SubPk;
-                        MatLinksToSub = true;
-                    }
-
-                    // Need at least one content column
-                    if (string.IsNullOrEmpty(MatType) && string.IsNullOrEmpty(MatText) && string.IsNullOrEmpty(MatMedia))
-                    {
-                        MatText = mc.FirstOrDefault(c =>
-                        !string.Equals(c, MatPk, StringComparison.OrdinalIgnoreCase) &&
-                        !string.Equals(c, MatSubFk, StringComparison.OrdinalIgnoreCase));
-                    }
-                }
-            }
-        }
-
-        private static bool TableExists(SqlConnection conn, string name)
-        {
-            using (var cmd = new SqlCommand(
-            "SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = @t", conn))
-            {
-                cmd.Parameters.AddWithValue("@t", name);
-                return cmd.ExecuteScalar() != null;
-            }
-        }
-
-        private static List<string> Cols(SqlConnection conn, string table)
-        {
-            var list = new List<string>();
-            using (var cmd = new SqlCommand(
-            "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @t", conn))
-            {
-                cmd.Parameters.AddWithValue("@t", table);
-                using (var r = cmd.ExecuteReader())
-                {
-                    while (r.Read()) list.Add(r.GetString(0));
-                }
-            }
-            return list;
-        }
-
-        private static bool Has(List<string> cols, string name)
-        {
-            return cols.Any(c => string.Equals(c, name, StringComparison.OrdinalIgnoreCase));
-        }
-
-        private static string PrimaryKey(SqlConnection conn, string table)
-        {
-            using (var cmd = new SqlCommand(@"
-            SELECT TOP 1 ku.COLUMN_NAME
-            FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc
-            INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE ku
-            ON tc.CONSTRAINT_NAME = ku.CONSTRAINT_NAME AND tc.TABLE_NAME = ku.TABLE_NAME
-            WHERE tc.TABLE_NAME = @t AND tc.CONSTRAINT_TYPE = 'PRIMARY KEY'
-            ORDER BY ku.ORDINAL_POSITION", conn))
-            {
-                cmd.Parameters.AddWithValue("@t", table);
-                var o = cmd.ExecuteScalar();
-                return o == null || o == DBNull.Value ? null : o.ToString();
-            }
-        }
-
-        private static string Pick(List<string> cols, params string[] candidates)
-        {
-            foreach (var c in candidates)
-            {
-                var hit = cols.FirstOrDefault(x => string.Equals(x, c, StringComparison.OrdinalIgnoreCase));
-                if (hit != null) return hit;
-            }
-            // last resort: first column (often PK)
-            if (cols.Count > 0) return cols[0];
-            throw new InvalidOperationException("No columns found; candidates: " + string.Join(",", candidates));
-        }
-
-        private static string PickOptional(List<string> cols, params string[] candidates)
-        {
-            foreach (var c in candidates)
-            {
-                var hit = cols.FirstOrDefault(x => string.Equals(x, c, StringComparison.OrdinalIgnoreCase));
-                if (hit != null) return hit;
-            }
-            return null;
-        }
-
-        public static string Q(string ident)
-        {
-            if (string.IsNullOrEmpty(ident)) return ident;
-            // bracket-quote for reserved words like Index
-            return "[" + ident.Replace("]", "]]") + "]";
-        }
-
-        public static object DebugInfo()
-        {
-            Ensure();
-            return new
-            {
-                loadError = _loadError,
-                chapters = new { ChTable, ChPk, ChCourseFk, ChTitle, ChIndex },
-                sub = new { SubTable, SubPk, SubChapterFk, SubTitle, SubIndex },
-                mats = new { MatTable, MatPk, MatSubFk, MatLinksToSub, MatType, MatText, MatMedia, MatIndex }
-            };
-        }
-    }
-}
-
 ```

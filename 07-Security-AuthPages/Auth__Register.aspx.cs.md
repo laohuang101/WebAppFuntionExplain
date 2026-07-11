@@ -1,6 +1,6 @@
 # Register.aspx.cs
 **Source:** `Pages/Authentication/Register.aspx.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,40 +15,41 @@ Two-step: form → Session pending → QR/MFA confirm → only then INSERT user.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 34:** `name` (`string`) — **Display name of user/course/criterion.**
-- **Line 35:** `email` (`string`) — **Account email address (usually lowercased).**
-- **Line 36:** `pass` (`string`) — **Password from a form field.**
-- **Line 37:** `confirm` (`string`) — **Confirm-password form field.**
-- **Line 38:** `role` (`string`) — **User role code or name (Admin/Student/Lecturer).**
-- **Line 45:** `result` (`var`) — **AuthResult or API result { success, message, … }.**
-- **Line 55:** `secret` (`string`) — **MFA TOTP Base32 secret for authenticator apps.**
-- **Line 71:** `code` (`string`) — **6-digit TOTP / OTP the user typed.**
-- **Line 89:** `result` (`var`) — **AuthResult or API result { success, message, … }.**
-- **Line 126:** `normalized` (`string`) — **Cleaned secret/code (spaces removed, uppercased).**
-- **Line 130:** `uri` (`string`) — **otpauth:// or other URI string.**
-- **Line 132:** `qrUrl` (`string`) — **URL of QR image for authenticator setup.**
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (5 found)
 
 ### `Page_Load` — lines 10–28
 
+#### Signature
+
 ```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Page_Load`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Navigation:** Redirects the browser.
-- **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+Runs automatically when the ASP.NET page opens or posts back; sets up the page and security checks.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Save temporary state in Session (`Session["UserID"] !`).
+2. Redirect the browser to another page.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   10 |         protected void Page_Load(object sender, EventArgs e)
@@ -72,37 +73,47 @@ protected void Page_Load(object sender, EventArgs e)
   28 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L10:** Page load entry (GET or postback).
-- **L12:** Server session for logged-in user.
-- **L14:** Navigate browser to another URL.
-- **L18:** False on first open; true after postback.
-
 ---
 
 ### `btnRegister_Click` — lines 31–65
+
+#### Signature
 
 ```csharp
 protected void btnRegister_Click(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `btnRegister_Click`.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
-- **Local variables (what each means):**
-- `name` (`string`) — Display name of user/course/criterion.
-- `email` (`string`) — Account email address (usually lowercased).
-- `pass` (`string`) — Password from a form field.
-- `confirm` (`string`) — Confirm-password form field.
-- `role` (`string`) — User role code or name (Admin/Student/Lecturer).
-- `result` (`var`) — AuthResult or API result { success, message, … }.
-- `secret` (`string`) — MFA TOTP Base32 secret for authenticator apps.
+Button handler: start registration and show the MFA setup panel.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Read name, email, passwords, and role from the form.
+2. If passwords do not match, show an error.
+3. Call StartRegistration (Session pending only).
+4. Hide the form and show the MFA QR / secret panel.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `name` | `string` | Display name of user/course/criterion. |
+| `email` | `string` | Account email address (usually lowercased). |
+| `pass` | `string` | Password from a form field. |
+| `confirm` | `string` | Confirm-password form field. |
+| `role` | `string` | User role code or name (Admin/Student/Lecturer). |
+| `result` | `var` | AuthResult or API result { success, message, … }. |
+| `secret` | `string` | MFA TOTP Base32 secret for authenticator apps. |
+
+#### Code
 
 ```csharp
   31 |         protected void btnRegister_Click(object sender, EventArgs e)
@@ -142,37 +153,42 @@ protected void btnRegister_Click(object sender, EventArgs e)
   65 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L34:** `name` means: Display name of user/course/criterion.
-- **L35:** `email` means: Account email address (usually lowercased).
-- **L36:** `pass` means: Password from a form field.
-- **L37:** `confirm` means: Confirm-password form field.
-- **L38:** `role` means: User role code or name (Admin/Student/Lecturer).
-- **L46:** Pending registration in Session until MFA confirmed. | `result` means: AuthResult or API result { success, message, … }.
-- **L55:** `secret` means: MFA TOTP Base32 secret for authenticator apps.
-- **L58:** Pending registration in Session until MFA confirmed.
-
 ---
 
 ### `btnConfirmMfa_Click` — lines 68–109
+
+#### Signature
 
 ```csharp
 protected void btnConfirmMfa_Click(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `btnConfirmMfa_Click`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
-- **Local variables (what each means):**
-- `code` (`string`) — 6-digit TOTP / OTP the user typed.
-- `result` (`var`) — AuthResult or API result { success, message, … }.
+Button handler: finish registration only after a valid authenticator code.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Read the 6-digit code the user typed.
+2. Call FinishRegistration (creates the Users row only if the code is valid).
+3. On success, show the “done” panel with a link to Login.
+4. On failure, keep the MFA panel and show the error.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `code` | `string` | 6-digit TOTP / OTP the user typed. |
+| `result` | `var` | AuthResult or API result { success, message, … }. |
+
+#### Code
 
 ```csharp
   68 |         protected void btnConfirmMfa_Click(object sender, EventArgs e)
@@ -219,28 +235,38 @@ protected void btnConfirmMfa_Click(object sender, EventArgs e)
  109 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L71:** `code` means: 6-digit TOTP / OTP the user typed.
-- **L90:** Pending registration in Session until MFA confirmed. | `result` means: AuthResult or API result { success, message, … }.
-- **L94:** Pending registration in Session until MFA confirmed.
-
 ---
 
 ### `lnkCancelMfa_Click` — lines 110–121
+
+#### Signature
 
 ```csharp
 protected void lnkCancelMfa_Click(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `lnkCancelMfa_Click`.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+Function `lnkCancelMfa_Click` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `lnkCancelMfa_Click`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  110 | 
@@ -257,30 +283,40 @@ protected void lnkCancelMfa_Click(object sender, EventArgs e)
  121 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L113:** Pending registration in Session until MFA confirmed.
-
 ---
 
 ### `ShowMfaSetup` — lines 122–136
+
+#### Signature
 
 ```csharp
 private void ShowMfaSetup(string email, string secret)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ShowMfaSetup`.
-- **Parameters (what each means):**
-- `email` (`string`) — Account email address (usually lowercased).
-- `secret` (`string`) — MFA TOTP Base32 secret for authenticator apps.
-- **Local variables (what each means):**
-- `normalized` (`string`) — Cleaned secret/code (spaces removed, uppercased).
-- `uri` (`string`) — otpauth:// or other URI string.
-- `qrUrl` (`string`) — URL of QR image for authenticator setup.  Literal text string.
+Updates the page HTML for **Show Mfa Setup**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Build the otpauth URI used to show the QR code.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `email` | `string` | Account email address (usually lowercased). |
+| `secret` | `string` | MFA TOTP Base32 secret for authenticator apps. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `normalized` | `string` | Cleaned secret/code (spaces removed, uppercased). |
+| `uri` | `string` | otpauth:// or other URI string. |
+| `qrUrl` | `string` | URL of QR image for authenticator setup.  Literal text string. |
+
+#### Code
 
 ```csharp
  122 | 
@@ -300,18 +336,11 @@ private void ShowMfaSetup(string email, string secret)
  136 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L126:** TOTP / authenticator (RFC 6238) helper. | `normalized` means: Cleaned secret/code (spaces removed, uppercased).
-- **L127:** TOTP / authenticator (RFC 6238) helper.
-- **L131:** TOTP / authenticator (RFC 6238) helper. | `uri` means: otpauth:// or other URI string.
-- **L132:** `qrUrl` means: URL of QR image for authenticator setup.  Literal text string.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -452,176 +481,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  136 |         }
  137 |     }
  138 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L6:** C# namespace grouping.
-- **L10:** Page load entry (GET or postback).
-- **L12:** Server session for logged-in user.
-- **L14:** Navigate browser to another URL.
-- **L18:** False on first open; true after postback.
-- **L34:** `name` means: Display name of user/course/criterion.
-- **L35:** `email` means: Account email address (usually lowercased).
-- **L36:** `pass` means: Password from a form field.
-- **L37:** `confirm` means: Confirm-password form field.
-- **L38:** `role` means: User role code or name (Admin/Student/Lecturer).
-- **L46:** Pending registration in Session until MFA confirmed. | `result` means: AuthResult or API result { success, message, … }.
-- **L55:** `secret` means: MFA TOTP Base32 secret for authenticator apps.
-- **L58:** Pending registration in Session until MFA confirmed.
-- **L71:** `code` means: 6-digit TOTP / OTP the user typed.
-- **L90:** Pending registration in Session until MFA confirmed. | `result` means: AuthResult or API result { success, message, … }.
-- **L94:** Pending registration in Session until MFA confirmed.
-- **L113:** Pending registration in Session until MFA confirmed.
-- **L126:** TOTP / authenticator (RFC 6238) helper. | `normalized` means: Cleaned secret/code (spaces removed, uppercased).
-- **L127:** TOTP / authenticator (RFC 6238) helper.
-- **L131:** TOTP / authenticator (RFC 6238) helper. | `uri` means: otpauth:// or other URI string.
-- **L132:** `qrUrl` means: URL of QR image for authenticator setup.  Literal text string.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Web;
-using System.Web.UI;
-using WebAppAssignment.Data.Security;
-
-namespace WebAppAssignment.Pages.Authentication
-{
-    public partial class Register : Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!IsPostBack && Session["UserID"] != null)
-            {
-                Response.Redirect("~/Pages/Landing/Landing.aspx");
-                return;
-            }
-
-            if (!IsPostBack)
-            {
-                // Resume MFA step if user refreshed mid-setup (account still NOT in DB)
-                string email, secret;
-                if (AuthService.TryGetPendingMfaSetup(Context, out email, out secret))
-                {
-                    pnlForm.Visible = false;
-                    ShowMfaSetup(email, secret);
-                }
-            }
-        }
-
-        /// <summary>Step 1: validate form only — no Users row yet.</summary>
-        protected void btnRegister_Click(object sender, EventArgs e)
-        {
-            lblError.Text = "";
-            string name = (txtName.Text ?? "").Trim();
-            string email = (txtEmail.Text ?? "").Trim();
-            string pass = txtPassword.Text ?? "";
-            string confirm = txtConfirm.Text ?? "";
-            string role = rblRole.SelectedValue ?? "Student";
-
-            if (pass != confirm)
-            {
-                lblError.Text = "Passwords do not match.";
-                return;
-            }
-
-            var result = AuthService.StartRegistration(Context, name, email, pass, role);
-            if (!result.Success)
-            {
-                lblError.Text = result.Message;
-                return;
-            }
-
-            pnlForm.Visible = false;
-            pnlDone.Visible = false;
-            string secret = result.User != null ? result.User.MfaSecret : null;
-            if (string.IsNullOrEmpty(secret))
-            {
-                AuthService.ClearPendingRegistration(Context);
-                lblError.Text = "Could not start MFA setup. Please try again.";
-                pnlForm.Visible = true;
-                return;
-            }
-
-            ShowMfaSetup(email, secret);
-        }
-
-        /// <summary>Step 2: verify authenticator, then pure-SQL INSERT user.</summary>
-        protected void btnConfirmMfa_Click(object sender, EventArgs e)
-        {
-            lblMfaError.Text = "";
-            string code = (txtSetupCode.Text ?? "").Trim();
-
-            string email, secret;
-            if (!AuthService.TryGetPendingMfaSetup(Context, out email, out secret))
-            {
-                lblMfaError.Text = "Registration session expired. Please start again.";
-                pnlMfaSetup.Visible = false;
-                pnlForm.Visible = true;
-                return;
-            }
-
-            ShowMfaSetup(email, secret);
-
-            if (string.IsNullOrEmpty(code))
-            {
-                lblMfaError.Text = "Enter the 6-digit code from Google Authenticator to create your account.";
-                return;
-            }
-
-            var result = AuthService.FinishRegistration(Context, code);
-            if (!result.Success)
-            {
-                lblMfaError.Text = result.Message ?? "Could not complete registration.";
-                if (!AuthService.HasPendingRegistration(Context))
-                {
-                    pnlMfaSetup.Visible = false;
-                    pnlForm.Visible = true;
-                    lblError.Text = result.Message;
-                }
-                return;
-            }
-
-            pnlMfaSetup.Visible = false;
-            pnlForm.Visible = false;
-            pnlDone.Visible = true;
-            litDoneMsg.Text =
-                "Account created. Sign in with your password and a <strong>new</strong> 6-digit code " +
-                "from the same Google Authenticator entry (codes change every 30 seconds).";
-        }
-
-        protected void lnkCancelMfa_Click(object sender, EventArgs e)
-        {
-            AuthService.ClearPendingRegistration(Context);
-            pnlMfaSetup.Visible = false;
-            pnlDone.Visible = false;
-            pnlForm.Visible = true;
-            lblError.Text = "";
-            lblMfaError.Text = "";
-            txtPassword.Text = "";
-            txtConfirm.Text = "";
-        }
-
-        private void ShowMfaSetup(string email, string secret)
-        {
-            pnlMfaSetup.Visible = true;
-            string normalized = TotpHelper.NormalizeSecret(secret);
-            litMfaSecret.Text = TotpHelper.FormatSecretForDisplay(normalized);
-            hidMfaSecret.Value = normalized;
-            hidMfaEmail.Value = email ?? "";
-
-            string uri = TotpHelper.BuildOtpAuthUri(email, normalized, "EduLMS");
-            string qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&ecc=M&data="
-                + HttpUtility.UrlEncode(uri);
-            imgQr.ImageUrl = qrUrl;
-            imgQr.AlternateText = "Scan with Google Authenticator";
-        }
-    }
-}
-
 ```

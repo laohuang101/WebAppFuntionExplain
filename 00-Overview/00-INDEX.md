@@ -1,6 +1,6 @@
 # EduLMS — Landing & Lecturer Function Explain (Markdown)
 
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 **Project root:** `/home/loke/Documents/WebappAss/WebAppAssignment`  
 **This pack:** `/home/loke/Documents/WebAppFuntionExplain`  
 
@@ -8,14 +8,14 @@
 
 ## What this pack is
 
-Markdown documentation for the **Landing** public site and the full **Lecturer** workspace (ASP.NET Web Forms 4.7.2, pure `SqlClient`).
+Markdown documentation for **Landing**, **Lecturer**, **Security**, and **Data** (ASP.NET Web Forms 4.7.2, pure `SqlClient`).
 
-Each important source file has its own `.md` file with:
+Each source file’s `.md` explains:
 
-1. Feature overview
-2. File-level variables/fields
-3. **Every detected function** — purpose, parameters, locals, line-by-line notes
-4. Full file listing with line numbers + annotations
+1. What the feature/file is for
+2. **Variables in a table** (name | type | what it is)
+3. **Every function**: What it is → How it works (steps) → Parameters table → Variables table → Code
+4. Full file code listing
 
 ## How Landing and Lecturer connect
 

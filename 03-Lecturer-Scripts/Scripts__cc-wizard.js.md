@@ -1,6 +1,6 @@
 # cc-wizard.js
 **Source:** `Pages/Lecturer/Scripts/cc-wizard.js`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,44 +15,60 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 14:** `prev` — script-level `const`/`let`/`var` — **Holds “prev” for this scope.**
-- **Line 16:** `dzMsg` — script-level `const`/`let`/`var` — **Holds “dz Msg” for this scope.**
-- **Line 31:** `params` — script-level `const`/`let`/`var` — **Often a collection related to params (plural name).**
-- **Line 32:** `editId` — script-level `const`/`let`/`var` — **Identifier (`editId`) — database primary/foreign key.**
-- **Line 36:** `tries` — script-level `const`/`let`/`var` — **Often a collection related to tries (plural name).**
-- **Line 37:** `t` — script-level `const`/`let`/`var` — **Temporary string/token/time value.**
-- **Line 53:** `c` — script-level `const`/`let`/`var` — **Temporary value (character, course, or counter depending on loop).**
-- **Line 62:** `prevEdit` — script-level `const`/`let`/`var` — **Holds “prev Edit” for this scope.**
-- **Line 77:** `step1` — script-level `const`/`let`/`var` — **Holds “step1” for this scope.**
-- **Line 78:** `step2` — script-level `const`/`let`/`var` — **Holds “step2” for this scope.**
-- **Line 79:** `stepLine` — script-level `const`/`let`/`var` — **Holds “step Line” for this scope.**
-- **Line 118:** `name` — script-level `const`/`let`/`var` — **Display name of user/course/criterion.**
-- **Line 119:** `desc` — script-level `const`/`let`/`var` — **Description text (may embed <<<META>>> JSON).**
-- **Line 120:** `category` — script-level `const`/`let`/`var` — **Holds “category” for this scope.**
-- **Line 121:** `level` — script-level `const`/`let`/`var` — **Holds “level” for this scope.**
-- **Line 122:** `bgImg` — script-level `const`/`let`/`var` — **Holds “bg Img” for this scope.**
-- **Line 123:** `errDiv` — script-level `const`/`let`/`var` — **Holds “err Div” for this scope.**
-- **Line 162:** `modalEl` — script-level `const`/`let`/`var` — **Holds “modal El” for this scope.**
-- **Line 163:** `modal` — script-level `const`/`let`/`var` — **Holds “modal” for this scope.**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `prev` | `const/let/var` | Holds “prev” for this scope. |
+| `dzMsg` | `const/let/var` | Holds “dz Msg” for this scope. |
+| `params` | `const/let/var` | Often a collection related to params (plural name). |
+| `editId` | `const/let/var` | Identifier (`editId`) — database primary/foreign key. |
+| `tries` | `const/let/var` | Often a collection related to tries (plural name). |
+| `t` | `const/let/var` | Temporary string/token/time value. |
+| `c` | `const/let/var` | Temporary value (character, course, or counter depending on loop). |
+| `prevEdit` | `const/let/var` | Holds “prev Edit” for this scope. |
+| `step1` | `const/let/var` | Holds “step1” for this scope. |
+| `step2` | `const/let/var` | Holds “step2” for this scope. |
+| `stepLine` | `const/let/var` | Holds “step Line” for this scope. |
+| `name` | `const/let/var` | Display name of user/course/criterion. |
+| `desc` | `const/let/var` | Description text (may embed <<<META>>> JSON). |
+| `category` | `const/let/var` | Holds “category” for this scope. |
+| `level` | `const/let/var` | Holds “level” for this scope. |
+| `bgImg` | `const/let/var` | Holds “bg Img” for this scope. |
+| `errDiv` | `const/let/var` | Holds “err Div” for this scope. |
+| `modalEl` | `const/let/var` | Holds “modal El” for this scope. |
+| `modal` | `const/let/var` | Holds “modal” for this scope. |
 
 ## Functions / methods (7 found)
 
 ### `showCreateCourseModal` — lines 2–26
 
+#### Signature
+
 ```javascript
 function showCreateCourseModal()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `showCreateCourseModal`.
-- **Local variables (what each means):**
-- `prev` — Holds “prev” for this scope.  DOM element from the page.
-- `dzMsg` — Holds “dz Msg” for this scope.  DOM element from the page.
+Updates the page HTML for **show Create Course Modal**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `prev` | `—` | Holds “prev” for this scope.  DOM element from the page. |
+| `dzMsg` | `—` | Holds “dz Msg” for this scope.  DOM element from the page. |
+
+#### Code
 
 ```javascript
    2 | 
@@ -82,37 +98,38 @@ function showCreateCourseModal()
   26 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L9:** Get HTML element by id.
-- **L10:** Get HTML element by id.
-- **L11:** Get HTML element by id.
-- **L12:** Get HTML element by id.
-- **L13:** Get HTML element by id.
-- **L14:** Get HTML element by id. | `prev` means: Holds “prev” for this scope.  DOM element from the page.
-- **L16:** Get HTML element by id. | `dzMsg` means: Holds “dz Msg” for this scope.  DOM element from the page.
-- **L17:** Update page HTML.
-- **L19:** Get HTML element by id.
-- **L21:** Get HTML element by id.
-
 ---
 
 ### `editCourseBasicInfo` — lines 50–73
+
+#### Signature
 
 ```javascript
 function editCourseBasicInfo(cid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `editCourseBasicInfo`.
-- **Parameters (what each means):**
-- `cid` — Course ID (Courses.CID).
-- **Local variables (what each means):**
-- `c` — Course object/row.
-- `prevEdit` — Holds “prev Edit” for this scope.  DOM element from the page.
+Function `editCourseBasicInfo` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cid` | `—` | Course ID (Courses.CID). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `c` | `—` | Course object/row. |
+| `prevEdit` | `—` | Holds “prev Edit” for this scope.  DOM element from the page. |
+
+#### Code
 
 ```javascript
   50 | 
@@ -141,38 +158,41 @@ function editCourseBasicInfo(cid)
   73 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L53:** `c` means: Course object/row.
-- **L57:** Get HTML element by id.
-- **L58:** Get HTML element by id.
-- **L59:** Get HTML element by id.
-- **L60:** Get HTML element by id.
-- **L61:** Get HTML element by id.
-- **L62:** Get HTML element by id. | `prevEdit` means: Holds “prev Edit” for this scope.  DOM element from the page.
-- **L68:** Get HTML element by id.
-- **L69:** Get HTML element by id.
-
 ---
 
 ### `setWizardStep` — lines 73–114
+
+#### Signature
 
 ```javascript
 function setWizardStep(step)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `setWizardStep`.
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `step` — TOTP 30-second time step counter.
-- **Local variables (what each means):**
-- `step1` — Holds “step1” for this scope.  DOM element from the page.
-- `step2` — Holds “step2” for this scope.  DOM element from the page.
-- `stepLine` — Holds “step Line” for this scope.  DOM element from the page.
+Saves or updates **set Wizard Step** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `setWizardStep`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `step` | `—` | TOTP 30-second time step counter. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `step1` | `—` | Holds “step1” for this scope.  DOM element from the page. |
+| `step2` | `—` | Holds “step2” for this scope.  DOM element from the page. |
+| `stepLine` | `—` | Holds “step Line” for this scope.  DOM element from the page. |
+
+#### Code
 
 ```javascript
   73 | 
@@ -219,41 +239,40 @@ function setWizardStep(step)
  114 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L77:** Get HTML element by id. | `step1` means: Holds “step1” for this scope.  DOM element from the page.
-- **L78:** Get HTML element by id. | `step2` means: Holds “step2” for this scope.  DOM element from the page.
-- **L79:** Get HTML element by id. | `stepLine` means: Holds “step Line” for this scope.  DOM element from the page.
-- **L90:** Get HTML element by id.
-- **L91:** Get HTML element by id.
-- **L94:** Get HTML element by id.
-- **L95:** Get HTML element by id.
-- **L104:** Get HTML element by id.
-- **L105:** Get HTML element by id.
-- **L108:** Get HTML element by id.
-- **L109:** Get HTML element by id.
-
 ---
 
 ### `nextWizardStep` — lines 114–155
+
+#### Signature
 
 ```javascript
 function nextWizardStep()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `nextWizardStep`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Local variables (what each means):**
-- `name` — Display name of user/course/criterion.  DOM element from the page.
-- `desc` — Description text (may embed <<<META>>> JSON).  DOM element from the page.
-- `category` — Holds “category” for this scope.  DOM element from the page.
-- `level` — Holds “level” for this scope.  DOM element from the page.
-- `bgImg` — Holds “bg Img” for this scope.  DOM element from the page.
-- `errDiv` — Holds “err Div” for this scope.  DOM element from the page.
+Function `nextWizardStep` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `name` | `—` | Display name of user/course/criterion.  DOM element from the page. |
+| `desc` | `—` | Description text (may embed <<<META>>> JSON).  DOM element from the page. |
+| `category` | `—` | Holds “category” for this scope.  DOM element from the page. |
+| `level` | `—` | Holds “level” for this scope.  DOM element from the page. |
+| `bgImg` | `—` | Holds “bg Img” for this scope.  DOM element from the page. |
+| `errDiv` | `—` | Holds “err Div” for this scope.  DOM element from the page. |
+
+#### Code
 
 ```javascript
  114 | 
@@ -300,28 +319,35 @@ function nextWizardStep()
  155 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L118:** Get HTML element by id. | `name` means: Display name of user/course/criterion.  DOM element from the page.
-- **L119:** Get HTML element by id. | `desc` means: Description text (may embed <<<META>>> JSON).  DOM element from the page.
-- **L120:** Get HTML element by id. | `category` means: Holds “category” for this scope.  DOM element from the page.
-- **L121:** Get HTML element by id. | `level` means: Holds “level” for this scope.  DOM element from the page.
-- **L122:** Get HTML element by id. | `bgImg` means: Holds “bg Img” for this scope.  DOM element from the page.
-- **L123:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
-
 ---
 
 ### `prevWizardStep` — lines 155–159
+
+#### Signature
 
 ```javascript
 function prevWizardStep()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `prevWizardStep`.
+Function `prevWizardStep` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `prevWizardStep`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  155 | 
@@ -335,18 +361,34 @@ function prevWizardStep()
 
 ### `completeWizard` — lines 159–166
 
+#### Signature
+
 ```javascript
 function completeWizard()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `completeWizard`.
-- **Local variables (what each means):**
-- `modalEl` — Holds “modal El” for this scope.  DOM element from the page.
-- `modal` — Holds “modal” for this scope.
+Function `completeWizard` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `completeWizard`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `modalEl` | `—` | Holds “modal El” for this scope.  DOM element from the page. |
+| `modal` | `—` | Holds “modal” for this scope. |
+
+#### Code
 
 ```javascript
  159 | 
@@ -359,26 +401,37 @@ function completeWizard()
  166 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L162:** Get HTML element by id. | `modalEl` means: Holds “modal El” for this scope.  DOM element from the page.
-- **L163:** `modal` means: Holds “modal” for this scope.
-
 ---
 
 ### `confirmCloseWizard` — lines 166–171
+
+#### Signature
 
 ```javascript
 function confirmCloseWizard(e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `confirmCloseWizard`.
-- **Parameters (what each means):**
-- `e` — Often email string (C#) or DOM event (JS).
+Function `confirmCloseWizard` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `confirmCloseWizard`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `e` | `—` | Often email string (C#) or DOM event (JS). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  166 | 
@@ -391,9 +444,9 @@ function confirmCloseWizard(e)
 
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```javascript
    1 | // Course Creation — wizard create/edit course
@@ -568,229 +621,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  170 |     loadCourses();
  171 | }
  172 | 
-```
-
-**Line notes** (what code + variables mean)
-
-- **L9:** Get HTML element by id.
-- **L10:** Get HTML element by id.
-- **L11:** Get HTML element by id.
-- **L12:** Get HTML element by id.
-- **L13:** Get HTML element by id.
-- **L14:** Get HTML element by id. | `prev` means: Holds “prev” for this scope.  DOM element from the page.
-- **L16:** Get HTML element by id. | `dzMsg` means: Holds “dz Msg” for this scope.  DOM element from the page.
-- **L17:** Update page HTML.
-- **L19:** Get HTML element by id.
-- **L21:** Get HTML element by id.
-- **L29:** DOM event handler.
-- **L30:** Error handling block.
-- **L31:** `params` means: Often a collection related to params (plural name).  Newly constructed object.
-- **L32:** `editId` means: Identifier (`editId`) — database primary/foreign key.
-- **L36:** `tries` means: Often a collection related to tries (plural name).  Literal number `0`.
-- **L37:** `t` means: Temporary string/token/time value.
-- **L53:** `c` means: Course object/row.
-- **L57:** Get HTML element by id.
-- **L58:** Get HTML element by id.
-- **L59:** Get HTML element by id.
-- **L60:** Get HTML element by id.
-- **L61:** Get HTML element by id.
-- **L62:** Get HTML element by id. | `prevEdit` means: Holds “prev Edit” for this scope.  DOM element from the page.
-- **L68:** Get HTML element by id.
-- **L69:** Get HTML element by id.
-- **L77:** Get HTML element by id. | `step1` means: Holds “step1” for this scope.  DOM element from the page.
-- **L78:** Get HTML element by id. | `step2` means: Holds “step2” for this scope.  DOM element from the page.
-- **L79:** Get HTML element by id. | `stepLine` means: Holds “step Line” for this scope.  DOM element from the page.
-- **L90:** Get HTML element by id.
-- **L91:** Get HTML element by id.
-- **L94:** Get HTML element by id.
-- **L95:** Get HTML element by id.
-- **L104:** Get HTML element by id.
-- **L105:** Get HTML element by id.
-- **L108:** Get HTML element by id.
-- **L109:** Get HTML element by id.
-- **L118:** Get HTML element by id. | `name` means: Display name of user/course/criterion.  DOM element from the page.
-- **L119:** Get HTML element by id. | `desc` means: Description text (may embed <<<META>>> JSON).  DOM element from the page.
-- **L120:** Get HTML element by id. | `category` means: Holds “category” for this scope.  DOM element from the page.
-- **L121:** Get HTML element by id. | `level` means: Holds “level” for this scope.  DOM element from the page.
-- **L122:** Get HTML element by id. | `bgImg` means: Holds “bg Img” for this scope.  DOM element from the page.
-- **L123:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
-- **L162:** Get HTML element by id. | `modalEl` means: Holds “modal El” for this scope.  DOM element from the page.
-- **L163:** `modal` means: Holds “modal” for this scope.
-
-## Source snapshot (raw)
-
-```javascript
-// Course Creation — wizard create/edit course
-// depends on: cc-core.js, cc-grid.js
-function showCreateCourseModal() {
-    currentCourseId = null;
-    editingSectionId = null;
-    editingLessonId = null;
-
-    // Reset form fields
-    document.getElementById('txtCourseTitle').value = '';
-    document.getElementById('txtCourseDesc').value = '';
-    document.getElementById('ddlCategory').value = 'Development';
-    document.getElementById('ddlLevel').value = 'Beginner';
-    document.getElementById('txtBgImg').value = '';
-    const prev = document.getElementById('courseThumbPreview');
-    if (prev) { prev.src = ''; prev.classList.add('d-none'); }
-    const dzMsg = document.getElementById('dzMessage');
-    if (dzMsg) dzMsg.innerHTML = '<i class="fa-solid fa-cloud-arrow-up d-block mb-2 fs-4"></i>Click to upload image (16:9 ratio)';
-
-    document.getElementById('step1Error').style.display = 'none';
-
-    document.getElementById('wizardModalTitle').innerText = "Create New Course";
-
-    setWizardStep(1);
-
-    showModal('courseWizardModal');
-}
-
-// Deep-link: CourseCreation.aspx?edit=123 (from preview Edit button)
-document.addEventListener('DOMContentLoaded', function () {
-    try {
-        var params = new URLSearchParams(window.location.search);
-        var editId = parseInt(params.get('edit') || sessionStorage.getItem('editCourseId') || '0', 10);
-        if (editId > 0) {
-            sessionStorage.removeItem('editCourseId');
-            // Wait for courses to load then open editor
-            var tries = 0;
-            var t = setInterval(function () {
-                tries++;
-                if (courses && courses.length) {
-                    clearInterval(t);
-                    editCourseBasicInfo(editId);
-                    // jump to curriculum step if already saved
-                    if (currentCourseId) setTimeout(function () { setWizardStep(2); }, 200);
-                } else if (tries > 40) {
-                    clearInterval(t);
-                }
-            }, 100);
-        }
-    } catch (e) { /* ignore */ }
-});
-
-function editCourseBasicInfo(cid) {
-    const c = courses.find(item => item.cid === cid);
-    if (!c) return;
-
-    currentCourseId = cid;
-    document.getElementById('txtCourseTitle').value = c.name;
-    document.getElementById('txtCourseDesc').value = c.description;
-    if (c.category) document.getElementById('ddlCategory').value = c.category;
-    if (c.level) document.getElementById('ddlLevel').value = c.level;
-    document.getElementById('txtBgImg').value = c.bgImg || '';
-    const prevEdit = document.getElementById('courseThumbPreview');
-    if (prevEdit && c.bgImg) {
-        prevEdit.src = c.bgImg;
-        prevEdit.classList.remove('d-none');
-    }
-
-    document.getElementById('step1Error').style.display = 'none';
-    document.getElementById('wizardModalTitle').innerText = 'Edit Course: ' + c.name;
-
-    setWizardStep(1);
-    showModal('courseWizardModal');
-}
-
-function setWizardStep(step) {
-    activeWizardStep = step;
-    const step1 = document.getElementById('stepIndicator1');
-    const step2 = document.getElementById('stepIndicator2');
-    const stepLine = document.getElementById('stepLine1');
-
-    if (step === 1) {
-        // Indicators
-        step1.classList.remove('completed');
-        step1.classList.add('active');
-        step2.classList.remove('active');
-        step2.classList.remove('completed');
-        stepLine.classList.remove('active');
-
-        // Form panels
-        document.getElementById('wizardStep1').style.display = 'block';
-        document.getElementById('wizardStep2').style.display = 'none';
-
-        // Footers
-        document.getElementById('wizardFooterStep1').style.display = 'flex';
-        document.getElementById('wizardFooterStep2').style.setProperty('display', 'none', 'important');
-    } else {
-        // Indicators
-        step1.classList.remove('active');
-        step1.classList.add('completed');
-        step2.classList.add('active');
-        stepLine.classList.add('active');
-
-        // Form panels
-        document.getElementById('wizardStep1').style.display = 'none';
-        document.getElementById('wizardStep2').style.display = 'block';
-
-        // Footers
-        document.getElementById('wizardFooterStep1').style.setProperty('display', 'none', 'important');
-        document.getElementById('wizardFooterStep2').style.setProperty('display', 'flex', 'important');
-
-        // Load Curriculum
-        loadCurriculumView();
-    }
-}
-
-
-function nextWizardStep() {
-    const name = document.getElementById('txtCourseTitle').value.trim();
-    const desc = document.getElementById('txtCourseDesc').value.trim();
-    const category = document.getElementById('ddlCategory').value;
-    const level = document.getElementById('ddlLevel').value;
-    const bgImg = document.getElementById('txtBgImg').value.trim();
-    const errDiv = document.getElementById('step1Error');
-
-    errDiv.style.display = 'none';
-
-    if (!name || !desc) {
-        errDiv.innerText = "Please fill in all required fields (Title and Description).";
-        errDiv.style.display = 'block';
-        return;
-    }
-
-    postJson('CourseCreation.aspx/SaveCourseInfo', {
-        name: name,
-        desc: desc,
-        category: category,
-        level: level,
-        bgImg: bgImg,
-        cid: currentCourseId || 0
-    })
-    .then(function (resObj) {
-        if (resObj && resObj.success) {
-            currentCourseId = resObj.cid;
-            setWizardStep(2);
-        } else {
-            errDiv.innerText = (resObj && resObj.message) || 'Failed to save course details.';
-            errDiv.style.display = 'block';
-        }
-    })
-    .catch(function (err) {
-        errDiv.innerText = 'Network error saving course.';
-        errDiv.style.display = 'block';
-        console.error(err);
-    });
-}
-
-function prevWizardStep() {
-    setWizardStep(1);
-}
-
-function completeWizard() {
-    const modalEl = document.getElementById('courseWizardModal');
-    const modal = bootstrap.Modal.getInstance(modalEl);
-    modal.hide();
-    loadCourses(); // Refresh list
-}
-
-function confirmCloseWizard(e) {
-    // Reload courses in case they cancelled early on step 2 (curriculum changes are saved incrementally)
-    loadCourses();
-}
-
-
 ```

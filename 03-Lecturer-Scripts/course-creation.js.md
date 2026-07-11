@@ -1,6 +1,6 @@
 # course-creation.js
 **Source:** `Pages/Lecturer/course-creation.js`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,31 +15,21 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-_No top-level variables detected by scanner._
+_No top-level script variables found._
 
 ## Functions / methods (0 found)
 
-_No methods matched the scanner (markup-only or unconventional structure). See full file listing below._
+_No methods matched the scanner (markup-only or unconventional structure). See the code listing at the bottom._
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```javascript
    1 | // Course Creation bootstrap — load modules in order (see CourseCreation.aspx)
    2 | // Modules: Scripts/cc-core.js → cc-media.js → cc-grid.js → cc-wizard.js → cc-curriculum.js
    3 | // This file kept for backwards-compatible script path references.
    4 | console.debug('[EduLMS] course-creation modules loaded');
-```
-
-## Source snapshot (raw)
-
-```javascript
-// Course Creation bootstrap — load modules in order (see CourseCreation.aspx)
-// Modules: Scripts/cc-core.js → cc-media.js → cc-grid.js → cc-wizard.js → cc-curriculum.js
-// This file kept for backwards-compatible script path references.
-console.debug('[EduLMS] course-creation modules loaded');
-
 ```

@@ -1,6 +1,6 @@
 # assignments-edit.js
 **Source:** `Pages/Lecturer/Scripts/assignments-edit.js`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,33 +15,49 @@ Build CourseWorks with due date, rubric or objective quiz. Due date closes stude
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 6:** `res` — script-level `const`/`let`/`var` — **Result object returned from fetch/WebMethod (`data.d` unwrapped).**
-- **Line 22:** `opts` — script-level `const`/`let`/`var` — **Often a collection related to opts (plural name).**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `res` | `const/let/var` | Result object returned from fetch/WebMethod (`data.d` unwrapped). |
+| `opts` | `const/let/var` | Often a collection related to opts (plural name). |
 
 ## Functions / methods (1 found)
 
 ### `loadAssignmentDetails` — lines 1–31
 
+#### Signature
+
 ```javascript
 function loadAssignmentDetails(cwid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `loadAssignmentDetails`.
-- **Due date:** Related to assignment closing after the due day.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **AJAX:** Browser calls server endpoints asynchronously.
-- **Pattern:** Read/load data for display.
-- **Parameters (what each means):**
-- `cwid` — CourseWork ID (assignment) (CourseWorks.CWID).
-- **Local variables (what each means):**
-- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- `opts` — Often a collection related to opts (plural name).
+Reads/loads data related to **Assignment Details** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Call the server with `fetch` (AJAX) and wait for the JSON result.
+2. Parse the server JSON response into a JavaScript object.
+3. Show a simple popup message to the user.
+4. Update a page element (text, HTML, value, or enabled/disabled).
+5. Use the assignment due date to decide if submissions are still open.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cwid` | `—` | CourseWork ID (assignment) (CourseWorks.CWID). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `res` | `—` | Result object returned from fetch/WebMethod (`data.d` unwrapped). |
+| `opts` | `—` | Often a collection related to opts (plural name). |
+
+#### Code
 
 ```javascript
    1 | 
@@ -77,22 +93,11 @@ function loadAssignmentDetails(cwid)
   31 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L4:** HTTP request to server WebMethod/ashx.
-- **L6:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L9:** Get HTML element by id.
-- **L10:** Get HTML element by id.
-- **L11:** Assignment deadline; submissions close after due day.
-- **L12:** Get HTML element by id.
-- **L13:** Get HTML element by id.
-- **L22:** `opts` means: Often a collection related to opts (plural name).
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```javascript
    1 | // Helper to load assignment details into the builder for editing
@@ -126,52 +131,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   29 |         window.currentEditingCWID = cwid;
   30 |     }).catch(err => console.error(err));
   31 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L4:** HTTP request to server WebMethod/ashx.
-- **L6:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L9:** Get HTML element by id.
-- **L10:** Get HTML element by id.
-- **L11:** Assignment deadline; submissions close after due day.
-- **L12:** Get HTML element by id.
-- **L13:** Get HTML element by id.
-- **L22:** `opts` means: Often a collection related to opts (plural name).
-
-## Source snapshot (raw)
-
-```javascript
-// Helper to load assignment details into the builder for editing
-function loadAssignmentDetails(cwid) {
-    if (!cwid) return;
-    fetch('Assignments.aspx/GetAssignmentDetails', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ cwid: cwid }) })
-    .then(r => r.json()).then(d => {
-        const res = d.d || d;
-        if (!res.success) return alert('Failed to load assignment');
-        // populate fields
-        document.getElementById('txtTitle').value = res.title || '';
-        document.getElementById('txtDescription').value = res.description || '';
-        document.getElementById('txtDueDate').value = res.dueDate || '';
-        document.getElementById('chkRequireUpload').checked = !!res.requireUpload;
-        if (res.type === 'Objective') document.getElementById('typeObjective').checked = true; else document.getElementById('typeSubjective').checked = true;
-        // rubric
-        rubricItems = [];
-        if (res.rubric && Array.isArray(res.rubric)) res.rubric.forEach(r => rubricItems.push({ criterion: r.criterion, points: r.points }));
-        renderRubricList();
-        // questions
-        questions = [];
-        if (res.questions && Array.isArray(res.questions)) {
-            res.questions.forEach(q => {
-                const opts = (q.options || []).map(o => ({ text: o.text, correct: o.isCorrect }));
-                questions.push({ prompt: q.prompt, options: opts, type: q.qtype });
-            });
-        }
-        renderQuestions();
-        onTypeChange();
-        // store cwid
-        window.currentEditingCWID = cwid;
-    }).catch(err => console.error(err));
-}
-
 ```

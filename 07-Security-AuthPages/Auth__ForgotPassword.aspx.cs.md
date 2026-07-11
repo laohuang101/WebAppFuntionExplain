@@ -1,6 +1,6 @@
 # ForgotPassword.aspx.cs
 **Source:** `Pages/Authentication/ForgotPassword.aspx.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,38 +15,44 @@ Two-step reset: verify email+TOTP first, then set new password (session window).
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 12:** `ResetWindow` (`TimeSpan`) — **Holds “Reset Window” for this scope. (type `TimeSpan`)**
-- **Line 43:** `result` (`var`) — **AuthResult or API result { success, message, … }.**
-- **Line 77:** `p1` (`string`) — **New password field (first entry).**
-- **Line 79:** `p2` (`string`) — **Confirm password field (must match p1).**
-- **Line 86:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 88:** `result` (`var`) — **AuthResult or API result { success, message, … }.**
-- **Line 118:** `at` (`var`) — **Timestamp (CreatedUtc / PwdResetAt).**
-- **Line 121:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 150:** `on2` (`bool`) — **Holds “on2” for this scope. (true/false)**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ResetWindow` | `TimeSpan` | Holds “Reset Window” for this scope. (type `TimeSpan`) |
 
 ## Functions / methods (9 found)
 
 ### `Page_Load` — lines 13–36
 
+#### Signature
+
 ```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Page_Load`.
-- **CSRF:** Validates anti-forgery token on mutating request.
-- **Session:** Reads/writes ASP.NET Session.
-- **Navigation:** Redirects the browser.
-- **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+Runs automatically when the ASP.NET page opens or posts back; sets up the page and security checks.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Make sure a CSRF token exists in Session (create one if missing).
+2. Read the logged-in user id from Session/JWT (0 means not signed in).
+3. Redirect the browser to another page.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   13 | 
@@ -75,33 +81,41 @@ protected void Page_Load(object sender, EventArgs e)
   36 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L14:** Page load entry (GET or postback).
-- **L17:** CSRF anti-forgery protection.
-- **L19:** False on first open; true after postback.
-- **L21:** Navigate browser to another URL.
-- **L25:** False on first open; true after postback.
-
 ---
 
 ### `btnVerify_Click` — lines 39–62
+
+#### Signature
 
 ```csharp
 protected void btnVerify_Click(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `btnVerify_Click`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
-- **Local variables (what each means):**
-- `result` (`var`) — AuthResult or API result { success, message, … }.  Assigned from verification boolean/result.
+Button handler: verify MFA or password-reset code and continue to the next step.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Verify email + authenticator code for password reset (step 1).
+2. Save temporary state in Session (`Session[SessUid]`).
+3. Save temporary state in Session (`Session[SessEmail]`).
+4. Save temporary state in Session (`Session[SessAt]`).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `result` | `var` | AuthResult or API result { success, message, … }.  Assigned from verification boolean/result. |
+
+#### Code
 
 ```csharp
   39 |         protected void btnVerify_Click(object sender, EventArgs e)
@@ -130,35 +144,42 @@ protected void btnVerify_Click(object sender, EventArgs e)
   62 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L44:** Verify multi-factor / TOTP code. | `result` means: AuthResult or API result { success, message, … }.  Assigned from verification boolean/result.
-- **L53:** Server session for logged-in user.
-- **L54:** Server session for logged-in user.
-- **L56:** Server session for logged-in user.
-
 ---
 
 ### `btnReset_Click` — lines 65–102
+
+#### Signature
 
 ```csharp
 protected void btnReset_Click(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `btnReset_Click`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
-- **Local variables (what each means):**
-- `p1` (`string`) — New password field (first entry).
-- `p2` (`string`) — Confirm password field (must match p1).
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.  Read from ASP.NET Session.
-- `result` (`var`) — AuthResult or API result { success, message, … }.
+Button handler: save the new password after MFA was already verified.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Save temporary state in Session (`Session[SessUid]);`).
+2. Update the user’s password hash (step 2 of reset).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `p1` | `string` | New password field (first entry). |
+| `p2` | `string` | Confirm password field (must match p1). |
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user.  Read from ASP.NET Session. |
+| `result` | `var` | AuthResult or API result { success, message, … }. |
+
+#### Code
 
 ```csharp
   65 |         protected void btnReset_Click(object sender, EventArgs e)
@@ -201,30 +222,38 @@ protected void btnReset_Click(object sender, EventArgs e)
  102 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L78:** `p1` means: New password field (first entry).
-- **L79:** `p2` means: Confirm password field (must match p1).
-- **L87:** Server session for logged-in user. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Read from ASP.NET Session.
-- **L88:** Password-reset MFA then update password hash. | `result` means: AuthResult or API result { success, message, … }.
-
 ---
 
 ### `lnkBack_Click` — lines 103–111
+
+#### Signature
 
 ```csharp
 protected void lnkBack_Click(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `lnkBack_Click`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+Function `lnkBack_Click` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `lnkBack_Click`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  103 | 
@@ -242,18 +271,33 @@ protected void lnkBack_Click(object sender, EventArgs e)
 
 ### `HasValidResetSession` — lines 112–124
 
+#### Signature
+
 ```csharp
 private bool HasValidResetSession()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `HasValidResetSession`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Local variables (what each means):**
-- `at` (`var`) — Timestamp (CreatedUtc / PwdResetAt).  Read from ASP.NET Session.
+Checks a condition related to **Has Valid Reset Session** and returns true/false (or tries an action safely).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Save temporary state in Session (`Session[SessUid]`).
+2. Save temporary state in Session (`Session[SessAt];`).
+3. Return `true` to the caller.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `at` | `var` | Timestamp (CreatedUtc / PwdResetAt).  Read from ASP.NET Session. |
+
+#### Code
 
 ```csharp
  112 | 
@@ -271,29 +315,33 @@ private bool HasValidResetSession()
  124 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L115:** Server session for logged-in user.
-- **L116:** Error handling block.
-- **L118:** Server session for logged-in user. | `at` means: Timestamp (CreatedUtc / PwdResetAt).  Read from ASP.NET Session.
-- **L120:** Server session for logged-in user.
-- **L123:** Handle/log exception.
-
 ---
 
 ### `ClearResetSession` — lines 125–131
+
+#### Signature
 
 ```csharp
 private void ClearResetSession()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ClearResetSession`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Pattern:** Delete/clear data.
+Deletes or clears **Clear Reset Session** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Clear Session data (logout or end of multi-step flow).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  125 | 
@@ -309,15 +357,31 @@ private void ClearResetSession()
 
 ### `ShowStep1` — lines 132–138
 
+#### Signature
+
 ```csharp
 private void ShowStep1()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ShowStep1`.
+Updates the page HTML for **Show Step1**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `ShowStep1`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  132 | 
@@ -333,16 +397,29 @@ private void ShowStep1()
 
 ### `ShowStep2` — lines 139–146
 
+#### Signature
+
 ```csharp
 private void ShowStep2()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ShowStep2`.
-- **Session:** Reads/writes ASP.NET Session.
+Updates the page HTML for **Show Step2**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Save temporary state in Session (`Session[SessEmail] as string ?? "";`).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  139 | 
@@ -355,26 +432,37 @@ private void ShowStep2()
  146 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L144:** Server session for logged-in user.
-
 ---
 
 ### `UpdatePills` — lines 147–153
+
+#### Signature
 
 ```csharp
 private void UpdatePills()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `UpdatePills`.
-- **Pattern:** Persist changes.
-- **Local variables (what each means):**
-- `on2` (`bool`) — Holds “on2” for this scope. (true/false)
+Saves or updates **Update Pills** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `UpdatePills`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `on2` | `bool` | Holds “on2” for this scope. (true/false) |
+
+#### Code
 
 ```csharp
  147 | 
@@ -386,15 +474,11 @@ private void UpdatePills()
  153 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L150:** `on2` means: Holds “on2” for this scope. (true/false)
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -552,192 +636,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  153 |         }
  154 |     }
  155 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L5:** C# namespace grouping.
-- **L14:** Page load entry (GET or postback).
-- **L17:** CSRF anti-forgery protection.
-- **L19:** False on first open; true after postback.
-- **L21:** Navigate browser to another URL.
-- **L25:** False on first open; true after postback.
-- **L44:** Verify multi-factor / TOTP code. | `result` means: AuthResult or API result { success, message, … }.  Assigned from verification boolean/result.
-- **L53:** Server session for logged-in user.
-- **L54:** Server session for logged-in user.
-- **L56:** Server session for logged-in user.
-- **L78:** `p1` means: New password field (first entry).
-- **L79:** `p2` means: Confirm password field (must match p1).
-- **L87:** Server session for logged-in user. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Read from ASP.NET Session.
-- **L88:** Password-reset MFA then update password hash. | `result` means: AuthResult or API result { success, message, … }.
-- **L115:** Server session for logged-in user.
-- **L116:** Error handling block.
-- **L118:** Server session for logged-in user. | `at` means: Timestamp (CreatedUtc / PwdResetAt).  Read from ASP.NET Session.
-- **L120:** Server session for logged-in user.
-- **L123:** Handle/log exception.
-- **L144:** Server session for logged-in user.
-- **L150:** `on2` means: Holds “on2” for this scope. (true/false)
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Web.UI;
-using WebAppAssignment.Data.Security;
-
-namespace WebAppAssignment.Pages.Authentication
-{
-    public partial class ForgotPassword : Page
-    {
-        private const string SessUid = "PwdResetUid";
-        private const string SessEmail = "PwdResetEmail";
-        private const string SessAt = "PwdResetAt";
-        private static readonly TimeSpan ResetWindow = TimeSpan.FromMinutes(10);
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            AuthSchema.Ensure();
-            CsrfProtection.EnsureToken(Context);
-
-            if (!IsPostBack && AuthService.GetValidatedUserId(Context) > 0)
-            {
-                Response.Redirect("~/Pages/Landing/Landing.aspx");
-                return;
-            }
-
-            if (!IsPostBack)
-            {
-                if (HasValidResetSession())
-                    ShowStep2();
-                else
-                    ShowStep1();
-            }
-            else
-            {
-                UpdatePills();
-            }
-        }
-
-        /// <summary>Step 1: verify email + MFA code only.</summary>
-        protected void btnVerify_Click(object sender, EventArgs e)
-        {
-            lblMsg.CssClass = "d-block mt-3 text-center small text-danger";
-            lblMsg.Text = "";
-
-            var result = AuthService.VerifyMfaForPasswordReset(txtEmail.Text, txtMfaCode.Text);
-            if (!result.Success || result.User == null)
-            {
-                // Message may include debug HTML when compilation debug=true
-                lblMsg.Text = result.Message ?? "Could not verify MFA.";
-                ShowStep1();
-                return;
-            }
-
-            Session[SessUid] = result.User.UID;
-            Session[SessEmail] = result.User.Email
-                ?? (txtEmail.Text ?? "").Trim().ToLowerInvariant();
-            Session[SessAt] = DateTime.UtcNow;
-
-            txtMfaCode.Text = "";
-            ShowStep2();
-            lblMsg.CssClass = "d-block mt-3 text-center small text-success";
-            lblMsg.Text = result.Message ?? "MFA verified. Set your new password below.";
-        }
-
-        /// <summary>Step 2: set new password (MFA already verified in session).</summary>
-        protected void btnReset_Click(object sender, EventArgs e)
-        {
-            lblMsg.CssClass = "d-block mt-3 text-center small text-danger";
-            lblMsg.Text = "";
-
-            if (!HasValidResetSession())
-            {
-                ClearResetSession();
-                ShowStep1();
-                lblMsg.Text = "Session expired. Verify MFA again.";
-                return;
-            }
-
-            string p1 = txtPassword.Text ?? "";
-            string p2 = txtPassword2.Text ?? "";
-            if (p1 != p2)
-            {
-                lblMsg.Text = "Passwords do not match.";
-                ShowStep2();
-                return;
-            }
-
-            int uid = Convert.ToInt32(Session[SessUid]);
-            var result = AuthService.CompletePasswordReset(uid, p1);
-            if (!result.Success)
-            {
-                lblMsg.Text = result.Message ?? "Could not update password.";
-                ShowStep2();
-                return;
-            }
-
-            ClearResetSession();
-            pnlStep1.Visible = false;
-            pnlStep2.Visible = false;
-            lblMsg.CssClass = "d-block mt-3 text-center small text-success";
-            lblMsg.Text = result.Message + " Redirecting to login…";
-            Response.AddHeader("Refresh", "2;url=" + ResolveUrl("~/Pages/Authentication/Login.aspx"));
-        }
-
-        protected void lnkBack_Click(object sender, EventArgs e)
-        {
-            ClearResetSession();
-            ShowStep1();
-            lblMsg.Text = "";
-            txtPassword.Text = "";
-            txtPassword2.Text = "";
-        }
-
-        private bool HasValidResetSession()
-        {
-            if (Session[SessUid] == null || Session[SessAt] == null) return false;
-            try
-            {
-                var at = (DateTime)Session[SessAt];
-                if (DateTime.UtcNow - at > ResetWindow) return false;
-                Convert.ToInt32(Session[SessUid]);
-                return true;
-            }
-            catch { return false; }
-        }
-
-        private void ClearResetSession()
-        {
-            Session.Remove(SessUid);
-            Session.Remove(SessEmail);
-            Session.Remove(SessAt);
-        }
-
-        private void ShowStep1()
-        {
-            pnlStep1.Visible = true;
-            pnlStep2.Visible = false;
-            UpdatePills();
-        }
-
-        private void ShowStep2()
-        {
-            pnlStep1.Visible = false;
-            pnlStep2.Visible = true;
-            litVerifiedEmail.Text = Session[SessEmail] as string ?? "";
-            UpdatePills();
-        }
-
-        private void UpdatePills()
-        {
-            bool on2 = pnlStep2.Visible;
-            pill1.Attributes["class"] = "step-pill" + (on2 ? " done" : " active");
-            pill2.Attributes["class"] = "step-pill" + (on2 ? " active" : "");
-        }
-    }
-}
-
 ```

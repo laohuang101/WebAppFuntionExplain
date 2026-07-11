@@ -1,6 +1,6 @@
 # Register.aspx
 **Source:** `Pages/Authentication/Register.aspx`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,17 +15,17 @@ Two-step: form → Session pending → QR/MFA confirm → only then INSERT user.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
+Markup file — variables live in the matching `.cs` / `.js` companion docs.
 
 ## Functions / methods (0 found)
 
-_No methods matched the scanner (markup-only or unconventional structure). See full file listing below._
+_No methods matched the scanner (markup-only or unconventional structure). See the code listing at the bottom._
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```html
    1 | <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="WebAppAssignment.Pages.Authentication.Register" %>
@@ -159,146 +159,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  129 |     <script src="<%= ResolveUrl("~/Shared/Scripts/csrf.js") %>"></script>
  130 | </body>
  131 | </html>
-```
-
-**Line notes** (what code + variables mean)
-
-- **L8:** CSRF anti-forgery protection.
-- **L129:** CSRF anti-forgery protection.
-
-## Source snapshot (raw)
-
-```html
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="WebAppAssignment.Pages.Authentication.Register" %>
-
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <meta charset="utf-8" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <%= WebAppAssignment.Data.Security.CsrfProtection.MetaTag(Context) %>
-    <title>EduLMS - Register</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="<%= ResolveUrl("~/Shared/Style/auth.css") %>" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <style type="text/css">
-        .step { font-weight: 700; color: #f17f54; margin-right: .25rem; }
-        .secret-box {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            letter-spacing: .08em; word-break: break-all;
-            background: #f9fafb; border-radius: 8px; padding: .5rem .75rem;
-        }
-        .hint { font-size: .75rem; color: #6b7280; }
-    </style>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div class="container d-flex justify-content-center align-items-center" style="min-height:100vh;padding:1.5rem 0;">
-            <div class="card card-auth p-4 w-100" style="max-width: 420px;">
-
-                <%-- STEP 1: account form — nothing written to DB yet --%>
-                <asp:Panel ID="pnlForm" runat="server">
-                    <div class="text-center mb-3">
-                        <i class="fa-solid fa-user-plus fa-2x" style="color:#f17f54;"></i>
-                        <h3 class="mt-2 fw-bold">Create account</h3>
-                        <p class="text-muted small mb-0">Student or Lecturer · password + MFA required</p>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label d-block small fw-semibold text-muted">I am a…</label>
-                        <asp:RadioButtonList ID="rblRole" runat="server" RepeatDirection="Horizontal" CssClass="form-check">
-                            <asp:ListItem Text="Student" Value="Student" Selected="True" />
-                            <asp:ListItem Text="Lecturer" Value="Lecturer" />
-                        </asp:RadioButtonList>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-semibold text-muted">Full name</label>
-                        <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="Your name"></asp:TextBox>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-semibold text-muted">Email</label>
-                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" placeholder="you@example.com"></asp:TextBox>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-semibold text-muted">Password</label>
-                        <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" placeholder="Min 8 chars, letters + numbers"></asp:TextBox>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-semibold text-muted">Confirm password</label>
-                        <asp:TextBox ID="txtConfirm" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
-                    </div>
-                    <asp:Button ID="btnRegister" runat="server" Text="Continue to MFA setup"
-                        CssClass="btn btn-accent w-100 text-white" OnClick="btnRegister_Click" />
-                    <asp:Label ID="lblError" runat="server" CssClass="d-block mt-3 text-center text-danger small"></asp:Label>
-                    <p class="hint text-center mt-2 mb-0">
-                        Your account is only created after you confirm the authenticator code.
-                    </p>
-                    <div class="text-center mt-3">
-                        <a href="<%= ResolveUrl("~/Pages/Authentication/Login.aspx") %>" class="small" style="color:#f17f54;">Already have an account? Login</a>
-                    </div>
-                </asp:Panel>
-
-                <%-- STEP 2: MFA setup — still no DB row until Confirm --%>
-                <asp:Panel ID="pnlMfaSetup" runat="server" Visible="false">
-                    <div class="text-center mb-2">
-                        <i class="fa-solid fa-shield-halved fa-2x" style="color:#f17f54;"></i>
-                        <h3 class="mt-2 fw-bold">Set up authenticator</h3>
-                        <p class="text-muted small mb-0">
-                            Account is <strong>not created yet</strong>. Scan the QR, then enter a code to finish.
-                        </p>
-                    </div>
-
-                    <p class="small mb-2"><span class="step">1.</span> Scan with <strong>Google Authenticator</strong> (or Authy):</p>
-                    <div class="text-center mb-3">
-                        <asp:Image ID="imgQr" runat="server" Width="200" Height="200" CssClass="img-fluid border rounded" />
-                    </div>
-
-                    <p class="small mb-1"><span class="step">2.</span> Or type this key manually:</p>
-                    <div class="secret-box text-center mb-3">
-                        <asp:Literal ID="litMfaSecret" runat="server" Mode="Encode" />
-                    </div>
-                    <asp:HiddenField ID="hidMfaSecret" runat="server" />
-                    <asp:HiddenField ID="hidMfaEmail" runat="server" />
-
-                    <p class="small mb-2"><span class="step">3.</span> Enter the <strong>current 6-digit code</strong> from your app:</p>
-                    <div class="mb-3">
-                        <asp:TextBox ID="txtSetupCode" runat="server" CssClass="form-control text-center"
-                            MaxLength="8" placeholder="000000" autocomplete="one-time-code"
-                            style="letter-spacing:.3em;font-weight:700;font-size:1.15rem;"></asp:TextBox>
-                        <div class="form-text hint">Codes refresh every 30 seconds. Phone time must be automatic.</div>
-                    </div>
-
-                    <asp:Button ID="btnConfirmMfa" runat="server" Text="Confirm MFA and create account"
-                        CssClass="btn btn-accent w-100 text-white" OnClick="btnConfirmMfa_Click" />
-                    <asp:Label ID="lblMfaError" runat="server" CssClass="d-block mt-3 text-center text-danger small"></asp:Label>
-
-                    <div class="text-center mt-3">
-                        <asp:LinkButton ID="lnkCancelMfa" runat="server" CssClass="small text-muted text-decoration-none"
-                            OnClick="lnkCancelMfa_Click" CausesValidation="false">
-                            Cancel — discard setup (no account will be saved)
-                        </asp:LinkButton>
-                    </div>
-                </asp:Panel>
-
-                <%-- Done — account exists only after step 2 succeeded --%>
-                <asp:Panel ID="pnlDone" runat="server" Visible="false">
-                    <div class="text-center">
-                        <i class="fa-solid fa-circle-check fa-3x text-success"></i>
-                        <h3 class="mt-3 fw-bold">You are all set</h3>
-                        <p class="text-muted small">
-                            <asp:Literal ID="litDoneMsg" runat="server" />
-                        </p>
-                        <a href="<%= ResolveUrl("~/Pages/Authentication/Login.aspx") %>"
-                           class="btn btn-accent text-white mt-2">Go to login</a>
-                    </div>
-                </asp:Panel>
-
-            </div>
-        </div>
-    </form>
-    <script src="<%= ResolveUrl("~/Shared/Scripts/csrf.js") %>"></script>
-</body>
-</html>
-
 ```

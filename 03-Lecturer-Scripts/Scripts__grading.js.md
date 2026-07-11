@@ -1,6 +1,6 @@
 # grading.js
 **Source:** `Pages/Lecturer/Scripts/grading.js`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,70 +15,88 @@ List submissions for lecturer courses; assign marks and feedback; CSV export.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 2:** `submissions` — script-level `const`/`let`/`var` — **Often a collection related to submissions (plural name).**
-- **Line 4:** `filtered` — script-level `const`/`let`/`var` — **Holds “filtered” for this scope.**
-- **Line 5:** `currentIndex` — script-level `const`/`let`/`var` — **Holds “current Index” for this scope.**
-- **Line 6:** `statusFilter` — script-level `const`/`let`/`var` — **Holds “status Filter” for this scope.**
-- **Line 11:** `params` — script-level `const`/`let`/`var` — **Often a collection related to params (plural name).**
-- **Line 12:** `f` — script-level `const`/`let`/`var` — **Holds “f” for this scope.**
-- **Line 15:** `btn` — script-level `const`/`let`/`var` — **Button DOM element.**
-- **Line 28:** `p` — script-level `const`/`let`/`var` — **Parameter, path, or password fragment depending on context.**
-- **Line 29:** `i` — script-level `const`/`let`/`var` — **Loop index (0-based counter in for-loops).**
-- **Line 36:** `u` — script-level `const`/`let`/`var` — **Holds “u” for this scope.**
-- **Line 45:** `a` — script-level `const`/`let`/`var` — **Holds “a” for this scope.**
-- **Line 50:** `path` — script-level `const`/`let`/`var` — **File path under Uploads or URL path.**
-- **Line 51:** `idx` — script-level `const`/`let`/`var` — **Holds “idx” for this scope.**
-- **Line 58:** `url` — script-level `const`/`let`/`var` — **HTTP URL to media or page.**
-- **Line 73:** `out` — script-level `const`/`let`/`var` — **Holds “out” for this scope.**
-- **Line 75:** `s` — script-level `const`/`let`/`var` — **String value or submission-related object.**
-- **Line 79:** `o` — script-level `const`/`let`/`var` — **Holds “o” for this scope.**
-- **Line 88:** `m` — script-level `const`/`let`/`var` — **Holds “m” for this scope.**
-- **Line 113:** `res` — script-level `const`/`let`/`var` — **Result object returned from fetch/WebMethod (`data.d` unwrapped).**
-- **Line 121:** `graded` — script-level `const`/`let`/`var` — **Holds “graded” for this scope.**
-- **Line 122:** `total` — script-level `const`/`let`/`var` — **Sum of points or total items.**
-- **Line 123:** `pending` — script-level `const`/`let`/`var` — **Holds “pending” for this scope.**
-- **Line 125:** `bp` — script-level `const`/`let`/`var` — **Holds “bp” for this scope.**
-- **Line 144:** `pct` — script-level `const`/`let`/`var` — **Holds “pct” for this scope.**
-- **Line 160:** `q` — script-level `const`/`let`/`var` — **Search query text, or SQL command text.**
-- **Line 190:** `blob` — script-level `const`/`let`/`var` — **Holds “blob” for this scope.**
-- **Line 205:** `box` — script-level `const`/`let`/`var` — **Container element for lists/tables.**
-- **Line 211:** `colors` — script-level `const`/`let`/`var` — **Often a collection related to colors (plural name).**
-- **Line 213:** `div` — script-level `const`/`let`/`var` — **Holds “div” for this scope.**
-- **Line 216:** `parsed` — script-level `const`/`let`/`var` — **Holds “parsed” for this scope.**
-- **Line 217:** `fileIcon` — script-level `const`/`let`/`var` — **Holds “file Icon” for this scope.**
-- **Line 220:** `scoreHtml` — script-level `const`/`let`/`var` — **Holds “score Html” for this scope.**
-- **Line 247:** `raw` — script-level `const`/`let`/`var` — **Raw bytes or unprocessed input string.**
-- **Line 254:** `preview` — script-level `const`/`let`/`var` — **Holds “preview” for this scope.**
-- **Line 256:** `btnDl` — script-level `const`/`let`/`var` — **UI control reference (btn Dl).**
-- **Line 257:** `html` — script-level `const`/`let`/`var` — **Holds “html” for this scope.**
-- **Line 260:** `view` — script-level `const`/`let`/`var` — **Holds “view” for this scope.**
-- **Line 261:** `dl` — script-level `const`/`let`/`var` — **Holds “dl” for this scope.**
-- **Line 262:** `kind` — script-level `const`/`let`/`var` — **Upload kind (material/video/thumbnail/submission).**
-- **Line 263:** `label` — script-level `const`/`let`/`var` — **otpauth account label (issuer:email).**
-- **Line 300:** `max` — script-level `const`/`let`/`var` — **Holds “max” for this scope.**
-- **Line 312:** `score` — script-level `const`/`let`/`var` — **Points earned or max points depending on context.**
-- **Line 318:** `next` — script-level `const`/`let`/`var` — **Holds “next” for this scope.**
-- **Line 328:** `review` — script-level `const`/`let`/`var` — **Holds “review” for this scope.**
-- **Line 329:** `err` — script-level `const`/`let`/`var` — **Error message string or error element.**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `submissions` | `const/let/var` | Often a collection related to submissions (plural name). |
+| `filtered` | `const/let/var` | Holds “filtered” for this scope. |
+| `currentIndex` | `const/let/var` | Holds “current Index” for this scope. |
+| `statusFilter` | `const/let/var` | Holds “status Filter” for this scope. |
+| `params` | `const/let/var` | Often a collection related to params (plural name). |
+| `f` | `const/let/var` | Holds “f” for this scope. |
+| `btn` | `const/let/var` | Button DOM element. |
+| `p` | `const/let/var` | Parameter, path, or password fragment depending on context. |
+| `i` | `const/let/var` | Loop index (0-based counter in for-loops). |
+| `u` | `const/let/var` | Holds “u” for this scope. |
+| `a` | `const/let/var` | Holds “a” for this scope. |
+| `path` | `const/let/var` | File path under Uploads or URL path. |
+| `idx` | `const/let/var` | Holds “idx” for this scope. |
+| `url` | `const/let/var` | HTTP URL to media or page. |
+| `out` | `const/let/var` | Holds “out” for this scope. |
+| `s` | `const/let/var` | String value or submission-related object. |
+| `o` | `const/let/var` | Holds “o” for this scope. |
+| `m` | `const/let/var` | Holds “m” for this scope. |
+| `res` | `const/let/var` | Result object returned from fetch/WebMethod (`data.d` unwrapped). |
+| `graded` | `const/let/var` | Holds “graded” for this scope. |
+| `total` | `const/let/var` | Sum of points or total items. |
+| `pending` | `const/let/var` | Holds “pending” for this scope. |
+| `bp` | `const/let/var` | Holds “bp” for this scope. |
+| `pct` | `const/let/var` | Holds “pct” for this scope. |
+| `q` | `const/let/var` | Search query text, or SQL command text. |
+| `blob` | `const/let/var` | Holds “blob” for this scope. |
+| `box` | `const/let/var` | Container element for lists/tables. |
+| `colors` | `const/let/var` | Often a collection related to colors (plural name). |
+| `div` | `const/let/var` | Holds “div” for this scope. |
+| `parsed` | `const/let/var` | Holds “parsed” for this scope. |
+| `fileIcon` | `const/let/var` | Holds “file Icon” for this scope. |
+| `scoreHtml` | `const/let/var` | Holds “score Html” for this scope. |
+| `raw` | `const/let/var` | Raw bytes or unprocessed input string. |
+| `preview` | `const/let/var` | Holds “preview” for this scope. |
+| `btnDl` | `const/let/var` | UI control reference (btn Dl). |
+| `html` | `const/let/var` | Holds “html” for this scope. |
+| `view` | `const/let/var` | Holds “view” for this scope. |
+| `dl` | `const/let/var` | Holds “dl” for this scope. |
+| `kind` | `const/let/var` | Upload kind (material/video/thumbnail/submission). |
+| `label` | `const/let/var` | otpauth account label (issuer:email). |
+| `max` | `const/let/var` | Holds “max” for this scope. |
+| `score` | `const/let/var` | Points earned or max points depending on context. |
+| `next` | `const/let/var` | Holds “next” for this scope. |
+| `review` | `const/let/var` | Holds “review” for this scope. |
+| `err` | `const/let/var` | Error message string or error element. |
 
 ## Functions / methods (16 found)
 
 ### `mediaAppRoot` — lines 25–32
 
+#### Signature
+
 ```javascript
 function mediaAppRoot()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `mediaAppRoot`.
-- **Local variables (what each means):**
-- `p` — Parameter, path, or password fragment depending on context.
-- `i` — Loop index (0-based counter in for-loops).
+Function `mediaAppRoot` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `mediaAppRoot`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `p` | `—` | Parameter, path, or password fragment depending on context. |
+| `i` | `—` | Loop index (0-based counter in for-loops). |
+
+#### Code
 
 ```javascript
   25 | 
@@ -91,30 +109,41 @@ function mediaAppRoot()
   32 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L28:** `p` means: Parameter, path, or password fragment depending on context.
-- **L29:** `i` means: Loop index (0-based counter in for-loops).
-
 ---
 
 ### `resolveMediaUrl` — lines 32–49
+
+#### Signature
 
 ```javascript
 function resolveMediaUrl(raw, forDownload)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `resolveMediaUrl`.
-- **Parameters (what each means):**
-- `raw` — Raw bytes or unprocessed input string.
-- `forDownload` — Holds “for Download” for this scope.
-- **Local variables (what each means):**
-- `u` — Holds “u” for this scope.
-- `a` — Holds “a” for this scope.
+Function `resolveMediaUrl` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `resolveMediaUrl`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `raw` | `—` | Raw bytes or unprocessed input string. |
+| `forDownload` | `—` | Holds “for Download” for this scope. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `u` | `—` | Holds “u” for this scope. |
+| `a` | `—` | Holds “a” for this scope. |
+
+#### Code
 
 ```javascript
   32 | 
@@ -137,27 +166,37 @@ function resolveMediaUrl(raw, forDownload)
   49 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L36:** `u` means: Holds “u” for this scope.
-- **L43:** Error handling block.
-- **L45:** `a` means: Holds “a” for this scope.
-
 ---
 
 ### `mediaKind` — lines 61–69
+
+#### Signature
 
 ```javascript
 function mediaKind(s)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `mediaKind`.
-- **Parameters (what each means):**
-- `s` — String value or submission-related object.
+Function `mediaKind` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `mediaKind`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `s` | `—` | String value or submission-related object. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
   61 | 
@@ -175,23 +214,36 @@ function mediaKind(s)
 
 ### `parseAnswerContent` — lines 71–99
 
+#### Signature
+
 ```javascript
 function parseAnswerContent(raw)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `parseAnswerContent`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters (what each means):**
-- `raw` — Raw bytes or unprocessed input string.
-- **Local variables (what each means):**
-- `out` — Holds “out” for this scope.
-- `s` — String being cleaned or built.
-- `o` — Holds “o” for this scope.  JSON serialize/parse result.
-- `m` — Holds “m” for this scope.
+Converts or cleans **parse Answer Content** into a usable form.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Parse the server JSON response into a JavaScript object.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `raw` | `—` | Raw bytes or unprocessed input string. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `out` | `—` | Holds “out” for this scope. |
+| `s` | `—` | String being cleaned or built. |
+| `o` | `—` | Holds “o” for this scope.  JSON serialize/parse result. |
+| `m` | `—` | Holds “m” for this scope. |
+
+#### Code
 
 ```javascript
   71 | 
@@ -225,36 +277,42 @@ function parseAnswerContent(raw)
   99 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L73:** `out` means: Holds “out” for this scope.
-- **L75:** `s` means: String being cleaned or built.
-- **L78:** Error handling block.
-- **L79:** JS object ↔ JSON text. | `o` means: Holds “o” for this scope.  JSON serialize/parse result.
-- **L88:** `m` means: Holds “m” for this scope.
-
 ---
 
 ### `loadSubmissions` — lines 102–140
+
+#### Signature
 
 ```javascript
 function loadSubmissions()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `loadSubmissions`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **AJAX:** Browser calls server endpoints asynchronously.
-- **Pattern:** Read/load data for display.
-- **Local variables (what each means):**
-- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- `graded` — Holds “graded” for this scope.
-- `total` — Sum of points or total items.
-- `pending` — Holds “pending” for this scope.  Literal number `0`.
-- `bp` — Holds “bp” for this scope.  DOM element from the page.
+Reads/loads data related to **Submissions** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Call the server with `fetch` (AJAX) and wait for the JSON result.
+2. Parse the server JSON response into a JavaScript object.
+3. If the previous step failed, show the error and stop.
+4. Update a page element (text, HTML, value, or enabled/disabled).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `res` | `—` | Result object returned from fetch/WebMethod (`data.d` unwrapped). |
+| `graded` | `—` | Holds “graded” for this scope. |
+| `total` | `—` | Sum of points or total items. |
+| `pending` | `—` | Holds “pending” for this scope.  Literal number `0`. |
+| `bp` | `—` | Holds “bp” for this scope.  DOM element from the page. |
+
+#### Code
 
 ```javascript
  102 | 
@@ -298,38 +356,40 @@ function loadSubmissions()
  140 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L105:** HTTP request to server WebMethod/ashx.
-- **L113:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L116:** Get HTML element by id.
-- **L117:** Encode text to reduce XSS risk.
-- **L121:** `graded` means: Holds “graded” for this scope.
-- **L122:** `total` means: Sum of points or total items.
-- **L123:** `pending` means: Holds “pending” for this scope.  Literal number `0`.
-- **L125:** Get HTML element by id. | `bp` means: Holds “bp” for this scope.  DOM element from the page.
-- **L132:** Get HTML element by id.
-- **L138:** Get HTML element by id.
-
 ---
 
 ### `updateProgress` — lines 140–146
+
+#### Signature
 
 ```javascript
 function updateProgress(graded, total)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `updateProgress`.
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `graded` — Holds “graded” for this scope.
-- `total` — Sum of points or total items.
-- **Local variables (what each means):**
-- `pct` — Holds “pct” for this scope.
+Saves or updates **update Progress** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `updateProgress`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `graded` | `—` | Holds “graded” for this scope. |
+| `total` | `—` | Sum of points or total items. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `pct` | `—` | Holds “pct” for this scope. |
+
+#### Code
 
 ```javascript
  140 | 
@@ -341,29 +401,38 @@ function updateProgress(graded, total)
  146 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L143:** Get HTML element by id.
-- **L144:** `pct` means: Holds “pct” for this scope.
-- **L145:** Get HTML element by id.
-
 ---
 
 ### `setStatusFilter` — lines 146–157
+
+#### Signature
 
 ```javascript
 function setStatusFilter(mode, btn)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `setStatusFilter`.
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `mode` — Holds “mode” for this scope.
-- `btn` — Button DOM element.
+Saves or updates **set Status Filter** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `setStatusFilter`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `mode` | `—` | Holds “mode” for this scope. |
+| `btn` | `—` | Button DOM element. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  146 | 
@@ -384,17 +453,31 @@ function setStatusFilter(mode, btn)
 
 ### `filterStudents` — lines 157–170
 
+#### Signature
+
 ```javascript
 function filterStudents()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `filterStudents`.
-- **Local variables (what each means):**
-- `q` — Search query text, or SQL command text.  DOM element from the page.
+Function `filterStudents` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `q` | `—` | Search query text, or SQL command text.  DOM element from the page. |
+
+#### Code
 
 ```javascript
  157 | 
@@ -413,30 +496,42 @@ function filterStudents()
  170 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L160:** Get HTML element by id. | `q` means: Search query text, or SQL command text.  DOM element from the page.
-
 ---
 
 ### `exportGradesCsv` — lines 170–202
+
+#### Signature
 
 ```javascript
 function exportGradesCsv()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `exportGradesCsv`.
-- **CSRF:** Validates anti-forgery token on mutating request.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **AJAX:** Browser calls server endpoints asynchronously.
-- **Local variables (what each means):**
-- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- `blob` — Holds “blob” for this scope.  Newly constructed object.
-- `a` — Holds “a” for this scope.
+Browser-side function `exportGradesCsv` — talks to the server and updates the page.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Call the server with `fetch` (AJAX) and wait for the JSON result.
+2. Convert a JavaScript object into a JSON string for the server.
+3. Parse the server JSON response into a JavaScript object.
+4. Show a simple popup message to the user.
+5. If the previous step failed, show the error and stop.
+6. Show a simple popup message to the user.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `res` | `—` | Result object returned from fetch/WebMethod (`data.d` unwrapped). |
+| `blob` | `—` | Holds “blob” for this scope.  Newly constructed object. |
+| `a` | `—` | Holds “a” for this scope. |
+
+#### Code
 
 ```javascript
  170 | 
@@ -474,37 +569,42 @@ function exportGradesCsv()
  202 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L172:** CSV export.
-- **L173:** HTTP request to server WebMethod/ashx.
-- **L176:** JS object ↔ JSON text.
-- **L181:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L182:** CSRF anti-forgery protection.
-- **L190:** CSV export. | `blob` means: Holds “blob” for this scope.  Newly constructed object.
-- **L191:** `a` means: Holds “a” for this scope.
-- **L193:** CSV export.
-
 ---
 
 ### `renderStudentList` — lines 202–232
+
+#### Signature
 
 ```javascript
 function renderStudentList()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `renderStudentList`.
-- **Local variables (what each means):**
-- `box` — Container element for lists/tables.  DOM element from the page.
-- `colors` — Often a collection related to colors (plural name).
-- `div` — Holds “div” for this scope.
-- `parsed` — Holds “parsed” for this scope.
-- `fileIcon` — Holds “file Icon” for this scope.
-- `scoreHtml` — Holds “score Html” for this scope.
+Updates the page HTML for **render Student List**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `renderStudentList`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `box` | `—` | Container element for lists/tables.  DOM element from the page. |
+| `colors` | `—` | Often a collection related to colors (plural name). |
+| `div` | `—` | Holds “div” for this scope. |
+| `parsed` | `—` | Holds “parsed” for this scope. |
+| `fileIcon` | `—` | Holds “file Icon” for this scope. |
+| `scoreHtml` | `—` | Holds “score Html” for this scope. |
+
+#### Code
 
 ```javascript
  202 | 
@@ -540,48 +640,47 @@ function renderStudentList()
  232 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L205:** Get HTML element by id. | `box` means: Container element for lists/tables.  DOM element from the page.
-- **L206:** Update page HTML.
-- **L208:** Update page HTML.
-- **L211:** `colors` means: Often a collection related to colors (plural name).
-- **L213:** `div` means: Holds “div” for this scope.
-- **L216:** `parsed` means: Holds “parsed” for this scope.
-- **L217:** `fileIcon` means: Holds “file Icon” for this scope.
-- **L220:** `scoreHtml` means: Holds “score Html” for this scope.
-- **L223:** Update page HTML.
-- **L225:** Encode text to reduce XSS risk.
-- **L227:** Encode text to reduce XSS risk.
-- **L229:** Encode text to reduce XSS risk.
-
 ---
 
 ### `selectStudent` — lines 232–308
+
+#### Signature
 
 ```javascript
 function selectStudent(index)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `selectStudent`.
-- **Parameters (what each means):**
-- `index` — Holds “index” for this scope.
-- **Local variables (what each means):**
-- `s` — String value or submission-related object.
-- `raw` — Raw bytes or unprocessed input string.
-- `parsed` — Holds “parsed” for this scope.
-- `preview` — Holds “preview” for this scope.  DOM element from the page.
-- `btnDl` — UI control reference (btn Dl).  DOM element from the page.
-- `html` — Holds “html” for this scope.  Literal text string.
-- `view` — Holds “view” for this scope.
-- `dl` — Holds “dl” for this scope.
-- `kind` — Upload kind (material/video/thumbnail/submission).
-- `label` — otpauth account label (issuer:email).
-- `max` — Holds “max” for this scope.
+Function `selectStudent` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `index` | `—` | Holds “index” for this scope. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `s` | `—` | String value or submission-related object. |
+| `raw` | `—` | Raw bytes or unprocessed input string. |
+| `parsed` | `—` | Holds “parsed” for this scope. |
+| `preview` | `—` | Holds “preview” for this scope.  DOM element from the page. |
+| `btnDl` | `—` | UI control reference (btn Dl).  DOM element from the page. |
+| `html` | `—` | Holds “html” for this scope.  Literal text string. |
+| `view` | `—` | Holds “view” for this scope. |
+| `dl` | `—` | Holds “dl” for this scope. |
+| `kind` | `—` | Upload kind (material/video/thumbnail/submission). |
+| `label` | `—` | otpauth account label (issuer:email). |
+| `max` | `—` | Holds “max” for this scope. |
+
+#### Code
 
 ```javascript
  232 | 
@@ -663,49 +762,36 @@ function selectStudent(index)
  308 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L237:** `s` means: String value or submission-related object.
-- **L240:** Get HTML element by id.
-- **L241:** Get HTML element by id.
-- **L245:** Get HTML element by id.
-- **L246:** Get HTML element by id.
-- **L248:** `raw` means: Raw bytes or unprocessed input string.
-- **L249:** `parsed` means: Holds “parsed” for this scope.
-- **L255:** Get HTML element by id. | `preview` means: Holds “preview” for this scope.  DOM element from the page.
-- **L256:** Get HTML element by id. | `btnDl` means: UI control reference (btn Dl).  DOM element from the page.
-- **L257:** `html` means: Holds “html” for this scope.  Literal text string.
-- **L260:** `view` means: Holds “view” for this scope.
-- **L261:** `dl` means: Holds “dl” for this scope.
-- **L262:** `kind` means: Upload kind (material/video/thumbnail/submission).
-- **L263:** `label` means: otpauth account label (issuer:email).
-- **L267:** Encode text to reduce XSS risk.
-- **L292:** Encode text to reduce XSS risk.
-- **L299:** Update page HTML.
-- **L301:** `max` means: Holds “max” for this scope.
-- **L302:** Get HTML element by id.
-- **L303:** Get HTML element by id.
-- **L304:** Get HTML element by id.
-- **L305:** Get HTML element by id.
-- **L307:** Get HTML element by id.
-
 ---
 
 ### `updateTotalDisplay` — lines 308–314
+
+#### Signature
 
 ```javascript
 function updateTotalDisplay()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `updateTotalDisplay`.
-- **Pattern:** Persist changes.
-- **Local variables (what each means):**
-- `max` — Holds “max” for this scope.
-- `score` — Points earned or max points depending on context.  DOM element from the page.
+Saves or updates **update Total Display** in the database or UI state.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `max` | `—` | Holds “max” for this scope. |
+| `score` | `—` | Points earned or max points depending on context.  DOM element from the page. |
+
+#### Code
 
 ```javascript
  308 | 
@@ -717,29 +803,39 @@ function updateTotalDisplay()
  314 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L311:** `max` means: Holds “max” for this scope.
-- **L312:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
-- **L313:** Get HTML element by id.
-
 ---
 
 ### `navStudent` — lines 314–322
+
+#### Signature
 
 ```javascript
 function navStudent(delta)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `navStudent`.
-- **Parameters (what each means):**
-- `delta` — Holds “delta” for this scope.
-- **Local variables (what each means):**
-- `next` — Holds “next” for this scope.
+Function `navStudent` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `navStudent`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `delta` | `—` | Holds “delta” for this scope. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `next` | `—` | Holds “next” for this scope. |
+
+#### Code
 
 ```javascript
  314 | 
@@ -753,31 +849,42 @@ function navStudent(delta)
  322 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L318:** `next` means: Holds “next” for this scope.
-
 ---
 
 ### `submitGrade` — lines 322–358
+
+#### Signature
 
 ```javascript
 function submitGrade()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `submitGrade`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **AJAX:** Browser calls server endpoints asynchronously.
-- **Local variables (what each means):**
-- `s` — String value or submission-related object.
-- `score` — Points earned or max points depending on context.  DOM element from the page.
-- `review` — Holds “review” for this scope.  DOM element from the page.
-- `err` — Error message string or error element.  DOM element from the page.
-- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
+Browser-side function `submitGrade` — talks to the server and updates the page.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+2. Call the server with `fetch` (AJAX) and wait for the JSON result.
+3. Convert a JavaScript object into a JSON string for the server.
+4. Parse the server JSON response into a JavaScript object.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `s` | `—` | String value or submission-related object. |
+| `score` | `—` | Points earned or max points depending on context.  DOM element from the page. |
+| `review` | `—` | Holds “review” for this scope.  DOM element from the page. |
+| `err` | `—` | Error message string or error element.  DOM element from the page. |
+| `res` | `—` | Result object returned from fetch/WebMethod (`data.d` unwrapped). |
+
+#### Code
 
 ```javascript
  322 | 
@@ -819,31 +926,37 @@ function submitGrade()
  358 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L326:** `s` means: String value or submission-related object.
-- **L327:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
-- **L328:** Get HTML element by id. | `review` means: Holds “review” for this scope.  DOM element from the page.
-- **L329:** Get HTML element by id. | `err` means: Error message string or error element.  DOM element from the page.
-- **L338:** HTTP request to server WebMethod/ashx.
-- **L341:** JS object ↔ JSON text.
-- **L346:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-
 ---
 
 ### `escapeHtml` — lines 358–366
+
+#### Signature
 
 ```javascript
 function escapeHtml(str)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `escapeHtml`.
-- **Parameters (what each means):**
-- `str` — String value: str.
+Function `escapeHtml` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `escapeHtml`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `str` | `—` | String value: str. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  358 | 
@@ -857,26 +970,37 @@ function escapeHtml(str)
  366 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L360:** Encode text to reduce XSS risk.
-- **L365:** Encode text to reduce XSS risk.
-
 ---
 
 ### `escapeAttr` — lines 363–366
+
+#### Signature
 
 ```javascript
 function escapeAttr(str)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `escapeAttr`.
-- **Parameters (what each means):**
-- `str` — String value: str.
+Function `escapeAttr` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `escapeAttr`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `str` | `—` | String value: str. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  363 | 
@@ -885,15 +1009,11 @@ function escapeAttr(str)
  366 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L365:** Encode text to reduce XSS risk.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```javascript
    1 | /* Grading page - CWSubmissions + CWMarkings; PDF/image/video preview for file answers */
@@ -1262,471 +1382,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  364 | function escapeAttr(str) {
  365 |     return escapeHtml(str).replace(/'/g, '&#39;');
  366 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L3:** `submissions` means: Often a collection related to submissions (plural name).
-- **L4:** `filtered` means: Holds “filtered” for this scope.
-- **L5:** `currentIndex` means: Holds “current Index” for this scope.
-- **L6:** `statusFilter` means: Holds “status Filter” for this scope.  Literal text string.
-- **L8:** DOM event handler.
-- **L10:** Error handling block.
-- **L11:** `params` means: Often a collection related to params (plural name).  Newly constructed object.
-- **L12:** `f` means: Holds “f” for this scope.
-- **L15:** `btn` means: Button DOM element.
-- **L28:** `p` means: Parameter, path, or password fragment depending on context.
-- **L29:** `i` means: Loop index (0-based counter in for-loops).
-- **L36:** `u` means: Holds “u” for this scope.
-- **L43:** Error handling block.
-- **L45:** `a` means: Holds “a” for this scope.
-- **L50:** `path` means: File path under Uploads or URL path.
-- **L51:** `idx` means: Holds “idx” for this scope.
-- **L58:** `url` means: HTTP URL to media or page.
-- **L73:** `out` means: Holds “out” for this scope.
-- **L75:** `s` means: String being cleaned or built.
-- **L78:** Error handling block.
-- **L79:** JS object ↔ JSON text. | `o` means: Holds “o” for this scope.  JSON serialize/parse result.
-- **L88:** `m` means: Holds “m” for this scope.
-- **L105:** HTTP request to server WebMethod/ashx.
-- **L113:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L116:** Get HTML element by id.
-- **L117:** Encode text to reduce XSS risk.
-- **L121:** `graded` means: Holds “graded” for this scope.
-- **L122:** `total` means: Sum of points or total items.
-- **L123:** `pending` means: Holds “pending” for this scope.  Literal number `0`.
-- **L125:** Get HTML element by id. | `bp` means: Holds “bp” for this scope.  DOM element from the page.
-- **L132:** Get HTML element by id.
-- **L138:** Get HTML element by id.
-- **L143:** Get HTML element by id.
-- **L144:** `pct` means: Holds “pct” for this scope.
-- **L145:** Get HTML element by id.
-- **L160:** Get HTML element by id. | `q` means: Search query text, or SQL command text.  DOM element from the page.
-- **L172:** CSV export.
-- **L173:** HTTP request to server WebMethod/ashx.
-- **L176:** JS object ↔ JSON text.
-- **L181:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L182:** CSRF anti-forgery protection.
-- **L190:** CSV export. | `blob` means: Holds “blob” for this scope.  Newly constructed object.
-- **L191:** `a` means: Holds “a” for this scope.
-- **L193:** CSV export.
-- **L205:** Get HTML element by id. | `box` means: Container element for lists/tables.  DOM element from the page.
-- **L206:** Update page HTML.
-- **L208:** Update page HTML.
-- **L211:** `colors` means: Often a collection related to colors (plural name).
-- **L213:** `div` means: Holds “div” for this scope.
-- **L216:** `parsed` means: Holds “parsed” for this scope.
-- **L217:** `fileIcon` means: Holds “file Icon” for this scope.
-- **L220:** `scoreHtml` means: Holds “score Html” for this scope.
-- **L223:** Update page HTML.
-- **L225:** Encode text to reduce XSS risk.
-- **L227:** Encode text to reduce XSS risk.
-- **L229:** Encode text to reduce XSS risk.
-- **L237:** `s` means: String value or submission-related object.
-- **L240:** Get HTML element by id.
-- **L241:** Get HTML element by id.
-- **L245:** Get HTML element by id.
-- **L246:** Get HTML element by id.
-- **L248:** `raw` means: Raw bytes or unprocessed input string.
-- **L249:** `parsed` means: Holds “parsed” for this scope.
-- **L255:** Get HTML element by id. | `preview` means: Holds “preview” for this scope.  DOM element from the page.
-- **L256:** Get HTML element by id. | `btnDl` means: UI control reference (btn Dl).  DOM element from the page.
-- **L257:** `html` means: Holds “html” for this scope.  Literal text string.
-- **L260:** `view` means: Holds “view” for this scope.
-- **L261:** `dl` means: Holds “dl” for this scope.
-- **L262:** `kind` means: Upload kind (material/video/thumbnail/submission).
-- **L263:** `label` means: otpauth account label (issuer:email).
-- **L267:** Encode text to reduce XSS risk.
-- **L292:** Encode text to reduce XSS risk.
-- **L299:** Update page HTML.
-- **L301:** `max` means: Holds “max” for this scope.
-- **L302:** Get HTML element by id.
-- **L303:** Get HTML element by id.
-- **L304:** Get HTML element by id.
-- **L305:** Get HTML element by id.
-- **L307:** Get HTML element by id.
-- **L311:** `max` means: Holds “max” for this scope.
-- **L312:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
-- **L313:** Get HTML element by id.
-- **L318:** `next` means: Holds “next” for this scope.
-- **L326:** `s` means: String value or submission-related object.
-- **L327:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
-- **L328:** Get HTML element by id. | `review` means: Holds “review” for this scope.  DOM element from the page.
-- **L329:** Get HTML element by id. | `err` means: Error message string or error element.  DOM element from the page.
-- **L338:** HTTP request to server WebMethod/ashx.
-- **L341:** JS object ↔ JSON text.
-- **L346:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
-- **L360:** Encode text to reduce XSS risk.
-- **L365:** Encode text to reduce XSS risk.
-
-## Source snapshot (raw)
-
-```javascript
-/* Grading page - CWSubmissions + CWMarkings; PDF/image/video preview for file answers */
-
-let submissions = [];
-let filtered = [];
-let currentIndex = -1;
-let statusFilter = 'all'; // all | pending | graded
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Deep-link: Grading.aspx?filter=pending
-    try {
-        var params = new URLSearchParams(window.location.search || '');
-        var f = (params.get('filter') || '').toLowerCase();
-        if (f === 'pending' || f === 'graded' || f === 'all') {
-            statusFilter = f;
-            var btn = document.querySelector('[data-filter="' + f + '"]');
-            if (btn) {
-                document.querySelectorAll('[data-filter]').forEach(function (b) {
-                    b.classList.remove('active');
-                });
-                btn.classList.add('active');
-            }
-        }
-    } catch (e) { }
-    loadSubmissions();
-});
-
-function mediaAppRoot() {
-    var p = window.location.pathname || '';
-    var i = p.toLowerCase().indexOf('/pages/');
-    if (i > 0) return p.substring(0, i);
-    return '';
-}
-
-function resolveMediaUrl(raw, forDownload) {
-    if (!raw) return '';
-    var u = String(raw).trim();
-    if (/^https?:\/\//i.test(u) && u.indexOf('/Uploads/') < 0 && u.indexOf('Media.ashx') < 0 && u.indexOf('Uploads/') < 0)
-    return u;
-    if (u.indexOf('Media.ashx') >= 0) {
-        if (forDownload && u.indexOf('dl=1') < 0) return u + (u.indexOf('?') >= 0 ? '&' : '?') + 'dl=1';
-        return u;
-    }
-    try {
-        if (/^https?:\/\//i.test(u)) {
-        var a = document.createElement('a');
-        a.href = u;
-        u = a.pathname || u;
-    }
-} catch (e) { }
-var path = u.replace(/\\/g, '/');
-var idx = path.toLowerCase().indexOf('/uploads/');
-if (idx >= 0) path = path.substring(idx + 1);
-if (path.indexOf('~/') === 0) path = path.substring(2);
-path = path.replace(/^\/+/, '');
-if (path.toLowerCase().indexOf('uploads/') === 0) path = path.substring('uploads/'.length);
-if (!path) return '';
-if (path.indexOf('/') < 0) path = 'CourseSubmissions/' + path;
-var url = mediaAppRoot() + '/Media.ashx?f=' + encodeURIComponent(path);
-if (forDownload) url += '&dl=1';
-return url;
-}
-
-function mediaKind(s) {
-    s = (s || '').toLowerCase();
-    if (/\.(mp4|webm|mov)(\?|$)/.test(s) || s.indexOf('coursevideos') >= 0) return 'video';
-    if (/\.(png|jpe?g|gif|webp|bmp)(\?|$)/.test(s)) return 'image';
-    if (/\.pdf(\?|$)/.test(s)) return 'pdf';
-    return 'file';
-}
-
-/** Parse CWSubmissions.Content: plain text or JSON {text,file,fileName} */
-function parseAnswerContent(raw) {
-    var out = { text: '', file: '', fileName: '' };
-    if (raw == null) return out;
-    var s = String(raw).trim();
-    if (!s) return out;
-    if (s.charAt(0) === '{') {
-        try {
-            var o = JSON.parse(s);
-            out.text = o.text || o.Text || '';
-            out.file = o.file || o.fileUrl || o.FileUrl || o.url || '';
-            out.fileName = o.fileName || o.FileName || '';
-            if (!out.fileName && out.file) out.fileName = out.file.split('/').pop();
-            return out;
-        } catch (e) { /* fall through */ }
-    }
-    // marker form
-    var m = s.match(/<<<FILE>>>([\s\S]*?)<<<ENDFILE>>>/i);
-    if (m) {
-        out.file = m[1].trim();
-        out.text = s.replace(m[0], '').trim();
-        out.fileName = out.file.split('/').pop();
-        return out;
-    }
-    if (/uploads\//i.test(s) || /Media\.ashx/i.test(s) || /\.(pdf|docx?|pptx?|png|jpe?g|mp4)(\?|$)/i.test(s)) {
-    out.file = s;
-    out.fileName = s.split('/').pop();
-    return out;
-}
-out.text = s;
-return out;
-}
-
-function loadSubmissions() {
-    fetch('Grading.aspx/GetSubmissions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: '{}',
-        credentials: 'same-origin'
-    })
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
-        var res = data.d || data;
-        if (res.notAuthenticated) { location.href = '/Pages/Authentication/Login.aspx'; return; }
-        if (!res.success) {
-            document.getElementById('studentList').innerHTML =
-            '<div class="text-danger small">' + escapeHtml(res.message || 'Failed') + '</div>';
-            return;
-        }
-        submissions = res.submissions || [];
-        var graded = res.gradedCount || 0;
-        var total = res.totalCount || submissions.length;
-        var pending = 0;
-        submissions.forEach(function (s) { if (!s.isGraded) pending++; });
-        var bp = document.getElementById('badgePendingCount');
-        if (bp) bp.textContent = String(pending);
-        updateProgress(graded, total);
-        filterStudents();
-        if (filtered.length > 0) selectStudent(0);
-        else {
-            currentIndex = -1;
-            document.getElementById('answerPreview').innerHTML =
-                '<div class="text-muted text-center py-5">No submissions in this filter</div>';
-        }
-    })
-    .catch(function (err) {
-        console.error(err);
-        document.getElementById('studentList').innerHTML = '<div class="text-danger small">Network error</div>';
-    });
-}
-
-function updateProgress(graded, total) {
-    document.getElementById('lblGradedCount').innerText = graded + '/' + total;
-    var pct = total > 0 ? (graded / total) * 100 : 0;
-    document.getElementById('gradedBar').style.width = pct + '%';
-}
-
-function setStatusFilter(mode, btn) {
-    statusFilter = mode || 'all';
-    document.querySelectorAll('[data-filter]').forEach(function (b) {
-        b.classList.remove('active');
-    });
-    if (btn) btn.classList.add('active');
-    currentIndex = -1;
-    filterStudents();
-    if (filtered.length > 0) selectStudent(0);
-}
-
-function filterStudents() {
-    var q = (document.getElementById('txtSearchStudents').value || '').toLowerCase();
-    filtered = submissions.filter(function (s) {
-        if (statusFilter === 'pending' && s.isGraded) return false;
-        if (statusFilter === 'graded' && !s.isGraded) return false;
-        return !q ||
-        (s.studentName || '').toLowerCase().indexOf(q) >= 0 ||
-        (s.assignmentTitle || '').toLowerCase().indexOf(q) >= 0 ||
-        (s.courseName || '').toLowerCase().indexOf(q) >= 0;
-    });
-    renderStudentList();
-}
-
-function exportGradesCsv() {
-    fetch('Grading.aspx/ExportGradesCsv', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cid: 0 }),
-        credentials: 'same-origin'
-    })
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
-        var res = data.d || data;
-        if (res.notAuthenticated || res.csrf) {
-            alert(res.message || 'Please refresh and sign in again.');
-            return;
-        }
-        if (!res.success) {
-            alert(res.message || 'Export failed');
-            return;
-        }
-        var blob = new Blob([res.csv || ''], { type: 'text/csv;charset=utf-8;' });
-        var a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = res.fileName || 'grades.csv';
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(function () {
-            URL.revokeObjectURL(a.href);
-            a.remove();
-        }, 500);
-    })
-    .catch(function () { alert('Network error exporting grades.'); });
-}
-
-function renderStudentList() {
-    var box = document.getElementById('studentList');
-    box.innerHTML = '';
-    if (filtered.length === 0) {
-        box.innerHTML = '<div class="text-muted small py-3 text-center">No submissions</div>';
-        return;
-    }
-    var colors = ['#f59e0b', '#3b82f6', '#10b981', '#8b5cf6', '#ec4899'];
-    filtered.forEach(function (s, i) {
-        var div = document.createElement('div');
-        div.className = 'student-row' + (i === currentIndex ? ' active' : '');
-        div.onclick = function () { selectStudent(i); };
-        var parsed = parseAnswerContent(s.studentAnswer || s.content || '');
-        var fileIcon = parsed.file
-        ? '<i class="fa-solid fa-paperclip text-muted me-1" style="font-size:.7rem;"></i>'
-        : '';
-        var scoreHtml = s.isGraded
-        ? '<span class="text-success small fw-semibold">' + s.markScore + '/' + s.maxScore + '</span>'
-        : '<span class="pending-dot"></span>';
-        div.innerHTML =
-        '<div class="student-avatar me-2" style="background:' + colors[i % colors.length] + '">' +
-        escapeHtml(s.initials || '?') + '</div>' +
-        '<div class="flex-grow-1 overflow-hidden">' +
-        '<div class="fw-semibold small text-truncate">' + fileIcon + escapeHtml(s.studentName) + '</div>' +
-        '<div class="text-muted" style="font-size:0.7rem;"><i class="fa-regular fa-clock me-1"></i>' +
-        escapeHtml(s.timeText || '') + '</div></div>' + scoreHtml;
-        box.appendChild(div);
-    });
-}
-
-function selectStudent(index) {
-    if (index < 0 || index >= filtered.length) return;
-    currentIndex = index;
-    var s = filtered[index];
-    renderStudentList();
-
-    document.getElementById('lblAssignmentTitle').innerText = s.assignmentTitle || 'Submission';
-    document.getElementById('lblAssignmentMeta').innerText =
-    (s.courseName || '') + ' · ' + (s.studentName || '') +
-    (s.requireFile ? ' · File required' : '');
-
-    document.getElementById('previewAvatar').innerText = s.initials || '?';
-    document.getElementById('previewName').innerText = (s.studentName || '') + "'s Submission";
-
-    var raw = s.studentAnswer || s.content || '';
-    var parsed = parseAnswerContent(raw);
-    // Prefer explicit fields from API if present
-    if (s.fileUrl) parsed.file = s.fileUrl;
-    if (s.fileName) parsed.fileName = s.fileName;
-    if (s.answerText != null && s.answerText !== '') parsed.text = s.answerText;
-
-    var preview = document.getElementById('answerPreview');
-    var btnDl = document.getElementById('btnDownload');
-    var html = '';
-
-    if (parsed.file) {
-        var view = resolveMediaUrl(parsed.file, false);
-        var dl = resolveMediaUrl(parsed.file, true);
-        var kind = mediaKind((parsed.fileName || '') + ' ' + parsed.file);
-        var label = parsed.fileName || parsed.file.split('/').pop() || 'file';
-
-        html += '<div class="file-chip mb-2 d-flex align-items-center gap-2 p-2 border rounded bg-light">' +
-        '<i class="fa-regular fa-file-lines"></i>' +
-        '<span class="small text-truncate flex-grow-1">' + escapeHtml(label) + '</span>' +
-        '<a class="btn btn-sm btn-outline-secondary py-0" href="' + escapeAttr(view) + '" target="_blank">Open</a>' +
-        '</div>';
-
-        if (kind === 'pdf') {
-            html += '<iframe src="' + escapeAttr(view) + '#toolbar=1" title="PDF preview" ' +
-            'style="width:100%;height:480px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;"></iframe>';
-        } else if (kind === 'image') {
-            html += '<img src="' + escapeAttr(view) + '" class="img-fluid rounded border" alt="" style="max-height:480px;" />';
-        } else if (kind === 'video') {
-            html += '<video controls playsinline class="w-100 rounded" style="max-height:420px;background:#111;" src="' +
-            escapeAttr(view) + '"></video>';
-        } else {
-            html += '<div class="text-muted small text-center py-4">Preview not available - use Open / Download.</div>';
-        }
-
-        btnDl.href = dl;
-        btnDl.style.display = 'inline-flex';
-    } else {
-        btnDl.style.display = 'none';
-    }
-
-    if (parsed.text) {
-        html += '<div class="mt-3"><div class="fw-semibold small text-muted mb-1">Written answer</div>' +
-        '<pre class="small p-3 bg-light rounded" style="white-space:pre-wrap;max-height:240px;overflow:auto;">' +
-        escapeHtml(parsed.text) + '</pre></div>';
-    }
-
-    if (!parsed.file && !parsed.text) {
-        html = '<div class="text-muted text-center py-5">No answer text or file</div>';
-    }
-
-    preview.innerHTML = html;
-
-    var max = s.maxScore || 100;
-    document.getElementById('lblMaxScore').innerText = '/ ' + max;
-    document.getElementById('txtGradeScore').max = max;
-    document.getElementById('txtGradeScore').value = s.isGraded ? s.markScore : 0;
-    document.getElementById('txtFeedback').value = s.review || '';
-    updateTotalDisplay();
-    document.getElementById('gradeError').style.display = 'none';
-}
-
-function updateTotalDisplay() {
-    var max = (filtered[currentIndex] && filtered[currentIndex].maxScore) || 100;
-    var score = parseFloat(document.getElementById('txtGradeScore').value) || 0;
-    document.getElementById('lblTotalScore').innerText = score + '/' + max;
-}
-
-function navStudent(delta) {
-    if (filtered.length === 0) return;
-    var next = currentIndex + delta;
-    if (next < 0) next = 0;
-    if (next >= filtered.length) next = filtered.length - 1;
-    selectStudent(next);
-}
-
-function submitGrade() {
-    if (currentIndex < 0 || !filtered[currentIndex]) return;
-    var s = filtered[currentIndex];
-    var score = parseFloat(document.getElementById('txtGradeScore').value);
-    var review = document.getElementById('txtFeedback').value.trim();
-    var err = document.getElementById('gradeError');
-    err.style.display = 'none';
-
-    if (isNaN(score) || score < 0) {
-        err.innerText = 'Enter a valid score.';
-        err.style.display = 'block';
-        return;
-    }
-
-    fetch('Grading.aspx/SaveGrade', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sid: s.sid, score: score, review: review }),
-        credentials: 'same-origin'
-    })
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
-        var res = data.d || data;
-        if (res.success) loadSubmissions();
-        else {
-            err.innerText = res.message || 'Failed to save grade.';
-            err.style.display = 'block';
-        }
-    })
-    .catch(function (e) {
-        err.innerText = 'Network error.';
-        err.style.display = 'block';
-        console.error(e);
-    });
-}
-
-function escapeHtml(str) {
-    if (str == null) return '';
-    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
-function escapeAttr(str) {
-    return escapeHtml(str).replace(/'/g, '&#39;');
-}
-
 ```

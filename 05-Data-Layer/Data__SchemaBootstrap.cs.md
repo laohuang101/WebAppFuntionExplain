@@ -1,6 +1,6 @@
 # SchemaBootstrap.cs
 **Source:** `Data/SchemaBootstrap.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,24 +15,42 @@ App-start (or first request) orchestration: run AuthSchema, CourseSchema, DbInde
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 12:** `Gate` (`object`) — **Holds “Gate” for this scope.**
-- **Line 13:** `_done` (`bool`) — **Holds “done” for this scope. (true/false)**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `Gate` | `object` | Holds “Gate” for this scope. |
+| `_done` | `bool` | Holds “done” for this scope. (true/false) |
 
 ## Functions / methods (1 found)
 
 ### `EnsureAll` — lines 14–26
 
+#### Signature
+
 ```csharp
 public static void EnsureAll()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `EnsureAll`.
+Makes sure **All** exists or is valid before the rest of the code continues.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `EnsureAll`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   14 | 
@@ -50,17 +68,11 @@ public static void EnsureAll()
   26 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L21:** Error handling block.
-- **L22:** Error handling block.
-- **L23:** Error handling block.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -91,47 +103,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   26 |         }
   27 |     }
   28 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L4:** C# namespace grouping.
-- **L21:** Error handling block.
-- **L22:** Error handling block.
-- **L23:** Error handling block.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using WebAppAssignment.Data.Security;
-
-namespace WebAppAssignment.Data
-{
-    /// <summary>
-    /// One-shot schema warmup so pages don't each pay Ensure() costs repeatedly
-    /// (AuthSchema / CourseSchema already short-circuit after first success).
-    /// </summary>
-    public static class SchemaBootstrap
-    {
-        private static readonly object Gate = new object();
-        private static bool _done;
-
-        public static void EnsureAll()
-        {
-            if (_done) return;
-            lock (Gate)
-            {
-                if (_done) return;
-                try { AuthSchema.Ensure(); } catch { }
-                try { CourseSchema.Ensure(); } catch { }
-                try { DbIndexes.Ensure(); } catch { }
-                _done = true;
-            }
-        }
-    }
-}
-
 ```

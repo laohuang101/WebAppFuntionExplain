@@ -1,6 +1,6 @@
 # DashboardService.cs
 **Source:** `Pages/Lecturer/Services/DashboardService.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,57 +15,47 @@ Lecturer home: course stats, recent submissions, charts. Backed by LecturerRepos
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 13:** `ConnString` (`string`) — **Holds “Conn String” for this scope. (text)**
-- **Line 17:** `cols` (`var`) — **Often a collection related to cols (plural name).**
-- **Line 36:** `ownerCol` (`string`) — **Holds “owner Col” for this scope. (text)**
-- **Line 41:** `activeCourses` (`int`) — **Often a collection related to active Courses (plural name). (integer)**
-- **Line 49:** `totalStudents` (`int`) — **Often a collection related to total Students (plural name). (integer)**
-- **Line 61:** `pending` (`int`) — **Holds “pending” for this scope. (integer)**
-- **Line 73:** `avgObj` (`var`) — **Holds “avg Obj” for this scope.**
-- **Line 74:** `avg` (`double`) — **Holds “avg” for this scope. (number/score)**
-- **Line 92:** `submissions` (`var`) — **Often a collection related to submissions (plural name).**
-- **Line 97:** `sid` (`int`) — **Submission ID (CWSubmissions.SID).**
-- **Line 98:** `studentName` (`string`) — **Student display name.**
-- **Line 99:** `assign` (`string`) — **Holds “assign” for this scope. (text)**
-- **Line 100:** `courseName` (`string`) — **Course display name.**
-- **Line 101:** `answer` (`string`) — **Holds “answer” for this scope. (text)**
-- **Line 102:** `timeText` (`string`) — **Date/time value. (text)**
-- **Line 103:** `isGraded` (`bool`) — **Boolean flag: is Graded. (true/false)**
-- **Line 104:** `maxScore` (`int`) — **Maximum points (usually 100).**
-- **Line 105:** `initials` (`var`) — **Often a collection related to initials (plural name).**
-- **Line 108:** `parts` (`var`) — **Split path or name segments.**
-- **Line 133:** `gradeDist` (`var`) — **Holds “grade Dist” for this scope.**
-- **Line 151:** `enrollTrend` (`var`) — **Holds “enroll Trend” for this scope.**
-- **Line 180:** `ownerCol` (`string`) — **Holds “owner Col” for this scope. (text)**
-- **Line 191:** `cnt` (`int`) — **Holds “cnt” for this scope. (integer)**
-- **Line 198:** `exist` (`int`) — **Holds “exist” for this scope. (integer)**
-- **Line 237:** `ownerCol` (`string`) — **Holds “owner Col” for this scope. (text)**
-- **Line 246:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 252:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ConnString` | `string` | Holds “Conn String” for this scope. (text) |
 
 ## Functions / methods (4 found)
 
 ### `DetectOwnerColumn` — lines 14–24
 
+#### Signature
+
 ```csharp
 private static string DetectOwnerColumn(SqlConnection conn)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `DetectOwnerColumn`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- **Local variables (what each means):**
-- `cols` (`var`) — Often a collection related to cols (plural name).  Newly constructed object.
-- `cc` (`var`) — Holds “cc” for this scope.
-- `r` (`var`) — Usually one database row (DataRow) in query loops.
+Function `DetectOwnerColumn` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `DetectOwnerColumn`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cols` | `var` | Often a collection related to cols (plural name).  Newly constructed object. |
+| `cc` | `var` | Holds “cc” for this scope. |
+| `r` | `var` | Usually one database row (DataRow) in query loops. |
+
+#### Code
 
 ```csharp
   14 | 
@@ -81,53 +71,59 @@ private static string DetectOwnerColumn(SqlConnection conn)
   24 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L15:** Database access (pure SQL).
-- **L17:** `cols` means: Often a collection related to cols (plural name).  Newly constructed object.
-- **L18:** Import namespace/types.
-- **L21:** Import namespace/types.
-- **L23:** Owner lecturer foreign key.
-
 ---
 
 ### `GetDashboardData` — lines 25–168
+
+#### Signature
 
 ```csharp
 public static object GetDashboardData(int uid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GetDashboardData`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Pattern:** Read/load data for display.
-- **Parameters (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
-- `ownerCol` (`string`) — Holds “owner Col” for this scope. (text)
-- `activeCourses` (`int`) — Often a collection related to active Courses (plural name). (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
-- `totalStudents` (`int`) — Often a collection related to total Students (plural name). (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
-- `pending` (`int`) — Holds “pending” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
-- `avgObj` (`var`) — Holds “avg Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
-- `avg` (`double`) — Holds “avg” for this scope. (number/score)  Literal number `0`.
-- `hasGrades` (`bool`) — Boolean flag: has Grades. (true/false)
-- `submissions` (`var`) — Often a collection related to submissions (plural name).  Newly constructed object.
-- `rdr` (`var`) — Holds “rdr” for this scope.
-- `studentName` (`string`) — Student display name.
-- `assign` (`string`) — Holds “assign” for this scope. (text)
-- `courseName` (`string`) — Course display name.
-- `answer` (`string`) — Holds “answer” for this scope. (text)
-- `timeText` (`string`) — Date/time value. (text)
-- `isGraded` (`bool`) — Boolean flag: is Graded. (true/false)
-- `maxScore` (`int`) — Maximum points (usually 100).
-- `initials` (`var`) — Often a collection related to initials (plural name).  Literal text string.
-- `parts` (`var`) — Split path or name segments.
-- `gradeDist` (`var`) — Holds “grade Dist” for this scope.  Newly constructed object.
-- `enrollTrend` (`var`) — Holds “enroll Trend” for this scope.  Newly constructed object.
+Reads/loads data related to **Dashboard Data** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Open a connection to the LocalDB / SQL Server database.
+2. Run SQL that returns one value (count, id, flag).
+3. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object. |
+| `ownerCol` | `string` | Holds “owner Col” for this scope. (text) |
+| `activeCourses` | `int` | Often a collection related to active Courses (plural name). (integer)  Assigned from single SQL scalar (COUNT/IDENTITY). |
+| `totalStudents` | `int` | Often a collection related to total Students (plural name). (integer)  Assigned from single SQL scalar (COUNT/IDENTITY). |
+| `pending` | `int` | Holds “pending” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY). |
+| `avgObj` | `var` | Holds “avg Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY). |
+| `avg` | `double` | Holds “avg” for this scope. (number/score)  Literal number `0`. |
+| `hasGrades` | `bool` | Boolean flag: has Grades. (true/false) |
+| `submissions` | `var` | Often a collection related to submissions (plural name).  Newly constructed object. |
+| `rdr` | `var` | Holds “rdr” for this scope. |
+| `studentName` | `string` | Student display name. |
+| `assign` | `string` | Holds “assign” for this scope. (text) |
+| `courseName` | `string` | Course display name. |
+| `answer` | `string` | Holds “answer” for this scope. (text) |
+| `timeText` | `string` | Date/time value. (text) |
+| `isGraded` | `bool` | Boolean flag: is Graded. (true/false) |
+| `maxScore` | `int` | Maximum points (usually 100). |
+| `initials` | `var` | Often a collection related to initials (plural name).  Literal text string. |
+| `parts` | `var` | Split path or name segments. |
+| `gradeDist` | `var` | Holds “grade Dist” for this scope.  Newly constructed object. |
+| `enrollTrend` | `var` | Holds “enroll Trend” for this scope.  Newly constructed object. |
+
+#### Code
 
 ```csharp
   25 | 
@@ -276,72 +272,46 @@ public static object GetDashboardData(int uid)
  168 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L28:** Error handling block.
-- **L32:** Import namespace/types.
-- **L33:** Import namespace/types.
-- **L36:** `ownerCol` means: Holds “owner Col” for this scope. (text)
-- **L40:** Parameterized SQL — prevents classic SQL injection.
-- **L41:** Run SQL; return table / rows / scalar. | `activeCourses` means: Often a collection related to active Courses (plural name). (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L48:** Parameterized SQL — prevents classic SQL injection.
-- **L49:** Run SQL; return table / rows / scalar. | `totalStudents` means: Often a collection related to total Students (plural name). (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L58:** Join related tables (courses ↔ chapters ↔ works ↔ users).
-- **L60:** Parameterized SQL — prevents classic SQL injection.
-- **L61:** Run SQL; return table / rows / scalar. | `pending` means: Holds “pending” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L72:** Parameterized SQL — prevents classic SQL injection.
-- **L73:** Run SQL; return table / rows / scalar. | `avgObj` means: Holds “avg Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L74:** `avg` means: Holds “avg” for this scope. (number/score)
-- **L75:** Null-safe read from database values.
-- **L87:** Join related tables (courses ↔ chapters ↔ works ↔ users).
-- **L88:** Join related tables (courses ↔ chapters ↔ works ↔ users).
-- **L91:** Parameterized SQL — prevents classic SQL injection.
-- **L92:** `submissions` means: Often a collection related to submissions (plural name).  Newly constructed object.
-- **L93:** Import namespace/types.
-- **L97:** Null-safe read from database values. | `sid` means: Submission ID (CWSubmissions.SID).
-- **L98:** Null-safe read from database values. | `studentName` means: Student display name.
-- **L99:** Null-safe read from database values. | `assign` means: Holds “assign” for this scope. (text)
-- **L100:** Null-safe read from database values. | `courseName` means: Course display name.
-- **L101:** Null-safe read from database values. | `answer` means: Holds “answer” for this scope. (text)
-- **L102:** Null-safe read from database values. | `timeText` means: Date/time value. (text)
-- **L103:** Null-safe read from database values. | `isGraded` means: Boolean flag: is Graded. (true/false)
-- **L104:** Null-safe read from database values. | `maxScore` means: Maximum points (usually 100).
-- **L105:** `initials` means: Often a collection related to initials (plural name).  Literal text string.
-- **L108:** `parts` means: Split path or name segments.
-- **L132:** Parameterized SQL — prevents classic SQL injection.
-- **L133:** `gradeDist` means: Holds “grade Dist” for this scope.  Newly constructed object.
-- **L134:** Import namespace/types.
-- **L150:** Parameterized SQL — prevents classic SQL injection.
-- **L151:** `enrollTrend` means: Holds “enroll Trend” for this scope.  Newly constructed object.
-- **L152:** Import namespace/types.
-- **L163:** Handle/log exception.
-- **L165:** Error handling block.
-
 ---
 
 ### `SaveGrade` — lines 169–226
+
+#### Signature
 
 ```csharp
 public static object SaveGrade(int uid, int sid, int score, string review)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `SaveGrade`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `sid` (`int`) — Submission ID (CWSubmissions.SID).
-- `score` (`int`) — Points earned or max points depending on context.
-- `review` (`string`) — Holds “review” for this scope. (text)
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
-- `ownerCol` (`string`) — Holds “owner Col” for this scope. (text)
-- `cnt` (`int`) — Holds “cnt” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
-- `exist` (`int`) — Holds “exist” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+Saves marks and feedback for a student submission.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Open a connection to the LocalDB / SQL Server database.
+2. Run SQL that returns one value (count, id, flag).
+3. Run INSERT/UPDATE/DELETE SQL against the database.
+4. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `sid` | `int` | Submission ID (CWSubmissions.SID). |
+| `score` | `int` | Points earned or max points depending on context. |
+| `review` | `string` | Holds “review” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object. |
+| `ownerCol` | `string` | Holds “owner Col” for this scope. (text) |
+| `cnt` | `int` | Holds “cnt” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY). |
+| `exist` | `int` | Holds “exist” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY). |
+
+#### Code
 
 ```csharp
  169 | 
@@ -404,49 +374,42 @@ public static object SaveGrade(int uid, int sid, int score, string review)
  226 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L172:** Error handling block.
-- **L176:** Import namespace/types.
-- **L177:** Import namespace/types.
-- **L180:** `ownerCol` means: Holds “owner Col” for this scope. (text)
-- **L189:** Parameterized SQL — prevents classic SQL injection.
-- **L190:** Parameterized SQL — prevents classic SQL injection.
-- **L191:** Run SQL; return table / rows / scalar. | `cnt` means: Holds “cnt” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L197:** Parameterized SQL — prevents classic SQL injection.
-- **L198:** Run SQL; return table / rows / scalar. | `exist` means: Holds “exist” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L204:** Parameterized SQL — prevents classic SQL injection.
-- **L205:** Parameterized SQL — prevents classic SQL injection.
-- **L206:** Parameterized SQL — prevents classic SQL injection.
-- **L207:** Run SQL; return table / rows / scalar.
-- **L212:** Parameterized SQL — prevents classic SQL injection.
-- **L213:** Parameterized SQL — prevents classic SQL injection.
-- **L214:** Parameterized SQL — prevents classic SQL injection.
-- **L215:** Run SQL; return table / rows / scalar.
-- **L221:** Handle/log exception.
-- **L223:** Error handling block.
-
 ---
 
 ### `DeleteCourse` — lines 227–254
+
+#### Signature
 
 ```csharp
 public static bool DeleteCourse(int uid, int courseId)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `DeleteCourse`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Pattern:** Delete/clear data.
-- **Parameters (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `courseId` (`int`) — Holds “course Id” for this scope. (integer)
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
-- `ownerCol` (`string`) — Holds “owner Col” for this scope. (text)
+Deletes or clears **Delete Course** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Open a connection to the LocalDB / SQL Server database.
+2. Run INSERT/UPDATE/DELETE SQL against the database.
+3. Return `true` to the caller.
+4. Return `false` to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `courseId` | `int` | Holds “course Id” for this scope. (integer) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object. |
+| `ownerCol` | `string` | Holds “owner Col” for this scope. (text) |
+
+#### Code
 
 ```csharp
  227 | 
@@ -479,23 +442,11 @@ public static bool DeleteCourse(int uid, int courseId)
  254 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L230:** Error handling block.
-- **L233:** Import namespace/types.
-- **L234:** Import namespace/types.
-- **L237:** `ownerCol` means: Holds “owner Col” for this scope. (text)
-- **L243:** Parameterized SQL — prevents classic SQL injection.
-- **L244:** Parameterized SQL — prevents classic SQL injection.
-- **L245:** Run SQL; return table / rows / scalar.
-- **L249:** Handle/log exception.
-- **L251:** Error handling block.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -754,348 +705,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  254 |         }
  255 |     }
  256 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L5:** Import namespace/types.
-- **L6:** Import namespace/types.
-- **L7:** Import namespace/types.
-- **L9:** C# namespace grouping.
-- **L15:** Database access (pure SQL).
-- **L17:** `cols` means: Often a collection related to cols (plural name).  Newly constructed object.
-- **L18:** Import namespace/types.
-- **L21:** Import namespace/types.
-- **L23:** Owner lecturer foreign key.
-- **L28:** Error handling block.
-- **L32:** Import namespace/types.
-- **L33:** Import namespace/types.
-- **L36:** `ownerCol` means: Holds “owner Col” for this scope. (text)
-- **L40:** Parameterized SQL — prevents classic SQL injection.
-- **L41:** Run SQL; return table / rows / scalar. | `activeCourses` means: Often a collection related to active Courses (plural name). (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L48:** Parameterized SQL — prevents classic SQL injection.
-- **L49:** Run SQL; return table / rows / scalar. | `totalStudents` means: Often a collection related to total Students (plural name). (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L58:** Join related tables (courses ↔ chapters ↔ works ↔ users).
-- **L60:** Parameterized SQL — prevents classic SQL injection.
-- **L61:** Run SQL; return table / rows / scalar. | `pending` means: Holds “pending” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L72:** Parameterized SQL — prevents classic SQL injection.
-- **L73:** Run SQL; return table / rows / scalar. | `avgObj` means: Holds “avg Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L74:** `avg` means: Holds “avg” for this scope. (number/score)
-- **L75:** Null-safe read from database values.
-- **L87:** Join related tables (courses ↔ chapters ↔ works ↔ users).
-- **L88:** Join related tables (courses ↔ chapters ↔ works ↔ users).
-- **L91:** Parameterized SQL — prevents classic SQL injection.
-- **L92:** `submissions` means: Often a collection related to submissions (plural name).  Newly constructed object.
-- **L93:** Import namespace/types.
-- **L97:** Null-safe read from database values. | `sid` means: Submission ID (CWSubmissions.SID).
-- **L98:** Null-safe read from database values. | `studentName` means: Student display name.
-- **L99:** Null-safe read from database values. | `assign` means: Holds “assign” for this scope. (text)
-- **L100:** Null-safe read from database values. | `courseName` means: Course display name.
-- **L101:** Null-safe read from database values. | `answer` means: Holds “answer” for this scope. (text)
-- **L102:** Null-safe read from database values. | `timeText` means: Date/time value. (text)
-- **L103:** Null-safe read from database values. | `isGraded` means: Boolean flag: is Graded. (true/false)
-- **L104:** Null-safe read from database values. | `maxScore` means: Maximum points (usually 100).
-- **L105:** `initials` means: Often a collection related to initials (plural name).  Literal text string.
-- **L108:** `parts` means: Split path or name segments.
-- **L132:** Parameterized SQL — prevents classic SQL injection.
-- **L133:** `gradeDist` means: Holds “grade Dist” for this scope.  Newly constructed object.
-- **L134:** Import namespace/types.
-- **L150:** Parameterized SQL — prevents classic SQL injection.
-- **L151:** `enrollTrend` means: Holds “enroll Trend” for this scope.  Newly constructed object.
-- **L152:** Import namespace/types.
-- **L163:** Handle/log exception.
-- **L165:** Error handling block.
-- **L172:** Error handling block.
-- **L176:** Import namespace/types.
-- **L177:** Import namespace/types.
-- **L180:** `ownerCol` means: Holds “owner Col” for this scope. (text)
-- **L189:** Parameterized SQL — prevents classic SQL injection.
-- **L190:** Parameterized SQL — prevents classic SQL injection.
-- **L191:** Run SQL; return table / rows / scalar. | `cnt` means: Holds “cnt” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L197:** Parameterized SQL — prevents classic SQL injection.
-- **L198:** Run SQL; return table / rows / scalar. | `exist` means: Holds “exist” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
-- **L204:** Parameterized SQL — prevents classic SQL injection.
-- **L205:** Parameterized SQL — prevents classic SQL injection.
-- **L206:** Parameterized SQL — prevents classic SQL injection.
-- **L207:** Run SQL; return table / rows / scalar.
-- **L212:** Parameterized SQL — prevents classic SQL injection.
-- **L213:** Parameterized SQL — prevents classic SQL injection.
-- **L214:** Parameterized SQL — prevents classic SQL injection.
-- **L215:** Run SQL; return table / rows / scalar.
-- **L221:** Handle/log exception.
-- **L223:** Error handling block.
-- **L230:** Error handling block.
-- **L233:** Import namespace/types.
-- **L234:** Import namespace/types.
-- **L237:** `ownerCol` means: Holds “owner Col” for this scope. (text)
-- **L243:** Parameterized SQL — prevents classic SQL injection.
-- **L244:** Parameterized SQL — prevents classic SQL injection.
-- **L245:** Run SQL; return table / rows / scalar.
-- **L249:** Handle/log exception.
-- **L251:** Error handling block.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using WebAppAssignment.Shared.DebugLog;
-
-namespace WebAppAssignment.Pages.Lecturer.Services
-{
-    public static class DashboardService
-    {
-        private static readonly string ConnString = ConfigurationManager.ConnectionStrings["MyDbConn"]?.ConnectionString ?? string.Empty;
-
-        private static string DetectOwnerColumn(SqlConnection conn)
-        {
-            var cols = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            using (var cc = conn.CreateCommand())
-            {
-                cc.CommandText = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Courses'";
-                using (var r = cc.ExecuteReader()) { while (r.Read()) cols.Add(r.GetString(0)); }
-            }
-            return cols.Contains("UID") ? "UID" : (cols.Contains("LecturerUID") ? "LecturerUID" : (cols.Contains("UserID") ? "UserID" : "UID"));
-        }
-
-        public static object GetDashboardData(int uid)
-        {
-            try
-            {
-                if (uid == 0) return new { notAuthenticated = true };
-
-                using (var conn = new SqlConnection(ConnString))
-                using (var cmd = conn.CreateCommand())
-                {
-                    conn.Open();
-                    string ownerCol = DetectOwnerColumn(conn);
-
-                    // Active courses
-                    cmd.CommandText = $"SELECT COUNT(1) FROM Courses WHERE [{ownerCol}] = @uid";
-                    cmd.Parameters.AddWithValue("@uid", uid);
-                    int activeCourses = Convert.ToInt32(cmd.ExecuteScalar() ?? 0);
-                    cmd.Parameters.Clear();
-
-                    // Total distinct students
-                    cmd.CommandText = $@"SELECT COUNT(DISTINCT e.UID) FROM Enrollments e
-                    JOIN Courses c ON e.CID = c.CID
-                    WHERE c.[{ownerCol}] = @uid";
-                    cmd.Parameters.AddWithValue("@uid", uid);
-                    int totalStudents = Convert.ToInt32(cmd.ExecuteScalar() ?? 0);
-                    cmd.Parameters.Clear();
-
-                    // Pending grading
-                    cmd.CommandText = $@"SELECT COUNT(1) FROM CWSubmissions s
-                    JOIN CourseWorks cw ON s.CWID = cw.CWID
-                    JOIN SubChapters sc ON cw.SchID = sc.SchID
-                    JOIN Chapters ch ON sc.ChID = ch.ChID
-                    JOIN Courses c ON ch.CID = c.CID
-                    LEFT JOIN CWMarkings m ON m.SID = s.SID
-                    WHERE c.[{ownerCol}] = @uid AND m.SID IS NULL";
-                    cmd.Parameters.AddWithValue("@uid", uid);
-                    int pending = Convert.ToInt32(cmd.ExecuteScalar() ?? 0);
-                    cmd.Parameters.Clear();
-
-                    // Average grade
-                    cmd.CommandText = $@"SELECT AVG(CAST(m.Score AS FLOAT) / NULLIF(ISNULL(cw.MaxScore,0),0) * 100.0) FROM CWMarkings m
-                    JOIN CWSubmissions s ON m.SID = s.SID
-                    JOIN CourseWorks cw ON s.CWID = cw.CWID
-                    JOIN SubChapters sc ON cw.SchID = sc.SchID
-                    JOIN Chapters ch ON sc.ChID = ch.ChID
-                    JOIN Courses c ON ch.CID = c.CID
-                    WHERE c.[{ownerCol}] = @uid";
-                    cmd.Parameters.AddWithValue("@uid", uid);
-                    var avgObj = cmd.ExecuteScalar();
-                    double avg = 0; bool hasGrades = false;
-                    if (avgObj != null && avgObj != DBNull.Value) { avg = Convert.ToDouble(avgObj); hasGrades = true; }
-                    cmd.Parameters.Clear();
-
-                    // Recent submissions (top 8)
-                    cmd.CommandText = $@"SELECT TOP 8 s.SID, ISNULL(u.Name,'') AS StudentName, ISNULL(cw.Title,'') AS AssignmentTitle, ISNULL(c.Name,'') AS CourseName,
-                    ISNULL(s.Text, ISNULL(s.Content, '')) AS StudentAnswer, ISNULL(s.CreatedAt, GETDATE()) AS SubmittedAt,
-                    CASE WHEN m.SID IS NULL THEN 0 ELSE 1 END AS IsGraded, ISNULL(cw.MaxScore,0) AS MaxScore
-                    FROM CWSubmissions s
-                    JOIN CourseWorks cw ON s.CWID = cw.CWID
-                    JOIN SubChapters sc ON cw.SchID = sc.SchID
-                    JOIN Chapters ch ON sc.ChID = ch.ChID
-                    JOIN Courses c ON ch.CID = c.CID
-                    LEFT JOIN CWMarkings m ON m.SID = s.SID
-                    LEFT JOIN Users u ON u.UID = s.UID
-                    WHERE c.[{ownerCol}] = @uid
-                    ORDER BY ISNULL(s.CreatedAt, GETDATE()) DESC";
-                    cmd.Parameters.AddWithValue("@uid", uid);
-                    var submissions = new List<object>();
-                    using (var rdr = cmd.ExecuteReader())
-                    {
-                        while (rdr.Read())
-                        {
-                            int sid = rdr.IsDBNull(0) ? 0 : rdr.GetInt32(0);
-                            string studentName = rdr.IsDBNull(1) ? "" : rdr.GetString(1);
-                            string assign = rdr.IsDBNull(2) ? "" : rdr.GetString(2);
-                            string courseName = rdr.IsDBNull(3) ? "" : rdr.GetString(3);
-                            string answer = rdr.IsDBNull(4) ? "" : rdr.GetString(4);
-                            string timeText = rdr.IsDBNull(5) ? "" : Convert.ToDateTime(rdr.GetValue(5)).ToString("g");
-                            bool isGraded = rdr.IsDBNull(6) ? false : rdr.GetInt32(6) != 0;
-                            int maxScore = rdr.IsDBNull(7) ? 0 : Convert.ToInt32(rdr.GetValue(7));
-                            var initials = "";
-                            if (!string.IsNullOrEmpty(studentName))
-                            {
-                                var parts = studentName.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                                if (parts.Length > 1) initials = (parts[0][0].ToString() + parts[parts.Length - 1][0].ToString()).ToUpper(); else initials = parts[0][0].ToString().ToUpper();
-                            }
-                            submissions.Add(new { sid = sid, studentName = studentName, initials = initials, assignmentTitle = assign, courseName = courseName, studentAnswer = answer, timeText = timeText, isGraded = isGraded, maxScore = maxScore });
-                        }
-                    }
-
-                    // Grade distribution (A/B/C/D/F) based on percentage of MaxScore
-                    cmd.Parameters.Clear();
-                    cmd.CommandText = $@"SELECT GradeLabel, COUNT(1) AS Cnt FROM (
-                    SELECT CASE
-                    WHEN (CAST(m.Score AS FLOAT) / NULLIF(ISNULL(cw.MaxScore,0),0)) >= 0.85 THEN 'A'
-                    WHEN (CAST(m.Score AS FLOAT) / NULLIF(ISNULL(cw.MaxScore,0),0)) >= 0.70 THEN 'B'
-                    WHEN (CAST(m.Score AS FLOAT) / NULLIF(ISNULL(cw.MaxScore,0),0)) >= 0.60 THEN 'C'
-                    WHEN (CAST(m.Score AS FLOAT) / NULLIF(ISNULL(cw.MaxScore,0),0)) >= 0.50 THEN 'D'
-                    ELSE 'F' END AS GradeLabel
-                    FROM CWMarkings m
-                    JOIN CWSubmissions s ON m.SID = s.SID
-                    JOIN CourseWorks cw ON s.CWID = cw.CWID
-                    JOIN SubChapters sc ON cw.SchID = sc.SchID
-                    JOIN Chapters ch ON sc.ChID = ch.ChID
-                    JOIN Courses c ON ch.CID = c.CID
-                    WHERE c.[{ownerCol}] = @uid
-                    ) t GROUP BY GradeLabel";
-                    cmd.Parameters.AddWithValue("@uid", uid);
-                    var gradeDist = new List<object>();
-                    using (var rdr = cmd.ExecuteReader())
-                    {
-                        while (rdr.Read())
-                        {
-                            gradeDist.Add(new { label = rdr.GetString(0), value = rdr.GetInt32(1) });
-                        }
-                    }
-                    cmd.Parameters.Clear();
-
-                    // Enrollment trends: count per month for last 6 months
-                    cmd.CommandText = $@"SELECT FORMAT(e.CreatedAt,'yyyy-MM') AS Mon, COUNT(1) AS Cnt
-                    FROM Enrollments e
-                    JOIN Courses c ON e.CID = c.CID
-                    WHERE c.[{ownerCol}] = @uid AND e.CreatedAt >= DATEADD(month, -6, GETDATE())
-                    GROUP BY FORMAT(e.CreatedAt,'yyyy-MM')
-                    ORDER BY Mon ASC";
-                    cmd.Parameters.AddWithValue("@uid", uid);
-                    var enrollTrend = new List<object>();
-                    using (var rdr = cmd.ExecuteReader())
-                    {
-                        while (rdr.Read())
-                        {
-                            enrollTrend.Add(new { label = rdr.GetString(0), value = rdr.GetInt32(1) });
-                        }
-                    }
-
-                    return new { success = true, totalStudents = totalStudents, activeCourses = activeCourses, pendingGrading = pending, averageGrade = Math.Round(avg, 0), hasGrades = hasGrades, submissions = submissions, gradeDistribution = gradeDist, enrollmentTrends = enrollTrend };
-                }
-            }
-            catch (Exception ex)
-            {
-                try { Logger.Error(ex, "DashboardService.GetDashboardData"); } catch { }
-                return new { success = false, message = ex.Message };
-            }
-        }
-
-        public static object SaveGrade(int uid, int sid, int score, string review)
-        {
-            try
-            {
-                if (uid == 0) return new { notAuthenticated = true };
-
-                using (var conn = new SqlConnection(ConnString))
-                using (var cmd = conn.CreateCommand())
-                {
-                    conn.Open();
-                    string ownerCol = DetectOwnerColumn(conn);
-
-                    // verify submission belongs to this lecturer's course
-                    cmd.CommandText = $@"SELECT COUNT(1) FROM CWSubmissions s
-                    JOIN CourseWorks cw ON s.CWID = cw.CWID
-                    JOIN SubChapters sc ON cw.SchID = sc.SchID
-                    JOIN Chapters ch ON sc.ChID = ch.ChID
-                    JOIN Courses c ON ch.CID = c.CID
-                    WHERE s.SID = @sid AND c.[{ownerCol}] = @uid";
-                    cmd.Parameters.AddWithValue("@sid", sid);
-                    cmd.Parameters.AddWithValue("@uid", uid);
-                    int cnt = Convert.ToInt32(cmd.ExecuteScalar() ?? 0);
-                    cmd.Parameters.Clear();
-                    if (cnt == 0) return new { success = false, message = "Unauthorized or submission not found" };
-
-                    // upsert marking
-                    cmd.CommandText = "SELECT COUNT(1) FROM CWMarkings WHERE SID = @sid";
-                    cmd.Parameters.AddWithValue("@sid", sid);
-                    int exist = Convert.ToInt32(cmd.ExecuteScalar() ?? 0);
-                    cmd.Parameters.Clear();
-
-                    if (exist > 0)
-                    {
-                        cmd.CommandText = "UPDATE CWMarkings SET Score = @score, Review = @review, Timestamp = GETDATE() WHERE SID = @sid";
-                        cmd.Parameters.AddWithValue("@score", score);
-                        cmd.Parameters.AddWithValue("@review", review ?? string.Empty);
-                        cmd.Parameters.AddWithValue("@sid", sid);
-                        cmd.ExecuteNonQuery();
-                    }
-                    else
-                    {
-                        cmd.CommandText = "INSERT INTO CWMarkings (SID, Score, Review, Timestamp) VALUES (@sid, @score, @review, GETDATE())";
-                        cmd.Parameters.AddWithValue("@sid", sid);
-                        cmd.Parameters.AddWithValue("@score", score);
-                        cmd.Parameters.AddWithValue("@review", review ?? string.Empty);
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    return new { success = true };
-                }
-            }
-            catch (Exception ex)
-            {
-                try { Logger.Error(ex, "DashboardService.SaveGrade"); } catch { }
-                return new { success = false, message = ex.Message };
-            }
-        }
-
-        public static bool DeleteCourse(int uid, int courseId)
-        {
-            try
-            {
-                if (uid == 0) return false;
-                using (var conn = new SqlConnection(ConnString))
-                using (var cmd = conn.CreateCommand())
-                {
-                    conn.Open();
-                    string ownerCol = DetectOwnerColumn(conn);
-                    cmd.CommandText = $@"DELETE FROM StudyMats WHERE SchID IN (SELECT SchID FROM SubChapters WHERE ChID IN (SELECT ChID FROM Chapters WHERE CID = @cid));
-                    DELETE FROM SubChapters WHERE ChID IN (SELECT ChID FROM Chapters WHERE CID = @cid);
-                    DELETE FROM Chapters WHERE CID = @cid;
-                    DELETE FROM Enrollments WHERE CID = @cid;
-                    DELETE FROM Courses WHERE CID = @cid AND [{ownerCol}] = @uid;";
-                    cmd.Parameters.AddWithValue("@cid", courseId);
-                    cmd.Parameters.AddWithValue("@uid", uid);
-                    cmd.ExecuteNonQuery();
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                try { Logger.Error(ex, "DashboardService.DeleteCourse"); } catch { }
-                return false;
-            }
-        }
-    }
-}
-
 ```

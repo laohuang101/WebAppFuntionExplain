@@ -1,6 +1,6 @@
 # CourseSchema.cs
 **Source:** `Data/CourseSchema.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,29 +15,45 @@ Ensures optional Courses columns exist at runtime (e.g. IsPublished BIT) and bac
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 9:** `Gate` (`object`) — **Holds “Gate” for this scope.**
-- **Line 10:** `_ready` (`bool`) — **Holds “ready” for this scope. (true/false)**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `Gate` | `object` | Holds “Gate” for this scope. |
+| `_ready` | `bool` | Holds “ready” for this scope. (true/false) |
 
 ## Functions / methods (3 found)
 
 ### `Ensure` — lines 11–36
 
+#### Signature
+
 ```csharp
 public static void Ensure()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Ensure`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
-- `up` (`var`) — Holds “up” for this scope.  Newly constructed object.
+Makes sure **** exists or is valid before the rest of the code continues.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Open a connection to the LocalDB / SQL Server database.
+2. Update the course publish flag so Landing can show/hide it.
+3. Run INSERT/UPDATE/DELETE SQL against the database.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+| `up` | `var` | Holds “up” for this scope.  Newly constructed object. |
+
+#### Code
 
 ```csharp
   11 | 
@@ -68,40 +84,42 @@ public static void Ensure()
   36 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L18:** Error handling block.
-- **L20:** Import namespace/types.
-- **L22:** Idempotent schema/index ensure (safe to run many times).
-- **L24:** Error handling block.
-- **L26:** Import namespace/types.
-- **L27:** Course publish flag for Landing catalog.
-- **L28:** Run SQL; return table / rows / scalar.
-- **L30:** Handle/log exception.
-- **L33:** Handle/log exception.
-
 ---
 
 ### `EnsureColumn` — lines 37–55
+
+#### Signature
 
 ```csharp
 private static void EnsureColumn(SqlConnection conn, string table, string column, string definition)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `EnsureColumn`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `table` (`string`) — DataTable or HTML table container.
-- `column` (`string`) — Holds “column” for this scope. (text)
-- `definition` (`string`) — Holds “definition” for this scope. (text)
-- **Local variables (what each means):**
-- `check` (`var`) — Holds “check” for this scope.  Newly constructed object.
-- `alter` (`var`) — Holds “alter” for this scope.  Newly constructed object.
+Makes sure **Column** exists or is valid before the rest of the code continues.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Run SQL that returns one value (count, id, flag).
+2. Run INSERT/UPDATE/DELETE SQL against the database.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `table` | `string` | DataTable or HTML table container. |
+| `column` | `string` | Holds “column” for this scope. (text) |
+| `definition` | `string` | Holds “definition” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `check` | `var` | Holds “check” for this scope.  Newly constructed object. |
+| `alter` | `var` | Holds “alter” for this scope.  Newly constructed object. |
+
+#### Code
 
 ```csharp
   37 | 
@@ -125,33 +143,33 @@ private static void EnsureColumn(SqlConnection conn, string table, string column
   55 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L38:** Database access (pure SQL).
-- **L40:** Import namespace/types.
-- **L44:** Parameterized SQL — prevents classic SQL injection.
-- **L45:** Parameterized SQL — prevents classic SQL injection.
-- **L46:** Run SQL; return table / rows / scalar.
-- **L48:** Error handling block.
-- **L50:** Import namespace/types.
-- **L52:** Run SQL; return table / rows / scalar.
-- **L54:** Handle/log exception.
-
 ---
 
 ### `HasIsPublished` — lines 56–67
+
+#### Signature
 
 ```csharp
 public static bool HasIsPublished()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `HasIsPublished`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.
+Checks a condition related to **Has Is Published** and returns true/false (or tries an action safely).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Run SQL that returns one value (count, id, flag).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   56 | 
@@ -168,19 +186,11 @@ public static bool HasIsPublished()
   67 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L57:** Course publish flag for Landing catalog.
-- **L60:** Error handling block.
-- **L62:** Database access (pure SQL).
-- **L64:** Course publish flag for Landing catalog.
-- **L66:** Handle/log exception.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -252,108 +262,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   67 |         }
   68 |     }
   69 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L4:** C# namespace grouping.
-- **L18:** Error handling block.
-- **L20:** Import namespace/types.
-- **L22:** Idempotent schema/index ensure (safe to run many times).
-- **L24:** Error handling block.
-- **L26:** Import namespace/types.
-- **L27:** Course publish flag for Landing catalog.
-- **L28:** Run SQL; return table / rows / scalar.
-- **L30:** Handle/log exception.
-- **L33:** Handle/log exception.
-- **L38:** Database access (pure SQL).
-- **L40:** Import namespace/types.
-- **L44:** Parameterized SQL — prevents classic SQL injection.
-- **L45:** Parameterized SQL — prevents classic SQL injection.
-- **L46:** Run SQL; return table / rows / scalar.
-- **L48:** Error handling block.
-- **L50:** Import namespace/types.
-- **L52:** Run SQL; return table / rows / scalar.
-- **L54:** Handle/log exception.
-- **L57:** Course publish flag for Landing catalog.
-- **L60:** Error handling block.
-- **L62:** Database access (pure SQL).
-- **L64:** Course publish flag for Landing catalog.
-- **L66:** Handle/log exception.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Data.SqlClient;
-
-namespace WebAppAssignment.Data
-{
-    /// <summary>Ensures optional Courses columns exist (e.g. IsPublished).</summary>
-    public static class CourseSchema
-    {
-        private static readonly object Gate = new object();
-        private static bool _ready;
-
-        public static void Ensure()
-        {
-            if (_ready) return;
-            lock (Gate)
-            {
-                if (_ready) return;
-                try
-                {
-                    using (var conn = DbHelper.OpenConnection())
-                    {
-                        EnsureColumn(conn, "Courses", "IsPublished", "BIT NULL");
-                        // Default existing rows: treat as published if they already have content history
-                        try
-                        {
-                            using (var up = new SqlCommand(
-                                "UPDATE Courses SET IsPublished = 1 WHERE IsPublished IS NULL", conn))
-                                up.ExecuteNonQuery();
-                        }
-                        catch { }
-                    }
-                }
-                catch { }
-                _ready = true;
-            }
-        }
-
-        private static void EnsureColumn(SqlConnection conn, string table, string column, string definition)
-        {
-            using (var check = new SqlCommand(@"
-SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_NAME = @t AND COLUMN_NAME = @c", conn))
-            {
-                check.Parameters.AddWithValue("@t", table);
-                check.Parameters.AddWithValue("@c", column);
-                if (check.ExecuteScalar() != null) return;
-            }
-            try
-            {
-                using (var alter = new SqlCommand(
-                    "ALTER TABLE [" + table + "] ADD [" + column + "] " + definition, conn))
-                    alter.ExecuteNonQuery();
-            }
-            catch { }
-        }
-
-        public static bool HasIsPublished()
-        {
-            Ensure();
-            try
-            {
-                return DbHelper.ExecuteScalarInt(@"
-SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_NAME = 'Courses' AND COLUMN_NAME = 'IsPublished'") > 0;
-            }
-            catch { return false; }
-        }
-    }
-}
-
 ```

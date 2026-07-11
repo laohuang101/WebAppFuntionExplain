@@ -1,6 +1,6 @@
 # ResetPassword.aspx.designer.cs
 **Source:** `Pages/Authentication/ResetPassword.aspx.designer.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,17 +15,17 @@ One-shot TOTP + new password form (uses AuthService.ResetPasswordWithTotp).
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-_No classic field declarations detected (or mostly locals inside methods — see each function’s **Local variables** section)._
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (0 found)
 
-_No methods matched the scanner (markup-only or unconventional structure). See full file listing below._
+_No methods matched the scanner (markup-only or unconventional structure). See the code listing at the bottom._
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | namespace WebAppAssignment.Pages.Authentication
@@ -41,27 +41,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   11 |         protected global::System.Web.UI.WebControls.Label lblMsg;
   12 |     }
   13 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** C# namespace grouping.
-
-## Source snapshot (raw)
-
-```csharp
-namespace WebAppAssignment.Pages.Authentication
-{
-    public partial class ResetPassword
-    {
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
-        protected global::System.Web.UI.WebControls.TextBox txtCode;
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
-        protected global::System.Web.UI.WebControls.TextBox txtPassword2;
-        protected global::System.Web.UI.WebControls.Button btnReset;
-        protected global::System.Web.UI.WebControls.Label lblMsg;
-    }
-}
-
 ```

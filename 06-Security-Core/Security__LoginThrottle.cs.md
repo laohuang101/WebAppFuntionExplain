@@ -1,6 +1,6 @@
 # LoginThrottle.cs
 **Source:** `Data/Security/LoginThrottle.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,57 +15,51 @@ In-memory brute-force protection per email+IP (failures, lockout window).
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 16:** `Failures` (`int`) — **Number of failed login attempts in the current window.**
-- **Line 17:** `WindowStartUtc` (`DateTime`) — **Date/time value. (date/time)**
-- **Line 18:** `LockedUntilUtc` (`DateTime?`) — **Date/time value. (date/time)**
-- **Line 28:** `n` (`int`) — **Integer count (rows, items, or length).**
-- **Line 30:** `n` (`return`) — **Numeric count or temporary integer.**
-- **Line 31:** `5` (`return`) — **Holds “5” for this scope. (type `return`)**
-- **Line 39:** `n` (`int`) — **Integer count (rows, items, or length).**
-- **Line 41:** `n` (`return`) — **Numeric count or temporary integer.**
-- **Line 42:** `15` (`return`) — **Holds “15” for this scope. (type `return`)**
-- **Line 50:** `n` (`int`) — **Integer count (rows, items, or length).**
-- **Line 52:** `n` (`return`) — **Numeric count or temporary integer.**
-- **Line 53:** `15` (`return`) — **Holds “15” for this scope. (type `return`)**
-- **Line 59:** `e` (`string`) — **Normalized email string (trimmed/lowercased).**
-- **Line 60:** `ip` (`string`) — **Client IP address for throttle/audit.**
-- **Line 67:** `xff` (`string`) — **X-Forwarded-For header value (client IP when behind a proxy).**
-- **Line 70:** `comma` (`int`) — **Index of the first comma in a string (split helper).**
-- **Line 82:** `key` (`string`) — **HMAC key bytes or dictionary key.**
-- **Line 83:** `b` (`Bucket`) — **Holds “b” for this scope. (type `Bucket`)**
-- **Line 90:** `remain` (`var`) — **Holds “remain” for this scope.**
-- **Line 91:** `mins` (`int`) — **Often a collection related to mins (plural name). (integer)**
-- **Line 93:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 100:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 105:** `key` (`string`) — **HMAC key bytes or dictionary key.**
-- **Line 106:** `now` (`var`) — **Current time (usually UTC or server local).**
-- **Line 123:** `b` (`return`) — **Holds “b” for this scope. (type `return`)**
-- **Line 129:** `key` (`string`) — **HMAC key bytes or dictionary key.**
-- **Line 130:** `removed` (`Bucket`) — **Holds “removed” for this scope. (type `Bucket`)**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `Failures` | `int` | Number of failed login attempts in the current window. |
+| `WindowStartUtc` | `DateTime` | Date/time value. (date/time) |
+| `LockedUntilUtc` | `DateTime?` | Date/time value. (date/time) |
 
 ## Functions / methods (4 found)
 
 ### `ClientKey` — lines 56–77
 
+#### Signature
+
 ```csharp
 public static string ClientKey(string email, HttpContext ctx)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ClientKey`.
-- **Parameters (what each means):**
-- `email` (`string`) — Account email address (usually lowercased).
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- **Local variables (what each means):**
-- `e` (`string`) — Normalized email string (trimmed/lowercased).
-- `ip` (`string`) — Client IP address for throttle/audit.  Literal text string.
-- `xff` (`string`) — X-Forwarded-For header value (client IP when behind a proxy).
-- `comma` (`int`) — Index of the first comma in a string (split helper).
+Function `ClientKey` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `ClientKey`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `email` | `string` | Account email address (usually lowercased). |
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `e` | `string` | Normalized email string (trimmed/lowercased). |
+| `ip` | `string` | Client IP address for throttle/audit.  Literal text string. |
+| `xff` | `string` | X-Forwarded-For header value (client IP when behind a proxy). |
+| `comma` | `int` | Index of the first comma in a string (split helper). |
+
+#### Code
 
 ```csharp
   56 | 
@@ -92,36 +86,42 @@ public static string ClientKey(string email, HttpContext ctx)
   77 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L59:** `e` means: Normalized email string (trimmed/lowercased).
-- **L60:** `ip` means: Client IP address for throttle/audit.  Literal text string.
-- **L61:** Error handling block.
-- **L67:** `xff` means: X-Forwarded-For header value (client IP when behind a proxy).
-- **L70:** `comma` means: Index of the first comma in a string (split helper).
-- **L75:** Handle/log exception.
-
 ---
 
 ### `IsLocked` — lines 78–101
+
+#### Signature
 
 ```csharp
 public static bool IsLocked(string email, HttpContext ctx, out string message)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `IsLocked`.
-- **Parameters (what each means):**
-- `email` (`string`) — Account email address (usually lowercased).
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- `message` (`string`) — Status text for the UI.
-- **Local variables (what each means):**
-- `key` (`string`) — HMAC key bytes or dictionary key.
-- `remain` (`var`) — Holds “remain” for this scope.
-- `mins` (`int`) — Often a collection related to mins (plural name). (integer)
+Returns true if this email/IP is temporarily blocked after too many failed logins.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Return `true` to the caller.
+2. Return `false` to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `email` | `string` | Account email address (usually lowercased). |
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+| `message` | `string` | Status text for the UI. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `key` | `string` | HMAC key bytes or dictionary key. |
+| `remain` | `var` | Holds “remain” for this scope. |
+| `mins` | `int` | Often a collection related to mins (plural name). (integer) |
+
+#### Code
 
 ```csharp
   78 | 
@@ -150,32 +150,41 @@ public static bool IsLocked(string email, HttpContext ctx, out string message)
  101 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L79:** Brute-force lockout tracking.
-- **L82:** `key` means: HMAC key bytes or dictionary key.
-- **L90:** `remain` means: Holds “remain” for this scope.
-- **L91:** `mins` means: Often a collection related to mins (plural name). (integer)
-
 ---
 
 ### `RegisterFailure` — lines 102–125
+
+#### Signature
 
 ```csharp
 public static void RegisterFailure(string email, HttpContext ctx)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `RegisterFailure`.
-- **Parameters (what each means):**
-- `email` (`string`) — Account email address (usually lowercased).
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- **Local variables (what each means):**
-- `key` (`string`) — HMAC key bytes or dictionary key.
-- `now` (`var`) — Current time (usually UTC or server local).
+Records a failed login attempt (may trigger lockout).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `RegisterFailure`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `email` | `string` | Account email address (usually lowercased). |
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `key` | `string` | HMAC key bytes or dictionary key. |
+| `now` | `var` | Current time (usually UTC or server local). |
+
+#### Code
 
 ```csharp
  102 | 
@@ -204,30 +213,40 @@ public static void RegisterFailure(string email, HttpContext ctx)
  125 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L103:** Brute-force lockout tracking.
-- **L105:** `key` means: HMAC key bytes or dictionary key.
-- **L106:** `now` means: Current time (usually UTC or server local).
-
 ---
 
 ### `RegisterSuccess` — lines 126–132
+
+#### Signature
 
 ```csharp
 public static void RegisterSuccess(string email, HttpContext ctx)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `RegisterSuccess`.
-- **Parameters (what each means):**
-- `email` (`string`) — Account email address (usually lowercased).
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- **Local variables (what each means):**
-- `key` (`string`) — HMAC key bytes or dictionary key.
+Clears the failure counter after a good login.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `RegisterSuccess`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `email` | `string` | Account email address (usually lowercased). |
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `key` | `string` | HMAC key bytes or dictionary key. |
+
+#### Code
 
 ```csharp
  126 | 
@@ -239,15 +258,11 @@ public static void RegisterSuccess(string email, HttpContext ctx)
  132 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L129:** `key` means: HMAC key bytes or dictionary key.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -384,168 +399,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  132 |         }
  133 |     }
  134 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L6:** C# namespace grouping.
-- **L12:** Brute-force lockout tracking.
-- **L14:** Class declaration for this page/service.
-- **L59:** `e` means: Normalized email string (trimmed/lowercased).
-- **L60:** `ip` means: Client IP address for throttle/audit.  Literal text string.
-- **L61:** Error handling block.
-- **L67:** `xff` means: X-Forwarded-For header value (client IP when behind a proxy).
-- **L70:** `comma` means: Index of the first comma in a string (split helper).
-- **L75:** Handle/log exception.
-- **L79:** Brute-force lockout tracking.
-- **L82:** `key` means: HMAC key bytes or dictionary key.
-- **L90:** `remain` means: Holds “remain” for this scope.
-- **L91:** `mins` means: Often a collection related to mins (plural name). (integer)
-- **L103:** Brute-force lockout tracking.
-- **L105:** `key` means: HMAC key bytes or dictionary key.
-- **L106:** `now` means: Current time (usually UTC or server local).
-- **L129:** `key` means: HMAC key bytes or dictionary key.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Collections.Concurrent;
-using System.Configuration;
-using System.Web;
-
-namespace WebAppAssignment.Data.Security
-{
-    /// <summary>
-    /// In-memory login rate limit / lockout (per email + IP).
-    /// Suitable for single-server / LocalDB assignment deploy.
-    /// </summary>
-    public static class LoginThrottle
-    {
-        private class Bucket
-        {
-            public int Failures;
-            public DateTime WindowStartUtc;
-            public DateTime? LockedUntilUtc;
-        }
-
-        private static readonly ConcurrentDictionary<string, Bucket> Map =
-            new ConcurrentDictionary<string, Bucket>(StringComparer.OrdinalIgnoreCase);
-
-        private static int MaxFailures
-        {
-            get
-            {
-                int n;
-                if (int.TryParse(ConfigurationManager.AppSettings["LoginMaxFailures"], out n) && n > 0)
-                    return n;
-                return 5;
-            }
-        }
-
-        private static int LockoutMinutes
-        {
-            get
-            {
-                int n;
-                if (int.TryParse(ConfigurationManager.AppSettings["LoginLockoutMinutes"], out n) && n > 0)
-                    return n;
-                return 15;
-            }
-        }
-
-        private static int WindowMinutes
-        {
-            get
-            {
-                int n;
-                if (int.TryParse(ConfigurationManager.AppSettings["LoginWindowMinutes"], out n) && n > 0)
-                    return n;
-                return 15;
-            }
-        }
-
-        public static string ClientKey(string email, HttpContext ctx)
-        {
-            string e = (email ?? "").Trim().ToLowerInvariant();
-            string ip = "unknown";
-            try
-            {
-                if (ctx != null && ctx.Request != null)
-                {
-                    ip = ctx.Request.UserHostAddress ?? "unknown";
-                    // basic proxy header (first hop)
-                    string xff = ctx.Request.Headers["X-Forwarded-For"];
-                    if (!string.IsNullOrEmpty(xff))
-                    {
-                        int comma = xff.IndexOf(',');
-                        ip = (comma > 0 ? xff.Substring(0, comma) : xff).Trim();
-                    }
-                }
-            }
-            catch { }
-            return e + "|" + ip;
-        }
-
-        public static bool IsLocked(string email, HttpContext ctx, out string message)
-        {
-            message = null;
-            string key = ClientKey(email, ctx);
-            Bucket b;
-            if (!Map.TryGetValue(key, out b) || b == null) return false;
-
-            if (b.LockedUntilUtc.HasValue)
-            {
-                if (b.LockedUntilUtc.Value > DateTime.UtcNow)
-                {
-                    var remain = b.LockedUntilUtc.Value - DateTime.UtcNow;
-                    int mins = Math.Max(1, (int)Math.Ceiling(remain.TotalMinutes));
-                    message = "Too many failed sign-in attempts. Try again in about " + mins + " minute(s).";
-                    return true;
-                }
-                // lock expired
-                b.LockedUntilUtc = null;
-                b.Failures = 0;
-                b.WindowStartUtc = DateTime.UtcNow;
-            }
-            return false;
-        }
-
-        public static void RegisterFailure(string email, HttpContext ctx)
-        {
-            string key = ClientKey(email, ctx);
-            var now = DateTime.UtcNow;
-            Map.AddOrUpdate(key,
-                _ => new Bucket { Failures = 1, WindowStartUtc = now },
-                (_, b) =>
-                {
-                    if (b.WindowStartUtc.AddMinutes(WindowMinutes) < now)
-                    {
-                        b.Failures = 1;
-                        b.WindowStartUtc = now;
-                        b.LockedUntilUtc = null;
-                    }
-                    else
-                    {
-                        b.Failures++;
-                        if (b.Failures >= MaxFailures)
-                            b.LockedUntilUtc = now.AddMinutes(LockoutMinutes);
-                    }
-                    return b;
-                });
-        }
-
-        public static void RegisterSuccess(string email, HttpContext ctx)
-        {
-            string key = ClientKey(email, ctx);
-            Bucket removed;
-            Map.TryRemove(key, out removed);
-        }
-    }
-}
-
 ```

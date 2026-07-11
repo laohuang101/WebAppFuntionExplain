@@ -1,6 +1,6 @@
 # Students.aspx
 **Source:** `Pages/Lecturer/Students.aspx`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,17 +15,17 @@ Enrolled students per course with progress counts.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
+Markup file — variables live in the matching `.cs` / `.js` companion docs.
 
 ## Functions / methods (0 found)
 
-_No methods matched the scanner (markup-only or unconventional structure). See full file listing below._
+_No methods matched the scanner (markup-only or unconventional structure). See the code listing at the bottom._
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```html
    1 | <%@ Page Title="Student Performance" Language="C#" MasterPageFile="~/Shared/Header&Footer.Master" AutoEventWireup="true" CodeBehind="Students.aspx.cs" Inherits="WebAppAssignment.Pages.Lecturer.Students" %>
@@ -113,100 +113,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   83 |   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   84 |   <script src="Scripts/students.js"></script>
   85 | </asp:Content>
-```
-
-**Line notes** (what code + variables mean)
-
-- **L62:** Dashboard chart/visualization.
-- **L83:** Dashboard chart/visualization.
-
-## Source snapshot (raw)
-
-```html
-<%@ Page Title="Student Performance" Language="C#" MasterPageFile="~/Shared/Header&Footer.Master" AutoEventWireup="true" CodeBehind="Students.aspx.cs" Inherits="WebAppAssignment.Pages.Lecturer.Students" %>
-
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-  <link rel="stylesheet" href="Style/lecturer-pages.css" />
-</asp:Content>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-  <div class="lecturer-page">
-    <div class="mb-4">
-      <h3 class="fw-bold text-dark mb-1">Student Performance</h3>
-      <p class="text-muted small mb-0">Monitor progress and identify students who need help. Search, sort, filter, and paginate below.</p>
-    </div>
-
-    <div class="glass-card p-3">
-      <div id="studentsTableWrap">
-        <div class="text-center text-muted py-4">
-          <i class="fa-solid fa-circle-notch fa-spin me-2"></i>Loading students...
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Student detail modal -->
-  <div class="modal fade" id="studentModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content border-0" style="border-radius:18px;">
-        <div class="modal-header border-0 pb-0">
-          <div class="d-flex align-items-center gap-3">
-            <div class="student-avatar lg" id="mAvatar"> - </div>
-            <div>
-              <h5 class="fw-bold mb-0" id="mName">Student</h5>
-              <div class="text-muted small" id="mMeta"></div>
-            </div>
-          </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row g-3 mb-4">
-            <div class="col-md-4">
-              <div class="stat-mini text-center p-3">
-                <div class="text-muted small">Current Grade</div>
-                <div class="fw-bold fs-3" id="mGrade" style="color:#10b981;"> - </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="stat-mini text-center p-3">
-                <div class="text-muted small">Course Progress</div>
-                <div class="fw-bold fs-3" id="mProgress">0%</div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="stat-mini text-center p-3">
-                <div class="text-muted small">Attendance*</div>
-                <div class="fw-bold fs-3" id="mAttendance"> - </div>
-              </div>
-            </div>
-          </div>
-          <p class="text-muted small mb-3">* Attendance uses Enrollments/CourseProgresses Progress (no separate attendance table in EduDB).</p>
-
-          <h6 class="fw-bold mb-2">Performance Trend</h6>
-          <div class="chart-box mb-4">
-            <canvas id="trendChart" height="100"></canvas>
-          </div>
-
-          <h6 class="fw-bold mb-2">Recent Grades</h6>
-          <div class="table-responsive">
-            <table class="table table-sm mb-0">
-              <thead>
-                <tr>
-                  <th>Assignment</th>
-                  <th>Date</th>
-                  <th class="text-end">Score</th>
-                </tr>
-              </thead>
-              <tbody id="mGradesBody"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <script src="Scripts/students.js"></script>
-</asp:Content>
-
 ```

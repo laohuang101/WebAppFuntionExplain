@@ -1,6 +1,6 @@
 # AuthService.cs
 **Source:** `Data/Security/AuthService.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,97 +15,53 @@ Central auth orchestration: pending registration (no DB row until MFA), login pa
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 46:** `PendingRegTtl` (`TimeSpan`) — **Holds “Pending Reg Ttl” for this scope. (type `TimeSpan`)**
-- **Line 63:** `roleCode` (`string`) — **Stored role value (0 Admin / 1 Student / 2 Lecturer).**
-- **Line 65:** `roleNormalized` (`string`) — **Friendly role name (Admin, Student, Lecturer).**
-- **Line 66:** `rc` (`string`) — **Holds “rc” for this scope. (text)**
-- **Line 80:** `exists` (`int`) — **Count > 0 check (email/user/row already exists).**
-- **Line 85:** `mfaSecret` (`string`) — **Authenticator secret stored for the user.**
-- **Line 126:** `createdUtc` (`DateTime`) — **Date/time value. (date/time)**
-- **Line 152:** `exists` (`int`) — **Count > 0 check (email/user/row already exists).**
-- **Line 160:** `mfaSecret` (`string`) — **Authenticator secret stored for the user.**
-- **Line 162:** `mfaOn` (`int`) — **1/0 flag written to Users.MfaEnabled.**
-- **Line 163:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 201:** `byEmail` (`object`) — **Email address.**
-- **Line 232:** `stored` (`object`) — **Holds “stored” for this scope.**
-- **Line 233:** `storedSecret` (`string`) — **Secret key material (MFA Base32 or crypto secret). (text)**
-- **Line 273:** `at` (`DateTime`) — **Timestamp (CreatedUtc / PwdResetAt).**
-- **Line 281:** `at` (`DateTime`) — **Timestamp (CreatedUtc / PwdResetAt).**
-- **Line 320:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 324:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 325:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 344:** `ctx` (`var`) — **Current HTTP request context (Request, Response, Session).**
-- **Line 348:** `lockMsg` (`string`) — **Message shown when the account is temporarily locked.**
-- **Line 355:** `user` (`AuthUser`) — **AuthUser or user row (UID, Email, Role, MfaSecret, …).**
-- **Line 362:** `stored` (`string`) — **Holds “stored” for this scope. (text)**
-- **Line 379:** `newHash` (`string`) — **Cryptographic hash string. (text)**
-- **Line 401:** `adminToken` (`string`) — **Security token (JWT or CSRF). (text)**
-- **Line 441:** `user` (`AuthUser`) — **AuthUser or user row (UID, Email, Role, MfaSecret, …).**
-- **Line 443:** `ok` (`bool`) — **Boolean success flag.**
-- **Line 457:** `otp` (`string`) — **Holds “otp” for this scope. (text)**
-- **Line 458:** `exp` (`DateTime?`) — **Expiry DateTime.**
-- **Line 477:** `secret` (`string`) — **MFA TOTP Base32 secret for authenticator apps.**
-- **Line 491:** `token` (`string`) — **JWT or CSRF token string.**
-- **Line 518:** `uid` (`int?`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 519:** `email` (`string`) — **Account email address (usually lowercased).**
-- **Line 551:** `lockMsg` (`string`) — **Message shown when the account is temporarily locked.**
-- **Line 558:** `user` (`AuthUser`) — **AuthUser or user row (UID, Email, Role, MfaSecret, …).**
-- **Line 559:** `bad` (`string`) — **Holds “bad” for this scope. (text)**
-- **Line 566:** `secret` (`string`) — **MFA TOTP Base32 secret for authenticator apps.**
-- **Line 580:** `msg` (`string`) — **Human-readable message (error or success).**
-- **Line 591:** `expected` (`string`) — **Holds “expected” for this scope. (text)**
-- **Line 592:** `you` (`string`) — **Holds “you” for this scope. (text)**
-- **Line 645:** `user` (`AuthUser`) — **AuthUser or user row (UID, Email, Role, MfaSecret, …).**
-- **Line 647:** `newHash` (`string`) — **Cryptographic hash string. (text)**
-- **Line 684:** `v` (`var`) — **Generic value (version flag in JSON, or loop value).**
-- **Line 713:** `o` (`object`) — **Holds “o” for this scope.**
-- **Line 719:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 734:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 739:** `uid` (`return`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 751:** `0` (`return`) — **Holds “0” for this scope. (type `return`)**
-- **Line 762:** `existing` (`int`) — **Holds “existing” for this scope. (integer)**
-- **Line 766:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 776:** `token` (`string`) — **JWT or CSRF token string.**
-- **Line 778:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 783:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 790:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 819:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 825:** `r` (`var`) — **Usually one database row (DataRow) in query loops.**
-- **Line 833:** `letter` (`bool`) — **Holds “letter” for this scope. (true/false)**
-- **Line 923:** `mfa` (`bool`) — **Holds “mfa” for this scope. (true/false)**
-- **Line 953:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 954:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 961:** `i` (`int`) — **Loop index (0-based counter in for-loops).**
-- **Line 980:** `flag` (`string`) — **Holds “flag” for this scope. (text)**
-- **Line 997:** `u` (`AuthUser`) — **Holds “u” for this scope. (user DTO)**
-- **Line 998:** `u` (`return`) — **Holds “u” for this scope. (type `return`)**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `PendingRegTtl` | `TimeSpan` | Holds “Pending Reg Ttl” for this scope. (type `TimeSpan`) |
 
 ## Functions / methods (32 found)
 
 ### `StartRegistration` — lines 52–114
 
+#### Signature
+
 ```csharp
 public static AuthResult StartRegistration(HttpContext ctx, string name, string email, string password, string roleChoice = "Student")
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `StartRegistration`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- `name` (`string`) — Display name of user/course/criterion.
-- `email` (`string`) — Account email address (usually lowercased).
-- `password` (`string`) — Plain password from the form (never log this).
-- `roleChoice` (`string`) — Role selected on the register form.
-- **Local variables (what each means):**
-- `rc` (`string`) — Holds “rc” for this scope. (text)
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
-- `mfaSecret` (`string`) — Authenticator secret stored for the user.  New random MFA secret.
+Validates the register form and stores pending account data in Session (does NOT create the user yet).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate name, email, password strength, and role (Student/Lecturer only).
+2. Check the email is not already in Users.
+3. Hash the password and generate a new MFA secret.
+4. Store everything in Session only (pending registration) — do not insert into the database yet.
+5. Return the MFA secret to the page so it can show the QR code.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+| `name` | `string` | Display name of user/course/criterion. |
+| `email` | `string` | Account email address (usually lowercased). |
+| `password` | `string` | Plain password from the form (never log this). |
+| `roleChoice` | `string` | Role selected on the register form. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `rc` | `string` | Holds “rc” for this scope. (text) |
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+| `mfaSecret` | `string` | Authenticator secret stored for the user.  New random MFA secret. |
+
+#### Code
 
 ```csharp
   52 |         public static AuthResult StartRegistration(HttpContext ctx, string name, string email, string password, string roleChoice = "Student")
@@ -173,46 +129,47 @@ public static AuthResult StartRegistration(HttpContext ctx, string name, string 
  114 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L52:** Pending registration in Session until MFA confirmed.
-- **L66:** `rc` means: Holds “rc” for this scope. (text)
-- **L78:** Import namespace/types.
-- **L80:** `exists` means: Count > 0 check (email/user/row already exists).
-- **L82:** Parameterized SQL — prevents classic SQL injection.
-- **L86:** TOTP / authenticator (RFC 6238) helper. | `mfaSecret` means: Authenticator secret stored for the user.  New random MFA secret.
-- **L89:** Server session for logged-in user.
-- **L90:** Server session for logged-in user.
-- **L91:** Server session for logged-in user.
-- **L92:** Server session for logged-in user.
-- **L93:** Server session for logged-in user.
-- **L94:** Server session for logged-in user.
-- **L95:** Server session for logged-in user.
-
 ---
 
 ### `FinishRegistration` — lines 120–267
+
+#### Signature
 
 ```csharp
 public static AuthResult FinishRegistration(HttpContext ctx, string totpCode)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `FinishRegistration`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- `totpCode` (`string`) — User-entered 6-digit authenticator code.
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
-- `mfaSecret` (`string`) — Authenticator secret stored for the user.
-- `mfaOn` (`int`) — 1/0 flag written to Users.MfaEnabled.  Literal number `1`.
-- `byEmail` (`object`) — Email address.
-- `stored` (`object`) — Holds “stored” for this scope.
-- `storedSecret` (`string`) — Secret key material (MFA Base32 or crypto secret). (text)
+After a valid MFA code, inserts the new user into the database and clears the pending Session.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Read the pending registration from Session; fail if missing or timed out.
+2. Verify the 6-digit authenticator code against the pending secret.
+3. Insert the new user into Users (hash + MfaSecret + role).
+4. Clear the pending Session data.
+5. Return success so the UI can send the user to Login.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+| `totpCode` | `string` | User-entered 6-digit authenticator code. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+| `mfaSecret` | `string` | Authenticator secret stored for the user. |
+| `mfaOn` | `int` | 1/0 flag written to Users.MfaEnabled.  Literal number `1`. |
+| `byEmail` | `object` | Email address. |
+| `stored` | `object` | Holds “stored” for this scope. |
+| `storedSecret` | `string` | Secret key material (MFA Base32 or crypto secret). (text) |
+
+#### Code
 
 ```csharp
  120 |         public static AuthResult FinishRegistration(HttpContext ctx, string totpCode)
@@ -365,78 +322,37 @@ public static AuthResult FinishRegistration(HttpContext ctx, string totpCode)
  267 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L120:** Pending registration in Session until MFA confirmed.
-- **L127:** Pending registration in Session until MFA confirmed.
-- **L130:** Pending registration in Session until MFA confirmed.
-- **L132:** Pending registration in Session until MFA confirmed.
-- **L139:** TOTP / authenticator (RFC 6238) helper.
-- **L142:** Pending registration in Session until MFA confirmed.
-- **L146:** TOTP / authenticator (RFC 6238) helper.
-- **L150:** Import namespace/types.
-- **L152:** `exists` means: Count > 0 check (email/user/row already exists).
-- **L154:** Parameterized SQL — prevents classic SQL injection.
-- **L157:** Pending registration in Session until MFA confirmed.
-- **L161:** `mfaSecret` means: Authenticator secret stored for the user.
-- **L162:** `mfaOn` means: 1/0 flag written to Users.MfaEnabled.  Literal number `1`.
-- **L165:** Error handling block.
-- **L169:** Return new identity/UID after INSERT.
-- **L171:** Parameterized SQL — prevents classic SQL injection.
-- **L172:** Parameterized SQL — prevents classic SQL injection.
-- **L173:** Parameterized SQL — prevents classic SQL injection.
-- **L174:** Parameterized SQL — prevents classic SQL injection.
-- **L175:** Parameterized SQL — prevents classic SQL injection.
-- **L176:** Parameterized SQL — prevents classic SQL injection.
-- **L177:** Parameterized SQL — prevents classic SQL injection.
-- **L178:** Parameterized SQL — prevents classic SQL injection.
-- **L180:** Handle/log exception.
-- **L182:** Error handling block.
-- **L186:** Return new identity/UID after INSERT.
-- **L188:** Parameterized SQL — prevents classic SQL injection.
-- **L189:** Parameterized SQL — prevents classic SQL injection.
-- **L190:** Parameterized SQL — prevents classic SQL injection.
-- **L191:** Parameterized SQL — prevents classic SQL injection.
-- **L193:** Handle/log exception.
-- **L199:** Error handling block.
-- **L201:** Parameterized SQL — prevents classic SQL injection. | `byEmail` means: Email address.
-- **L202:** Null-safe read from database values.
-- **L205:** Handle/log exception.
-- **L210:** Error handling block.
-- **L214:** Parameterized SQL — prevents classic SQL injection.
-- **L215:** Parameterized SQL — prevents classic SQL injection.
-- **L216:** Parameterized SQL — prevents classic SQL injection.
-- **L217:** Parameterized SQL — prevents classic SQL injection.
-- **L218:** Parameterized SQL — prevents classic SQL injection.
-- **L220:** Handle/log exception.
-- **L222:** Error handling block.
-- **L225:** Parameterized SQL — prevents classic SQL injection.
-- **L227:** Handle/log exception.
-- **L230:** Error handling block.
-- **L232:** Parameterized SQL — prevents classic SQL injection. | `stored` means: Holds “stored” for this scope.
-- **L233:** Null-safe read from database values. | `storedSecret` means: Secret key material (MFA Base32 or crypto secret). (text)
-- **L235:** TOTP / authenticator (RFC 6238) helper.
-- **L238:** Parameterized SQL — prevents classic SQL injection.
-- **L242:** Handle/log exception.
-- **L244:** Parameterized SQL — prevents classic SQL injection.
-- **L248:** Pending registration in Session until MFA confirmed.
-- **L249:** Write/read security audit events.
-
 ---
 
 ### `HasPendingRegistration` — lines 270–275
+
+#### Signature
 
 ```csharp
 public static bool HasPendingRegistration(HttpContext ctx)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `HasPendingRegistration`.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+Checks a condition related to **Has Pending Registration** and returns true/false (or tries an action safely).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `HasPendingRegistration`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  270 |         public static bool HasPendingRegistration(HttpContext ctx)
@@ -447,28 +363,39 @@ public static bool HasPendingRegistration(HttpContext ctx)
  275 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L270:** Pending registration in Session until MFA confirmed.
-- **L274:** Pending registration in Session until MFA confirmed.
-
 ---
 
 ### `TryGetPendingMfaSetup` — lines 278–283
+
+#### Signature
 
 ```csharp
 public static bool TryGetPendingMfaSetup(HttpContext ctx, out string email, out string mfaSecret)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `TryGetPendingMfaSetup`.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- `email` (`string`) — Account email address (usually lowercased).
-- `mfaSecret` (`string`) — Authenticator secret stored for the user.
+Checks a condition related to **Try Get Pending Mfa Setup** and returns true/false (or tries an action safely).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `TryGetPendingMfaSetup`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+| `email` | `string` | Account email address (usually lowercased). |
+| `mfaSecret` | `string` | Authenticator secret stored for the user. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  278 |         public static bool TryGetPendingMfaSetup(HttpContext ctx, out string email, out string mfaSecret)
@@ -479,27 +406,35 @@ public static bool TryGetPendingMfaSetup(HttpContext ctx, out string email, out 
  283 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L282:** Pending registration in Session until MFA confirmed.
-
 ---
 
 ### `ClearPendingRegistration` — lines 284–299
+
+#### Signature
 
 ```csharp
 public static void ClearPendingRegistration(HttpContext ctx)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ClearPendingRegistration`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Pattern:** Delete/clear data.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+Deletes or clears **Clear Pending Registration** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Clear Session data (logout or end of multi-step flow).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  284 | 
@@ -520,22 +455,11 @@ public static void ClearPendingRegistration(HttpContext ctx)
  299 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L285:** Pending registration in Session until MFA confirmed.
-- **L287:** Error handling block.
-- **L290:** Pending registration in Session until MFA confirmed.
-- **L291:** Pending registration in Session until MFA confirmed.
-- **L292:** Pending registration in Session until MFA confirmed.
-- **L293:** Pending registration in Session until MFA confirmed.
-- **L294:** Pending registration in Session until MFA confirmed.
-- **L295:** Pending registration in Session until MFA confirmed.
-- **L296:** Pending registration in Session until MFA confirmed.
-- **L298:** Handle/log exception.
-
 ---
 
 ### `TryReadPendingRegistration` — lines 300–328
+
+#### Signature
 
 ```csharp
 private static bool TryReadPendingRegistration(
@@ -544,21 +468,40 @@ private static bool TryReadPendingRegistration(
             out string roleCode, out string roleNormalized, out string secret, out DateTime createdUtc)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `TryReadPendingRegistration`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- `name` (`string`) — Display name of user/course/criterion.
-- `email` (`string`) — Account email address (usually lowercased).
-- `hash` (`string`) — Password hash (PBKDF2) stored in DB.
-- `roleCode` (`string`) — Stored role value (0 Admin / 1 Student / 2 Lecturer).
-- `roleNormalized` (`string`) — Friendly role name (Admin, Student, Lecturer).
-- `secret` (`string`) — MFA TOTP Base32 secret for authenticator apps.
-- `createdUtc` (`DateTime`) — Date/time value. (date/time)
+Checks a condition related to **Try Read Pending Registration** and returns true/false (or tries an action safely).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Save temporary state in Session (`Session[SessRegName] as string;`).
+2. Save temporary state in Session (`Session[SessRegEmail] as string;`).
+3. Save temporary state in Session (`Session[SessRegHash] as string;`).
+4. Save temporary state in Session (`Session[SessRegRole] as string;`).
+5. Save temporary state in Session (`Session[SessRegRoleName] as string;`).
+6. Save temporary state in Session (`Session[SessRegSecret] as string;`).
+7. Save temporary state in Session (`Session[SessRegAt];`).
+8. Return `false` to the caller.
+9. Return `true` to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+| `name` | `string` | Display name of user/course/criterion. |
+| `email` | `string` | Account email address (usually lowercased). |
+| `hash` | `string` | Password hash (PBKDF2) stored in DB. |
+| `roleCode` | `string` | Stored role value (0 Admin / 1 Student / 2 Lecturer). |
+| `roleNormalized` | `string` | Friendly role name (Admin, Student, Lecturer). |
+| `secret` | `string` | MFA TOTP Base32 secret for authenticator apps. |
+| `createdUtc` | `DateTime` | Date/time value. (date/time) |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  300 | 
@@ -592,39 +535,39 @@ private static bool TryReadPendingRegistration(
  328 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L301:** Pending registration in Session until MFA confirmed.
-- **L309:** Error handling block.
-- **L311:** Server session for logged-in user.
-- **L312:** Server session for logged-in user.
-- **L313:** Server session for logged-in user.
-- **L314:** Server session for logged-in user.
-- **L315:** Server session for logged-in user.
-- **L316:** Server session for logged-in user.
-- **L317:** Server session for logged-in user.
-- **L318:** Server session for logged-in user.
-- **L327:** Handle/log exception.
-
 ---
 
 ### `Register` — lines 331–334
+
+#### Signature
 
 ```csharp
 public static AuthResult Register(string name, string email, string password, bool enableMfa, string roleChoice = "Student")
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Register`.
-- **Parameters (what each means):**
-- `name` (`string`) — Display name of user/course/criterion.
-- `email` (`string`) — Account email address (usually lowercased).
-- `password` (`string`) — Plain password from the form (never log this).
-- `enableMfa` (`bool`) — Whether MFA should be enabled for the account.
-- `roleChoice` (`string`) — Role selected on the register form.
+Function `Register` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate the form and keep pending registration only in Session (no database user yet).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `name` | `string` | Display name of user/course/criterion. |
+| `email` | `string` | Account email address (usually lowercased). |
+| `password` | `string` | Plain password from the form (never log this). |
+| `enableMfa` | `bool` | Whether MFA should be enabled for the account. |
+| `roleChoice` | `string` | Role selected on the register form. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  331 |         public static AuthResult Register(string name, string email, string password, bool enableMfa, string roleChoice = "Student")
@@ -633,33 +576,48 @@ public static AuthResult Register(string name, string email, string password, bo
  334 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L333:** Pending registration in Session until MFA confirmed.
-
 ---
 
 ### `LoginPassword` — lines 339–430
+
+#### Signature
 
 ```csharp
 public static AuthResult LoginPassword(string email, string password)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `LoginPassword`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `email` (`string`) — Account email address (usually lowercased).
-- `password` (`string`) — Plain password from the form (never log this).
-- **Local variables (what each means):**
-- `ctx` (`var`) — Current HTTP request context (Request, Response, Session).
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
-- `stored` (`string`) — Holds “stored” for this scope. (text)
-- `newHash` (`string`) — Cryptographic hash string. (text)  Assigned from password hash function.
-- `adminToken` (`string`) — Security token (JWT or CSRF). (text)
+Checks email + password; Admin finishes login; Student/Lecturer must do MFA next.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Clean the email (trim + lowercase) and read the password.
+2. If LoginThrottle says this email/IP is locked, return an error and stop.
+3. Open the database and load the user row by email.
+4. If the user is missing or the password hash does not match, record a failure and return “invalid login”.
+5. On success, clear the failure counter; if the stored password was plain text, upgrade it to a PBKDF2 hash.
+6. If the role is Admin: create a JWT and return success without MFA.
+7. If the role is Student/Lecturer: return success with RequiresMfa = true so the next page asks for the authenticator code.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `email` | `string` | Account email address (usually lowercased). |
+| `password` | `string` | Plain password from the form (never log this). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `var` | Current HTTP request context (Request, Response, Session). |
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+| `stored` | `string` | Holds “stored” for this scope. (text) |
+| `newHash` | `string` | Cryptographic hash string. (text)  Assigned from password hash function. |
+| `adminToken` | `string` | Security token (JWT or CSRF). (text) |
+
+#### Code
 
 ```csharp
  339 |         public static AuthResult LoginPassword(string email, string password)
@@ -756,58 +714,48 @@ public static AuthResult LoginPassword(string email, string password)
  430 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L344:** `ctx` means: Current HTTP request context (Request, Response, Session).
-- **L350:** Brute-force lockout tracking.
-- **L353:** Import namespace/types.
-- **L355:** `user` means: AuthUser or user row (UID, Email, Role, MfaSecret, …).
-- **L358:** Brute-force lockout tracking.
-- **L359:** Write/read security audit events.
-- **L363:** `stored` means: Holds “stored” for this scope. (text)
-- **L367:** Password hashing (PBKDF2).
-- **L369:** Brute-force lockout tracking.
-- **L370:** Write/read security audit events.
-- **L374:** Brute-force lockout tracking.
-- **L377:** Password hashing (PBKDF2).
-- **L379:** Password hashing (PBKDF2). | `newHash` means: Cryptographic hash string. (text)  Assigned from password hash function.
-- **L380:** Error handling block.
-- **L383:** Parameterized SQL — prevents classic SQL injection.
-- **L385:** Handle/log exception.
-- **L387:** Error handling block.
-- **L390:** Parameterized SQL — prevents classic SQL injection.
-- **L392:** Handle/log exception.
-- **L396:** Map role codes/names to Admin/Student/Lecturer.
-- **L401:** JWT cookie create/validate/clear. | `adminToken` means: Security token (JWT or CSRF). (text)
-- **L402:** Write/read security audit events.
-
 ---
 
 ### `VerifyMfa` — lines 431–500
+
+#### Signature
 
 ```csharp
 public static AuthResult VerifyMfa(int uid, string code, string method)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `VerifyMfa`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `code` (`string`) — 6-digit TOTP / OTP the user typed.
-- `method` (`string`) — HTTP method (GET/POST) or MFA method (totp/email).
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
-- `ok` (`bool`) — Boolean success flag.
-- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
-- `r` (`var`) — Usually one database row (DataRow) in query loops.
-- `exp` (`DateTime?`) — Expiry DateTime.
-- `secret` (`string`) — MFA TOTP Base32 secret for authenticator apps.
-- `token` (`string`) — JWT or CSRF token string.
+Checks the authenticator code after password login, then allows full sign-in.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Load the user by UID from the pending MFA session.
+2. Verify the TOTP code with TotpHelper (or email OTP if that method is used).
+3. On success, build a JWT and return the user for CompleteLogin.
+4. On failure, record a throttle failure and return an error.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `code` | `string` | 6-digit TOTP / OTP the user typed. |
+| `method` | `string` | HTTP method (GET/POST) or MFA method (totp/email). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+| `ok` | `bool` | Boolean success flag. |
+| `cmd` | `var` | SqlCommand — the SQL statement + parameters object.  Newly constructed object. |
+| `r` | `var` | Usually one database row (DataRow) in query loops. |
+| `exp` | `DateTime?` | Expiry DateTime. |
+| `secret` | `string` | MFA TOTP Base32 secret for authenticator apps. |
+| `token` | `string` | JWT or CSRF token string. |
+
+#### Code
 
 ```csharp
  431 | 
@@ -882,47 +830,40 @@ public static AuthResult VerifyMfa(int uid, string code, string method)
  500 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L432:** Verify multi-factor / TOTP code.
-- **L439:** Import namespace/types.
-- **L441:** `user` means: AuthUser or user row (UID, Email, Role, MfaSecret, …).
-- **L444:** `ok` means: Boolean success flag.
-- **L447:** Error handling block.
-- **L449:** Import namespace/types.
-- **L452:** Parameterized SQL — prevents classic SQL injection.
-- **L453:** Import namespace/types.
-- **L457:** Null-safe read from database values. | `otp` means: Holds “otp” for this scope. (text)
-- **L458:** Null-safe read from database values. | `exp` means: Expiry DateTime.
-- **L469:** Parameterized SQL — prevents classic SQL injection.
-- **L472:** Handle/log exception.
-- **L477:** TOTP / authenticator (RFC 6238) helper. | `secret` means: MFA TOTP Base32 secret for authenticator apps.
-- **L480:** TOTP / authenticator (RFC 6238) helper.
-- **L485:** Brute-force lockout tracking.
-- **L489:** Brute-force lockout tracking.
-- **L490:** Map role codes/names to Admin/Student/Lecturer.
-- **L491:** JWT cookie create/validate/clear. | `token` means: JWT or CSRF token string.
-
 ---
 
 ### `CompleteLogin` — lines 501–513
+
+#### Signature
 
 ```csharp
 public static void CompleteLogin(HttpContext ctx, AuthUser user, string token)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `CompleteLogin`.
-- **CSRF:** Validates anti-forgery token on mutating request.
-- **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- `user` (`AuthUser`) — AuthUser or user row (UID, Email, Role, MfaSecret, …).
-- `token` (`string`) — JWT or CSRF token string.
+Writes Session keys and JWT cookie so the user is fully signed in.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Write Session keys: UserID, UserName, UserRole, AuthToken.
+2. Set the JWT cookie on the browser response.
+3. Optionally refresh the CSRF token.
+4. Log a successful login in the security audit table.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+| `user` | `AuthUser` | AuthUser or user row (UID, Email, Role, MfaSecret, …). |
+| `token` | `string` | JWT or CSRF token string. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  501 | 
@@ -940,35 +881,42 @@ public static void CompleteLogin(HttpContext ctx, AuthUser user, string token)
  513 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L502:** Issue Session + JWT after successful auth.
-- **L506:** Server session for logged-in user.
-- **L507:** Server session for logged-in user.
-- **L508:** Server session for logged-in user.
-- **L509:** Server session for logged-in user.
-- **L510:** JWT cookie create/validate/clear.
-- **L511:** CSRF anti-forgery protection.
-- **L512:** Map role codes/names to Admin/Student/Lecturer.
-
 ---
 
 ### `Logout` — lines 514–535
+
+#### Signature
 
 ```csharp
 public static void Logout(HttpContext ctx)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Logout`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- **Local variables (what each means):**
-- `email` (`string`) — Account email address (usually lowercased).
+Clears Session and JWT cookie so the user is signed out.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Save temporary state in Session (`Session !`).
+2. Save temporary state in Session (`Session["UserID"]);`).
+3. Save temporary state in Session (`Session !`).
+4. Write an audit-log row for this security event.
+5. Clear Session data (logout or end of multi-step flow).
+6. Delete the JWT cookie (sign out).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `email` | `string` | Account email address (usually lowercased). |
+
+#### Code
 
 ```csharp
  514 | 
@@ -995,43 +943,45 @@ public static void Logout(HttpContext ctx)
  535 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L519:** `email` means: Account email address (usually lowercased).
-- **L520:** Error handling block.
-- **L522:** Server session for logged-in user.
-- **L523:** Server session for logged-in user.
-- **L524:** Server session for logged-in user.
-- **L526:** Handle/log exception.
-- **L527:** Write/read security audit events.
-- **L528:** Error handling block.
-- **L533:** Handle/log exception.
-- **L534:** JWT cookie create/validate/clear.
-
 ---
 
 ### `VerifyMfaForPasswordReset` — lines 541–630
+
+#### Signature
 
 ```csharp
 public static AuthResult VerifyMfaForPasswordReset(string email, string totpCode)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `VerifyMfaForPasswordReset`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `email` (`string`) — Account email address (usually lowercased).
-- `totpCode` (`string`) — User-entered 6-digit authenticator code.
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
-- `bad` (`string`) — Holds “bad” for this scope. (text)  Literal text string.
-- `secret` (`string`) — MFA TOTP Base32 secret for authenticator apps.
-- `msg` (`string`) — Human-readable message (error or success).  Literal text string.
-- `expected` (`string`) — Holds “expected” for this scope. (text)  TOTP related value.
-- `you` (`string`) — Holds “you” for this scope. (text)
+Step 1 of forgot-password: prove identity with email + authenticator code.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate email and TOTP code are present.
+2. Load the user and check the authenticator code.
+3. On success, the page stores UID in Session for the new-password step.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `email` | `string` | Account email address (usually lowercased). |
+| `totpCode` | `string` | User-entered 6-digit authenticator code. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+| `bad` | `string` | Holds “bad” for this scope. (text)  Literal text string. |
+| `secret` | `string` | MFA TOTP Base32 secret for authenticator apps. |
+| `msg` | `string` | Human-readable message (error or success).  Literal text string. |
+| `expected` | `string` | Holds “expected” for this scope. (text)  TOTP related value. |
+| `you` | `string` | Holds “you” for this scope. (text) |
+
+#### Code
 
 ```csharp
  541 |         public static AuthResult VerifyMfaForPasswordReset(string email, string totpCode)
@@ -1126,51 +1076,42 @@ public static AuthResult VerifyMfaForPasswordReset(string email, string totpCode
  630 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L541:** Verify multi-factor / TOTP code.
-- **L553:** Brute-force lockout tracking.
-- **L556:** Import namespace/types.
-- **L558:** `user` means: AuthUser or user row (UID, Email, Role, MfaSecret, …).
-- **L559:** `bad` means: Holds “bad” for this scope. (text)  Literal text string.
-- **L562:** Brute-force lockout tracking.
-- **L563:** Write/read security audit events.
-- **L567:** TOTP / authenticator (RFC 6238) helper. | `secret` means: MFA TOTP Base32 secret for authenticator apps.
-- **L570:** Write/read security audit events.
-- **L576:** TOTP / authenticator (RFC 6238) helper.
-- **L578:** Brute-force lockout tracking.
-- **L579:** Write/read security audit events.
-- **L587:** Debug-only TOTP leak switch (must stay false for demos).
-- **L589:** Error handling block.
-- **L591:** TOTP / authenticator (RFC 6238) helper. | `expected` means: Holds “expected” for this scope. (text)  TOTP related value.
-- **L592:** TOTP / authenticator (RFC 6238) helper. | `you` means: Holds “you” for this scope. (text)
-- **L597:** Encode text to reduce XSS risk.
-- **L605:** Handle/log exception.
-- **L620:** Brute-force lockout tracking.
-- **L621:** Write/read security audit events.
-- **L622:** Map role codes/names to Admin/Student/Lecturer.
-
 ---
 
 ### `CompletePasswordReset` — lines 635–679
+
+#### Signature
 
 ```csharp
 public static AuthResult CompletePasswordReset(int uid, string newPassword)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `CompletePasswordReset`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `newPassword` (`string`) — Password (plain input — hash before storing). (text)
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
-- `newHash` (`string`) — Cryptographic hash string. (text)  Assigned from password hash function.
+Step 2 of forgot-password: save the new password hash for that user.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate the new password (length/complexity).
+2. Hash it with PBKDF2.
+3. UPDATE Users.Password / PasswordHash for that UID.
+4. Return success so the UI can send the user to Login.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `newPassword` | `string` | Password (plain input — hash before storing). (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+| `newHash` | `string` | Cryptographic hash string. (text)  Assigned from password hash function. |
+
+#### Code
 
 ```csharp
  635 |         public static AuthResult CompletePasswordReset(int uid, string newPassword)
@@ -1220,41 +1161,41 @@ public static AuthResult CompletePasswordReset(int uid, string newPassword)
  679 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L635:** Password-reset MFA then update password hash.
-- **L643:** Import namespace/types.
-- **L645:** `user` means: AuthUser or user row (UID, Email, Role, MfaSecret, …).
-- **L648:** Password hashing (PBKDF2). | `newHash` means: Cryptographic hash string. (text)  Assigned from password hash function.
-- **L649:** Error handling block.
-- **L654:** Parameterized SQL — prevents classic SQL injection.
-- **L656:** Handle/log exception.
-- **L658:** Error handling block.
-- **L661:** Parameterized SQL — prevents classic SQL injection.
-- **L663:** Handle/log exception.
-- **L669:** Parameterized SQL — prevents classic SQL injection.
-- **L670:** Handle/log exception.
-- **L672:** Write/read security audit events.
-
 ---
 
 ### `ResetPasswordWithTotp` — lines 682–687
+
+#### Signature
 
 ```csharp
 public static AuthResult ResetPasswordWithTotp(string email, string totpCode, string newPassword)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ResetPasswordWithTotp`.
-- **Parameters (what each means):**
-- `email` (`string`) — Account email address (usually lowercased).
-- `totpCode` (`string`) — User-entered 6-digit authenticator code.
-- `newPassword` (`string`) — Password (plain input — hash before storing). (text)
-- **Local variables (what each means):**
-- `v` (`var`) — Generic value (version flag in JSON, or loop value).  Assigned from verification boolean/result.
+One-shot password reset: verify TOTP then set new password.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Verify email + authenticator code for password reset (step 1).
+2. If the previous step failed, show the error and stop.
+3. Update the user’s password hash (step 2 of reset).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `email` | `string` | Account email address (usually lowercased). |
+| `totpCode` | `string` | User-entered 6-digit authenticator code. |
+| `newPassword` | `string` | Password (plain input — hash before storing). (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `v` | `var` | Generic value (version flag in JSON, or loop value).  Assigned from verification boolean/result. |
+
+#### Code
 
 ```csharp
  682 |         public static AuthResult ResetPasswordWithTotp(string email, string totpCode, string newPassword)
@@ -1265,28 +1206,39 @@ public static AuthResult ResetPasswordWithTotp(string email, string totpCode, st
  687 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L684:** Verify multi-factor / TOTP code. | `v` means: Generic value (version flag in JSON, or loop value).  Assigned from verification boolean/result.
-- **L686:** Password-reset MFA then update password hash.
-
 ---
 
 ### `ResetPasswordWithCode` — lines 690–693
+
+#### Signature
 
 ```csharp
 public static AuthResult ResetPasswordWithCode(string email, string code, string newPassword)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ResetPasswordWithCode`.
-- **Parameters (what each means):**
-- `email` (`string`) — Account email address (usually lowercased).
-- `code` (`string`) — 6-digit TOTP / OTP the user typed.
-- `newPassword` (`string`) — Password (plain input — hash before storing). (text)
+Function `ResetPasswordWithCode` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `ResetPasswordWithCode`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `email` | `string` | Account email address (usually lowercased). |
+| `code` | `string` | 6-digit TOTP / OTP the user typed. |
+| `newPassword` | `string` | Password (plain input — hash before storing). (text) |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  690 |         public static AuthResult ResetPasswordWithCode(string email, string code, string newPassword)
@@ -1299,17 +1251,33 @@ public static AuthResult ResetPasswordWithCode(string email, string code, string
 
 ### `RequestPasswordReset` — lines 696–703
 
+#### Signature
+
 ```csharp
 public static AuthResult RequestPasswordReset(string email)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `RequestPasswordReset`.
-- **Parameters (what each means):**
-- `email` (`string`) — Account email address (usually lowercased).
+Function `RequestPasswordReset` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `RequestPasswordReset`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `email` | `string` | Account email address (usually lowercased). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  696 |         public static AuthResult RequestPasswordReset(string email)
@@ -1326,20 +1294,35 @@ public static AuthResult RequestPasswordReset(string email)
 
 ### `UserExists` — lines 706–721
 
+#### Signature
+
 ```csharp
 public static bool UserExists(int uid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `UserExists`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
+Function `UserExists` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+2. Open a connection to the LocalDB / SQL Server database.
+3. Return `false` to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+
+#### Code
 
 ```csharp
  706 |         public static bool UserExists(int uid)
@@ -1360,30 +1343,39 @@ public static bool UserExists(int uid)
  721 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L709:** Error handling block.
-- **L711:** Import namespace/types.
-- **L713:** Parameterized SQL — prevents classic SQL injection. | `o` means: Holds “o” for this scope.
-- **L717:** Handle/log exception.
-
 ---
 
 ### `GetValidatedUserId` — lines 727–752
+
+#### Signature
 
 ```csharp
 public static int GetValidatedUserId(HttpContext ctx)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GetValidatedUserId`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Pattern:** Read/load data for display.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+Returns a real Users.UID from Session/JWT, or 0 if missing/stale.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. If Session is empty, try to rebuild it from the JWT cookie.
+2. Save temporary state in Session (`Session["UserID"]`).
+3. Save temporary state in Session (`Session["UserID"]); }`).
+4. Clear Session data (logout or end of multi-step flow).
+5. Delete the JWT cookie (sign out).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  727 |         public static int GetValidatedUserId(HttpContext ctx)
@@ -1414,37 +1406,50 @@ public static int GetValidatedUserId(HttpContext ctx)
  752 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L727:** Restore/validate user from Session or JWT; reject stale UIDs.
-- **L731:** Restore/validate user from Session or JWT; reject stale UIDs.
-- **L733:** Server session for logged-in user.
-- **L735:** Server session for logged-in user.
-- **L736:** Handle/log exception.
-- **L742:** Error handling block.
-- **L749:** Handle/log exception.
-- **L750:** JWT cookie create/validate/clear.
-
 ---
 
 ### `TryRestoreSessionFromJwt` — lines 755–820
+
+#### Signature
 
 ```csharp
 public static bool TryRestoreSessionFromJwt(HttpContext ctx)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `TryRestoreSessionFromJwt`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- **Local variables (what each means):**
-- `token` (`string`) — JWT or CSRF token string.
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
-- `r` (`var`) — Usually one database row (DataRow) in query loops.
+If Session expired, rebuilds Session from a valid JWT cookie.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Save temporary state in Session (`Session["UserID"] !`).
+2. Save temporary state in Session (`Session["UserID"]); }`).
+3. Return `true` to the caller.
+4. Clear Session data (logout or end of multi-step flow).
+5. Delete the JWT cookie (sign out).
+6. Return `false` to the caller.
+7. Delete the JWT cookie (sign out).
+8. Return `false` to the caller.
+9. Open a connection to the LocalDB / SQL Server database.
+10. Save temporary state in Session (`Session["UserID"]`).
+11. Save temporary state in Session (`Session["UserName"]`).
+12. Save temporary state in Session (`Session["UserRole"]`).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `token` | `string` | JWT or CSRF token string. |
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+| `r` | `var` | Usually one database row (DataRow) in query loops. |
+
+#### Code
 
 ```csharp
  755 |         public static bool TryRestoreSessionFromJwt(HttpContext ctx)
@@ -1515,48 +1520,38 @@ public static bool TryRestoreSessionFromJwt(HttpContext ctx)
  820 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L755:** Restore/validate user from Session or JWT; reject stale UIDs.
-- **L760:** Server session for logged-in user.
-- **L763:** Server session for logged-in user.
-- **L764:** Handle/log exception.
-- **L768:** Error handling block.
-- **L774:** Handle/log exception.
-- **L777:** JWT cookie create/validate/clear. | `token` means: JWT or CSRF token string.
-- **L780:** JWT cookie create/validate/clear.
-- **L782:** JWT cookie create/validate/clear.
-- **L789:** JWT cookie create/validate/clear.
-- **L794:** Error handling block.
-- **L796:** Import namespace/types.
-- **L798:** Import namespace/types.
-- **L801:** Parameterized SQL — prevents classic SQL injection.
-- **L802:** Import namespace/types.
-- **L806:** Null-safe read from database values.
-- **L807:** Null-safe read from database values.
-- **L813:** Handle/log exception.
-- **L815:** Server session for logged-in user.
-- **L816:** Server session for logged-in user.
-- **L817:** Server session for logged-in user.
-- **L818:** Server session for logged-in user.
-
 ---
 
 ### `NormalizeRole` — lines 821–829
+
+#### Signature
 
 ```csharp
 public static string NormalizeRole(string role)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `NormalizeRole`.
-- **Parameters (what each means):**
-- `role` (`string`) — User role code or name (Admin/Student/Lecturer).
-- **Local variables (what each means):**
-- `r` (`var`) — Usually one database row (DataRow) in query loops.
+Converts role codes (`0`/`1`/`2`) or names into Admin / Student / Lecturer.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+2. Branch for Admin (often skips MFA) vs Student/Lecturer.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `role` | `string` | User role code or name (Admin/Student/Lecturer). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `r` | `var` | Usually one database row (DataRow) in query loops. |
+
+#### Code
 
 ```csharp
  821 | 
@@ -1570,29 +1565,40 @@ public static string NormalizeRole(string role)
  829 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L822:** Map role codes/names to Admin/Student/Lecturer.
-- **L825:** `r` means: Usually one database row (DataRow) in query loops.
-
 ---
 
 ### `HasComplexity` — lines 830–840
+
+#### Signature
 
 ```csharp
 private static bool HasComplexity(string password)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `HasComplexity`.
-- **Parameters (what each means):**
-- `password` (`string`) — Plain password from the form (never log this).
-- **Local variables (what each means):**
-- `letter` (`bool`) — Holds “letter” for this scope. (true/false)
-- `c` — Temporary value (character, course, or counter depending on loop).
+Checks a condition related to **Has Complexity** and returns true/false (or tries an action safely).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `HasComplexity`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `password` | `string` | Plain password from the form (never log this). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `letter` | `bool` | Holds “letter” for this scope. (true/false) |
+| `c` | `—` | Temporary value (character, course, or counter depending on loop). |
+
+#### Code
 
 ```csharp
  830 | 
@@ -1608,31 +1614,41 @@ private static bool HasComplexity(string password)
  840 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L833:** `letter` means: Holds “letter” for this scope. (true/false)
-
 ---
 
 ### `LoadUserByEmail` — lines 841–880
+
+#### Signature
 
 ```csharp
 private static AuthUser LoadUserByEmail(SqlConnection conn, string email)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `LoadUserByEmail`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Pattern:** Read/load data for display.
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `email` (`string`) — Account email address (usually lowercased).
-- **Local variables (what each means):**
-- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
-- `r` (`var`) — Usually one database row (DataRow) in query loops.
+Reads/loads data related to **User By Email** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `LoadUserByEmail`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `email` | `string` | Account email address (usually lowercased). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cmd` | `var` | SqlCommand — the SQL statement + parameters object.  Newly constructed object. |
+| `r` | `var` | Usually one database row (DataRow) in query loops. |
+
+#### Code
 
 ```csharp
  841 | 
@@ -1677,43 +1693,41 @@ private static AuthUser LoadUserByEmail(SqlConnection conn, string email)
  880 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L842:** Database access (pure SQL).
-- **L845:** Error handling block.
-- **L847:** Import namespace/types.
-- **L851:** Parameterized SQL — prevents classic SQL injection.
-- **L852:** Import namespace/types.
-- **L859:** Handle/log exception.
-- **L861:** Import namespace/types.
-- **L864:** Parameterized SQL — prevents classic SQL injection.
-- **L865:** Import namespace/types.
-- **L871:** Null-safe read from database values.
-- **L872:** Null-safe read from database values.
-- **L873:** Null-safe read from database values.
-- **L874:** Null-safe read from database values.
-
 ---
 
 ### `LoadUserById` — lines 881–919
+
+#### Signature
 
 ```csharp
 private static AuthUser LoadUserById(SqlConnection conn, int uid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `LoadUserById`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Pattern:** Read/load data for display.
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- **Local variables (what each means):**
-- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
-- `r` (`var`) — Usually one database row (DataRow) in query loops.
+Reads/loads data related to **User By Id** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `LoadUserById`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cmd` | `var` | SqlCommand — the SQL statement + parameters object.  Newly constructed object. |
+| `r` | `var` | Usually one database row (DataRow) in query loops. |
+
+#### Code
 
 ```csharp
  881 | 
@@ -1757,36 +1771,39 @@ private static AuthUser LoadUserById(SqlConnection conn, int uid)
  919 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L882:** Database access (pure SQL).
-- **L884:** Error handling block.
-- **L886:** Import namespace/types.
-- **L890:** Parameterized SQL — prevents classic SQL injection.
-- **L891:** Import namespace/types.
-- **L898:** Handle/log exception.
-- **L900:** Import namespace/types.
-- **L903:** Parameterized SQL — prevents classic SQL injection.
-- **L904:** Import namespace/types.
-
 ---
 
 ### `MapUser` — lines 920–947
+
+#### Signature
 
 ```csharp
 private static AuthUser MapUser(SqlDataReader r)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `MapUser`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `r` (`SqlDataReader`) — Usually one database row (DataRow) in query loops.
-- **Local variables (what each means):**
-- `mfa` (`bool`) — Holds “mfa” for this scope. (true/false)
+Function `MapUser` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `MapUser`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `r` | `SqlDataReader` | Usually one database row (DataRow) in query loops. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `mfa` | `bool` | Holds “mfa” for this scope. (true/false) |
+
+#### Code
 
 ```csharp
  920 | 
@@ -1819,34 +1836,39 @@ private static AuthUser MapUser(SqlDataReader r)
  947 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L923:** `mfa` means: Holds “mfa” for this scope. (true/false)
-- **L924:** Error handling block.
-- **L926:** Null-safe read from database values.
-- **L929:** Handle/log exception.
-- **L931:** Error handling block.
-- **L944:** TOTP / authenticator (RFC 6238) helper.
-
 ---
 
 ### `HasCol` — lines 948–955
+
+#### Signature
 
 ```csharp
 private static bool HasCol(SqlDataReader r, string name)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `HasCol`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `r` (`SqlDataReader`) — Usually one database row (DataRow) in query loops.
-- `name` (`string`) — Display name of user/course/criterion.
-- **Local variables (what each means):**
-- `i` (`int`) — Loop index (0-based counter in for-loops).  Literal number `0`.
+Checks a condition related to **Has Col** and returns true/false (or tries an action safely).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Return `true` to the caller.
+2. Return `false` to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `r` | `SqlDataReader` | Usually one database row (DataRow) in query loops. |
+| `name` | `string` | Display name of user/course/criterion. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `i` | `int` | Loop index (0-based counter in for-loops).  Literal number `0`. |
+
+#### Code
 
 ```csharp
  948 | 
@@ -1863,21 +1885,36 @@ private static bool HasCol(SqlDataReader r, string name)
 
 ### `Safe` — lines 956–965
 
+#### Signature
+
 ```csharp
 private static string Safe(SqlDataReader r, string col)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Safe`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `r` (`SqlDataReader`) — Usually one database row (DataRow) in query loops.
-- `col` (`string`) — Holds “col” for this scope. (text)
-- **Local variables (what each means):**
-- `i` (`int`) — Loop index (0-based counter in for-loops).
+Function `Safe` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `Safe`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `r` | `SqlDataReader` | Usually one database row (DataRow) in query loops. |
+| `col` | `string` | Holds “col” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `i` | `int` | Loop index (0-based counter in for-loops). |
+
+#### Code
 
 ```csharp
  956 | 
@@ -1892,28 +1929,37 @@ private static string Safe(SqlDataReader r, string col)
  965 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L959:** Error handling block.
-- **L961:** `i` means: Loop index (0-based counter in for-loops).
-- **L962:** Null-safe read from database values.
-- **L964:** Handle/log exception.
-
 ---
 
 ### `Fail` — lines 966–970
+
+#### Signature
 
 ```csharp
 private static AuthResult Fail(string msg)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Fail`.
-- **Parameters (what each means):**
-- `msg` (`string`) — Human-readable message (error or success).
+Function `Fail` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `Fail`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `msg` | `string` | Human-readable message (error or success). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  966 | 
@@ -1927,17 +1973,33 @@ private static AuthResult Fail(string msg)
 
 ### `IsMfaDebugEnabled` — lines 976–984
 
+#### Signature
+
 ```csharp
 private static bool IsMfaDebugEnabled()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `IsMfaDebugEnabled`.
-- **Local variables (what each means):**
-- `flag` (`string`) — Holds “flag” for this scope. (text)  Read from Web.config.
+Checks a condition related to **Is Mfa Debug Enabled** and returns true/false (or tries an action safely).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `IsMfaDebugEnabled`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `flag` | `string` | Holds “flag” for this scope. (text)  Read from Web.config. |
+
+#### Code
 
 ```csharp
  976 |         private static bool IsMfaDebugEnabled()
@@ -1951,32 +2013,38 @@ private static bool IsMfaDebugEnabled()
  984 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L976:** Debug-only TOTP leak switch (must stay false for demos).
-- **L978:** Error handling block.
-- **L980:** Debug-only TOTP leak switch (must stay false for demos). | `flag` means: Holds “flag” for this scope. (text)  Read from Web.config.
-- **L983:** Handle/log exception.
-
 ---
 
 ### `GetStoredMfaSecretByEmail` — lines 989–1002
+
+#### Signature
 
 ```csharp
 public static string GetStoredMfaSecretByEmail(string email)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GetStoredMfaSecretByEmail`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Pattern:** Read/load data for display.
-- **Parameters (what each means):**
-- `email` (`string`) — Account email address (usually lowercased).
-- **Local variables (what each means):**
-- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
+Reads/loads data related to **Stored Mfa Secret By Email** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+2. Open a connection to the LocalDB / SQL Server database.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `email` | `string` | Account email address (usually lowercased). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `var` | SqlConnection — open link to LocalDB/SQL Server. |
+
+#### Code
 
 ```csharp
  989 |         public static string GetStoredMfaSecretByEmail(string email)
@@ -1995,31 +2063,38 @@ public static string GetStoredMfaSecretByEmail(string email)
 1002 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L993:** Error handling block.
-- **L995:** Import namespace/types.
-- **L997:** `u` means: Holds “u” for this scope. (user DTO)
-- **L998:** TOTP / authenticator (RFC 6238) helper.
-- **L1001:** Handle/log exception.
-
 ---
 
 ### `P` — lines 1003–1007
+
+#### Signature
 
 ```csharp
 private static SqlParameter P(string n, object v)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `P`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `n` (`string`) — Numeric count or temporary integer.
-- `v` (`object`) — Generic value (version flag in JSON, or loop value).
+Creates one SQL parameter (`@Name` + value) so user input is never concatenated into SQL.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `P`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `n` | `string` | Numeric count or temporary integer. |
+| `v` | `object` | Generic value (version flag in JSON, or loop value). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
 1003 | 
@@ -2029,31 +2104,39 @@ private static SqlParameter P(string n, object v)
 1007 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L1004:** Parameterized SQL — prevents classic SQL injection.
-- **L1006:** Parameterized SQL — prevents classic SQL injection.
-
 ---
 
 ### `Scalar` — lines 1008–1016
+
+#### Signature
 
 ```csharp
 private static object Scalar(SqlConnection conn, string sql, params SqlParameter[] ps)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Scalar`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
-- `ps` (`SqlParameter[]`) — Holds “ps” for this scope. (type `SqlParameter[]`)
-- **Local variables (what each means):**
-- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
+Function `Scalar` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Run SQL that returns one value (count, id, flag).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `sql` | `string` | SQL query text (should use parameters, not raw user input). |
+| `ps` | `SqlParameter[]` | Holds “ps” for this scope. (type `SqlParameter[]`) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cmd` | `var` | SqlCommand — the SQL statement + parameters object.  Newly constructed object. |
+
+#### Code
 
 ```csharp
 1008 | 
@@ -2067,32 +2150,39 @@ private static object Scalar(SqlConnection conn, string sql, params SqlParameter
 1016 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L1009:** Database access (pure SQL).
-- **L1011:** Import namespace/types.
-- **L1014:** Run SQL; return table / rows / scalar.
-
 ---
 
 ### `Exec` — lines 1017–1025
+
+#### Signature
 
 ```csharp
 private static void Exec(SqlConnection conn, string sql, params SqlParameter[] ps)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Exec`.
-- **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters (what each means):**
-- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
-- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
-- `ps` (`SqlParameter[]`) — Holds “ps” for this scope. (type `SqlParameter[]`)
-- **Local variables (what each means):**
-- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
+Function `Exec` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Run INSERT/UPDATE/DELETE SQL against the database.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `conn` | `SqlConnection` | SqlConnection — open link to LocalDB/SQL Server. |
+| `sql` | `string` | SQL query text (should use parameters, not raw user input). |
+| `ps` | `SqlParameter[]` | Holds “ps” for this scope. (type `SqlParameter[]`) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cmd` | `var` | SqlCommand — the SQL statement + parameters object.  Newly constructed object. |
+
+#### Code
 
 ```csharp
 1017 | 
@@ -2106,17 +2196,11 @@ private static void Exec(SqlConnection conn, string sql, params SqlParameter[] p
 1025 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L1018:** Database access (pure SQL).
-- **L1020:** Import namespace/types.
-- **L1023:** Run SQL; return table / rows / scalar.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -3021,270 +3105,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  900 |                 using (var cmd = new SqlCommand(
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L5:** Import namespace/types.
-- **L7:** C# namespace grouping.
-- **L9:** Class declaration for this page/service.
-- **L22:** Class declaration for this page/service.
-- **L39:** Pending registration in Session until MFA confirmed.
-- **L40:** Pending registration in Session until MFA confirmed.
-- **L41:** Pending registration in Session until MFA confirmed.
-- **L42:** Pending registration in Session until MFA confirmed.
-- **L43:** Pending registration in Session until MFA confirmed.
-- **L44:** Pending registration in Session until MFA confirmed.
-- **L45:** Pending registration in Session until MFA confirmed.
-- **L46:** Pending registration in Session until MFA confirmed.
-- **L52:** Pending registration in Session until MFA confirmed.
-- **L66:** `rc` means: Holds “rc” for this scope. (text)
-- **L78:** Import namespace/types.
-- **L80:** `exists` means: Count > 0 check (email/user/row already exists).
-- **L82:** Parameterized SQL — prevents classic SQL injection.
-- **L86:** TOTP / authenticator (RFC 6238) helper. | `mfaSecret` means: Authenticator secret stored for the user.  New random MFA secret.
-- **L89:** Server session for logged-in user.
-- **L90:** Server session for logged-in user.
-- **L91:** Server session for logged-in user.
-- **L92:** Server session for logged-in user.
-- **L93:** Server session for logged-in user.
-- **L94:** Server session for logged-in user.
-- **L95:** Server session for logged-in user.
-- **L120:** Pending registration in Session until MFA confirmed.
-- **L127:** Pending registration in Session until MFA confirmed.
-- **L130:** Pending registration in Session until MFA confirmed.
-- **L132:** Pending registration in Session until MFA confirmed.
-- **L139:** TOTP / authenticator (RFC 6238) helper.
-- **L142:** Pending registration in Session until MFA confirmed.
-- **L146:** TOTP / authenticator (RFC 6238) helper.
-- **L150:** Import namespace/types.
-- **L152:** `exists` means: Count > 0 check (email/user/row already exists).
-- **L154:** Parameterized SQL — prevents classic SQL injection.
-- **L157:** Pending registration in Session until MFA confirmed.
-- **L161:** `mfaSecret` means: Authenticator secret stored for the user.
-- **L162:** `mfaOn` means: 1/0 flag written to Users.MfaEnabled.  Literal number `1`.
-- **L165:** Error handling block.
-- **L169:** Return new identity/UID after INSERT.
-- **L171:** Parameterized SQL — prevents classic SQL injection.
-- **L172:** Parameterized SQL — prevents classic SQL injection.
-- **L173:** Parameterized SQL — prevents classic SQL injection.
-- **L174:** Parameterized SQL — prevents classic SQL injection.
-- **L175:** Parameterized SQL — prevents classic SQL injection.
-- **L176:** Parameterized SQL — prevents classic SQL injection.
-- **L177:** Parameterized SQL — prevents classic SQL injection.
-- **L178:** Parameterized SQL — prevents classic SQL injection.
-- **L180:** Handle/log exception.
-- **L182:** Error handling block.
-- **L186:** Return new identity/UID after INSERT.
-- **L188:** Parameterized SQL — prevents classic SQL injection.
-- **L189:** Parameterized SQL — prevents classic SQL injection.
-- **L190:** Parameterized SQL — prevents classic SQL injection.
-- **L191:** Parameterized SQL — prevents classic SQL injection.
-- **L193:** Handle/log exception.
-- **L199:** Error handling block.
-- **L201:** Parameterized SQL — prevents classic SQL injection. | `byEmail` means: Email address.
-- **L202:** Null-safe read from database values.
-- **L205:** Handle/log exception.
-- **L210:** Error handling block.
-- **L214:** Parameterized SQL — prevents classic SQL injection.
-- **L215:** Parameterized SQL — prevents classic SQL injection.
-- **L216:** Parameterized SQL — prevents classic SQL injection.
-- **L217:** Parameterized SQL — prevents classic SQL injection.
-- **L218:** Parameterized SQL — prevents classic SQL injection.
-- **L220:** Handle/log exception.
-- **L222:** Error handling block.
-- **L225:** Parameterized SQL — prevents classic SQL injection.
-- **L227:** Handle/log exception.
-- **L230:** Error handling block.
-- **L232:** Parameterized SQL — prevents classic SQL injection. | `stored` means: Holds “stored” for this scope.
-- **L233:** Null-safe read from database values. | `storedSecret` means: Secret key material (MFA Base32 or crypto secret). (text)
-- **L235:** TOTP / authenticator (RFC 6238) helper.
-- **L238:** Parameterized SQL — prevents classic SQL injection.
-- **L242:** Handle/log exception.
-- **L244:** Parameterized SQL — prevents classic SQL injection.
-- **L248:** Pending registration in Session until MFA confirmed.
-- **L249:** Write/read security audit events.
-- **L270:** Pending registration in Session until MFA confirmed.
-- **L274:** Pending registration in Session until MFA confirmed.
-- **L282:** Pending registration in Session until MFA confirmed.
-- **L285:** Pending registration in Session until MFA confirmed.
-- **L287:** Error handling block.
-- **L290:** Pending registration in Session until MFA confirmed.
-- **L291:** Pending registration in Session until MFA confirmed.
-- **L292:** Pending registration in Session until MFA confirmed.
-- **L293:** Pending registration in Session until MFA confirmed.
-- **L294:** Pending registration in Session until MFA confirmed.
-- **L295:** Pending registration in Session until MFA confirmed.
-- **L296:** Pending registration in Session until MFA confirmed.
-- **L298:** Handle/log exception.
-- **L301:** Pending registration in Session until MFA confirmed.
-- **L309:** Error handling block.
-- **L311:** Server session for logged-in user.
-- **L312:** Server session for logged-in user.
-- **L313:** Server session for logged-in user.
-- **L314:** Server session for logged-in user.
-- **L315:** Server session for logged-in user.
-- **L316:** Server session for logged-in user.
-- **L317:** Server session for logged-in user.
-- **L318:** Server session for logged-in user.
-- **L327:** Handle/log exception.
-- **L333:** Pending registration in Session until MFA confirmed.
-- **L344:** `ctx` means: Current HTTP request context (Request, Response, Session).
-- **L350:** Brute-force lockout tracking.
-- **L353:** Import namespace/types.
-- **L355:** `user` means: AuthUser or user row (UID, Email, Role, MfaSecret, …).
-- **L358:** Brute-force lockout tracking.
-- **L359:** Write/read security audit events.
-- **L363:** `stored` means: Holds “stored” for this scope. (text)
-- **L367:** Password hashing (PBKDF2).
-- **L369:** Brute-force lockout tracking.
-- **L370:** Write/read security audit events.
-- **L374:** Brute-force lockout tracking.
-- **L377:** Password hashing (PBKDF2).
-- **L379:** Password hashing (PBKDF2). | `newHash` means: Cryptographic hash string. (text)  Assigned from password hash function.
-- **L380:** Error handling block.
-- **L383:** Parameterized SQL — prevents classic SQL injection.
-- **L385:** Handle/log exception.
-- **L387:** Error handling block.
-- **L390:** Parameterized SQL — prevents classic SQL injection.
-- **L392:** Handle/log exception.
-- **L396:** Map role codes/names to Admin/Student/Lecturer.
-- **L401:** JWT cookie create/validate/clear. | `adminToken` means: Security token (JWT or CSRF). (text)
-- **L402:** Write/read security audit events.
-- **L432:** Verify multi-factor / TOTP code.
-- **L439:** Import namespace/types.
-- **L441:** `user` means: AuthUser or user row (UID, Email, Role, MfaSecret, …).
-- **L444:** `ok` means: Boolean success flag.
-- **L447:** Error handling block.
-- **L449:** Import namespace/types.
-- **L452:** Parameterized SQL — prevents classic SQL injection.
-- **L453:** Import namespace/types.
-- **L457:** Null-safe read from database values. | `otp` means: Holds “otp” for this scope. (text)
-- **L458:** Null-safe read from database values. | `exp` means: Expiry DateTime.
-- **L469:** Parameterized SQL — prevents classic SQL injection.
-- **L472:** Handle/log exception.
-- **L477:** TOTP / authenticator (RFC 6238) helper. | `secret` means: MFA TOTP Base32 secret for authenticator apps.
-- **L480:** TOTP / authenticator (RFC 6238) helper.
-- **L485:** Brute-force lockout tracking.
-- **L489:** Brute-force lockout tracking.
-- **L490:** Map role codes/names to Admin/Student/Lecturer.
-- **L491:** JWT cookie create/validate/clear. | `token` means: JWT or CSRF token string.
-- **L502:** Issue Session + JWT after successful auth.
-- **L506:** Server session for logged-in user.
-- **L507:** Server session for logged-in user.
-- **L508:** Server session for logged-in user.
-- **L509:** Server session for logged-in user.
-- **L510:** JWT cookie create/validate/clear.
-- **L511:** CSRF anti-forgery protection.
-- **L512:** Map role codes/names to Admin/Student/Lecturer.
-- **L519:** `email` means: Account email address (usually lowercased).
-- **L520:** Error handling block.
-- **L522:** Server session for logged-in user.
-- **L523:** Server session for logged-in user.
-- **L524:** Server session for logged-in user.
-- **L526:** Handle/log exception.
-- **L527:** Write/read security audit events.
-- **L528:** Error handling block.
-- **L533:** Handle/log exception.
-- **L534:** JWT cookie create/validate/clear.
-- **L541:** Verify multi-factor / TOTP code.
-- **L553:** Brute-force lockout tracking.
-- **L556:** Import namespace/types.
-- **L558:** `user` means: AuthUser or user row (UID, Email, Role, MfaSecret, …).
-- **L559:** `bad` means: Holds “bad” for this scope. (text)  Literal text string.
-- **L562:** Brute-force lockout tracking.
-- **L563:** Write/read security audit events.
-- **L567:** TOTP / authenticator (RFC 6238) helper. | `secret` means: MFA TOTP Base32 secret for authenticator apps.
-- **L570:** Write/read security audit events.
-- **L576:** TOTP / authenticator (RFC 6238) helper.
-- **L578:** Brute-force lockout tracking.
-- **L579:** Write/read security audit events.
-- **L587:** Debug-only TOTP leak switch (must stay false for demos).
-- **L589:** Error handling block.
-- **L591:** TOTP / authenticator (RFC 6238) helper. | `expected` means: Holds “expected” for this scope. (text)  TOTP related value.
-- **L592:** TOTP / authenticator (RFC 6238) helper. | `you` means: Holds “you” for this scope. (text)
-- **L597:** Encode text to reduce XSS risk.
-- **L605:** Handle/log exception.
-- **L620:** Brute-force lockout tracking.
-- **L621:** Write/read security audit events.
-- **L622:** Map role codes/names to Admin/Student/Lecturer.
-- **L635:** Password-reset MFA then update password hash.
-- **L643:** Import namespace/types.
-- **L645:** `user` means: AuthUser or user row (UID, Email, Role, MfaSecret, …).
-- **L648:** Password hashing (PBKDF2). | `newHash` means: Cryptographic hash string. (text)  Assigned from password hash function.
-- **L649:** Error handling block.
-- **L654:** Parameterized SQL — prevents classic SQL injection.
-- **L656:** Handle/log exception.
-- **L658:** Error handling block.
-- **L661:** Parameterized SQL — prevents classic SQL injection.
-- **L663:** Handle/log exception.
-- **L669:** Parameterized SQL — prevents classic SQL injection.
-- **L670:** Handle/log exception.
-- **L672:** Write/read security audit events.
-- **L684:** Verify multi-factor / TOTP code. | `v` means: Generic value (version flag in JSON, or loop value).  Assigned from verification boolean/result.
-- **L686:** Password-reset MFA then update password hash.
-- **L709:** Error handling block.
-- **L711:** Import namespace/types.
-- **L713:** Parameterized SQL — prevents classic SQL injection. | `o` means: Holds “o” for this scope.
-- **L717:** Handle/log exception.
-- **L727:** Restore/validate user from Session or JWT; reject stale UIDs.
-- **L731:** Restore/validate user from Session or JWT; reject stale UIDs.
-- **L733:** Server session for logged-in user.
-- **L735:** Server session for logged-in user.
-- **L736:** Handle/log exception.
-- **L742:** Error handling block.
-- **L749:** Handle/log exception.
-- **L750:** JWT cookie create/validate/clear.
-- **L755:** Restore/validate user from Session or JWT; reject stale UIDs.
-- **L760:** Server session for logged-in user.
-- **L763:** Server session for logged-in user.
-- **L764:** Handle/log exception.
-- **L768:** Error handling block.
-- **L774:** Handle/log exception.
-- **L777:** JWT cookie create/validate/clear. | `token` means: JWT or CSRF token string.
-- **L780:** JWT cookie create/validate/clear.
-- **L782:** JWT cookie create/validate/clear.
-- **L789:** JWT cookie create/validate/clear.
-- **L794:** Error handling block.
-- **L796:** Import namespace/types.
-- **L798:** Import namespace/types.
-- **L801:** Parameterized SQL — prevents classic SQL injection.
-- **L802:** Import namespace/types.
-- **L806:** Null-safe read from database values.
-- **L807:** Null-safe read from database values.
-- **L813:** Handle/log exception.
-- **L815:** Server session for logged-in user.
-- **L816:** Server session for logged-in user.
-- **L817:** Server session for logged-in user.
-- **L818:** Server session for logged-in user.
-- **L822:** Map role codes/names to Admin/Student/Lecturer.
-- **L825:** `r` means: Usually one database row (DataRow) in query loops.
-- **L833:** `letter` means: Holds “letter” for this scope. (true/false)
-- **L842:** Database access (pure SQL).
-- **L845:** Error handling block.
-- **L847:** Import namespace/types.
-- **L851:** Parameterized SQL — prevents classic SQL injection.
-- **L852:** Import namespace/types.
-- **L859:** Handle/log exception.
-- **L861:** Import namespace/types.
-- **L864:** Parameterized SQL — prevents classic SQL injection.
-- **L865:** Import namespace/types.
-- **L871:** Null-safe read from database values.
-- **L872:** Null-safe read from database values.
-- **L873:** Null-safe read from database values.
-- **L874:** Null-safe read from database values.
-- **L882:** Database access (pure SQL).
-- **L884:** Error handling block.
-- **L886:** Import namespace/types.
-- **L890:** Parameterized SQL — prevents classic SQL injection.
-- **L891:** Import namespace/types.
-- **L898:** Handle/log exception.
-- **L900:** Import namespace/types.
-
-_… truncated: 127 more lines in source. Open the original file for the rest._
-
-## Source snapshot (raw)
-
-_File has 1027 lines — raw dump omitted here to keep Markdown readable. Open `Data/Security/AuthService.cs` in the project._
+_… truncated: 127 more lines. Open `Data/Security/AuthService.cs` for the rest._

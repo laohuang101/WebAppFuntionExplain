@@ -315,9 +315,23 @@ def extract_js_functions(text: str):
 
 def extract_fields_cs(text: str):
     fields = []
+    skip_types = {
+        "return", "if", "else", "for", "foreach", "while", "switch", "case", "new",
+        "using", "try", "catch", "throw", "lock", "typeof", "sizeof", "await", "yield",
+    }
+    skip_names = {
+        "class", "namespace", "using", "return", "if", "true", "false", "null", "this",
+        "value", "get", "set",
+    }
     for m in CS_FIELD.finditer(text):
         typ, name = m.group(1), m.group(2)
-        if name in ("class", "namespace", "using", "return", "if"):
+        if name in skip_names or typ in skip_types:
+            continue
+        if name.isdigit() or typ.isdigit():
+            continue
+        # Must look like a field: prefer lines with access modifiers
+        line = text[m.start(): text.find("\n", m.start())]
+        if not re.search(r"\b(public|private|protected|internal|static|const|readonly)\b", line):
             continue
         fields.append((name, typ, line_of(text, m.start())))
     return fields[:100]
@@ -550,12 +564,16 @@ def explain_variable(name: str, typ: str | None = None, rhs: str | None = None, 
     # Disambiguate short names using type / assignment
     meaning = None
     if low == "e":
-        if "exception" in typ_l or "exception" in rhs_l:
+        if "eventargs" in typ_l or "event" in typ_l:
+            meaning = "Event data from the button/control click (ASP.NET EventArgs)."
+        elif "exception" in typ_l or "exception" in rhs_l:
             meaning = "Caught Exception object."
         elif "string" in typ_l or "email" in rhs_l or "tolower" in rhs_l:
             meaning = "Normalized email string (trimmed/lowercased)."
         else:
             meaning = "Often email string (C#) or DOM event (JS)."
+    if low == "sender":
+        meaning = "The control that raised the event (the button that was clicked)."
     elif low == "r":
         if "datarow" in typ_l or "rows[" in rhs_l:
             meaning = "One DataRow from a SQL result."
@@ -807,61 +825,385 @@ def extract_params_from_header(header: str) -> list[tuple[str, str | None]]:
     return out
 
 
-def explain_method(name: str, header: str, body: str, lang: str) -> list[str]:
-    notes = []
-    low = (name + " " + header + " " + body[:1200]).lower()
-    notes.append(f"**Purpose:** Implements `{name}`.")
-    if "webmethod" in body.lower() or "[WebMethod" in body:
-        notes.append("**ASP.NET WebMethod:** Called from browser JS via `Page.aspx/MethodName` POST JSON.")
-    if "authgate" in low or "requirelecturer" in low or "ensurepage" in low:
-        notes.append("**Security:** Uses AuthGate — requires logged-in role.")
-    if "csrf" in low:
-        notes.append("**CSRF:** Validates anti-forgery token on mutating request.")
-    if any(x in low for x in ("sql", "executequery", "sqlcommand", "dbhelper")):
-        notes.append("**Data:** Pure SQL via DbHelper/SqlClient (parameterized).")
-    if "due" in low and any(x in low for x in ("closed", "pastdue", "duedate")):
-        notes.append("**Due date:** Related to assignment closing after the due day.")
-    if "ispublished" in low or "publish" in low:
-        notes.append("**Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.")
-    if "lectureruid" in low or "assertowner" in low:
-        notes.append("**Ownership:** Checks course belongs to current lecturer (IDOR protection).")
-    if "session" in low:
-        notes.append("**Session:** Reads/writes ASP.NET Session.")
-    if "json" in low or "javascriptserializer" in low or "json.stringify" in low:
-        notes.append("**JSON:** Serializes/deserializes UI or META payloads.")
+def what_is_function(name: str, header: str, body: str, lang: str) -> str:
+    """One clear sentence: what this function is for."""
+    n = name.lower()
+    b = body.lower()
+    h = header.lower()
+
+    # Specific well-known names in this project
+    known = {
+        "page_load": "Runs automatically when the ASP.NET page opens or posts back; sets up the page and security checks.",
+        "pageload": "Runs automatically when the ASP.NET page opens or posts back; sets up the page and security checks.",
+        "processrequest": "Main entry point for an `.ashx` HTTP handler — handles one browser request from start to finish.",
+        "currentuserid": "Returns the logged-in user’s ID (from Session/JWT), or `0` if nobody is signed in.",
+        "currentrole": "Returns the logged-in user’s role name (Admin / Lecturer / Student).",
+        "ensurepage": "Blocks the page unless the visitor is logged in with an allowed role (redirects to login otherwise).",
+        "ensurehandlerrole": "Same as EnsurePage but for `.ashx` APIs — returns an error JSON instead of a redirect.",
+        "ensurecsrf": "Checks that a POST/AJAX request includes a valid anti-forgery (CSRF) token.",
+        "ensurcsrf": "Checks that a POST/AJAX request includes a valid anti-forgery (CSRF) token.",
+        "opentconnection": "Opens a new SQL Server / LocalDB connection using Web.config.",
+        "openconnection": "Opens a new SQL Server / LocalDB connection using the `MyDbConn` connection string.",
+        "executequery": "Runs a SELECT SQL query and returns all matching rows as a DataTable.",
+        "executenonquery": "Runs INSERT/UPDATE/DELETE SQL and returns how many rows changed.",
+        "executescalar": "Runs SQL that returns a single value (for example COUNT or a new ID).",
+        "executescalarint": "Runs SQL and returns a single integer value (COUNT or identity).",
+        "p": "Creates one SQL parameter (`@Name` + value) so user input is never concatenated into SQL.",
+        "safestring": "Reads a database column as text safely (empty string if the value is NULL).",
+        "hash": "Turns a plain password into a stored PBKDF2 hash.",
+        "verify": "Checks whether a typed password matches the stored hash.",
+        "createtoken": "Builds a signed JWT string for the logged-in user.",
+        "tryvalidate": "Checks whether a JWT cookie is valid and extracts user claims.",
+        "setauthcookie": "Saves the JWT into the browser cookie `EduLMS.Auth`.",
+        "clearauthcookie": "Removes the JWT auth cookie (logout).",
+        "generatesecret": "Creates a new random Base32 secret for Google Authenticator.",
+        "generatecode": "Computes the current 6-digit TOTP code for a secret (server-side).",
+        "verifycode": "Checks if the 6-digit code from the authenticator app is correct (with clock skew window).",
+        "buildotpauthuri": "Builds the `otpauth://` link used to draw the MFA QR code.",
+        "normalizesecret": "Cleans an MFA secret (remove spaces, uppercase Base32).",
+        "normalizecode": "Cleans a typed OTP (digits only).",
+        "startregistration": "Validates the register form and stores pending account data in Session (does NOT create the user yet).",
+        "finishregistration": "After a valid MFA code, inserts the new user into the database and clears the pending Session.",
+        "loginpassword": "Checks email + password; Admin finishes login; Student/Lecturer must do MFA next.",
+        "verifymfa": "Checks the authenticator code after password login, then allows full sign-in.",
+        "completelogin": "Writes Session keys and JWT cookie so the user is fully signed in.",
+        "logout": "Clears Session and JWT cookie so the user is signed out.",
+        "verifymfaforpasswordreset": "Step 1 of forgot-password: prove identity with email + authenticator code.",
+        "completepasswordreset": "Step 2 of forgot-password: save the new password hash for that user.",
+        "resetpasswordwithtotp": "One-shot password reset: verify TOTP then set new password.",
+        "getvalidateduserid": "Returns a real Users.UID from Session/JWT, or 0 if missing/stale.",
+        "tryrestoresessionfromjwt": "If Session expired, rebuilds Session from a valid JWT cookie.",
+        "normalizerole": "Converts role codes (`0`/`1`/`2`) or names into Admin / Student / Lecturer.",
+        "islocked": "Returns true if this email/IP is temporarily blocked after too many failed logins.",
+        "registerfailure": "Records a failed login attempt (may trigger lockout).",
+        "registersuccess": "Clears the failure counter after a good login.",
+        "log": "Writes one security event row (login, register, reset, etc.) for the audit log.",
+        "query": "Reads recent security audit events for the Admin audit page.",
+        "assertcourseowner": "Throws/fails unless the current lecturer owns that course (stops IDOR).",
+        "setcoursepublished": "Sets Courses.IsPublished so the course shows or hides on Landing.",
+        "savecoursework": "Creates or updates an assignment (CourseWorks) including due date and META.",
+        "getcourseworksforlecturer": "Lists all assignments for courses owned by this lecturer.",
+        "savegrade": "Saves marks and feedback for a student submission.",
+        "btnlogin_click": "Button handler: when the user clicks Login, check password and go to MFA or dashboard.",
+        "btnregister_click": "Button handler: start registration and show the MFA setup panel.",
+        "btnconfirmmfa_click": "Button handler: finish registration only after a valid authenticator code.",
+        "btnverify_click": "Button handler: verify MFA or password-reset code and continue to the next step.",
+        "btnreset_click": "Button handler: save the new password after MFA was already verified.",
+        "saveassignment": "Browser JS: collect assignment form fields and POST them to the server WebMethod.",
+        "loadcourses": "Browser JS: load the lecturer’s courses into a dropdown.",
+        "loadexisting": "Browser JS: load and display existing assignments in a table.",
+        "submitattempt": "Browser JS: send the student’s answer/file to SaveSubmission.",
+        "loadcoursework": "Browser JS: load assignment title, due date, and closed status for the submit page.",
+        "authorizfolder": "Decides if the current user may download a file from that Uploads folder.",
+        "authorizefolder": "Decides if the current user may download a file from that Uploads folder.",
+        "normalizerelative": "Cleans a client file path and forces it under allowed Uploads folders only.",
+        "tophysical": "Turns a relative Uploads path into a full disk path (or null if unsafe).",
+        "ismagicok": "Checks file content bytes match an allowed type (PDF/image/video), not just the extension.",
+    }
+    if n in known:
+        return known[n]
+
+    # Prefix-based plain English
+    if n.startswith("get") or n.startswith("load") or n.startswith("fetch") or n.startswith("read"):
+        return f"Reads/loads data related to **{split_camel(name[3:] if n.startswith('get') else name[4:] if n.startswith('load') else name)}** and returns it for display or further use."
+    if n.startswith("save") or n.startswith("update") or n.startswith("set") or n.startswith("insert") or n.startswith("add"):
+        return f"Saves or updates **{split_camel(name)}** in the database or UI state."
+    if n.startswith("delete") or n.startswith("remove") or n.startswith("clear"):
+        return f"Deletes or clears **{split_camel(name)}** (data or temporary state)."
+    if n.startswith("is") or n.startswith("has") or n.startswith("can") or n.startswith("try"):
+        return f"Checks a condition related to **{split_camel(name)}** and returns true/false (or tries an action safely)."
+    if n.startswith("ensure"):
+        return f"Makes sure **{split_camel(name[6:])}** exists or is valid before the rest of the code continues."
+    if n.startswith("build") or n.startswith("create") or n.startswith("make") or n.startswith("generate"):
+        return f"Creates/builds **{split_camel(name)}** (object, string, secret, or UI content)."
+    if n.startswith("format") or n.startswith("parse") or n.startswith("normalize"):
+        return f"Converts or cleans **{split_camel(name)}** into a usable form."
+    if n.startswith("render") or n.startswith("show") or n.startswith("update") and "html" in b:
+        return f"Updates the page HTML for **{split_camel(name)}**."
+    if n.startswith("btn") and n.endswith("click"):
+        return f"Runs when the user clicks a button related to **{split_camel(name)}**."
+    if "[webmethod" in b or "webmethod" in h:
+        return f"Server API method `{name}` — the browser calls it with JSON (AJAX) and gets a result object back."
     if "fetch(" in body:
-        notes.append("**AJAX:** Browser calls server endpoints asynchronously.")
-    if "redirect" in low:
-        notes.append("**Navigation:** Redirects the browser.")
-    if name.lower().startswith(("get", "load")):
-        notes.append("**Pattern:** Read/load data for display.")
-    if name.lower().startswith(("save", "set", "update", "insert")):
-        notes.append("**Pattern:** Persist changes.")
-    if name.lower().startswith(("delete", "remove", "clear")):
-        notes.append("**Pattern:** Delete/clear data.")
-    if name.lower() in ("pageload", "page_load"):
-        notes.append("**Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.")
+        return f"Browser-side function `{name}` — talks to the server and updates the page."
+    return f"Function `{name}` — supports this feature by running the logic in its body (see **How it works**)."
 
-    # Parameters with meanings
-    params = extract_params_from_header(header)
-    if params:
-        notes.append("**Parameters (what each means):**")
-        for pname, ptyp in params:
-            meaning = explain_variable(pname, ptyp, None, lang)
-            notes.append(
-                f"- `{pname}`" + (f" (`{ptyp}`)" if ptyp else "") + f" — {meaning}"
-            )
 
-    # Locals with meanings
-    locals_ = extract_locals_with_context(body, lang)
-    if locals_:
-        notes.append("**Local variables (what each means):**")
-        for lname, ltyp, rhs in locals_:
-            meaning = explain_variable(lname, ltyp, rhs, lang)
-            notes.append(
-                f"- `{lname}`" + (f" (`{ltyp}`)" if ltyp else "") + f" — {meaning}"
-            )
-    return notes
+# Hand-written clear flows for the most important methods (overrides scanner)
+KNOWN_HOW_IT_WORKS = {
+    "loginpassword": [
+        "Clean the email (trim + lowercase) and read the password.",
+        "If LoginThrottle says this email/IP is locked, return an error and stop.",
+        "Open the database and load the user row by email.",
+        "If the user is missing or the password hash does not match, record a failure and return “invalid login”.",
+        "On success, clear the failure counter; if the stored password was plain text, upgrade it to a PBKDF2 hash.",
+        "If the role is Admin: create a JWT and return success without MFA.",
+        "If the role is Student/Lecturer: return success with RequiresMfa = true so the next page asks for the authenticator code.",
+    ],
+    "startregistration": [
+        "Validate name, email, password strength, and role (Student/Lecturer only).",
+        "Check the email is not already in Users.",
+        "Hash the password and generate a new MFA secret.",
+        "Store everything in Session only (pending registration) — do not insert into the database yet.",
+        "Return the MFA secret to the page so it can show the QR code.",
+    ],
+    "finishregistration": [
+        "Read the pending registration from Session; fail if missing or timed out.",
+        "Verify the 6-digit authenticator code against the pending secret.",
+        "Insert the new user into Users (hash + MfaSecret + role).",
+        "Clear the pending Session data.",
+        "Return success so the UI can send the user to Login.",
+    ],
+    "completelogin": [
+        "Write Session keys: UserID, UserName, UserRole, AuthToken.",
+        "Set the JWT cookie on the browser response.",
+        "Optionally refresh the CSRF token.",
+        "Log a successful login in the security audit table.",
+    ],
+    "btnlogin_click": [
+        "Read email and password from the text boxes.",
+        "If either is empty, show an error and stop.",
+        "Call AuthService.LoginPassword.",
+        "If login failed, show the error message.",
+        "If MFA is required, store MfaPendingUid in Session and redirect to MfaVerify.",
+        "Otherwise call CompleteLogin and redirect by role (Admin / Lecturer / Student).",
+    ],
+    "btnregister_click": [
+        "Read name, email, passwords, and role from the form.",
+        "If passwords do not match, show an error.",
+        "Call StartRegistration (Session pending only).",
+        "Hide the form and show the MFA QR / secret panel.",
+    ],
+    "btnconfirmmfa_click": [
+        "Read the 6-digit code the user typed.",
+        "Call FinishRegistration (creates the Users row only if the code is valid).",
+        "On success, show the “done” panel with a link to Login.",
+        "On failure, keep the MFA panel and show the error.",
+    ],
+    "currentuserid": [
+        "Use the given HttpContext, or the current request context.",
+        "If there is no context, return 0 (not logged in).",
+        "Ensure a CSRF token exists for this session.",
+        "Return AuthService.GetValidatedUserId (real UID or 0).",
+    ],
+    "executequery": [
+        "Open a database connection.",
+        "Create a SqlCommand with the SQL text and attach any parameters.",
+        "Use a SqlDataAdapter to fill a DataTable with all result rows.",
+        "Return that DataTable to the caller.",
+    ],
+    "executenonquery": [
+        "Open a database connection.",
+        "Create a SqlCommand with INSERT/UPDATE/DELETE SQL and parameters.",
+        "Execute the command and return how many rows were changed.",
+    ],
+    "verifymfa": [
+        "Load the user by UID from the pending MFA session.",
+        "Verify the TOTP code with TotpHelper (or email OTP if that method is used).",
+        "On success, build a JWT and return the user for CompleteLogin.",
+        "On failure, record a throttle failure and return an error.",
+    ],
+    "verifymfaforpasswordreset": [
+        "Validate email and TOTP code are present.",
+        "Load the user and check the authenticator code.",
+        "On success, the page stores UID in Session for the new-password step.",
+    ],
+    "completepasswordreset": [
+        "Validate the new password (length/complexity).",
+        "Hash it with PBKDF2.",
+        "UPDATE Users.Password / PasswordHash for that UID.",
+        "Return success so the UI can send the user to Login.",
+    ],
+    "saveassignment": [
+        "Read title, instructions, course, due date, rubric/questions from the form.",
+        "Require a due date when publishing.",
+        "POST the data to Assignments.aspx/SaveCourseWork as JSON.",
+        "Show success or error on the page and refresh the list.",
+    ],
+    "submitattempt": [
+        "If the assignment is closed, block submit.",
+        "Collect written answer and optional uploaded file path.",
+        "POST to Submit.aspx/SaveSubmission.",
+        "Show success or the server error message.",
+    ],
+}
+
+
+def how_it_works(name: str, header: str, body: str, lang: str) -> list[str]:
+    """
+    Ordered plain-English steps describing the function body.
+    Uses hand-written flows for key methods; otherwise scans important statements.
+    """
+    n = name.lower()
+    if n in KNOWN_HOW_IT_WORKS:
+        return KNOWN_HOW_IT_WORKS[n]
+
+    steps: list[str] = []
+    lines = body.splitlines()
+
+    # Skip signature line
+    for raw in lines[1:]:
+        s = raw.strip()
+        if not s or s in ("{", "}") or s.startswith("//") or s.startswith("/*") or s.startswith("*"):
+            continue
+        low = s.lower()
+
+        # Auth / security
+        if "authgate.ensurepage" in low or "ensurepage(" in low:
+            steps.append("Check the visitor is logged in with an allowed role; if not, redirect to login and stop.")
+        elif "ensurehandlerrole" in low or "requirerole" in low or "requirelecturer" in low or "requirestudent" in low or "requireadmin" in low:
+            steps.append("Check the caller’s role (Lecturer/Student/Admin). If not allowed, return an error and stop.")
+        elif "csrfprotection.validate" in low or "ensurecsrf" in low:
+            steps.append("Validate the CSRF anti-forgery token on this mutating request.")
+        elif "csrfprotection.ensuretoken" in low:
+            steps.append("Make sure a CSRF token exists in Session (create one if missing).")
+        elif "getvalidateduserid" in low or "currentuserid" in low:
+            steps.append("Read the logged-in user id from Session/JWT (0 means not signed in).")
+        elif "tryrestoresessionfromjwt" in low:
+            steps.append("If Session is empty, try to rebuild it from the JWT cookie.")
+        elif "loginthrottle.islocked" in low:
+            steps.append("If this email/IP is locked after too many failures, return an error and stop.")
+        elif "loginthrottle.registerfailure" in low:
+            steps.append("Record a failed attempt (may lock the account temporarily).")
+        elif "loginthrottle.registersuccess" in low:
+            steps.append("Clear the failure counter after a successful login.")
+        elif "passwordhasher.verify" in low:
+            steps.append("Compare the typed password with the stored PBKDF2 hash.")
+        elif "passwordhasher.hash" in low:
+            steps.append("Hash the password with PBKDF2 before saving it.")
+        elif "totphelper.verifycode" in low:
+            steps.append("Check the 6-digit authenticator code against the user’s MFA secret.")
+        elif "totphelper.generatesecret" in low:
+            steps.append("Generate a new random MFA secret for Google Authenticator.")
+        elif "totphelper.generatecode" in low:
+            steps.append("Compute the current server-side TOTP code for debugging/setup.")
+        elif "totphelper.buildotpauthuri" in low:
+            steps.append("Build the otpauth URI used to show the QR code.")
+        elif "jwthelper.createtoken" in low:
+            steps.append("Create a signed JWT for this user.")
+        elif "jwthelper.setauthcookie" in low:
+            steps.append("Store the JWT in the browser cookie.")
+        elif "jwthelper.clearauthcookie" in low:
+            steps.append("Delete the JWT cookie (sign out).")
+        elif "completelogin" in low:
+            steps.append("Finish sign-in: write Session (UserID, UserName, UserRole) and set the JWT cookie.")
+        elif "startregistration" in low:
+            steps.append("Validate the form and keep pending registration only in Session (no database user yet).")
+        elif "finishregistration" in low:
+            steps.append("After MFA succeeds, INSERT the new user into the Users table.")
+        elif "verifymfaforpasswordreset" in low:
+            steps.append("Verify email + authenticator code for password reset (step 1).")
+        elif "completepasswordreset" in low:
+            steps.append("Update the user’s password hash (step 2 of reset).")
+        elif "securityaudit.log" in low:
+            steps.append("Write an audit-log row for this security event.")
+
+        # Data / SQL
+        elif "dbhelper.executequery" in low or "executequery(" in low:
+            steps.append("Run a SELECT query and load the matching rows into memory.")
+        elif "dbhelper.executenonquery" in low or "executenonquery(" in low:
+            steps.append("Run INSERT/UPDATE/DELETE SQL against the database.")
+        elif "dbhelper.executescalar" in low or "executescalarint" in low or "executescalar(" in low:
+            steps.append("Run SQL that returns one value (count, id, flag).")
+        elif "openconnection" in low or "new sqlconnection" in low:
+            steps.append("Open a connection to the LocalDB / SQL Server database.")
+        elif "assertcourseowner" in low or "lectureruid" in low and ("!=" in s or "==" in s) and "throw" in low:
+            steps.append("Verify this lecturer owns the course; deny access if not.")
+        elif "ispublished" in low and ("update" in low or "set " in low):
+            steps.append("Update the course publish flag so Landing can show/hide it.")
+        elif "duedate" in low or "ispastdue" in low or "isclosed" in low:
+            steps.append("Use the assignment due date to decide if submissions are still open.")
+
+        # Session / request
+        elif "session[" in low and ("=" in s) and "session.remove" not in low:
+            steps.append(f"Save temporary state in Session (`{s[s.find('Session'):].split('=')[0].strip() if 'Session' in s else 'key'}`).")
+        elif "session.remove" in low or "session.clear" in low or "session.abandon" in low:
+            steps.append("Clear Session data (logout or end of multi-step flow).")
+        elif "response.redirect" in low:
+            steps.append("Redirect the browser to another page.")
+        elif "response.write" in low or "context.response.write" in low:
+            steps.append("Write the HTTP response body (JSON, file bytes, or text).")
+
+        # JS / UI
+        elif "fetch(" in low:
+            steps.append("Call the server with `fetch` (AJAX) and wait for the JSON result.")
+        elif "getelementbyid" in low and ("innerhtml" in low or "textcontent" in low or "value" in low or "disabled" in low):
+            steps.append("Update a page element (text, HTML, value, or enabled/disabled).")
+        elif "addeventlistener" in low:
+            steps.append("Attach a browser event handler (click, load, change, …).")
+        elif "json.stringify" in low:
+            steps.append("Convert a JavaScript object into a JSON string for the server.")
+        elif "json.parse" in low or ".json()" in low:
+            steps.append("Parse the server JSON response into a JavaScript object.")
+        elif "preventdefault" in low:
+            steps.append("Stop the browser’s default action (for example form submit).")
+        elif "alert(" in low:
+            steps.append("Show a simple popup message to the user.")
+
+        # Returns — keep sparse so big methods stay readable
+        elif low.startswith("return new autresult") or low.startswith("return new {"):
+            steps.append("Build and return the result object (success or data for the UI).")
+        elif low.startswith("return false") or low.startswith("return true"):
+            steps.append(f"Return `{s.split()[1].rstrip(';')}` to the caller.")
+        elif "return fail(" in low or re.search(r"return\s+Fail\(", s):
+            # Only mention once
+            if not any("failure message" in x for x in steps):
+                steps.append("On bad input or failed check, return a failure message and stop.")
+        elif low.startswith("throw "):
+            steps.append("Stop with an error (invalid access or bad input).")
+        elif "requiresmfa" in low and "true" in low:
+            steps.append("Mark the result so the UI must ask for the authenticator code next.")
+        elif "role" in low and "admin" in low and ("equals" in low or "==" in s or "string.equals" in low):
+            steps.append("If the user is Admin, complete login without MFA; otherwise require MFA.")
+
+        # Validation patterns
+        elif low.startswith("if (") and ("return" in low or low.endswith("{")):
+            if "string.isnull" in low or "isnullorempty" in low or "!cid" in low or "<= 0" in low or "length <" in low:
+                steps.append("Validate input; if invalid, stop and return an error/message.")
+            elif "success" in low and "!" in low:
+                steps.append("If the previous step failed, show the error and stop.")
+            elif "admin" in low and ("role" in low or "normalizerole" in " ".join(lines).lower()):
+                steps.append("Branch for Admin (often skips MFA) vs Student/Lecturer.")
+
+    # Deduplicate consecutive duplicates while keeping order
+    deduped: list[str] = []
+    for st in steps:
+        if not deduped or deduped[-1] != st:
+            deduped.append(st)
+
+    # If too few steps, add generic structure help
+    if len(deduped) < 2:
+        n = name.lower()
+        if n in ("page_load", "pageload"):
+            deduped = [
+                "ASP.NET calls this automatically on every request.",
+                "On first load (`!IsPostBack`), initialize UI or redirect if already logged in.",
+                "On postback, button handlers run separately after this method.",
+            ]
+        elif not deduped:
+            deduped = [
+                f"Starts when something calls `{name}`.",
+                "Uses the parameters and local variables listed below.",
+                "Runs the statements in the code block (checks, database/UI work, then return).",
+            ]
+
+    # Cap length for readability
+    return deduped[:12]
+
+
+def vars_table(rows: list[tuple[str, str | None, str]]) -> str:
+    """
+    rows: list of (name, type_or_None, what_it_is)
+    """
+    if not rows:
+        return "_None found._\n"
+    lines = ["| Variable | Type | What it is |", "|----------|------|------------|"]
+    for name, typ, meaning in rows:
+        t = typ if typ else "—"
+        # escape pipes in meaning
+        m = (meaning or "").replace("|", "\\|")
+        lines.append(f"| `{name}` | `{t}` | {m} |")
+    return "\n".join(lines) + "\n"
 
 
 def line_note(line: str) -> str | None:
@@ -1081,36 +1423,32 @@ def write_file_md(path: Path, out_md: Path, title: str, feature_blurb: str, rel:
     lines_out.append(f"- **Kind:** `{ext or 'unknown'}`\n\n")
 
     lines_out.append("## Variables / fields (file level)\n\n")
-    lines_out.append(
-        "Each name is explained in plain English (what it stores / why it exists).\n\n"
-    )
+    lines_out.append("Simple table of names declared at file/class level.\n\n")
     if lang == "cs":
         fields = extract_fields_cs(text)
         if fields:
-            for name, typ, ln in fields:
-                meaning = explain_variable(name, typ, None, "cs")
-                lines_out.append(
-                    f"- **Line {ln}:** `{name}` (`{typ}`) — **{meaning}**\n"
-                )
+            rows = [
+                (name, typ, explain_variable(name, typ, None, "cs"))
+                for name, typ, ln in fields
+            ]
+            lines_out.append(vars_table(rows))
         else:
             lines_out.append(
-                "_No classic field declarations detected (or mostly locals inside methods — "
-                "see each function’s **Local variables** section)._\n"
+                "_No file-level fields found. See each function’s **Variables** table for locals._\n"
             )
     elif lang == "js":
         vars_ = extract_vars_js(text)
         if vars_:
-            for name, ln in vars_:
-                meaning = explain_variable(name, None, None, "js")
-                lines_out.append(
-                    f"- **Line {ln}:** `{name}` — script-level `const`/`let`/`var` — **{meaning}**\n"
-                )
+            rows = [
+                (name, "const/let/var", explain_variable(name, None, None, "js"))
+                for name, ln in vars_
+            ]
+            lines_out.append(vars_table(rows))
         else:
-            lines_out.append("_No top-level variables detected by scanner._\n")
+            lines_out.append("_No top-level script variables found._\n")
     else:
         lines_out.append(
-            "Markup/mixed file. Server controls and expressions are explained with "
-            "code-behind and script companions.\n"
+            "Markup file — variables live in the matching `.cs` / `.js` companion docs.\n"
         )
     lines_out.append("\n")
 
@@ -1125,57 +1463,71 @@ def write_file_md(path: Path, out_md: Path, title: str, feature_blurb: str, rel:
     if not methods:
         lines_out.append(
             "_No methods matched the scanner (markup-only or unconventional structure). "
-            "See full file listing below._\n\n"
+            "See the code listing at the bottom._\n\n"
         )
 
     for meth in methods:
+        mlang = "js" if lang == "js" else "cs"
         lines_out.append(f"### `{meth['name']}` — lines {meth['start']}–{meth['end']}\n\n")
+
+        # Signature
+        lines_out.append("#### Signature\n\n")
         lines_out.append(md_fence(meth["header"][:400], fence_lang))
-        lines_out.append("\n#### Explanation\n\n")
-        for note in explain_method(meth["name"], meth["header"], meth["body"], "js" if lang == "js" else "cs"):
-            # notes may already be markdown bullets ("- `x` — ...")
-            if note.startswith("- ") or note.startswith("* "):
-                lines_out.append(f"{note}\n")
-            else:
-                lines_out.append(f"- {note}\n")
-        lines_out.append("\n#### Line-by-line (this function)\n\n")
+
+        # What it is
+        lines_out.append("\n#### What it is\n\n")
+        lines_out.append(what_is_function(meth["name"], meth["header"], meth["body"], mlang) + "\n")
+
+        # How it works
+        lines_out.append("\n#### How it works\n\n")
+        steps = how_it_works(meth["name"], meth["header"], meth["body"], mlang)
+        for i, step in enumerate(steps, 1):
+            lines_out.append(f"{i}. {step}\n")
+
+        # Parameters table
+        params = extract_params_from_header(meth["header"])
+        lines_out.append("\n#### Parameters\n\n")
+        if params:
+            prows = [
+                (pname, ptyp, explain_variable(pname, ptyp, None, mlang))
+                for pname, ptyp in params
+            ]
+            lines_out.append(vars_table(prows))
+        else:
+            lines_out.append("_No parameters._\n")
+
+        # Locals table
+        locals_ = extract_locals_with_context(meth["body"], mlang)
+        lines_out.append("\n#### Variables (inside this function)\n\n")
+        if locals_:
+            lrows = [
+                (lname, ltyp, explain_variable(lname, ltyp, rhs, mlang))
+                for lname, ltyp, rhs in locals_
+            ]
+            lines_out.append(vars_table(lrows))
+        else:
+            lines_out.append("_No local variables detected (or only uses parameters)._\n")
+
+        # Code block (clean, no interleaved notes)
+        lines_out.append("\n#### Code\n\n")
         body_lines = meth["body"].splitlines()
         max_fn = 250
         lines_out.append(format_numbered_code(body_lines, meth["start"], fence_lang, max_fn))
-        notes = format_line_notes(body_lines, meth["start"], max_fn, lang)
-        if notes:
-            lines_out.append("\n**Line notes** (what code + variables mean)\n\n")
-            lines_out.extend(notes)
         if len(body_lines) > max_fn:
             lines_out.append(
-                f"\n_… {len(body_lines) - max_fn} more lines in this function (see full listing)._\n"
+                f"\n_… {len(body_lines) - max_fn} more lines — open the source file for the full method._\n"
             )
         lines_out.append("\n---\n\n")
 
-    lines_out.append("## Full file listing with line notes\n\n")
+    lines_out.append("## Full file code\n\n")
     lines_out.append(
-        "Source is shown as a single fenced code block with line numbers. "
-        "Recognized patterns and **variable meanings** are listed under **Line notes**.\n\n"
+        "Complete source with line numbers (for reading along with the function sections above).\n\n"
     )
     max_full = min(len(lines), 900)
     lines_out.append(format_numbered_code(lines[:max_full], 1, fence_lang, max_full))
-    full_notes = format_line_notes(lines[:max_full], 1, max_full, lang)
-    if full_notes:
-        lines_out.append("\n**Line notes** (what code + variables mean)\n\n")
-        lines_out.extend(full_notes)
     if len(lines) > max_full:
         lines_out.append(
-            f"\n_… truncated: {len(lines) - max_full} more lines in source. Open the original file for the rest._\n"
-        )
-
-    lines_out.append("\n## Source snapshot (raw)\n\n")
-    # include full source in a fence for easy copy (cap large files)
-    if len(lines) <= 600:
-        lines_out.append(md_fence(text, fence_lang))
-    else:
-        lines_out.append(
-            f"_File has {len(lines)} lines — raw dump omitted here to keep Markdown readable. "
-            f"Open `{rel}` in the project._\n"
+            f"\n_… truncated: {len(lines) - max_full} more lines. Open `{rel}` for the rest._\n"
         )
 
     out_md.parent.mkdir(parents=True, exist_ok=True)
@@ -1194,13 +1546,13 @@ def write_index(file_list: list[tuple[str, str, str]]):
     o.append("---\n\n")
     o.append("## What this pack is\n\n")
     o.append(
-        "Markdown documentation for the **Landing** public site and the full **Lecturer** workspace "
+        "Markdown documentation for **Landing**, **Lecturer**, **Security**, and **Data** "
         "(ASP.NET Web Forms 4.7.2, pure `SqlClient`).\n\n"
-        "Each important source file has its own `.md` file with:\n\n"
-        "1. Feature overview\n"
-        "2. File-level variables/fields\n"
-        "3. **Every detected function** — purpose, parameters, locals, line-by-line notes\n"
-        "4. Full file listing with line numbers + annotations\n\n"
+        "Each source file’s `.md` explains:\n\n"
+        "1. What the feature/file is for\n"
+        "2. **Variables in a table** (name | type | what it is)\n"
+        "3. **Every function**: What it is → How it works (steps) → Parameters table → Variables table → Code\n"
+        "4. Full file code listing\n\n"
     )
     o.append("## How Landing and Lecturer connect\n\n")
     for b in [

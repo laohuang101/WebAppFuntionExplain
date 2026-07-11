@@ -1,6 +1,6 @@
 # cc-media.js
 **Source:** `Pages/Lecturer/Scripts/cc-media.js`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,73 +15,94 @@ Serve files under Uploads with path sandbox + auth policy by folder.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 4:** `dz` — script-level `const`/`let`/`var` — **Holds “dz” for this scope.**
-- **Line 8:** `fileInput` — script-level `const`/`let`/`var` — **Holds “file Input” for this scope.**
-- **Line 13:** `preview` — script-level `const`/`let`/`var` — **Holds “preview” for this scope.**
-- **Line 15:** `hiddenField` — script-level `const`/`let`/`var` — **Holds “hidden Field” for this scope.**
-- **Line 16:** `dzMsg` — script-level `const`/`let`/`var` — **Holds “dz Msg” for this scope.**
-- **Line 24:** `formData` — script-level `const`/`let`/`var` — **Holds “form Data” for this scope.**
-- **Line 60:** `file` — script-level `const`/`let`/`var` — **Uploaded file object or file name.**
-- **Line 83:** `fd` — script-level `const`/`let`/`var` — **Holds “fd” for this scope.**
-- **Line 103:** `p` — script-level `const`/`let`/`var` — **Parameter, path, or password fragment depending on context.**
-- **Line 104:** `lower` — script-level `const`/`let`/`var` — **Holds “lower” for this scope.**
-- **Line 105:** `i` — script-level `const`/`let`/`var` — **Loop index (0-based counter in for-loops).**
-- **Line 117:** `u` — script-level `const`/`let`/`var` — **Holds “u” for this scope.**
-- **Line 129:** `key` — script-level `const`/`let`/`var` — **HMAC key bytes or dictionary key.**
-- **Line 131:** `q` — script-level `const`/`let`/`var` — **Search query text, or SQL command text.**
-- **Line 139:** `a` — script-level `const`/`let`/`var` — **Holds “a” for this scope.**
-- **Line 144:** `path` — script-level `const`/`let`/`var` — **File path under Uploads or URL path.**
-- **Line 146:** `idx` — script-level `const`/`let`/`var` — **Holds “idx” for this scope.**
-- **Line 156:** `root` — script-level `const`/`let`/`var` — **Root directory path (Uploads).**
-- **Line 158:** `url` — script-level `const`/`let`/`var` — **HTTP URL to media or page.**
-- **Line 164:** `s` — script-level `const`/`let`/`var` — **String value or submission-related object.**
-- **Line 173:** `safeView` — script-level `const`/`let`/`var` — **Holds “safe View” for this scope.**
-- **Line 174:** `safeName` — script-level `const`/`let`/`var` — **Holds “safe Name” for this scope.**
-- **Line 194:** `area` — script-level `const`/`let`/`var` — **Holds “area” for this scope.**
-- **Line 196:** `input` — script-level `const`/`let`/`var` — **Holds “input” for this scope.**
-- **Line 205:** `msg` — script-level `const`/`let`/`var` — **Human-readable message (error or success).**
-- **Line 215:** `ext` — script-level `const`/`let`/`var` — **File extension (.pdf, .mp4, …).**
-- **Line 228:** `store` — script-level `const`/`let`/`var` — **Holds “store” for this scope.**
-- **Line 229:** `viewUrl` — script-level `const`/`let`/`var` — **URL string.**
-- **Line 230:** `dlUrl` — script-level `const`/`let`/`var` — **URL string.**
-- **Line 231:** `txt` — script-level `const`/`let`/`var` — **UI control reference (txt).**
-- **Line 239:** `prev` — script-level `const`/`let`/`var` — **Holds “prev” for this scope.**
-- **Line 299:** `allowed` — script-level `const`/`let`/`var` — **Boolean — path/role is permitted.**
-- **Line 305:** `maxMb` — script-level `const`/`let`/`var` — **Holds “max Mb” for this scope.**
-- **Line 314:** `materialsField` — script-level `const`/`let`/`var` — **Holds “materials Field” for this scope.**
-- **Line 315:** `materials` — script-level `const`/`let`/`var` — **Often a collection related to materials (plural name).**
-- **Line 361:** `attachments` — script-level `const`/`let`/`var` — **Often a collection related to attachments (plural name).**
-- **Line 368:** `heading` — script-level `const`/`let`/`var` — **Holds “heading” for this scope.**
-- **Line 375:** `raw` — script-level `const`/`let`/`var` — **Raw bytes or unprocessed input string.**
-- **Line 378:** `name` — script-level `const`/`let`/`var` — **Display name of user/course/criterion.**
-- **Line 379:** `kind` — script-level `const`/`let`/`var` — **Upload kind (material/video/thumbnail/submission).**
-- **Line 380:** `card` — script-level `const`/`let`/`var` — **Holds “card” for this scope.**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `dz` | `const/let/var` | Holds “dz” for this scope. |
+| `fileInput` | `const/let/var` | Holds “file Input” for this scope. |
+| `preview` | `const/let/var` | Holds “preview” for this scope. |
+| `hiddenField` | `const/let/var` | Holds “hidden Field” for this scope. |
+| `dzMsg` | `const/let/var` | Holds “dz Msg” for this scope. |
+| `formData` | `const/let/var` | Holds “form Data” for this scope. |
+| `file` | `const/let/var` | Uploaded file object or file name. |
+| `fd` | `const/let/var` | Holds “fd” for this scope. |
+| `p` | `const/let/var` | Parameter, path, or password fragment depending on context. |
+| `lower` | `const/let/var` | Holds “lower” for this scope. |
+| `i` | `const/let/var` | Loop index (0-based counter in for-loops). |
+| `u` | `const/let/var` | Holds “u” for this scope. |
+| `key` | `const/let/var` | HMAC key bytes or dictionary key. |
+| `q` | `const/let/var` | Search query text, or SQL command text. |
+| `a` | `const/let/var` | Holds “a” for this scope. |
+| `path` | `const/let/var` | File path under Uploads or URL path. |
+| `idx` | `const/let/var` | Holds “idx” for this scope. |
+| `root` | `const/let/var` | Root directory path (Uploads). |
+| `url` | `const/let/var` | HTTP URL to media or page. |
+| `s` | `const/let/var` | String value or submission-related object. |
+| `safeView` | `const/let/var` | Holds “safe View” for this scope. |
+| `safeName` | `const/let/var` | Holds “safe Name” for this scope. |
+| `area` | `const/let/var` | Holds “area” for this scope. |
+| `input` | `const/let/var` | Holds “input” for this scope. |
+| `msg` | `const/let/var` | Human-readable message (error or success). |
+| `ext` | `const/let/var` | File extension (.pdf, .mp4, …). |
+| `store` | `const/let/var` | Holds “store” for this scope. |
+| `viewUrl` | `const/let/var` | URL string. |
+| `dlUrl` | `const/let/var` | URL string. |
+| `txt` | `const/let/var` | UI control reference (txt). |
+| `prev` | `const/let/var` | Holds “prev” for this scope. |
+| `allowed` | `const/let/var` | Boolean — path/role is permitted. |
+| `maxMb` | `const/let/var` | Holds “max Mb” for this scope. |
+| `materialsField` | `const/let/var` | Holds “materials Field” for this scope. |
+| `materials` | `const/let/var` | Often a collection related to materials (plural name). |
+| `attachments` | `const/let/var` | Often a collection related to attachments (plural name). |
+| `heading` | `const/let/var` | Holds “heading” for this scope. |
+| `raw` | `const/let/var` | Raw bytes or unprocessed input string. |
+| `name` | `const/let/var` | Display name of user/course/criterion. |
+| `kind` | `const/let/var` | Upload kind (material/video/thumbnail/submission). |
+| `card` | `const/let/var` | Holds “card” for this scope. |
 
 ## Functions / methods (13 found)
 
 ### `initDropzone` — lines 2–77
 
+#### Signature
+
 ```javascript
 function initDropzone()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `initDropzone`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **AJAX:** Browser calls server endpoints asynchronously.
-- **Local variables (what each means):**
-- `dz` — Holds “dz” for this scope.  DOM element from the page.
-- `fileInput` — Holds “file Input” for this scope.
-- `preview` — Holds “preview” for this scope.  DOM element from the page.
-- `hiddenField` — Holds “hidden Field” for this scope.  DOM element from the page.
-- `dzMsg` — Holds “dz Msg” for this scope.  DOM element from the page.
-- `formData` — Holds “form Data” for this scope.  Newly constructed object.
-- `file` — Uploaded file object or file name.
+Browser-side function `initDropzone` — talks to the server and updates the page.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Show a simple popup message to the user.
+2. Call the server with `fetch` (AJAX) and wait for the JSON result.
+3. Parse the server JSON response into a JavaScript object.
+4. Show a simple popup message to the user.
+5. Attach a browser event handler (click, load, change, …).
+6. Stop the browser’s default action (for example form submit).
+7. Attach a browser event handler (click, load, change, …).
+8. Stop the browser’s default action (for example form submit).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `dz` | `—` | Holds “dz” for this scope.  DOM element from the page. |
+| `fileInput` | `—` | Holds “file Input” for this scope. |
+| `preview` | `—` | Holds “preview” for this scope.  DOM element from the page. |
+| `hiddenField` | `—` | Holds “hidden Field” for this scope.  DOM element from the page. |
+| `dzMsg` | `—` | Holds “dz Msg” for this scope.  DOM element from the page. |
+| `formData` | `—` | Holds “form Data” for this scope.  Newly constructed object. |
+| `file` | `—` | Uploaded file object or file name. |
+
+#### Code
 
 ```javascript
    2 | 
@@ -162,42 +183,40 @@ function initDropzone()
   77 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L4:** Get HTML element by id. | `dz` means: Holds “dz” for this scope.  DOM element from the page.
-- **L8:** `fileInput` means: Holds “file Input” for this scope.
-- **L14:** Get HTML element by id. | `preview` means: Holds “preview” for this scope.  DOM element from the page.
-- **L15:** Get HTML element by id. | `hiddenField` means: Holds “hidden Field” for this scope.  DOM element from the page.
-- **L16:** Get HTML element by id. | `dzMsg` means: Holds “dz Msg” for this scope.  DOM element from the page.
-- **L25:** `formData` means: Holds “form Data” for this scope.  Newly constructed object.
-- **L31:** HTTP request to server WebMethod/ashx.
-- **L57:** DOM event handler.
-- **L59:** DOM event handler.
-- **L60:** `file` means: Uploaded file object or file name.
-- **L64:** DOM event handler.
-- **L68:** DOM event handler.
-- **L71:** DOM event handler.
-- **L74:** `file` means: Uploaded file object or file name.
-
 ---
 
 ### `uploadFile` — lines 16–55
+
+#### Signature
 
 ```javascript
 function uploadFile(file)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `uploadFile`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **AJAX:** Browser calls server endpoints asynchronously.
-- **Parameters (what each means):**
-- `file` — Uploaded file object or file name.
-- **Local variables (what each means):**
-- `formData` — Holds “form Data” for this scope.  Newly constructed object.
+Browser-side function `uploadFile` — talks to the server and updates the page.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Show a simple popup message to the user.
+2. Call the server with `fetch` (AJAX) and wait for the JSON result.
+3. Parse the server JSON response into a JavaScript object.
+4. Show a simple popup message to the user.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `file` | `—` | Uploaded file object or file name. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `formData` | `—` | Holds “form Data” for this scope.  Newly constructed object. |
+
+#### Code
 
 ```javascript
   16 | 
@@ -242,30 +261,39 @@ function uploadFile(file)
   55 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L25:** `formData` means: Holds “form Data” for this scope.  Newly constructed object.
-- **L31:** HTTP request to server WebMethod/ashx.
-
 ---
 
 ### `uploadLessonFile` — lines 81–99
+
+#### Signature
 
 ```javascript
 function uploadLessonFile(file)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `uploadLessonFile`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **AJAX:** Browser calls server endpoints asynchronously.
-- **Parameters (what each means):**
-- `file` — Uploaded file object or file name.
-- **Local variables (what each means):**
-- `fd` — Holds “fd” for this scope.  Newly constructed object.
+Browser-side function `uploadLessonFile` — talks to the server and updates the page.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Call the server with `fetch` (AJAX) and wait for the JSON result.
+2. Parse the server JSON response into a JavaScript object.
+3. Stop with an error (invalid access or bad input).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `file` | `—` | Uploaded file object or file name. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `fd` | `—` | Holds “fd” for this scope.  Newly constructed object. |
+
+#### Code
 
 ```javascript
   81 | 
@@ -289,30 +317,39 @@ function uploadLessonFile(file)
   99 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L83:** `fd` means: Holds “fd” for this scope.  Newly constructed object.
-- **L85:** HTTP request to server WebMethod/ashx.
-- **L91:** Error handling block.
-- **L92:** JS object ↔ JSON text.
-
 ---
 
 ### `mediaAppRoot` — lines 101–109
+
+#### Signature
 
 ```javascript
 function mediaAppRoot()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `mediaAppRoot`.
-- **Local variables (what each means):**
-- `p` — Parameter, path, or password fragment depending on context.
-- `lower` — Holds “lower” for this scope.
-- `i` — Loop index (0-based counter in for-loops).
+Function `mediaAppRoot` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `mediaAppRoot`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `p` | `—` | Parameter, path, or password fragment depending on context. |
+| `lower` | `—` | Holds “lower” for this scope. |
+| `i` | `—` | Loop index (0-based counter in for-loops). |
+
+#### Code
 
 ```javascript
  101 | 
@@ -326,33 +363,43 @@ function mediaAppRoot()
  109 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L103:** `p` means: Parameter, path, or password fragment depending on context.
-- **L104:** `lower` means: Holds “lower” for this scope.
-- **L105:** `i` means: Loop index (0-based counter in for-loops).
-
 ---
 
 ### `resolveMediaUrl` — lines 114–143
+
+#### Signature
 
 ```javascript
 function resolveMediaUrl(raw, forDownload)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `resolveMediaUrl`.
-- **Parameters (what each means):**
-- `raw` — Raw bytes or unprocessed input string.
-- `forDownload` — Holds “for Download” for this scope.
-- **Local variables (what each means):**
-- `u` — Holds “u” for this scope.
-- `key` — HMAC key bytes or dictionary key.
-- `q` — Search query text, or SQL command text.
-- `a` — Holds “a” for this scope.
+Function `resolveMediaUrl` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `resolveMediaUrl`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `raw` | `—` | Raw bytes or unprocessed input string. |
+| `forDownload` | `—` | Holds “for Download” for this scope. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `u` | `—` | Holds “u” for this scope. |
+| `key` | `—` | HMAC key bytes or dictionary key. |
+| `q` | `—` | Search query text, or SQL command text. |
+| `a` | `—` | Holds “a” for this scope. |
+
+#### Code
 
 ```javascript
  114 | 
@@ -387,32 +434,39 @@ function resolveMediaUrl(raw, forDownload)
  143 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L117:** `u` means: Holds “u” for this scope.
-- **L128:** Error handling block.
-- **L129:** `key` means: HMAC key bytes or dictionary key.
-- **L131:** `q` means: Search query text, or SQL command text.
-- **L137:** Error handling block.
-- **L139:** `a` means: Holds “a” for this scope.
-
 ---
 
 ### `mediaKind` — lines 161–170
+
+#### Signature
 
 ```javascript
 function mediaKind(urlOrName)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `mediaKind`.
-- **Parameters (what each means):**
-- `urlOrName` — URL string.
-- **Local variables (what each means):**
-- `s` — String value or submission-related object.
+Function `mediaKind` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `mediaKind`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `urlOrName` | `—` | URL string. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `s` | `—` | String value or submission-related object. |
+
+#### Code
 
 ```javascript
  161 | 
@@ -427,30 +481,42 @@ function mediaKind(urlOrName)
  170 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L164:** `s` means: String value or submission-related object.
-
 ---
 
 ### `buildMaterialPreviewHtml` — lines 170–191
+
+#### Signature
 
 ```javascript
 function buildMaterialPreviewHtml(viewUrl, kind, fileName)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `buildMaterialPreviewHtml`.
-- **Parameters (what each means):**
-- `viewUrl` — URL string.
-- `kind` — Upload kind (material/video/thumbnail/submission).
-- `fileName` — Original file name for display/download.
-- **Local variables (what each means):**
-- `safeView` — Holds “safe View” for this scope.
-- `safeName` — Holds “safe Name” for this scope.
+Creates/builds **build Material Preview Html** (object, string, secret, or UI content).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `buildMaterialPreviewHtml`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `viewUrl` | `—` | URL string. |
+| `kind` | `—` | Upload kind (material/video/thumbnail/submission). |
+| `fileName` | `—` | Original file name for display/download. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `safeView` | `—` | Holds “safe View” for this scope. |
+| `safeName` | `—` | Holds “safe Name” for this scope. |
+
+#### Code
 
 ```javascript
  170 | 
@@ -477,34 +543,47 @@ function buildMaterialPreviewHtml(viewUrl, kind, fileName)
  191 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L173:** Encode text to reduce XSS risk. | `safeView` means: Holds “safe View” for this scope.
-- **L174:** Encode text to reduce XSS risk. | `safeName` means: Holds “safe Name” for this scope.
-
 ---
 
 ### `initMediaDropzone` — lines 191–275
+
+#### Signature
 
 ```javascript
 function initMediaDropzone()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `initMediaDropzone`.
-- **Local variables (what each means):**
-- `area` — Holds “area” for this scope.  DOM element from the page.
-- `input` — Holds “input” for this scope.  DOM element from the page.
-- `msg` — Human-readable message (error or success).
-- `ext` — File extension (.pdf, .mp4, …).
-- `store` — Holds “store” for this scope.
-- `viewUrl` — URL string.
-- `dlUrl` — URL string.
-- `txt` — UI control reference (txt).  DOM element from the page.
-- `prev` — Holds “prev” for this scope.  DOM element from the page.
+Function `initMediaDropzone` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Show a simple popup message to the user.
+2. Attach a browser event handler (click, load, change, …).
+3. Stop the browser’s default action (for example form submit).
+4. Attach a browser event handler (click, load, change, …).
+5. Stop the browser’s default action (for example form submit).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `area` | `—` | Holds “area” for this scope.  DOM element from the page. |
+| `input` | `—` | Holds “input” for this scope.  DOM element from the page. |
+| `msg` | `—` | Human-readable message (error or success). |
+| `ext` | `—` | File extension (.pdf, .mp4, …). |
+| `store` | `—` | Holds “store” for this scope. |
+| `viewUrl` | `—` | URL string. |
+| `dlUrl` | `—` | URL string. |
+| `txt` | `—` | UI control reference (txt).  DOM element from the page. |
+| `prev` | `—` | Holds “prev” for this scope.  DOM element from the page. |
+
+#### Code
 
 ```javascript
  191 | 
@@ -594,51 +673,42 @@ function initMediaDropzone()
  275 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L194:** Get HTML element by id. | `area` means: Holds “area” for this scope.  DOM element from the page.
-- **L196:** Get HTML element by id. | `input` means: Holds “input” for this scope.  DOM element from the page.
-- **L205:** `msg` means: Human-readable message (error or success).
-- **L215:** `ext` means: File extension (.pdf, .mp4, …).
-- **L228:** `store` means: Holds “store” for this scope.
-- **L229:** `viewUrl` means: URL string.
-- **L230:** `dlUrl` means: URL string.
-- **L231:** Get HTML element by id. | `txt` means: UI control reference (txt).  DOM element from the page.
-- **L237:** Update page HTML.
-- **L238:** Encode text to reduce XSS risk.
-- **L239:** Get HTML element by id. | `prev` means: Holds “prev” for this scope.  DOM element from the page.
-- **L241:** Update page HTML.
-- **L242:** Encode text to reduce XSS risk.
-- **L243:** Encode text to reduce XSS risk.
-- **L244:** Encode text to reduce XSS risk.
-- **L259:** DOM event handler.
-- **L264:** DOM event handler.
-- **L268:** DOM event handler.
-- **L269:** DOM event handler.
-- **L270:** DOM event handler.
-
 ---
 
 ### `uploadVideo` — lines 211–257
+
+#### Signature
 
 ```javascript
 function uploadVideo(file)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `uploadVideo`.
-- **Parameters (what each means):**
-- `file` — Uploaded file object or file name.
-- **Local variables (what each means):**
-- `ext` — File extension (.pdf, .mp4, …).
-- `store` — Holds “store” for this scope.
-- `viewUrl` — URL string.
-- `dlUrl` — URL string.
-- `txt` — UI control reference (txt).  DOM element from the page.
-- `prev` — Holds “prev” for this scope.  DOM element from the page.
+Function `uploadVideo` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Show a simple popup message to the user.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `file` | `—` | Uploaded file object or file name. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ext` | `—` | File extension (.pdf, .mp4, …). |
+| `store` | `—` | Holds “store” for this scope. |
+| `viewUrl` | `—` | URL string. |
+| `dlUrl` | `—` | URL string. |
+| `txt` | `—` | UI control reference (txt).  DOM element from the page. |
+| `prev` | `—` | Holds “prev” for this scope.  DOM element from the page. |
+
+#### Code
 
 ```javascript
  211 | 
@@ -690,44 +760,50 @@ function uploadVideo(file)
  257 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L215:** `ext` means: File extension (.pdf, .mp4, …).
-- **L228:** `store` means: Holds “store” for this scope.
-- **L229:** `viewUrl` means: URL string.
-- **L230:** `dlUrl` means: URL string.
-- **L231:** Get HTML element by id. | `txt` means: UI control reference (txt).  DOM element from the page.
-- **L237:** Update page HTML.
-- **L238:** Encode text to reduce XSS risk.
-- **L239:** Get HTML element by id. | `prev` means: Holds “prev” for this scope.  DOM element from the page.
-- **L241:** Update page HTML.
-- **L242:** Encode text to reduce XSS risk.
-- **L243:** Encode text to reduce XSS risk.
-- **L244:** Encode text to reduce XSS risk.
-
 ---
 
 ### `initMaterialDropzone` — lines 275–358
+
+#### Signature
 
 ```javascript
 function initMaterialDropzone()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `initMaterialDropzone`.
-- **Local variables (what each means):**
-- `area` — Holds “area” for this scope.  DOM element from the page.
-- `input` — Holds “input” for this scope.  DOM element from the page.
-- `msg` — Human-readable message (error or success).
-- `allowed` — Boolean — path/role is permitted.
-- `ext` — File extension (.pdf, .mp4, …).
-- `maxMb` — Holds “max Mb” for this scope.
-- `materialsField` — Holds “materials Field” for this scope.  DOM element from the page.
-- `materials` — Often a collection related to materials (plural name).
-- `store` — Holds “store” for this scope.
+Function `initMaterialDropzone` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Show a simple popup message to the user.
+2. Parse the server JSON response into a JavaScript object.
+3. Convert a JavaScript object into a JSON string for the server.
+4. Show a simple popup message to the user.
+5. Attach a browser event handler (click, load, change, …).
+6. Stop the browser’s default action (for example form submit).
+7. Attach a browser event handler (click, load, change, …).
+8. Stop the browser’s default action (for example form submit).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `area` | `—` | Holds “area” for this scope.  DOM element from the page. |
+| `input` | `—` | Holds “input” for this scope.  DOM element from the page. |
+| `msg` | `—` | Human-readable message (error or success). |
+| `allowed` | `—` | Boolean — path/role is permitted. |
+| `ext` | `—` | File extension (.pdf, .mp4, …). |
+| `maxMb` | `—` | Holds “max Mb” for this scope. |
+| `materialsField` | `—` | Holds “materials Field” for this scope.  DOM element from the page. |
+| `materials` | `—` | Often a collection related to materials (plural name). |
+| `store` | `—` | Holds “store” for this scope. |
+
+#### Code
 
 ```javascript
  275 | 
@@ -816,50 +892,45 @@ function initMaterialDropzone()
  358 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L278:** Get HTML element by id. | `area` means: Holds “area” for this scope.  DOM element from the page.
-- **L280:** Get HTML element by id. | `input` means: Holds “input” for this scope.  DOM element from the page.
-- **L289:** `msg` means: Human-readable message (error or success).
-- **L299:** `allowed` means: Boolean — path/role is permitted.
-- **L300:** `ext` means: File extension (.pdf, .mp4, …).
-- **L305:** `maxMb` means: Holds “max Mb” for this scope.
-- **L314:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
-- **L315:** `materials` means: Often a collection related to materials (plural name).
-- **L316:** JS object ↔ JSON text.
-- **L317:** `store` means: Holds “store” for this scope.
-- **L326:** JS object ↔ JSON text.
-- **L328:** Update page HTML.
-- **L329:** Encode text to reduce XSS risk.
-- **L342:** DOM event handler.
-- **L347:** DOM event handler.
-- **L351:** DOM event handler.
-- **L352:** DOM event handler.
-- **L353:** DOM event handler.
-
 ---
 
 ### `uploadMaterial` — lines 295–340
+
+#### Signature
 
 ```javascript
 function uploadMaterial(file)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `uploadMaterial`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters (what each means):**
-- `file` — Uploaded file object or file name.
-- **Local variables (what each means):**
-- `allowed` — Boolean — path/role is permitted.
-- `ext` — File extension (.pdf, .mp4, …).
-- `maxMb` — Holds “max Mb” for this scope.
-- `materialsField` — Holds “materials Field” for this scope.  DOM element from the page.
-- `materials` — Often a collection related to materials (plural name).
-- `store` — Holds “store” for this scope.
+Function `uploadMaterial` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Show a simple popup message to the user.
+2. Parse the server JSON response into a JavaScript object.
+3. Convert a JavaScript object into a JSON string for the server.
+4. Show a simple popup message to the user.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `file` | `—` | Uploaded file object or file name. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `allowed` | `—` | Boolean — path/role is permitted. |
+| `ext` | `—` | File extension (.pdf, .mp4, …). |
+| `maxMb` | `—` | Holds “max Mb” for this scope. |
+| `materialsField` | `—` | Holds “materials Field” for this scope.  DOM element from the page. |
+| `materials` | `—` | Often a collection related to materials (plural name). |
+| `store` | `—` | Holds “store” for this scope. |
+
+#### Code
 
 ```javascript
  295 | 
@@ -910,44 +981,45 @@ function uploadMaterial(file)
  340 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L299:** `allowed` means: Boolean — path/role is permitted.
-- **L300:** `ext` means: File extension (.pdf, .mp4, …).
-- **L305:** `maxMb` means: Holds “max Mb” for this scope.
-- **L314:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
-- **L315:** `materials` means: Often a collection related to materials (plural name).
-- **L316:** JS object ↔ JSON text.
-- **L317:** `store` means: Holds “store” for this scope.
-- **L326:** JS object ↔ JSON text.
-- **L328:** Update page HTML.
-- **L329:** Encode text to reduce XSS risk.
-
 ---
 
 ### `renderAttachmentsList` — lines 358–398
+
+#### Signature
 
 ```javascript
 function renderAttachmentsList()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `renderAttachmentsList`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Local variables (what each means):**
-- `attachments` — Often a collection related to attachments (plural name).  DOM element from the page.
-- `materialsField` — Holds “materials Field” for this scope.  DOM element from the page.
-- `materials` — Often a collection related to materials (plural name).
-- `heading` — Holds “heading” for this scope.
-- `raw` — Raw bytes or unprocessed input string.
-- `viewUrl` — URL string.
-- `dlUrl` — URL string.
-- `name` — Display name of user/course/criterion.
-- `kind` — Upload kind (material/video/thumbnail/submission).
-- `card` — Holds “card” for this scope.
+Updates the page HTML for **render Attachments List**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Parse the server JSON response into a JavaScript object.
+2. Attach a browser event handler (click, load, change, …).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `attachments` | `—` | Often a collection related to attachments (plural name).  DOM element from the page. |
+| `materialsField` | `—` | Holds “materials Field” for this scope.  DOM element from the page. |
+| `materials` | `—` | Often a collection related to materials (plural name). |
+| `heading` | `—` | Holds “heading” for this scope. |
+| `raw` | `—` | Raw bytes or unprocessed input string. |
+| `viewUrl` | `—` | URL string. |
+| `dlUrl` | `—` | URL string. |
+| `name` | `—` | Display name of user/course/criterion. |
+| `kind` | `—` | Upload kind (material/video/thumbnail/submission). |
+| `card` | `—` | Holds “card” for this scope. |
+
+#### Code
 
 ```javascript
  358 | 
@@ -993,46 +1065,39 @@ function renderAttachmentsList()
  398 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L361:** Get HTML element by id. | `attachments` means: Often a collection related to attachments (plural name).  DOM element from the page.
-- **L362:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
-- **L364:** Update page HTML.
-- **L365:** `materials` means: Often a collection related to materials (plural name).
-- **L366:** JS object ↔ JSON text.
-- **L369:** `heading` means: Holds “heading” for this scope.
-- **L375:** `raw` means: Raw bytes or unprocessed input string.
-- **L376:** `viewUrl` means: URL string.
-- **L377:** `dlUrl` means: URL string.
-- **L378:** `name` means: Display name of user/course/criterion.
-- **L379:** `kind` means: Upload kind (material/video/thumbnail/submission).
-- **L381:** `card` means: Holds “card” for this scope.
-- **L383:** Update page HTML.
-- **L386:** Encode text to reduce XSS risk.
-- **L387:** Encode text to reduce XSS risk.
-- **L388:** Encode text to reduce XSS risk.
-- **L393:** DOM event handler.
-
 ---
 
 ### `removeAttachment` — lines 398–410
+
+#### Signature
 
 ```javascript
 function removeAttachment(url)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `removeAttachment`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Delete/clear data.
-- **Parameters (what each means):**
-- `url` — HTTP URL to media or page.
-- **Local variables (what each means):**
-- `materialsField` — Holds “materials Field” for this scope.  DOM element from the page.
-- `materials` — Often a collection related to materials (plural name).
+Deletes or clears **remove Attachment** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Parse the server JSON response into a JavaScript object.
+2. Convert a JavaScript object into a JSON string for the server.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `url` | `—` | HTTP URL to media or page. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `materialsField` | `—` | Holds “materials Field” for this scope.  DOM element from the page. |
+| `materials` | `—` | Often a collection related to materials (plural name). |
+
+#### Code
 
 ```javascript
  398 | 
@@ -1050,18 +1115,11 @@ function removeAttachment(url)
  410 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L401:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
-- **L403:** `materials` means: Often a collection related to materials (plural name).
-- **L404:** JS object ↔ JSON text.
-- **L408:** JS object ↔ JSON text.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```javascript
    1 | // Course Creation — media / materials dropzones
@@ -1475,517 +1533,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  409 |     renderAttachmentsList();
  410 | }
  411 | 
-```
-
-**Line notes** (what code + variables mean)
-
-- **L4:** Get HTML element by id. | `dz` means: Holds “dz” for this scope.  DOM element from the page.
-- **L8:** `fileInput` means: Holds “file Input” for this scope.
-- **L14:** Get HTML element by id. | `preview` means: Holds “preview” for this scope.  DOM element from the page.
-- **L15:** Get HTML element by id. | `hiddenField` means: Holds “hidden Field” for this scope.  DOM element from the page.
-- **L16:** Get HTML element by id. | `dzMsg` means: Holds “dz Msg” for this scope.  DOM element from the page.
-- **L25:** `formData` means: Holds “form Data” for this scope.  Newly constructed object.
-- **L31:** HTTP request to server WebMethod/ashx.
-- **L57:** DOM event handler.
-- **L59:** DOM event handler.
-- **L60:** `file` means: Uploaded file object or file name.
-- **L64:** DOM event handler.
-- **L68:** DOM event handler.
-- **L71:** DOM event handler.
-- **L74:** `file` means: Uploaded file object or file name.
-- **L83:** `fd` means: Holds “fd” for this scope.  Newly constructed object.
-- **L85:** HTTP request to server WebMethod/ashx.
-- **L91:** Error handling block.
-- **L92:** JS object ↔ JSON text.
-- **L103:** `p` means: Parameter, path, or password fragment depending on context.
-- **L104:** `lower` means: Holds “lower” for this scope.
-- **L105:** `i` means: Loop index (0-based counter in for-loops).
-- **L117:** `u` means: Holds “u” for this scope.
-- **L128:** Error handling block.
-- **L129:** `key` means: HMAC key bytes or dictionary key.
-- **L131:** `q` means: Search query text, or SQL command text.
-- **L137:** Error handling block.
-- **L139:** `a` means: Holds “a” for this scope.
-- **L145:** `path` means: File path under Uploads or URL path.
-- **L146:** `idx` means: Holds “idx” for this scope.
-- **L157:** `root` means: Root directory path (Uploads).
-- **L158:** `url` means: HTTP URL to media or page.
-- **L164:** `s` means: String value or submission-related object.
-- **L173:** Encode text to reduce XSS risk. | `safeView` means: Holds “safe View” for this scope.
-- **L174:** Encode text to reduce XSS risk. | `safeName` means: Holds “safe Name” for this scope.
-- **L194:** Get HTML element by id. | `area` means: Holds “area” for this scope.  DOM element from the page.
-- **L196:** Get HTML element by id. | `input` means: Holds “input” for this scope.  DOM element from the page.
-- **L205:** `msg` means: Human-readable message (error or success).
-- **L215:** `ext` means: File extension (.pdf, .mp4, …).
-- **L228:** `store` means: Holds “store” for this scope.
-- **L229:** `viewUrl` means: URL string.
-- **L230:** `dlUrl` means: URL string.
-- **L231:** Get HTML element by id. | `txt` means: UI control reference (txt).  DOM element from the page.
-- **L237:** Update page HTML.
-- **L238:** Encode text to reduce XSS risk.
-- **L239:** Get HTML element by id. | `prev` means: Holds “prev” for this scope.  DOM element from the page.
-- **L241:** Update page HTML.
-- **L242:** Encode text to reduce XSS risk.
-- **L243:** Encode text to reduce XSS risk.
-- **L244:** Encode text to reduce XSS risk.
-- **L259:** DOM event handler.
-- **L264:** DOM event handler.
-- **L268:** DOM event handler.
-- **L269:** DOM event handler.
-- **L270:** DOM event handler.
-- **L278:** Get HTML element by id. | `area` means: Holds “area” for this scope.  DOM element from the page.
-- **L280:** Get HTML element by id. | `input` means: Holds “input” for this scope.  DOM element from the page.
-- **L289:** `msg` means: Human-readable message (error or success).
-- **L299:** `allowed` means: Boolean — path/role is permitted.
-- **L300:** `ext` means: File extension (.pdf, .mp4, …).
-- **L305:** `maxMb` means: Holds “max Mb” for this scope.
-- **L314:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
-- **L315:** `materials` means: Often a collection related to materials (plural name).
-- **L316:** JS object ↔ JSON text.
-- **L317:** `store` means: Holds “store” for this scope.
-- **L326:** JS object ↔ JSON text.
-- **L328:** Update page HTML.
-- **L329:** Encode text to reduce XSS risk.
-- **L342:** DOM event handler.
-- **L347:** DOM event handler.
-- **L351:** DOM event handler.
-- **L352:** DOM event handler.
-- **L353:** DOM event handler.
-- **L361:** Get HTML element by id. | `attachments` means: Often a collection related to attachments (plural name).  DOM element from the page.
-- **L362:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
-- **L364:** Update page HTML.
-- **L365:** `materials` means: Often a collection related to materials (plural name).
-- **L366:** JS object ↔ JSON text.
-- **L369:** `heading` means: Holds “heading” for this scope.
-- **L375:** `raw` means: Raw bytes or unprocessed input string.
-- **L376:** `viewUrl` means: URL string.
-- **L377:** `dlUrl` means: URL string.
-- **L378:** `name` means: Display name of user/course/criterion.
-- **L379:** `kind` means: Upload kind (material/video/thumbnail/submission).
-- **L381:** `card` means: Holds “card” for this scope.
-- **L383:** Update page HTML.
-- **L386:** Encode text to reduce XSS risk.
-- **L387:** Encode text to reduce XSS risk.
-- **L388:** Encode text to reduce XSS risk.
-- **L393:** DOM event handler.
-- **L401:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
-- **L403:** `materials` means: Often a collection related to materials (plural name).
-- **L404:** JS object ↔ JSON text.
-- **L408:** JS object ↔ JSON text.
-
-## Source snapshot (raw)
-
-```javascript
-// Course Creation — media / materials dropzones
-// depends on: cc-core.js
-function initDropzone() {
-    const dz = document.getElementById('dropzoneArea');
-    if (!dz) return;
-
-    // Create hidden file input
-    let fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.accept = 'image/*';
-    fileInput.style.display = 'none';
-    dz.appendChild(fileInput);
-
-    const preview = document.getElementById('courseThumbPreview');
-    const hiddenField = document.getElementById('txtBgImg');
-    const dzMsg = document.getElementById('dzMessage');
-
-    function uploadFile(file) {
-        if (!file) return;
-        if (file.size > 2 * 1024 * 1024) {
-            alert('File too large. Maximum allowed size is 2MB.');
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append('file', file, file.name);
-
-        dz.classList.add('disabled');
-        dzMsg.innerText = 'Uploading...';
-
-        fetch('UploadThumbnail.ashx', {
-            method: 'POST',
-            body: formData
-        })
-        .then(res => res.json())
-        .then(resp => {
-            if (resp.success) {
-                hiddenField.value = resp.url;
-                if (preview) {
-                    preview.src = resp.url;
-                    preview.classList.remove('d-none');
-                }
-                dzMsg.innerText = 'Upload successful';
-            } else {
-                alert('Upload failed: ' + (resp.message || 'Unknown error'));
-                dzMsg.innerText = 'Drag & drop a thumbnail here or click to browse (Max 2MB)';
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            alert('Upload failed.');
-            dzMsg.innerText = 'Drag & drop a thumbnail here or click to browse (Max 2MB)';
-        })
-        .finally(() => dz.classList.remove('disabled'));
-    }
-
-    dz.addEventListener('click', () => fileInput.click());
-
-    fileInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        uploadFile(file);
-    });
-
-    dz.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dz.classList.add('border-primary');
-    });
-    dz.addEventListener('dragleave', (e) => {
-        dz.classList.remove('border-primary');
-    });
-    dz.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dz.classList.remove('border-primary');
-        const file = e.dataTransfer.files[0];
-        uploadFile(file);
-    });
-}
-
-
-
-/** Upload a file to UploadMedia.ashx; returns Promise<{success,url,fileName,serveUrl,downloadUrl}> */
-function uploadLessonFile(file) {
-    var fd = new FormData();
-    fd.append('file', file, file.name);
-    return fetch('UploadMedia.ashx', {
-        method: 'POST',
-        body: fd,
-        credentials: 'same-origin'
-    }).then(function (r) {
-        return r.text().then(function (text) {
-            try {
-                return JSON.parse(text);
-            } catch (e) {
-                console.error('UploadMedia non-JSON response:', text);
-                throw new Error('Upload failed (server returned non-JSON). Check you are logged in and UploadMedia.ashx is reachable.');
-            }
-        });
-    });
-}
-
-/** App virtual root: "" or "/MyApp" (never ends with /) */
-function mediaAppRoot() {
-    var p = window.location.pathname || '';
-    var lower = p.toLowerCase();
-    var i = lower.indexOf('/pages/');
-    if (i > 0) return p.substring(0, i);
-    // site at root → ""
-    return '';
-}
-
-/**
-* Resolve stored media to /Media.ashx?f=CourseMaterials/file.ext
-* This is the only reliable way under IIS Express (static /Uploads often 404s).
-*/
-function resolveMediaUrl(raw, forDownload) {
-    if (!raw) return '';
-    var u = String(raw).trim();
-
-    // External non-upload URLs
-    if (/^https?:\/\//i.test(u) &&
-    u.indexOf('/Uploads/') < 0 && u.indexOf('Uploads/') < 0 &&
-    u.indexOf('Media.ashx') < 0 && u.indexOf('ServeUpload') < 0) {
-        return u;
-    }
-
-    // Already Media.ashx / ServeUpload - normalize to Media.ashx
-    if (u.indexOf('Media.ashx') >= 0 || u.indexOf('ServeUpload') >= 0) {
-        try {
-            var key = u.indexOf('f=') >= 0 ? 'f=' : (u.indexOf('path=') >= 0 ? 'path=' : null);
-            if (key) {
-                var q = u.split(key)[1];
-                if (q) return resolveMediaUrl(decodeURIComponent(q.split('&')[0]), forDownload);
-            }
-        } catch (e) { }
-    }
-
-    try {
-        if (/^https?:\/\//i.test(u)) {
-        var a = document.createElement('a');
-        a.href = u;
-        u = a.pathname || u;
-    }
-} catch (e) { /* ignore */ }
-
-var path = u.replace(/\\/g, '/');
-var idx = path.toLowerCase().indexOf('/uploads/');
-if (idx >= 0) path = path.substring(idx + 1); // Uploads/...
-if (path.indexOf('~/') === 0) path = path.substring(2);
-path = path.replace(/^\/+/, '');
-if (path.toLowerCase().indexOf('uploads/') === 0) path = path.substring('uploads/'.length);
-
-// path is now CourseMaterials/guid.pdf or CourseVideos/...
-if (!path) return '';
-// If only a bare filename slipped in, assume CourseMaterials
-if (path.indexOf('/') < 0) path = 'CourseMaterials/' + path;
-
-var root = mediaAppRoot();
-var url = root + '/Media.ashx?f=' + encodeURIComponent(path);
-if (forDownload) url += '&dl=1';
-return url;
-}
-
-function mediaKind(urlOrName) {
-    var s = (urlOrName || '').toLowerCase();
-    if (/\.(mp4|webm|mov)(\?|$)/.test(s) || s.indexOf('coursevideos') >= 0) return 'video';
-    if (/\.(png|jpe?g|gif|webp|bmp)(\?|$)/.test(s)) return 'image';
-    if (/\.pdf(\?|$)/.test(s)) return 'pdf';
-    if (/\.(pptx?|docx?|pptm)(\?|$)/.test(s)) return 'office';
-    return 'file';
-}
-
-function buildMaterialPreviewHtml(viewUrl, kind, fileName) {
-    var safeView = escapeHtml(viewUrl);
-    var safeName = escapeHtml(fileName || 'file');
-    if (kind === 'video') {
-        return '<video controls preload="metadata" src="' + safeView +
-        '" style="max-width:100%;max-height:200px;display:block;border-radius:8px;background:#111;"></video>';
-    }
-    if (kind === 'image') {
-        return '<a href="' + safeView + '" target="_blank" rel="noopener">' +
-        '<img src="' + safeView + '" alt="' + safeName +
-        '" style="max-width:100%;max-height:180px;border-radius:8px;object-fit:contain;background:#f3f4f6;" /></a>';
-    }
-    if (kind === 'pdf') {
-        return '<iframe src="' + safeView +
-        '#toolbar=1" title="' + safeName +
-        '" style="width:100%;height:220px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;"></iframe>';
-    }
-    return '<div class="text-muted small py-2"><i class="fa-solid fa-file me-1"></i>' + safeName +
-    ' - use Open / Download</div>';
-}
-
-function initMediaDropzone() {
-    var area = document.getElementById('mediaDropzone');
-    if (!area) return;
-    var input = document.getElementById('mediaFileInput');
-    if (!input) {
-        input = document.createElement('input');
-        input.type = 'file';
-        input.id = 'mediaFileInput';
-        input.accept = 'video/*,.mp4,.webm,.mov';
-        input.style.display = 'none';
-        area.appendChild(input);
-    }
-    var msg = area.querySelector('.dz-inner');
-    if (!msg) {
-        msg = document.createElement('div');
-        msg.className = 'dz-inner text-muted small';
-        msg.innerText = 'Click to upload video (mp4/webm/mov)';
-        area.appendChild(msg);
-    }
-
-    function uploadVideo(file) {
-        if (!file) return;
-        var ext = (file.name.split('.').pop() || '').toLowerCase();
-        if (['mp4', 'webm', 'mov'].indexOf(ext) < 0) {
-            alert('Unsupported video format. Use mp4, webm, or mov.');
-            return;
-        }
-        if (file.size > 200 * 1024 * 1024) {
-            alert('Video too large (max 200MB).');
-            return;
-        }
-        msg.innerText = 'Uploading ' + file.name + '...';
-        uploadLessonFile(file)
-        .then(function (resp) {
-            if (resp && resp.success) {
-                var store = resp.storePath || resp.under || resp.url;
-                var viewUrl = resp.serveUrl || resolveMediaUrl(store, false);
-                var dlUrl = resp.downloadUrl || resolveMediaUrl(store, true);
-                var txt = document.getElementById('txtLessonContent');
-                if (txt) {
-                    // store portable path for DB (Uploads/CourseVideos/...)
-                    txt.value = store;
-                    txt.classList.remove('d-none');
-                }
-                msg.innerHTML = '<span class="text-success"><i class="fa-solid fa-circle-check me-1"></i>Uploaded: ' +
-                escapeHtml(resp.fileName || file.name) + ' (' + (resp.size || file.size) + ' bytes)</span>';
-                var prev = document.getElementById('lessonMediaPreview');
-                if (prev) {
-                    prev.innerHTML = buildMaterialPreviewHtml(viewUrl, 'video', resp.fileName || file.name) +
-                    '<div class="mt-1"><a class="small" href="' + escapeHtml(viewUrl) + '" target="_blank">Open</a>' +
-                    ' · <a class="small" href="' + escapeHtml(dlUrl) + '">Download</a></div>' +
-                    '<div class="hint text-muted" style="font-size:.75rem;word-break:break-all;">' + escapeHtml(viewUrl) + '</div>';
-                    prev.classList.remove('d-none');
-                }
-            } else {
-                alert('Upload failed: ' + ((resp && resp.message) || 'Unknown error'));
-                msg.innerText = 'Click to upload video (mp4/webm/mov, up to 200MB)';
-            }
-        })
-        .catch(function (err) {
-            console.error(err);
-            alert(err.message || 'Upload failed');
-            msg.innerText = 'Click to upload video (mp4/webm/mov, up to 200MB)';
-        });
-    }
-
-    area.addEventListener('click', function (e) {
-        if (e.target === input) return;
-        e.preventDefault();
-        input.click();
-    });
-    input.addEventListener('change', function () {
-        if (input.files && input.files[0]) uploadVideo(input.files[0]);
-        input.value = '';
-    });
-    area.addEventListener('dragover', function (e) { e.preventDefault(); area.classList.add('dragover'); });
-    area.addEventListener('dragleave', function () { area.classList.remove('dragover'); });
-    area.addEventListener('drop', function (e) {
-        e.preventDefault();
-        area.classList.remove('dragover');
-        if (e.dataTransfer.files && e.dataTransfer.files[0]) uploadVideo(e.dataTransfer.files[0]);
-    });
-}
-
-function initMaterialDropzone() {
-    var area = document.getElementById('materialDropzone');
-    if (!area) return;
-    var input = document.getElementById('materialFileInput');
-    if (!input) {
-        input = document.createElement('input');
-        input.type = 'file';
-        input.id = 'materialFileInput';
-        input.accept = '.pdf,.ppt,.pptx,.docx,image/*,video/*,.mp4,.webm';
-        input.style.display = 'none';
-        area.appendChild(input);
-    }
-    var msg = area.querySelector('.dz-inner');
-    if (!msg) {
-        msg = document.createElement('div');
-        msg.className = 'dz-inner text-muted small';
-        msg.innerText = 'Click to upload materials (pdf, pptx, docx, images, video)';
-        area.appendChild(msg);
-    }
-
-    function uploadMaterial(file) {
-        if (!file) return;
-        var allowed = ['pdf', 'ppt', 'pptx', 'docx', 'doc', 'png', 'jpg', 'jpeg', 'gif', 'webp', 'mp4', 'webm', 'mov'];
-        var ext = (file.name.split('.').pop() || '').toLowerCase();
-        if (allowed.indexOf(ext) < 0) {
-            alert('Unsupported file format: .' + ext);
-            return;
-        }
-        var maxMb = (ext === 'mp4' || ext === 'webm' || ext === 'mov') ? 200 : 30;
-        if (file.size > maxMb * 1024 * 1024) {
-            alert('File too large (max ' + maxMb + 'MB).');
-            return;
-        }
-        msg.innerText = 'Uploading ' + file.name + '...';
-        uploadLessonFile(file)
-        .then(function (resp) {
-            if (resp && resp.success) {
-                var materialsField = document.getElementById('lessonMaterials');
-                var materials = [];
-                try { materials = JSON.parse(materialsField.value || '[]'); } catch (e) { materials = []; }
-                var store = resp.storePath || ('Uploads/' + (resp.under || ''));
-                materials.push({
-                    storePath: store,
-                    url: store,
-                    under: resp.under || '',
-                    fileName: resp.fileName || file.name,
-                    serveUrl: resp.serveUrl || resolveMediaUrl(store, false),
-                    downloadUrl: resp.downloadUrl || resolveMediaUrl(store, true)
-                });
-                materialsField.value = JSON.stringify(materials);
-                renderAttachmentsList();
-                msg.innerHTML = '<span class="text-success"><i class="fa-solid fa-circle-check me-1"></i>Uploaded: ' +
-                escapeHtml(resp.fileName || file.name) + ' - preview below</span>';
-            } else {
-                alert('Upload failed: ' + ((resp && resp.message) || 'Unknown error'));
-                msg.innerText = 'Click to upload materials (pdf, pptx, docx, images, video)';
-            }
-        })
-        .catch(function (err) {
-            console.error(err);
-            alert(err.message || 'Upload failed');
-            msg.innerText = 'Click to upload materials (pdf, pptx, docx, images, video)';
-        });
-    }
-
-    area.addEventListener('click', function (e) {
-        if (e.target === input) return;
-        e.preventDefault();
-        input.click();
-    });
-    input.addEventListener('change', function () {
-        if (input.files && input.files[0]) uploadMaterial(input.files[0]);
-        input.value = '';
-    });
-    area.addEventListener('dragover', function (e) { e.preventDefault(); area.classList.add('dragover'); });
-    area.addEventListener('dragleave', function () { area.classList.remove('dragover'); });
-    area.addEventListener('drop', function (e) {
-        e.preventDefault();
-        area.classList.remove('dragover');
-        if (e.dataTransfer.files && e.dataTransfer.files[0]) uploadMaterial(e.dataTransfer.files[0]);
-    });
-}
-
-function renderAttachmentsList() {
-    var attachments = document.getElementById('lessonAttachments');
-    var materialsField = document.getElementById('lessonMaterials');
-    if (!attachments || !materialsField) return;
-    attachments.innerHTML = '';
-    var materials = [];
-    try { materials = JSON.parse(materialsField.value || '[]'); } catch (e) { materials = []; }
-    if (!materials.length) return;
-
-    var heading = document.createElement('div');
-    heading.className = 'fw-semibold small text-muted mb-2';
-    heading.textContent = 'Materials (' + materials.length + ') - preview & download';
-    attachments.appendChild(heading);
-
-    materials.forEach(function (m, idx) {
-        var raw = m.url || m.mediaLink || '';
-        var viewUrl = m.serveUrl || resolveMediaUrl(raw, false);
-        var dlUrl = m.downloadUrl || resolveMediaUrl(raw, true);
-        var name = m.fileName || m.textContent || raw || ('File ' + (idx + 1));
-        var kind = mediaKind(name + ' ' + raw);
-
-        var card = document.createElement('div');
-        card.className = 'mb-2 p-2 rounded border bg-white';
-        card.innerHTML =
-        '<div class="d-flex align-items-center gap-2 mb-2">' +
-        '<i class="fa-solid fa-paperclip text-muted"></i>' +
-        '<span class="small flex-grow-1 text-truncate fw-semibold">' + escapeHtml(name) + '</span>' +
-        '<a class="btn btn-sm btn-outline-secondary py-0" href="' + escapeHtml(viewUrl) + '" target="_blank" rel="noopener">Open</a>' +
-        '<a class="btn btn-sm btn-outline-primary py-0" href="' + escapeHtml(dlUrl) + '" download>Download</a>' +
-        '<button type="button" class="btn btn-sm btn-link text-danger p-0" data-rm="' + idx + '">Remove</button>' +
-        '</div>' +
-        '<div class="material-preview">' + buildMaterialPreviewHtml(viewUrl, kind, name) + '</div>';
-
-        card.querySelector('[data-rm]').addEventListener('click', function () {
-            removeAttachment(raw || m.url);
-        });
-        attachments.appendChild(card);
-    });
-}
-
-function removeAttachment(url) {
-    var materialsField = document.getElementById('lessonMaterials');
-    if (!materialsField) return;
-    var materials = [];
-    try { materials = JSON.parse(materialsField.value || '[]'); } catch (e) { materials = []; }
-    materials = materials.filter(function (m) {
-        return (m.url !== url) && (m.mediaLink !== url);
-    });
-    materialsField.value = JSON.stringify(materials);
-    renderAttachmentsList();
-}
-
-
 ```

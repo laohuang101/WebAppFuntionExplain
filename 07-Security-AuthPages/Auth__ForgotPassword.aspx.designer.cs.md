@@ -1,6 +1,6 @@
 # ForgotPassword.aspx.designer.cs
 **Source:** `Pages/Authentication/ForgotPassword.aspx.designer.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,17 +15,17 @@ Two-step reset: verify email+TOTP first, then set new password (session window).
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-_No classic field declarations detected (or mostly locals inside methods — see each function’s **Local variables** section)._
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (0 found)
 
-_No methods matched the scanner (markup-only or unconventional structure). See full file listing below._
+_No methods matched the scanner (markup-only or unconventional structure). See the code listing at the bottom._
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | namespace WebAppAssignment.Pages.Authentication
@@ -48,34 +48,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   18 |         protected global::System.Web.UI.WebControls.Label lblMsg;
   19 |     }
   20 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** C# namespace grouping.
-
-## Source snapshot (raw)
-
-```csharp
-namespace WebAppAssignment.Pages.Authentication
-{
-    public partial class ForgotPassword
-    {
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pill1;
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pill2;
-        protected global::System.Web.UI.WebControls.Panel pnlStep1;
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
-        protected global::System.Web.UI.WebControls.TextBox txtMfaCode;
-        protected global::System.Web.UI.WebControls.Button btnVerify;
-        protected global::System.Web.UI.WebControls.Panel pnlStep2;
-        protected global::System.Web.UI.WebControls.Literal litVerifiedEmail;
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
-        protected global::System.Web.UI.WebControls.TextBox txtPassword2;
-        protected global::System.Web.UI.WebControls.Button btnReset;
-        protected global::System.Web.UI.WebControls.LinkButton lnkBack;
-        protected global::System.Web.UI.WebControls.Label lblMsg;
-    }
-}
-
 ```

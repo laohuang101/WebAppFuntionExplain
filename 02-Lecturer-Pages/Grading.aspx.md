@@ -1,6 +1,6 @@
 # Grading.aspx
 **Source:** `Pages/Lecturer/Grading.aspx`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,17 +15,17 @@ List submissions for lecturer courses; assign marks and feedback; CSV export.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
+Markup file — variables live in the matching `.cs` / `.js` companion docs.
 
 ## Functions / methods (0 found)
 
-_No methods matched the scanner (markup-only or unconventional structure). See full file listing below._
+_No methods matched the scanner (markup-only or unconventional structure). See the code listing at the bottom._
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```html
    1 | <%@ Page Title="Grading" Language="C#" MasterPageFile="~/Shared/Header&Footer.Master" AutoEventWireup="true" CodeBehind="Grading.aspx.cs" Inherits="WebAppAssignment.Pages.Lecturer.Grading" %>
@@ -122,109 +122,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   92 | 
   93 |   <script src="Scripts/grading.js"></script>
   94 | </asp:Content>
-```
-
-**Line notes** (what code + variables mean)
-
-- **L22:** CSV export.
-- **L23:** CSV export.
-
-## Source snapshot (raw)
-
-```html
-<%@ Page Title="Grading" Language="C#" MasterPageFile="~/Shared/Header&Footer.Master" AutoEventWireup="true" CodeBehind="Grading.aspx.cs" Inherits="WebAppAssignment.Pages.Lecturer.Grading" %>
-
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-  <link rel="stylesheet" href="Style/lecturer-pages.css" />
-</asp:Content>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-  <div class="lecturer-page">
-    <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3">
-      <div>
-        <h3 class="fw-bold text-dark mb-1" id="lblAssignmentTitle">Grading</h3>
-        <p class="text-muted small mb-0" id="lblAssignmentMeta">Select a submission to grade</p>
-      </div>
-      <div class="d-flex flex-wrap align-items-center gap-3">
-        <div class="btn-group btn-group-sm" role="group" aria-label="Filter">
-          <button type="button" class="btn btn-outline-secondary active" data-filter="all" onclick="setStatusFilter('all', this)">All</button>
-          <button type="button" class="btn btn-outline-secondary" data-filter="pending" onclick="setStatusFilter('pending', this)">
-            Pending <span class="badge bg-warning text-dark ms-1" id="badgePendingCount">0</span>
-          </button>
-          <button type="button" class="btn btn-outline-secondary" data-filter="graded" onclick="setStatusFilter('graded', this)">Graded</button>
-        </div>
-        <button type="button" class="btn btn-sm btn-outline-dark rounded-pill px-3" onclick="exportGradesCsv()">
-          <i class="fa-solid fa-file-csv me-1"></i> Export CSV
-        </button>
-        <div class="text-end">
-          <div class="text-muted small mb-1">Graded: <span id="lblGradedCount">0/0</span></div>
-          <div class="progress" style="width:160px;height:8px;">
-            <div id="gradedBar" class="progress-bar" style="background:var(--primary-accent);width:0%;"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row g-3 grading-layout">
-      <!-- Student list -->
-      <div class="col-lg-3">
-        <div class="glass-card p-3 h-100">
-          <input type="text" id="txtSearchStudents" class="form-control form-control-sm mb-3" placeholder="Search students..." oninput="filterStudents()" />
-          <div id="studentList" class="student-list"></div>
-        </div>
-      </div>
-
-      <!-- Preview -->
-      <div class="col-lg-5">
-        <div class="glass-card p-3 h-100">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <div class="d-flex align-items-center gap-2">
-              <div class="student-avatar" id="previewAvatar"> - </div>
-              <h6 class="fw-bold mb-0" id="previewName">Select a student</h6>
-            </div>
-            <a id="btnDownload" href="#" target="_blank" class="btn btn-sm btn-light border" style="display:none;">
-              <i class="fa-solid fa-download me-1"></i> Open File
-            </a>
-          </div>
-          <div id="answerPreview" class="answer-preview">
-            <div class="text-muted text-center py-5">Document / Answer Preview Area</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Rubric / score -->
-      <div class="col-lg-4">
-        <div class="glass-card p-3 h-100 d-flex flex-column">
-          <h6 class="fw-bold mb-3">Grading</h6>
-          <div class="mb-3">
-            <label class="form-label small text-muted fw-bold">Score</label>
-            <div class="input-group">
-              <input type="number" id="txtGradeScore" class="form-control" min="0" value="0" oninput="updateTotalDisplay()" />
-              <span class="input-group-text" id="lblMaxScore">/ 100</span>
-            </div>
-          </div>
-          <div class="mb-3">
-            <div class="d-flex justify-content-between">
-              <span class="fw-bold">Total Score</span>
-              <span class="fw-bold" style="color:var(--primary-accent);" id="lblTotalScore">0/100</span>
-            </div>
-          </div>
-          <div class="mb-3 flex-grow-1">
-            <label class="form-label small text-muted fw-bold">Feedback Comments</label>
-            <textarea id="txtFeedback" class="form-control" rows="6" placeholder="Great job on the layout, but..."></textarea>
-          </div>
-          <div id="gradeError" class="text-danger small mb-2" style="display:none;"></div>
-          <button type="button" class="btn btn-pill-accent w-100 mb-2" onclick="submitGrade()">Submit Grade</button>
-          <div class="d-flex gap-2">
-            <button type="button" class="btn btn-light border flex-fill" onclick="navStudent(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-            <button type="button" class="btn btn-light border flex-fill" onclick="navStudent(1)"><i class="fa-solid fa-chevron-right"></i></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="Scripts/grading.js"></script>
-</asp:Content>
-
 ```

@@ -4,9 +4,7 @@ Detailed **Landing + Lecturer + Security** documentation for EduLMS.
 
 ## Start here
 
-→ **[00-Overview/00-INDEX.md](00-Overview/00-INDEX.md)**  
-→ **[00-Overview/01-SECURITY-OVERVIEW.md](00-Overview/01-SECURITY-OVERVIEW.md)**  
-→ **[00-Overview/02-DATA-OVERVIEW.md](00-Overview/02-DATA-OVERVIEW.md)**
+→ **[00-Overview/00-INDEX.md](00-Overview/00-INDEX.md)**
 
 ## Folders
 
@@ -37,7 +35,7 @@ Detailed **Landing + Lecturer + Security** documentation for EduLMS.
 - [Security__AuthGate.cs.md](06-Security-Core/Security__AuthGate.cs.md)
 - [Auth__Login.aspx.cs.md](07-Security-AuthPages/Auth__Login.aspx.cs.md)
 
-Generated: 2026-07-11T21:47:15
+Generated: 2026-07-11T21:56:49
 
 ```bash
 python3 /home/loke/Documents/WebAppFuntionExplain/_generate_md_docs.py

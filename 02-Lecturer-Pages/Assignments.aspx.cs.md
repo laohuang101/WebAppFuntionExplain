@@ -1,6 +1,6 @@
 # Assignments.aspx.cs
 **Source:** `Pages/Lecturer/Assignments.aspx.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,32 +15,42 @@ Build CourseWorks with due date, rubric or objective quiz. Due date closes stude
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 29:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 45:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 75:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 83:** `id` (`int`) — **Generic primary key / identifier.**
-- **Line 102:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (6 found)
 
 ### `Page_Load` — lines 12–16
 
+#### Signature
+
 ```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Page_Load`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+Runs automatically when the ASP.NET page opens or posts back; sets up the page and security checks.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. ASP.NET calls this automatically on every request.
+2. On first load (`!IsPostBack`), initialize UI or redirect if already logged in.
+3. On postback, button handlers run separately after this method.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   12 |         protected void Page_Load(object sender, EventArgs e)
@@ -50,25 +60,33 @@ protected void Page_Load(object sender, EventArgs e)
   16 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L12:** Page load entry (GET or postback).
-- **L14:** Authorization — block wrong role / anonymous.
-
 ---
 
 ### `CurrentUid` — lines 17–21
+
+#### Signature
 
 ```csharp
 private static int CurrentUid()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `CurrentUid`.
-- **Security:** Uses AuthGate — requires logged-in role.
+Function `CurrentUid` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Check the caller’s role (Lecturer/Student/Admin). If not allowed, return an error and stop.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   17 | 
@@ -78,28 +96,35 @@ private static int CurrentUid()
   21 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L20:** Authorization — block wrong role / anonymous.
-
 ---
 
 ### `GetCourses` — lines 25–37
+
+#### Signature
 
 ```csharp
 public static object GetCourses()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GetCourses`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Read/load data for display.
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+Reads/loads data related to **Courses** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+
+#### Code
 
 ```csharp
   25 |         public static object GetCourses()
@@ -117,31 +142,35 @@ public static object GetCourses()
   37 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L27:** Error handling block.
-- **L29:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L30:** Authorization — block wrong role / anonymous.
-- **L33:** Handle/log exception.
-
 ---
 
 ### `GetCourseWorks` — lines 41–53
+
+#### Signature
 
 ```csharp
 public static object GetCourseWorks()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GetCourseWorks`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Read/load data for display.
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+Reads/loads data related to **Course Works** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+
+#### Code
 
 ```csharp
   41 |         public static object GetCourseWorks()
@@ -159,16 +188,11 @@ public static object GetCourseWorks()
   53 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L43:** Error handling block.
-- **L45:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L46:** Authorization — block wrong role / anonymous.
-- **L49:** Handle/log exception.
-
 ---
 
 ### `SaveCourseWork` — lines 61–94
+
+#### Signature
 
 ```csharp
 public static object SaveCourseWork(
@@ -184,28 +208,38 @@ public static object SaveCourseWork(
         string objectiveQuestionsJson)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `SaveCourseWork`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Persist changes.
-- **Parameters (what each means):**
-- `cwid` (`int?`) — CourseWork ID (assignment) (CourseWorks.CWID).
-- `cid` (`int`) — Course ID (Courses.CID).
-- `title` (`string`) — Title of course work / page heading.
-- `instructions` (`string`) — Student-facing assignment instructions (plain part of Description).
-- `type` (`string`) — Holds “type” for this scope. (text)
-- `score` (`decimal`) — Points earned or max points depending on context.
-- `creditGiven` (`decimal`) — Holds “credit Given” for this scope. (number/score)
-- `rubricJson` (`string`) — Holds “rubric Json” for this scope. (text)
-- `extraMetaJson` (`string`) — Holds “extra Meta Json” for this scope. (text)
-- `objectiveQuestionsJson` (`string`) — Holds “objective Questions Json” for this scope. (text)
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `id` (`int`) — Generic primary key / identifier.
+Creates or updates an assignment (CourseWorks) including due date and META.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+2. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cwid` | `int?` | CourseWork ID (assignment) (CourseWorks.CWID). |
+| `cid` | `int` | Course ID (Courses.CID). |
+| `title` | `string` | Title of course work / page heading. |
+| `instructions` | `string` | Student-facing assignment instructions (plain part of Description). |
+| `type` | `string` | Holds “type” for this scope. (text) |
+| `score` | `decimal` | Points earned or max points depending on context. |
+| `creditGiven` | `decimal` | Holds “credit Given” for this scope. (number/score) |
+| `rubricJson` | `string` | Holds “rubric Json” for this scope. (text) |
+| `extraMetaJson` | `string` | Holds “extra Meta Json” for this scope. (text) |
+| `objectiveQuestionsJson` | `string` | Holds “objective Questions Json” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `id` | `int` | Generic primary key / identifier. |
+
+#### Code
 
 ```csharp
   61 |         public static object SaveCourseWork(
@@ -244,34 +278,37 @@ public static object SaveCourseWork(
   94 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L73:** Error handling block.
-- **L75:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L76:** Authorization — block wrong role / anonymous.
-- **L84:** `id` means: Generic primary key / identifier.
-- **L90:** Handle/log exception.
-
 ---
 
 ### `DeleteCourseWork` — lines 98–111
+
+#### Signature
 
 ```csharp
 public static object DeleteCourseWork(int cwid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `DeleteCourseWork`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Delete/clear data.
-- **Parameters (what each means):**
-- `cwid` (`int`) — CourseWork ID (assignment) (CourseWorks.CWID).
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+Deletes or clears **Delete Course Work** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cwid` | `int` | CourseWork ID (assignment) (CourseWorks.CWID). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+
+#### Code
 
 ```csharp
   98 |         public static object DeleteCourseWork(int cwid)
@@ -290,18 +327,11 @@ public static object DeleteCourseWork(int cwid)
  111 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L100:** Error handling block.
-- **L102:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L103:** Authorization — block wrong role / anonymous.
-- **L107:** Handle/log exception.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -417,157 +447,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  111 |         }
  112 |     }
  113 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L5:** Import namespace/types.
-- **L6:** Import namespace/types.
-- **L8:** C# namespace grouping.
-- **L12:** Page load entry (GET or postback).
-- **L14:** Authorization — block wrong role / anonymous.
-- **L20:** Authorization — block wrong role / anonymous.
-- **L23:** Expose method to AJAX JSON calls.
-- **L27:** Error handling block.
-- **L29:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L30:** Authorization — block wrong role / anonymous.
-- **L33:** Handle/log exception.
-- **L39:** Expose method to AJAX JSON calls.
-- **L43:** Error handling block.
-- **L45:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L46:** Authorization — block wrong role / anonymous.
-- **L49:** Handle/log exception.
-- **L59:** Expose method to AJAX JSON calls.
-- **L73:** Error handling block.
-- **L75:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L76:** Authorization — block wrong role / anonymous.
-- **L84:** `id` means: Generic primary key / identifier.
-- **L90:** Handle/log exception.
-- **L96:** Expose method to AJAX JSON calls.
-- **L100:** Error handling block.
-- **L102:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L103:** Authorization — block wrong role / anonymous.
-- **L107:** Handle/log exception.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Web.Script.Services;
-using System.Web.Services;
-using System.Web.UI;
-using WebAppAssignment.Data;
-using WebAppAssignment.Data.Security;
-
-namespace WebAppAssignment.Pages.Lecturer
-{
-    public partial class Assignments : Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))
-                return;
-}
-
-        private static int CurrentUid()
-        {
-            return AuthGate.RequireLecturer();
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object GetCourses()
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                return new { success = true, courses = LecturerRepository.GetLecturerCoursesSimple(uid) };
-            }
-            catch (Exception ex)
-            {
-                return new { success = false, message = "Request failed." };
-            }
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object GetCourseWorks()
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                return new { success = true, items = LecturerRepository.GetCourseWorksForLecturer(uid) };
-            }
-            catch (Exception ex)
-            {
-                return new { success = false, message = "Request failed." };
-            }
-        }
-
-        /// <summary>
-        /// Saves into CourseWorks (CWID, ChID, Title, Description, DueDate)
-        /// and optionally ObjectiveQuestions (QID, QuestionText, OptionA-D, CorrectAnswer).
-        /// </summary>
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object SaveCourseWork(
-        int? cwid,
-        int cid,
-        string title,
-        string instructions,
-        string type,
-        decimal score,
-        decimal creditGiven,
-        string rubricJson,
-        string extraMetaJson,
-        string objectiveQuestionsJson)
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                if (cid <= 0) return new { success = false, message = "Select a target course." };
-                if (string.IsNullOrWhiteSpace(title)) return new { success = false, message = "Title is required." };
-
-                // All assessments are graded out of 100 pts
-                score = 100m;
-                creditGiven = 100m;
-
-                int id = LecturerRepository.SaveCourseWork(
-                uid, cwid, cid, title.Trim(), instructions, type,
-                score, creditGiven, rubricJson, extraMetaJson, objectiveQuestionsJson);
-
-                return new { success = true, cwid = id };
-            }
-            catch (Exception ex)
-            {
-                return new { success = false, message = "Request failed." };
-            }
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object DeleteCourseWork(int cwid)
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                LecturerRepository.DeleteCourseWork(uid, cwid);
-                return new { success = true };
-            }
-            catch (Exception ex)
-            {
-                return new { success = false, message = "Request failed." };
-            }
-        }
-    }
-}
-
 ```

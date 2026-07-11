@@ -1,6 +1,6 @@
 # AuthGate.cs
 **Source:** `Data/Security/AuthGate.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,42 +15,42 @@ Shared gate for pages, WebMethods, and ashx handlers — role checks, CSRF on mu
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 52:** `n` (`string`) — **Numeric count or temporary integer.**
-- **Line 57:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 59:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 78:** `0` (`return`) — **Holds “0” for this scope. (type `return`)**
-- **Line 80:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 84:** `0` (`return`) — **Holds “0” for this scope. (type `return`)**
-- **Line 112:** `ctx` (`var`) — **Current HTTP request context (Request, Response, Session).**
-- **Line 114:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 120:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 126:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 128:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 133:** `ctx` (`var`) — **Current HTTP request context (Request, Response, Session).**
-- **Line 172:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 186:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 191:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
-- **Line 193:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
-- **Line 206:** `json` (`string`) — **JSON string (to parse or serialize).**
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (17 found)
 
 ### `CurrentUserId` — lines 18–24
 
+#### Signature
+
 ```csharp
 public static int CurrentUserId(HttpContext ctx = null)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `CurrentUserId`.
-- **CSRF:** Validates anti-forgery token on mutating request.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+Returns the logged-in user’s ID (from Session/JWT), or `0` if nobody is signed in.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Use the given HttpContext, or the current request context.
+2. If there is no context, return 0 (not logged in).
+3. Ensure a CSRF token exists for this session.
+4. Return AuthService.GetValidatedUserId (real UID or 0).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   18 |         public static int CurrentUserId(HttpContext ctx = null)
@@ -62,28 +62,36 @@ public static int CurrentUserId(HttpContext ctx = null)
   24 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L22:** CSRF anti-forgery protection.
-- **L23:** Restore/validate user from Session or JWT; reject stale UIDs.
-
 ---
 
 ### `EnsureCsrf` — lines 27–33
+
+#### Signature
 
 ```csharp
 public static bool EnsureCsrf(HttpContext ctx = null)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `EnsureCsrf`.
-- **CSRF:** Validates anti-forgery token on mutating request.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+Checks that a POST/AJAX request includes a valid anti-forgery (CSRF) token.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Make sure a CSRF token exists in Session (create one if missing).
+2. Validate the CSRF anti-forgery token on this mutating request.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   27 |         public static bool EnsureCsrf(HttpContext ctx = null)
@@ -95,30 +103,37 @@ public static bool EnsureCsrf(HttpContext ctx = null)
   33 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L27:** CSRF anti-forgery protection.
-- **L31:** CSRF anti-forgery protection.
-- **L32:** CSRF anti-forgery protection.
-
 ---
 
 ### `CurrentRole` — lines 34–41
+
+#### Signature
 
 ```csharp
 public static string CurrentRole(HttpContext ctx = null)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `CurrentRole`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- **Local variables (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+Returns the logged-in user’s role name (Admin / Lecturer / Student).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Read the logged-in user id from Session/JWT (0 means not signed in).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Code
 
 ```csharp
   34 | 
@@ -131,29 +146,39 @@ public static string CurrentRole(HttpContext ctx = null)
   41 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L39:** Restore/validate user from Session or JWT; reject stale UIDs.
-- **L40:** Server session for logged-in user.
-
 ---
 
 ### `CurrentUserName` — lines 42–48
+
+#### Signature
 
 ```csharp
 public static string CurrentUserName(HttpContext ctx = null)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `CurrentUserName`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- **Local variables (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+Function `CurrentUserName` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `CurrentUserName`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Code
 
 ```csharp
   42 | 
@@ -165,29 +190,41 @@ public static string CurrentUserName(HttpContext ctx = null)
   48 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L47:** Server session for logged-in user.
-
 ---
 
 ### `IsInRole` — lines 49–60
+
+#### Signature
 
 ```csharp
 public static bool IsInRole(string role, params string[] allowed)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `IsInRole`.
-- **Parameters (what each means):**
-- `role` (`string`) — User role code or name (Admin/Student/Lecturer).
-- `allowed` (`string[]`) — Boolean — path/role is permitted.
-- **Local variables (what each means):**
-- `n` (`string`) — Numeric count or temporary integer.
-- `a` — Holds “a” for this scope.
+Checks a condition related to **Is In Role** and returns true/false (or tries an action safely).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+2. Return `true` to the caller.
+3. Return `false` to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `role` | `string` | User role code or name (Admin/Student/Lecturer). |
+| `allowed` | `string[]` | Boolean — path/role is permitted. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `n` | `string` | Numeric count or temporary integer. |
+| `a` | `—` | Holds “a” for this scope. |
+
+#### Code
 
 ```csharp
   49 | 
@@ -204,26 +241,35 @@ public static bool IsInRole(string role, params string[] allowed)
   60 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L52:** Map role codes/names to Admin/Student/Lecturer. | `n` means: Numeric count or temporary integer.
-- **L56:** Map role codes/names to Admin/Student/Lecturer.
-
 ---
 
 ### `RequireUser` — lines 63–66
+
+#### Signature
 
 ```csharp
 public static int RequireUser(HttpContext ctx = null)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `RequireUser`.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+Function `RequireUser` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Read the logged-in user id from Session/JWT (0 means not signed in).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   63 |         public static int RequireUser(HttpContext ctx = null)
@@ -236,21 +282,36 @@ public static int RequireUser(HttpContext ctx = null)
 
 ### `RequireRole` — lines 69–85
 
+#### Signature
+
 ```csharp
 public static int RequireRole(HttpContext ctx, params string[] roles)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `RequireRole`.
-- **CSRF:** Validates anti-forgery token on mutating request.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- `roles` (`string[]`) — Often a collection related to roles (plural name). (text)
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+Function `RequireRole` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate the CSRF anti-forgery token on this mutating request.
+2. Read the logged-in user id from Session/JWT (0 means not signed in).
+3. Validate input; if invalid, stop and return an error/message.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+| `roles` | `string[]` | Often a collection related to roles (plural name). (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous). |
+
+#### Code
 
 ```csharp
   69 |         public static int RequireRole(HttpContext ctx, params string[] roles)
@@ -272,30 +333,35 @@ public static int RequireRole(HttpContext ctx, params string[] roles)
   85 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L69:** Role authorization for pages/handlers.
-- **L72:** CSRF anti-forgery protection.
-- **L74:** CSRF anti-forgery protection.
-- **L75:** CSRF anti-forgery protection.
-- **L77:** CSRF anti-forgery protection.
-- **L80:** `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
-
 ---
 
 ### `RequireRole` — lines 86–90
+
+#### Signature
 
 ```csharp
 public static int RequireRole(params string[] roles)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `RequireRole`.
-- **Parameters (what each means):**
-- `roles` (`string[]`) — Often a collection related to roles (plural name). (text)
+Function `RequireRole` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Check the caller’s role (Lecturer/Student/Admin). If not allowed, return an error and stop.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `roles` | `string[]` | Often a collection related to roles (plural name). (text) |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   86 | 
@@ -305,29 +371,37 @@ public static int RequireRole(params string[] roles)
   90 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L87:** Role authorization for pages/handlers.
-- **L89:** Role authorization for pages/handlers.
-
 ---
 
 ### `RequireLecturer` — lines 91–95
+
+#### Signature
 
 ```csharp
 public static int RequireLecturer(HttpContext ctx = null)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `RequireLecturer`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- **Local variables (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+Function `RequireLecturer` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Check the caller’s role (Lecturer/Student/Admin). If not allowed, return an error and stop.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Code
 
 ```csharp
   91 | 
@@ -337,27 +411,37 @@ public static int RequireLecturer(HttpContext ctx = null)
   95 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L94:** Role authorization for pages/handlers.
-
 ---
 
 ### `RequireAdmin` — lines 96–100
+
+#### Signature
 
 ```csharp
 public static int RequireAdmin(HttpContext ctx = null)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `RequireAdmin`.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- **Local variables (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+Function `RequireAdmin` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Check the caller’s role (Lecturer/Student/Admin). If not allowed, return an error and stop.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Code
 
 ```csharp
   96 | 
@@ -367,27 +451,37 @@ public static int RequireAdmin(HttpContext ctx = null)
  100 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L99:** Role authorization for pages/handlers.
-
 ---
 
 ### `RequireStudent` — lines 101–105
+
+#### Signature
 
 ```csharp
 public static int RequireStudent(HttpContext ctx = null)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `RequireStudent`.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- **Local variables (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+Function `RequireStudent` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Check the caller’s role (Lecturer/Student/Admin). If not allowed, return an error and stop.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+
+#### Code
 
 ```csharp
  101 | 
@@ -397,31 +491,44 @@ public static int RequireStudent(HttpContext ctx = null)
  105 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L104:** Role authorization for pages/handlers.
-
 ---
 
 ### `EnsurePage` — lines 108–129
+
+#### Signature
 
 ```csharp
 public static bool EnsurePage(Page page, params string[] roles)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `EnsurePage`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **Navigation:** Redirects the browser.
-- **Parameters (what each means):**
-- `page` (`Page`) — Page number for pagination, or Page instance.
-- `roles` (`string[]`) — Often a collection related to roles (plural name). (text)
-- **Local variables (what each means):**
-- `ctx` (`var`) — Current HTTP request context (Request, Response, Session).
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+Blocks the page unless the visitor is logged in with an allowed role (redirects to login otherwise).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Read the logged-in user id from Session/JWT (0 means not signed in).
+2. Redirect the browser to another page.
+3. Return `false` to the caller.
+4. Redirect the browser to another page.
+5. Return `false` to the caller.
+6. Return `true` to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `page` | `Page` | Page number for pagination, or Page instance. |
+| `roles` | `string[]` | Often a collection related to roles (plural name). (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `var` | Current HTTP request context (Request, Response, Session). |
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous). |
+
+#### Code
 
 ```csharp
  108 |         public static bool EnsurePage(Page page, params string[] roles)
@@ -448,35 +555,39 @@ public static bool EnsurePage(Page page, params string[] roles)
  129 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L108:** Role authorization for pages/handlers.
-- **L112:** `ctx` means: Current HTTP request context (Request, Response, Session).
-- **L115:** `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
-- **L118:** Navigate browser to another URL.
-- **L119:** Error handling block.
-- **L124:** Navigate browser to another URL.
-- **L125:** Error handling block.
-
 ---
 
 ### `NotAuthenticatedJson` — lines 130–149
+
+#### Signature
 
 ```csharp
 public static object NotAuthenticatedJson(string message = null)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `NotAuthenticatedJson`.
-- **CSRF:** Validates anti-forgery token on mutating request.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters (what each means):**
-- `message` (`string`) — Status text for the UI.
-- **Local variables (what each means):**
-- `message` (`string`) — Status text for the UI.
+Function `NotAuthenticatedJson` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `NotAuthenticatedJson`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `message` | `string` | Status text for the UI. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `message` | `string` | Status text for the UI. |
+
+#### Code
 
 ```csharp
  130 | 
@@ -501,30 +612,39 @@ public static object NotAuthenticatedJson(string message = null)
  149 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L133:** `ctx` means: Current HTTP request context (Request, Response, Session).
-- **L134:** CSRF anti-forgery protection.
-- **L139:** CSRF anti-forgery protection.
-
 ---
 
 ### `ForbiddenJson` — lines 150–159
+
+#### Signature
 
 ```csharp
 public static object ForbiddenJson(string message = null)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ForbiddenJson`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters (what each means):**
-- `message` (`string`) — Status text for the UI.
-- **Local variables (what each means):**
-- `message` (`string`) — Status text for the UI.
+Function `ForbiddenJson` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `ForbiddenJson`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `message` | `string` | Status text for the UI. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `message` | `string` | Status text for the UI. |
+
+#### Code
 
 ```csharp
  150 | 
@@ -543,19 +663,34 @@ public static object ForbiddenJson(string message = null)
 
 ### `EnsureHandlerUser` — lines 162–173
 
+#### Signature
+
 ```csharp
 public static bool EnsureHandlerUser(HttpContext ctx, out int uid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `EnsureHandlerUser`.
-- **CSRF:** Validates anti-forgery token on mutating request.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+Makes sure **Handler User** exists or is valid before the rest of the code continues.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate the CSRF anti-forgery token on this mutating request.
+2. Read the logged-in user id from Session/JWT (0 means not signed in).
+3. Return `false` to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  162 |         public static bool EnsureHandlerUser(HttpContext ctx, out int uid)
@@ -572,29 +707,41 @@ public static bool EnsureHandlerUser(HttpContext ctx, out int uid)
  173 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L165:** CSRF anti-forgery protection.
-- **L167:** CSRF anti-forgery protection.
-
 ---
 
 ### `EnsureHandlerRole` — lines 174–194
+
+#### Signature
 
 ```csharp
 public static bool EnsureHandlerRole(HttpContext ctx, out int uid, params string[] roles)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `EnsureHandlerRole`.
-- **CSRF:** Validates anti-forgery token on mutating request.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `roles` (`string[]`) — Often a collection related to roles (plural name). (text)
+Same as EnsurePage but for `.ashx` APIs — returns an error JSON instead of a redirect.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Check the caller’s role (Lecturer/Student/Admin). If not allowed, return an error and stop.
+2. Validate the CSRF anti-forgery token on this mutating request.
+3. Read the logged-in user id from Session/JWT (0 means not signed in).
+4. Return `false` to the caller.
+5. Return `true` to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `roles` | `string[]` | Often a collection related to roles (plural name). (text) |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
  174 | 
@@ -620,32 +767,39 @@ public static bool EnsureHandlerRole(HttpContext ctx, out int uid, params string
  194 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L175:** Role authorization for pages/handlers.
-- **L178:** CSRF anti-forgery protection.
-- **L180:** CSRF anti-forgery protection.
-
 ---
 
 ### `WriteHandlerError` — lines 195–211
+
+#### Signature
 
 ```csharp
 public static void WriteHandlerError(HttpContext ctx, int status, string message)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `WriteHandlerError`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters (what each means):**
-- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
-- `status` (`int`) — Holds “status” for this scope. (integer)
-- `message` (`string`) — Status text for the UI.
-- **Local variables (what each means):**
-- `json` (`string`) — JSON string (to parse or serialize).  Literal text string.
+Function `WriteHandlerError` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Write the HTTP response body (JSON, file bytes, or text).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ctx` | `HttpContext` | Current HTTP request context (Request, Response, Session). |
+| `status` | `int` | Holds “status” for this scope. (integer) |
+| `message` | `string` | Status text for the UI. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `json` | `string` | JSON string (to parse or serialize).  Literal text string. |
+
+#### Code
 
 ```csharp
  195 | 
@@ -667,17 +821,11 @@ public static void WriteHandlerError(HttpContext ctx, int status, string message
  211 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L199:** Error handling block.
-- **L206:** `json` means: JSON string (to parse or serialize).  Literal text string.
-- **L210:** Handle/log exception.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -893,270 +1041,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  211 |         }
  212 |     }
  213 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L5:** C# namespace grouping.
-- **L10:** Authorization — block wrong role / anonymous.
-- **L22:** CSRF anti-forgery protection.
-- **L23:** Restore/validate user from Session or JWT; reject stale UIDs.
-- **L27:** CSRF anti-forgery protection.
-- **L31:** CSRF anti-forgery protection.
-- **L32:** CSRF anti-forgery protection.
-- **L39:** Restore/validate user from Session or JWT; reject stale UIDs.
-- **L40:** Server session for logged-in user.
-- **L47:** Server session for logged-in user.
-- **L52:** Map role codes/names to Admin/Student/Lecturer. | `n` means: Numeric count or temporary integer.
-- **L56:** Map role codes/names to Admin/Student/Lecturer.
-- **L69:** Role authorization for pages/handlers.
-- **L72:** CSRF anti-forgery protection.
-- **L74:** CSRF anti-forgery protection.
-- **L75:** CSRF anti-forgery protection.
-- **L77:** CSRF anti-forgery protection.
-- **L80:** `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
-- **L87:** Role authorization for pages/handlers.
-- **L89:** Role authorization for pages/handlers.
-- **L94:** Role authorization for pages/handlers.
-- **L99:** Role authorization for pages/handlers.
-- **L104:** Role authorization for pages/handlers.
-- **L108:** Role authorization for pages/handlers.
-- **L112:** `ctx` means: Current HTTP request context (Request, Response, Session).
-- **L115:** `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
-- **L118:** Navigate browser to another URL.
-- **L119:** Error handling block.
-- **L124:** Navigate browser to another URL.
-- **L125:** Error handling block.
-- **L133:** `ctx` means: Current HTTP request context (Request, Response, Session).
-- **L134:** CSRF anti-forgery protection.
-- **L139:** CSRF anti-forgery protection.
-- **L165:** CSRF anti-forgery protection.
-- **L167:** CSRF anti-forgery protection.
-- **L175:** Role authorization for pages/handlers.
-- **L178:** CSRF anti-forgery protection.
-- **L180:** CSRF anti-forgery protection.
-- **L199:** Error handling block.
-- **L206:** `json` means: JSON string (to parse or serialize).  Literal text string.
-- **L210:** Handle/log exception.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Web;
-using System.Web.UI;
-
-namespace WebAppAssignment.Data.Security
-{
-    /// <summary>
-    /// Shared login / role gate for pages, WebMethods, and ashx handlers.
-    /// </summary>
-    public static class AuthGate
-    {
-        public static HttpContext Ctx
-        {
-            get { return HttpContext.Current; }
-        }
-
-        /// <summary>Valid session UID (JWT restored), or 0.</summary>
-        public static int CurrentUserId(HttpContext ctx = null)
-        {
-            ctx = ctx ?? Ctx;
-            if (ctx == null) return 0;
-            try { CsrfProtection.EnsureToken(ctx); } catch { }
-            return AuthService.GetValidatedUserId(ctx);
-        }
-
-        /// <summary>Validate CSRF on mutating requests. Returns false if invalid.</summary>
-        public static bool EnsureCsrf(HttpContext ctx = null)
-        {
-            ctx = ctx ?? Ctx;
-            if (ctx == null) return false;
-            try { CsrfProtection.EnsureToken(ctx); } catch { }
-            return CsrfProtection.ValidateOrReject(ctx, writeJsonError: true);
-        }
-
-        public static string CurrentRole(HttpContext ctx = null)
-        {
-            ctx = ctx ?? Ctx;
-            if (ctx == null || ctx.Session == null) return "";
-            AuthService.GetValidatedUserId(ctx);
-            return AuthService.NormalizeRole(ctx.Session["UserRole"] as string ?? "");
-        }
-
-        public static string CurrentUserName(HttpContext ctx = null)
-        {
-            ctx = ctx ?? Ctx;
-            if (ctx == null || ctx.Session == null) return "";
-            return ctx.Session["UserName"] as string ?? "";
-        }
-
-        public static bool IsInRole(string role, params string[] allowed)
-        {
-            string n = AuthService.NormalizeRole(role ?? "");
-            if (string.IsNullOrEmpty(n) || allowed == null || allowed.Length == 0) return false;
-            foreach (var a in allowed)
-            {
-                if (string.Equals(n, AuthService.NormalizeRole(a), StringComparison.OrdinalIgnoreCase))
-                    return true;
-            }
-            return false;
-        }
-
-        /// <summary>Require any authenticated user. Returns uid or 0.</summary>
-        public static int RequireUser(HttpContext ctx = null)
-        {
-            return CurrentUserId(ctx);
-        }
-
-        /// <summary>Require authenticated user in one of the roles. Returns uid or 0.</summary>
-        public static int RequireRole(HttpContext ctx, params string[] roles)
-        {
-            ctx = ctx ?? Ctx;
-            if (ctx != null) ctx.Items["CsrfFailed"] = false;
-            if (ctx != null && ctx.Request != null
-                && !CsrfProtection.IsSafeMethod(ctx.Request.HttpMethod)
-                && !CsrfProtection.Validate(ctx))
-            {
-                ctx.Items["CsrfFailed"] = true;
-                return 0;
-            }
-            int uid = CurrentUserId(ctx);
-            if (uid <= 0) return 0;
-            if (roles == null || roles.Length == 0) return uid;
-            if (IsInRole(CurrentRole(ctx), roles)) return uid;
-            return 0;
-        }
-
-        public static int RequireRole(params string[] roles)
-        {
-            return RequireRole(Ctx, roles);
-        }
-
-        public static int RequireLecturer(HttpContext ctx = null)
-        {
-            return RequireRole(ctx ?? Ctx, "Lecturer", "Admin");
-        }
-
-        public static int RequireAdmin(HttpContext ctx = null)
-        {
-            return RequireRole(ctx ?? Ctx, "Admin");
-        }
-
-        public static int RequireStudent(HttpContext ctx = null)
-        {
-            return RequireRole(ctx ?? Ctx, "Student", "Admin");
-        }
-
-        /// <summary>Page gate: redirect to login (or landing) if not allowed.</summary>
-        public static bool EnsurePage(Page page, params string[] roles)
-        {
-            if (page == null) return false;
-            // Page.Context is protected internal — use HttpContext.Current instead
-            var ctx = HttpContext.Current;
-            if (ctx == null) return false;
-
-            int uid = CurrentUserId(ctx);
-            if (uid <= 0)
-            {
-                page.Response.Redirect("~/Pages/Authentication/Login.aspx", false);
-                try { ctx.ApplicationInstance.CompleteRequest(); } catch { }
-                return false;
-            }
-            if (roles != null && roles.Length > 0 && !IsInRole(CurrentRole(ctx), roles))
-            {
-                page.Response.Redirect("~/Pages/Landing/Landing.aspx", false);
-                try { ctx.ApplicationInstance.CompleteRequest(); } catch { }
-                return false;
-            }
-            return true;
-        }
-
-        public static object NotAuthenticatedJson(string message = null)
-        {
-            var ctx = Ctx;
-            if (ctx != null && ctx.Items["CsrfFailed"] as bool? == true)
-            {
-                return new
-                {
-                    success = false,
-                    csrf = true,
-                    message = "CSRF validation failed. Refresh the page and try again."
-                };
-            }
-            return new
-            {
-                success = false,
-                notAuthenticated = true,
-                message = message ?? "Not authenticated. Please sign in again."
-            };
-        }
-
-        public static object ForbiddenJson(string message = null)
-        {
-            return new
-            {
-                success = false,
-                forbidden = true,
-                message = message ?? "You do not have permission to perform this action."
-            };
-        }
-
-        /// <summary>For ashx: write 401 JSON and return false if not logged in.</summary>
-        public static bool EnsureHandlerUser(HttpContext ctx, out int uid)
-        {
-            uid = 0;
-            if (ctx != null && !CsrfProtection.IsSafeMethod(ctx.Request.HttpMethod))
-            {
-                if (!CsrfProtection.ValidateOrReject(ctx, true)) return false;
-            }
-            uid = CurrentUserId(ctx);
-            if (uid > 0) return true;
-            WriteHandlerError(ctx, 401, "Authentication required.");
-            return false;
-        }
-
-        public static bool EnsureHandlerRole(HttpContext ctx, out int uid, params string[] roles)
-        {
-            uid = 0;
-            if (ctx != null && !CsrfProtection.IsSafeMethod(ctx.Request.HttpMethod))
-            {
-                if (!CsrfProtection.ValidateOrReject(ctx, true)) return false;
-            }
-            uid = CurrentUserId(ctx);
-            if (uid <= 0)
-            {
-                WriteHandlerError(ctx, 401, "Authentication required.");
-                return false;
-            }
-            if (roles != null && roles.Length > 0 && !IsInRole(CurrentRole(ctx), roles))
-            {
-                WriteHandlerError(ctx, 403, "Forbidden for your role.");
-                return false;
-            }
-            return true;
-        }
-
-        public static void WriteHandlerError(HttpContext ctx, int status, string message)
-        {
-            if (ctx == null || ctx.Response == null) return;
-            try
-            {
-                ctx.Response.Clear();
-                ctx.Response.StatusCode = status;
-                ctx.Response.TrySkipIisCustomErrors = true;
-                ctx.Response.ContentType = "application/json; charset=utf-8";
-                ctx.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                string json = "{\"success\":false,\"message\":\"" +
-                              (message ?? "Error").Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"}";
-                ctx.Response.Write(json);
-            }
-            catch { }
-        }
-    }
-}
-
 ```

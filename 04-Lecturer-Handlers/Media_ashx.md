@@ -1,6 +1,6 @@
 # Media.ashx
 **Source:** `Media.ashx`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,39 +15,55 @@ Serve files under Uploads with path sandbox + auth policy by folder.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
+Markup file — variables live in the matching `.cs` / `.js` companion docs.
 
 ## Functions / methods (11 found)
 
 ### `ProcessRequest` — lines 19–116
 
+#### Signature
+
 ```html
 public void ProcessRequest(HttpContext context)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ProcessRequest`.
-- **Parameters (what each means):**
-- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
-- **Local variables (what each means):**
-- `f` (`string`) — Holds “f” for this scope. (text)  Comes from HTTP request.
-- `relative` (`string`) — Path relative to Uploads root.
-- `bare` (`string`) — Holds “bare” for this scope. (text)
-- `foundBare` (`string`) — Holds “found Bare” for this scope. (text)
-- `relBare` (`string`) — Holds “rel Bare” for this scope. (text)
-- `folderBare` (`string`) — Filesystem or URL path. (text)
-- `parts` (`var`) — Split path or name segments.
-- `folder` (`string`) — Uploads subfolder (CourseMaterials, CourseVideos, …).
-- `physical` (`string`) — Absolute disk path on the server.
-- `byMeta` (`string`) — Holds “by Meta” for this scope. (text)
-- `sb` (`var`) — StringBuilder — efficient string concatenation.  Newly constructed object.
-- `rootFull` (`string`) — Holds “root Full” for this scope. (text)
-- `full` (`string`) — Fully resolved absolute path.
+Main entry point for an `.ashx` HTTP handler — handles one browser request from start to finish.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `ProcessRequest`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `context` | `HttpContext` | Holds “context” for this scope. (current HTTP request) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `f` | `string` | Holds “f” for this scope. (text)  Comes from HTTP request. |
+| `relative` | `string` | Path relative to Uploads root. |
+| `bare` | `string` | Holds “bare” for this scope. (text) |
+| `foundBare` | `string` | Holds “found Bare” for this scope. (text) |
+| `relBare` | `string` | Holds “rel Bare” for this scope. (text) |
+| `folderBare` | `string` | Filesystem or URL path. (text) |
+| `parts` | `var` | Split path or name segments. |
+| `folder` | `string` | Uploads subfolder (CourseMaterials, CourseVideos, …). |
+| `physical` | `string` | Absolute disk path on the server. |
+| `byMeta` | `string` | Holds “by Meta” for this scope. (text) |
+| `sb` | `var` | StringBuilder — efficient string concatenation.  Newly constructed object. |
+| `rootFull` | `string` | Holds “root Full” for this scope. (text) |
+| `full` | `string` | Fully resolved absolute path. |
+
+#### Code
 
 ```html
   19 | 
@@ -150,46 +166,47 @@ public void ProcessRequest(HttpContext context)
  116 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L20:** IHttpHandler entry for ashx.
-- **L22:** Error handling block.
-- **L38:** `f` means: Holds “f” for this scope. (text)  Comes from HTTP request.
-- **L43:** Sandbox path under ~/Uploads. | `relative` means: Path relative to Uploads root.
-- **L47:** `bare` means: Holds “bare” for this scope. (text)
-- **L51:** `foundBare` means: Holds “found Bare” for this scope. (text)
-- **L54:** `relBare` means: Holds “rel Bare” for this scope. (text)
-- **L55:** `folderBare` means: Filesystem or URL path. (text)
-- **L66:** `parts` means: Split path or name segments.
-- **L67:** `folder` means: Uploads subfolder (CourseMaterials, CourseVideos, …).
-- **L71:** Sandbox path under ~/Uploads. | `physical` means: Absolute disk path on the server.
-- **L76:** `byMeta` means: Holds “by Meta” for this scope. (text)
-- **L87:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
-- **L99:** `rootFull` means: Holds “root Full” for this scope. (text)
-- **L102:** `full` means: Fully resolved absolute path.
-- **L111:** Handle/log exception.
-- **L114:** Error handling block.
-
 ---
 
 ### `AuthorizeFolder` — lines 124–166
+
+#### Signature
 
 ```html
 private static bool AuthorizeFolder(HttpContext context, string folder)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `AuthorizeFolder`.
-- **Session:** Reads/writes ASP.NET Session.
-- **Parameters (what each means):**
-- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
-- `folder` (`string`) — Uploads subfolder (CourseMaterials, CourseVideos, …).
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
-- `role` (`string`) — User role code or name (Admin/Student/Lecturer).
+Decides if the current user may download a file from that Uploads folder.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Return `false` to the caller.
+2. Return `true` to the caller.
+3. Read the logged-in user id from Session/JWT (0 means not signed in).
+4. Return `false` to the caller.
+5. Save temporary state in Session (`Session !`).
+6. Return `true` to the caller.
+7. If the user is Admin, complete login without MFA; otherwise require MFA.
+8. Return `true` to the caller.
+9. Return `false` to the caller.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `context` | `HttpContext` | Holds “context” for this scope. (current HTTP request) |
+| `folder` | `string` | Uploads subfolder (CourseMaterials, CourseVideos, …). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous). |
+| `role` | `string` | User role code or name (Admin/Student/Lecturer). |
+
+#### Code
 
 ```html
  124 |     private static bool AuthorizeFolder(HttpContext context, string folder)
@@ -237,29 +254,37 @@ private static bool AuthorizeFolder(HttpContext context, string folder)
  166 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L137:** Restore/validate user from Session or JWT; reject stale UIDs. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
-- **L144:** Map role codes/names to Admin/Student/Lecturer. | `role` means: User role code or name (Admin/Student/Lecturer).
-- **L145:** Server session for logged-in user.
-
 ---
 
 ### `FirstFolder` — lines 167–173
+
+#### Signature
 
 ```html
 private static string FirstFolder(string relative)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `FirstFolder`.
-- **Parameters (what each means):**
-- `relative` (`string`) — Path relative to Uploads root.
-- **Local variables (what each means):**
-- `slash` (`int`) — Holds “slash” for this scope. (integer)
+Function `FirstFolder` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `relative` | `string` | Path relative to Uploads root. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `slash` | `int` | Holds “slash” for this scope. (integer) |
+
+#### Code
 
 ```html
  167 | 
@@ -271,29 +296,41 @@ private static string FirstFolder(string relative)
  173 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L171:** `slash` means: Holds “slash” for this scope. (integer)
-
 ---
 
 ### `ToRelativeUnderUploads` — lines 174–187
+
+#### Signature
 
 ```html
 private static string ToRelativeUnderUploads(HttpContext context, string physical)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ToRelativeUnderUploads`.
-- **Parameters (what each means):**
-- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
-- `physical` (`string`) — Absolute disk path on the server.
-- **Local variables (what each means):**
-- `root` (`string`) — Root directory path (Uploads).
-- `full` (`string`) — Fully resolved absolute path.
+Function `ToRelativeUnderUploads` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `ToRelativeUnderUploads`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `context` | `HttpContext` | Holds “context” for this scope. (current HTTP request) |
+| `physical` | `string` | Absolute disk path on the server. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `root` | `string` | Root directory path (Uploads). |
+| `full` | `string` | Fully resolved absolute path. |
+
+#### Code
 
 ```html
  174 | 
@@ -312,47 +349,54 @@ private static string ToRelativeUnderUploads(HttpContext context, string physica
  187 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L177:** Error handling block.
-- **L179:** `root` means: Root directory path (Uploads).
-- **L182:** `full` means: Fully resolved absolute path.
-- **L186:** Handle/log exception.
-
 ---
 
 ### `FindByOriginalName` — lines 192–263
+
+#### Signature
 
 ```html
 private static string FindByOriginalName(HttpContext context, string folderOrNull, string originalName)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `FindByOriginalName`.
-- **Parameters (what each means):**
-- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
-- `folderOrNull` (`string`) — Filesystem or URL path. (text)
-- `originalName` (`string`) — Holds “original Name” for this scope. (text)
-- **Local variables (what each means):**
-- `uploads` (`string`) — Often a collection related to uploads (plural name). (text)
-- `dir` (`string`) — Filesystem or URL path. (text)
-- `exact` (`string`) — Holds “exact” for this scope. (text)
-- `content` (`string`) — Submission body text or JSON payload in CWSubmissions.
-- `dataFile` (`string`) — Holds “data File” for this scope. (text)
-- `log` (`string`) — Holds “log” for this scope. (text)
-- `o` (`int`) — Holds “o” for this scope. (integer)
-- `orig` (`string`) — Holds “orig” for this scope. (text)
-- `sp` (`int`) — Holds “sp” for this scope. (integer)
-- `u` (`int`) — Holds “u” for this scope. (integer)
-- `under` (`string`) — Holds “under” for this scope. (text)
-- `sp2` (`int`) — Holds “sp2” for this scope. (integer)
-- `phys` (`string`) — Often a collection related to phys (plural name). (text)
-- `folder` — Uploads subfolder (CourseMaterials, CourseVideos, …).
-- `meta` — Extra settings packed as JSON (dueDate, requireFile, …).
-- `line` — Holds “line” for this scope.
+Function `FindByOriginalName` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `context` | `HttpContext` | Holds “context” for this scope. (current HTTP request) |
+| `folderOrNull` | `string` | Filesystem or URL path. (text) |
+| `originalName` | `string` | Holds “original Name” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uploads` | `string` | Often a collection related to uploads (plural name). (text) |
+| `dir` | `string` | Filesystem or URL path. (text) |
+| `exact` | `string` | Holds “exact” for this scope. (text) |
+| `content` | `string` | Submission body text or JSON payload in CWSubmissions. |
+| `dataFile` | `string` | Holds “data File” for this scope. (text) |
+| `log` | `string` | Holds “log” for this scope. (text) |
+| `o` | `int` | Holds “o” for this scope. (integer) |
+| `orig` | `string` | Holds “orig” for this scope. (text) |
+| `sp` | `int` | Holds “sp” for this scope. (integer) |
+| `u` | `int` | Holds “u” for this scope. (integer) |
+| `under` | `string` | Holds “under” for this scope. (text) |
+| `sp2` | `int` | Holds “sp2” for this scope. (integer) |
+| `phys` | `string` | Often a collection related to phys (plural name). (text) |
+| `folder` | `—` | Uploads subfolder (CourseMaterials, CourseVideos, …). |
+| `meta` | `—` | Extra settings packed as JSON (dueDate, requireFile, …). |
+| `line` | `—` | Holds “line” for this scope. |
+
+#### Code
 
 ```html
  192 |     private static string FindByOriginalName(HttpContext context, string folderOrNull, string originalName)
@@ -429,48 +473,41 @@ private static string FindByOriginalName(HttpContext context, string folderOrNul
  263 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L196:** `uploads` means: Often a collection related to uploads (plural name). (text)
-- **L205:** `dir` means: Filesystem or URL path. (text)
-- **L208:** `exact` means: Holds “exact” for this scope. (text)
-- **L213:** Error handling block.
-- **L215:** `content` means: Submission body text or JSON payload in CWSubmissions.
-- **L218:** `dataFile` means: Holds “data File” for this scope. (text)
-- **L222:** Handle/log exception.
-- **L227:** Error handling block.
-- **L229:** `log` means: Holds “log” for this scope. (text)
-- **L236:** `o` means: Holds “o” for this scope. (integer)
-- **L237:** `orig` means: Holds “orig” for this scope. (text)
-- **L238:** `sp` means: Holds “sp” for this scope. (integer)
-- **L243:** `u` means: Holds “u” for this scope. (integer)
-- **L244:** `under` means: Holds “under” for this scope. (text)
-- **L245:** `sp2` means: Holds “sp2” for this scope. (integer)
-- **L250:** `phys` means: Often a collection related to phys (plural name). (text)
-- **L254:** Error handling block.
-- **L260:** Handle/log exception.
-
 ---
 
 ### `NormalizeRequestPath` — lines 264–294
+
+#### Signature
 
 ```html
 private static string NormalizeRequestPath(string f)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `NormalizeRequestPath`.
-- **Parameters (what each means):**
-- `f` (`string`) — Holds “f” for this scope. (text)
-- **Local variables (what each means):**
-- `up` (`int`) — Holds “up” for this scope. (integer)
-- `p` (`int`) — Parameter, path, or password fragment depending on context.
-- `rest` (`string`) — Holds “rest” for this scope. (text)
-- `eq` (`int`) — Holds “eq” for this scope. (integer)
-- `amp` (`int`) — Holds “amp” for this scope. (integer)
+Converts or cleans **Normalize Request Path** into a usable form.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Validate input; if invalid, stop and return an error/message.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `f` | `string` | Holds “f” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `up` | `int` | Holds “up” for this scope. (integer) |
+| `p` | `int` | Parameter, path, or password fragment depending on context. |
+| `rest` | `string` | Holds “rest” for this scope. (text) |
+| `eq` | `int` | Holds “eq” for this scope. (integer) |
+| `amp` | `int` | Holds “amp” for this scope. (integer) |
+
+#### Code
 
 ```html
  264 | 
@@ -506,54 +543,61 @@ private static string NormalizeRequestPath(string f)
  294 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L272:** `up` means: Holds “up” for this scope. (integer)
-- **L278:** `p` means: Parameter, path, or password fragment depending on context.
-- **L282:** `rest` means: Holds “rest” for this scope. (text)
-- **L283:** `eq` means: Holds “eq” for this scope. (integer)
-- **L285:** `amp` means: Holds “amp” for this scope. (integer)
-- **L287:** Error handling block.
-
 ---
 
 ### `StreamFile` — lines 295–383
+
+#### Signature
 
 ```html
 private static void StreamFile(HttpContext context, string physical)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `StreamFile`.
-- **Parameters (what each means):**
-- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
-- `physical` (`string`) — Absolute disk path on the server.
-- **Local variables (what each means):**
-- `fileName` (`string`) — Original file name for display/download.
-- `metaPath` (`string`) — Filesystem or URL path. (text)
-- `downloadName` (`string`) — Holds “download Name” for this scope. (text)
-- `orig` (`string`) — Holds “orig” for this scope. (text)
-- `ext` (`string`) — File extension (.pdf, .mp4, …).
-- `contentType` (`string`) — Holds “content Type” for this scope. (text)
-- `forceDownload` (`bool`) — Holds “force Download” for this scope. (true/false)  Comes from HTTP request.
-- `fileLength` (`long`) — Holds “file Length” for this scope. (integer)  Newly constructed object.
-- `start` (`long`) — Range start (file stream) or string index.  Literal number `0`.
-- `end` (`long`) — Range end or string end index.
-- `isRange` (`bool`) — Boolean flag: is Range. (true/false)
-- `rangeHeader` (`string`) — Holds “range Header” for this scope. (text)
-- `spec` (`string`) — Holds “spec” for this scope. (text)
-- `dash` (`int`) — Holds “dash” for this scope. (integer)
-- `s1` (`string`) — Holds “s1” for this scope. (text)
-- `s2` (`string`) — Holds “s2” for this scope. (text)
-- `contentLength` (`long`) — Holds “content Length” for this scope. (integer)
-- `fs` (`var`) — Holds “fs” for this scope.  Newly constructed object.
-- `buffer` (`var`) — Holds “buffer” for this scope.  Newly constructed object.
-- `remaining` (`long`) — Holds “remaining” for this scope. (integer)
-- `toRead` (`int`) — Holds “to Read” for this scope. (integer)
-- `read` (`int`) — Holds “read” for this scope. (integer)
+Function `StreamFile` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `StreamFile`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `context` | `HttpContext` | Holds “context” for this scope. (current HTTP request) |
+| `physical` | `string` | Absolute disk path on the server. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `fileName` | `string` | Original file name for display/download. |
+| `metaPath` | `string` | Filesystem or URL path. (text) |
+| `downloadName` | `string` | Holds “download Name” for this scope. (text) |
+| `orig` | `string` | Holds “orig” for this scope. (text) |
+| `ext` | `string` | File extension (.pdf, .mp4, …). |
+| `contentType` | `string` | Holds “content Type” for this scope. (text) |
+| `forceDownload` | `bool` | Holds “force Download” for this scope. (true/false)  Comes from HTTP request. |
+| `fileLength` | `long` | Holds “file Length” for this scope. (integer)  Newly constructed object. |
+| `start` | `long` | Range start (file stream) or string index.  Literal number `0`. |
+| `end` | `long` | Range end or string end index. |
+| `isRange` | `bool` | Boolean flag: is Range. (true/false) |
+| `rangeHeader` | `string` | Holds “range Header” for this scope. (text) |
+| `spec` | `string` | Holds “spec” for this scope. (text) |
+| `dash` | `int` | Holds “dash” for this scope. (integer) |
+| `s1` | `string` | Holds “s1” for this scope. (text) |
+| `s2` | `string` | Holds “s2” for this scope. (text) |
+| `contentLength` | `long` | Holds “content Length” for this scope. (integer) |
+| `fs` | `var` | Holds “fs” for this scope.  Newly constructed object. |
+| `buffer` | `var` | Holds “buffer” for this scope.  Newly constructed object. |
+| `remaining` | `long` | Holds “remaining” for this scope. (integer) |
+| `toRead` | `int` | Holds “to Read” for this scope. (integer) |
+| `read` | `int` | Holds “read” for this scope. (integer) |
+
+#### Code
 
 ```html
  295 | 
@@ -647,59 +691,47 @@ private static void StreamFile(HttpContext context, string physical)
  383 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L298:** `fileName` means: Original file name for display/download.
-- **L300:** `metaPath` means: Filesystem or URL path. (text)
-- **L301:** `downloadName` means: Holds “download Name” for this scope. (text)
-- **L304:** Error handling block.
-- **L306:** `orig` means: Holds “orig” for this scope. (text)
-- **L309:** Handle/log exception.
-- **L312:** `ext` means: File extension (.pdf, .mp4, …).
-- **L313:** `contentType` means: Holds “content Type” for this scope. (text)
-- **L314:** `forceDownload` means: Holds “force Download” for this scope. (true/false)  Comes from HTTP request.
-- **L318:** `fileLength` means: Holds “file Length” for this scope. (integer)  Newly constructed object.
-- **L319:** `start` means: Range start (file stream) or string index.  Literal number `0`.
-- **L320:** `end` means: Range end or string end index.
-- **L321:** `isRange` means: Boolean flag: is Range. (true/false)
-- **L323:** `rangeHeader` means: Holds “range Header” for this scope. (text)
-- **L328:** `spec` means: Holds “spec” for this scope. (text)
-- **L329:** `dash` means: Holds “dash” for this scope. (integer)
-- **L332:** `s1` means: Holds “s1” for this scope. (text)
-- **L333:** `s2` means: Holds “s2” for this scope. (text)
-- **L348:** `contentLength` means: Holds “content Length” for this scope. (integer)
-- **L367:** Import namespace/types.
-- **L370:** `buffer` means: Holds “buffer” for this scope.  Newly constructed object.
-- **L371:** `remaining` means: Holds “remaining” for this scope. (integer)
-- **L375:** `toRead` means: Holds “to Read” for this scope. (integer)
-- **L376:** `read` means: Holds “read” for this scope. (integer)
-- **L382:** Error handling block.
-
 ---
 
 ### `WriteDiag` — lines 384–420
+
+#### Signature
 
 ```html
 private static void WriteDiag(HttpContext context)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `WriteDiag`.
-- **Parameters (what each means):**
-- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
-- **Local variables (what each means):**
-- `sb` (`var`) — StringBuilder — efficient string concatenation.  Newly constructed object.
-- `uploads` (`string`) — Often a collection related to uploads (plural name). (text)
-- `dir` (`string`) — Filesystem or URL path. (text)
-- `files` (`var`) — Often a collection related to files (plural name).
-- `n` (`int`) — Integer count (rows, items, or length).  Literal number `0`.
-- `fi` (`var`) — Holds “fi” for this scope.  Newly constructed object.
-- `note` (`string`) — Holds “note” for this scope. (text)  Literal text string.
-- `root` — Root directory path (Uploads).
-- `file` — Uploaded file object or file name.
+Function `WriteDiag` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `WriteDiag`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `context` | `HttpContext` | Holds “context” for this scope. (current HTTP request) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sb` | `var` | StringBuilder — efficient string concatenation.  Newly constructed object. |
+| `uploads` | `string` | Often a collection related to uploads (plural name). (text) |
+| `dir` | `string` | Filesystem or URL path. (text) |
+| `files` | `var` | Often a collection related to files (plural name). |
+| `n` | `int` | Integer count (rows, items, or length).  Literal number `0`. |
+| `fi` | `var` | Holds “fi” for this scope.  Newly constructed object. |
+| `note` | `string` | Holds “note” for this scope. (text)  Literal text string. |
+| `root` | `—` | Root directory path (Uploads). |
+| `file` | `—` | Uploaded file object or file name. |
+
+#### Code
 
 ```html
  384 | 
@@ -741,34 +773,37 @@ private static void WriteDiag(HttpContext context)
  420 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L387:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
-- **L388:** `uploads` means: Often a collection related to uploads (plural name). (text)
-- **L397:** `dir` means: Filesystem or URL path. (text)
-- **L401:** `files` means: Often a collection related to files (plural name).
-- **L403:** `n` means: Integer count (rows, items, or length).  Literal number `0`.
-- **L406:** `fi` means: Holds “fi” for this scope.  Newly constructed object.
-- **L407:** `note` means: Holds “note” for this scope. (text)  Literal text string.
-- **L410:** Error handling block.
-
 ---
 
 ### `WriteText` — lines 421–428
+
+#### Signature
 
 ```html
 private static void WriteText(HttpContext context, int code, string message)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `WriteText`.
-- **Parameters (what each means):**
-- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
-- `code` (`int`) — 6-digit TOTP / OTP the user typed.
-- `message` (`string`) — Status text for the UI.
+Function `WriteText` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Write the HTTP response body (JSON, file bytes, or text).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `context` | `HttpContext` | Holds “context” for this scope. (current HTTP request) |
+| `code` | `int` | 6-digit TOTP / OTP the user typed. |
+| `message` | `string` | Status text for the UI. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```html
  421 | 
@@ -785,19 +820,35 @@ private static void WriteText(HttpContext context, int code, string message)
 
 ### `IsClientAbort` — lines 429–438
 
+#### Signature
+
 ```html
 private static bool IsClientAbort(Exception ex)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `IsClientAbort`.
-- **Parameters (what each means):**
-- `ex` (`Exception`) — Exception object in catch blocks.
-- **Local variables (what each means):**
-- `m` (`string`) — Holds “m” for this scope. (text)
+Checks a condition related to **Is Client Abort** and returns true/false (or tries an action safely).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `IsClientAbort`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ex` | `Exception` | Exception object in catch blocks. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `m` | `string` | Holds “m” for this scope. (text) |
+
+#### Code
 
 ```html
  429 | 
@@ -812,25 +863,37 @@ private static bool IsClientAbort(Exception ex)
  438 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L433:** `m` means: Holds “m” for this scope. (text)
-
 ---
 
 ### `MimeFromExt` — lines 439–460
+
+#### Signature
 
 ```html
 private static string MimeFromExt(string ext)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `MimeFromExt`.
-- **Parameters (what each means):**
-- `ext` (`string`) — File extension (.pdf, .mp4, …).
+Function `MimeFromExt` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `MimeFromExt`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `ext` | `string` | File extension (.pdf, .mp4, …). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```html
  439 | 
@@ -859,9 +922,9 @@ private static string MimeFromExt(string ext)
 
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```html
    1 | <%@ WebHandler Language="C#" Class="MediaHandler" %>
@@ -1327,567 +1390,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  461 | 
  462 |     public bool IsReusable { get { return false; } }
  463 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L5:** Import namespace/types.
-- **L6:** Import namespace/types.
-- **L7:** Import namespace/types.
-- **L8:** Import namespace/types.
-- **L16:** Class declaration for this page/service.
-- **L18:** Sandbox path under ~/Uploads.
-- **L20:** IHttpHandler entry for ashx.
-- **L22:** Error handling block.
-- **L38:** `f` means: Holds “f” for this scope. (text)  Comes from HTTP request.
-- **L43:** Sandbox path under ~/Uploads. | `relative` means: Path relative to Uploads root.
-- **L47:** `bare` means: Holds “bare” for this scope. (text)
-- **L51:** `foundBare` means: Holds “found Bare” for this scope. (text)
-- **L54:** `relBare` means: Holds “rel Bare” for this scope. (text)
-- **L55:** `folderBare` means: Filesystem or URL path. (text)
-- **L66:** `parts` means: Split path or name segments.
-- **L67:** `folder` means: Uploads subfolder (CourseMaterials, CourseVideos, …).
-- **L71:** Sandbox path under ~/Uploads. | `physical` means: Absolute disk path on the server.
-- **L76:** `byMeta` means: Holds “by Meta” for this scope. (text)
-- **L87:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
-- **L99:** `rootFull` means: Holds “root Full” for this scope. (text)
-- **L102:** `full` means: Fully resolved absolute path.
-- **L111:** Handle/log exception.
-- **L114:** Error handling block.
-- **L137:** Restore/validate user from Session or JWT; reject stale UIDs. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
-- **L144:** Map role codes/names to Admin/Student/Lecturer. | `role` means: User role code or name (Admin/Student/Lecturer).
-- **L145:** Server session for logged-in user.
-- **L171:** `slash` means: Holds “slash” for this scope. (integer)
-- **L177:** Error handling block.
-- **L179:** `root` means: Root directory path (Uploads).
-- **L182:** `full` means: Fully resolved absolute path.
-- **L186:** Handle/log exception.
-- **L196:** `uploads` means: Often a collection related to uploads (plural name). (text)
-- **L205:** `dir` means: Filesystem or URL path. (text)
-- **L208:** `exact` means: Holds “exact” for this scope. (text)
-- **L213:** Error handling block.
-- **L215:** `content` means: Submission body text or JSON payload in CWSubmissions.
-- **L218:** `dataFile` means: Holds “data File” for this scope. (text)
-- **L222:** Handle/log exception.
-- **L227:** Error handling block.
-- **L229:** `log` means: Holds “log” for this scope. (text)
-- **L236:** `o` means: Holds “o” for this scope. (integer)
-- **L237:** `orig` means: Holds “orig” for this scope. (text)
-- **L238:** `sp` means: Holds “sp” for this scope. (integer)
-- **L243:** `u` means: Holds “u” for this scope. (integer)
-- **L244:** `under` means: Holds “under” for this scope. (text)
-- **L245:** `sp2` means: Holds “sp2” for this scope. (integer)
-- **L250:** `phys` means: Often a collection related to phys (plural name). (text)
-- **L254:** Error handling block.
-- **L260:** Handle/log exception.
-- **L272:** `up` means: Holds “up” for this scope. (integer)
-- **L278:** `p` means: Parameter, path, or password fragment depending on context.
-- **L282:** `rest` means: Holds “rest” for this scope. (text)
-- **L283:** `eq` means: Holds “eq” for this scope. (integer)
-- **L285:** `amp` means: Holds “amp” for this scope. (integer)
-- **L287:** Error handling block.
-- **L298:** `fileName` means: Original file name for display/download.
-- **L300:** `metaPath` means: Filesystem or URL path. (text)
-- **L301:** `downloadName` means: Holds “download Name” for this scope. (text)
-- **L304:** Error handling block.
-- **L306:** `orig` means: Holds “orig” for this scope. (text)
-- **L309:** Handle/log exception.
-- **L312:** `ext` means: File extension (.pdf, .mp4, …).
-- **L313:** `contentType` means: Holds “content Type” for this scope. (text)
-- **L314:** `forceDownload` means: Holds “force Download” for this scope. (true/false)  Comes from HTTP request.
-- **L318:** `fileLength` means: Holds “file Length” for this scope. (integer)  Newly constructed object.
-- **L319:** `start` means: Range start (file stream) or string index.  Literal number `0`.
-- **L320:** `end` means: Range end or string end index.
-- **L321:** `isRange` means: Boolean flag: is Range. (true/false)
-- **L323:** `rangeHeader` means: Holds “range Header” for this scope. (text)
-- **L328:** `spec` means: Holds “spec” for this scope. (text)
-- **L329:** `dash` means: Holds “dash” for this scope. (integer)
-- **L332:** `s1` means: Holds “s1” for this scope. (text)
-- **L333:** `s2` means: Holds “s2” for this scope. (text)
-- **L348:** `contentLength` means: Holds “content Length” for this scope. (integer)
-- **L367:** Import namespace/types.
-- **L370:** `buffer` means: Holds “buffer” for this scope.  Newly constructed object.
-- **L371:** `remaining` means: Holds “remaining” for this scope. (integer)
-- **L375:** `toRead` means: Holds “to Read” for this scope. (integer)
-- **L376:** `read` means: Holds “read” for this scope. (integer)
-- **L382:** Error handling block.
-- **L387:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
-- **L388:** `uploads` means: Often a collection related to uploads (plural name). (text)
-- **L397:** `dir` means: Filesystem or URL path. (text)
-- **L401:** `files` means: Often a collection related to files (plural name).
-- **L403:** `n` means: Integer count (rows, items, or length).  Literal number `0`.
-- **L406:** `fi` means: Holds “fi” for this scope.  Newly constructed object.
-- **L407:** `note` means: Holds “note” for this scope. (text)  Literal text string.
-- **L410:** Error handling block.
-- **L433:** `m` means: Holds “m” for this scope. (text)
-
-## Source snapshot (raw)
-
-```html
-<%@ WebHandler Language="C#" Class="MediaHandler" %>
-
-using System;
-using System.Globalization;
-using System.IO;
-using System.Text;
-using System.Web;
-using WebAppAssignment.Data.Security;
-
-/// <summary>
-/// Serves lesson media from ~/Uploads/ only (path-sandboxed).
-///   /Media.ashx?f=CourseMaterials/{guid}.pdf
-///   /Media.ashx?f=CourseVideos/{guid}.mp4&amp;dl=1
-///   /Media.ashx?diag=1  (debug builds only)
-/// </summary>
-public class MediaHandler : IHttpHandler
-{
-    private static readonly string[] AllowedRoots = UploadPathGuard.AllowedRoots;
-
-    public void ProcessRequest(HttpContext context)
-    {
-        try
-        {
-            if (context.Request["diag"] == "1" || context.Request["debug"] == "1")
-            {
-                if (!context.IsDebuggingEnabled)
-                {
-                    WriteText(context, 403, "Diagnostics disabled.");
-                    return;
-                }
-                // Diag lists upload folders — lecturers/admins only
-                if (!AuthorizeFolder(context, "CourseMaterials"))
-                    return;
-                WriteDiag(context);
-                return;
-            }
-
-            string f = context.Request["f"]
-                       ?? context.Request["path"]
-                       ?? context.Request["file"]
-                       ?? "";
-
-            string relative = UploadPathGuard.NormalizeRelative(f);
-            if (string.IsNullOrEmpty(relative))
-            {
-                // Bare filename → search allowed folders via .meta
-                string bare = (f ?? "").Replace('\\', '/').Trim().TrimStart('/');
-                if (!string.IsNullOrEmpty(bare) && bare.IndexOf('/') < 0 && bare.IndexOf("..") < 0)
-                {
-                    // Never resolve bare names into submissions without a folder hint
-                    string foundBare = FindByOriginalName(context, null, bare);
-                    if (foundBare != null)
-                    {
-                        string relBare = ToRelativeUnderUploads(context, foundBare);
-                        string folderBare = FirstFolder(relBare);
-                        if (!AuthorizeFolder(context, folderBare))
-                            return;
-                        StreamFile(context, foundBare);
-                        return;
-                    }
-                }
-                WriteText(context, 400, "Missing or invalid f= parameter. Example: Media.ashx?f=CourseMaterials/abc123.pdf");
-                return;
-            }
-
-            var parts = relative.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-            string folder = parts.Length > 0 ? parts[0] : "";
-            if (!AuthorizeFolder(context, folder))
-                return;
-
-            string physical = UploadPathGuard.ToPhysical(context, relative);
-
-            if (physical == null || !File.Exists(physical))
-            {
-                // Resolve original display name → GUID file via .meta sidecars
-                string byMeta = parts.Length >= 2
-                    ? FindByOriginalName(context, parts[0], parts[parts.Length - 1])
-                    : null;
-                if (byMeta != null)
-                {
-                    StreamFile(context, byMeta);
-                    return;
-                }
-
-                if (context.IsDebuggingEnabled)
-                {
-                    var sb = new StringBuilder();
-                    sb.AppendLine("404 File not found");
-                    sb.AppendLine("Requested: Uploads/" + relative);
-                    WriteText(context, 404, sb.ToString());
-                }
-                else
-                {
-                    WriteText(context, 404, "File not found.");
-                }
-                return;
-            }
-
-            string rootFull = Path.GetFullPath(context.Server.MapPath("~/Uploads"))
-                .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
-                + Path.DirectorySeparatorChar;
-            string full = Path.GetFullPath(physical);
-            if (!full.StartsWith(rootFull, StringComparison.OrdinalIgnoreCase))
-            {
-                WriteText(context, 403, "Access denied.");
-                return;
-            }
-
-            StreamFile(context, full);
-        }
-        catch (Exception ex)
-        {
-            if (IsClientAbort(ex)) return;
-            try { WriteText(context, 500, context.IsDebuggingEnabled ? ("Media error: " + ex.Message) : "Media error."); } catch { }
-        }
-    }
-
-    /// <summary>
-    /// Access policy:
-    /// - CourseThumbnails: public (Landing cards without login)
-    /// - CourseMaterials / CourseVideos: any signed-in user (student/lecturer/admin)
-    /// - CourseSubmissions: signed-in Student, Lecturer, or Admin only
-    /// </summary>
-    private static bool AuthorizeFolder(HttpContext context, string folder)
-    {
-        folder = (folder ?? "").Trim();
-        if (string.IsNullOrEmpty(folder))
-        {
-            WriteText(context, 400, "Missing folder.");
-            return false;
-        }
-
-        // Public catalog images only
-        if (string.Equals(folder, "CourseThumbnails", StringComparison.OrdinalIgnoreCase))
-            return true;
-
-        int uid = AuthService.GetValidatedUserId(context);
-        if (uid <= 0)
-        {
-            WriteText(context, 401, "Sign in required to access this file.");
-            return false;
-        }
-
-        string role = AuthService.NormalizeRole(
-            context.Session != null ? context.Session["UserRole"] as string : null);
-
-        // Lesson materials / videos: any authenticated role
-        if (string.Equals(folder, "CourseMaterials", StringComparison.OrdinalIgnoreCase) ||
-            string.Equals(folder, "CourseVideos", StringComparison.OrdinalIgnoreCase))
-            return true;
-
-        // Student submission files: no anonymous; role must be Student/Lecturer/Admin
-        if (string.Equals(folder, "CourseSubmissions", StringComparison.OrdinalIgnoreCase))
-        {
-            if (string.Equals(role, "Student", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(role, "Lecturer", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(role, "Admin", StringComparison.OrdinalIgnoreCase))
-                return true;
-
-            WriteText(context, 403, "You do not have access to submission files.");
-            return false;
-        }
-
-        WriteText(context, 403, "Folder not allowed.");
-        return false;
-    }
-
-    private static string FirstFolder(string relative)
-    {
-        if (string.IsNullOrEmpty(relative)) return "";
-        int slash = relative.IndexOf('/');
-        return slash < 0 ? relative : relative.Substring(0, slash);
-    }
-
-    private static string ToRelativeUnderUploads(HttpContext context, string physical)
-    {
-        try
-        {
-            string root = Path.GetFullPath(context.Server.MapPath("~/Uploads"))
-                .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
-                + Path.DirectorySeparatorChar;
-            string full = Path.GetFullPath(physical);
-            if (!full.StartsWith(root, StringComparison.OrdinalIgnoreCase)) return null;
-            return full.Substring(root.Length).Replace('\\', '/');
-        }
-        catch { return null; }
-    }
-
-    /// <summary>
-    /// Find a file by original upload name using .meta sidecars and uploads.log.
-    /// </summary>
-    private static string FindByOriginalName(HttpContext context, string folderOrNull, string originalName)
-    {
-        if (string.IsNullOrWhiteSpace(originalName)) return null;
-        originalName = Path.GetFileName(originalName.Trim().Replace('\\', '/'));
-        string uploads = context.Server.MapPath("~/Uploads");
-        if (!Directory.Exists(uploads)) return null;
-
-        string[] folders = string.IsNullOrEmpty(folderOrNull)
-            ? AllowedRoots
-            : new[] { folderOrNull };
-
-        foreach (var folder in folders)
-        {
-            string dir = Path.Combine(uploads, folder);
-            if (!Directory.Exists(dir)) continue;
-
-            string exact = Path.Combine(dir, originalName);
-            if (File.Exists(exact)) return exact;
-
-            foreach (var meta in Directory.GetFiles(dir, "*.meta"))
-            {
-                try
-                {
-                    string content = Path.GetFileName(File.ReadAllText(meta).Trim().Replace('\\', '/'));
-                    if (string.Equals(content, originalName, StringComparison.OrdinalIgnoreCase))
-                    {
-                        string dataFile = meta.Substring(0, meta.Length - 5);
-                        if (File.Exists(dataFile)) return dataFile;
-                    }
-                }
-                catch { }
-            }
-        }
-
-        // Scan uploads.log: "OK under=CourseMaterials/{guid}.pdf original=My File.pdf"
-        try
-        {
-            string log = Path.Combine(context.Server.MapPath("~/App_Data/Logs"), "uploads.log");
-            if (File.Exists(log))
-            {
-                foreach (var line in File.ReadAllLines(log))
-                {
-                    if (line.IndexOf("original=", StringComparison.OrdinalIgnoreCase) < 0) continue;
-                    if (line.IndexOf("under=", StringComparison.OrdinalIgnoreCase) < 0) continue;
-                    int o = line.IndexOf("original=", StringComparison.OrdinalIgnoreCase);
-                    string orig = line.Substring(o + 9).Trim();
-                    int sp = orig.IndexOf(" bytes=");
-                    if (sp > 0) orig = orig.Substring(0, sp).Trim();
-                    orig = Path.GetFileName(orig.Replace('\\', '/'));
-                    if (!string.Equals(orig, originalName, StringComparison.OrdinalIgnoreCase)) continue;
-
-                    int u = line.IndexOf("under=", StringComparison.OrdinalIgnoreCase);
-                    string under = line.Substring(u + 6).Trim();
-                    int sp2 = under.IndexOf(' ');
-                    if (sp2 > 0) under = under.Substring(0, sp2).Trim();
-                    under = under.Replace('\\', '/').TrimStart('/');
-                    if (under.StartsWith("Uploads/", StringComparison.OrdinalIgnoreCase))
-                        under = under.Substring(8);
-                    string phys = context.Server.MapPath("~/Uploads/" + under);
-                    if (File.Exists(phys))
-                    {
-                        // Write .meta for next time
-                        try { File.WriteAllText(phys + ".meta", originalName, Encoding.UTF8); } catch { }
-                        return phys;
-                    }
-                }
-            }
-        }
-        catch { }
-
-        return null;
-    }
-
-    private static string NormalizeRequestPath(string f)
-    {
-        if (string.IsNullOrWhiteSpace(f)) return "";
-        f = f.Replace('\\', '/').Trim().TrimStart('/');
-
-        if (f.StartsWith("Uploads/", StringComparison.OrdinalIgnoreCase))
-            f = f.Substring("Uploads/".Length);
-        int up = f.IndexOf("/Uploads/", StringComparison.OrdinalIgnoreCase);
-        if (up >= 0) f = f.Substring(up + "/Uploads/".Length);
-
-        if (f.IndexOf("ServeUpload.ashx", StringComparison.OrdinalIgnoreCase) >= 0 ||
-            f.IndexOf("Media.ashx", StringComparison.OrdinalIgnoreCase) >= 0)
-        {
-            int p = f.IndexOf("f=", StringComparison.OrdinalIgnoreCase);
-            if (p < 0) p = f.IndexOf("path=", StringComparison.OrdinalIgnoreCase);
-            if (p >= 0)
-            {
-                string rest = f.Substring(p);
-                int eq = rest.IndexOf('=');
-                rest = eq >= 0 ? rest.Substring(eq + 1) : rest;
-                int amp = rest.IndexOf('&');
-                if (amp >= 0) rest = rest.Substring(0, amp);
-                try { f = HttpUtility.UrlDecode(rest); } catch { f = rest; }
-                f = f.TrimStart('/');
-                if (f.StartsWith("Uploads/", StringComparison.OrdinalIgnoreCase))
-                    f = f.Substring("Uploads/".Length);
-            }
-        }
-        return f;
-    }
-
-    private static void StreamFile(HttpContext context, string physical)
-    {
-        string fileName = Path.GetFileName(physical);
-        // Prefer original name from .meta for Content-Disposition
-        string metaPath = physical + ".meta";
-        string downloadName = fileName;
-        if (File.Exists(metaPath))
-        {
-            try
-            {
-                string orig = File.ReadAllText(metaPath).Trim();
-                if (!string.IsNullOrEmpty(orig)) downloadName = Path.GetFileName(orig);
-            }
-            catch { }
-        }
-
-        string ext = Path.GetExtension(fileName).ToLowerInvariant();
-        string contentType = MimeFromExt(ext);
-        bool forceDownload = context.Request["dl"] == "1" || context.Request["download"] == "1";
-        if (ext == ".doc" || ext == ".docx" || ext == ".ppt" || ext == ".pptx" || ext == ".pptm")
-            forceDownload = true;
-
-        long fileLength = new FileInfo(physical).Length;
-        long start = 0;
-        long end = fileLength - 1;
-        bool isRange = false;
-
-        string rangeHeader = context.Request.Headers["Range"];
-        if (!forceDownload && !string.IsNullOrEmpty(rangeHeader) &&
-            rangeHeader.StartsWith("bytes=", StringComparison.OrdinalIgnoreCase))
-        {
-            isRange = true;
-            string spec = rangeHeader.Substring(6).Trim();
-            int dash = spec.IndexOf('-');
-            if (dash >= 0)
-            {
-                string s1 = spec.Substring(0, dash).Trim();
-                string s2 = spec.Substring(dash + 1).Trim();
-                if (s1.Length > 0) long.TryParse(s1, NumberStyles.Integer, CultureInfo.InvariantCulture, out start);
-                if (s2.Length > 0) long.TryParse(s2, NumberStyles.Integer, CultureInfo.InvariantCulture, out end);
-                else end = fileLength - 1;
-            }
-            if (start < 0) start = 0;
-            if (end >= fileLength) end = fileLength - 1;
-            if (start > end || start >= fileLength)
-            {
-                context.Response.StatusCode = 416;
-                context.Response.AddHeader("Content-Range", "bytes */" + fileLength);
-                return;
-            }
-        }
-
-        long contentLength = end - start + 1;
-
-        context.Response.ClearHeaders();
-        context.Response.ClearContent();
-        context.Response.BufferOutput = false;
-        context.Response.ContentType = contentType;
-        context.Response.AddHeader("Accept-Ranges", "bytes");
-        context.Response.AddHeader("Content-Length", contentLength.ToString(CultureInfo.InvariantCulture));
-        context.Response.AddHeader("Content-Disposition",
-            (forceDownload ? "attachment" : "inline") + "; filename=\"" + downloadName.Replace("\"", "'") + "\"");
-
-        if (isRange)
-        {
-            context.Response.StatusCode = 206;
-            context.Response.AddHeader("Content-Range",
-                string.Format(CultureInfo.InvariantCulture, "bytes {0}-{1}/{2}", start, end, fileLength));
-        }
-        else context.Response.StatusCode = 200;
-
-        using (var fs = new FileStream(physical, FileMode.Open, FileAccess.Read, FileShare.Read))
-        {
-            if (start > 0) fs.Seek(start, SeekOrigin.Begin);
-            var buffer = new byte[81920];
-            long remaining = contentLength;
-            while (remaining > 0)
-            {
-                if (!context.Response.IsClientConnected) return;
-                int toRead = remaining > buffer.Length ? buffer.Length : (int)remaining;
-                int read = fs.Read(buffer, 0, toRead);
-                if (read <= 0) break;
-                context.Response.OutputStream.Write(buffer, 0, read);
-                remaining -= read;
-            }
-        }
-        try { context.Response.Flush(); } catch { }
-    }
-
-    private static void WriteDiag(HttpContext context)
-    {
-        var sb = new StringBuilder();
-        string uploads = context.Server.MapPath("~/Uploads");
-        sb.AppendLine("EduLMS Media diagnostics");
-        sb.AppendLine("AppPath: " + context.Request.ApplicationPath);
-        sb.AppendLine("MapPath ~/Uploads: " + uploads);
-        sb.AppendLine("Exists: " + Directory.Exists(uploads));
-        if (Directory.Exists(uploads))
-        {
-            foreach (var root in AllowedRoots)
-            {
-                string dir = Path.Combine(uploads, root);
-                sb.AppendLine();
-                sb.AppendLine("[" + root + "] exists=" + Directory.Exists(dir));
-                if (!Directory.Exists(dir)) continue;
-                var files = Directory.GetFiles(dir);
-                sb.AppendLine("  fileCount=" + files.Length);
-                int n = 0;
-                foreach (var file in files)
-                {
-                    var fi = new FileInfo(file);
-                    string note = "";
-                    if (file.EndsWith(".meta", StringComparison.OrdinalIgnoreCase))
-                    {
-                        try { note = " => " + File.ReadAllText(file).Trim(); } catch { }
-                    }
-                    sb.AppendLine("  - " + fi.Name + " (" + fi.Length + " bytes)" + note);
-                    if (++n >= 40) { sb.AppendLine("  ..."); break; }
-                }
-            }
-        }
-        sb.AppendLine();
-        sb.AppendLine("Test: " + VirtualPathUtility.ToAbsolute("~/Media.ashx") + "?f=CourseMaterials/YOUR_GUID.pdf");
-        WriteText(context, 200, sb.ToString());
-    }
-
-    private static void WriteText(HttpContext context, int code, string message)
-    {
-        context.Response.Clear();
-        context.Response.StatusCode = code;
-        context.Response.ContentType = "text/plain; charset=utf-8";
-        context.Response.Write(message ?? "");
-    }
-
-    private static bool IsClientAbort(Exception ex)
-    {
-        if (ex == null) return false;
-        string m = ex.Message ?? "";
-        if (m.IndexOf("remote host closed", StringComparison.OrdinalIgnoreCase) >= 0) return true;
-        if (m.IndexOf("client disconnected", StringComparison.OrdinalIgnoreCase) >= 0) return true;
-        if (m.IndexOf("aborted", StringComparison.OrdinalIgnoreCase) >= 0) return true;
-        return ex.InnerException != null && IsClientAbort(ex.InnerException);
-    }
-
-    private static string MimeFromExt(string ext)
-    {
-        switch (ext)
-        {
-            case ".pdf": return "application/pdf";
-            case ".mp4": return "video/mp4";
-            case ".webm": return "video/webm";
-            case ".mov": return "video/quicktime";
-            case ".png": return "image/png";
-            case ".jpg":
-            case ".jpeg": return "image/jpeg";
-            case ".gif": return "image/gif";
-            case ".webp": return "image/webp";
-            case ".bmp": return "image/bmp";
-            case ".doc": return "application/msword";
-            case ".docx": return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-            case ".ppt": return "application/vnd.ms-powerpoint";
-            case ".pptx": return "application/vnd.openxmlformats-officedocument.presentationml.presentation";
-            default: return "application/octet-stream";
-        }
-    }
-
-    public bool IsReusable { get { return false; } }
-}
-
 ```

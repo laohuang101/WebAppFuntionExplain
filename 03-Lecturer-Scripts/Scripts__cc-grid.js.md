@@ -1,6 +1,6 @@
 # cc-grid.js
 **Source:** `Pages/Lecturer/Scripts/cc-grid.js`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,37 +15,51 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 25:** `container` — script-level `const`/`let`/`var` — **Holds “container” for this scope.**
-- **Line 41:** `col` — script-level `const`/`let`/`var` — **Holds “col” for this scope.**
-- **Line 43:** `isPublished` — script-level `const`/`let`/`var` — **Course visibility flag for Landing catalog.**
-- **Line 45:** `statusBadgeClass` — script-level `const`/`let`/`var` — **Often a collection related to status Badge Class (plural name).**
-- **Line 46:** `statusText` — script-level `const`/`let`/`var` — **Holds “status Text” for this scope.**
-- **Line 47:** `rating` — script-level `const`/`let`/`var` — **Holds “rating” for this scope.**
-- **Line 48:** `ratingHtml` — script-level `const`/`let`/`var` — **Holds “rating Html” for this scope.**
-- **Line 51:** `pubBtnLabel` — script-level `const`/`let`/`var` — **Holds “pub Btn Label” for this scope.**
-- **Line 52:** `pubBtnIcon` — script-level `const`/`let`/`var` — **Holds “pub Btn Icon” for this scope.**
-- **Line 88:** `card` — script-level `const`/`let`/`var` — **Holds “card” for this scope.**
-- **Line 90:** `btn` — script-level `const`/`let`/`var` — **Button DOM element.**
-- **Line 94:** `action` — script-level `const`/`let`/`var` — **Holds “action” for this scope.**
-- **Line 108:** `msg` — script-level `const`/`let`/`var` — **Human-readable message (error or success).**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `container` | `const/let/var` | Holds “container” for this scope. |
+| `col` | `const/let/var` | Holds “col” for this scope. |
+| `isPublished` | `const/let/var` | Course visibility flag for Landing catalog. |
+| `statusBadgeClass` | `const/let/var` | Often a collection related to status Badge Class (plural name). |
+| `statusText` | `const/let/var` | Holds “status Text” for this scope. |
+| `rating` | `const/let/var` | Holds “rating” for this scope. |
+| `ratingHtml` | `const/let/var` | Holds “rating Html” for this scope. |
+| `pubBtnLabel` | `const/let/var` | Holds “pub Btn Label” for this scope. |
+| `pubBtnIcon` | `const/let/var` | Holds “pub Btn Icon” for this scope. |
+| `card` | `const/let/var` | Holds “card” for this scope. |
+| `btn` | `const/let/var` | Button DOM element. |
+| `action` | `const/let/var` | Holds “action” for this scope. |
+| `msg` | `const/let/var` | Human-readable message (error or success). |
 
 ## Functions / methods (6 found)
 
 ### `loadCourses` — lines 3–22
 
+#### Signature
+
 ```javascript
 function loadCourses()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `loadCourses`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Read/load data for display.
+Browser JS: load the lecturer’s courses into a dropdown.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Update a page element (text, HTML, value, or enabled/disabled).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
    3 | 
@@ -70,39 +84,47 @@ function loadCourses()
   22 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L12:** Get HTML element by id.
-- **L14:** Encode text to reduce XSS risk.
-- **L19:** Get HTML element by id.
-
 ---
 
 ### `renderCourseGrid` — lines 22–105
+
+#### Signature
 
 ```javascript
 function renderCourseGrid()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `renderCourseGrid`.
-- **Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.
-- **Local variables (what each means):**
-- `container` — Holds “container” for this scope.  DOM element from the page.
-- `col` — Holds “col” for this scope.
-- `isPublished` — Course visibility flag for Landing catalog.
-- `statusBadgeClass` — Often a collection related to status Badge Class (plural name).
-- `statusText` — Holds “status Text” for this scope.
-- `rating` — Holds “rating” for this scope.
-- `ratingHtml` — Holds “rating Html” for this scope.
-- `pubBtnLabel` — Holds “pub Btn Label” for this scope.
-- `pubBtnIcon` — Holds “pub Btn Icon” for this scope.
-- `card` — Holds “card” for this scope.
-- `btn` — Button DOM element.
-- `action` — Holds “action” for this scope.
+Updates the page HTML for **render Course Grid**.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Attach a browser event handler (click, load, change, …).
+2. Stop the browser’s default action (for example form submit).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `container` | `—` | Holds “container” for this scope.  DOM element from the page. |
+| `col` | `—` | Holds “col” for this scope. |
+| `isPublished` | `—` | Course visibility flag for Landing catalog. |
+| `statusBadgeClass` | `—` | Often a collection related to status Badge Class (plural name). |
+| `statusText` | `—` | Holds “status Text” for this scope. |
+| `rating` | `—` | Holds “rating” for this scope. |
+| `ratingHtml` | `—` | Holds “rating Html” for this scope. |
+| `pubBtnLabel` | `—` | Holds “pub Btn Label” for this scope. |
+| `pubBtnIcon` | `—` | Holds “pub Btn Icon” for this scope. |
+| `card` | `—` | Holds “card” for this scope. |
+| `btn` | `—` | Button DOM element. |
+| `action` | `—` | Holds “action” for this scope. |
+
+#### Code
 
 ```javascript
   22 | 
@@ -191,47 +213,39 @@ function renderCourseGrid()
  105 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L25:** Get HTML element by id. | `container` means: Holds “container” for this scope.  DOM element from the page.
-- **L26:** Update page HTML.
-- **L29:** Update page HTML.
-- **L41:** `col` means: Holds “col” for this scope.
-- **L44:** `isPublished` means: Course visibility flag for Landing catalog.
-- **L45:** `statusBadgeClass` means: Often a collection related to status Badge Class (plural name).
-- **L46:** `statusText` means: Holds “status Text” for this scope.
-- **L47:** `rating` means: Holds “rating” for this scope.
-- **L48:** `ratingHtml` means: Holds “rating Html” for this scope.
-- **L51:** `pubBtnLabel` means: Holds “pub Btn Label” for this scope.
-- **L52:** `pubBtnIcon` means: Holds “pub Btn Icon” for this scope.
-- **L54:** Update page HTML.
-- **L57:** Encode text to reduce XSS risk.
-- **L63:** Encode text to reduce XSS risk.
-- **L88:** `card` means: Holds “card” for this scope.
-- **L89:** DOM event handler.
-- **L90:** `btn` means: Button DOM element.
-- **L94:** `action` means: Holds “action” for this scope.
-
 ---
 
 ### `toggleCoursePublished` — lines 105–127
+
+#### Signature
 
 ```javascript
 function toggleCoursePublished(cid, publish)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `toggleCoursePublished`.
-- **Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters (what each means):**
-- `cid` — Course ID (Courses.CID).
-- `publish` — Holds “publish” for this scope.
-- **Local variables (what each means):**
-- `msg` — Human-readable message (error or success).
+Function `toggleCoursePublished` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. If the previous step failed, show the error and stop.
+2. Show a simple popup message to the user.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cid` | `—` | Course ID (Courses.CID). |
+| `publish` | `—` | Holds “publish” for this scope. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `msg` | `—` | Human-readable message (error or success). |
+
+#### Code
 
 ```javascript
  105 | 
@@ -259,25 +273,37 @@ function toggleCoursePublished(cid, publish)
  127 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L108:** `msg` means: Human-readable message (error or success).
-
 ---
 
 ### `openCoursePreview` — lines 127–131
+
+#### Signature
 
 ```javascript
 function openCoursePreview(cid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `openCoursePreview`.
-- **Parameters (what each means):**
-- `cid` — Course ID (Courses.CID).
+Function `openCoursePreview` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `openCoursePreview`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cid` | `—` | Course ID (Courses.CID). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  127 | 
@@ -291,18 +317,31 @@ function openCoursePreview(cid)
 
 ### `escapeHtml` — lines 131–149
 
+#### Signature
+
 ```javascript
 function escapeHtml(str)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `escapeHtml`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters (what each means):**
-- `str` — String value: str.
+Function `escapeHtml` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Show a simple popup message to the user.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `str` | `—` | String value: str. |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  131 | 
@@ -326,27 +365,35 @@ function escapeHtml(str)
  149 | 
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L133:** Encode text to reduce XSS risk.
-
 ---
 
 ### `deleteCourse` — lines 136–148
+
+#### Signature
 
 ```javascript
 function deleteCourse(cid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `deleteCourse`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Delete/clear data.
-- **Parameters (what each means):**
-- `cid` — Course ID (Courses.CID).
+Deletes or clears **delete Course** (data or temporary state).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Show a simple popup message to the user.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `cid` | `—` | Course ID (Courses.CID). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
  136 | 
@@ -366,9 +413,9 @@ function deleteCourse(cid)
 
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```javascript
    1 | // Course Creation — course grid, publish, delete
@@ -520,185 +567,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  147 |     .catch(function (err) { console.error(err); alert('Network error.'); });
  148 | }
  149 | 
-```
-
-**Line notes** (what code + variables mean)
-
-- **L12:** Get HTML element by id.
-- **L14:** Encode text to reduce XSS risk.
-- **L19:** Get HTML element by id.
-- **L25:** Get HTML element by id. | `container` means: Holds “container” for this scope.  DOM element from the page.
-- **L26:** Update page HTML.
-- **L29:** Update page HTML.
-- **L41:** `col` means: Holds “col” for this scope.
-- **L44:** `isPublished` means: Course visibility flag for Landing catalog.
-- **L45:** `statusBadgeClass` means: Often a collection related to status Badge Class (plural name).
-- **L46:** `statusText` means: Holds “status Text” for this scope.
-- **L47:** `rating` means: Holds “rating” for this scope.
-- **L48:** `ratingHtml` means: Holds “rating Html” for this scope.
-- **L51:** `pubBtnLabel` means: Holds “pub Btn Label” for this scope.
-- **L52:** `pubBtnIcon` means: Holds “pub Btn Icon” for this scope.
-- **L54:** Update page HTML.
-- **L57:** Encode text to reduce XSS risk.
-- **L63:** Encode text to reduce XSS risk.
-- **L88:** `card` means: Holds “card” for this scope.
-- **L89:** DOM event handler.
-- **L90:** `btn` means: Button DOM element.
-- **L94:** `action` means: Holds “action” for this scope.
-- **L108:** `msg` means: Human-readable message (error or success).
-- **L133:** Encode text to reduce XSS risk.
-
-## Source snapshot (raw)
-
-```javascript
-// Course Creation — course grid, publish, delete
-// depends on: cc-core.js
-// ---- Course grid / wizard / curriculum ----
-
-function loadCourses() {
-    postJson('CourseCreation.aspx/GetCoursesData', {})
-    .then(function (resObj) {
-        if (resObj && resObj.success) {
-            courses = resObj.courses || [];
-            renderCourseGrid();
-        } else {
-            document.getElementById('courseGridContainer').innerHTML =
-            '<div class="col-12 text-center text-danger py-4">Failed to load courses: ' +
-            escapeHtml((resObj && resObj.message) || 'Unknown error') + '</div>';
-        }
-    })
-    .catch(function (err) {
-        console.error('Error loading courses: ', err);
-        document.getElementById('courseGridContainer').innerHTML =
-        '<div class="col-12 text-center text-danger py-4">Network error loading courses.</div>';
-    });
-}
-
-function renderCourseGrid() {
-    const container = document.getElementById('courseGridContainer');
-    container.innerHTML = '';
-
-    if (courses.length === 0) {
-        container.innerHTML = `
-        <div class="col-12 text-center py-5">
-        <div class="glass-card p-5 d-inline-block" style="max-width: 450px;">
-        <i class="fa-solid fa-folder-open fa-3x mb-3 text-muted" style="color: var(--primary-accent) !important; opacity:0.6;"></i>
-        <h5 class="fw-bold">No Courses Created Yet</h5>
-        <p class="text-muted small">Begin by clicking the "Create Course" button at the top right to start your syllabus.</p>
-        </div>
-        </div>`;
-        return;
-    }
-
-    courses.forEach(c => {
-        const col = document.createElement('div');
-        col.className = 'col-lg-4 col-md-6';
-
-        const isPublished = !!c.isPublished || (c.status === 'Published');
-        const statusBadgeClass = isPublished ? 'badge-published' : 'badge-draft';
-        const statusText = isPublished ? 'Published' : 'Draft';
-        const rating = (c.rating != null && c.rating > 0) ? Number(c.rating).toFixed(1) : null;
-        const ratingHtml = rating
-        ? `<span class="ms-2"><i class="fa-solid fa-star" style="color:#f59e0b;"></i> ${rating}</span>`
-        : '';
-        const pubBtnLabel = isPublished ? 'Unpublish' : 'Publish';
-        const pubBtnIcon = isPublished ? 'fa-eye-slash' : 'fa-cloud-arrow-up';
-
-        col.innerHTML = `
-        <div class="course-grid-card h-100 d-flex flex-column course-card-clickable" data-cid="${c.cid}" role="button" title="Open course preview">
-        <div class="position-relative">
-        <img src="${c.bgImg || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=400'}" class="course-banner-img" alt="${escapeHtml(c.name)}">
-        <div class="position-absolute top-0 end-0 m-3">
-        <span class="badge-status ${statusBadgeClass}">${statusText}</span>
-        </div>
-        </div>
-        <div class="p-4 d-flex flex-column flex-grow-1">
-        <h5 class="course-title">${escapeHtml(c.name)}</h5>
-        <div class="d-flex align-items-center text-muted small fw-semibold mb-3">
-        <i class="fa-solid fa-user-group me-1"></i> ${c.studentsCount || 0}
-        ${ratingHtml}
-        </div>
-        <div class="mt-auto d-flex justify-content-between align-items-center gap-2 pt-2 border-top border-light">
-        <button type="button" class="btn btn-sm rounded-pill px-3 ${isPublished ? 'btn-outline-secondary' : 'btn-pill-accent'}" data-action="publish" title="${pubBtnLabel}">
-        <i class="fa-solid ${pubBtnIcon} me-1"></i>${pubBtnLabel}
-        </button>
-        <div class="d-flex gap-1">
-        <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="preview" title="Preview Course">
-        <i class="fa-regular fa-eye"></i>
-        </button>
-        <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="edit" title="Edit Course">
-        <i class="fa-solid fa-pencil"></i>
-        </button>
-        <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="delete" title="Delete Course">
-        <i class="fa-regular fa-trash-can"></i>
-        </button>
-        </div>
-        </div>
-        </div>
-        </div>`;
-
-        // Card click → preview; action buttons stop propagation
-        const card = col.querySelector('.course-card-clickable');
-        card.addEventListener('click', function (e) {
-            const btn = e.target.closest('[data-action]');
-            if (btn) {
-                e.preventDefault();
-                e.stopPropagation();
-                const action = btn.getAttribute('data-action');
-                if (action === 'edit') editCourseBasicInfo(c.cid);
-                else if (action === 'delete') deleteCourse(c.cid);
-                else if (action === 'preview') openCoursePreview(c.cid);
-                else if (action === 'publish') toggleCoursePublished(c.cid, !isPublished);
-                return;
-            }
-            openCoursePreview(c.cid);
-        });
-        container.appendChild(col);
-    });
-}
-
-function toggleCoursePublished(cid, publish) {
-    const msg = publish
-        ? 'Publish this course so students can see it on the landing page?'
-        : 'Unpublish this course? It will be hidden from the public catalogue.';
-    if (!window.confirm(msg)) return;
-    postJson('CourseCreation.aspx/SetCoursePublished', { cid: cid, published: !!publish })
-        .then(function (res) {
-            if (res && res.notAuthenticated) {
-                location.href = '/Pages/Authentication/Login.aspx';
-                return;
-            }
-            if (!res || !res.success) {
-                alert((res && res.message) || 'Could not update publish state.');
-                return;
-            }
-            loadCourses();
-        })
-        .catch(function (err) {
-            alert(err.message || 'Could not update publish state.');
-        });
-}
-
-function openCoursePreview(cid) {
-    window.location.href = 'CoursePreview.aspx?cid=' + encodeURIComponent(cid);
-}
-
-function escapeHtml(str) {
-    if (!str) return '';
-    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-
-function deleteCourse(cid) {
-    if (!confirm('CAUTION: Are you sure you want to delete this course? This will remove all chapters, lessons, materials, and student enrollments! This action is permanent.')) return;
-
-    postJson('CourseCreation.aspx/DeleteCourse', { cid: cid })
-    .then(function (resObj) {
-        if (resObj && resObj.success) loadCourses();
-        else alert('Delete course failed: ' + ((resObj && resObj.message) || 'Unknown error'));
-    })
-    .catch(function (err) { console.error(err); alert('Network error.'); });
-}
-
-
 ```

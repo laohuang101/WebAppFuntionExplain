@@ -1,6 +1,6 @@
 # Logout.aspx
 **Source:** `Pages/Authentication/Logout.aspx`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,17 +15,17 @@ Clears session, abandons session, clears JWT auth cookie.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
+Markup file — variables live in the matching `.cs` / `.js` companion docs.
 
 ## Functions / methods (0 found)
 
-_No methods matched the scanner (markup-only or unconventional structure). See full file listing below._
+_No methods matched the scanner (markup-only or unconventional structure). See the code listing at the bottom._
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```html
    1 | <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Logout.aspx.cs" Inherits="WebAppAssignment.Pages.Authentication.Logout" %>
@@ -47,29 +47,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   17 |     </form>
   18 |   </body>
   19 | </html>
-```
-
-## Source snapshot (raw)
-
-```html
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Logout.aspx.cs" Inherits="WebAppAssignment.Pages.Authentication.Logout" %>
-
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head runat="server">
-    <meta charset="utf-8" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Signing out... - EduLMS</title>
-    <meta http-equiv="refresh" content="0;url=<%= ResolveUrl("~/Pages/Landing/Landing.aspx") %>" />
-    <style>
-      body { font-family: Inter, system-ui, sans-serif; background: #f5f6f8; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; color: #6b7280; }
-    </style>
-  </head>
-  <body>
-    <form id="form1" runat="server">
-      <div>Signing you out...</div>
-    </form>
-  </body>
-</html>
-
 ```

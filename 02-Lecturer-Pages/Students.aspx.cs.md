@@ -1,6 +1,6 @@
 # Students.aspx.cs
 **Source:** `Pages/Lecturer/Students.aspx.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,31 +15,42 @@ Enrolled students per course with progress counts.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 29:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 31:** `list` (`var`) — **In-memory collection being built for JSON return.**
-- **Line 46:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
-- **Line 48:** `detail` (`var`) — **Holds “detail” for this scope.**
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (4 found)
 
 ### `Page_Load` — lines 12–16
 
+#### Signature
+
 ```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `Page_Load`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters (what each means):**
-- `sender` (`object`) — Holds “sender” for this scope.
-- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+Runs automatically when the ASP.NET page opens or posts back; sets up the page and security checks.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. ASP.NET calls this automatically on every request.
+2. On first load (`!IsPostBack`), initialize UI or redirect if already logged in.
+3. On postback, button handlers run separately after this method.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sender` | `object` | The control that raised the event (the button that was clicked). |
+| `e` | `EventArgs` | Event data from the button/control click (ASP.NET EventArgs). |
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   12 |         protected void Page_Load(object sender, EventArgs e)
@@ -49,25 +60,33 @@ protected void Page_Load(object sender, EventArgs e)
   16 | }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L12:** Page load entry (GET or postback).
-- **L14:** Authorization — block wrong role / anonymous.
-
 ---
 
 ### `CurrentUid` — lines 17–21
+
+#### Signature
 
 ```csharp
 private static int CurrentUid()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `CurrentUid`.
-- **Security:** Uses AuthGate — requires logged-in role.
+Function `CurrentUid` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Check the caller’s role (Lecturer/Student/Admin). If not allowed, return an error and stop.
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```csharp
   17 | 
@@ -77,31 +96,38 @@ private static int CurrentUid()
   21 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L20:** Authorization — block wrong role / anonymous.
-
 ---
 
 ### `GetStudents` — lines 25–38
+
+#### Signature
 
 ```csharp
 public static object GetStudents(string search)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GetStudents`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Read/load data for display.
-- **Parameters (what each means):**
-- `search` (`string`) — Holds “search” for this scope. (text)
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `list` (`var`) — In-memory collection being built for JSON return.
+Reads/loads data related to **Students** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `search` | `string` | Holds “search” for this scope. (text) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `list` | `var` | In-memory collection being built for JSON return. |
+
+#### Code
 
 ```csharp
   25 |         public static object GetStudents(string search)
@@ -120,36 +146,39 @@ public static object GetStudents(string search)
   38 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L27:** Error handling block.
-- **L29:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L30:** Authorization — block wrong role / anonymous.
-- **L31:** `list` means: In-memory collection being built for JSON return.
-- **L34:** Handle/log exception.
-
 ---
 
 ### `GetStudentDetail` — lines 42–56
+
+#### Signature
 
 ```csharp
 public static object GetStudentDetail(int studentUid, int cid)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `GetStudentDetail`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Pattern:** Read/load data for display.
-- **Parameters (what each means):**
-- `studentUid` (`int`) — Users.UID of the student.
-- `cid` (`int`) — Course ID (Courses.CID).
-- **Local variables (what each means):**
-- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
-- `detail` (`var`) — Holds “detail” for this scope.
+Reads/loads data related to **Student Detail** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Build and return the result object (success or data for the UI).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `studentUid` | `int` | Users.UID of the student. |
+| `cid` | `int` | Course ID (Courses.CID). |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `uid` | `int` | User ID (Users.UID) of the logged-in or target user. |
+| `detail` | `var` | Holds “detail” for this scope. |
+
+#### Code
 
 ```csharp
   42 |         public static object GetStudentDetail(int studentUid, int cid)
@@ -169,19 +198,11 @@ public static object GetStudentDetail(int studentUid, int cid)
   56 |         }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L44:** Error handling block.
-- **L46:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L47:** Authorization — block wrong role / anonymous.
-- **L48:** `detail` means: Holds “detail” for this scope.
-- **L52:** Handle/log exception.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -242,93 +263,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   56 |         }
   57 |     }
   58 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L2:** Import namespace/types.
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L5:** Import namespace/types.
-- **L6:** Import namespace/types.
-- **L8:** C# namespace grouping.
-- **L12:** Page load entry (GET or postback).
-- **L14:** Authorization — block wrong role / anonymous.
-- **L20:** Authorization — block wrong role / anonymous.
-- **L23:** Expose method to AJAX JSON calls.
-- **L27:** Error handling block.
-- **L29:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L30:** Authorization — block wrong role / anonymous.
-- **L31:** `list` means: In-memory collection being built for JSON return.
-- **L34:** Handle/log exception.
-- **L40:** Expose method to AJAX JSON calls.
-- **L44:** Error handling block.
-- **L46:** `uid` means: User ID (Users.UID) of the logged-in or target user.
-- **L47:** Authorization — block wrong role / anonymous.
-- **L48:** `detail` means: Holds “detail” for this scope.
-- **L52:** Handle/log exception.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-using System.Web.Script.Services;
-using System.Web.Services;
-using System.Web.UI;
-using WebAppAssignment.Data;
-using WebAppAssignment.Data.Security;
-
-namespace WebAppAssignment.Pages.Lecturer
-{
-    public partial class Students : Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))
-                return;
-}
-
-        private static int CurrentUid()
-        {
-            return AuthGate.RequireLecturer();
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object GetStudents(string search)
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                var list = LecturerRepository.GetStudentPerformance(uid, search);
-                return new { success = true, students = list };
-            }
-            catch (Exception ex)
-            {
-                return new { success = false, message = "Request failed." };
-            }
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public static object GetStudentDetail(int studentUid, int cid)
-        {
-            try
-            {
-                int uid = CurrentUid();
-                if (uid == 0) return AuthGate.NotAuthenticatedJson();
-                var detail = LecturerRepository.GetStudentDetail(uid, studentUid, cid);
-                if (detail == null) return new { success = false, message = "Student not found." };
-                return new { success = true, detail = detail };
-            }
-            catch (Exception ex)
-            {
-                return new { success = false, message = "Request failed." };
-            }
-        }
-    }
-}
-
 ```

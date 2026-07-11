@@ -1,6 +1,6 @@
 # UploadThumbnail.ashx
 **Source:** `Pages/Lecturer/UploadThumbnail.ashx`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,38 +15,51 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
+Markup file — variables live in the matching `.cs` / `.js` companion docs.
 
 ## Functions / methods (2 found)
 
 ### `ProcessRequest` — lines 14–92
 
+#### Signature
+
 ```html
 public void ProcessRequest(HttpContext context)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `ProcessRequest`.
-- **Security:** Uses AuthGate — requires logged-in role.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters (what each means):**
-- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
-- **Local variables (what each means):**
-- `file` (`var`) — Uploaded file object or file name.
-- `ext` (`var`) — File extension (.pdf, .mp4, …).
-- `uploadsFolder` (`var`) — Filesystem or URL path.
-- `fileName` (`var`) — Original file name for display/download.
-- `savePath` (`var`) — Filesystem or URL path.
-- `full` (`string`) — Fully resolved absolute path.
-- `root` (`string`) — Root directory path (Uploads).
-- `under` (`string`) — Holds “under” for this scope. (text)  Literal text string.
-- `mediaUrl` (`string`) — URL string. (text)
-- `staticUrl` (`string`) — URL string. (text)
+Main entry point for an `.ashx` HTTP handler — handles one browser request from start to finish.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Check the caller’s role (Lecturer/Student/Admin). If not allowed, return an error and stop.
+2. Write an audit-log row for this security event.
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `context` | `HttpContext` | Holds “context” for this scope. (current HTTP request) |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `file` | `var` | Uploaded file object or file name. |
+| `ext` | `var` | File extension (.pdf, .mp4, …). |
+| `uploadsFolder` | `var` | Filesystem or URL path. |
+| `fileName` | `var` | Original file name for display/download. |
+| `savePath` | `var` | Filesystem or URL path. |
+| `full` | `string` | Fully resolved absolute path. |
+| `root` | `string` | Root directory path (Uploads). |
+| `under` | `string` | Holds “under” for this scope. (text)  Literal text string. |
+| `mediaUrl` | `string` | URL string. (text) |
+| `staticUrl` | `string` | URL string. (text) |
+
+#### Code
 
 ```html
   14 | 
@@ -130,47 +143,38 @@ public void ProcessRequest(HttpContext context)
   92 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L15:** IHttpHandler entry for ashx.
-- **L20:** Error handling block.
-- **L23:** Authorization — block wrong role / anonymous.
-- **L32:** `file` means: Uploaded file object or file name.
-- **L39:** `ext` means: File extension (.pdf, .mp4, …).
-- **L40:** Sandbox path under ~/Uploads.
-- **L52:** File magic-byte validation on upload.
-- **L53:** Validate upload by file signature.
-- **L55:** Write/read security audit events.
-- **L56:** File magic-byte validation on upload.
-- **L60:** `uploadsFolder` means: Filesystem or URL path.
-- **L63:** `fileName` means: Original file name for display/download.
-- **L64:** `savePath` means: Filesystem or URL path.
-- **L66:** `full` means: Fully resolved absolute path.
-- **L67:** `root` means: Root directory path (Uploads).
-- **L76:** `under` means: Holds “under” for this scope. (text)  Literal text string.
-- **L77:** `mediaUrl` means: URL string. (text)
-- **L78:** `staticUrl` means: URL string. (text)
-- **L88:** Handle/log exception.
-
 ---
 
 ### `WriteJson` — lines 93–98
+
+#### Signature
 
 ```html
 private void WriteJson(HttpContext context, object obj)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `WriteJson`.
-- **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters (what each means):**
-- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
-- `obj` (`object`) — Holds “obj” for this scope.
-- **Local variables (what each means):**
-- `js` (`var`) — Holds “js” for this scope.  Newly constructed object.
+Function `WriteJson` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Write the HTTP response body (JSON, file bytes, or text).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `context` | `HttpContext` | Holds “context” for this scope. (current HTTP request) |
+| `obj` | `object` | Holds “obj” for this scope. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `js` | `var` | Holds “js” for this scope.  Newly constructed object. |
+
+#### Code
 
 ```html
   93 | 
@@ -181,15 +185,11 @@ private void WriteJson(HttpContext context, object obj)
   98 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L96:** `js` means: Holds “js” for this scope.  Newly constructed object.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```html
    1 | <%@ WebHandler Language="C#" Class="UploadThumbnail" %>
@@ -293,141 +293,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   99 | 
  100 |     public bool IsReusable { get { return false; } }
  101 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L3:** Import namespace/types.
-- **L4:** Import namespace/types.
-- **L5:** Import namespace/types.
-- **L6:** Import namespace/types.
-- **L7:** Import namespace/types.
-- **L8:** Import namespace/types.
-- **L11:** Class declaration for this page/service.
-- **L15:** IHttpHandler entry for ashx.
-- **L20:** Error handling block.
-- **L23:** Authorization — block wrong role / anonymous.
-- **L32:** `file` means: Uploaded file object or file name.
-- **L39:** `ext` means: File extension (.pdf, .mp4, …).
-- **L40:** Sandbox path under ~/Uploads.
-- **L52:** File magic-byte validation on upload.
-- **L53:** Validate upload by file signature.
-- **L55:** Write/read security audit events.
-- **L56:** File magic-byte validation on upload.
-- **L60:** `uploadsFolder` means: Filesystem or URL path.
-- **L63:** `fileName` means: Original file name for display/download.
-- **L64:** `savePath` means: Filesystem or URL path.
-- **L66:** `full` means: Fully resolved absolute path.
-- **L67:** `root` means: Root directory path (Uploads).
-- **L76:** `under` means: Holds “under” for this scope. (text)  Literal text string.
-- **L77:** `mediaUrl` means: URL string. (text)
-- **L78:** `staticUrl` means: URL string. (text)
-- **L88:** Handle/log exception.
-- **L96:** `js` means: Holds “js” for this scope.  Newly constructed object.
-
-## Source snapshot (raw)
-
-```html
-<%@ WebHandler Language="C#" Class="UploadThumbnail" %>
-
-using System;
-using System.IO;
-using System.Web;
-using System.Web.Script.Serialization;
-using System.Web.SessionState;
-using WebAppAssignment.Data.Security;
-
-/// <summary>Course thumbnail upload — Lecturer/Admin only.</summary>
-public class UploadThumbnail : IHttpHandler, IRequiresSessionState
-{
-    private static readonly string[] ImageExts = { ".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp" };
-
-    public void ProcessRequest(HttpContext context)
-    {
-        context.Response.ContentType = "application/json; charset=utf-8";
-        context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-
-        try
-        {
-            int uid;
-            if (!AuthGate.EnsureHandlerRole(context, out uid, "Lecturer", "Admin"))
-                return;
-
-            if (context.Request.Files.Count == 0)
-            {
-                WriteJson(context, new { success = false, message = "No file uploaded." });
-                return;
-            }
-
-            var file = context.Request.Files[0];
-            if (file == null || file.ContentLength <= 0)
-            {
-                WriteJson(context, new { success = false, message = "Empty file." });
-                return;
-            }
-
-            var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
-            if (!UploadPathGuard.IsAllowedExtension(ext, ImageExts))
-            {
-                WriteJson(context, new { success = false, message = "Only image files are allowed." });
-                return;
-            }
-
-            if (file.ContentLength > 5 * 1024 * 1024)
-            {
-                WriteJson(context, new { success = false, message = "Thumbnail must be under 5 MB." });
-                return;
-            }
-
-            string magicMsg;
-            if (!FileMagic.LooksValid(file, ext, out magicMsg))
-            {
-                SecurityAudit.Log("upload.reject", uid, magicMsg + " thumb");
-                WriteJson(context, new { success = false, message = magicMsg ?? "Invalid image content." });
-                return;
-            }
-
-            var uploadsFolder = context.Server.MapPath("~/Uploads/CourseThumbnails");
-            if (!Directory.Exists(uploadsFolder)) Directory.CreateDirectory(uploadsFolder);
-
-            var fileName = Guid.NewGuid().ToString("N") + ext;
-            var savePath = Path.Combine(uploadsFolder, fileName);
-            // Ensure still under thumbnails folder
-            string full = Path.GetFullPath(savePath);
-            string root = Path.GetFullPath(uploadsFolder) + Path.DirectorySeparatorChar;
-            if (!full.StartsWith(root, StringComparison.OrdinalIgnoreCase))
-            {
-                WriteJson(context, new { success = false, message = "Invalid save path." });
-                return;
-            }
-
-            file.SaveAs(savePath);
-
-            string under = "CourseThumbnails/" + fileName;
-            string mediaUrl = VirtualPathUtility.ToAbsolute("~/Media.ashx") + "?f=" + HttpUtility.UrlEncode(under);
-            string staticUrl = VirtualPathUtility.ToAbsolute("~/Uploads/" + under);
-
-            WriteJson(context, new
-            {
-                success = true,
-                url = mediaUrl,
-                staticUrl = staticUrl,
-                storePath = "Uploads/" + under
-            });
-        }
-        catch
-        {
-            WriteJson(context, new { success = false, message = "Thumbnail upload failed." });
-        }
-    }
-
-    private void WriteJson(HttpContext context, object obj)
-    {
-        var js = new JavaScriptSerializer();
-        context.Response.Write(js.Serialize(obj));
-    }
-
-    public bool IsReusable { get { return false; } }
-}
-
 ```

@@ -1,6 +1,6 @@
 # dropdowns.js
 **Source:** `Pages/Lecturer/Scripts/dropdowns.js`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,27 +15,44 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-- **Line 4:** `defaultData` — script-level `const`/`let`/`var` — **Holds “default Data” for this scope.**
-- **Line 33:** `sel` — script-level `const`/`let`/`var` — **Holds “sel” for this scope.**
-- **Line 38:** `o` — script-level `const`/`let`/`var` — **Holds “o” for this scope.**
-- **Line 46:** `data` — script-level `const`/`let`/`var` — **Holds “data” for this scope.**
+| Variable | Type | What it is |
+|----------|------|------------|
+| `defaultData` | `const/let/var` | Holds “default Data” for this scope. |
+| `sel` | `const/let/var` | Holds “sel” for this scope. |
+| `o` | `const/let/var` | Holds “o” for this scope. |
+| `data` | `const/let/var` | Holds “data” for this scope. |
 
 ## Functions / methods (2 found)
 
 ### `getData` — lines 26–30
 
+#### Signature
+
 ```javascript
 function getData()
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `getData`.
-- **Pattern:** Read/load data for display.
+Reads/loads data related to **Data** and returns it for display or further use.
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `getData`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+_No parameters._
+
+#### Variables (inside this function)
+
+_No local variables detected (or only uses parameters)._
+
+#### Code
 
 ```javascript
   26 | 
@@ -49,21 +66,37 @@ function getData()
 
 ### `populateSelect` — lines 30–43
 
+#### Signature
+
 ```javascript
 function populateSelect(id, items)
 ```
 
-#### Explanation
+#### What it is
 
-- **Purpose:** Implements `populateSelect`.
-- **Parameters (what each means):**
-- `id` — Generic primary key / identifier.
-- `items` — Array of rows for UI tables.
-- **Local variables (what each means):**
-- `sel` — Holds “sel” for this scope.  DOM element from the page.
-- `o` — Holds “o” for this scope.
+Function `populateSelect` — supports this feature by running the logic in its body (see **How it works**).
 
-#### Line-by-line (this function)
+#### How it works
+
+1. Starts when something calls `populateSelect`.
+2. Uses the parameters and local variables listed below.
+3. Runs the statements in the code block (checks, database/UI work, then return).
+
+#### Parameters
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `id` | `—` | Generic primary key / identifier. |
+| `items` | `—` | Array of rows for UI tables. |
+
+#### Variables (inside this function)
+
+| Variable | Type | What it is |
+|----------|------|------------|
+| `sel` | `—` | Holds “sel” for this scope.  DOM element from the page. |
+| `o` | `—` | Holds “o” for this scope. |
+
+#### Code
 
 ```javascript
   30 | 
@@ -82,17 +115,11 @@ function populateSelect(id, items)
   43 |     }
 ```
 
-**Line notes** (what code + variables mean)
-
-- **L33:** Get HTML element by id. | `sel` means: Holds “sel” for this scope.  DOM element from the page.
-- **L36:** Update page HTML.
-- **L38:** `o` means: Holds “o” for this scope.
-
 ---
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```javascript
    1 | // dropdowns.js - provides JSON-driven dropdown population for CourseCreation page
@@ -156,80 +183,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   59 |         }
   60 |     }).catch(()=>{});
   61 | })();
-```
-
-**Line notes** (what code + variables mean)
-
-- **L4:** `defaultData` means: Holds “default Data” for this scope.
-- **L33:** Get HTML element by id. | `sel` means: Holds “sel” for this scope.  DOM element from the page.
-- **L36:** Update page HTML.
-- **L38:** `o` means: Holds “o” for this scope.
-- **L46:** `data` means: Holds “data” for this scope.
-- **L54:** HTTP request to server WebMethod/ashx.
-
-## Source snapshot (raw)
-
-```javascript
-// dropdowns.js - provides JSON-driven dropdown population for CourseCreation page
-(function(){
-    // Default dropdown data (can be extended or fetched from server)
-    const defaultData = {
-        categories: [
-        { value: 'UI/UX Design', label: 'UI/UX Design' },
-        { value: 'Product Design', label: 'Product Design' },
-        { value: 'Web Development', label: 'Web Development' },
-        { value: 'Software Engineering', label: 'Software Engineering' }
-        ],
-        levels: [
-        { value: 'Beginner', label: 'Beginner' },
-        { value: 'Intermediate', label: 'Intermediate' },
-        { value: 'Advanced', label: 'Advanced' }
-        ],
-        lessonTypes: [
-        { value: 'Text', label: 'Text Content' },
-        { value: 'Video', label: 'Video Link' },
-        { value: 'Quiz', label: 'Quiz / Assignment Question' }
-        ]
-    };
-
-    // Allows page or tests to override data programmatically
-    window.setDropdownData = function(data){
-        window.__dropdownData = Object.assign({}, window.__dropdownData || defaultData, data);
-    };
-
-    function getData(){
-        return window.__dropdownData || defaultData;
-    }
-
-    function populateSelect(id, items){
-        const sel = document.getElementById(id);
-        if(!sel) return;
-        // clear existing
-        sel.innerHTML = '';
-        items.forEach(it => {
-            const o = document.createElement('option');
-            o.value = it.value;
-            o.text = it.label;
-            sel.appendChild(o);
-        });
-    }
-
-    window.initDropdowns = function(){
-        const data = getData();
-        populateSelect('ddlCategory', data.categories);
-        populateSelect('ddlLevel', data.levels);
-        populateSelect('ddlLessonType', data.lessonTypes);
-    };
-
-    // Optionally attempt to fetch a remote JSON file 'dropdowns.json' in same folder
-    // If present, it will override defaults (non-blocking)
-    fetch('Scripts/dropdowns.json').then(r=>{
-        if(!r.ok) return null; return r.json();
-    }).then(json=>{
-        if(json) {
-            window.setDropdownData(json);
-        }
-    }).catch(()=>{});
-})();
-
 ```

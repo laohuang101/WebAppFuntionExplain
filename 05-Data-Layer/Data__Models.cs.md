@@ -1,6 +1,6 @@
 # Models.cs
 **Source:** `Data/Models.cs`  
-**Generated:** 2026-07-11 21:47  
+**Generated:** 2026-07-11 21:56  
 
 ---
 
@@ -15,17 +15,17 @@ Lightweight POCOs / row shapes (CourseRow, CourseWorkRow, CWSubmissionRow, …) 
 
 ## Variables / fields (file level)
 
-Each name is explained in plain English (what it stores / why it exists).
+Simple table of names declared at file/class level.
 
-_No classic field declarations detected (or mostly locals inside methods — see each function’s **Local variables** section)._
+_No file-level fields found. See each function’s **Variables** table for locals._
 
 ## Functions / methods (0 found)
 
-_No methods matched the scanner (markup-only or unconventional structure). See full file listing below._
+_No methods matched the scanner (markup-only or unconventional structure). See the code listing at the bottom._
 
-## Full file listing with line notes
+## Full file code
 
-Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+Complete source with line numbers (for reading along with the function sections above).
 
 ```csharp
    1 | using System;
@@ -120,117 +120,4 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   90 |         public decimal MaxMarks { get; set; }
   91 |     }
   92 | }
-```
-
-**Line notes** (what code + variables mean)
-
-- **L1:** Import namespace/types.
-- **L3:** C# namespace grouping.
-- **L8:** Class declaration for this page/service.
-- **L21:** Class declaration for this page/service.
-- **L24:** Owner lecturer foreign key.
-- **L34:** Class declaration for this page/service.
-- **L42:** Class declaration for this page/service.
-- **L48:** Assignment deadline; submissions close after due day.
-- **L52:** Class declaration for this page/service.
-- **L62:** Class declaration for this page/service.
-- **L74:** Class declaration for this page/service.
-- **L84:** Class declaration for this page/service.
-
-## Source snapshot (raw)
-
-```csharp
-using System;
-
-namespace WebAppAssignment.Data
-{
-    // Actual EduDB.mdf schema (from VS Server Explorer)
-
-    // Users: UID, Name, Email, Password, Role, ...
-    public class UserRow
-    {
-        public int UID { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string Role { get; set; }
-        public string Avatar { get; set; }
-        public string Description { get; set; }
-        public string ContactInfo { get; set; }
-    }
-
-    // Courses: CID, LecturerUID, Name, Description, Rating, BgImg, Categories, Level
-    public class CourseRow
-    {
-        public int CID { get; set; }
-        public int LecturerUID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public decimal? Rating { get; set; }
-        public string BgImg { get; set; }
-        public string Categories { get; set; }
-        public string Level { get; set; }
-    }
-
-    // Enrollments: CID, StudentUID, Progress
-    public class EnrollmentRow
-    {
-        public int CID { get; set; }
-        public int StudentUID { get; set; }
-        public decimal Progress { get; set; }
-    }
-
-    // CourseWorks: CWID, ChID, Title, Description, DueDate
-    public class CourseWorkRow
-    {
-        public int CWID { get; set; }
-        public int ChID { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public DateTime? DueDate { get; set; }
-    }
-
-    // CWSubmissions: SID, CWID, StudentUID, SubmissionDate, Content
-    public class CWSubmissionRow
-    {
-        public int SID { get; set; }
-        public int CWID { get; set; }
-        public int StudentUID { get; set; }
-        public DateTime SubmissionDate { get; set; }
-        public string Content { get; set; }
-    }
-
-    // ObjectiveQuestions: QID, QuestionText, OptionA, OptionB, OptionC, OptionD, CorrectAnswer
-    public class ObjectiveQuestionRow
-    {
-        public int QID { get; set; }
-        public string QuestionText { get; set; }
-        public string OptionA { get; set; }
-        public string OptionB { get; set; }
-        public string OptionC { get; set; }
-        public string OptionD { get; set; }
-        public string CorrectAnswer { get; set; }
-    }
-
-    // ObjectiveAnswers: AnswerID, QID, StudentUID, SelectedAnswer, IsCorrect
-    public class ObjectiveAnswerRow
-    {
-        public int AnswerID { get; set; }
-        public int QID { get; set; }
-        public int StudentUID { get; set; }
-        public string SelectedAnswer { get; set; }
-        public bool IsCorrect { get; set; }
-    }
-
-    // Live: GradeScales (GID, GradeLetter, MinMarks, MaxMarks)
-    public class GradeScaleRow
-    {
-        public int GSID { get; set; }
-        public string ScoreRange { get; set; }
-        public string Grade { get; set; }
-        public decimal MinMarks { get; set; }
-        public decimal MaxMarks { get; set; }
-    }
-}
-
 ```
