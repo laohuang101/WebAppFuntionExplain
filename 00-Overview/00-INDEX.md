@@ -1,6 +1,6 @@
 # EduLMS — Landing & Lecturer Function Explain (Markdown)
 
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 **Project root:** `/home/loke/Documents/WebappAss/WebAppAssignment`  
 **This pack:** `/home/loke/Documents/WebAppFuntionExplain`  
 
@@ -72,9 +72,23 @@ Uploads
 - **`02-Lecturer-Pages/`** — Dashboard, CourseCreation, Assignments, Grading, Students, …
 - **`03-Lecturer-Scripts/`** — Client JS modules (cc-*, dashboard, grading, …)
 - **`04-Lecturer-Handlers/`** — ashx APIs: Curriculum, Upload, Seed, Media
-- **`05-Lecturer-Data/`** — LecturerRepository, DbHelper, schema helpers
+- **`05-Data-Layer/`** — DbHelper, LecturerRepository, Models, schema bootstrap & indexes
 - **`06-Security-Core/`** — AuthService, JWT, TOTP, CSRF, throttle, audit, upload guards
 - **`07-Security-AuthPages/`** — Login, Register, MFA, Forgot/Reset password, Logout, csrf.js
+
+### Data layer (pure SQL)
+
+| File | Role |
+|------|------|
+| `DbHelper` | Main ADO.NET helper (connection, query, params) |
+| `DatabaseHelper` | Legacy connection helper |
+| `LecturerRepository` | All lecturer SQL (courses, works, grades, students) |
+| `Models` | Simple DTOs / row classes (not EF) |
+| `CourseSchema` | Ensure IsPublished etc. |
+| `SchemaMap` | Map real MDF table/column names |
+| `SchemaBootstrap` | Run all Ensure* at startup |
+| `DbIndexes` | Create performance indexes if missing |
+| `Data/Security/*` | Auth SQL + security helpers (see folder 06) |
 
 ## Key SQL tables
 

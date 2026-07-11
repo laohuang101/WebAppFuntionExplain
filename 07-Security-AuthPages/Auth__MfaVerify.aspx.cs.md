@@ -1,6 +1,6 @@
 # MfaVerify.aspx.cs
 **Source:** `Pages/Authentication/MfaVerify.aspx.cs`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -26,7 +26,7 @@ Post-login TOTP (or demo email OTP) step before CompleteLogin issues session/JWT
 
 ### `Page_Load` — lines 9–30
 
-```
+```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
@@ -41,41 +41,46 @@ protected void Page_Load(object sender, EventArgs e)
 
 #### Line-by-line (this function)
 
-`   9`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  10`  `        {`
-`  11`  `            if (Session["MfaPendingUid"] == null)`
-  - → Server session for logged-in user.
-`  12`  `            {`
-`  13`  `                Response.Redirect("~/Pages/Authentication/Login.aspx");`
-  - → Navigate browser to another URL.
-`  14`  `                return;`
-`  15`  `            }`
-`  16`  ``
-`  17`  `            if (!IsPostBack)`
-  - → False on first open; true after postback.
-`  18`  `            {`
-`  19`  `                string method = Session["MfaMethod"] as string ?? "totp";`
-  - → Server session for logged-in user.
-`  20`  `                if (method == "email")`
-`  21`  `                {`
-`  22`  `                    litHint.Text = "Enter the one-time code for your email.";`
-`  23`  `                    if (Session["MfaDemoOtp"] != null)`
-  - → Server session for logged-in user.
-`  24`  `                    {`
-`  25`  `                        pnlDemoOtp.Visible = true;`
-`  26`  `                        litDemoOtp.Text = Session["MfaDemoOtp"].ToString();`
-  - → Server session for logged-in user.
-`  27`  `                    }`
-`  28`  `                }`
-`  29`  `            }`
-`  30`  `        }`
+```csharp
+   9 |         protected void Page_Load(object sender, EventArgs e)
+  10 |         {
+  11 |             if (Session["MfaPendingUid"] == null)
+  12 |             {
+  13 |                 Response.Redirect("~/Pages/Authentication/Login.aspx");
+  14 |                 return;
+  15 |             }
+  16 | 
+  17 |             if (!IsPostBack)
+  18 |             {
+  19 |                 string method = Session["MfaMethod"] as string ?? "totp";
+  20 |                 if (method == "email")
+  21 |                 {
+  22 |                     litHint.Text = "Enter the one-time code for your email.";
+  23 |                     if (Session["MfaDemoOtp"] != null)
+  24 |                     {
+  25 |                         pnlDemoOtp.Visible = true;
+  26 |                         litDemoOtp.Text = Session["MfaDemoOtp"].ToString();
+  27 |                     }
+  28 |                 }
+  29 |             }
+  30 |         }
+```
+
+**Line notes**
+
+- **L9:** Page load entry (GET or postback).
+- **L11:** Server session for logged-in user.
+- **L13:** Navigate browser to another URL.
+- **L17:** False on first open; true after postback.
+- **L19:** Server session for logged-in user.
+- **L23:** Server session for logged-in user.
+- **L26:** Server session for logged-in user.
 
 ---
 
 ### `btnVerify_Click` — lines 31–53
 
-```
+```csharp
 protected void btnVerify_Click(object sender, EventArgs e)
 ```
 
@@ -89,39 +94,44 @@ protected void btnVerify_Click(object sender, EventArgs e)
 
 #### Line-by-line (this function)
 
-`  31`  ``
-`  32`  `        protected void btnVerify_Click(object sender, EventArgs e)`
-`  33`  `        {`
-`  34`  `            lblError.Text = "";`
-`  35`  `            int uid = Convert.ToInt32(Session["MfaPendingUid"]);`
-  - → Server session for logged-in user.
-`  36`  `            string method = Session["MfaMethod"] as string ?? "totp";`
-  - → Server session for logged-in user.
-`  37`  `            string code = (txtCode.Text ?? "").Trim();`
-`  38`  ``
-`  39`  `            var result = AuthService.VerifyMfa(uid, code, method);`
-  - → Verify multi-factor / TOTP code.
-`  40`  `            if (!result.Success)`
-`  41`  `            {`
-`  42`  `                lblError.Text = result.Message;`
-`  43`  `                return;`
-`  44`  `            }`
-`  45`  ``
-`  46`  `            // Clear MFA pending state`
-`  47`  `            Session.Remove("MfaPendingUid");`
-`  48`  `            Session.Remove("MfaMethod");`
-`  49`  `            Session.Remove("MfaDemoOtp");`
-`  50`  ``
-`  51`  `            AuthService.CompleteLogin(Context, result.User, result.Token);`
-  - → Issue Session + JWT after successful auth.
-`  52`  `            RedirectUser(result.User.RoleNormalized);`
-`  53`  `        }`
+```csharp
+  31 | 
+  32 |         protected void btnVerify_Click(object sender, EventArgs e)
+  33 |         {
+  34 |             lblError.Text = "";
+  35 |             int uid = Convert.ToInt32(Session["MfaPendingUid"]);
+  36 |             string method = Session["MfaMethod"] as string ?? "totp";
+  37 |             string code = (txtCode.Text ?? "").Trim();
+  38 | 
+  39 |             var result = AuthService.VerifyMfa(uid, code, method);
+  40 |             if (!result.Success)
+  41 |             {
+  42 |                 lblError.Text = result.Message;
+  43 |                 return;
+  44 |             }
+  45 | 
+  46 |             // Clear MFA pending state
+  47 |             Session.Remove("MfaPendingUid");
+  48 |             Session.Remove("MfaMethod");
+  49 |             Session.Remove("MfaDemoOtp");
+  50 | 
+  51 |             AuthService.CompleteLogin(Context, result.User, result.Token);
+  52 |             RedirectUser(result.User.RoleNormalized);
+  53 |         }
+```
+
+**Line notes**
+
+- **L35:** Server session for logged-in user.
+- **L36:** Server session for logged-in user.
+- **L39:** Verify multi-factor / TOTP code.
+- **L51:** Issue Session + JWT after successful auth.
 
 ---
 
 ### `RedirectUser` — lines 54–64
 
-```
+```csharp
 private void RedirectUser(string role)
 ```
 
@@ -134,111 +144,121 @@ private void RedirectUser(string role)
 
 #### Line-by-line (this function)
 
-`  54`  ``
-`  55`  `        private void RedirectUser(string role)`
-`  56`  `        {`
-`  57`  `            string r = (role ?? "").ToLowerInvariant();`
-`  58`  `            if (r == "admin")`
-`  59`  `            Response.Redirect("~/Pages/Admin/ADashboard.aspx");`
-  - → Navigate browser to another URL.
-`  60`  `            else if (r == "lecturer")`
-`  61`  `            Response.Redirect("~/Pages/Lecturer/Dashboard.aspx");`
-  - → Navigate browser to another URL.
-`  62`  `            else`
-`  63`  `            Response.Redirect("~/Pages/Landing/Landing.aspx");`
-  - → Navigate browser to another URL.
-`  64`  `        }`
+```csharp
+  54 | 
+  55 |         private void RedirectUser(string role)
+  56 |         {
+  57 |             string r = (role ?? "").ToLowerInvariant();
+  58 |             if (r == "admin")
+  59 |             Response.Redirect("~/Pages/Admin/ADashboard.aspx");
+  60 |             else if (r == "lecturer")
+  61 |             Response.Redirect("~/Pages/Lecturer/Dashboard.aspx");
+  62 |             else
+  63 |             Response.Redirect("~/Pages/Landing/Landing.aspx");
+  64 |         }
+```
+
+**Line notes**
+
+- **L59:** Navigate browser to another URL.
+- **L61:** Navigate browser to another URL.
+- **L63:** Navigate browser to another URL.
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `using System;`
-  - → Import namespace/types.
-`   2`  `using System.Web.UI;`
-  - → Import namespace/types.
-`   3`  `using WebAppAssignment.Data.Security;`
-  - → Import namespace/types.
-`   4`  ``
-`   5`  `namespace WebAppAssignment.Pages.Authentication`
-  - → C# namespace grouping.
-`   6`  `{`
-`   7`  `    public partial class MfaVerify : Page`
-`   8`  `    {`
-`   9`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  10`  `        {`
-`  11`  `            if (Session["MfaPendingUid"] == null)`
-  - → Server session for logged-in user.
-`  12`  `            {`
-`  13`  `                Response.Redirect("~/Pages/Authentication/Login.aspx");`
-  - → Navigate browser to another URL.
-`  14`  `                return;`
-`  15`  `            }`
-`  16`  ``
-`  17`  `            if (!IsPostBack)`
-  - → False on first open; true after postback.
-`  18`  `            {`
-`  19`  `                string method = Session["MfaMethod"] as string ?? "totp";`
-  - → Server session for logged-in user.
-`  20`  `                if (method == "email")`
-`  21`  `                {`
-`  22`  `                    litHint.Text = "Enter the one-time code for your email.";`
-`  23`  `                    if (Session["MfaDemoOtp"] != null)`
-  - → Server session for logged-in user.
-`  24`  `                    {`
-`  25`  `                        pnlDemoOtp.Visible = true;`
-`  26`  `                        litDemoOtp.Text = Session["MfaDemoOtp"].ToString();`
-  - → Server session for logged-in user.
-`  27`  `                    }`
-`  28`  `                }`
-`  29`  `            }`
-`  30`  `        }`
-`  31`  ``
-`  32`  `        protected void btnVerify_Click(object sender, EventArgs e)`
-`  33`  `        {`
-`  34`  `            lblError.Text = "";`
-`  35`  `            int uid = Convert.ToInt32(Session["MfaPendingUid"]);`
-  - → Server session for logged-in user.
-`  36`  `            string method = Session["MfaMethod"] as string ?? "totp";`
-  - → Server session for logged-in user.
-`  37`  `            string code = (txtCode.Text ?? "").Trim();`
-`  38`  ``
-`  39`  `            var result = AuthService.VerifyMfa(uid, code, method);`
-  - → Verify multi-factor / TOTP code.
-`  40`  `            if (!result.Success)`
-`  41`  `            {`
-`  42`  `                lblError.Text = result.Message;`
-`  43`  `                return;`
-`  44`  `            }`
-`  45`  ``
-`  46`  `            // Clear MFA pending state`
-`  47`  `            Session.Remove("MfaPendingUid");`
-`  48`  `            Session.Remove("MfaMethod");`
-`  49`  `            Session.Remove("MfaDemoOtp");`
-`  50`  ``
-`  51`  `            AuthService.CompleteLogin(Context, result.User, result.Token);`
-  - → Issue Session + JWT after successful auth.
-`  52`  `            RedirectUser(result.User.RoleNormalized);`
-`  53`  `        }`
-`  54`  ``
-`  55`  `        private void RedirectUser(string role)`
-`  56`  `        {`
-`  57`  `            string r = (role ?? "").ToLowerInvariant();`
-`  58`  `            if (r == "admin")`
-`  59`  `            Response.Redirect("~/Pages/Admin/ADashboard.aspx");`
-  - → Navigate browser to another URL.
-`  60`  `            else if (r == "lecturer")`
-`  61`  `            Response.Redirect("~/Pages/Lecturer/Dashboard.aspx");`
-  - → Navigate browser to another URL.
-`  62`  `            else`
-`  63`  `            Response.Redirect("~/Pages/Landing/Landing.aspx");`
-  - → Navigate browser to another URL.
-`  64`  `        }`
-`  65`  `    }`
-`  66`  `}`
+```csharp
+   1 | using System;
+   2 | using System.Web.UI;
+   3 | using WebAppAssignment.Data.Security;
+   4 | 
+   5 | namespace WebAppAssignment.Pages.Authentication
+   6 | {
+   7 |     public partial class MfaVerify : Page
+   8 |     {
+   9 |         protected void Page_Load(object sender, EventArgs e)
+  10 |         {
+  11 |             if (Session["MfaPendingUid"] == null)
+  12 |             {
+  13 |                 Response.Redirect("~/Pages/Authentication/Login.aspx");
+  14 |                 return;
+  15 |             }
+  16 | 
+  17 |             if (!IsPostBack)
+  18 |             {
+  19 |                 string method = Session["MfaMethod"] as string ?? "totp";
+  20 |                 if (method == "email")
+  21 |                 {
+  22 |                     litHint.Text = "Enter the one-time code for your email.";
+  23 |                     if (Session["MfaDemoOtp"] != null)
+  24 |                     {
+  25 |                         pnlDemoOtp.Visible = true;
+  26 |                         litDemoOtp.Text = Session["MfaDemoOtp"].ToString();
+  27 |                     }
+  28 |                 }
+  29 |             }
+  30 |         }
+  31 | 
+  32 |         protected void btnVerify_Click(object sender, EventArgs e)
+  33 |         {
+  34 |             lblError.Text = "";
+  35 |             int uid = Convert.ToInt32(Session["MfaPendingUid"]);
+  36 |             string method = Session["MfaMethod"] as string ?? "totp";
+  37 |             string code = (txtCode.Text ?? "").Trim();
+  38 | 
+  39 |             var result = AuthService.VerifyMfa(uid, code, method);
+  40 |             if (!result.Success)
+  41 |             {
+  42 |                 lblError.Text = result.Message;
+  43 |                 return;
+  44 |             }
+  45 | 
+  46 |             // Clear MFA pending state
+  47 |             Session.Remove("MfaPendingUid");
+  48 |             Session.Remove("MfaMethod");
+  49 |             Session.Remove("MfaDemoOtp");
+  50 | 
+  51 |             AuthService.CompleteLogin(Context, result.User, result.Token);
+  52 |             RedirectUser(result.User.RoleNormalized);
+  53 |         }
+  54 | 
+  55 |         private void RedirectUser(string role)
+  56 |         {
+  57 |             string r = (role ?? "").ToLowerInvariant();
+  58 |             if (r == "admin")
+  59 |             Response.Redirect("~/Pages/Admin/ADashboard.aspx");
+  60 |             else if (r == "lecturer")
+  61 |             Response.Redirect("~/Pages/Lecturer/Dashboard.aspx");
+  62 |             else
+  63 |             Response.Redirect("~/Pages/Landing/Landing.aspx");
+  64 |         }
+  65 |     }
+  66 | }
+```
+
+**Line notes**
+
+- **L1:** Import namespace/types.
+- **L2:** Import namespace/types.
+- **L3:** Import namespace/types.
+- **L5:** C# namespace grouping.
+- **L9:** Page load entry (GET or postback).
+- **L11:** Server session for logged-in user.
+- **L13:** Navigate browser to another URL.
+- **L17:** False on first open; true after postback.
+- **L19:** Server session for logged-in user.
+- **L23:** Server session for logged-in user.
+- **L26:** Server session for logged-in user.
+- **L35:** Server session for logged-in user.
+- **L36:** Server session for logged-in user.
+- **L39:** Verify multi-factor / TOTP code.
+- **L51:** Issue Session + JWT after successful auth.
+- **L59:** Navigate browser to another URL.
+- **L61:** Navigate browser to another URL.
+- **L63:** Navigate browser to another URL.
 
 ## Source snapshot (raw)
 

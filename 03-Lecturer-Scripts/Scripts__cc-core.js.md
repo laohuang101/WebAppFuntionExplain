@@ -1,6 +1,6 @@
 # cc-core.js
 **Source:** `Pages/Lecturer/Scripts/cc-core.js`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -33,7 +33,7 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ### `unwrap` — lines 13–21
 
-```
+```javascript
 function unwrap(data)
 ```
 
@@ -45,21 +45,23 @@ function unwrap(data)
 
 #### Line-by-line (this function)
 
-`  13`  ``
-`  14`  `function unwrap(data) {`
-`  15`  `    if (window.EduApi && EduApi.unwrap) return EduApi.unwrap(data);`
-`  16`  `    if (!data) return data;`
-`  17`  `    let x = data;`
-`  18`  `    if (x.d !== undefined) x = x.d;`
-`  19`  `    if (x && x.d !== undefined) x = x.d;`
-`  20`  `    return x;`
-`  21`  `}`
+```javascript
+  13 | 
+  14 | function unwrap(data) {
+  15 |     if (window.EduApi && EduApi.unwrap) return EduApi.unwrap(data);
+  16 |     if (!data) return data;
+  17 |     let x = data;
+  18 |     if (x.d !== undefined) x = x.d;
+  19 |     if (x && x.d !== undefined) x = x.d;
+  20 |     return x;
+  21 | }
+```
 
 ---
 
 ### `postJson` — lines 21–43
 
-```
+```javascript
 function postJson(url, body)
 ```
 
@@ -73,38 +75,43 @@ function postJson(url, body)
 
 #### Line-by-line (this function)
 
-`  21`  ``
-`  22`  ``
-`  23`  `function postJson(url, body) {`
-`  24`  `    if (window.EduApi && EduApi.postJson) return EduApi.postJson(url, body);`
-`  25`  `    return fetch(url, {`
-  - → HTTP request to server WebMethod/ashx.
-`  26`  `        method: 'POST',`
-`  27`  `        headers: { 'Content-Type': 'application/json; charset=utf-8' },`
-`  28`  `        body: JSON.stringify(body || {}),`
-  - → JS object ↔ JSON text.
-`  29`  `        credentials: 'same-origin'`
-`  30`  `    }).then(function (res) {`
-`  31`  `        return res.text().then(function (text) {`
-`  32`  `            var parsed = null;`
-`  33`  `            try { parsed = text ? JSON.parse(text) : null; } catch (e) {`
-  - → JS object ↔ JSON text.
-`  34`  `                throw new Error('Server returned non-JSON (HTTP ' + res.status + '): ' + text.slice(0, 200));`
-`  35`  `            }`
-`  36`  `            if (!res.ok) {`
-`  37`  `                var msg = (parsed && (parsed.message || parsed.Message)) || ('HTTP ' + res.status);`
-`  38`  `                throw new Error(msg);`
-`  39`  `            }`
-`  40`  `            return unwrap(parsed);`
-`  41`  `        });`
-`  42`  `    });`
-`  43`  `}`
+```javascript
+  21 | 
+  22 | 
+  23 | function postJson(url, body) {
+  24 |     if (window.EduApi && EduApi.postJson) return EduApi.postJson(url, body);
+  25 |     return fetch(url, {
+  26 |         method: 'POST',
+  27 |         headers: { 'Content-Type': 'application/json; charset=utf-8' },
+  28 |         body: JSON.stringify(body || {}),
+  29 |         credentials: 'same-origin'
+  30 |     }).then(function (res) {
+  31 |         return res.text().then(function (text) {
+  32 |             var parsed = null;
+  33 |             try { parsed = text ? JSON.parse(text) : null; } catch (e) {
+  34 |                 throw new Error('Server returned non-JSON (HTTP ' + res.status + '): ' + text.slice(0, 200));
+  35 |             }
+  36 |             if (!res.ok) {
+  37 |                 var msg = (parsed && (parsed.message || parsed.Message)) || ('HTTP ' + res.status);
+  38 |                 throw new Error(msg);
+  39 |             }
+  40 |             return unwrap(parsed);
+  41 |         });
+  42 |     });
+  43 | }
+```
+
+**Line notes**
+
+- **L25:** HTTP request to server WebMethod/ashx.
+- **L28:** JS object ↔ JSON text.
+- **L33:** JS object ↔ JSON text.
 
 ---
 
 ### `curriculumApi` — lines 45–49
 
-```
+```javascript
 function curriculumApi(action, payload)
 ```
 
@@ -117,17 +124,19 @@ function curriculumApi(action, payload)
 
 #### Line-by-line (this function)
 
-`  45`  ``
-`  46`  `function curriculumApi(action, payload) {`
-`  47`  `    var body = Object.assign({ action: action }, payload || {});`
-`  48`  `    return postJson('CurriculumApi.ashx', body);`
-`  49`  `}`
+```javascript
+  45 | 
+  46 | function curriculumApi(action, payload) {
+  47 |     var body = Object.assign({ action: action }, payload || {});
+  48 |     return postJson('CurriculumApi.ashx', body);
+  49 | }
+```
 
 ---
 
 ### `hideModal` — lines 51–58
 
-```
+```javascript
 function hideModal(id)
 ```
 
@@ -139,21 +148,26 @@ function hideModal(id)
 
 #### Line-by-line (this function)
 
-`  51`  ``
-`  52`  `function hideModal(id) {`
-`  53`  `    var el = document.getElementById(id);`
-  - → Get HTML element by id.
-`  54`  `    if (!el) return;`
-`  55`  `    var inst = bootstrap.Modal.getInstance(el);`
-`  56`  `    if (!inst) inst = bootstrap.Modal.getOrCreateInstance(el);`
-`  57`  `    inst.hide();`
-`  58`  `}`
+```javascript
+  51 | 
+  52 | function hideModal(id) {
+  53 |     var el = document.getElementById(id);
+  54 |     if (!el) return;
+  55 |     var inst = bootstrap.Modal.getInstance(el);
+  56 |     if (!inst) inst = bootstrap.Modal.getOrCreateInstance(el);
+  57 |     inst.hide();
+  58 | }
+```
+
+**Line notes**
+
+- **L53:** Get HTML element by id.
 
 ---
 
 ### `showModal` — lines 58–65
 
-```
+```javascript
 function showModal(id)
 ```
 
@@ -165,102 +179,112 @@ function showModal(id)
 
 #### Line-by-line (this function)
 
-`  58`  ``
-`  59`  ``
-`  60`  `function showModal(id) {`
-`  61`  `    var el = document.getElementById(id);`
-  - → Get HTML element by id.
-`  62`  `    if (!el) return;`
-`  63`  `    // Nested modals: keep parent wizard open`
-`  64`  `    bootstrap.Modal.getOrCreateInstance(el, { backdrop: true, keyboard: true }).show();`
-`  65`  `}`
+```javascript
+  58 | 
+  59 | 
+  60 | function showModal(id) {
+  61 |     var el = document.getElementById(id);
+  62 |     if (!el) return;
+  63 |     // Nested modals: keep parent wizard open
+  64 |     bootstrap.Modal.getOrCreateInstance(el, { backdrop: true, keyboard: true }).show();
+  65 | }
+```
+
+**Line notes**
+
+- **L61:** Get HTML element by id.
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `// Course Creation — core helpers (API, modals)`
-`   2`  `// Course Creation script (moved from CourseCreation.aspx)`
-`   3`  `// Handles course grid, wizard, curriculum, and thumbnail upload via dropzone`
-`   4`  ``
-`   5`  `let courses = [];`
-`   6`  `let currentCourseId = null;`
-`   7`  `let activeWizardStep = 1;`
-`   8`  ``
-`   9`  `let editingSectionId = null; // for section add/edit`
-`  10`  `let targetChapterId = null; // for lesson adding`
-`  11`  `let editingLessonId = null; // for lesson editing`
-`  12`  ``
-`  13`  `/** Prefer shared EduApi (csrf + unwrap) from master page when available */`
-`  14`  `function unwrap(data) {`
-`  15`  `    if (window.EduApi && EduApi.unwrap) return EduApi.unwrap(data);`
-`  16`  `    if (!data) return data;`
-`  17`  `    let x = data;`
-`  18`  `    if (x.d !== undefined) x = x.d;`
-`  19`  `    if (x && x.d !== undefined) x = x.d;`
-`  20`  `    return x;`
-`  21`  `}`
-`  22`  ``
-`  23`  `function postJson(url, body) {`
-`  24`  `    if (window.EduApi && EduApi.postJson) return EduApi.postJson(url, body);`
-`  25`  `    return fetch(url, {`
-  - → HTTP request to server WebMethod/ashx.
-`  26`  `        method: 'POST',`
-`  27`  `        headers: { 'Content-Type': 'application/json; charset=utf-8' },`
-`  28`  `        body: JSON.stringify(body || {}),`
-  - → JS object ↔ JSON text.
-`  29`  `        credentials: 'same-origin'`
-`  30`  `    }).then(function (res) {`
-`  31`  `        return res.text().then(function (text) {`
-`  32`  `            var parsed = null;`
-`  33`  `            try { parsed = text ? JSON.parse(text) : null; } catch (e) {`
-  - → JS object ↔ JSON text.
-`  34`  `                throw new Error('Server returned non-JSON (HTTP ' + res.status + '): ' + text.slice(0, 200));`
-`  35`  `            }`
-`  36`  `            if (!res.ok) {`
-`  37`  `                var msg = (parsed && (parsed.message || parsed.Message)) || ('HTTP ' + res.status);`
-`  38`  `                throw new Error(msg);`
-`  39`  `            }`
-`  40`  `            return unwrap(parsed);`
-`  41`  `        });`
-`  42`  `    });`
-`  43`  `}`
-`  44`  ``
-`  45`  `/** Curriculum API (ashx) - reliable lesson/section CRUD */`
-`  46`  `function curriculumApi(action, payload) {`
-`  47`  `    var body = Object.assign({ action: action }, payload || {});`
-`  48`  `    return postJson('CurriculumApi.ashx', body);`
-`  49`  `}`
-`  50`  ``
-`  51`  `/** Safely hide a Bootstrap modal (handles missing instance) */`
-`  52`  `function hideModal(id) {`
-`  53`  `    var el = document.getElementById(id);`
-  - → Get HTML element by id.
-`  54`  `    if (!el) return;`
-`  55`  `    var inst = bootstrap.Modal.getInstance(el);`
-`  56`  `    if (!inst) inst = bootstrap.Modal.getOrCreateInstance(el);`
-`  57`  `    inst.hide();`
-`  58`  `}`
-`  59`  ``
-`  60`  `function showModal(id) {`
-`  61`  `    var el = document.getElementById(id);`
-  - → Get HTML element by id.
-`  62`  `    if (!el) return;`
-`  63`  `    // Nested modals: keep parent wizard open`
-`  64`  `    bootstrap.Modal.getOrCreateInstance(el, { backdrop: true, keyboard: true }).show();`
-`  65`  `}`
-`  66`  ``
-`  67`  `/** Keep body scroll + multiple backdrops clean when nested modals close */`
-`  68`  `document.addEventListener('hidden.bs.modal', function () {`
-  - → DOM event handler.
-`  69`  `    var open = document.querySelectorAll('.modal.show');`
-`  70`  `    if (open.length) {`
-`  71`  `        document.body.classList.add('modal-open');`
-`  72`  `    }`
-`  73`  `});`
-`  74`  ``
+```javascript
+   1 | // Course Creation — core helpers (API, modals)
+   2 | // Course Creation script (moved from CourseCreation.aspx)
+   3 | // Handles course grid, wizard, curriculum, and thumbnail upload via dropzone
+   4 | 
+   5 | let courses = [];
+   6 | let currentCourseId = null;
+   7 | let activeWizardStep = 1;
+   8 | 
+   9 | let editingSectionId = null; // for section add/edit
+  10 | let targetChapterId = null; // for lesson adding
+  11 | let editingLessonId = null; // for lesson editing
+  12 | 
+  13 | /** Prefer shared EduApi (csrf + unwrap) from master page when available */
+  14 | function unwrap(data) {
+  15 |     if (window.EduApi && EduApi.unwrap) return EduApi.unwrap(data);
+  16 |     if (!data) return data;
+  17 |     let x = data;
+  18 |     if (x.d !== undefined) x = x.d;
+  19 |     if (x && x.d !== undefined) x = x.d;
+  20 |     return x;
+  21 | }
+  22 | 
+  23 | function postJson(url, body) {
+  24 |     if (window.EduApi && EduApi.postJson) return EduApi.postJson(url, body);
+  25 |     return fetch(url, {
+  26 |         method: 'POST',
+  27 |         headers: { 'Content-Type': 'application/json; charset=utf-8' },
+  28 |         body: JSON.stringify(body || {}),
+  29 |         credentials: 'same-origin'
+  30 |     }).then(function (res) {
+  31 |         return res.text().then(function (text) {
+  32 |             var parsed = null;
+  33 |             try { parsed = text ? JSON.parse(text) : null; } catch (e) {
+  34 |                 throw new Error('Server returned non-JSON (HTTP ' + res.status + '): ' + text.slice(0, 200));
+  35 |             }
+  36 |             if (!res.ok) {
+  37 |                 var msg = (parsed && (parsed.message || parsed.Message)) || ('HTTP ' + res.status);
+  38 |                 throw new Error(msg);
+  39 |             }
+  40 |             return unwrap(parsed);
+  41 |         });
+  42 |     });
+  43 | }
+  44 | 
+  45 | /** Curriculum API (ashx) - reliable lesson/section CRUD */
+  46 | function curriculumApi(action, payload) {
+  47 |     var body = Object.assign({ action: action }, payload || {});
+  48 |     return postJson('CurriculumApi.ashx', body);
+  49 | }
+  50 | 
+  51 | /** Safely hide a Bootstrap modal (handles missing instance) */
+  52 | function hideModal(id) {
+  53 |     var el = document.getElementById(id);
+  54 |     if (!el) return;
+  55 |     var inst = bootstrap.Modal.getInstance(el);
+  56 |     if (!inst) inst = bootstrap.Modal.getOrCreateInstance(el);
+  57 |     inst.hide();
+  58 | }
+  59 | 
+  60 | function showModal(id) {
+  61 |     var el = document.getElementById(id);
+  62 |     if (!el) return;
+  63 |     // Nested modals: keep parent wizard open
+  64 |     bootstrap.Modal.getOrCreateInstance(el, { backdrop: true, keyboard: true }).show();
+  65 | }
+  66 | 
+  67 | /** Keep body scroll + multiple backdrops clean when nested modals close */
+  68 | document.addEventListener('hidden.bs.modal', function () {
+  69 |     var open = document.querySelectorAll('.modal.show');
+  70 |     if (open.length) {
+  71 |         document.body.classList.add('modal-open');
+  72 |     }
+  73 | });
+  74 | 
+```
+
+**Line notes**
+
+- **L25:** HTTP request to server WebMethod/ashx.
+- **L28:** JS object ↔ JSON text.
+- **L33:** JS object ↔ JSON text.
+- **L53:** Get HTML element by id.
+- **L61:** Get HTML element by id.
+- **L68:** DOM event handler.
 
 ## Source snapshot (raw)
 

@@ -1,6 +1,6 @@
 # Students.aspx.cs
 **Source:** `Pages/Lecturer/Students.aspx.cs`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -24,7 +24,7 @@ Enrolled students per course with progress counts.
 
 ### `Page_Load` — lines 12–16
 
-```
+```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
@@ -37,19 +37,24 @@ protected void Page_Load(object sender, EventArgs e)
 
 #### Line-by-line (this function)
 
-`  12`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  13`  `        {`
-`  14`  `            if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))`
-  - → Authorization — block wrong role / anonymous.
-`  15`  `                return;`
-`  16`  `}`
+```csharp
+  12 |         protected void Page_Load(object sender, EventArgs e)
+  13 |         {
+  14 |             if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))
+  15 |                 return;
+  16 | }
+```
+
+**Line notes**
+
+- **L12:** Page load entry (GET or postback).
+- **L14:** Authorization — block wrong role / anonymous.
 
 ---
 
 ### `CurrentUid` — lines 17–21
 
-```
+```csharp
 private static int CurrentUid()
 ```
 
@@ -60,18 +65,23 @@ private static int CurrentUid()
 
 #### Line-by-line (this function)
 
-`  17`  ``
-`  18`  `        private static int CurrentUid()`
-`  19`  `        {`
-`  20`  `            return AuthGate.RequireLecturer();`
-  - → Authorization — block wrong role / anonymous.
-`  21`  `        }`
+```csharp
+  17 | 
+  18 |         private static int CurrentUid()
+  19 |         {
+  20 |             return AuthGate.RequireLecturer();
+  21 |         }
+```
+
+**Line notes**
+
+- **L20:** Authorization — block wrong role / anonymous.
 
 ---
 
 ### `GetStudents` — lines 25–38
 
-```
+```csharp
 public static object GetStudents(string search)
 ```
 
@@ -86,29 +96,34 @@ public static object GetStudents(string search)
 
 #### Line-by-line (this function)
 
-`  25`  `        public static object GetStudents(string search)`
-`  26`  `        {`
-`  27`  `            try`
-  - → Error handling block.
-`  28`  `            {`
-`  29`  `                int uid = CurrentUid();`
-`  30`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  31`  `                var list = LecturerRepository.GetStudentPerformance(uid, search);`
-`  32`  `                return new { success = true, students = list };`
-`  33`  `            }`
-`  34`  `            catch (Exception ex)`
-  - → Handle/log exception.
-`  35`  `            {`
-`  36`  `                return new { success = false, message = "Request failed." };`
-`  37`  `            }`
-`  38`  `        }`
+```csharp
+  25 |         public static object GetStudents(string search)
+  26 |         {
+  27 |             try
+  28 |             {
+  29 |                 int uid = CurrentUid();
+  30 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  31 |                 var list = LecturerRepository.GetStudentPerformance(uid, search);
+  32 |                 return new { success = true, students = list };
+  33 |             }
+  34 |             catch (Exception ex)
+  35 |             {
+  36 |                 return new { success = false, message = "Request failed." };
+  37 |             }
+  38 |         }
+```
+
+**Line notes**
+
+- **L27:** Error handling block.
+- **L30:** Authorization — block wrong role / anonymous.
+- **L34:** Handle/log exception.
 
 ---
 
 ### `GetStudentDetail` — lines 42–56
 
-```
+```csharp
 public static object GetStudentDetail(int studentUid, int cid)
 ```
 
@@ -123,107 +138,117 @@ public static object GetStudentDetail(int studentUid, int cid)
 
 #### Line-by-line (this function)
 
-`  42`  `        public static object GetStudentDetail(int studentUid, int cid)`
-`  43`  `        {`
-`  44`  `            try`
-  - → Error handling block.
-`  45`  `            {`
-`  46`  `                int uid = CurrentUid();`
-`  47`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  48`  `                var detail = LecturerRepository.GetStudentDetail(uid, studentUid, cid);`
-`  49`  `                if (detail == null) return new { success = false, message = "Student not found." };`
-`  50`  `                return new { success = true, detail = detail };`
-`  51`  `            }`
-`  52`  `            catch (Exception ex)`
-  - → Handle/log exception.
-`  53`  `            {`
-`  54`  `                return new { success = false, message = "Request failed." };`
-`  55`  `            }`
-`  56`  `        }`
+```csharp
+  42 |         public static object GetStudentDetail(int studentUid, int cid)
+  43 |         {
+  44 |             try
+  45 |             {
+  46 |                 int uid = CurrentUid();
+  47 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  48 |                 var detail = LecturerRepository.GetStudentDetail(uid, studentUid, cid);
+  49 |                 if (detail == null) return new { success = false, message = "Student not found." };
+  50 |                 return new { success = true, detail = detail };
+  51 |             }
+  52 |             catch (Exception ex)
+  53 |             {
+  54 |                 return new { success = false, message = "Request failed." };
+  55 |             }
+  56 |         }
+```
+
+**Line notes**
+
+- **L44:** Error handling block.
+- **L47:** Authorization — block wrong role / anonymous.
+- **L52:** Handle/log exception.
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `using System;`
-  - → Import namespace/types.
-`   2`  `using System.Web.Script.Services;`
-  - → Import namespace/types.
-`   3`  `using System.Web.Services;`
-  - → Import namespace/types.
-`   4`  `using System.Web.UI;`
-  - → Import namespace/types.
-`   5`  `using WebAppAssignment.Data;`
-  - → Import namespace/types.
-`   6`  `using WebAppAssignment.Data.Security;`
-  - → Import namespace/types.
-`   7`  ``
-`   8`  `namespace WebAppAssignment.Pages.Lecturer`
-  - → C# namespace grouping.
-`   9`  `{`
-`  10`  `    public partial class Students : Page`
-`  11`  `    {`
-`  12`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  13`  `        {`
-`  14`  `            if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))`
-  - → Authorization — block wrong role / anonymous.
-`  15`  `                return;`
-`  16`  `}`
-`  17`  ``
-`  18`  `        private static int CurrentUid()`
-`  19`  `        {`
-`  20`  `            return AuthGate.RequireLecturer();`
-  - → Authorization — block wrong role / anonymous.
-`  21`  `        }`
-`  22`  ``
-`  23`  `        [WebMethod(EnableSession = true)]`
-  - → Expose method to AJAX JSON calls.
-`  24`  `        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]`
-`  25`  `        public static object GetStudents(string search)`
-`  26`  `        {`
-`  27`  `            try`
-  - → Error handling block.
-`  28`  `            {`
-`  29`  `                int uid = CurrentUid();`
-`  30`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  31`  `                var list = LecturerRepository.GetStudentPerformance(uid, search);`
-`  32`  `                return new { success = true, students = list };`
-`  33`  `            }`
-`  34`  `            catch (Exception ex)`
-  - → Handle/log exception.
-`  35`  `            {`
-`  36`  `                return new { success = false, message = "Request failed." };`
-`  37`  `            }`
-`  38`  `        }`
-`  39`  ``
-`  40`  `        [WebMethod(EnableSession = true)]`
-  - → Expose method to AJAX JSON calls.
-`  41`  `        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]`
-`  42`  `        public static object GetStudentDetail(int studentUid, int cid)`
-`  43`  `        {`
-`  44`  `            try`
-  - → Error handling block.
-`  45`  `            {`
-`  46`  `                int uid = CurrentUid();`
-`  47`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  48`  `                var detail = LecturerRepository.GetStudentDetail(uid, studentUid, cid);`
-`  49`  `                if (detail == null) return new { success = false, message = "Student not found." };`
-`  50`  `                return new { success = true, detail = detail };`
-`  51`  `            }`
-`  52`  `            catch (Exception ex)`
-  - → Handle/log exception.
-`  53`  `            {`
-`  54`  `                return new { success = false, message = "Request failed." };`
-`  55`  `            }`
-`  56`  `        }`
-`  57`  `    }`
-`  58`  `}`
+```csharp
+   1 | using System;
+   2 | using System.Web.Script.Services;
+   3 | using System.Web.Services;
+   4 | using System.Web.UI;
+   5 | using WebAppAssignment.Data;
+   6 | using WebAppAssignment.Data.Security;
+   7 | 
+   8 | namespace WebAppAssignment.Pages.Lecturer
+   9 | {
+  10 |     public partial class Students : Page
+  11 |     {
+  12 |         protected void Page_Load(object sender, EventArgs e)
+  13 |         {
+  14 |             if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))
+  15 |                 return;
+  16 | }
+  17 | 
+  18 |         private static int CurrentUid()
+  19 |         {
+  20 |             return AuthGate.RequireLecturer();
+  21 |         }
+  22 | 
+  23 |         [WebMethod(EnableSession = true)]
+  24 |         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+  25 |         public static object GetStudents(string search)
+  26 |         {
+  27 |             try
+  28 |             {
+  29 |                 int uid = CurrentUid();
+  30 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  31 |                 var list = LecturerRepository.GetStudentPerformance(uid, search);
+  32 |                 return new { success = true, students = list };
+  33 |             }
+  34 |             catch (Exception ex)
+  35 |             {
+  36 |                 return new { success = false, message = "Request failed." };
+  37 |             }
+  38 |         }
+  39 | 
+  40 |         [WebMethod(EnableSession = true)]
+  41 |         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+  42 |         public static object GetStudentDetail(int studentUid, int cid)
+  43 |         {
+  44 |             try
+  45 |             {
+  46 |                 int uid = CurrentUid();
+  47 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  48 |                 var detail = LecturerRepository.GetStudentDetail(uid, studentUid, cid);
+  49 |                 if (detail == null) return new { success = false, message = "Student not found." };
+  50 |                 return new { success = true, detail = detail };
+  51 |             }
+  52 |             catch (Exception ex)
+  53 |             {
+  54 |                 return new { success = false, message = "Request failed." };
+  55 |             }
+  56 |         }
+  57 |     }
+  58 | }
+```
+
+**Line notes**
+
+- **L1:** Import namespace/types.
+- **L2:** Import namespace/types.
+- **L3:** Import namespace/types.
+- **L4:** Import namespace/types.
+- **L5:** Import namespace/types.
+- **L6:** Import namespace/types.
+- **L8:** C# namespace grouping.
+- **L12:** Page load entry (GET or postback).
+- **L14:** Authorization — block wrong role / anonymous.
+- **L20:** Authorization — block wrong role / anonymous.
+- **L23:** Expose method to AJAX JSON calls.
+- **L27:** Error handling block.
+- **L30:** Authorization — block wrong role / anonymous.
+- **L34:** Handle/log exception.
+- **L40:** Expose method to AJAX JSON calls.
+- **L44:** Error handling block.
+- **L47:** Authorization — block wrong role / anonymous.
+- **L52:** Handle/log exception.
 
 ## Source snapshot (raw)
 

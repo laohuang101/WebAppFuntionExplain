@@ -1,6 +1,6 @@
 # cc-wizard.js
 **Source:** `Pages/Lecturer/Scripts/cc-wizard.js`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -39,7 +39,7 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ### `showCreateCourseModal` — lines 2–26
 
-```
+```javascript
 function showCreateCourseModal()
 ```
 
@@ -50,47 +50,52 @@ function showCreateCourseModal()
 
 #### Line-by-line (this function)
 
-`   2`  ``
-`   3`  `function showCreateCourseModal() {`
-`   4`  `    currentCourseId = null;`
-`   5`  `    editingSectionId = null;`
-`   6`  `    editingLessonId = null;`
-`   7`  ``
-`   8`  `    // Reset form fields`
-`   9`  `    document.getElementById('txtCourseTitle').value = '';`
-  - → Get HTML element by id.
-`  10`  `    document.getElementById('txtCourseDesc').value = '';`
-  - → Get HTML element by id.
-`  11`  `    document.getElementById('ddlCategory').value = 'Development';`
-  - → Get HTML element by id.
-`  12`  `    document.getElementById('ddlLevel').value = 'Beginner';`
-  - → Get HTML element by id.
-`  13`  `    document.getElementById('txtBgImg').value = '';`
-  - → Get HTML element by id.
-`  14`  `    const prev = document.getElementById('courseThumbPreview');`
-  - → Get HTML element by id.
-`  15`  `    if (prev) { prev.src = ''; prev.classList.add('d-none'); }`
-`  16`  `    const dzMsg = document.getElementById('dzMessage');`
-  - → Get HTML element by id.
-`  17`  `    if (dzMsg) dzMsg.innerHTML = '<i class="fa-solid fa-cloud-arrow-up d-block mb-2 fs-4"></i>Click to upload image (16:9 ratio)';`
-  - → Update page HTML.
-`  18`  ``
-`  19`  `    document.getElementById('step1Error').style.display = 'none';`
-  - → Get HTML element by id.
-`  20`  ``
-`  21`  `    document.getElementById('wizardModalTitle').innerText = "Create New Course";`
-  - → Get HTML element by id.
-`  22`  ``
-`  23`  `    setWizardStep(1);`
-`  24`  ``
-`  25`  `    showModal('courseWizardModal');`
-`  26`  `}`
+```javascript
+   2 | 
+   3 | function showCreateCourseModal() {
+   4 |     currentCourseId = null;
+   5 |     editingSectionId = null;
+   6 |     editingLessonId = null;
+   7 | 
+   8 |     // Reset form fields
+   9 |     document.getElementById('txtCourseTitle').value = '';
+  10 |     document.getElementById('txtCourseDesc').value = '';
+  11 |     document.getElementById('ddlCategory').value = 'Development';
+  12 |     document.getElementById('ddlLevel').value = 'Beginner';
+  13 |     document.getElementById('txtBgImg').value = '';
+  14 |     const prev = document.getElementById('courseThumbPreview');
+  15 |     if (prev) { prev.src = ''; prev.classList.add('d-none'); }
+  16 |     const dzMsg = document.getElementById('dzMessage');
+  17 |     if (dzMsg) dzMsg.innerHTML = '<i class="fa-solid fa-cloud-arrow-up d-block mb-2 fs-4"></i>Click to upload image (16:9 ratio)';
+  18 | 
+  19 |     document.getElementById('step1Error').style.display = 'none';
+  20 | 
+  21 |     document.getElementById('wizardModalTitle').innerText = "Create New Course";
+  22 | 
+  23 |     setWizardStep(1);
+  24 | 
+  25 |     showModal('courseWizardModal');
+  26 | }
+```
+
+**Line notes**
+
+- **L9:** Get HTML element by id.
+- **L10:** Get HTML element by id.
+- **L11:** Get HTML element by id.
+- **L12:** Get HTML element by id.
+- **L13:** Get HTML element by id.
+- **L14:** Get HTML element by id.
+- **L16:** Get HTML element by id.
+- **L17:** Update page HTML.
+- **L19:** Get HTML element by id.
+- **L21:** Get HTML element by id.
 
 ---
 
 ### `editCourseBasicInfo` — lines 50–73
 
-```
+```javascript
 function editCourseBasicInfo(cid)
 ```
 
@@ -102,44 +107,49 @@ function editCourseBasicInfo(cid)
 
 #### Line-by-line (this function)
 
-`  50`  ``
-`  51`  ``
-`  52`  `function editCourseBasicInfo(cid) {`
-`  53`  `    const c = courses.find(item => item.cid === cid);`
-`  54`  `    if (!c) return;`
-`  55`  ``
-`  56`  `    currentCourseId = cid;`
-`  57`  `    document.getElementById('txtCourseTitle').value = c.name;`
-  - → Get HTML element by id.
-`  58`  `    document.getElementById('txtCourseDesc').value = c.description;`
-  - → Get HTML element by id.
-`  59`  `    if (c.category) document.getElementById('ddlCategory').value = c.category;`
-  - → Get HTML element by id.
-`  60`  `    if (c.level) document.getElementById('ddlLevel').value = c.level;`
-  - → Get HTML element by id.
-`  61`  `    document.getElementById('txtBgImg').value = c.bgImg || '';`
-  - → Get HTML element by id.
-`  62`  `    const prevEdit = document.getElementById('courseThumbPreview');`
-  - → Get HTML element by id.
-`  63`  `    if (prevEdit && c.bgImg) {`
-`  64`  `        prevEdit.src = c.bgImg;`
-`  65`  `        prevEdit.classList.remove('d-none');`
-`  66`  `    }`
-`  67`  ``
-`  68`  `    document.getElementById('step1Error').style.display = 'none';`
-  - → Get HTML element by id.
-`  69`  `    document.getElementById('wizardModalTitle').innerText = 'Edit Course: ' + c.name;`
-  - → Get HTML element by id.
-`  70`  ``
-`  71`  `    setWizardStep(1);`
-`  72`  `    showModal('courseWizardModal');`
-`  73`  `}`
+```javascript
+  50 | 
+  51 | 
+  52 | function editCourseBasicInfo(cid) {
+  53 |     const c = courses.find(item => item.cid === cid);
+  54 |     if (!c) return;
+  55 | 
+  56 |     currentCourseId = cid;
+  57 |     document.getElementById('txtCourseTitle').value = c.name;
+  58 |     document.getElementById('txtCourseDesc').value = c.description;
+  59 |     if (c.category) document.getElementById('ddlCategory').value = c.category;
+  60 |     if (c.level) document.getElementById('ddlLevel').value = c.level;
+  61 |     document.getElementById('txtBgImg').value = c.bgImg || '';
+  62 |     const prevEdit = document.getElementById('courseThumbPreview');
+  63 |     if (prevEdit && c.bgImg) {
+  64 |         prevEdit.src = c.bgImg;
+  65 |         prevEdit.classList.remove('d-none');
+  66 |     }
+  67 | 
+  68 |     document.getElementById('step1Error').style.display = 'none';
+  69 |     document.getElementById('wizardModalTitle').innerText = 'Edit Course: ' + c.name;
+  70 | 
+  71 |     setWizardStep(1);
+  72 |     showModal('courseWizardModal');
+  73 | }
+```
+
+**Line notes**
+
+- **L57:** Get HTML element by id.
+- **L58:** Get HTML element by id.
+- **L59:** Get HTML element by id.
+- **L60:** Get HTML element by id.
+- **L61:** Get HTML element by id.
+- **L62:** Get HTML element by id.
+- **L68:** Get HTML element by id.
+- **L69:** Get HTML element by id.
 
 ---
 
 ### `setWizardStep` — lines 73–114
 
-```
+```javascript
 function setWizardStep(step)
 ```
 
@@ -152,65 +162,70 @@ function setWizardStep(step)
 
 #### Line-by-line (this function)
 
-`  73`  ``
-`  74`  ``
-`  75`  `function setWizardStep(step) {`
-`  76`  `    activeWizardStep = step;`
-`  77`  `    const step1 = document.getElementById('stepIndicator1');`
-  - → Get HTML element by id.
-`  78`  `    const step2 = document.getElementById('stepIndicator2');`
-  - → Get HTML element by id.
-`  79`  `    const stepLine = document.getElementById('stepLine1');`
-  - → Get HTML element by id.
-`  80`  ``
-`  81`  `    if (step === 1) {`
-`  82`  `        // Indicators`
-`  83`  `        step1.classList.remove('completed');`
-`  84`  `        step1.classList.add('active');`
-`  85`  `        step2.classList.remove('active');`
-`  86`  `        step2.classList.remove('completed');`
-`  87`  `        stepLine.classList.remove('active');`
-`  88`  ``
-`  89`  `        // Form panels`
-`  90`  `        document.getElementById('wizardStep1').style.display = 'block';`
-  - → Get HTML element by id.
-`  91`  `        document.getElementById('wizardStep2').style.display = 'none';`
-  - → Get HTML element by id.
-`  92`  ``
-`  93`  `        // Footers`
-`  94`  `        document.getElementById('wizardFooterStep1').style.display = 'flex';`
-  - → Get HTML element by id.
-`  95`  `        document.getElementById('wizardFooterStep2').style.setProperty('display', 'none', 'important');`
-  - → Get HTML element by id.
-`  96`  `    } else {`
-`  97`  `        // Indicators`
-`  98`  `        step1.classList.remove('active');`
-`  99`  `        step1.classList.add('completed');`
-` 100`  `        step2.classList.add('active');`
-` 101`  `        stepLine.classList.add('active');`
-` 102`  ``
-` 103`  `        // Form panels`
-` 104`  `        document.getElementById('wizardStep1').style.display = 'none';`
-  - → Get HTML element by id.
-` 105`  `        document.getElementById('wizardStep2').style.display = 'block';`
-  - → Get HTML element by id.
-` 106`  ``
-` 107`  `        // Footers`
-` 108`  `        document.getElementById('wizardFooterStep1').style.setProperty('display', 'none', 'important');`
-  - → Get HTML element by id.
-` 109`  `        document.getElementById('wizardFooterStep2').style.setProperty('display', 'flex', 'important');`
-  - → Get HTML element by id.
-` 110`  ``
-` 111`  `        // Load Curriculum`
-` 112`  `        loadCurriculumView();`
-` 113`  `    }`
-` 114`  `}`
+```javascript
+  73 | 
+  74 | 
+  75 | function setWizardStep(step) {
+  76 |     activeWizardStep = step;
+  77 |     const step1 = document.getElementById('stepIndicator1');
+  78 |     const step2 = document.getElementById('stepIndicator2');
+  79 |     const stepLine = document.getElementById('stepLine1');
+  80 | 
+  81 |     if (step === 1) {
+  82 |         // Indicators
+  83 |         step1.classList.remove('completed');
+  84 |         step1.classList.add('active');
+  85 |         step2.classList.remove('active');
+  86 |         step2.classList.remove('completed');
+  87 |         stepLine.classList.remove('active');
+  88 | 
+  89 |         // Form panels
+  90 |         document.getElementById('wizardStep1').style.display = 'block';
+  91 |         document.getElementById('wizardStep2').style.display = 'none';
+  92 | 
+  93 |         // Footers
+  94 |         document.getElementById('wizardFooterStep1').style.display = 'flex';
+  95 |         document.getElementById('wizardFooterStep2').style.setProperty('display', 'none', 'important');
+  96 |     } else {
+  97 |         // Indicators
+  98 |         step1.classList.remove('active');
+  99 |         step1.classList.add('completed');
+ 100 |         step2.classList.add('active');
+ 101 |         stepLine.classList.add('active');
+ 102 | 
+ 103 |         // Form panels
+ 104 |         document.getElementById('wizardStep1').style.display = 'none';
+ 105 |         document.getElementById('wizardStep2').style.display = 'block';
+ 106 | 
+ 107 |         // Footers
+ 108 |         document.getElementById('wizardFooterStep1').style.setProperty('display', 'none', 'important');
+ 109 |         document.getElementById('wizardFooterStep2').style.setProperty('display', 'flex', 'important');
+ 110 | 
+ 111 |         // Load Curriculum
+ 112 |         loadCurriculumView();
+ 113 |     }
+ 114 | }
+```
+
+**Line notes**
+
+- **L77:** Get HTML element by id.
+- **L78:** Get HTML element by id.
+- **L79:** Get HTML element by id.
+- **L90:** Get HTML element by id.
+- **L91:** Get HTML element by id.
+- **L94:** Get HTML element by id.
+- **L95:** Get HTML element by id.
+- **L104:** Get HTML element by id.
+- **L105:** Get HTML element by id.
+- **L108:** Get HTML element by id.
+- **L109:** Get HTML element by id.
 
 ---
 
 ### `nextWizardStep` — lines 114–155
 
-```
+```javascript
 function nextWizardStep()
 ```
 
@@ -222,60 +237,65 @@ function nextWizardStep()
 
 #### Line-by-line (this function)
 
-` 114`  ``
-` 115`  ``
-` 116`  ``
-` 117`  `function nextWizardStep() {`
-` 118`  `    const name = document.getElementById('txtCourseTitle').value.trim();`
-  - → Get HTML element by id.
-` 119`  `    const desc = document.getElementById('txtCourseDesc').value.trim();`
-  - → Get HTML element by id.
-` 120`  `    const category = document.getElementById('ddlCategory').value;`
-  - → Get HTML element by id.
-` 121`  `    const level = document.getElementById('ddlLevel').value;`
-  - → Get HTML element by id.
-` 122`  `    const bgImg = document.getElementById('txtBgImg').value.trim();`
-  - → Get HTML element by id.
-` 123`  `    const errDiv = document.getElementById('step1Error');`
-  - → Get HTML element by id.
-` 124`  ``
-` 125`  `    errDiv.style.display = 'none';`
-` 126`  ``
-` 127`  `    if (!name || !desc) {`
-` 128`  `        errDiv.innerText = "Please fill in all required fields (Title and Description).";`
-` 129`  `        errDiv.style.display = 'block';`
-` 130`  `        return;`
-` 131`  `    }`
-` 132`  ``
-` 133`  `    postJson('CourseCreation.aspx/SaveCourseInfo', {`
-` 134`  `        name: name,`
-` 135`  `        desc: desc,`
-` 136`  `        category: category,`
-` 137`  `        level: level,`
-` 138`  `        bgImg: bgImg,`
-` 139`  `        cid: currentCourseId || 0`
-` 140`  `    })`
-` 141`  `    .then(function (resObj) {`
-` 142`  `        if (resObj && resObj.success) {`
-` 143`  `            currentCourseId = resObj.cid;`
-` 144`  `            setWizardStep(2);`
-` 145`  `        } else {`
-` 146`  `            errDiv.innerText = (resObj && resObj.message) || 'Failed to save course details.';`
-` 147`  `            errDiv.style.display = 'block';`
-` 148`  `        }`
-` 149`  `    })`
-` 150`  `    .catch(function (err) {`
-` 151`  `        errDiv.innerText = 'Network error saving course.';`
-` 152`  `        errDiv.style.display = 'block';`
-` 153`  `        console.error(err);`
-` 154`  `    });`
-` 155`  `}`
+```javascript
+ 114 | 
+ 115 | 
+ 116 | 
+ 117 | function nextWizardStep() {
+ 118 |     const name = document.getElementById('txtCourseTitle').value.trim();
+ 119 |     const desc = document.getElementById('txtCourseDesc').value.trim();
+ 120 |     const category = document.getElementById('ddlCategory').value;
+ 121 |     const level = document.getElementById('ddlLevel').value;
+ 122 |     const bgImg = document.getElementById('txtBgImg').value.trim();
+ 123 |     const errDiv = document.getElementById('step1Error');
+ 124 | 
+ 125 |     errDiv.style.display = 'none';
+ 126 | 
+ 127 |     if (!name || !desc) {
+ 128 |         errDiv.innerText = "Please fill in all required fields (Title and Description).";
+ 129 |         errDiv.style.display = 'block';
+ 130 |         return;
+ 131 |     }
+ 132 | 
+ 133 |     postJson('CourseCreation.aspx/SaveCourseInfo', {
+ 134 |         name: name,
+ 135 |         desc: desc,
+ 136 |         category: category,
+ 137 |         level: level,
+ 138 |         bgImg: bgImg,
+ 139 |         cid: currentCourseId || 0
+ 140 |     })
+ 141 |     .then(function (resObj) {
+ 142 |         if (resObj && resObj.success) {
+ 143 |             currentCourseId = resObj.cid;
+ 144 |             setWizardStep(2);
+ 145 |         } else {
+ 146 |             errDiv.innerText = (resObj && resObj.message) || 'Failed to save course details.';
+ 147 |             errDiv.style.display = 'block';
+ 148 |         }
+ 149 |     })
+ 150 |     .catch(function (err) {
+ 151 |         errDiv.innerText = 'Network error saving course.';
+ 152 |         errDiv.style.display = 'block';
+ 153 |         console.error(err);
+ 154 |     });
+ 155 | }
+```
+
+**Line notes**
+
+- **L118:** Get HTML element by id.
+- **L119:** Get HTML element by id.
+- **L120:** Get HTML element by id.
+- **L121:** Get HTML element by id.
+- **L122:** Get HTML element by id.
+- **L123:** Get HTML element by id.
 
 ---
 
 ### `prevWizardStep` — lines 155–159
 
-```
+```javascript
 function prevWizardStep()
 ```
 
@@ -285,17 +305,19 @@ function prevWizardStep()
 
 #### Line-by-line (this function)
 
-` 155`  ``
-` 156`  ``
-` 157`  `function prevWizardStep() {`
-` 158`  `    setWizardStep(1);`
-` 159`  `}`
+```javascript
+ 155 | 
+ 156 | 
+ 157 | function prevWizardStep() {
+ 158 |     setWizardStep(1);
+ 159 | }
+```
 
 ---
 
 ### `completeWizard` — lines 159–166
 
-```
+```javascript
 function completeWizard()
 ```
 
@@ -306,21 +328,26 @@ function completeWizard()
 
 #### Line-by-line (this function)
 
-` 159`  ``
-` 160`  ``
-` 161`  `function completeWizard() {`
-` 162`  `    const modalEl = document.getElementById('courseWizardModal');`
-  - → Get HTML element by id.
-` 163`  `    const modal = bootstrap.Modal.getInstance(modalEl);`
-` 164`  `    modal.hide();`
-` 165`  `    loadCourses(); // Refresh list`
-` 166`  `}`
+```javascript
+ 159 | 
+ 160 | 
+ 161 | function completeWizard() {
+ 162 |     const modalEl = document.getElementById('courseWizardModal');
+ 163 |     const modal = bootstrap.Modal.getInstance(modalEl);
+ 164 |     modal.hide();
+ 165 |     loadCourses(); // Refresh list
+ 166 | }
+```
+
+**Line notes**
+
+- **L162:** Get HTML element by id.
 
 ---
 
 ### `confirmCloseWizard` — lines 166–171
 
-```
+```javascript
 function confirmCloseWizard(e)
 ```
 
@@ -331,229 +358,236 @@ function confirmCloseWizard(e)
 
 #### Line-by-line (this function)
 
-` 166`  ``
-` 167`  ``
-` 168`  `function confirmCloseWizard(e) {`
-` 169`  `    // Reload courses in case they cancelled early on step 2 (curriculum changes are saved incrementally)`
-` 170`  `    loadCourses();`
-` 171`  `}`
+```javascript
+ 166 | 
+ 167 | 
+ 168 | function confirmCloseWizard(e) {
+ 169 |     // Reload courses in case they cancelled early on step 2 (curriculum changes are saved incrementally)
+ 170 |     loadCourses();
+ 171 | }
+```
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `// Course Creation — wizard create/edit course`
-`   2`  `// depends on: cc-core.js, cc-grid.js`
-`   3`  `function showCreateCourseModal() {`
-`   4`  `    currentCourseId = null;`
-`   5`  `    editingSectionId = null;`
-`   6`  `    editingLessonId = null;`
-`   7`  ``
-`   8`  `    // Reset form fields`
-`   9`  `    document.getElementById('txtCourseTitle').value = '';`
-  - → Get HTML element by id.
-`  10`  `    document.getElementById('txtCourseDesc').value = '';`
-  - → Get HTML element by id.
-`  11`  `    document.getElementById('ddlCategory').value = 'Development';`
-  - → Get HTML element by id.
-`  12`  `    document.getElementById('ddlLevel').value = 'Beginner';`
-  - → Get HTML element by id.
-`  13`  `    document.getElementById('txtBgImg').value = '';`
-  - → Get HTML element by id.
-`  14`  `    const prev = document.getElementById('courseThumbPreview');`
-  - → Get HTML element by id.
-`  15`  `    if (prev) { prev.src = ''; prev.classList.add('d-none'); }`
-`  16`  `    const dzMsg = document.getElementById('dzMessage');`
-  - → Get HTML element by id.
-`  17`  `    if (dzMsg) dzMsg.innerHTML = '<i class="fa-solid fa-cloud-arrow-up d-block mb-2 fs-4"></i>Click to upload image (16:9 ratio)';`
-  - → Update page HTML.
-`  18`  ``
-`  19`  `    document.getElementById('step1Error').style.display = 'none';`
-  - → Get HTML element by id.
-`  20`  ``
-`  21`  `    document.getElementById('wizardModalTitle').innerText = "Create New Course";`
-  - → Get HTML element by id.
-`  22`  ``
-`  23`  `    setWizardStep(1);`
-`  24`  ``
-`  25`  `    showModal('courseWizardModal');`
-`  26`  `}`
-`  27`  ``
-`  28`  `// Deep-link: CourseCreation.aspx?edit=123 (from preview Edit button)`
-`  29`  `document.addEventListener('DOMContentLoaded', function () {`
-  - → DOM event handler.
-`  30`  `    try {`
-  - → Error handling block.
-`  31`  `        var params = new URLSearchParams(window.location.search);`
-`  32`  `        var editId = parseInt(params.get('edit') || sessionStorage.getItem('editCourseId') || '0', 10);`
-`  33`  `        if (editId > 0) {`
-`  34`  `            sessionStorage.removeItem('editCourseId');`
-`  35`  `            // Wait for courses to load then open editor`
-`  36`  `            var tries = 0;`
-`  37`  `            var t = setInterval(function () {`
-`  38`  `                tries++;`
-`  39`  `                if (courses && courses.length) {`
-`  40`  `                    clearInterval(t);`
-`  41`  `                    editCourseBasicInfo(editId);`
-`  42`  `                    // jump to curriculum step if already saved`
-`  43`  `                    if (currentCourseId) setTimeout(function () { setWizardStep(2); }, 200);`
-`  44`  `                } else if (tries > 40) {`
-`  45`  `                    clearInterval(t);`
-`  46`  `                }`
-`  47`  `            }, 100);`
-`  48`  `        }`
-`  49`  `    } catch (e) { /* ignore */ }`
-`  50`  `});`
-`  51`  ``
-`  52`  `function editCourseBasicInfo(cid) {`
-`  53`  `    const c = courses.find(item => item.cid === cid);`
-`  54`  `    if (!c) return;`
-`  55`  ``
-`  56`  `    currentCourseId = cid;`
-`  57`  `    document.getElementById('txtCourseTitle').value = c.name;`
-  - → Get HTML element by id.
-`  58`  `    document.getElementById('txtCourseDesc').value = c.description;`
-  - → Get HTML element by id.
-`  59`  `    if (c.category) document.getElementById('ddlCategory').value = c.category;`
-  - → Get HTML element by id.
-`  60`  `    if (c.level) document.getElementById('ddlLevel').value = c.level;`
-  - → Get HTML element by id.
-`  61`  `    document.getElementById('txtBgImg').value = c.bgImg || '';`
-  - → Get HTML element by id.
-`  62`  `    const prevEdit = document.getElementById('courseThumbPreview');`
-  - → Get HTML element by id.
-`  63`  `    if (prevEdit && c.bgImg) {`
-`  64`  `        prevEdit.src = c.bgImg;`
-`  65`  `        prevEdit.classList.remove('d-none');`
-`  66`  `    }`
-`  67`  ``
-`  68`  `    document.getElementById('step1Error').style.display = 'none';`
-  - → Get HTML element by id.
-`  69`  `    document.getElementById('wizardModalTitle').innerText = 'Edit Course: ' + c.name;`
-  - → Get HTML element by id.
-`  70`  ``
-`  71`  `    setWizardStep(1);`
-`  72`  `    showModal('courseWizardModal');`
-`  73`  `}`
-`  74`  ``
-`  75`  `function setWizardStep(step) {`
-`  76`  `    activeWizardStep = step;`
-`  77`  `    const step1 = document.getElementById('stepIndicator1');`
-  - → Get HTML element by id.
-`  78`  `    const step2 = document.getElementById('stepIndicator2');`
-  - → Get HTML element by id.
-`  79`  `    const stepLine = document.getElementById('stepLine1');`
-  - → Get HTML element by id.
-`  80`  ``
-`  81`  `    if (step === 1) {`
-`  82`  `        // Indicators`
-`  83`  `        step1.classList.remove('completed');`
-`  84`  `        step1.classList.add('active');`
-`  85`  `        step2.classList.remove('active');`
-`  86`  `        step2.classList.remove('completed');`
-`  87`  `        stepLine.classList.remove('active');`
-`  88`  ``
-`  89`  `        // Form panels`
-`  90`  `        document.getElementById('wizardStep1').style.display = 'block';`
-  - → Get HTML element by id.
-`  91`  `        document.getElementById('wizardStep2').style.display = 'none';`
-  - → Get HTML element by id.
-`  92`  ``
-`  93`  `        // Footers`
-`  94`  `        document.getElementById('wizardFooterStep1').style.display = 'flex';`
-  - → Get HTML element by id.
-`  95`  `        document.getElementById('wizardFooterStep2').style.setProperty('display', 'none', 'important');`
-  - → Get HTML element by id.
-`  96`  `    } else {`
-`  97`  `        // Indicators`
-`  98`  `        step1.classList.remove('active');`
-`  99`  `        step1.classList.add('completed');`
-` 100`  `        step2.classList.add('active');`
-` 101`  `        stepLine.classList.add('active');`
-` 102`  ``
-` 103`  `        // Form panels`
-` 104`  `        document.getElementById('wizardStep1').style.display = 'none';`
-  - → Get HTML element by id.
-` 105`  `        document.getElementById('wizardStep2').style.display = 'block';`
-  - → Get HTML element by id.
-` 106`  ``
-` 107`  `        // Footers`
-` 108`  `        document.getElementById('wizardFooterStep1').style.setProperty('display', 'none', 'important');`
-  - → Get HTML element by id.
-` 109`  `        document.getElementById('wizardFooterStep2').style.setProperty('display', 'flex', 'important');`
-  - → Get HTML element by id.
-` 110`  ``
-` 111`  `        // Load Curriculum`
-` 112`  `        loadCurriculumView();`
-` 113`  `    }`
-` 114`  `}`
-` 115`  ``
-` 116`  ``
-` 117`  `function nextWizardStep() {`
-` 118`  `    const name = document.getElementById('txtCourseTitle').value.trim();`
-  - → Get HTML element by id.
-` 119`  `    const desc = document.getElementById('txtCourseDesc').value.trim();`
-  - → Get HTML element by id.
-` 120`  `    const category = document.getElementById('ddlCategory').value;`
-  - → Get HTML element by id.
-` 121`  `    const level = document.getElementById('ddlLevel').value;`
-  - → Get HTML element by id.
-` 122`  `    const bgImg = document.getElementById('txtBgImg').value.trim();`
-  - → Get HTML element by id.
-` 123`  `    const errDiv = document.getElementById('step1Error');`
-  - → Get HTML element by id.
-` 124`  ``
-` 125`  `    errDiv.style.display = 'none';`
-` 126`  ``
-` 127`  `    if (!name || !desc) {`
-` 128`  `        errDiv.innerText = "Please fill in all required fields (Title and Description).";`
-` 129`  `        errDiv.style.display = 'block';`
-` 130`  `        return;`
-` 131`  `    }`
-` 132`  ``
-` 133`  `    postJson('CourseCreation.aspx/SaveCourseInfo', {`
-` 134`  `        name: name,`
-` 135`  `        desc: desc,`
-` 136`  `        category: category,`
-` 137`  `        level: level,`
-` 138`  `        bgImg: bgImg,`
-` 139`  `        cid: currentCourseId || 0`
-` 140`  `    })`
-` 141`  `    .then(function (resObj) {`
-` 142`  `        if (resObj && resObj.success) {`
-` 143`  `            currentCourseId = resObj.cid;`
-` 144`  `            setWizardStep(2);`
-` 145`  `        } else {`
-` 146`  `            errDiv.innerText = (resObj && resObj.message) || 'Failed to save course details.';`
-` 147`  `            errDiv.style.display = 'block';`
-` 148`  `        }`
-` 149`  `    })`
-` 150`  `    .catch(function (err) {`
-` 151`  `        errDiv.innerText = 'Network error saving course.';`
-` 152`  `        errDiv.style.display = 'block';`
-` 153`  `        console.error(err);`
-` 154`  `    });`
-` 155`  `}`
-` 156`  ``
-` 157`  `function prevWizardStep() {`
-` 158`  `    setWizardStep(1);`
-` 159`  `}`
-` 160`  ``
-` 161`  `function completeWizard() {`
-` 162`  `    const modalEl = document.getElementById('courseWizardModal');`
-  - → Get HTML element by id.
-` 163`  `    const modal = bootstrap.Modal.getInstance(modalEl);`
-` 164`  `    modal.hide();`
-` 165`  `    loadCourses(); // Refresh list`
-` 166`  `}`
-` 167`  ``
-` 168`  `function confirmCloseWizard(e) {`
-` 169`  `    // Reload courses in case they cancelled early on step 2 (curriculum changes are saved incrementally)`
-` 170`  `    loadCourses();`
-` 171`  `}`
-` 172`  ``
+```javascript
+   1 | // Course Creation — wizard create/edit course
+   2 | // depends on: cc-core.js, cc-grid.js
+   3 | function showCreateCourseModal() {
+   4 |     currentCourseId = null;
+   5 |     editingSectionId = null;
+   6 |     editingLessonId = null;
+   7 | 
+   8 |     // Reset form fields
+   9 |     document.getElementById('txtCourseTitle').value = '';
+  10 |     document.getElementById('txtCourseDesc').value = '';
+  11 |     document.getElementById('ddlCategory').value = 'Development';
+  12 |     document.getElementById('ddlLevel').value = 'Beginner';
+  13 |     document.getElementById('txtBgImg').value = '';
+  14 |     const prev = document.getElementById('courseThumbPreview');
+  15 |     if (prev) { prev.src = ''; prev.classList.add('d-none'); }
+  16 |     const dzMsg = document.getElementById('dzMessage');
+  17 |     if (dzMsg) dzMsg.innerHTML = '<i class="fa-solid fa-cloud-arrow-up d-block mb-2 fs-4"></i>Click to upload image (16:9 ratio)';
+  18 | 
+  19 |     document.getElementById('step1Error').style.display = 'none';
+  20 | 
+  21 |     document.getElementById('wizardModalTitle').innerText = "Create New Course";
+  22 | 
+  23 |     setWizardStep(1);
+  24 | 
+  25 |     showModal('courseWizardModal');
+  26 | }
+  27 | 
+  28 | // Deep-link: CourseCreation.aspx?edit=123 (from preview Edit button)
+  29 | document.addEventListener('DOMContentLoaded', function () {
+  30 |     try {
+  31 |         var params = new URLSearchParams(window.location.search);
+  32 |         var editId = parseInt(params.get('edit') || sessionStorage.getItem('editCourseId') || '0', 10);
+  33 |         if (editId > 0) {
+  34 |             sessionStorage.removeItem('editCourseId');
+  35 |             // Wait for courses to load then open editor
+  36 |             var tries = 0;
+  37 |             var t = setInterval(function () {
+  38 |                 tries++;
+  39 |                 if (courses && courses.length) {
+  40 |                     clearInterval(t);
+  41 |                     editCourseBasicInfo(editId);
+  42 |                     // jump to curriculum step if already saved
+  43 |                     if (currentCourseId) setTimeout(function () { setWizardStep(2); }, 200);
+  44 |                 } else if (tries > 40) {
+  45 |                     clearInterval(t);
+  46 |                 }
+  47 |             }, 100);
+  48 |         }
+  49 |     } catch (e) { /* ignore */ }
+  50 | });
+  51 | 
+  52 | function editCourseBasicInfo(cid) {
+  53 |     const c = courses.find(item => item.cid === cid);
+  54 |     if (!c) return;
+  55 | 
+  56 |     currentCourseId = cid;
+  57 |     document.getElementById('txtCourseTitle').value = c.name;
+  58 |     document.getElementById('txtCourseDesc').value = c.description;
+  59 |     if (c.category) document.getElementById('ddlCategory').value = c.category;
+  60 |     if (c.level) document.getElementById('ddlLevel').value = c.level;
+  61 |     document.getElementById('txtBgImg').value = c.bgImg || '';
+  62 |     const prevEdit = document.getElementById('courseThumbPreview');
+  63 |     if (prevEdit && c.bgImg) {
+  64 |         prevEdit.src = c.bgImg;
+  65 |         prevEdit.classList.remove('d-none');
+  66 |     }
+  67 | 
+  68 |     document.getElementById('step1Error').style.display = 'none';
+  69 |     document.getElementById('wizardModalTitle').innerText = 'Edit Course: ' + c.name;
+  70 | 
+  71 |     setWizardStep(1);
+  72 |     showModal('courseWizardModal');
+  73 | }
+  74 | 
+  75 | function setWizardStep(step) {
+  76 |     activeWizardStep = step;
+  77 |     const step1 = document.getElementById('stepIndicator1');
+  78 |     const step2 = document.getElementById('stepIndicator2');
+  79 |     const stepLine = document.getElementById('stepLine1');
+  80 | 
+  81 |     if (step === 1) {
+  82 |         // Indicators
+  83 |         step1.classList.remove('completed');
+  84 |         step1.classList.add('active');
+  85 |         step2.classList.remove('active');
+  86 |         step2.classList.remove('completed');
+  87 |         stepLine.classList.remove('active');
+  88 | 
+  89 |         // Form panels
+  90 |         document.getElementById('wizardStep1').style.display = 'block';
+  91 |         document.getElementById('wizardStep2').style.display = 'none';
+  92 | 
+  93 |         // Footers
+  94 |         document.getElementById('wizardFooterStep1').style.display = 'flex';
+  95 |         document.getElementById('wizardFooterStep2').style.setProperty('display', 'none', 'important');
+  96 |     } else {
+  97 |         // Indicators
+  98 |         step1.classList.remove('active');
+  99 |         step1.classList.add('completed');
+ 100 |         step2.classList.add('active');
+ 101 |         stepLine.classList.add('active');
+ 102 | 
+ 103 |         // Form panels
+ 104 |         document.getElementById('wizardStep1').style.display = 'none';
+ 105 |         document.getElementById('wizardStep2').style.display = 'block';
+ 106 | 
+ 107 |         // Footers
+ 108 |         document.getElementById('wizardFooterStep1').style.setProperty('display', 'none', 'important');
+ 109 |         document.getElementById('wizardFooterStep2').style.setProperty('display', 'flex', 'important');
+ 110 | 
+ 111 |         // Load Curriculum
+ 112 |         loadCurriculumView();
+ 113 |     }
+ 114 | }
+ 115 | 
+ 116 | 
+ 117 | function nextWizardStep() {
+ 118 |     const name = document.getElementById('txtCourseTitle').value.trim();
+ 119 |     const desc = document.getElementById('txtCourseDesc').value.trim();
+ 120 |     const category = document.getElementById('ddlCategory').value;
+ 121 |     const level = document.getElementById('ddlLevel').value;
+ 122 |     const bgImg = document.getElementById('txtBgImg').value.trim();
+ 123 |     const errDiv = document.getElementById('step1Error');
+ 124 | 
+ 125 |     errDiv.style.display = 'none';
+ 126 | 
+ 127 |     if (!name || !desc) {
+ 128 |         errDiv.innerText = "Please fill in all required fields (Title and Description).";
+ 129 |         errDiv.style.display = 'block';
+ 130 |         return;
+ 131 |     }
+ 132 | 
+ 133 |     postJson('CourseCreation.aspx/SaveCourseInfo', {
+ 134 |         name: name,
+ 135 |         desc: desc,
+ 136 |         category: category,
+ 137 |         level: level,
+ 138 |         bgImg: bgImg,
+ 139 |         cid: currentCourseId || 0
+ 140 |     })
+ 141 |     .then(function (resObj) {
+ 142 |         if (resObj && resObj.success) {
+ 143 |             currentCourseId = resObj.cid;
+ 144 |             setWizardStep(2);
+ 145 |         } else {
+ 146 |             errDiv.innerText = (resObj && resObj.message) || 'Failed to save course details.';
+ 147 |             errDiv.style.display = 'block';
+ 148 |         }
+ 149 |     })
+ 150 |     .catch(function (err) {
+ 151 |         errDiv.innerText = 'Network error saving course.';
+ 152 |         errDiv.style.display = 'block';
+ 153 |         console.error(err);
+ 154 |     });
+ 155 | }
+ 156 | 
+ 157 | function prevWizardStep() {
+ 158 |     setWizardStep(1);
+ 159 | }
+ 160 | 
+ 161 | function completeWizard() {
+ 162 |     const modalEl = document.getElementById('courseWizardModal');
+ 163 |     const modal = bootstrap.Modal.getInstance(modalEl);
+ 164 |     modal.hide();
+ 165 |     loadCourses(); // Refresh list
+ 166 | }
+ 167 | 
+ 168 | function confirmCloseWizard(e) {
+ 169 |     // Reload courses in case they cancelled early on step 2 (curriculum changes are saved incrementally)
+ 170 |     loadCourses();
+ 171 | }
+ 172 | 
+```
+
+**Line notes**
+
+- **L9:** Get HTML element by id.
+- **L10:** Get HTML element by id.
+- **L11:** Get HTML element by id.
+- **L12:** Get HTML element by id.
+- **L13:** Get HTML element by id.
+- **L14:** Get HTML element by id.
+- **L16:** Get HTML element by id.
+- **L17:** Update page HTML.
+- **L19:** Get HTML element by id.
+- **L21:** Get HTML element by id.
+- **L29:** DOM event handler.
+- **L30:** Error handling block.
+- **L57:** Get HTML element by id.
+- **L58:** Get HTML element by id.
+- **L59:** Get HTML element by id.
+- **L60:** Get HTML element by id.
+- **L61:** Get HTML element by id.
+- **L62:** Get HTML element by id.
+- **L68:** Get HTML element by id.
+- **L69:** Get HTML element by id.
+- **L77:** Get HTML element by id.
+- **L78:** Get HTML element by id.
+- **L79:** Get HTML element by id.
+- **L90:** Get HTML element by id.
+- **L91:** Get HTML element by id.
+- **L94:** Get HTML element by id.
+- **L95:** Get HTML element by id.
+- **L104:** Get HTML element by id.
+- **L105:** Get HTML element by id.
+- **L108:** Get HTML element by id.
+- **L109:** Get HTML element by id.
+- **L118:** Get HTML element by id.
+- **L119:** Get HTML element by id.
+- **L120:** Get HTML element by id.
+- **L121:** Get HTML element by id.
+- **L122:** Get HTML element by id.
+- **L123:** Get HTML element by id.
+- **L162:** Get HTML element by id.
 
 ## Source snapshot (raw)
 

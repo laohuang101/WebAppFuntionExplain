@@ -517,6 +517,32 @@ def md_fence(code: str, lang: str = "") -> str:
     return f"```{lang}\n{safe}\n```\n"
 
 
+def format_numbered_code(body_lines: list[str], start_line: int, fence_lang: str, max_lines: int = 250) -> str:
+    """Pretty fenced block with line numbers: 001 | code"""
+    chunk = body_lines[:max_lines]
+    rows = []
+    for i, raw in enumerate(chunk):
+        abs_ln = start_line + i
+        # keep tabs readable; strip only trailing CR
+        display = raw.replace("\t", "    ").rstrip("\r")
+        rows.append(f"{abs_ln:4d} | {display}")
+    if len(body_lines) > max_lines:
+        rows.append(f" ... | … {len(body_lines) - max_lines} more lines truncated …")
+    return md_fence("\n".join(rows), fence_lang)
+
+
+def format_line_notes(body_lines: list[str], start_line: int, max_lines: int = 250) -> list[str]:
+    """Bullet notes keyed by absolute line number (only lines with a recognized pattern)."""
+    out = []
+    for i, raw in enumerate(body_lines[:max_lines]):
+        n = line_note(raw)
+        if not n:
+            continue
+        abs_ln = start_line + i
+        out.append(f"- **L{abs_ln}:** {n}\n")
+    return out
+
+
 def pdf_name_for(rel: str) -> str:
     p = Path(rel)
     safe = re.sub(r"[^\w.\-]+", "_", p.name)
@@ -599,36 +625,35 @@ def write_file_md(path: Path, out_md: Path, title: str, feature_blurb: str, rel:
 
     for meth in methods:
         lines_out.append(f"### `{meth['name']}` — lines {meth['start']}–{meth['end']}\n\n")
-        lines_out.append(f"```\n{meth['header'][:400]}\n```\n\n")
-        lines_out.append("#### Explanation\n\n")
+        lines_out.append(md_fence(meth["header"][:400], fence_lang))
+        lines_out.append("\n#### Explanation\n\n")
         for note in explain_method(meth["name"], meth["header"], meth["body"], "js" if lang == "js" else "cs"):
             lines_out.append(f"- {note}\n")
         lines_out.append("\n#### Line-by-line (this function)\n\n")
         body_lines = meth["body"].splitlines()
         max_fn = 250
-        for i, raw in enumerate(body_lines[:max_fn]):
-            abs_ln = meth["start"] + i
-            lines_out.append(f"`{abs_ln:4d}`  `{raw}`\n")
-            n = line_note(raw)
-            if n:
-                lines_out.append(f"  - → {n}\n")
+        lines_out.append(format_numbered_code(body_lines, meth["start"], fence_lang, max_fn))
+        notes = format_line_notes(body_lines, meth["start"], max_fn)
+        if notes:
+            lines_out.append("\n**Line notes**\n\n")
+            lines_out.extend(notes)
         if len(body_lines) > max_fn:
-            lines_out.append(f"\n_… {len(body_lines) - max_fn} more lines in this function (see full listing)._\n")
+            lines_out.append(
+                f"\n_… {len(body_lines) - max_fn} more lines in this function (see full listing)._\n"
+            )
         lines_out.append("\n---\n\n")
 
     lines_out.append("## Full file listing with line notes\n\n")
     lines_out.append(
-        "Every line of the source is listed (truncated only if extremely long). "
-        "Notes appear under lines the analyzer recognizes.\n\n"
+        "Source is shown as a single fenced code block with line numbers. "
+        "Recognized patterns are listed under **Line notes** after the block.\n\n"
     )
     max_full = min(len(lines), 900)
-    for i, raw in enumerate(lines[:max_full], start=1):
-        # Use indented code style without breaking tables
-        display = raw.replace("\t", "    ")
-        lines_out.append(f"`{i:4d}`  `{display}`\n")
-        n = line_note(raw)
-        if n:
-            lines_out.append(f"  - → {n}\n")
+    lines_out.append(format_numbered_code(lines[:max_full], 1, fence_lang, max_full))
+    full_notes = format_line_notes(lines[:max_full], 1, max_full)
+    if full_notes:
+        lines_out.append("\n**Line notes**\n\n")
+        lines_out.extend(full_notes)
     if len(lines) > max_full:
         lines_out.append(
             f"\n_… truncated: {len(lines) - max_full} more lines in source. Open the original file for the rest._\n"

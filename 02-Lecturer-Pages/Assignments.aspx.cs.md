@@ -1,6 +1,6 @@
 # Assignments.aspx.cs
 **Source:** `Pages/Lecturer/Assignments.aspx.cs`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -25,7 +25,7 @@ Build CourseWorks with due date, rubric or objective quiz. Due date closes stude
 
 ### `Page_Load` — lines 12–16
 
-```
+```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
@@ -38,19 +38,24 @@ protected void Page_Load(object sender, EventArgs e)
 
 #### Line-by-line (this function)
 
-`  12`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  13`  `        {`
-`  14`  `            if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))`
-  - → Authorization — block wrong role / anonymous.
-`  15`  `                return;`
-`  16`  `}`
+```csharp
+  12 |         protected void Page_Load(object sender, EventArgs e)
+  13 |         {
+  14 |             if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))
+  15 |                 return;
+  16 | }
+```
+
+**Line notes**
+
+- **L12:** Page load entry (GET or postback).
+- **L14:** Authorization — block wrong role / anonymous.
 
 ---
 
 ### `CurrentUid` — lines 17–21
 
-```
+```csharp
 private static int CurrentUid()
 ```
 
@@ -61,18 +66,23 @@ private static int CurrentUid()
 
 #### Line-by-line (this function)
 
-`  17`  ``
-`  18`  `        private static int CurrentUid()`
-`  19`  `        {`
-`  20`  `            return AuthGate.RequireLecturer();`
-  - → Authorization — block wrong role / anonymous.
-`  21`  `        }`
+```csharp
+  17 | 
+  18 |         private static int CurrentUid()
+  19 |         {
+  20 |             return AuthGate.RequireLecturer();
+  21 |         }
+```
+
+**Line notes**
+
+- **L20:** Authorization — block wrong role / anonymous.
 
 ---
 
 ### `GetCourses` — lines 25–37
 
-```
+```csharp
 public static object GetCourses()
 ```
 
@@ -86,28 +96,33 @@ public static object GetCourses()
 
 #### Line-by-line (this function)
 
-`  25`  `        public static object GetCourses()`
-`  26`  `        {`
-`  27`  `            try`
-  - → Error handling block.
-`  28`  `            {`
-`  29`  `                int uid = CurrentUid();`
-`  30`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  31`  `                return new { success = true, courses = LecturerRepository.GetLecturerCoursesSimple(uid) };`
-`  32`  `            }`
-`  33`  `            catch (Exception ex)`
-  - → Handle/log exception.
-`  34`  `            {`
-`  35`  `                return new { success = false, message = "Request failed." };`
-`  36`  `            }`
-`  37`  `        }`
+```csharp
+  25 |         public static object GetCourses()
+  26 |         {
+  27 |             try
+  28 |             {
+  29 |                 int uid = CurrentUid();
+  30 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  31 |                 return new { success = true, courses = LecturerRepository.GetLecturerCoursesSimple(uid) };
+  32 |             }
+  33 |             catch (Exception ex)
+  34 |             {
+  35 |                 return new { success = false, message = "Request failed." };
+  36 |             }
+  37 |         }
+```
+
+**Line notes**
+
+- **L27:** Error handling block.
+- **L30:** Authorization — block wrong role / anonymous.
+- **L33:** Handle/log exception.
 
 ---
 
 ### `GetCourseWorks` — lines 41–53
 
-```
+```csharp
 public static object GetCourseWorks()
 ```
 
@@ -121,28 +136,33 @@ public static object GetCourseWorks()
 
 #### Line-by-line (this function)
 
-`  41`  `        public static object GetCourseWorks()`
-`  42`  `        {`
-`  43`  `            try`
-  - → Error handling block.
-`  44`  `            {`
-`  45`  `                int uid = CurrentUid();`
-`  46`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  47`  `                return new { success = true, items = LecturerRepository.GetCourseWorksForLecturer(uid) };`
-`  48`  `            }`
-`  49`  `            catch (Exception ex)`
-  - → Handle/log exception.
-`  50`  `            {`
-`  51`  `                return new { success = false, message = "Request failed." };`
-`  52`  `            }`
-`  53`  `        }`
+```csharp
+  41 |         public static object GetCourseWorks()
+  42 |         {
+  43 |             try
+  44 |             {
+  45 |                 int uid = CurrentUid();
+  46 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  47 |                 return new { success = true, items = LecturerRepository.GetCourseWorksForLecturer(uid) };
+  48 |             }
+  49 |             catch (Exception ex)
+  50 |             {
+  51 |                 return new { success = false, message = "Request failed." };
+  52 |             }
+  53 |         }
+```
+
+**Line notes**
+
+- **L43:** Error handling block.
+- **L46:** Authorization — block wrong role / anonymous.
+- **L49:** Handle/log exception.
 
 ---
 
 ### `SaveCourseWork` — lines 61–94
 
-```
+```csharp
 public static object SaveCourseWork(
         int? cwid,
         int cid,
@@ -176,49 +196,54 @@ public static object SaveCourseWork(
 
 #### Line-by-line (this function)
 
-`  61`  `        public static object SaveCourseWork(`
-`  62`  `        int? cwid,`
-`  63`  `        int cid,`
-`  64`  `        string title,`
-`  65`  `        string instructions,`
-`  66`  `        string type,`
-`  67`  `        decimal score,`
-`  68`  `        decimal creditGiven,`
-`  69`  `        string rubricJson,`
-`  70`  `        string extraMetaJson,`
-`  71`  `        string objectiveQuestionsJson)`
-`  72`  `        {`
-`  73`  `            try`
-  - → Error handling block.
-`  74`  `            {`
-`  75`  `                int uid = CurrentUid();`
-`  76`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  77`  `                if (cid <= 0) return new { success = false, message = "Select a target course." };`
-`  78`  `                if (string.IsNullOrWhiteSpace(title)) return new { success = false, message = "Title is required." };`
-`  79`  ``
-`  80`  `                // All assessments are graded out of 100 pts`
-`  81`  `                score = 100m;`
-`  82`  `                creditGiven = 100m;`
-`  83`  ``
-`  84`  `                int id = LecturerRepository.SaveCourseWork(`
-`  85`  `                uid, cwid, cid, title.Trim(), instructions, type,`
-`  86`  `                score, creditGiven, rubricJson, extraMetaJson, objectiveQuestionsJson);`
-`  87`  ``
-`  88`  `                return new { success = true, cwid = id };`
-`  89`  `            }`
-`  90`  `            catch (Exception ex)`
-  - → Handle/log exception.
-`  91`  `            {`
-`  92`  `                return new { success = false, message = "Request failed." };`
-`  93`  `            }`
-`  94`  `        }`
+```csharp
+  61 |         public static object SaveCourseWork(
+  62 |         int? cwid,
+  63 |         int cid,
+  64 |         string title,
+  65 |         string instructions,
+  66 |         string type,
+  67 |         decimal score,
+  68 |         decimal creditGiven,
+  69 |         string rubricJson,
+  70 |         string extraMetaJson,
+  71 |         string objectiveQuestionsJson)
+  72 |         {
+  73 |             try
+  74 |             {
+  75 |                 int uid = CurrentUid();
+  76 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  77 |                 if (cid <= 0) return new { success = false, message = "Select a target course." };
+  78 |                 if (string.IsNullOrWhiteSpace(title)) return new { success = false, message = "Title is required." };
+  79 | 
+  80 |                 // All assessments are graded out of 100 pts
+  81 |                 score = 100m;
+  82 |                 creditGiven = 100m;
+  83 | 
+  84 |                 int id = LecturerRepository.SaveCourseWork(
+  85 |                 uid, cwid, cid, title.Trim(), instructions, type,
+  86 |                 score, creditGiven, rubricJson, extraMetaJson, objectiveQuestionsJson);
+  87 | 
+  88 |                 return new { success = true, cwid = id };
+  89 |             }
+  90 |             catch (Exception ex)
+  91 |             {
+  92 |                 return new { success = false, message = "Request failed." };
+  93 |             }
+  94 |         }
+```
+
+**Line notes**
+
+- **L73:** Error handling block.
+- **L76:** Authorization — block wrong role / anonymous.
+- **L90:** Handle/log exception.
 
 ---
 
 ### `DeleteCourseWork` — lines 98–111
 
-```
+```csharp
 public static object DeleteCourseWork(int cwid)
 ```
 
@@ -233,169 +258,179 @@ public static object DeleteCourseWork(int cwid)
 
 #### Line-by-line (this function)
 
-`  98`  `        public static object DeleteCourseWork(int cwid)`
-`  99`  `        {`
-` 100`  `            try`
-  - → Error handling block.
-` 101`  `            {`
-` 102`  `                int uid = CurrentUid();`
-` 103`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-` 104`  `                LecturerRepository.DeleteCourseWork(uid, cwid);`
-` 105`  `                return new { success = true };`
-` 106`  `            }`
-` 107`  `            catch (Exception ex)`
-  - → Handle/log exception.
-` 108`  `            {`
-` 109`  `                return new { success = false, message = "Request failed." };`
-` 110`  `            }`
-` 111`  `        }`
+```csharp
+  98 |         public static object DeleteCourseWork(int cwid)
+  99 |         {
+ 100 |             try
+ 101 |             {
+ 102 |                 int uid = CurrentUid();
+ 103 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+ 104 |                 LecturerRepository.DeleteCourseWork(uid, cwid);
+ 105 |                 return new { success = true };
+ 106 |             }
+ 107 |             catch (Exception ex)
+ 108 |             {
+ 109 |                 return new { success = false, message = "Request failed." };
+ 110 |             }
+ 111 |         }
+```
+
+**Line notes**
+
+- **L100:** Error handling block.
+- **L103:** Authorization — block wrong role / anonymous.
+- **L107:** Handle/log exception.
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `using System;`
-  - → Import namespace/types.
-`   2`  `using System.Web.Script.Services;`
-  - → Import namespace/types.
-`   3`  `using System.Web.Services;`
-  - → Import namespace/types.
-`   4`  `using System.Web.UI;`
-  - → Import namespace/types.
-`   5`  `using WebAppAssignment.Data;`
-  - → Import namespace/types.
-`   6`  `using WebAppAssignment.Data.Security;`
-  - → Import namespace/types.
-`   7`  ``
-`   8`  `namespace WebAppAssignment.Pages.Lecturer`
-  - → C# namespace grouping.
-`   9`  `{`
-`  10`  `    public partial class Assignments : Page`
-`  11`  `    {`
-`  12`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  13`  `        {`
-`  14`  `            if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))`
-  - → Authorization — block wrong role / anonymous.
-`  15`  `                return;`
-`  16`  `}`
-`  17`  ``
-`  18`  `        private static int CurrentUid()`
-`  19`  `        {`
-`  20`  `            return AuthGate.RequireLecturer();`
-  - → Authorization — block wrong role / anonymous.
-`  21`  `        }`
-`  22`  ``
-`  23`  `        [WebMethod(EnableSession = true)]`
-  - → Expose method to AJAX JSON calls.
-`  24`  `        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]`
-`  25`  `        public static object GetCourses()`
-`  26`  `        {`
-`  27`  `            try`
-  - → Error handling block.
-`  28`  `            {`
-`  29`  `                int uid = CurrentUid();`
-`  30`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  31`  `                return new { success = true, courses = LecturerRepository.GetLecturerCoursesSimple(uid) };`
-`  32`  `            }`
-`  33`  `            catch (Exception ex)`
-  - → Handle/log exception.
-`  34`  `            {`
-`  35`  `                return new { success = false, message = "Request failed." };`
-`  36`  `            }`
-`  37`  `        }`
-`  38`  ``
-`  39`  `        [WebMethod(EnableSession = true)]`
-  - → Expose method to AJAX JSON calls.
-`  40`  `        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]`
-`  41`  `        public static object GetCourseWorks()`
-`  42`  `        {`
-`  43`  `            try`
-  - → Error handling block.
-`  44`  `            {`
-`  45`  `                int uid = CurrentUid();`
-`  46`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  47`  `                return new { success = true, items = LecturerRepository.GetCourseWorksForLecturer(uid) };`
-`  48`  `            }`
-`  49`  `            catch (Exception ex)`
-  - → Handle/log exception.
-`  50`  `            {`
-`  51`  `                return new { success = false, message = "Request failed." };`
-`  52`  `            }`
-`  53`  `        }`
-`  54`  ``
-`  55`  `        /// <summary>`
-`  56`  `        /// Saves into CourseWorks (CWID, ChID, Title, Description, DueDate)`
-`  57`  `        /// and optionally ObjectiveQuestions (QID, QuestionText, OptionA-D, CorrectAnswer).`
-`  58`  `        /// </summary>`
-`  59`  `        [WebMethod(EnableSession = true)]`
-  - → Expose method to AJAX JSON calls.
-`  60`  `        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]`
-`  61`  `        public static object SaveCourseWork(`
-`  62`  `        int? cwid,`
-`  63`  `        int cid,`
-`  64`  `        string title,`
-`  65`  `        string instructions,`
-`  66`  `        string type,`
-`  67`  `        decimal score,`
-`  68`  `        decimal creditGiven,`
-`  69`  `        string rubricJson,`
-`  70`  `        string extraMetaJson,`
-`  71`  `        string objectiveQuestionsJson)`
-`  72`  `        {`
-`  73`  `            try`
-  - → Error handling block.
-`  74`  `            {`
-`  75`  `                int uid = CurrentUid();`
-`  76`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  77`  `                if (cid <= 0) return new { success = false, message = "Select a target course." };`
-`  78`  `                if (string.IsNullOrWhiteSpace(title)) return new { success = false, message = "Title is required." };`
-`  79`  ``
-`  80`  `                // All assessments are graded out of 100 pts`
-`  81`  `                score = 100m;`
-`  82`  `                creditGiven = 100m;`
-`  83`  ``
-`  84`  `                int id = LecturerRepository.SaveCourseWork(`
-`  85`  `                uid, cwid, cid, title.Trim(), instructions, type,`
-`  86`  `                score, creditGiven, rubricJson, extraMetaJson, objectiveQuestionsJson);`
-`  87`  ``
-`  88`  `                return new { success = true, cwid = id };`
-`  89`  `            }`
-`  90`  `            catch (Exception ex)`
-  - → Handle/log exception.
-`  91`  `            {`
-`  92`  `                return new { success = false, message = "Request failed." };`
-`  93`  `            }`
-`  94`  `        }`
-`  95`  ``
-`  96`  `        [WebMethod(EnableSession = true)]`
-  - → Expose method to AJAX JSON calls.
-`  97`  `        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]`
-`  98`  `        public static object DeleteCourseWork(int cwid)`
-`  99`  `        {`
-` 100`  `            try`
-  - → Error handling block.
-` 101`  `            {`
-` 102`  `                int uid = CurrentUid();`
-` 103`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-` 104`  `                LecturerRepository.DeleteCourseWork(uid, cwid);`
-` 105`  `                return new { success = true };`
-` 106`  `            }`
-` 107`  `            catch (Exception ex)`
-  - → Handle/log exception.
-` 108`  `            {`
-` 109`  `                return new { success = false, message = "Request failed." };`
-` 110`  `            }`
-` 111`  `        }`
-` 112`  `    }`
-` 113`  `}`
+```csharp
+   1 | using System;
+   2 | using System.Web.Script.Services;
+   3 | using System.Web.Services;
+   4 | using System.Web.UI;
+   5 | using WebAppAssignment.Data;
+   6 | using WebAppAssignment.Data.Security;
+   7 | 
+   8 | namespace WebAppAssignment.Pages.Lecturer
+   9 | {
+  10 |     public partial class Assignments : Page
+  11 |     {
+  12 |         protected void Page_Load(object sender, EventArgs e)
+  13 |         {
+  14 |             if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))
+  15 |                 return;
+  16 | }
+  17 | 
+  18 |         private static int CurrentUid()
+  19 |         {
+  20 |             return AuthGate.RequireLecturer();
+  21 |         }
+  22 | 
+  23 |         [WebMethod(EnableSession = true)]
+  24 |         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+  25 |         public static object GetCourses()
+  26 |         {
+  27 |             try
+  28 |             {
+  29 |                 int uid = CurrentUid();
+  30 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  31 |                 return new { success = true, courses = LecturerRepository.GetLecturerCoursesSimple(uid) };
+  32 |             }
+  33 |             catch (Exception ex)
+  34 |             {
+  35 |                 return new { success = false, message = "Request failed." };
+  36 |             }
+  37 |         }
+  38 | 
+  39 |         [WebMethod(EnableSession = true)]
+  40 |         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+  41 |         public static object GetCourseWorks()
+  42 |         {
+  43 |             try
+  44 |             {
+  45 |                 int uid = CurrentUid();
+  46 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  47 |                 return new { success = true, items = LecturerRepository.GetCourseWorksForLecturer(uid) };
+  48 |             }
+  49 |             catch (Exception ex)
+  50 |             {
+  51 |                 return new { success = false, message = "Request failed." };
+  52 |             }
+  53 |         }
+  54 | 
+  55 |         /// <summary>
+  56 |         /// Saves into CourseWorks (CWID, ChID, Title, Description, DueDate)
+  57 |         /// and optionally ObjectiveQuestions (QID, QuestionText, OptionA-D, CorrectAnswer).
+  58 |         /// </summary>
+  59 |         [WebMethod(EnableSession = true)]
+  60 |         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+  61 |         public static object SaveCourseWork(
+  62 |         int? cwid,
+  63 |         int cid,
+  64 |         string title,
+  65 |         string instructions,
+  66 |         string type,
+  67 |         decimal score,
+  68 |         decimal creditGiven,
+  69 |         string rubricJson,
+  70 |         string extraMetaJson,
+  71 |         string objectiveQuestionsJson)
+  72 |         {
+  73 |             try
+  74 |             {
+  75 |                 int uid = CurrentUid();
+  76 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  77 |                 if (cid <= 0) return new { success = false, message = "Select a target course." };
+  78 |                 if (string.IsNullOrWhiteSpace(title)) return new { success = false, message = "Title is required." };
+  79 | 
+  80 |                 // All assessments are graded out of 100 pts
+  81 |                 score = 100m;
+  82 |                 creditGiven = 100m;
+  83 | 
+  84 |                 int id = LecturerRepository.SaveCourseWork(
+  85 |                 uid, cwid, cid, title.Trim(), instructions, type,
+  86 |                 score, creditGiven, rubricJson, extraMetaJson, objectiveQuestionsJson);
+  87 | 
+  88 |                 return new { success = true, cwid = id };
+  89 |             }
+  90 |             catch (Exception ex)
+  91 |             {
+  92 |                 return new { success = false, message = "Request failed." };
+  93 |             }
+  94 |         }
+  95 | 
+  96 |         [WebMethod(EnableSession = true)]
+  97 |         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+  98 |         public static object DeleteCourseWork(int cwid)
+  99 |         {
+ 100 |             try
+ 101 |             {
+ 102 |                 int uid = CurrentUid();
+ 103 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+ 104 |                 LecturerRepository.DeleteCourseWork(uid, cwid);
+ 105 |                 return new { success = true };
+ 106 |             }
+ 107 |             catch (Exception ex)
+ 108 |             {
+ 109 |                 return new { success = false, message = "Request failed." };
+ 110 |             }
+ 111 |         }
+ 112 |     }
+ 113 | }
+```
+
+**Line notes**
+
+- **L1:** Import namespace/types.
+- **L2:** Import namespace/types.
+- **L3:** Import namespace/types.
+- **L4:** Import namespace/types.
+- **L5:** Import namespace/types.
+- **L6:** Import namespace/types.
+- **L8:** C# namespace grouping.
+- **L12:** Page load entry (GET or postback).
+- **L14:** Authorization — block wrong role / anonymous.
+- **L20:** Authorization — block wrong role / anonymous.
+- **L23:** Expose method to AJAX JSON calls.
+- **L27:** Error handling block.
+- **L30:** Authorization — block wrong role / anonymous.
+- **L33:** Handle/log exception.
+- **L39:** Expose method to AJAX JSON calls.
+- **L43:** Error handling block.
+- **L46:** Authorization — block wrong role / anonymous.
+- **L49:** Handle/log exception.
+- **L59:** Expose method to AJAX JSON calls.
+- **L73:** Error handling block.
+- **L76:** Authorization — block wrong role / anonymous.
+- **L90:** Handle/log exception.
+- **L96:** Expose method to AJAX JSON calls.
+- **L100:** Error handling block.
+- **L103:** Authorization — block wrong role / anonymous.
+- **L107:** Handle/log exception.
 
 ## Source snapshot (raw)
 

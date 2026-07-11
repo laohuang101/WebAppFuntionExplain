@@ -1,6 +1,6 @@
 # Logout.aspx.cs
 **Source:** `Pages/Authentication/Logout.aspx.cs`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -21,7 +21,7 @@ _No classic field declarations detected (or mostly locals inside methods)._
 
 ### `Page_Load` — lines 9–13
 
-```
+```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
@@ -34,41 +34,51 @@ protected void Page_Load(object sender, EventArgs e)
 
 #### Line-by-line (this function)
 
-`   9`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  10`  `        {`
-`  11`  `            AuthService.Logout(Context);`
-`  12`  `            Response.Redirect("~/Pages/Landing/Landing.aspx", true);`
-  - → Navigate browser to another URL.
-`  13`  `        }`
+```csharp
+   9 |         protected void Page_Load(object sender, EventArgs e)
+  10 |         {
+  11 |             AuthService.Logout(Context);
+  12 |             Response.Redirect("~/Pages/Landing/Landing.aspx", true);
+  13 |         }
+```
+
+**Line notes**
+
+- **L9:** Page load entry (GET or postback).
+- **L12:** Navigate browser to another URL.
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `using System;`
-  - → Import namespace/types.
-`   2`  `using System.Web.UI;`
-  - → Import namespace/types.
-`   3`  `using WebAppAssignment.Data.Security;`
-  - → Import namespace/types.
-`   4`  ``
-`   5`  `namespace WebAppAssignment.Pages.Authentication`
-  - → C# namespace grouping.
-`   6`  `{`
-`   7`  `    public partial class Logout : Page`
-`   8`  `    {`
-`   9`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  10`  `        {`
-`  11`  `            AuthService.Logout(Context);`
-`  12`  `            Response.Redirect("~/Pages/Landing/Landing.aspx", true);`
-  - → Navigate browser to another URL.
-`  13`  `        }`
-`  14`  `    }`
-`  15`  `}`
+```csharp
+   1 | using System;
+   2 | using System.Web.UI;
+   3 | using WebAppAssignment.Data.Security;
+   4 | 
+   5 | namespace WebAppAssignment.Pages.Authentication
+   6 | {
+   7 |     public partial class Logout : Page
+   8 |     {
+   9 |         protected void Page_Load(object sender, EventArgs e)
+  10 |         {
+  11 |             AuthService.Logout(Context);
+  12 |             Response.Redirect("~/Pages/Landing/Landing.aspx", true);
+  13 |         }
+  14 |     }
+  15 | }
+```
+
+**Line notes**
+
+- **L1:** Import namespace/types.
+- **L2:** Import namespace/types.
+- **L3:** Import namespace/types.
+- **L5:** C# namespace grouping.
+- **L9:** Page load entry (GET or postback).
+- **L12:** Navigate browser to another URL.
 
 ## Source snapshot (raw)
 

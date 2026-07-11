@@ -1,6 +1,6 @@
 # course-creation.js
 **Source:** `Pages/Lecturer/course-creation.js`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -23,12 +23,14 @@ _No methods matched the scanner (markup-only or unconventional structure). See f
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `// Course Creation bootstrap — load modules in order (see CourseCreation.aspx)`
-`   2`  `// Modules: Scripts/cc-core.js → cc-media.js → cc-grid.js → cc-wizard.js → cc-curriculum.js`
-`   3`  `// This file kept for backwards-compatible script path references.`
-`   4`  `console.debug('[EduLMS] course-creation modules loaded');`
+```javascript
+   1 | // Course Creation bootstrap — load modules in order (see CourseCreation.aspx)
+   2 | // Modules: Scripts/cc-core.js → cc-media.js → cc-grid.js → cc-wizard.js → cc-curriculum.js
+   3 | // This file kept for backwards-compatible script path references.
+   4 | console.debug('[EduLMS] course-creation modules loaded');
+```
 
 ## Source snapshot (raw)
 

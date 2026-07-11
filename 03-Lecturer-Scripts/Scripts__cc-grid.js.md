@@ -1,6 +1,6 @@
 # cc-grid.js
 **Source:** `Pages/Lecturer/Scripts/cc-grid.js`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -33,7 +33,7 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ### `loadCourses` — lines 3–22
 
-```
+```javascript
 function loadCourses()
 ```
 
@@ -45,35 +45,40 @@ function loadCourses()
 
 #### Line-by-line (this function)
 
-`   3`  ``
-`   4`  ``
-`   5`  `function loadCourses() {`
-`   6`  `    postJson('CourseCreation.aspx/GetCoursesData', {})`
-`   7`  `    .then(function (resObj) {`
-`   8`  `        if (resObj && resObj.success) {`
-`   9`  `            courses = resObj.courses || [];`
-`  10`  `            renderCourseGrid();`
-`  11`  `        } else {`
-`  12`  `            document.getElementById('courseGridContainer').innerHTML =`
-  - → Get HTML element by id.
-`  13`  `            '<div class="col-12 text-center text-danger py-4">Failed to load courses: ' +`
-`  14`  `            escapeHtml((resObj && resObj.message) || 'Unknown error') + '</div>';`
-  - → Encode text to reduce XSS risk.
-`  15`  `        }`
-`  16`  `    })`
-`  17`  `    .catch(function (err) {`
-`  18`  `        console.error('Error loading courses: ', err);`
-`  19`  `        document.getElementById('courseGridContainer').innerHTML =`
-  - → Get HTML element by id.
-`  20`  `        '<div class="col-12 text-center text-danger py-4">Network error loading courses.</div>';`
-`  21`  `    });`
-`  22`  `}`
+```javascript
+   3 | 
+   4 | 
+   5 | function loadCourses() {
+   6 |     postJson('CourseCreation.aspx/GetCoursesData', {})
+   7 |     .then(function (resObj) {
+   8 |         if (resObj && resObj.success) {
+   9 |             courses = resObj.courses || [];
+  10 |             renderCourseGrid();
+  11 |         } else {
+  12 |             document.getElementById('courseGridContainer').innerHTML =
+  13 |             '<div class="col-12 text-center text-danger py-4">Failed to load courses: ' +
+  14 |             escapeHtml((resObj && resObj.message) || 'Unknown error') + '</div>';
+  15 |         }
+  16 |     })
+  17 |     .catch(function (err) {
+  18 |         console.error('Error loading courses: ', err);
+  19 |         document.getElementById('courseGridContainer').innerHTML =
+  20 |         '<div class="col-12 text-center text-danger py-4">Network error loading courses.</div>';
+  21 |     });
+  22 | }
+```
+
+**Line notes**
+
+- **L12:** Get HTML element by id.
+- **L14:** Encode text to reduce XSS risk.
+- **L19:** Get HTML element by id.
 
 ---
 
 ### `renderCourseGrid` — lines 22–105
 
-```
+```javascript
 function renderCourseGrid()
 ```
 
@@ -85,103 +90,108 @@ function renderCourseGrid()
 
 #### Line-by-line (this function)
 
-`  22`  ``
-`  23`  ``
-`  24`  `function renderCourseGrid() {`
-`  25`  `    const container = document.getElementById('courseGridContainer');`
-  - → Get HTML element by id.
-`  26`  `    container.innerHTML = '';`
-  - → Update page HTML.
-`  27`  ``
-`  28`  `    if (courses.length === 0) {`
-`  29`  `        container.innerHTML = ``
-  - → Update page HTML.
-`  30`  `        <div class="col-12 text-center py-5">`
-`  31`  `        <div class="glass-card p-5 d-inline-block" style="max-width: 450px;">`
-`  32`  `        <i class="fa-solid fa-folder-open fa-3x mb-3 text-muted" style="color: var(--primary-accent) !important; opacity:0.6;"></i>`
-`  33`  `        <h5 class="fw-bold">No Courses Created Yet</h5>`
-`  34`  `        <p class="text-muted small">Begin by clicking the "Create Course" button at the top right to start your syllabus.</p>`
-`  35`  `        </div>`
-`  36`  `        </div>`;`
-`  37`  `        return;`
-`  38`  `    }`
-`  39`  ``
-`  40`  `    courses.forEach(c => {`
-`  41`  `        const col = document.createElement('div');`
-`  42`  `        col.className = 'col-lg-4 col-md-6';`
-`  43`  ``
-`  44`  `        const isPublished = !!c.isPublished || (c.status === 'Published');`
-`  45`  `        const statusBadgeClass = isPublished ? 'badge-published' : 'badge-draft';`
-`  46`  `        const statusText = isPublished ? 'Published' : 'Draft';`
-`  47`  `        const rating = (c.rating != null && c.rating > 0) ? Number(c.rating).toFixed(1) : null;`
-`  48`  `        const ratingHtml = rating`
-`  49`  `        ? `<span class="ms-2"><i class="fa-solid fa-star" style="color:#f59e0b;"></i> ${rating}</span>``
-`  50`  `        : '';`
-`  51`  `        const pubBtnLabel = isPublished ? 'Unpublish' : 'Publish';`
-`  52`  `        const pubBtnIcon = isPublished ? 'fa-eye-slash' : 'fa-cloud-arrow-up';`
-`  53`  ``
-`  54`  `        col.innerHTML = ``
-  - → Update page HTML.
-`  55`  `        <div class="course-grid-card h-100 d-flex flex-column course-card-clickable" data-cid="${c.cid}" role="button" title="Open course preview">`
-`  56`  `        <div class="position-relative">`
-`  57`  `        <img src="${c.bgImg || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=400'}" class="course-banner-img" alt="${escapeHtml(c.name)}">`
-  - → Encode text to reduce XSS risk.
-`  58`  `        <div class="position-absolute top-0 end-0 m-3">`
-`  59`  `        <span class="badge-status ${statusBadgeClass}">${statusText}</span>`
-`  60`  `        </div>`
-`  61`  `        </div>`
-`  62`  `        <div class="p-4 d-flex flex-column flex-grow-1">`
-`  63`  `        <h5 class="course-title">${escapeHtml(c.name)}</h5>`
-  - → Encode text to reduce XSS risk.
-`  64`  `        <div class="d-flex align-items-center text-muted small fw-semibold mb-3">`
-`  65`  `        <i class="fa-solid fa-user-group me-1"></i> ${c.studentsCount || 0}`
-`  66`  `        ${ratingHtml}`
-`  67`  `        </div>`
-`  68`  `        <div class="mt-auto d-flex justify-content-between align-items-center gap-2 pt-2 border-top border-light">`
-`  69`  `        <button type="button" class="btn btn-sm rounded-pill px-3 ${isPublished ? 'btn-outline-secondary' : 'btn-pill-accent'}" data-action="publish" title="${pubBtnLabel}">`
-`  70`  `        <i class="fa-solid ${pubBtnIcon} me-1"></i>${pubBtnLabel}`
-`  71`  `        </button>`
-`  72`  `        <div class="d-flex gap-1">`
-`  73`  `        <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="preview" title="Preview Course">`
-`  74`  `        <i class="fa-regular fa-eye"></i>`
-`  75`  `        </button>`
-`  76`  `        <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="edit" title="Edit Course">`
-`  77`  `        <i class="fa-solid fa-pencil"></i>`
-`  78`  `        </button>`
-`  79`  `        <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="delete" title="Delete Course">`
-`  80`  `        <i class="fa-regular fa-trash-can"></i>`
-`  81`  `        </button>`
-`  82`  `        </div>`
-`  83`  `        </div>`
-`  84`  `        </div>`
-`  85`  `        </div>`;`
-`  86`  ``
-`  87`  `        // Card click → preview; action buttons stop propagation`
-`  88`  `        const card = col.querySelector('.course-card-clickable');`
-`  89`  `        card.addEventListener('click', function (e) {`
-  - → DOM event handler.
-`  90`  `            const btn = e.target.closest('[data-action]');`
-`  91`  `            if (btn) {`
-`  92`  `                e.preventDefault();`
-`  93`  `                e.stopPropagation();`
-`  94`  `                const action = btn.getAttribute('data-action');`
-`  95`  `                if (action === 'edit') editCourseBasicInfo(c.cid);`
-`  96`  `                else if (action === 'delete') deleteCourse(c.cid);`
-`  97`  `                else if (action === 'preview') openCoursePreview(c.cid);`
-`  98`  `                else if (action === 'publish') toggleCoursePublished(c.cid, !isPublished);`
-`  99`  `                return;`
-` 100`  `            }`
-` 101`  `            openCoursePreview(c.cid);`
-` 102`  `        });`
-` 103`  `        container.appendChild(col);`
-` 104`  `    });`
-` 105`  `}`
+```javascript
+  22 | 
+  23 | 
+  24 | function renderCourseGrid() {
+  25 |     const container = document.getElementById('courseGridContainer');
+  26 |     container.innerHTML = '';
+  27 | 
+  28 |     if (courses.length === 0) {
+  29 |         container.innerHTML = `
+  30 |         <div class="col-12 text-center py-5">
+  31 |         <div class="glass-card p-5 d-inline-block" style="max-width: 450px;">
+  32 |         <i class="fa-solid fa-folder-open fa-3x mb-3 text-muted" style="color: var(--primary-accent) !important; opacity:0.6;"></i>
+  33 |         <h5 class="fw-bold">No Courses Created Yet</h5>
+  34 |         <p class="text-muted small">Begin by clicking the "Create Course" button at the top right to start your syllabus.</p>
+  35 |         </div>
+  36 |         </div>`;
+  37 |         return;
+  38 |     }
+  39 | 
+  40 |     courses.forEach(c => {
+  41 |         const col = document.createElement('div');
+  42 |         col.className = 'col-lg-4 col-md-6';
+  43 | 
+  44 |         const isPublished = !!c.isPublished || (c.status === 'Published');
+  45 |         const statusBadgeClass = isPublished ? 'badge-published' : 'badge-draft';
+  46 |         const statusText = isPublished ? 'Published' : 'Draft';
+  47 |         const rating = (c.rating != null && c.rating > 0) ? Number(c.rating).toFixed(1) : null;
+  48 |         const ratingHtml = rating
+  49 |         ? `<span class="ms-2"><i class="fa-solid fa-star" style="color:#f59e0b;"></i> ${rating}</span>`
+  50 |         : '';
+  51 |         const pubBtnLabel = isPublished ? 'Unpublish' : 'Publish';
+  52 |         const pubBtnIcon = isPublished ? 'fa-eye-slash' : 'fa-cloud-arrow-up';
+  53 | 
+  54 |         col.innerHTML = `
+  55 |         <div class="course-grid-card h-100 d-flex flex-column course-card-clickable" data-cid="${c.cid}" role="button" title="Open course preview">
+  56 |         <div class="position-relative">
+  57 |         <img src="${c.bgImg || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=400'}" class="course-banner-img" alt="${escapeHtml(c.name)}">
+  58 |         <div class="position-absolute top-0 end-0 m-3">
+  59 |         <span class="badge-status ${statusBadgeClass}">${statusText}</span>
+  60 |         </div>
+  61 |         </div>
+  62 |         <div class="p-4 d-flex flex-column flex-grow-1">
+  63 |         <h5 class="course-title">${escapeHtml(c.name)}</h5>
+  64 |         <div class="d-flex align-items-center text-muted small fw-semibold mb-3">
+  65 |         <i class="fa-solid fa-user-group me-1"></i> ${c.studentsCount || 0}
+  66 |         ${ratingHtml}
+  67 |         </div>
+  68 |         <div class="mt-auto d-flex justify-content-between align-items-center gap-2 pt-2 border-top border-light">
+  69 |         <button type="button" class="btn btn-sm rounded-pill px-3 ${isPublished ? 'btn-outline-secondary' : 'btn-pill-accent'}" data-action="publish" title="${pubBtnLabel}">
+  70 |         <i class="fa-solid ${pubBtnIcon} me-1"></i>${pubBtnLabel}
+  71 |         </button>
+  72 |         <div class="d-flex gap-1">
+  73 |         <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="preview" title="Preview Course">
+  74 |         <i class="fa-regular fa-eye"></i>
+  75 |         </button>
+  76 |         <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="edit" title="Edit Course">
+  77 |         <i class="fa-solid fa-pencil"></i>
+  78 |         </button>
+  79 |         <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="delete" title="Delete Course">
+  80 |         <i class="fa-regular fa-trash-can"></i>
+  81 |         </button>
+  82 |         </div>
+  83 |         </div>
+  84 |         </div>
+  85 |         </div>`;
+  86 | 
+  87 |         // Card click → preview; action buttons stop propagation
+  88 |         const card = col.querySelector('.course-card-clickable');
+  89 |         card.addEventListener('click', function (e) {
+  90 |             const btn = e.target.closest('[data-action]');
+  91 |             if (btn) {
+  92 |                 e.preventDefault();
+  93 |                 e.stopPropagation();
+  94 |                 const action = btn.getAttribute('data-action');
+  95 |                 if (action === 'edit') editCourseBasicInfo(c.cid);
+  96 |                 else if (action === 'delete') deleteCourse(c.cid);
+  97 |                 else if (action === 'preview') openCoursePreview(c.cid);
+  98 |                 else if (action === 'publish') toggleCoursePublished(c.cid, !isPublished);
+  99 |                 return;
+ 100 |             }
+ 101 |             openCoursePreview(c.cid);
+ 102 |         });
+ 103 |         container.appendChild(col);
+ 104 |     });
+ 105 | }
+```
+
+**Line notes**
+
+- **L25:** Get HTML element by id.
+- **L26:** Update page HTML.
+- **L29:** Update page HTML.
+- **L54:** Update page HTML.
+- **L57:** Encode text to reduce XSS risk.
+- **L63:** Encode text to reduce XSS risk.
+- **L89:** DOM event handler.
 
 ---
 
 ### `toggleCoursePublished` — lines 105–127
 
-```
+```javascript
 function toggleCoursePublished(cid, publish)
 ```
 
@@ -195,35 +205,37 @@ function toggleCoursePublished(cid, publish)
 
 #### Line-by-line (this function)
 
-` 105`  ``
-` 106`  ``
-` 107`  `function toggleCoursePublished(cid, publish) {`
-` 108`  `    const msg = publish`
-` 109`  `        ? 'Publish this course so students can see it on the landing page?'`
-` 110`  `        : 'Unpublish this course? It will be hidden from the public catalogue.';`
-` 111`  `    if (!window.confirm(msg)) return;`
-` 112`  `    postJson('CourseCreation.aspx/SetCoursePublished', { cid: cid, published: !!publish })`
-` 113`  `        .then(function (res) {`
-` 114`  `            if (res && res.notAuthenticated) {`
-` 115`  `                location.href = '/Pages/Authentication/Login.aspx';`
-` 116`  `                return;`
-` 117`  `            }`
-` 118`  `            if (!res || !res.success) {`
-` 119`  `                alert((res && res.message) || 'Could not update publish state.');`
-` 120`  `                return;`
-` 121`  `            }`
-` 122`  `            loadCourses();`
-` 123`  `        })`
-` 124`  `        .catch(function (err) {`
-` 125`  `            alert(err.message || 'Could not update publish state.');`
-` 126`  `        });`
-` 127`  `}`
+```javascript
+ 105 | 
+ 106 | 
+ 107 | function toggleCoursePublished(cid, publish) {
+ 108 |     const msg = publish
+ 109 |         ? 'Publish this course so students can see it on the landing page?'
+ 110 |         : 'Unpublish this course? It will be hidden from the public catalogue.';
+ 111 |     if (!window.confirm(msg)) return;
+ 112 |     postJson('CourseCreation.aspx/SetCoursePublished', { cid: cid, published: !!publish })
+ 113 |         .then(function (res) {
+ 114 |             if (res && res.notAuthenticated) {
+ 115 |                 location.href = '/Pages/Authentication/Login.aspx';
+ 116 |                 return;
+ 117 |             }
+ 118 |             if (!res || !res.success) {
+ 119 |                 alert((res && res.message) || 'Could not update publish state.');
+ 120 |                 return;
+ 121 |             }
+ 122 |             loadCourses();
+ 123 |         })
+ 124 |         .catch(function (err) {
+ 125 |             alert(err.message || 'Could not update publish state.');
+ 126 |         });
+ 127 | }
+```
 
 ---
 
 ### `openCoursePreview` — lines 127–131
 
-```
+```javascript
 function openCoursePreview(cid)
 ```
 
@@ -234,17 +246,19 @@ function openCoursePreview(cid)
 
 #### Line-by-line (this function)
 
-` 127`  ``
-` 128`  ``
-` 129`  `function openCoursePreview(cid) {`
-` 130`  `    window.location.href = 'CoursePreview.aspx?cid=' + encodeURIComponent(cid);`
-` 131`  `}`
+```javascript
+ 127 | 
+ 128 | 
+ 129 | function openCoursePreview(cid) {
+ 130 |     window.location.href = 'CoursePreview.aspx?cid=' + encodeURIComponent(cid);
+ 131 | }
+```
 
 ---
 
 ### `escapeHtml` — lines 131–149
 
-```
+```javascript
 function escapeHtml(str)
 ```
 
@@ -256,32 +270,37 @@ function escapeHtml(str)
 
 #### Line-by-line (this function)
 
-` 131`  ``
-` 132`  ``
-` 133`  `function escapeHtml(str) {`
-  - → Encode text to reduce XSS risk.
-` 134`  `    if (!str) return '';`
-` 135`  `    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');`
-` 136`  `}`
-` 137`  ``
-` 138`  ``
-` 139`  `function deleteCourse(cid) {`
-` 140`  `    if (!confirm('CAUTION: Are you sure you want to delete this course? This will remove all chapters, lessons, materials, and student enrollments! This action is permanent.')) return;`
-` 141`  ``
-` 142`  `    postJson('CourseCreation.aspx/DeleteCourse', { cid: cid })`
-` 143`  `    .then(function (resObj) {`
-` 144`  `        if (resObj && resObj.success) loadCourses();`
-` 145`  `        else alert('Delete course failed: ' + ((resObj && resObj.message) || 'Unknown error'));`
-` 146`  `    })`
-` 147`  `    .catch(function (err) { console.error(err); alert('Network error.'); });`
-` 148`  `}`
-` 149`  ``
+```javascript
+ 131 | 
+ 132 | 
+ 133 | function escapeHtml(str) {
+ 134 |     if (!str) return '';
+ 135 |     return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+ 136 | }
+ 137 | 
+ 138 | 
+ 139 | function deleteCourse(cid) {
+ 140 |     if (!confirm('CAUTION: Are you sure you want to delete this course? This will remove all chapters, lessons, materials, and student enrollments! This action is permanent.')) return;
+ 141 | 
+ 142 |     postJson('CourseCreation.aspx/DeleteCourse', { cid: cid })
+ 143 |     .then(function (resObj) {
+ 144 |         if (resObj && resObj.success) loadCourses();
+ 145 |         else alert('Delete course failed: ' + ((resObj && resObj.message) || 'Unknown error'));
+ 146 |     })
+ 147 |     .catch(function (err) { console.error(err); alert('Network error.'); });
+ 148 | }
+ 149 | 
+```
+
+**Line notes**
+
+- **L133:** Encode text to reduce XSS risk.
 
 ---
 
 ### `deleteCourse` — lines 136–148
 
-```
+```javascript
 function deleteCourse(cid)
 ```
 
@@ -294,186 +313,193 @@ function deleteCourse(cid)
 
 #### Line-by-line (this function)
 
-` 136`  ``
-` 137`  ``
-` 138`  ``
-` 139`  `function deleteCourse(cid) {`
-` 140`  `    if (!confirm('CAUTION: Are you sure you want to delete this course? This will remove all chapters, lessons, materials, and student enrollments! This action is permanent.')) return;`
-` 141`  ``
-` 142`  `    postJson('CourseCreation.aspx/DeleteCourse', { cid: cid })`
-` 143`  `    .then(function (resObj) {`
-` 144`  `        if (resObj && resObj.success) loadCourses();`
-` 145`  `        else alert('Delete course failed: ' + ((resObj && resObj.message) || 'Unknown error'));`
-` 146`  `    })`
-` 147`  `    .catch(function (err) { console.error(err); alert('Network error.'); });`
-` 148`  `}`
+```javascript
+ 136 | 
+ 137 | 
+ 138 | 
+ 139 | function deleteCourse(cid) {
+ 140 |     if (!confirm('CAUTION: Are you sure you want to delete this course? This will remove all chapters, lessons, materials, and student enrollments! This action is permanent.')) return;
+ 141 | 
+ 142 |     postJson('CourseCreation.aspx/DeleteCourse', { cid: cid })
+ 143 |     .then(function (resObj) {
+ 144 |         if (resObj && resObj.success) loadCourses();
+ 145 |         else alert('Delete course failed: ' + ((resObj && resObj.message) || 'Unknown error'));
+ 146 |     })
+ 147 |     .catch(function (err) { console.error(err); alert('Network error.'); });
+ 148 | }
+```
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `// Course Creation — course grid, publish, delete`
-`   2`  `// depends on: cc-core.js`
-`   3`  `// ---- Course grid / wizard / curriculum ----`
-`   4`  ``
-`   5`  `function loadCourses() {`
-`   6`  `    postJson('CourseCreation.aspx/GetCoursesData', {})`
-`   7`  `    .then(function (resObj) {`
-`   8`  `        if (resObj && resObj.success) {`
-`   9`  `            courses = resObj.courses || [];`
-`  10`  `            renderCourseGrid();`
-`  11`  `        } else {`
-`  12`  `            document.getElementById('courseGridContainer').innerHTML =`
-  - → Get HTML element by id.
-`  13`  `            '<div class="col-12 text-center text-danger py-4">Failed to load courses: ' +`
-`  14`  `            escapeHtml((resObj && resObj.message) || 'Unknown error') + '</div>';`
-  - → Encode text to reduce XSS risk.
-`  15`  `        }`
-`  16`  `    })`
-`  17`  `    .catch(function (err) {`
-`  18`  `        console.error('Error loading courses: ', err);`
-`  19`  `        document.getElementById('courseGridContainer').innerHTML =`
-  - → Get HTML element by id.
-`  20`  `        '<div class="col-12 text-center text-danger py-4">Network error loading courses.</div>';`
-`  21`  `    });`
-`  22`  `}`
-`  23`  ``
-`  24`  `function renderCourseGrid() {`
-`  25`  `    const container = document.getElementById('courseGridContainer');`
-  - → Get HTML element by id.
-`  26`  `    container.innerHTML = '';`
-  - → Update page HTML.
-`  27`  ``
-`  28`  `    if (courses.length === 0) {`
-`  29`  `        container.innerHTML = ``
-  - → Update page HTML.
-`  30`  `        <div class="col-12 text-center py-5">`
-`  31`  `        <div class="glass-card p-5 d-inline-block" style="max-width: 450px;">`
-`  32`  `        <i class="fa-solid fa-folder-open fa-3x mb-3 text-muted" style="color: var(--primary-accent) !important; opacity:0.6;"></i>`
-`  33`  `        <h5 class="fw-bold">No Courses Created Yet</h5>`
-`  34`  `        <p class="text-muted small">Begin by clicking the "Create Course" button at the top right to start your syllabus.</p>`
-`  35`  `        </div>`
-`  36`  `        </div>`;`
-`  37`  `        return;`
-`  38`  `    }`
-`  39`  ``
-`  40`  `    courses.forEach(c => {`
-`  41`  `        const col = document.createElement('div');`
-`  42`  `        col.className = 'col-lg-4 col-md-6';`
-`  43`  ``
-`  44`  `        const isPublished = !!c.isPublished || (c.status === 'Published');`
-`  45`  `        const statusBadgeClass = isPublished ? 'badge-published' : 'badge-draft';`
-`  46`  `        const statusText = isPublished ? 'Published' : 'Draft';`
-`  47`  `        const rating = (c.rating != null && c.rating > 0) ? Number(c.rating).toFixed(1) : null;`
-`  48`  `        const ratingHtml = rating`
-`  49`  `        ? `<span class="ms-2"><i class="fa-solid fa-star" style="color:#f59e0b;"></i> ${rating}</span>``
-`  50`  `        : '';`
-`  51`  `        const pubBtnLabel = isPublished ? 'Unpublish' : 'Publish';`
-`  52`  `        const pubBtnIcon = isPublished ? 'fa-eye-slash' : 'fa-cloud-arrow-up';`
-`  53`  ``
-`  54`  `        col.innerHTML = ``
-  - → Update page HTML.
-`  55`  `        <div class="course-grid-card h-100 d-flex flex-column course-card-clickable" data-cid="${c.cid}" role="button" title="Open course preview">`
-`  56`  `        <div class="position-relative">`
-`  57`  `        <img src="${c.bgImg || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=400'}" class="course-banner-img" alt="${escapeHtml(c.name)}">`
-  - → Encode text to reduce XSS risk.
-`  58`  `        <div class="position-absolute top-0 end-0 m-3">`
-`  59`  `        <span class="badge-status ${statusBadgeClass}">${statusText}</span>`
-`  60`  `        </div>`
-`  61`  `        </div>`
-`  62`  `        <div class="p-4 d-flex flex-column flex-grow-1">`
-`  63`  `        <h5 class="course-title">${escapeHtml(c.name)}</h5>`
-  - → Encode text to reduce XSS risk.
-`  64`  `        <div class="d-flex align-items-center text-muted small fw-semibold mb-3">`
-`  65`  `        <i class="fa-solid fa-user-group me-1"></i> ${c.studentsCount || 0}`
-`  66`  `        ${ratingHtml}`
-`  67`  `        </div>`
-`  68`  `        <div class="mt-auto d-flex justify-content-between align-items-center gap-2 pt-2 border-top border-light">`
-`  69`  `        <button type="button" class="btn btn-sm rounded-pill px-3 ${isPublished ? 'btn-outline-secondary' : 'btn-pill-accent'}" data-action="publish" title="${pubBtnLabel}">`
-`  70`  `        <i class="fa-solid ${pubBtnIcon} me-1"></i>${pubBtnLabel}`
-`  71`  `        </button>`
-`  72`  `        <div class="d-flex gap-1">`
-`  73`  `        <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="preview" title="Preview Course">`
-`  74`  `        <i class="fa-regular fa-eye"></i>`
-`  75`  `        </button>`
-`  76`  `        <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="edit" title="Edit Course">`
-`  77`  `        <i class="fa-solid fa-pencil"></i>`
-`  78`  `        </button>`
-`  79`  `        <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="delete" title="Delete Course">`
-`  80`  `        <i class="fa-regular fa-trash-can"></i>`
-`  81`  `        </button>`
-`  82`  `        </div>`
-`  83`  `        </div>`
-`  84`  `        </div>`
-`  85`  `        </div>`;`
-`  86`  ``
-`  87`  `        // Card click → preview; action buttons stop propagation`
-`  88`  `        const card = col.querySelector('.course-card-clickable');`
-`  89`  `        card.addEventListener('click', function (e) {`
-  - → DOM event handler.
-`  90`  `            const btn = e.target.closest('[data-action]');`
-`  91`  `            if (btn) {`
-`  92`  `                e.preventDefault();`
-`  93`  `                e.stopPropagation();`
-`  94`  `                const action = btn.getAttribute('data-action');`
-`  95`  `                if (action === 'edit') editCourseBasicInfo(c.cid);`
-`  96`  `                else if (action === 'delete') deleteCourse(c.cid);`
-`  97`  `                else if (action === 'preview') openCoursePreview(c.cid);`
-`  98`  `                else if (action === 'publish') toggleCoursePublished(c.cid, !isPublished);`
-`  99`  `                return;`
-` 100`  `            }`
-` 101`  `            openCoursePreview(c.cid);`
-` 102`  `        });`
-` 103`  `        container.appendChild(col);`
-` 104`  `    });`
-` 105`  `}`
-` 106`  ``
-` 107`  `function toggleCoursePublished(cid, publish) {`
-` 108`  `    const msg = publish`
-` 109`  `        ? 'Publish this course so students can see it on the landing page?'`
-` 110`  `        : 'Unpublish this course? It will be hidden from the public catalogue.';`
-` 111`  `    if (!window.confirm(msg)) return;`
-` 112`  `    postJson('CourseCreation.aspx/SetCoursePublished', { cid: cid, published: !!publish })`
-` 113`  `        .then(function (res) {`
-` 114`  `            if (res && res.notAuthenticated) {`
-` 115`  `                location.href = '/Pages/Authentication/Login.aspx';`
-` 116`  `                return;`
-` 117`  `            }`
-` 118`  `            if (!res || !res.success) {`
-` 119`  `                alert((res && res.message) || 'Could not update publish state.');`
-` 120`  `                return;`
-` 121`  `            }`
-` 122`  `            loadCourses();`
-` 123`  `        })`
-` 124`  `        .catch(function (err) {`
-` 125`  `            alert(err.message || 'Could not update publish state.');`
-` 126`  `        });`
-` 127`  `}`
-` 128`  ``
-` 129`  `function openCoursePreview(cid) {`
-` 130`  `    window.location.href = 'CoursePreview.aspx?cid=' + encodeURIComponent(cid);`
-` 131`  `}`
-` 132`  ``
-` 133`  `function escapeHtml(str) {`
-  - → Encode text to reduce XSS risk.
-` 134`  `    if (!str) return '';`
-` 135`  `    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');`
-` 136`  `}`
-` 137`  ``
-` 138`  ``
-` 139`  `function deleteCourse(cid) {`
-` 140`  `    if (!confirm('CAUTION: Are you sure you want to delete this course? This will remove all chapters, lessons, materials, and student enrollments! This action is permanent.')) return;`
-` 141`  ``
-` 142`  `    postJson('CourseCreation.aspx/DeleteCourse', { cid: cid })`
-` 143`  `    .then(function (resObj) {`
-` 144`  `        if (resObj && resObj.success) loadCourses();`
-` 145`  `        else alert('Delete course failed: ' + ((resObj && resObj.message) || 'Unknown error'));`
-` 146`  `    })`
-` 147`  `    .catch(function (err) { console.error(err); alert('Network error.'); });`
-` 148`  `}`
-` 149`  ``
+```javascript
+   1 | // Course Creation — course grid, publish, delete
+   2 | // depends on: cc-core.js
+   3 | // ---- Course grid / wizard / curriculum ----
+   4 | 
+   5 | function loadCourses() {
+   6 |     postJson('CourseCreation.aspx/GetCoursesData', {})
+   7 |     .then(function (resObj) {
+   8 |         if (resObj && resObj.success) {
+   9 |             courses = resObj.courses || [];
+  10 |             renderCourseGrid();
+  11 |         } else {
+  12 |             document.getElementById('courseGridContainer').innerHTML =
+  13 |             '<div class="col-12 text-center text-danger py-4">Failed to load courses: ' +
+  14 |             escapeHtml((resObj && resObj.message) || 'Unknown error') + '</div>';
+  15 |         }
+  16 |     })
+  17 |     .catch(function (err) {
+  18 |         console.error('Error loading courses: ', err);
+  19 |         document.getElementById('courseGridContainer').innerHTML =
+  20 |         '<div class="col-12 text-center text-danger py-4">Network error loading courses.</div>';
+  21 |     });
+  22 | }
+  23 | 
+  24 | function renderCourseGrid() {
+  25 |     const container = document.getElementById('courseGridContainer');
+  26 |     container.innerHTML = '';
+  27 | 
+  28 |     if (courses.length === 0) {
+  29 |         container.innerHTML = `
+  30 |         <div class="col-12 text-center py-5">
+  31 |         <div class="glass-card p-5 d-inline-block" style="max-width: 450px;">
+  32 |         <i class="fa-solid fa-folder-open fa-3x mb-3 text-muted" style="color: var(--primary-accent) !important; opacity:0.6;"></i>
+  33 |         <h5 class="fw-bold">No Courses Created Yet</h5>
+  34 |         <p class="text-muted small">Begin by clicking the "Create Course" button at the top right to start your syllabus.</p>
+  35 |         </div>
+  36 |         </div>`;
+  37 |         return;
+  38 |     }
+  39 | 
+  40 |     courses.forEach(c => {
+  41 |         const col = document.createElement('div');
+  42 |         col.className = 'col-lg-4 col-md-6';
+  43 | 
+  44 |         const isPublished = !!c.isPublished || (c.status === 'Published');
+  45 |         const statusBadgeClass = isPublished ? 'badge-published' : 'badge-draft';
+  46 |         const statusText = isPublished ? 'Published' : 'Draft';
+  47 |         const rating = (c.rating != null && c.rating > 0) ? Number(c.rating).toFixed(1) : null;
+  48 |         const ratingHtml = rating
+  49 |         ? `<span class="ms-2"><i class="fa-solid fa-star" style="color:#f59e0b;"></i> ${rating}</span>`
+  50 |         : '';
+  51 |         const pubBtnLabel = isPublished ? 'Unpublish' : 'Publish';
+  52 |         const pubBtnIcon = isPublished ? 'fa-eye-slash' : 'fa-cloud-arrow-up';
+  53 | 
+  54 |         col.innerHTML = `
+  55 |         <div class="course-grid-card h-100 d-flex flex-column course-card-clickable" data-cid="${c.cid}" role="button" title="Open course preview">
+  56 |         <div class="position-relative">
+  57 |         <img src="${c.bgImg || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=400'}" class="course-banner-img" alt="${escapeHtml(c.name)}">
+  58 |         <div class="position-absolute top-0 end-0 m-3">
+  59 |         <span class="badge-status ${statusBadgeClass}">${statusText}</span>
+  60 |         </div>
+  61 |         </div>
+  62 |         <div class="p-4 d-flex flex-column flex-grow-1">
+  63 |         <h5 class="course-title">${escapeHtml(c.name)}</h5>
+  64 |         <div class="d-flex align-items-center text-muted small fw-semibold mb-3">
+  65 |         <i class="fa-solid fa-user-group me-1"></i> ${c.studentsCount || 0}
+  66 |         ${ratingHtml}
+  67 |         </div>
+  68 |         <div class="mt-auto d-flex justify-content-between align-items-center gap-2 pt-2 border-top border-light">
+  69 |         <button type="button" class="btn btn-sm rounded-pill px-3 ${isPublished ? 'btn-outline-secondary' : 'btn-pill-accent'}" data-action="publish" title="${pubBtnLabel}">
+  70 |         <i class="fa-solid ${pubBtnIcon} me-1"></i>${pubBtnLabel}
+  71 |         </button>
+  72 |         <div class="d-flex gap-1">
+  73 |         <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="preview" title="Preview Course">
+  74 |         <i class="fa-regular fa-eye"></i>
+  75 |         </button>
+  76 |         <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="edit" title="Edit Course">
+  77 |         <i class="fa-solid fa-pencil"></i>
+  78 |         </button>
+  79 |         <button type="button" class="btn btn-sm btn-link text-secondary p-1" data-action="delete" title="Delete Course">
+  80 |         <i class="fa-regular fa-trash-can"></i>
+  81 |         </button>
+  82 |         </div>
+  83 |         </div>
+  84 |         </div>
+  85 |         </div>`;
+  86 | 
+  87 |         // Card click → preview; action buttons stop propagation
+  88 |         const card = col.querySelector('.course-card-clickable');
+  89 |         card.addEventListener('click', function (e) {
+  90 |             const btn = e.target.closest('[data-action]');
+  91 |             if (btn) {
+  92 |                 e.preventDefault();
+  93 |                 e.stopPropagation();
+  94 |                 const action = btn.getAttribute('data-action');
+  95 |                 if (action === 'edit') editCourseBasicInfo(c.cid);
+  96 |                 else if (action === 'delete') deleteCourse(c.cid);
+  97 |                 else if (action === 'preview') openCoursePreview(c.cid);
+  98 |                 else if (action === 'publish') toggleCoursePublished(c.cid, !isPublished);
+  99 |                 return;
+ 100 |             }
+ 101 |             openCoursePreview(c.cid);
+ 102 |         });
+ 103 |         container.appendChild(col);
+ 104 |     });
+ 105 | }
+ 106 | 
+ 107 | function toggleCoursePublished(cid, publish) {
+ 108 |     const msg = publish
+ 109 |         ? 'Publish this course so students can see it on the landing page?'
+ 110 |         : 'Unpublish this course? It will be hidden from the public catalogue.';
+ 111 |     if (!window.confirm(msg)) return;
+ 112 |     postJson('CourseCreation.aspx/SetCoursePublished', { cid: cid, published: !!publish })
+ 113 |         .then(function (res) {
+ 114 |             if (res && res.notAuthenticated) {
+ 115 |                 location.href = '/Pages/Authentication/Login.aspx';
+ 116 |                 return;
+ 117 |             }
+ 118 |             if (!res || !res.success) {
+ 119 |                 alert((res && res.message) || 'Could not update publish state.');
+ 120 |                 return;
+ 121 |             }
+ 122 |             loadCourses();
+ 123 |         })
+ 124 |         .catch(function (err) {
+ 125 |             alert(err.message || 'Could not update publish state.');
+ 126 |         });
+ 127 | }
+ 128 | 
+ 129 | function openCoursePreview(cid) {
+ 130 |     window.location.href = 'CoursePreview.aspx?cid=' + encodeURIComponent(cid);
+ 131 | }
+ 132 | 
+ 133 | function escapeHtml(str) {
+ 134 |     if (!str) return '';
+ 135 |     return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+ 136 | }
+ 137 | 
+ 138 | 
+ 139 | function deleteCourse(cid) {
+ 140 |     if (!confirm('CAUTION: Are you sure you want to delete this course? This will remove all chapters, lessons, materials, and student enrollments! This action is permanent.')) return;
+ 141 | 
+ 142 |     postJson('CourseCreation.aspx/DeleteCourse', { cid: cid })
+ 143 |     .then(function (resObj) {
+ 144 |         if (resObj && resObj.success) loadCourses();
+ 145 |         else alert('Delete course failed: ' + ((resObj && resObj.message) || 'Unknown error'));
+ 146 |     })
+ 147 |     .catch(function (err) { console.error(err); alert('Network error.'); });
+ 148 | }
+ 149 | 
+```
+
+**Line notes**
+
+- **L12:** Get HTML element by id.
+- **L14:** Encode text to reduce XSS risk.
+- **L19:** Get HTML element by id.
+- **L25:** Get HTML element by id.
+- **L26:** Update page HTML.
+- **L29:** Update page HTML.
+- **L54:** Update page HTML.
+- **L57:** Encode text to reduce XSS risk.
+- **L63:** Encode text to reduce XSS risk.
+- **L89:** DOM event handler.
+- **L133:** Encode text to reduce XSS risk.
 
 ## Source snapshot (raw)
 

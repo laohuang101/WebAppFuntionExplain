@@ -1,6 +1,6 @@
 # ResetPassword.aspx.cs
 **Source:** `Pages/Authentication/ResetPassword.aspx.cs`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -24,7 +24,7 @@ One-shot TOTP + new password form (uses AuthService.ResetPasswordWithTotp).
 
 ### `Page_Load` — lines 9–19
 
-```
+```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
@@ -38,26 +38,31 @@ protected void Page_Load(object sender, EventArgs e)
 
 #### Line-by-line (this function)
 
-`   9`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  10`  `        {`
-`  11`  `            AuthSchema.Ensure();`
-`  12`  `            CsrfProtection.EnsureToken(Context);`
-  - → CSRF anti-forgery protection.
-`  13`  `            if (!IsPostBack)`
-  - → False on first open; true after postback.
-`  14`  `            {`
-`  15`  `                string email = Request.QueryString["email"];`
-`  16`  `                if (!string.IsNullOrEmpty(email))`
-`  17`  `                    txtEmail.Text = email.Trim();`
-`  18`  `            }`
-`  19`  `        }`
+```csharp
+   9 |         protected void Page_Load(object sender, EventArgs e)
+  10 |         {
+  11 |             AuthSchema.Ensure();
+  12 |             CsrfProtection.EnsureToken(Context);
+  13 |             if (!IsPostBack)
+  14 |             {
+  15 |                 string email = Request.QueryString["email"];
+  16 |                 if (!string.IsNullOrEmpty(email))
+  17 |                     txtEmail.Text = email.Trim();
+  18 |             }
+  19 |         }
+```
+
+**Line notes**
+
+- **L9:** Page load entry (GET or postback).
+- **L12:** CSRF anti-forgery protection.
+- **L13:** False on first open; true after postback.
 
 ---
 
 ### `btnReset_Click` — lines 20–42
 
-```
+```csharp
 protected void btnReset_Click(object sender, EventArgs e)
 ```
 
@@ -70,87 +75,94 @@ protected void btnReset_Click(object sender, EventArgs e)
 
 #### Line-by-line (this function)
 
-`  20`  ``
-`  21`  `        protected void btnReset_Click(object sender, EventArgs e)`
-`  22`  `        {`
-`  23`  `            lblMsg.CssClass = "d-block mt-3 text-center small text-danger";`
-`  24`  `            string p1 = txtPassword.Text ?? "";`
-`  25`  `            string p2 = txtPassword2.Text ?? "";`
-`  26`  `            if (p1 != p2)`
-`  27`  `            {`
-`  28`  `                lblMsg.Text = "Passwords do not match.";`
-`  29`  `                return;`
-`  30`  `            }`
-`  31`  ``
-`  32`  `            var result = AuthService.ResetPasswordWithTotp(txtEmail.Text, txtCode.Text, p1);`
-`  33`  `            if (!result.Success)`
-`  34`  `            {`
-`  35`  `                lblMsg.Text = result.Message ?? "Could not reset password.";`
-`  36`  `                return;`
-`  37`  `            }`
-`  38`  ``
-`  39`  `            lblMsg.CssClass = "d-block mt-3 text-center small text-success";`
-`  40`  `            lblMsg.Text = result.Message + " Redirecting to login…";`
-`  41`  `            Response.AddHeader("Refresh", "2;url=" + ResolveUrl("~/Pages/Authentication/Login.aspx"));`
-`  42`  `        }`
+```csharp
+  20 | 
+  21 |         protected void btnReset_Click(object sender, EventArgs e)
+  22 |         {
+  23 |             lblMsg.CssClass = "d-block mt-3 text-center small text-danger";
+  24 |             string p1 = txtPassword.Text ?? "";
+  25 |             string p2 = txtPassword2.Text ?? "";
+  26 |             if (p1 != p2)
+  27 |             {
+  28 |                 lblMsg.Text = "Passwords do not match.";
+  29 |                 return;
+  30 |             }
+  31 | 
+  32 |             var result = AuthService.ResetPasswordWithTotp(txtEmail.Text, txtCode.Text, p1);
+  33 |             if (!result.Success)
+  34 |             {
+  35 |                 lblMsg.Text = result.Message ?? "Could not reset password.";
+  36 |                 return;
+  37 |             }
+  38 | 
+  39 |             lblMsg.CssClass = "d-block mt-3 text-center small text-success";
+  40 |             lblMsg.Text = result.Message + " Redirecting to login…";
+  41 |             Response.AddHeader("Refresh", "2;url=" + ResolveUrl("~/Pages/Authentication/Login.aspx"));
+  42 |         }
+```
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `using System;`
-  - → Import namespace/types.
-`   2`  `using System.Web.UI;`
-  - → Import namespace/types.
-`   3`  `using WebAppAssignment.Data.Security;`
-  - → Import namespace/types.
-`   4`  ``
-`   5`  `namespace WebAppAssignment.Pages.Authentication`
-  - → C# namespace grouping.
-`   6`  `{`
-`   7`  `    public partial class ResetPassword : Page`
-`   8`  `    {`
-`   9`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  10`  `        {`
-`  11`  `            AuthSchema.Ensure();`
-`  12`  `            CsrfProtection.EnsureToken(Context);`
-  - → CSRF anti-forgery protection.
-`  13`  `            if (!IsPostBack)`
-  - → False on first open; true after postback.
-`  14`  `            {`
-`  15`  `                string email = Request.QueryString["email"];`
-`  16`  `                if (!string.IsNullOrEmpty(email))`
-`  17`  `                    txtEmail.Text = email.Trim();`
-`  18`  `            }`
-`  19`  `        }`
-`  20`  ``
-`  21`  `        protected void btnReset_Click(object sender, EventArgs e)`
-`  22`  `        {`
-`  23`  `            lblMsg.CssClass = "d-block mt-3 text-center small text-danger";`
-`  24`  `            string p1 = txtPassword.Text ?? "";`
-`  25`  `            string p2 = txtPassword2.Text ?? "";`
-`  26`  `            if (p1 != p2)`
-`  27`  `            {`
-`  28`  `                lblMsg.Text = "Passwords do not match.";`
-`  29`  `                return;`
-`  30`  `            }`
-`  31`  ``
-`  32`  `            var result = AuthService.ResetPasswordWithTotp(txtEmail.Text, txtCode.Text, p1);`
-`  33`  `            if (!result.Success)`
-`  34`  `            {`
-`  35`  `                lblMsg.Text = result.Message ?? "Could not reset password.";`
-`  36`  `                return;`
-`  37`  `            }`
-`  38`  ``
-`  39`  `            lblMsg.CssClass = "d-block mt-3 text-center small text-success";`
-`  40`  `            lblMsg.Text = result.Message + " Redirecting to login…";`
-`  41`  `            Response.AddHeader("Refresh", "2;url=" + ResolveUrl("~/Pages/Authentication/Login.aspx"));`
-`  42`  `        }`
-`  43`  `    }`
-`  44`  `}`
+```csharp
+   1 | using System;
+   2 | using System.Web.UI;
+   3 | using WebAppAssignment.Data.Security;
+   4 | 
+   5 | namespace WebAppAssignment.Pages.Authentication
+   6 | {
+   7 |     public partial class ResetPassword : Page
+   8 |     {
+   9 |         protected void Page_Load(object sender, EventArgs e)
+  10 |         {
+  11 |             AuthSchema.Ensure();
+  12 |             CsrfProtection.EnsureToken(Context);
+  13 |             if (!IsPostBack)
+  14 |             {
+  15 |                 string email = Request.QueryString["email"];
+  16 |                 if (!string.IsNullOrEmpty(email))
+  17 |                     txtEmail.Text = email.Trim();
+  18 |             }
+  19 |         }
+  20 | 
+  21 |         protected void btnReset_Click(object sender, EventArgs e)
+  22 |         {
+  23 |             lblMsg.CssClass = "d-block mt-3 text-center small text-danger";
+  24 |             string p1 = txtPassword.Text ?? "";
+  25 |             string p2 = txtPassword2.Text ?? "";
+  26 |             if (p1 != p2)
+  27 |             {
+  28 |                 lblMsg.Text = "Passwords do not match.";
+  29 |                 return;
+  30 |             }
+  31 | 
+  32 |             var result = AuthService.ResetPasswordWithTotp(txtEmail.Text, txtCode.Text, p1);
+  33 |             if (!result.Success)
+  34 |             {
+  35 |                 lblMsg.Text = result.Message ?? "Could not reset password.";
+  36 |                 return;
+  37 |             }
+  38 | 
+  39 |             lblMsg.CssClass = "d-block mt-3 text-center small text-success";
+  40 |             lblMsg.Text = result.Message + " Redirecting to login…";
+  41 |             Response.AddHeader("Refresh", "2;url=" + ResolveUrl("~/Pages/Authentication/Login.aspx"));
+  42 |         }
+  43 |     }
+  44 | }
+```
+
+**Line notes**
+
+- **L1:** Import namespace/types.
+- **L2:** Import namespace/types.
+- **L3:** Import namespace/types.
+- **L5:** C# namespace grouping.
+- **L9:** Page load entry (GET or postback).
+- **L12:** CSRF anti-forgery protection.
+- **L13:** False on first open; true after postback.
 
 ## Source snapshot (raw)
 

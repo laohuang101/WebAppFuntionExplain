@@ -1,6 +1,6 @@
 # AuthSchema.cs
 **Source:** `Data/Security/AuthSchema.cs`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -24,7 +24,7 @@ Ensures Users security columns exist (PasswordHash, MfaSecret, MfaEnabled, JWT-r
 
 ### `Ensure` — lines 14–43
 
-```
+```csharp
 public static void Ensure()
 ```
 
@@ -36,45 +36,58 @@ public static void Ensure()
 
 #### Line-by-line (this function)
 
-`  14`  ``
-`  15`  `        public static void Ensure()`
-`  16`  `        {`
-`  17`  `            if (_ready) return;`
-`  18`  `            lock (Gate)`
-`  19`  `            {`
-`  20`  `                if (_ready) return;`
-`  21`  `                try`
-  - → Error handling block.
-`  22`  `                {`
-`  23`  `                    using (var conn = DbHelper.OpenConnection())`
-  - → Import namespace/types.
-`  24`  `                    {`
-`  25`  `                        EnsureColumn(conn, "Users", "PasswordHash", "NVARCHAR(200) NULL");`
-`  26`  `                        EnsureColumn(conn, "Users", "MfaSecret", "NVARCHAR(64) NULL");`
-`  27`  `                        EnsureColumn(conn, "Users", "MfaEnabled", "BIT NOT NULL CONSTRAINT DF_Users_MfaEnabled DEFAULT(0)");`
-`  28`  `                        EnsureColumn(conn, "Users", "EmailOtp", "NVARCHAR(12) NULL");`
-`  29`  `                        EnsureColumn(conn, "Users", "EmailOtpExpiry", "DATETIME NULL");`
-`  30`  `                        EnsureColumn(conn, "Users", "CreatedAt", "DATETIME NULL");`
-`  31`  `                        EnsureColumn(conn, "Users", "PasswordResetToken", "NVARCHAR(128) NULL");`
-`  32`  `                        EnsureColumn(conn, "Users", "PasswordResetExpiry", "DATETIME NULL");`
-`  33`  `                        EnsureAuditTable(conn);`
-`  34`  `                    }`
-`  35`  `                    _ready = true;`
-`  36`  `                }`
-`  37`  `                catch`
-  - → Handle/log exception.
-`  38`  `                {`
-`  39`  `                    // Table might use different name; don't crash app start`
-`  40`  `                    _ready = true;`
-`  41`  `                }`
-`  42`  `            }`
-`  43`  `        }`
+```csharp
+  14 | 
+  15 |         public static void Ensure()
+  16 |         {
+  17 |             if (_ready) return;
+  18 |             lock (Gate)
+  19 |             {
+  20 |                 if (_ready) return;
+  21 |                 try
+  22 |                 {
+  23 |                     using (var conn = DbHelper.OpenConnection())
+  24 |                     {
+  25 |                         EnsureColumn(conn, "Users", "PasswordHash", "NVARCHAR(200) NULL");
+  26 |                         EnsureColumn(conn, "Users", "MfaSecret", "NVARCHAR(64) NULL");
+  27 |                         EnsureColumn(conn, "Users", "MfaEnabled", "BIT NOT NULL CONSTRAINT DF_Users_MfaEnabled DEFAULT(0)");
+  28 |                         EnsureColumn(conn, "Users", "EmailOtp", "NVARCHAR(12) NULL");
+  29 |                         EnsureColumn(conn, "Users", "EmailOtpExpiry", "DATETIME NULL");
+  30 |                         EnsureColumn(conn, "Users", "CreatedAt", "DATETIME NULL");
+  31 |                         EnsureColumn(conn, "Users", "PasswordResetToken", "NVARCHAR(128) NULL");
+  32 |                         EnsureColumn(conn, "Users", "PasswordResetExpiry", "DATETIME NULL");
+  33 |                         EnsureAuditTable(conn);
+  34 |                     }
+  35 |                     _ready = true;
+  36 |                 }
+  37 |                 catch
+  38 |                 {
+  39 |                     // Table might use different name; don't crash app start
+  40 |                     _ready = true;
+  41 |                 }
+  42 |             }
+  43 |         }
+```
+
+**Line notes**
+
+- **L21:** Error handling block.
+- **L23:** Import namespace/types.
+- **L25:** Idempotent schema/index ensure (safe to run many times).
+- **L26:** Idempotent schema/index ensure (safe to run many times).
+- **L27:** Idempotent schema/index ensure (safe to run many times).
+- **L28:** Idempotent schema/index ensure (safe to run many times).
+- **L29:** Idempotent schema/index ensure (safe to run many times).
+- **L30:** Idempotent schema/index ensure (safe to run many times).
+- **L31:** Idempotent schema/index ensure (safe to run many times).
+- **L32:** Idempotent schema/index ensure (safe to run many times).
+- **L37:** Handle/log exception.
 
 ---
 
 ### `EnsureAuditTable` — lines 44–71
 
-```
+```csharp
 private static void EnsureAuditTable(SqlConnection conn)
 ```
 
@@ -87,49 +100,54 @@ private static void EnsureAuditTable(SqlConnection conn)
 
 #### Line-by-line (this function)
 
-`  44`  ``
-`  45`  `        private static void EnsureAuditTable(SqlConnection conn)`
-  - → Database access (pure SQL).
-`  46`  `        {`
-`  47`  `            try`
-  - → Error handling block.
-`  48`  `            {`
-`  49`  `                using (var check = new SqlCommand(@"`
-  - → Import namespace/types.
-`  50`  `SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'AuditLog'", conn))`
-  - → Write/read security audit events.
-`  51`  `                {`
-`  52`  `                    if (check.ExecuteScalar() != null) return;`
-  - → Run SQL; return table / rows / scalar.
-`  53`  `                }`
-`  54`  ``
-`  55`  `                using (var create = new SqlCommand(@"`
-  - → Import namespace/types.
-`  56`  `CREATE TABLE AuditLog (`
-  - → Write/read security audit events.
-`  57`  `    LogId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,`
-`  58`  `    OccurredAt DATETIME NOT NULL,`
-`  59`  `    Action NVARCHAR(80) NOT NULL,`
-`  60`  `    UserId INT NULL,`
-`  61`  `    Email NVARCHAR(120) NULL,`
-`  62`  `    Detail NVARCHAR(500) NULL,`
-`  63`  `    IpAddress NVARCHAR(64) NULL,`
-`  64`  `    Path NVARCHAR(260) NULL`
-`  65`  `)", conn))`
-`  66`  `                {`
-`  67`  `                    create.ExecuteNonQuery();`
-  - → Run SQL; return table / rows / scalar.
-`  68`  `                }`
-`  69`  `            }`
-`  70`  `            catch { }`
-  - → Handle/log exception.
-`  71`  `        }`
+```csharp
+  44 | 
+  45 |         private static void EnsureAuditTable(SqlConnection conn)
+  46 |         {
+  47 |             try
+  48 |             {
+  49 |                 using (var check = new SqlCommand(@"
+  50 | SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'AuditLog'", conn))
+  51 |                 {
+  52 |                     if (check.ExecuteScalar() != null) return;
+  53 |                 }
+  54 | 
+  55 |                 using (var create = new SqlCommand(@"
+  56 | CREATE TABLE AuditLog (
+  57 |     LogId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+  58 |     OccurredAt DATETIME NOT NULL,
+  59 |     Action NVARCHAR(80) NOT NULL,
+  60 |     UserId INT NULL,
+  61 |     Email NVARCHAR(120) NULL,
+  62 |     Detail NVARCHAR(500) NULL,
+  63 |     IpAddress NVARCHAR(64) NULL,
+  64 |     Path NVARCHAR(260) NULL
+  65 | )", conn))
+  66 |                 {
+  67 |                     create.ExecuteNonQuery();
+  68 |                 }
+  69 |             }
+  70 |             catch { }
+  71 |         }
+```
+
+**Line notes**
+
+- **L45:** Database access (pure SQL).
+- **L47:** Error handling block.
+- **L49:** Import namespace/types.
+- **L50:** Write/read security audit events.
+- **L52:** Run SQL; return table / rows / scalar.
+- **L55:** Import namespace/types.
+- **L56:** Write/read security audit events.
+- **L67:** Run SQL; return table / rows / scalar.
+- **L70:** Handle/log exception.
 
 ---
 
 ### `NVARCHAR` — lines 59–68
 
-```
+```csharp
 Action NVARCHAR(80) NOT NULL,
     UserId INT NULL,
     Email NVARCHAR(120) NULL,
@@ -146,23 +164,28 @@ Action NVARCHAR(80) NOT NULL,
 
 #### Line-by-line (this function)
 
-`  59`  `    Action NVARCHAR(80) NOT NULL,`
-`  60`  `    UserId INT NULL,`
-`  61`  `    Email NVARCHAR(120) NULL,`
-`  62`  `    Detail NVARCHAR(500) NULL,`
-`  63`  `    IpAddress NVARCHAR(64) NULL,`
-`  64`  `    Path NVARCHAR(260) NULL`
-`  65`  `)", conn))`
-`  66`  `                {`
-`  67`  `                    create.ExecuteNonQuery();`
-  - → Run SQL; return table / rows / scalar.
-`  68`  `                }`
+```csharp
+  59 |     Action NVARCHAR(80) NOT NULL,
+  60 |     UserId INT NULL,
+  61 |     Email NVARCHAR(120) NULL,
+  62 |     Detail NVARCHAR(500) NULL,
+  63 |     IpAddress NVARCHAR(64) NULL,
+  64 |     Path NVARCHAR(260) NULL
+  65 | )", conn))
+  66 |                 {
+  67 |                     create.ExecuteNonQuery();
+  68 |                 }
+```
+
+**Line notes**
+
+- **L67:** Run SQL; return table / rows / scalar.
 
 ---
 
 ### `EnsureColumn` — lines 72–107
 
-```
+```csharp
 private static void EnsureColumn(SqlConnection conn, string table, string column, string definition)
 ```
 
@@ -175,196 +198,218 @@ private static void EnsureColumn(SqlConnection conn, string table, string column
 
 #### Line-by-line (this function)
 
-`  72`  ``
-`  73`  `        private static void EnsureColumn(SqlConnection conn, string table, string column, string definition)`
-  - → Database access (pure SQL).
-`  74`  `        {`
-`  75`  `            using (var check = new SqlCommand(@"`
-  - → Import namespace/types.
-`  76`  `            SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS`
-`  77`  `            WHERE TABLE_NAME = @t AND COLUMN_NAME = @c", conn))`
-`  78`  `            {`
-`  79`  `                check.Parameters.AddWithValue("@t", table);`
-`  80`  `                check.Parameters.AddWithValue("@c", column);`
-`  81`  `                if (check.ExecuteScalar() != null) return;`
-  - → Run SQL; return table / rows / scalar.
-`  82`  `            }`
-`  83`  ``
-`  84`  `            try`
-  - → Error handling block.
-`  85`  `            {`
-`  86`  `                using (var alter = new SqlCommand(`
-  - → Import namespace/types.
-`  87`  `                "ALTER TABLE [" + table + "] ADD [" + column + "] " + definition, conn))`
-`  88`  `                {`
-`  89`  `                    alter.ExecuteNonQuery();`
-  - → Run SQL; return table / rows / scalar.
-`  90`  `                }`
-`  91`  `            }`
-`  92`  `            catch`
-  - → Handle/log exception.
-`  93`  `            {`
-`  94`  `                string simple = definition`
-`  95`  `                .Replace(" CONSTRAINT DF_Users_MfaEnabled DEFAULT(0)", " NULL")`
-`  96`  `                .Replace("NOT NULL", "NULL");`
-`  97`  `                try`
-  - → Error handling block.
-`  98`  `                {`
-`  99`  `                    using (var alter = new SqlCommand(`
-  - → Import namespace/types.
-` 100`  `                    "ALTER TABLE [" + table + "] ADD [" + column + "] " + simple, conn))`
-` 101`  `                    {`
-` 102`  `                        alter.ExecuteNonQuery();`
-  - → Run SQL; return table / rows / scalar.
-` 103`  `                    }`
-` 104`  `                }`
-` 105`  `                catch { /* column may already exist under race */ }`
-  - → Handle/log exception.
-` 106`  `            }`
-` 107`  `        }`
+```csharp
+  72 | 
+  73 |         private static void EnsureColumn(SqlConnection conn, string table, string column, string definition)
+  74 |         {
+  75 |             using (var check = new SqlCommand(@"
+  76 |             SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS
+  77 |             WHERE TABLE_NAME = @t AND COLUMN_NAME = @c", conn))
+  78 |             {
+  79 |                 check.Parameters.AddWithValue("@t", table);
+  80 |                 check.Parameters.AddWithValue("@c", column);
+  81 |                 if (check.ExecuteScalar() != null) return;
+  82 |             }
+  83 | 
+  84 |             try
+  85 |             {
+  86 |                 using (var alter = new SqlCommand(
+  87 |                 "ALTER TABLE [" + table + "] ADD [" + column + "] " + definition, conn))
+  88 |                 {
+  89 |                     alter.ExecuteNonQuery();
+  90 |                 }
+  91 |             }
+  92 |             catch
+  93 |             {
+  94 |                 string simple = definition
+  95 |                 .Replace(" CONSTRAINT DF_Users_MfaEnabled DEFAULT(0)", " NULL")
+  96 |                 .Replace("NOT NULL", "NULL");
+  97 |                 try
+  98 |                 {
+  99 |                     using (var alter = new SqlCommand(
+ 100 |                     "ALTER TABLE [" + table + "] ADD [" + column + "] " + simple, conn))
+ 101 |                     {
+ 102 |                         alter.ExecuteNonQuery();
+ 103 |                     }
+ 104 |                 }
+ 105 |                 catch { /* column may already exist under race */ }
+ 106 |             }
+ 107 |         }
+```
+
+**Line notes**
+
+- **L73:** Database access (pure SQL).
+- **L75:** Import namespace/types.
+- **L79:** Parameterized SQL — prevents classic SQL injection.
+- **L80:** Parameterized SQL — prevents classic SQL injection.
+- **L81:** Run SQL; return table / rows / scalar.
+- **L84:** Error handling block.
+- **L86:** Import namespace/types.
+- **L89:** Run SQL; return table / rows / scalar.
+- **L92:** Handle/log exception.
+- **L97:** Error handling block.
+- **L99:** Import namespace/types.
+- **L102:** Run SQL; return table / rows / scalar.
+- **L105:** Handle/log exception.
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `using System;`
-  - → Import namespace/types.
-`   2`  `using System.Data.SqlClient;`
-  - → Import namespace/types.
-`   3`  `using WebAppAssignment.Data;`
-  - → Import namespace/types.
-`   4`  ``
-`   5`  `namespace WebAppAssignment.Data.Security`
-  - → C# namespace grouping.
-`   6`  `{`
-`   7`  `    /// <summary>`
-`   8`  `    /// Ensures auth-related columns / audit tables exist (pure SQL ALTER - no EF).`
-`   9`  `    /// </summary>`
-`  10`  `    public static class AuthSchema`
-`  11`  `    {`
-`  12`  `        private static readonly object Gate = new object();`
-`  13`  `        private static bool _ready;`
-`  14`  ``
-`  15`  `        public static void Ensure()`
-`  16`  `        {`
-`  17`  `            if (_ready) return;`
-`  18`  `            lock (Gate)`
-`  19`  `            {`
-`  20`  `                if (_ready) return;`
-`  21`  `                try`
-  - → Error handling block.
-`  22`  `                {`
-`  23`  `                    using (var conn = DbHelper.OpenConnection())`
-  - → Import namespace/types.
-`  24`  `                    {`
-`  25`  `                        EnsureColumn(conn, "Users", "PasswordHash", "NVARCHAR(200) NULL");`
-`  26`  `                        EnsureColumn(conn, "Users", "MfaSecret", "NVARCHAR(64) NULL");`
-`  27`  `                        EnsureColumn(conn, "Users", "MfaEnabled", "BIT NOT NULL CONSTRAINT DF_Users_MfaEnabled DEFAULT(0)");`
-`  28`  `                        EnsureColumn(conn, "Users", "EmailOtp", "NVARCHAR(12) NULL");`
-`  29`  `                        EnsureColumn(conn, "Users", "EmailOtpExpiry", "DATETIME NULL");`
-`  30`  `                        EnsureColumn(conn, "Users", "CreatedAt", "DATETIME NULL");`
-`  31`  `                        EnsureColumn(conn, "Users", "PasswordResetToken", "NVARCHAR(128) NULL");`
-`  32`  `                        EnsureColumn(conn, "Users", "PasswordResetExpiry", "DATETIME NULL");`
-`  33`  `                        EnsureAuditTable(conn);`
-`  34`  `                    }`
-`  35`  `                    _ready = true;`
-`  36`  `                }`
-`  37`  `                catch`
-  - → Handle/log exception.
-`  38`  `                {`
-`  39`  `                    // Table might use different name; don't crash app start`
-`  40`  `                    _ready = true;`
-`  41`  `                }`
-`  42`  `            }`
-`  43`  `        }`
-`  44`  ``
-`  45`  `        private static void EnsureAuditTable(SqlConnection conn)`
-  - → Database access (pure SQL).
-`  46`  `        {`
-`  47`  `            try`
-  - → Error handling block.
-`  48`  `            {`
-`  49`  `                using (var check = new SqlCommand(@"`
-  - → Import namespace/types.
-`  50`  `SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'AuditLog'", conn))`
-  - → Write/read security audit events.
-`  51`  `                {`
-`  52`  `                    if (check.ExecuteScalar() != null) return;`
-  - → Run SQL; return table / rows / scalar.
-`  53`  `                }`
-`  54`  ``
-`  55`  `                using (var create = new SqlCommand(@"`
-  - → Import namespace/types.
-`  56`  `CREATE TABLE AuditLog (`
-  - → Write/read security audit events.
-`  57`  `    LogId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,`
-`  58`  `    OccurredAt DATETIME NOT NULL,`
-`  59`  `    Action NVARCHAR(80) NOT NULL,`
-`  60`  `    UserId INT NULL,`
-`  61`  `    Email NVARCHAR(120) NULL,`
-`  62`  `    Detail NVARCHAR(500) NULL,`
-`  63`  `    IpAddress NVARCHAR(64) NULL,`
-`  64`  `    Path NVARCHAR(260) NULL`
-`  65`  `)", conn))`
-`  66`  `                {`
-`  67`  `                    create.ExecuteNonQuery();`
-  - → Run SQL; return table / rows / scalar.
-`  68`  `                }`
-`  69`  `            }`
-`  70`  `            catch { }`
-  - → Handle/log exception.
-`  71`  `        }`
-`  72`  ``
-`  73`  `        private static void EnsureColumn(SqlConnection conn, string table, string column, string definition)`
-  - → Database access (pure SQL).
-`  74`  `        {`
-`  75`  `            using (var check = new SqlCommand(@"`
-  - → Import namespace/types.
-`  76`  `            SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS`
-`  77`  `            WHERE TABLE_NAME = @t AND COLUMN_NAME = @c", conn))`
-`  78`  `            {`
-`  79`  `                check.Parameters.AddWithValue("@t", table);`
-`  80`  `                check.Parameters.AddWithValue("@c", column);`
-`  81`  `                if (check.ExecuteScalar() != null) return;`
-  - → Run SQL; return table / rows / scalar.
-`  82`  `            }`
-`  83`  ``
-`  84`  `            try`
-  - → Error handling block.
-`  85`  `            {`
-`  86`  `                using (var alter = new SqlCommand(`
-  - → Import namespace/types.
-`  87`  `                "ALTER TABLE [" + table + "] ADD [" + column + "] " + definition, conn))`
-`  88`  `                {`
-`  89`  `                    alter.ExecuteNonQuery();`
-  - → Run SQL; return table / rows / scalar.
-`  90`  `                }`
-`  91`  `            }`
-`  92`  `            catch`
-  - → Handle/log exception.
-`  93`  `            {`
-`  94`  `                string simple = definition`
-`  95`  `                .Replace(" CONSTRAINT DF_Users_MfaEnabled DEFAULT(0)", " NULL")`
-`  96`  `                .Replace("NOT NULL", "NULL");`
-`  97`  `                try`
-  - → Error handling block.
-`  98`  `                {`
-`  99`  `                    using (var alter = new SqlCommand(`
-  - → Import namespace/types.
-` 100`  `                    "ALTER TABLE [" + table + "] ADD [" + column + "] " + simple, conn))`
-` 101`  `                    {`
-` 102`  `                        alter.ExecuteNonQuery();`
-  - → Run SQL; return table / rows / scalar.
-` 103`  `                    }`
-` 104`  `                }`
-` 105`  `                catch { /* column may already exist under race */ }`
-  - → Handle/log exception.
-` 106`  `            }`
-` 107`  `        }`
-` 108`  `    }`
-` 109`  `}`
+```csharp
+   1 | using System;
+   2 | using System.Data.SqlClient;
+   3 | using WebAppAssignment.Data;
+   4 | 
+   5 | namespace WebAppAssignment.Data.Security
+   6 | {
+   7 |     /// <summary>
+   8 |     /// Ensures auth-related columns / audit tables exist (pure SQL ALTER - no EF).
+   9 |     /// </summary>
+  10 |     public static class AuthSchema
+  11 |     {
+  12 |         private static readonly object Gate = new object();
+  13 |         private static bool _ready;
+  14 | 
+  15 |         public static void Ensure()
+  16 |         {
+  17 |             if (_ready) return;
+  18 |             lock (Gate)
+  19 |             {
+  20 |                 if (_ready) return;
+  21 |                 try
+  22 |                 {
+  23 |                     using (var conn = DbHelper.OpenConnection())
+  24 |                     {
+  25 |                         EnsureColumn(conn, "Users", "PasswordHash", "NVARCHAR(200) NULL");
+  26 |                         EnsureColumn(conn, "Users", "MfaSecret", "NVARCHAR(64) NULL");
+  27 |                         EnsureColumn(conn, "Users", "MfaEnabled", "BIT NOT NULL CONSTRAINT DF_Users_MfaEnabled DEFAULT(0)");
+  28 |                         EnsureColumn(conn, "Users", "EmailOtp", "NVARCHAR(12) NULL");
+  29 |                         EnsureColumn(conn, "Users", "EmailOtpExpiry", "DATETIME NULL");
+  30 |                         EnsureColumn(conn, "Users", "CreatedAt", "DATETIME NULL");
+  31 |                         EnsureColumn(conn, "Users", "PasswordResetToken", "NVARCHAR(128) NULL");
+  32 |                         EnsureColumn(conn, "Users", "PasswordResetExpiry", "DATETIME NULL");
+  33 |                         EnsureAuditTable(conn);
+  34 |                     }
+  35 |                     _ready = true;
+  36 |                 }
+  37 |                 catch
+  38 |                 {
+  39 |                     // Table might use different name; don't crash app start
+  40 |                     _ready = true;
+  41 |                 }
+  42 |             }
+  43 |         }
+  44 | 
+  45 |         private static void EnsureAuditTable(SqlConnection conn)
+  46 |         {
+  47 |             try
+  48 |             {
+  49 |                 using (var check = new SqlCommand(@"
+  50 | SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'AuditLog'", conn))
+  51 |                 {
+  52 |                     if (check.ExecuteScalar() != null) return;
+  53 |                 }
+  54 | 
+  55 |                 using (var create = new SqlCommand(@"
+  56 | CREATE TABLE AuditLog (
+  57 |     LogId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+  58 |     OccurredAt DATETIME NOT NULL,
+  59 |     Action NVARCHAR(80) NOT NULL,
+  60 |     UserId INT NULL,
+  61 |     Email NVARCHAR(120) NULL,
+  62 |     Detail NVARCHAR(500) NULL,
+  63 |     IpAddress NVARCHAR(64) NULL,
+  64 |     Path NVARCHAR(260) NULL
+  65 | )", conn))
+  66 |                 {
+  67 |                     create.ExecuteNonQuery();
+  68 |                 }
+  69 |             }
+  70 |             catch { }
+  71 |         }
+  72 | 
+  73 |         private static void EnsureColumn(SqlConnection conn, string table, string column, string definition)
+  74 |         {
+  75 |             using (var check = new SqlCommand(@"
+  76 |             SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS
+  77 |             WHERE TABLE_NAME = @t AND COLUMN_NAME = @c", conn))
+  78 |             {
+  79 |                 check.Parameters.AddWithValue("@t", table);
+  80 |                 check.Parameters.AddWithValue("@c", column);
+  81 |                 if (check.ExecuteScalar() != null) return;
+  82 |             }
+  83 | 
+  84 |             try
+  85 |             {
+  86 |                 using (var alter = new SqlCommand(
+  87 |                 "ALTER TABLE [" + table + "] ADD [" + column + "] " + definition, conn))
+  88 |                 {
+  89 |                     alter.ExecuteNonQuery();
+  90 |                 }
+  91 |             }
+  92 |             catch
+  93 |             {
+  94 |                 string simple = definition
+  95 |                 .Replace(" CONSTRAINT DF_Users_MfaEnabled DEFAULT(0)", " NULL")
+  96 |                 .Replace("NOT NULL", "NULL");
+  97 |                 try
+  98 |                 {
+  99 |                     using (var alter = new SqlCommand(
+ 100 |                     "ALTER TABLE [" + table + "] ADD [" + column + "] " + simple, conn))
+ 101 |                     {
+ 102 |                         alter.ExecuteNonQuery();
+ 103 |                     }
+ 104 |                 }
+ 105 |                 catch { /* column may already exist under race */ }
+ 106 |             }
+ 107 |         }
+ 108 |     }
+ 109 | }
+```
+
+**Line notes**
+
+- **L1:** Import namespace/types.
+- **L2:** Import namespace/types.
+- **L3:** Import namespace/types.
+- **L5:** C# namespace grouping.
+- **L21:** Error handling block.
+- **L23:** Import namespace/types.
+- **L25:** Idempotent schema/index ensure (safe to run many times).
+- **L26:** Idempotent schema/index ensure (safe to run many times).
+- **L27:** Idempotent schema/index ensure (safe to run many times).
+- **L28:** Idempotent schema/index ensure (safe to run many times).
+- **L29:** Idempotent schema/index ensure (safe to run many times).
+- **L30:** Idempotent schema/index ensure (safe to run many times).
+- **L31:** Idempotent schema/index ensure (safe to run many times).
+- **L32:** Idempotent schema/index ensure (safe to run many times).
+- **L37:** Handle/log exception.
+- **L45:** Database access (pure SQL).
+- **L47:** Error handling block.
+- **L49:** Import namespace/types.
+- **L50:** Write/read security audit events.
+- **L52:** Run SQL; return table / rows / scalar.
+- **L55:** Import namespace/types.
+- **L56:** Write/read security audit events.
+- **L67:** Run SQL; return table / rows / scalar.
+- **L70:** Handle/log exception.
+- **L73:** Database access (pure SQL).
+- **L75:** Import namespace/types.
+- **L79:** Parameterized SQL — prevents classic SQL injection.
+- **L80:** Parameterized SQL — prevents classic SQL injection.
+- **L81:** Run SQL; return table / rows / scalar.
+- **L84:** Error handling block.
+- **L86:** Import namespace/types.
+- **L89:** Run SQL; return table / rows / scalar.
+- **L92:** Handle/log exception.
+- **L97:** Error handling block.
+- **L99:** Import namespace/types.
+- **L102:** Run SQL; return table / rows / scalar.
+- **L105:** Handle/log exception.
 
 ## Source snapshot (raw)
 

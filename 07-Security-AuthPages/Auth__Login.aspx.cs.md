@@ -1,6 +1,6 @@
 # Login.aspx.cs
 **Source:** `Pages/Authentication/Login.aspx.cs`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -25,7 +25,7 @@ Email + password; Student/Lecturer redirected to MFA; Admin password-only comple
 
 ### `Page_Load` — lines 10–21
 
-```
+```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
@@ -40,29 +40,34 @@ protected void Page_Load(object sender, EventArgs e)
 
 #### Line-by-line (this function)
 
-`  10`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  11`  `        {`
-`  12`  `            AuthSchema.Ensure();`
-`  13`  `            // Only treat as logged-in if UID still exists in Users (avoids stale JWT after DB reset)`
-`  14`  `            int uid = AuthService.GetValidatedUserId(Context);`
-  - → Restore/validate user from Session or JWT; reject stale UIDs.
-`  15`  ``
-`  16`  `            if (!IsPostBack && uid > 0)`
-  - → False on first open; true after postback.
-`  17`  `            {`
-`  18`  `                Logger.Info("User already logged in. Redirecting. " + uid + " " + Session["UserRole"]);`
-  - → Server session for logged-in user.
-`  19`  `                RedirectUser(Session["UserRole"] as string ?? "");`
-  - → Server session for logged-in user.
-`  20`  `            }`
-`  21`  `        }`
+```csharp
+  10 |         protected void Page_Load(object sender, EventArgs e)
+  11 |         {
+  12 |             AuthSchema.Ensure();
+  13 |             // Only treat as logged-in if UID still exists in Users (avoids stale JWT after DB reset)
+  14 |             int uid = AuthService.GetValidatedUserId(Context);
+  15 | 
+  16 |             if (!IsPostBack && uid > 0)
+  17 |             {
+  18 |                 Logger.Info("User already logged in. Redirecting. " + uid + " " + Session["UserRole"]);
+  19 |                 RedirectUser(Session["UserRole"] as string ?? "");
+  20 |             }
+  21 |         }
+```
+
+**Line notes**
+
+- **L10:** Page load entry (GET or postback).
+- **L14:** Restore/validate user from Session or JWT; reject stale UIDs.
+- **L16:** False on first open; true after postback.
+- **L18:** Server session for logged-in user.
+- **L19:** Server session for logged-in user.
 
 ---
 
 ### `btnLogin_Click` — lines 22–66
 
-```
+```csharp
 protected void btnLogin_Click(object sender, EventArgs e)
 ```
 
@@ -76,64 +81,69 @@ protected void btnLogin_Click(object sender, EventArgs e)
 
 #### Line-by-line (this function)
 
-`  22`  ``
-`  23`  `        protected void btnLogin_Click(object sender, EventArgs e)`
-`  24`  `        {`
-`  25`  `            string email = (txtEmail.Text ?? "").Trim();`
-`  26`  `            string password = txtPassword.Text ?? "";`
-`  27`  ``
-`  28`  `            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))`
-`  29`  `            {`
-`  30`  `                lblError.Text = "Please enter email and password.";`
-`  31`  `                return;`
-`  32`  `            }`
-`  33`  ``
-`  34`  `            try`
-  - → Error handling block.
-`  35`  `            {`
-`  36`  `                Logger.Info("Login attempt for: " + email);`
-`  37`  `                var result = AuthService.LoginPassword(email, password);`
-`  38`  ``
-`  39`  `                if (!result.Success)`
-`  40`  `                {`
-`  41`  `                    lblError.Text = result.Message ?? "Invalid email or password.";`
-`  42`  `                    Logger.Info("Login failed for: " + email);`
-`  43`  `                    return;`
-`  44`  `                }`
-`  45`  ``
-`  46`  `                if (result.RequiresMfa)`
-`  47`  `                {`
-`  48`  `                    Session["MfaPendingUid"] = result.User.UID;`
-  - → Server session for logged-in user.
-`  49`  `                    Session["MfaMethod"] = result.MfaMethod ?? "totp";`
-  - → Server session for logged-in user.
-`  50`  `                    if (!string.IsNullOrEmpty(result.DemoEmailOtp))`
-`  51`  `                    Session["MfaDemoOtp"] = result.DemoEmailOtp;`
-  - → Server session for logged-in user.
-`  52`  `                    Response.Redirect("~/Pages/Authentication/MfaVerify.aspx", false);`
-  - → Navigate browser to another URL.
-`  53`  `                    Context.ApplicationInstance.CompleteRequest();`
-`  54`  `                    return;`
-`  55`  `                }`
-`  56`  ``
-`  57`  `                AuthService.CompleteLogin(Context, result.User, result.Token);`
-  - → Issue Session + JWT after successful auth.
-`  58`  `                Logger.Info("Authenticated user role: " + result.User.RoleNormalized);`
-`  59`  `                RedirectUser(result.User.RoleNormalized);`
-`  60`  `            }`
-`  61`  `            catch (Exception ex)`
-  - → Handle/log exception.
-`  62`  `            {`
-`  63`  `                Logger.Error(ex, "Login failed");`
-`  64`  `                lblError.Text = "Sign-in error. Please try again.";`
-`  65`  `            }`
-`  66`  `        }`
+```csharp
+  22 | 
+  23 |         protected void btnLogin_Click(object sender, EventArgs e)
+  24 |         {
+  25 |             string email = (txtEmail.Text ?? "").Trim();
+  26 |             string password = txtPassword.Text ?? "";
+  27 | 
+  28 |             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+  29 |             {
+  30 |                 lblError.Text = "Please enter email and password.";
+  31 |                 return;
+  32 |             }
+  33 | 
+  34 |             try
+  35 |             {
+  36 |                 Logger.Info("Login attempt for: " + email);
+  37 |                 var result = AuthService.LoginPassword(email, password);
+  38 | 
+  39 |                 if (!result.Success)
+  40 |                 {
+  41 |                     lblError.Text = result.Message ?? "Invalid email or password.";
+  42 |                     Logger.Info("Login failed for: " + email);
+  43 |                     return;
+  44 |                 }
+  45 | 
+  46 |                 if (result.RequiresMfa)
+  47 |                 {
+  48 |                     Session["MfaPendingUid"] = result.User.UID;
+  49 |                     Session["MfaMethod"] = result.MfaMethod ?? "totp";
+  50 |                     if (!string.IsNullOrEmpty(result.DemoEmailOtp))
+  51 |                     Session["MfaDemoOtp"] = result.DemoEmailOtp;
+  52 |                     Response.Redirect("~/Pages/Authentication/MfaVerify.aspx", false);
+  53 |                     Context.ApplicationInstance.CompleteRequest();
+  54 |                     return;
+  55 |                 }
+  56 | 
+  57 |                 AuthService.CompleteLogin(Context, result.User, result.Token);
+  58 |                 Logger.Info("Authenticated user role: " + result.User.RoleNormalized);
+  59 |                 RedirectUser(result.User.RoleNormalized);
+  60 |             }
+  61 |             catch (Exception ex)
+  62 |             {
+  63 |                 Logger.Error(ex, "Login failed");
+  64 |                 lblError.Text = "Sign-in error. Please try again.";
+  65 |             }
+  66 |         }
+```
+
+**Line notes**
+
+- **L34:** Error handling block.
+- **L48:** Server session for logged-in user.
+- **L49:** Server session for logged-in user.
+- **L51:** Server session for logged-in user.
+- **L52:** Navigate browser to another URL.
+- **L57:** Issue Session + JWT after successful auth.
+- **L61:** Handle/log exception.
 
 ---
 
 ### `RedirectUser` — lines 67–78
 
-```
+```csharp
 private void RedirectUser(string role)
 ```
 
@@ -146,130 +156,140 @@ private void RedirectUser(string role)
 
 #### Line-by-line (this function)
 
-`  67`  ``
-`  68`  `        private void RedirectUser(string role)`
-`  69`  `        {`
-`  70`  `            string normalizedRole = AuthService.NormalizeRole(role).ToLowerInvariant();`
-  - → Map role codes/names to Admin/Student/Lecturer.
-`  71`  ``
-`  72`  `            if (normalizedRole == "admin")`
-`  73`  `            Response.Redirect("~/Pages/Admin/ADashboard.aspx");`
-  - → Navigate browser to another URL.
-`  74`  `            else if (normalizedRole == "lecturer")`
-`  75`  `            Response.Redirect("~/Pages/Lecturer/Dashboard.aspx");`
-  - → Navigate browser to another URL.
-`  76`  `            else`
-`  77`  `            Response.Redirect("~/Pages/Landing/Landing.aspx");`
-  - → Navigate browser to another URL.
-`  78`  `        }`
+```csharp
+  67 | 
+  68 |         private void RedirectUser(string role)
+  69 |         {
+  70 |             string normalizedRole = AuthService.NormalizeRole(role).ToLowerInvariant();
+  71 | 
+  72 |             if (normalizedRole == "admin")
+  73 |             Response.Redirect("~/Pages/Admin/ADashboard.aspx");
+  74 |             else if (normalizedRole == "lecturer")
+  75 |             Response.Redirect("~/Pages/Lecturer/Dashboard.aspx");
+  76 |             else
+  77 |             Response.Redirect("~/Pages/Landing/Landing.aspx");
+  78 |         }
+```
+
+**Line notes**
+
+- **L70:** Map role codes/names to Admin/Student/Lecturer.
+- **L73:** Navigate browser to another URL.
+- **L75:** Navigate browser to another URL.
+- **L77:** Navigate browser to another URL.
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `using System;`
-  - → Import namespace/types.
-`   2`  `using System.Web.UI;`
-  - → Import namespace/types.
-`   3`  `using WebAppAssignment.Data.Security;`
-  - → Import namespace/types.
-`   4`  `using WebAppAssignment.Shared.DebugLog;`
-  - → Import namespace/types.
-`   5`  ``
-`   6`  `namespace WebAppAssignment.Pages.Authentication`
-  - → C# namespace grouping.
-`   7`  `{`
-`   8`  `    public partial class Login : Page`
-`   9`  `    {`
-`  10`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  11`  `        {`
-`  12`  `            AuthSchema.Ensure();`
-`  13`  `            // Only treat as logged-in if UID still exists in Users (avoids stale JWT after DB reset)`
-`  14`  `            int uid = AuthService.GetValidatedUserId(Context);`
-  - → Restore/validate user from Session or JWT; reject stale UIDs.
-`  15`  ``
-`  16`  `            if (!IsPostBack && uid > 0)`
-  - → False on first open; true after postback.
-`  17`  `            {`
-`  18`  `                Logger.Info("User already logged in. Redirecting. " + uid + " " + Session["UserRole"]);`
-  - → Server session for logged-in user.
-`  19`  `                RedirectUser(Session["UserRole"] as string ?? "");`
-  - → Server session for logged-in user.
-`  20`  `            }`
-`  21`  `        }`
-`  22`  ``
-`  23`  `        protected void btnLogin_Click(object sender, EventArgs e)`
-`  24`  `        {`
-`  25`  `            string email = (txtEmail.Text ?? "").Trim();`
-`  26`  `            string password = txtPassword.Text ?? "";`
-`  27`  ``
-`  28`  `            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))`
-`  29`  `            {`
-`  30`  `                lblError.Text = "Please enter email and password.";`
-`  31`  `                return;`
-`  32`  `            }`
-`  33`  ``
-`  34`  `            try`
-  - → Error handling block.
-`  35`  `            {`
-`  36`  `                Logger.Info("Login attempt for: " + email);`
-`  37`  `                var result = AuthService.LoginPassword(email, password);`
-`  38`  ``
-`  39`  `                if (!result.Success)`
-`  40`  `                {`
-`  41`  `                    lblError.Text = result.Message ?? "Invalid email or password.";`
-`  42`  `                    Logger.Info("Login failed for: " + email);`
-`  43`  `                    return;`
-`  44`  `                }`
-`  45`  ``
-`  46`  `                if (result.RequiresMfa)`
-`  47`  `                {`
-`  48`  `                    Session["MfaPendingUid"] = result.User.UID;`
-  - → Server session for logged-in user.
-`  49`  `                    Session["MfaMethod"] = result.MfaMethod ?? "totp";`
-  - → Server session for logged-in user.
-`  50`  `                    if (!string.IsNullOrEmpty(result.DemoEmailOtp))`
-`  51`  `                    Session["MfaDemoOtp"] = result.DemoEmailOtp;`
-  - → Server session for logged-in user.
-`  52`  `                    Response.Redirect("~/Pages/Authentication/MfaVerify.aspx", false);`
-  - → Navigate browser to another URL.
-`  53`  `                    Context.ApplicationInstance.CompleteRequest();`
-`  54`  `                    return;`
-`  55`  `                }`
-`  56`  ``
-`  57`  `                AuthService.CompleteLogin(Context, result.User, result.Token);`
-  - → Issue Session + JWT after successful auth.
-`  58`  `                Logger.Info("Authenticated user role: " + result.User.RoleNormalized);`
-`  59`  `                RedirectUser(result.User.RoleNormalized);`
-`  60`  `            }`
-`  61`  `            catch (Exception ex)`
-  - → Handle/log exception.
-`  62`  `            {`
-`  63`  `                Logger.Error(ex, "Login failed");`
-`  64`  `                lblError.Text = "Sign-in error. Please try again.";`
-`  65`  `            }`
-`  66`  `        }`
-`  67`  ``
-`  68`  `        private void RedirectUser(string role)`
-`  69`  `        {`
-`  70`  `            string normalizedRole = AuthService.NormalizeRole(role).ToLowerInvariant();`
-  - → Map role codes/names to Admin/Student/Lecturer.
-`  71`  ``
-`  72`  `            if (normalizedRole == "admin")`
-`  73`  `            Response.Redirect("~/Pages/Admin/ADashboard.aspx");`
-  - → Navigate browser to another URL.
-`  74`  `            else if (normalizedRole == "lecturer")`
-`  75`  `            Response.Redirect("~/Pages/Lecturer/Dashboard.aspx");`
-  - → Navigate browser to another URL.
-`  76`  `            else`
-`  77`  `            Response.Redirect("~/Pages/Landing/Landing.aspx");`
-  - → Navigate browser to another URL.
-`  78`  `        }`
-`  79`  `    }`
-`  80`  `}`
+```csharp
+   1 | using System;
+   2 | using System.Web.UI;
+   3 | using WebAppAssignment.Data.Security;
+   4 | using WebAppAssignment.Shared.DebugLog;
+   5 | 
+   6 | namespace WebAppAssignment.Pages.Authentication
+   7 | {
+   8 |     public partial class Login : Page
+   9 |     {
+  10 |         protected void Page_Load(object sender, EventArgs e)
+  11 |         {
+  12 |             AuthSchema.Ensure();
+  13 |             // Only treat as logged-in if UID still exists in Users (avoids stale JWT after DB reset)
+  14 |             int uid = AuthService.GetValidatedUserId(Context);
+  15 | 
+  16 |             if (!IsPostBack && uid > 0)
+  17 |             {
+  18 |                 Logger.Info("User already logged in. Redirecting. " + uid + " " + Session["UserRole"]);
+  19 |                 RedirectUser(Session["UserRole"] as string ?? "");
+  20 |             }
+  21 |         }
+  22 | 
+  23 |         protected void btnLogin_Click(object sender, EventArgs e)
+  24 |         {
+  25 |             string email = (txtEmail.Text ?? "").Trim();
+  26 |             string password = txtPassword.Text ?? "";
+  27 | 
+  28 |             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+  29 |             {
+  30 |                 lblError.Text = "Please enter email and password.";
+  31 |                 return;
+  32 |             }
+  33 | 
+  34 |             try
+  35 |             {
+  36 |                 Logger.Info("Login attempt for: " + email);
+  37 |                 var result = AuthService.LoginPassword(email, password);
+  38 | 
+  39 |                 if (!result.Success)
+  40 |                 {
+  41 |                     lblError.Text = result.Message ?? "Invalid email or password.";
+  42 |                     Logger.Info("Login failed for: " + email);
+  43 |                     return;
+  44 |                 }
+  45 | 
+  46 |                 if (result.RequiresMfa)
+  47 |                 {
+  48 |                     Session["MfaPendingUid"] = result.User.UID;
+  49 |                     Session["MfaMethod"] = result.MfaMethod ?? "totp";
+  50 |                     if (!string.IsNullOrEmpty(result.DemoEmailOtp))
+  51 |                     Session["MfaDemoOtp"] = result.DemoEmailOtp;
+  52 |                     Response.Redirect("~/Pages/Authentication/MfaVerify.aspx", false);
+  53 |                     Context.ApplicationInstance.CompleteRequest();
+  54 |                     return;
+  55 |                 }
+  56 | 
+  57 |                 AuthService.CompleteLogin(Context, result.User, result.Token);
+  58 |                 Logger.Info("Authenticated user role: " + result.User.RoleNormalized);
+  59 |                 RedirectUser(result.User.RoleNormalized);
+  60 |             }
+  61 |             catch (Exception ex)
+  62 |             {
+  63 |                 Logger.Error(ex, "Login failed");
+  64 |                 lblError.Text = "Sign-in error. Please try again.";
+  65 |             }
+  66 |         }
+  67 | 
+  68 |         private void RedirectUser(string role)
+  69 |         {
+  70 |             string normalizedRole = AuthService.NormalizeRole(role).ToLowerInvariant();
+  71 | 
+  72 |             if (normalizedRole == "admin")
+  73 |             Response.Redirect("~/Pages/Admin/ADashboard.aspx");
+  74 |             else if (normalizedRole == "lecturer")
+  75 |             Response.Redirect("~/Pages/Lecturer/Dashboard.aspx");
+  76 |             else
+  77 |             Response.Redirect("~/Pages/Landing/Landing.aspx");
+  78 |         }
+  79 |     }
+  80 | }
+```
+
+**Line notes**
+
+- **L1:** Import namespace/types.
+- **L2:** Import namespace/types.
+- **L3:** Import namespace/types.
+- **L4:** Import namespace/types.
+- **L6:** C# namespace grouping.
+- **L10:** Page load entry (GET or postback).
+- **L14:** Restore/validate user from Session or JWT; reject stale UIDs.
+- **L16:** False on first open; true after postback.
+- **L18:** Server session for logged-in user.
+- **L19:** Server session for logged-in user.
+- **L34:** Error handling block.
+- **L48:** Server session for logged-in user.
+- **L49:** Server session for logged-in user.
+- **L51:** Server session for logged-in user.
+- **L52:** Navigate browser to another URL.
+- **L57:** Issue Session + JWT after successful auth.
+- **L61:** Handle/log exception.
+- **L70:** Map role codes/names to Admin/Student/Lecturer.
+- **L73:** Navigate browser to another URL.
+- **L75:** Navigate browser to another URL.
+- **L77:** Navigate browser to another URL.
 
 ## Source snapshot (raw)
 

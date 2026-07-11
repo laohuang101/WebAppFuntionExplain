@@ -1,12 +1,12 @@
 # SchemaMap.cs
 **Source:** `Data/SchemaMap.cs`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
 ## Feature / role in EduLMS
 
-Part of EduLMS Landing or Lecturer area. See function sections below.
+Discovers real table/column names in the attached MDF (SubChapters vs Lessons, etc.) so curriculum SQL adapts.
 
 ## File overview
 
@@ -56,7 +56,7 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ### `Ensure` — lines 44–62
 
-```
+```csharp
 public static void Ensure()
 ```
 
@@ -66,33 +66,38 @@ public static void Ensure()
 
 #### Line-by-line (this function)
 
-`  44`  ``
-`  45`  `        public static void Ensure()`
-`  46`  `        {`
-`  47`  `            if (_loaded) return;`
-`  48`  `            lock (Gate)`
-`  49`  `            {`
-`  50`  `                if (_loaded) return;`
-`  51`  `                try`
-  - → Error handling block.
-`  52`  `                {`
-`  53`  `                    Discover();`
-`  54`  `                    _loadError = null;`
-`  55`  `                }`
-`  56`  `                catch (Exception ex)`
-  - → Handle/log exception.
-`  57`  `                {`
-`  58`  `                    _loadError = ex.Message;`
-`  59`  `                }`
-`  60`  `                _loaded = true;`
-`  61`  `            }`
-`  62`  `        }`
+```csharp
+  44 | 
+  45 |         public static void Ensure()
+  46 |         {
+  47 |             if (_loaded) return;
+  48 |             lock (Gate)
+  49 |             {
+  50 |                 if (_loaded) return;
+  51 |                 try
+  52 |                 {
+  53 |                     Discover();
+  54 |                     _loadError = null;
+  55 |                 }
+  56 |                 catch (Exception ex)
+  57 |                 {
+  58 |                     _loadError = ex.Message;
+  59 |                 }
+  60 |                 _loaded = true;
+  61 |             }
+  62 |         }
+```
+
+**Line notes**
+
+- **L51:** Error handling block.
+- **L56:** Handle/log exception.
 
 ---
 
 ### `Reset` — lines 63–67
 
-```
+```csharp
 public static void Reset()
 ```
 
@@ -102,17 +107,19 @@ public static void Reset()
 
 #### Line-by-line (this function)
 
-`  63`  ``
-`  64`  `        public static void Reset()`
-`  65`  `        {`
-`  66`  `            lock (Gate) { _loaded = false; _loadError = null; }`
-`  67`  `        }`
+```csharp
+  63 | 
+  64 |         public static void Reset()
+  65 |         {
+  66 |             lock (Gate) { _loaded = false; _loadError = null; }
+  67 |         }
+```
 
 ---
 
 ### `Discover` — lines 68–149
 
-```
+```csharp
 private static void Discover()
 ```
 
@@ -124,95 +131,100 @@ private static void Discover()
 
 #### Line-by-line (this function)
 
-`  68`  ``
-`  69`  `        private static void Discover()`
-`  70`  `        {`
-`  71`  `            using (var conn = DbHelper.OpenConnection())`
-  - → Import namespace/types.
-`  72`  `            {`
-`  73`  `                // Chapters`
-`  74`  `                var chCols = Cols(conn, "Chapters");`
-`  75`  `                if (chCols.Count == 0) chCols = Cols(conn, "Chapter");`
-`  76`  `                if (chCols.Count > 0)`
-`  77`  `                {`
-`  78`  `                    ChTable = TableExists(conn, "Chapters") ? "Chapters" : "Chapter";`
-`  79`  `                    var chPk = PrimaryKey(conn, ChTable);`
-`  80`  `                    ChPk = !string.IsNullOrEmpty(chPk) ? chPk : Pick(chCols, "ChID", "ChapterID", "ID", "Id");`
-`  81`  `                    ChCourseFk = Pick(chCols, "CID", "CourseID", "CourseId");`
-`  82`  `                    ChTitle = Pick(chCols, "Title", "Name");`
-`  83`  `                    ChIndex = PickOptional(chCols, "Index", "Order", "OrderIndex", "SortOrder", "Idx");`
-`  84`  `                }`
-`  85`  ``
-`  86`  `                // SubChapters / SubChapter / Lessons`
-`  87`  `                string subTable = null;`
-`  88`  `                foreach (var t in new[] { "SubChapters", "SubChapter", "Lessons", "Lesson" })`
-`  89`  `                {`
-`  90`  `                    if (TableExists(conn, t)) { subTable = t; break; }`
-`  91`  `                }`
-`  92`  ``
-`  93`  `                if (subTable != null)`
-`  94`  `                {`
-`  95`  `                    SubTable = subTable;`
-`  96`  `                    var sc = Cols(conn, subTable);`
-`  97`  `                    var pk = PrimaryKey(conn, subTable);`
-`  98`  `                    SubPk = !string.IsNullOrEmpty(pk)`
-`  99`  `                    ? pk`
-` 100`  `                    : Pick(sc, "SchID", "SChID", "SubChapterID", "SubChapterId", "LessonID", "LessonId", "ID", "Id");`
-` 101`  `                    SubChapterFk = Pick(sc, "ChID", "ChapterID", "ChapterId");`
-` 102`  `                    SubTitle = Pick(sc, "Title", "Name", "LessonTitle");`
-` 103`  `                    SubIndex = PickOptional(sc, "Index", "Order", "OrderIndex", "SortOrder", "Idx");`
-` 104`  `                }`
-` 105`  ``
-` 106`  `                // StudyMats`
-` 107`  `                string matTable = null;`
-` 108`  `                foreach (var t in new[] { "StudyMats", "StudyMat", "StudyMaterials", "Materials" })`
-` 109`  `                {`
-` 110`  `                    if (TableExists(conn, t)) { matTable = t; break; }`
-` 111`  `                }`
-` 112`  `                if (matTable != null)`
-` 113`  `                {`
-` 114`  `                    MatTable = matTable;`
-` 115`  `                    var mc = Cols(conn, matTable);`
-` 116`  `                    var mPk = PrimaryKey(conn, matTable);`
-` 117`  `                    MatPk = !string.IsNullOrEmpty(mPk) ? mPk : Pick(mc, "SMID", "MID", "MaterialID", "ID", "Id");`
-` 118`  `                    MatType = PickOptional(mc, "Type", "MaterialType", "ContentType");`
-` 119`  `                    MatText = PickOptional(mc, "TextContent", "Content", "Text", "Body");`
-` 120`  `                    MatMedia = PickOptional(mc, "MediaLink", "MediaUrl", "Link", "Url", "FilePath");`
-` 121`  `                    MatIndex = PickOptional(mc, "Index", "Order", "OrderIndex", "SortOrder", "Idx");`
-` 122`  ``
-` 123`  `                    // Prefer SubChapter FK if present, else Chapter FK (legacy)`
-` 124`  `                    if (Has(mc, "SchID") || Has(mc, "SChID") || Has(mc, "SubChapterID") || Has(mc, "LessonID"))`
-` 125`  `                    {`
-` 126`  `                        MatSubFk = Pick(mc, "SchID", "SChID", "SubChapterID", "SubChapterId", "LessonID", "LessonId");`
-` 127`  `                        MatLinksToSub = true;`
-` 128`  `                    }`
-` 129`  `                    else if (Has(mc, "ChID") || Has(mc, "ChapterID"))`
-` 130`  `                    {`
-` 131`  `                        MatSubFk = Pick(mc, "ChID", "ChapterID", "ChapterId");`
-` 132`  `                        MatLinksToSub = false;`
-` 133`  `                    }`
-` 134`  `                    else if (!string.IsNullOrEmpty(SubTable) && !string.IsNullOrEmpty(SubPk) && Has(mc, SubPk))`
-` 135`  `                    {`
-` 136`  `                        MatSubFk = SubPk;`
-` 137`  `                        MatLinksToSub = true;`
-` 138`  `                    }`
-` 139`  ``
-` 140`  `                    // Need at least one content column`
-` 141`  `                    if (string.IsNullOrEmpty(MatType) && string.IsNullOrEmpty(MatText) && string.IsNullOrEmpty(MatMedia))`
-` 142`  `                    {`
-` 143`  `                        MatText = mc.FirstOrDefault(c =>`
-` 144`  `                        !string.Equals(c, MatPk, StringComparison.OrdinalIgnoreCase) &&`
-` 145`  `                        !string.Equals(c, MatSubFk, StringComparison.OrdinalIgnoreCase));`
-` 146`  `                    }`
-` 147`  `                }`
-` 148`  `            }`
-` 149`  `        }`
+```csharp
+  68 | 
+  69 |         private static void Discover()
+  70 |         {
+  71 |             using (var conn = DbHelper.OpenConnection())
+  72 |             {
+  73 |                 // Chapters
+  74 |                 var chCols = Cols(conn, "Chapters");
+  75 |                 if (chCols.Count == 0) chCols = Cols(conn, "Chapter");
+  76 |                 if (chCols.Count > 0)
+  77 |                 {
+  78 |                     ChTable = TableExists(conn, "Chapters") ? "Chapters" : "Chapter";
+  79 |                     var chPk = PrimaryKey(conn, ChTable);
+  80 |                     ChPk = !string.IsNullOrEmpty(chPk) ? chPk : Pick(chCols, "ChID", "ChapterID", "ID", "Id");
+  81 |                     ChCourseFk = Pick(chCols, "CID", "CourseID", "CourseId");
+  82 |                     ChTitle = Pick(chCols, "Title", "Name");
+  83 |                     ChIndex = PickOptional(chCols, "Index", "Order", "OrderIndex", "SortOrder", "Idx");
+  84 |                 }
+  85 | 
+  86 |                 // SubChapters / SubChapter / Lessons
+  87 |                 string subTable = null;
+  88 |                 foreach (var t in new[] { "SubChapters", "SubChapter", "Lessons", "Lesson" })
+  89 |                 {
+  90 |                     if (TableExists(conn, t)) { subTable = t; break; }
+  91 |                 }
+  92 | 
+  93 |                 if (subTable != null)
+  94 |                 {
+  95 |                     SubTable = subTable;
+  96 |                     var sc = Cols(conn, subTable);
+  97 |                     var pk = PrimaryKey(conn, subTable);
+  98 |                     SubPk = !string.IsNullOrEmpty(pk)
+  99 |                     ? pk
+ 100 |                     : Pick(sc, "SchID", "SChID", "SubChapterID", "SubChapterId", "LessonID", "LessonId", "ID", "Id");
+ 101 |                     SubChapterFk = Pick(sc, "ChID", "ChapterID", "ChapterId");
+ 102 |                     SubTitle = Pick(sc, "Title", "Name", "LessonTitle");
+ 103 |                     SubIndex = PickOptional(sc, "Index", "Order", "OrderIndex", "SortOrder", "Idx");
+ 104 |                 }
+ 105 | 
+ 106 |                 // StudyMats
+ 107 |                 string matTable = null;
+ 108 |                 foreach (var t in new[] { "StudyMats", "StudyMat", "StudyMaterials", "Materials" })
+ 109 |                 {
+ 110 |                     if (TableExists(conn, t)) { matTable = t; break; }
+ 111 |                 }
+ 112 |                 if (matTable != null)
+ 113 |                 {
+ 114 |                     MatTable = matTable;
+ 115 |                     var mc = Cols(conn, matTable);
+ 116 |                     var mPk = PrimaryKey(conn, matTable);
+ 117 |                     MatPk = !string.IsNullOrEmpty(mPk) ? mPk : Pick(mc, "SMID", "MID", "MaterialID", "ID", "Id");
+ 118 |                     MatType = PickOptional(mc, "Type", "MaterialType", "ContentType");
+ 119 |                     MatText = PickOptional(mc, "TextContent", "Content", "Text", "Body");
+ 120 |                     MatMedia = PickOptional(mc, "MediaLink", "MediaUrl", "Link", "Url", "FilePath");
+ 121 |                     MatIndex = PickOptional(mc, "Index", "Order", "OrderIndex", "SortOrder", "Idx");
+ 122 | 
+ 123 |                     // Prefer SubChapter FK if present, else Chapter FK (legacy)
+ 124 |                     if (Has(mc, "SchID") || Has(mc, "SChID") || Has(mc, "SubChapterID") || Has(mc, "LessonID"))
+ 125 |                     {
+ 126 |                         MatSubFk = Pick(mc, "SchID", "SChID", "SubChapterID", "SubChapterId", "LessonID", "LessonId");
+ 127 |                         MatLinksToSub = true;
+ 128 |                     }
+ 129 |                     else if (Has(mc, "ChID") || Has(mc, "ChapterID"))
+ 130 |                     {
+ 131 |                         MatSubFk = Pick(mc, "ChID", "ChapterID", "ChapterId");
+ 132 |                         MatLinksToSub = false;
+ 133 |                     }
+ 134 |                     else if (!string.IsNullOrEmpty(SubTable) && !string.IsNullOrEmpty(SubPk) && Has(mc, SubPk))
+ 135 |                     {
+ 136 |                         MatSubFk = SubPk;
+ 137 |                         MatLinksToSub = true;
+ 138 |                     }
+ 139 | 
+ 140 |                     // Need at least one content column
+ 141 |                     if (string.IsNullOrEmpty(MatType) && string.IsNullOrEmpty(MatText) && string.IsNullOrEmpty(MatMedia))
+ 142 |                     {
+ 143 |                         MatText = mc.FirstOrDefault(c =>
+ 144 |                         !string.Equals(c, MatPk, StringComparison.OrdinalIgnoreCase) &&
+ 145 |                         !string.Equals(c, MatSubFk, StringComparison.OrdinalIgnoreCase));
+ 146 |                     }
+ 147 |                 }
+ 148 |             }
+ 149 |         }
+```
+
+**Line notes**
+
+- **L71:** Import namespace/types.
 
 ---
 
 ### `TableExists` — lines 150–159
 
-```
+```csharp
 private static bool TableExists(SqlConnection conn, string name)
 ```
 
@@ -225,25 +237,31 @@ private static bool TableExists(SqlConnection conn, string name)
 
 #### Line-by-line (this function)
 
-` 150`  ``
-` 151`  `        private static bool TableExists(SqlConnection conn, string name)`
-  - → Database access (pure SQL).
-` 152`  `        {`
-` 153`  `            using (var cmd = new SqlCommand(`
-  - → Import namespace/types.
-` 154`  `            "SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = @t", conn))`
-` 155`  `            {`
-` 156`  `                cmd.Parameters.AddWithValue("@t", name);`
-` 157`  `                return cmd.ExecuteScalar() != null;`
-  - → Run SQL; return table / rows / scalar.
-` 158`  `            }`
-` 159`  `        }`
+```csharp
+ 150 | 
+ 151 |         private static bool TableExists(SqlConnection conn, string name)
+ 152 |         {
+ 153 |             using (var cmd = new SqlCommand(
+ 154 |             "SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = @t", conn))
+ 155 |             {
+ 156 |                 cmd.Parameters.AddWithValue("@t", name);
+ 157 |                 return cmd.ExecuteScalar() != null;
+ 158 |             }
+ 159 |         }
+```
+
+**Line notes**
+
+- **L151:** Database access (pure SQL).
+- **L153:** Import namespace/types.
+- **L156:** Parameterized SQL — prevents classic SQL injection.
+- **L157:** Run SQL; return table / rows / scalar.
 
 ---
 
 ### `Cols` — lines 160–174
 
-```
+```csharp
 private static List<string> Cols(SqlConnection conn, string table)
 ```
 
@@ -256,30 +274,36 @@ private static List<string> Cols(SqlConnection conn, string table)
 
 #### Line-by-line (this function)
 
-` 160`  ``
-` 161`  `        private static List<string> Cols(SqlConnection conn, string table)`
-  - → Database access (pure SQL).
-` 162`  `        {`
-` 163`  `            var list = new List<string>();`
-` 164`  `            using (var cmd = new SqlCommand(`
-  - → Import namespace/types.
-` 165`  `            "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @t", conn))`
-` 166`  `            {`
-` 167`  `                cmd.Parameters.AddWithValue("@t", table);`
-` 168`  `                using (var r = cmd.ExecuteReader())`
-  - → Import namespace/types.
-` 169`  `                {`
-` 170`  `                    while (r.Read()) list.Add(r.GetString(0));`
-` 171`  `                }`
-` 172`  `            }`
-` 173`  `            return list;`
-` 174`  `        }`
+```csharp
+ 160 | 
+ 161 |         private static List<string> Cols(SqlConnection conn, string table)
+ 162 |         {
+ 163 |             var list = new List<string>();
+ 164 |             using (var cmd = new SqlCommand(
+ 165 |             "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @t", conn))
+ 166 |             {
+ 167 |                 cmd.Parameters.AddWithValue("@t", table);
+ 168 |                 using (var r = cmd.ExecuteReader())
+ 169 |                 {
+ 170 |                     while (r.Read()) list.Add(r.GetString(0));
+ 171 |                 }
+ 172 |             }
+ 173 |             return list;
+ 174 |         }
+```
+
+**Line notes**
+
+- **L161:** Database access (pure SQL).
+- **L164:** Import namespace/types.
+- **L167:** Parameterized SQL — prevents classic SQL injection.
+- **L168:** Import namespace/types.
 
 ---
 
 ### `Has` — lines 175–179
 
-```
+```csharp
 private static bool Has(List<string> cols, string name)
 ```
 
@@ -290,17 +314,19 @@ private static bool Has(List<string> cols, string name)
 
 #### Line-by-line (this function)
 
-` 175`  ``
-` 176`  `        private static bool Has(List<string> cols, string name)`
-` 177`  `        {`
-` 178`  `            return cols.Any(c => string.Equals(c, name, StringComparison.OrdinalIgnoreCase));`
-` 179`  `        }`
+```csharp
+ 175 | 
+ 176 |         private static bool Has(List<string> cols, string name)
+ 177 |         {
+ 178 |             return cols.Any(c => string.Equals(c, name, StringComparison.OrdinalIgnoreCase));
+ 179 |         }
+```
 
 ---
 
 ### `PrimaryKey` — lines 180–195
 
-```
+```csharp
 private static string PrimaryKey(SqlConnection conn, string table)
 ```
 
@@ -313,31 +339,39 @@ private static string PrimaryKey(SqlConnection conn, string table)
 
 #### Line-by-line (this function)
 
-` 180`  ``
-` 181`  `        private static string PrimaryKey(SqlConnection conn, string table)`
-  - → Database access (pure SQL).
-` 182`  `        {`
-` 183`  `            using (var cmd = new SqlCommand(@"`
-  - → Import namespace/types.
-` 184`  `            SELECT TOP 1 ku.COLUMN_NAME`
-` 185`  `            FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc`
-` 186`  `            INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE ku`
-` 187`  `            ON tc.CONSTRAINT_NAME = ku.CONSTRAINT_NAME AND tc.TABLE_NAME = ku.TABLE_NAME`
-` 188`  `            WHERE tc.TABLE_NAME = @t AND tc.CONSTRAINT_TYPE = 'PRIMARY KEY'`
-` 189`  `            ORDER BY ku.ORDINAL_POSITION", conn))`
-` 190`  `            {`
-` 191`  `                cmd.Parameters.AddWithValue("@t", table);`
-` 192`  `                var o = cmd.ExecuteScalar();`
-  - → Run SQL; return table / rows / scalar.
-` 193`  `                return o == null || o == DBNull.Value ? null : o.ToString();`
-` 194`  `            }`
-` 195`  `        }`
+```csharp
+ 180 | 
+ 181 |         private static string PrimaryKey(SqlConnection conn, string table)
+ 182 |         {
+ 183 |             using (var cmd = new SqlCommand(@"
+ 184 |             SELECT TOP 1 ku.COLUMN_NAME
+ 185 |             FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc
+ 186 |             INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE ku
+ 187 |             ON tc.CONSTRAINT_NAME = ku.CONSTRAINT_NAME AND tc.TABLE_NAME = ku.TABLE_NAME
+ 188 |             WHERE tc.TABLE_NAME = @t AND tc.CONSTRAINT_TYPE = 'PRIMARY KEY'
+ 189 |             ORDER BY ku.ORDINAL_POSITION", conn))
+ 190 |             {
+ 191 |                 cmd.Parameters.AddWithValue("@t", table);
+ 192 |                 var o = cmd.ExecuteScalar();
+ 193 |                 return o == null || o == DBNull.Value ? null : o.ToString();
+ 194 |             }
+ 195 |         }
+```
+
+**Line notes**
+
+- **L181:** Database access (pure SQL).
+- **L183:** Import namespace/types.
+- **L186:** Join related tables (courses ↔ chapters ↔ works ↔ users).
+- **L191:** Parameterized SQL — prevents classic SQL injection.
+- **L192:** Run SQL; return table / rows / scalar.
+- **L193:** Null-safe read from database values.
 
 ---
 
 ### `Pick` — lines 196–207
 
-```
+```csharp
 private static string Pick(List<string> cols, params string[] candidates)
 ```
 
@@ -349,24 +383,26 @@ private static string Pick(List<string> cols, params string[] candidates)
 
 #### Line-by-line (this function)
 
-` 196`  ``
-` 197`  `        private static string Pick(List<string> cols, params string[] candidates)`
-` 198`  `        {`
-` 199`  `            foreach (var c in candidates)`
-` 200`  `            {`
-` 201`  `                var hit = cols.FirstOrDefault(x => string.Equals(x, c, StringComparison.OrdinalIgnoreCase));`
-` 202`  `                if (hit != null) return hit;`
-` 203`  `            }`
-` 204`  `            // last resort: first column (often PK)`
-` 205`  `            if (cols.Count > 0) return cols[0];`
-` 206`  `            throw new InvalidOperationException("No columns found; candidates: " + string.Join(",", candidates));`
-` 207`  `        }`
+```csharp
+ 196 | 
+ 197 |         private static string Pick(List<string> cols, params string[] candidates)
+ 198 |         {
+ 199 |             foreach (var c in candidates)
+ 200 |             {
+ 201 |                 var hit = cols.FirstOrDefault(x => string.Equals(x, c, StringComparison.OrdinalIgnoreCase));
+ 202 |                 if (hit != null) return hit;
+ 203 |             }
+ 204 |             // last resort: first column (often PK)
+ 205 |             if (cols.Count > 0) return cols[0];
+ 206 |             throw new InvalidOperationException("No columns found; candidates: " + string.Join(",", candidates));
+ 207 |         }
+```
 
 ---
 
 ### `PickOptional` — lines 208–217
 
-```
+```csharp
 private static string PickOptional(List<string> cols, params string[] candidates)
 ```
 
@@ -378,22 +414,24 @@ private static string PickOptional(List<string> cols, params string[] candidates
 
 #### Line-by-line (this function)
 
-` 208`  ``
-` 209`  `        private static string PickOptional(List<string> cols, params string[] candidates)`
-` 210`  `        {`
-` 211`  `            foreach (var c in candidates)`
-` 212`  `            {`
-` 213`  `                var hit = cols.FirstOrDefault(x => string.Equals(x, c, StringComparison.OrdinalIgnoreCase));`
-` 214`  `                if (hit != null) return hit;`
-` 215`  `            }`
-` 216`  `            return null;`
-` 217`  `        }`
+```csharp
+ 208 | 
+ 209 |         private static string PickOptional(List<string> cols, params string[] candidates)
+ 210 |         {
+ 211 |             foreach (var c in candidates)
+ 212 |             {
+ 213 |                 var hit = cols.FirstOrDefault(x => string.Equals(x, c, StringComparison.OrdinalIgnoreCase));
+ 214 |                 if (hit != null) return hit;
+ 215 |             }
+ 216 |             return null;
+ 217 |         }
+```
 
 ---
 
 ### `Q` — lines 218–224
 
-```
+```csharp
 public static string Q(string ident)
 ```
 
@@ -404,19 +442,21 @@ public static string Q(string ident)
 
 #### Line-by-line (this function)
 
-` 218`  ``
-` 219`  `        public static string Q(string ident)`
-` 220`  `        {`
-` 221`  `            if (string.IsNullOrEmpty(ident)) return ident;`
-` 222`  `            // bracket-quote for reserved words like Index`
-` 223`  `            return "[" + ident.Replace("]", "]]") + "]";`
-` 224`  `        }`
+```csharp
+ 218 | 
+ 219 |         public static string Q(string ident)
+ 220 |         {
+ 221 |             if (string.IsNullOrEmpty(ident)) return ident;
+ 222 |             // bracket-quote for reserved words like Index
+ 223 |             return "[" + ident.Replace("]", "]]") + "]";
+ 224 |         }
+```
 
 ---
 
 ### `DebugInfo` — lines 225–236
 
-```
+```csharp
 public static object DebugInfo()
 ```
 
@@ -426,281 +466,293 @@ public static object DebugInfo()
 
 #### Line-by-line (this function)
 
-` 225`  ``
-` 226`  `        public static object DebugInfo()`
-` 227`  `        {`
-` 228`  `            Ensure();`
-` 229`  `            return new`
-` 230`  `            {`
-` 231`  `                loadError = _loadError,`
-` 232`  `                chapters = new { ChTable, ChPk, ChCourseFk, ChTitle, ChIndex },`
-` 233`  `                sub = new { SubTable, SubPk, SubChapterFk, SubTitle, SubIndex },`
-` 234`  `                mats = new { MatTable, MatPk, MatSubFk, MatLinksToSub, MatType, MatText, MatMedia, MatIndex }`
-` 235`  `            };`
-` 236`  `        }`
+```csharp
+ 225 | 
+ 226 |         public static object DebugInfo()
+ 227 |         {
+ 228 |             Ensure();
+ 229 |             return new
+ 230 |             {
+ 231 |                 loadError = _loadError,
+ 232 |                 chapters = new { ChTable, ChPk, ChCourseFk, ChTitle, ChIndex },
+ 233 |                 sub = new { SubTable, SubPk, SubChapterFk, SubTitle, SubIndex },
+ 234 |                 mats = new { MatTable, MatPk, MatSubFk, MatLinksToSub, MatType, MatText, MatMedia, MatIndex }
+ 235 |             };
+ 236 |         }
+```
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `using System;`
-  - → Import namespace/types.
-`   2`  `using System.Collections.Generic;`
-  - → Import namespace/types.
-`   3`  `using System.Data;`
-  - → Import namespace/types.
-`   4`  `using System.Data.SqlClient;`
-  - → Import namespace/types.
-`   5`  `using System.Linq;`
-  - → Import namespace/types.
-`   6`  ``
-`   7`  `namespace WebAppAssignment.Data`
-  - → C# namespace grouping.
-`   8`  `{`
-`   9`  `    /// <summary>`
-`  10`  `    /// Discovers real column names from EduDB via INFORMATION_SCHEMA`
-`  11`  `    /// so curriculum SQL works even when PK names differ (SchID vs ID etc.).`
-`  12`  `    /// </summary>`
-`  13`  `    public static class SchemaMap`
-`  14`  `    {`
-`  15`  `        private static readonly object Gate = new object();`
-`  16`  `        private static bool _loaded;`
-`  17`  `        private static string _loadError;`
-`  18`  ``
-`  19`  `        // SubChapters`
-`  20`  `        public static string SubTable = null;`
-`  21`  `        public static string SubPk = null;`
-`  22`  `        public static string SubChapterFk = null;`
-`  23`  `        public static string SubTitle = null;`
-`  24`  `        public static string SubIndex = null; // optional`
-`  25`  ``
-`  26`  `        // StudyMats`
-`  27`  `        public static string MatTable = null;`
-`  28`  `        public static string MatPk = null;`
-`  29`  `        public static string MatSubFk = null; // SchID or ChID`
-`  30`  `        public static bool MatLinksToSub = false;`
-`  31`  `        public static string MatType = null;`
-`  32`  `        public static string MatText = null;`
-`  33`  `        public static string MatMedia = null;`
-`  34`  `        public static string MatIndex = null;`
-`  35`  ``
-`  36`  `        // Chapters`
-`  37`  `        public static string ChTable = "Chapters";`
-`  38`  `        public static string ChPk = "ChID";`
-`  39`  `        public static string ChCourseFk = "CID";`
-`  40`  `        public static string ChTitle = "Title";`
-`  41`  `        public static string ChIndex = null;`
-`  42`  ``
-`  43`  `        public static string LoadError { get { Ensure(); return _loadError; } }`
-`  44`  ``
-`  45`  `        public static void Ensure()`
-`  46`  `        {`
-`  47`  `            if (_loaded) return;`
-`  48`  `            lock (Gate)`
-`  49`  `            {`
-`  50`  `                if (_loaded) return;`
-`  51`  `                try`
-  - → Error handling block.
-`  52`  `                {`
-`  53`  `                    Discover();`
-`  54`  `                    _loadError = null;`
-`  55`  `                }`
-`  56`  `                catch (Exception ex)`
-  - → Handle/log exception.
-`  57`  `                {`
-`  58`  `                    _loadError = ex.Message;`
-`  59`  `                }`
-`  60`  `                _loaded = true;`
-`  61`  `            }`
-`  62`  `        }`
-`  63`  ``
-`  64`  `        public static void Reset()`
-`  65`  `        {`
-`  66`  `            lock (Gate) { _loaded = false; _loadError = null; }`
-`  67`  `        }`
-`  68`  ``
-`  69`  `        private static void Discover()`
-`  70`  `        {`
-`  71`  `            using (var conn = DbHelper.OpenConnection())`
-  - → Import namespace/types.
-`  72`  `            {`
-`  73`  `                // Chapters`
-`  74`  `                var chCols = Cols(conn, "Chapters");`
-`  75`  `                if (chCols.Count == 0) chCols = Cols(conn, "Chapter");`
-`  76`  `                if (chCols.Count > 0)`
-`  77`  `                {`
-`  78`  `                    ChTable = TableExists(conn, "Chapters") ? "Chapters" : "Chapter";`
-`  79`  `                    var chPk = PrimaryKey(conn, ChTable);`
-`  80`  `                    ChPk = !string.IsNullOrEmpty(chPk) ? chPk : Pick(chCols, "ChID", "ChapterID", "ID", "Id");`
-`  81`  `                    ChCourseFk = Pick(chCols, "CID", "CourseID", "CourseId");`
-`  82`  `                    ChTitle = Pick(chCols, "Title", "Name");`
-`  83`  `                    ChIndex = PickOptional(chCols, "Index", "Order", "OrderIndex", "SortOrder", "Idx");`
-`  84`  `                }`
-`  85`  ``
-`  86`  `                // SubChapters / SubChapter / Lessons`
-`  87`  `                string subTable = null;`
-`  88`  `                foreach (var t in new[] { "SubChapters", "SubChapter", "Lessons", "Lesson" })`
-`  89`  `                {`
-`  90`  `                    if (TableExists(conn, t)) { subTable = t; break; }`
-`  91`  `                }`
-`  92`  ``
-`  93`  `                if (subTable != null)`
-`  94`  `                {`
-`  95`  `                    SubTable = subTable;`
-`  96`  `                    var sc = Cols(conn, subTable);`
-`  97`  `                    var pk = PrimaryKey(conn, subTable);`
-`  98`  `                    SubPk = !string.IsNullOrEmpty(pk)`
-`  99`  `                    ? pk`
-` 100`  `                    : Pick(sc, "SchID", "SChID", "SubChapterID", "SubChapterId", "LessonID", "LessonId", "ID", "Id");`
-` 101`  `                    SubChapterFk = Pick(sc, "ChID", "ChapterID", "ChapterId");`
-` 102`  `                    SubTitle = Pick(sc, "Title", "Name", "LessonTitle");`
-` 103`  `                    SubIndex = PickOptional(sc, "Index", "Order", "OrderIndex", "SortOrder", "Idx");`
-` 104`  `                }`
-` 105`  ``
-` 106`  `                // StudyMats`
-` 107`  `                string matTable = null;`
-` 108`  `                foreach (var t in new[] { "StudyMats", "StudyMat", "StudyMaterials", "Materials" })`
-` 109`  `                {`
-` 110`  `                    if (TableExists(conn, t)) { matTable = t; break; }`
-` 111`  `                }`
-` 112`  `                if (matTable != null)`
-` 113`  `                {`
-` 114`  `                    MatTable = matTable;`
-` 115`  `                    var mc = Cols(conn, matTable);`
-` 116`  `                    var mPk = PrimaryKey(conn, matTable);`
-` 117`  `                    MatPk = !string.IsNullOrEmpty(mPk) ? mPk : Pick(mc, "SMID", "MID", "MaterialID", "ID", "Id");`
-` 118`  `                    MatType = PickOptional(mc, "Type", "MaterialType", "ContentType");`
-` 119`  `                    MatText = PickOptional(mc, "TextContent", "Content", "Text", "Body");`
-` 120`  `                    MatMedia = PickOptional(mc, "MediaLink", "MediaUrl", "Link", "Url", "FilePath");`
-` 121`  `                    MatIndex = PickOptional(mc, "Index", "Order", "OrderIndex", "SortOrder", "Idx");`
-` 122`  ``
-` 123`  `                    // Prefer SubChapter FK if present, else Chapter FK (legacy)`
-` 124`  `                    if (Has(mc, "SchID") || Has(mc, "SChID") || Has(mc, "SubChapterID") || Has(mc, "LessonID"))`
-` 125`  `                    {`
-` 126`  `                        MatSubFk = Pick(mc, "SchID", "SChID", "SubChapterID", "SubChapterId", "LessonID", "LessonId");`
-` 127`  `                        MatLinksToSub = true;`
-` 128`  `                    }`
-` 129`  `                    else if (Has(mc, "ChID") || Has(mc, "ChapterID"))`
-` 130`  `                    {`
-` 131`  `                        MatSubFk = Pick(mc, "ChID", "ChapterID", "ChapterId");`
-` 132`  `                        MatLinksToSub = false;`
-` 133`  `                    }`
-` 134`  `                    else if (!string.IsNullOrEmpty(SubTable) && !string.IsNullOrEmpty(SubPk) && Has(mc, SubPk))`
-` 135`  `                    {`
-` 136`  `                        MatSubFk = SubPk;`
-` 137`  `                        MatLinksToSub = true;`
-` 138`  `                    }`
-` 139`  ``
-` 140`  `                    // Need at least one content column`
-` 141`  `                    if (string.IsNullOrEmpty(MatType) && string.IsNullOrEmpty(MatText) && string.IsNullOrEmpty(MatMedia))`
-` 142`  `                    {`
-` 143`  `                        MatText = mc.FirstOrDefault(c =>`
-` 144`  `                        !string.Equals(c, MatPk, StringComparison.OrdinalIgnoreCase) &&`
-` 145`  `                        !string.Equals(c, MatSubFk, StringComparison.OrdinalIgnoreCase));`
-` 146`  `                    }`
-` 147`  `                }`
-` 148`  `            }`
-` 149`  `        }`
-` 150`  ``
-` 151`  `        private static bool TableExists(SqlConnection conn, string name)`
-  - → Database access (pure SQL).
-` 152`  `        {`
-` 153`  `            using (var cmd = new SqlCommand(`
-  - → Import namespace/types.
-` 154`  `            "SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = @t", conn))`
-` 155`  `            {`
-` 156`  `                cmd.Parameters.AddWithValue("@t", name);`
-` 157`  `                return cmd.ExecuteScalar() != null;`
-  - → Run SQL; return table / rows / scalar.
-` 158`  `            }`
-` 159`  `        }`
-` 160`  ``
-` 161`  `        private static List<string> Cols(SqlConnection conn, string table)`
-  - → Database access (pure SQL).
-` 162`  `        {`
-` 163`  `            var list = new List<string>();`
-` 164`  `            using (var cmd = new SqlCommand(`
-  - → Import namespace/types.
-` 165`  `            "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @t", conn))`
-` 166`  `            {`
-` 167`  `                cmd.Parameters.AddWithValue("@t", table);`
-` 168`  `                using (var r = cmd.ExecuteReader())`
-  - → Import namespace/types.
-` 169`  `                {`
-` 170`  `                    while (r.Read()) list.Add(r.GetString(0));`
-` 171`  `                }`
-` 172`  `            }`
-` 173`  `            return list;`
-` 174`  `        }`
-` 175`  ``
-` 176`  `        private static bool Has(List<string> cols, string name)`
-` 177`  `        {`
-` 178`  `            return cols.Any(c => string.Equals(c, name, StringComparison.OrdinalIgnoreCase));`
-` 179`  `        }`
-` 180`  ``
-` 181`  `        private static string PrimaryKey(SqlConnection conn, string table)`
-  - → Database access (pure SQL).
-` 182`  `        {`
-` 183`  `            using (var cmd = new SqlCommand(@"`
-  - → Import namespace/types.
-` 184`  `            SELECT TOP 1 ku.COLUMN_NAME`
-` 185`  `            FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc`
-` 186`  `            INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE ku`
-` 187`  `            ON tc.CONSTRAINT_NAME = ku.CONSTRAINT_NAME AND tc.TABLE_NAME = ku.TABLE_NAME`
-` 188`  `            WHERE tc.TABLE_NAME = @t AND tc.CONSTRAINT_TYPE = 'PRIMARY KEY'`
-` 189`  `            ORDER BY ku.ORDINAL_POSITION", conn))`
-` 190`  `            {`
-` 191`  `                cmd.Parameters.AddWithValue("@t", table);`
-` 192`  `                var o = cmd.ExecuteScalar();`
-  - → Run SQL; return table / rows / scalar.
-` 193`  `                return o == null || o == DBNull.Value ? null : o.ToString();`
-` 194`  `            }`
-` 195`  `        }`
-` 196`  ``
-` 197`  `        private static string Pick(List<string> cols, params string[] candidates)`
-` 198`  `        {`
-` 199`  `            foreach (var c in candidates)`
-` 200`  `            {`
-` 201`  `                var hit = cols.FirstOrDefault(x => string.Equals(x, c, StringComparison.OrdinalIgnoreCase));`
-` 202`  `                if (hit != null) return hit;`
-` 203`  `            }`
-` 204`  `            // last resort: first column (often PK)`
-` 205`  `            if (cols.Count > 0) return cols[0];`
-` 206`  `            throw new InvalidOperationException("No columns found; candidates: " + string.Join(",", candidates));`
-` 207`  `        }`
-` 208`  ``
-` 209`  `        private static string PickOptional(List<string> cols, params string[] candidates)`
-` 210`  `        {`
-` 211`  `            foreach (var c in candidates)`
-` 212`  `            {`
-` 213`  `                var hit = cols.FirstOrDefault(x => string.Equals(x, c, StringComparison.OrdinalIgnoreCase));`
-` 214`  `                if (hit != null) return hit;`
-` 215`  `            }`
-` 216`  `            return null;`
-` 217`  `        }`
-` 218`  ``
-` 219`  `        public static string Q(string ident)`
-` 220`  `        {`
-` 221`  `            if (string.IsNullOrEmpty(ident)) return ident;`
-` 222`  `            // bracket-quote for reserved words like Index`
-` 223`  `            return "[" + ident.Replace("]", "]]") + "]";`
-` 224`  `        }`
-` 225`  ``
-` 226`  `        public static object DebugInfo()`
-` 227`  `        {`
-` 228`  `            Ensure();`
-` 229`  `            return new`
-` 230`  `            {`
-` 231`  `                loadError = _loadError,`
-` 232`  `                chapters = new { ChTable, ChPk, ChCourseFk, ChTitle, ChIndex },`
-` 233`  `                sub = new { SubTable, SubPk, SubChapterFk, SubTitle, SubIndex },`
-` 234`  `                mats = new { MatTable, MatPk, MatSubFk, MatLinksToSub, MatType, MatText, MatMedia, MatIndex }`
-` 235`  `            };`
-` 236`  `        }`
-` 237`  `    }`
-` 238`  `}`
+```csharp
+   1 | using System;
+   2 | using System.Collections.Generic;
+   3 | using System.Data;
+   4 | using System.Data.SqlClient;
+   5 | using System.Linq;
+   6 | 
+   7 | namespace WebAppAssignment.Data
+   8 | {
+   9 |     /// <summary>
+  10 |     /// Discovers real column names from EduDB via INFORMATION_SCHEMA
+  11 |     /// so curriculum SQL works even when PK names differ (SchID vs ID etc.).
+  12 |     /// </summary>
+  13 |     public static class SchemaMap
+  14 |     {
+  15 |         private static readonly object Gate = new object();
+  16 |         private static bool _loaded;
+  17 |         private static string _loadError;
+  18 | 
+  19 |         // SubChapters
+  20 |         public static string SubTable = null;
+  21 |         public static string SubPk = null;
+  22 |         public static string SubChapterFk = null;
+  23 |         public static string SubTitle = null;
+  24 |         public static string SubIndex = null; // optional
+  25 | 
+  26 |         // StudyMats
+  27 |         public static string MatTable = null;
+  28 |         public static string MatPk = null;
+  29 |         public static string MatSubFk = null; // SchID or ChID
+  30 |         public static bool MatLinksToSub = false;
+  31 |         public static string MatType = null;
+  32 |         public static string MatText = null;
+  33 |         public static string MatMedia = null;
+  34 |         public static string MatIndex = null;
+  35 | 
+  36 |         // Chapters
+  37 |         public static string ChTable = "Chapters";
+  38 |         public static string ChPk = "ChID";
+  39 |         public static string ChCourseFk = "CID";
+  40 |         public static string ChTitle = "Title";
+  41 |         public static string ChIndex = null;
+  42 | 
+  43 |         public static string LoadError { get { Ensure(); return _loadError; } }
+  44 | 
+  45 |         public static void Ensure()
+  46 |         {
+  47 |             if (_loaded) return;
+  48 |             lock (Gate)
+  49 |             {
+  50 |                 if (_loaded) return;
+  51 |                 try
+  52 |                 {
+  53 |                     Discover();
+  54 |                     _loadError = null;
+  55 |                 }
+  56 |                 catch (Exception ex)
+  57 |                 {
+  58 |                     _loadError = ex.Message;
+  59 |                 }
+  60 |                 _loaded = true;
+  61 |             }
+  62 |         }
+  63 | 
+  64 |         public static void Reset()
+  65 |         {
+  66 |             lock (Gate) { _loaded = false; _loadError = null; }
+  67 |         }
+  68 | 
+  69 |         private static void Discover()
+  70 |         {
+  71 |             using (var conn = DbHelper.OpenConnection())
+  72 |             {
+  73 |                 // Chapters
+  74 |                 var chCols = Cols(conn, "Chapters");
+  75 |                 if (chCols.Count == 0) chCols = Cols(conn, "Chapter");
+  76 |                 if (chCols.Count > 0)
+  77 |                 {
+  78 |                     ChTable = TableExists(conn, "Chapters") ? "Chapters" : "Chapter";
+  79 |                     var chPk = PrimaryKey(conn, ChTable);
+  80 |                     ChPk = !string.IsNullOrEmpty(chPk) ? chPk : Pick(chCols, "ChID", "ChapterID", "ID", "Id");
+  81 |                     ChCourseFk = Pick(chCols, "CID", "CourseID", "CourseId");
+  82 |                     ChTitle = Pick(chCols, "Title", "Name");
+  83 |                     ChIndex = PickOptional(chCols, "Index", "Order", "OrderIndex", "SortOrder", "Idx");
+  84 |                 }
+  85 | 
+  86 |                 // SubChapters / SubChapter / Lessons
+  87 |                 string subTable = null;
+  88 |                 foreach (var t in new[] { "SubChapters", "SubChapter", "Lessons", "Lesson" })
+  89 |                 {
+  90 |                     if (TableExists(conn, t)) { subTable = t; break; }
+  91 |                 }
+  92 | 
+  93 |                 if (subTable != null)
+  94 |                 {
+  95 |                     SubTable = subTable;
+  96 |                     var sc = Cols(conn, subTable);
+  97 |                     var pk = PrimaryKey(conn, subTable);
+  98 |                     SubPk = !string.IsNullOrEmpty(pk)
+  99 |                     ? pk
+ 100 |                     : Pick(sc, "SchID", "SChID", "SubChapterID", "SubChapterId", "LessonID", "LessonId", "ID", "Id");
+ 101 |                     SubChapterFk = Pick(sc, "ChID", "ChapterID", "ChapterId");
+ 102 |                     SubTitle = Pick(sc, "Title", "Name", "LessonTitle");
+ 103 |                     SubIndex = PickOptional(sc, "Index", "Order", "OrderIndex", "SortOrder", "Idx");
+ 104 |                 }
+ 105 | 
+ 106 |                 // StudyMats
+ 107 |                 string matTable = null;
+ 108 |                 foreach (var t in new[] { "StudyMats", "StudyMat", "StudyMaterials", "Materials" })
+ 109 |                 {
+ 110 |                     if (TableExists(conn, t)) { matTable = t; break; }
+ 111 |                 }
+ 112 |                 if (matTable != null)
+ 113 |                 {
+ 114 |                     MatTable = matTable;
+ 115 |                     var mc = Cols(conn, matTable);
+ 116 |                     var mPk = PrimaryKey(conn, matTable);
+ 117 |                     MatPk = !string.IsNullOrEmpty(mPk) ? mPk : Pick(mc, "SMID", "MID", "MaterialID", "ID", "Id");
+ 118 |                     MatType = PickOptional(mc, "Type", "MaterialType", "ContentType");
+ 119 |                     MatText = PickOptional(mc, "TextContent", "Content", "Text", "Body");
+ 120 |                     MatMedia = PickOptional(mc, "MediaLink", "MediaUrl", "Link", "Url", "FilePath");
+ 121 |                     MatIndex = PickOptional(mc, "Index", "Order", "OrderIndex", "SortOrder", "Idx");
+ 122 | 
+ 123 |                     // Prefer SubChapter FK if present, else Chapter FK (legacy)
+ 124 |                     if (Has(mc, "SchID") || Has(mc, "SChID") || Has(mc, "SubChapterID") || Has(mc, "LessonID"))
+ 125 |                     {
+ 126 |                         MatSubFk = Pick(mc, "SchID", "SChID", "SubChapterID", "SubChapterId", "LessonID", "LessonId");
+ 127 |                         MatLinksToSub = true;
+ 128 |                     }
+ 129 |                     else if (Has(mc, "ChID") || Has(mc, "ChapterID"))
+ 130 |                     {
+ 131 |                         MatSubFk = Pick(mc, "ChID", "ChapterID", "ChapterId");
+ 132 |                         MatLinksToSub = false;
+ 133 |                     }
+ 134 |                     else if (!string.IsNullOrEmpty(SubTable) && !string.IsNullOrEmpty(SubPk) && Has(mc, SubPk))
+ 135 |                     {
+ 136 |                         MatSubFk = SubPk;
+ 137 |                         MatLinksToSub = true;
+ 138 |                     }
+ 139 | 
+ 140 |                     // Need at least one content column
+ 141 |                     if (string.IsNullOrEmpty(MatType) && string.IsNullOrEmpty(MatText) && string.IsNullOrEmpty(MatMedia))
+ 142 |                     {
+ 143 |                         MatText = mc.FirstOrDefault(c =>
+ 144 |                         !string.Equals(c, MatPk, StringComparison.OrdinalIgnoreCase) &&
+ 145 |                         !string.Equals(c, MatSubFk, StringComparison.OrdinalIgnoreCase));
+ 146 |                     }
+ 147 |                 }
+ 148 |             }
+ 149 |         }
+ 150 | 
+ 151 |         private static bool TableExists(SqlConnection conn, string name)
+ 152 |         {
+ 153 |             using (var cmd = new SqlCommand(
+ 154 |             "SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = @t", conn))
+ 155 |             {
+ 156 |                 cmd.Parameters.AddWithValue("@t", name);
+ 157 |                 return cmd.ExecuteScalar() != null;
+ 158 |             }
+ 159 |         }
+ 160 | 
+ 161 |         private static List<string> Cols(SqlConnection conn, string table)
+ 162 |         {
+ 163 |             var list = new List<string>();
+ 164 |             using (var cmd = new SqlCommand(
+ 165 |             "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @t", conn))
+ 166 |             {
+ 167 |                 cmd.Parameters.AddWithValue("@t", table);
+ 168 |                 using (var r = cmd.ExecuteReader())
+ 169 |                 {
+ 170 |                     while (r.Read()) list.Add(r.GetString(0));
+ 171 |                 }
+ 172 |             }
+ 173 |             return list;
+ 174 |         }
+ 175 | 
+ 176 |         private static bool Has(List<string> cols, string name)
+ 177 |         {
+ 178 |             return cols.Any(c => string.Equals(c, name, StringComparison.OrdinalIgnoreCase));
+ 179 |         }
+ 180 | 
+ 181 |         private static string PrimaryKey(SqlConnection conn, string table)
+ 182 |         {
+ 183 |             using (var cmd = new SqlCommand(@"
+ 184 |             SELECT TOP 1 ku.COLUMN_NAME
+ 185 |             FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS tc
+ 186 |             INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE ku
+ 187 |             ON tc.CONSTRAINT_NAME = ku.CONSTRAINT_NAME AND tc.TABLE_NAME = ku.TABLE_NAME
+ 188 |             WHERE tc.TABLE_NAME = @t AND tc.CONSTRAINT_TYPE = 'PRIMARY KEY'
+ 189 |             ORDER BY ku.ORDINAL_POSITION", conn))
+ 190 |             {
+ 191 |                 cmd.Parameters.AddWithValue("@t", table);
+ 192 |                 var o = cmd.ExecuteScalar();
+ 193 |                 return o == null || o == DBNull.Value ? null : o.ToString();
+ 194 |             }
+ 195 |         }
+ 196 | 
+ 197 |         private static string Pick(List<string> cols, params string[] candidates)
+ 198 |         {
+ 199 |             foreach (var c in candidates)
+ 200 |             {
+ 201 |                 var hit = cols.FirstOrDefault(x => string.Equals(x, c, StringComparison.OrdinalIgnoreCase));
+ 202 |                 if (hit != null) return hit;
+ 203 |             }
+ 204 |             // last resort: first column (often PK)
+ 205 |             if (cols.Count > 0) return cols[0];
+ 206 |             throw new InvalidOperationException("No columns found; candidates: " + string.Join(",", candidates));
+ 207 |         }
+ 208 | 
+ 209 |         private static string PickOptional(List<string> cols, params string[] candidates)
+ 210 |         {
+ 211 |             foreach (var c in candidates)
+ 212 |             {
+ 213 |                 var hit = cols.FirstOrDefault(x => string.Equals(x, c, StringComparison.OrdinalIgnoreCase));
+ 214 |                 if (hit != null) return hit;
+ 215 |             }
+ 216 |             return null;
+ 217 |         }
+ 218 | 
+ 219 |         public static string Q(string ident)
+ 220 |         {
+ 221 |             if (string.IsNullOrEmpty(ident)) return ident;
+ 222 |             // bracket-quote for reserved words like Index
+ 223 |             return "[" + ident.Replace("]", "]]") + "]";
+ 224 |         }
+ 225 | 
+ 226 |         public static object DebugInfo()
+ 227 |         {
+ 228 |             Ensure();
+ 229 |             return new
+ 230 |             {
+ 231 |                 loadError = _loadError,
+ 232 |                 chapters = new { ChTable, ChPk, ChCourseFk, ChTitle, ChIndex },
+ 233 |                 sub = new { SubTable, SubPk, SubChapterFk, SubTitle, SubIndex },
+ 234 |                 mats = new { MatTable, MatPk, MatSubFk, MatLinksToSub, MatType, MatText, MatMedia, MatIndex }
+ 235 |             };
+ 236 |         }
+ 237 |     }
+ 238 | }
+```
+
+**Line notes**
+
+- **L1:** Import namespace/types.
+- **L2:** Import namespace/types.
+- **L3:** Import namespace/types.
+- **L4:** Import namespace/types.
+- **L5:** Import namespace/types.
+- **L7:** C# namespace grouping.
+- **L51:** Error handling block.
+- **L56:** Handle/log exception.
+- **L71:** Import namespace/types.
+- **L151:** Database access (pure SQL).
+- **L153:** Import namespace/types.
+- **L156:** Parameterized SQL — prevents classic SQL injection.
+- **L157:** Run SQL; return table / rows / scalar.
+- **L161:** Database access (pure SQL).
+- **L164:** Import namespace/types.
+- **L167:** Parameterized SQL — prevents classic SQL injection.
+- **L168:** Import namespace/types.
+- **L181:** Database access (pure SQL).
+- **L183:** Import namespace/types.
+- **L186:** Join related tables (courses ↔ chapters ↔ works ↔ users).
+- **L191:** Parameterized SQL — prevents classic SQL injection.
+- **L192:** Run SQL; return table / rows / scalar.
+- **L193:** Null-safe read from database values.
 
 ## Source snapshot (raw)
 

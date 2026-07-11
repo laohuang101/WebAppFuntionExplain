@@ -1,6 +1,6 @@
 # dropdowns.js
 **Source:** `Pages/Lecturer/Scripts/dropdowns.js`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -24,7 +24,7 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ### `getData` — lines 26–30
 
-```
+```javascript
 function getData()
 ```
 
@@ -35,17 +35,19 @@ function getData()
 
 #### Line-by-line (this function)
 
-`  26`  ``
-`  27`  ``
-`  28`  `    function getData(){`
-`  29`  `        return window.__dropdownData || defaultData;`
-`  30`  `    }`
+```javascript
+  26 | 
+  27 | 
+  28 |     function getData(){
+  29 |         return window.__dropdownData || defaultData;
+  30 |     }
+```
 
 ---
 
 ### `populateSelect` — lines 30–43
 
-```
+```javascript
 function populateSelect(id, items)
 ```
 
@@ -57,93 +59,103 @@ function populateSelect(id, items)
 
 #### Line-by-line (this function)
 
-`  30`  ``
-`  31`  ``
-`  32`  `    function populateSelect(id, items){`
-`  33`  `        const sel = document.getElementById(id);`
-  - → Get HTML element by id.
-`  34`  `        if(!sel) return;`
-`  35`  `        // clear existing`
-`  36`  `        sel.innerHTML = '';`
-  - → Update page HTML.
-`  37`  `        items.forEach(it => {`
-`  38`  `            const o = document.createElement('option');`
-`  39`  `            o.value = it.value;`
-`  40`  `            o.text = it.label;`
-`  41`  `            sel.appendChild(o);`
-`  42`  `        });`
-`  43`  `    }`
+```javascript
+  30 | 
+  31 | 
+  32 |     function populateSelect(id, items){
+  33 |         const sel = document.getElementById(id);
+  34 |         if(!sel) return;
+  35 |         // clear existing
+  36 |         sel.innerHTML = '';
+  37 |         items.forEach(it => {
+  38 |             const o = document.createElement('option');
+  39 |             o.value = it.value;
+  40 |             o.text = it.label;
+  41 |             sel.appendChild(o);
+  42 |         });
+  43 |     }
+```
+
+**Line notes**
+
+- **L33:** Get HTML element by id.
+- **L36:** Update page HTML.
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `// dropdowns.js - provides JSON-driven dropdown population for CourseCreation page`
-`   2`  `(function(){`
-`   3`  `    // Default dropdown data (can be extended or fetched from server)`
-`   4`  `    const defaultData = {`
-`   5`  `        categories: [`
-`   6`  `        { value: 'UI/UX Design', label: 'UI/UX Design' },`
-`   7`  `        { value: 'Product Design', label: 'Product Design' },`
-`   8`  `        { value: 'Web Development', label: 'Web Development' },`
-`   9`  `        { value: 'Software Engineering', label: 'Software Engineering' }`
-`  10`  `        ],`
-`  11`  `        levels: [`
-`  12`  `        { value: 'Beginner', label: 'Beginner' },`
-`  13`  `        { value: 'Intermediate', label: 'Intermediate' },`
-`  14`  `        { value: 'Advanced', label: 'Advanced' }`
-`  15`  `        ],`
-`  16`  `        lessonTypes: [`
-`  17`  `        { value: 'Text', label: 'Text Content' },`
-`  18`  `        { value: 'Video', label: 'Video Link' },`
-`  19`  `        { value: 'Quiz', label: 'Quiz / Assignment Question' }`
-`  20`  `        ]`
-`  21`  `    };`
-`  22`  ``
-`  23`  `    // Allows page or tests to override data programmatically`
-`  24`  `    window.setDropdownData = function(data){`
-`  25`  `        window.__dropdownData = Object.assign({}, window.__dropdownData || defaultData, data);`
-`  26`  `    };`
-`  27`  ``
-`  28`  `    function getData(){`
-`  29`  `        return window.__dropdownData || defaultData;`
-`  30`  `    }`
-`  31`  ``
-`  32`  `    function populateSelect(id, items){`
-`  33`  `        const sel = document.getElementById(id);`
-  - → Get HTML element by id.
-`  34`  `        if(!sel) return;`
-`  35`  `        // clear existing`
-`  36`  `        sel.innerHTML = '';`
-  - → Update page HTML.
-`  37`  `        items.forEach(it => {`
-`  38`  `            const o = document.createElement('option');`
-`  39`  `            o.value = it.value;`
-`  40`  `            o.text = it.label;`
-`  41`  `            sel.appendChild(o);`
-`  42`  `        });`
-`  43`  `    }`
-`  44`  ``
-`  45`  `    window.initDropdowns = function(){`
-`  46`  `        const data = getData();`
-`  47`  `        populateSelect('ddlCategory', data.categories);`
-`  48`  `        populateSelect('ddlLevel', data.levels);`
-`  49`  `        populateSelect('ddlLessonType', data.lessonTypes);`
-`  50`  `    };`
-`  51`  ``
-`  52`  `    // Optionally attempt to fetch a remote JSON file 'dropdowns.json' in same folder`
-`  53`  `    // If present, it will override defaults (non-blocking)`
-`  54`  `    fetch('Scripts/dropdowns.json').then(r=>{`
-  - → HTTP request to server WebMethod/ashx.
-`  55`  `        if(!r.ok) return null; return r.json();`
-`  56`  `    }).then(json=>{`
-`  57`  `        if(json) {`
-`  58`  `            window.setDropdownData(json);`
-`  59`  `        }`
-`  60`  `    }).catch(()=>{});`
-`  61`  `})();`
+```javascript
+   1 | // dropdowns.js - provides JSON-driven dropdown population for CourseCreation page
+   2 | (function(){
+   3 |     // Default dropdown data (can be extended or fetched from server)
+   4 |     const defaultData = {
+   5 |         categories: [
+   6 |         { value: 'UI/UX Design', label: 'UI/UX Design' },
+   7 |         { value: 'Product Design', label: 'Product Design' },
+   8 |         { value: 'Web Development', label: 'Web Development' },
+   9 |         { value: 'Software Engineering', label: 'Software Engineering' }
+  10 |         ],
+  11 |         levels: [
+  12 |         { value: 'Beginner', label: 'Beginner' },
+  13 |         { value: 'Intermediate', label: 'Intermediate' },
+  14 |         { value: 'Advanced', label: 'Advanced' }
+  15 |         ],
+  16 |         lessonTypes: [
+  17 |         { value: 'Text', label: 'Text Content' },
+  18 |         { value: 'Video', label: 'Video Link' },
+  19 |         { value: 'Quiz', label: 'Quiz / Assignment Question' }
+  20 |         ]
+  21 |     };
+  22 | 
+  23 |     // Allows page or tests to override data programmatically
+  24 |     window.setDropdownData = function(data){
+  25 |         window.__dropdownData = Object.assign({}, window.__dropdownData || defaultData, data);
+  26 |     };
+  27 | 
+  28 |     function getData(){
+  29 |         return window.__dropdownData || defaultData;
+  30 |     }
+  31 | 
+  32 |     function populateSelect(id, items){
+  33 |         const sel = document.getElementById(id);
+  34 |         if(!sel) return;
+  35 |         // clear existing
+  36 |         sel.innerHTML = '';
+  37 |         items.forEach(it => {
+  38 |             const o = document.createElement('option');
+  39 |             o.value = it.value;
+  40 |             o.text = it.label;
+  41 |             sel.appendChild(o);
+  42 |         });
+  43 |     }
+  44 | 
+  45 |     window.initDropdowns = function(){
+  46 |         const data = getData();
+  47 |         populateSelect('ddlCategory', data.categories);
+  48 |         populateSelect('ddlLevel', data.levels);
+  49 |         populateSelect('ddlLessonType', data.lessonTypes);
+  50 |     };
+  51 | 
+  52 |     // Optionally attempt to fetch a remote JSON file 'dropdowns.json' in same folder
+  53 |     // If present, it will override defaults (non-blocking)
+  54 |     fetch('Scripts/dropdowns.json').then(r=>{
+  55 |         if(!r.ok) return null; return r.json();
+  56 |     }).then(json=>{
+  57 |         if(json) {
+  58 |             window.setDropdownData(json);
+  59 |         }
+  60 |     }).catch(()=>{});
+  61 | })();
+```
+
+**Line notes**
+
+- **L33:** Get HTML element by id.
+- **L36:** Update page HTML.
+- **L54:** HTTP request to server WebMethod/ashx.
 
 ## Source snapshot (raw)
 

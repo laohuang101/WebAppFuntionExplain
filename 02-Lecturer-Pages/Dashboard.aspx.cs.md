@@ -1,6 +1,6 @@
 # Dashboard.aspx.cs
 **Source:** `Pages/Lecturer/Dashboard.aspx.cs`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -26,7 +26,7 @@ Lecturer home: course stats, recent submissions, charts. Backed by LecturerRepos
 
 ### `Page_Load` — lines 12–16
 
-```
+```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
@@ -39,19 +39,24 @@ protected void Page_Load(object sender, EventArgs e)
 
 #### Line-by-line (this function)
 
-`  12`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  13`  `        {`
-`  14`  `            if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))`
-  - → Authorization — block wrong role / anonymous.
-`  15`  `                return;`
-`  16`  `        }`
+```csharp
+  12 |         protected void Page_Load(object sender, EventArgs e)
+  13 |         {
+  14 |             if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))
+  15 |                 return;
+  16 |         }
+```
+
+**Line notes**
+
+- **L12:** Page load entry (GET or postback).
+- **L14:** Authorization — block wrong role / anonymous.
 
 ---
 
 ### `CurrentUid` — lines 17–21
 
-```
+```csharp
 private static int CurrentUid()
 ```
 
@@ -62,18 +67,23 @@ private static int CurrentUid()
 
 #### Line-by-line (this function)
 
-`  17`  ``
-`  18`  `        private static int CurrentUid()`
-`  19`  `        {`
-`  20`  `            return AuthGate.RequireLecturer();`
-  - → Authorization — block wrong role / anonymous.
-`  21`  `        }`
+```csharp
+  17 | 
+  18 |         private static int CurrentUid()
+  19 |         {
+  20 |             return AuthGate.RequireLecturer();
+  21 |         }
+```
+
+**Line notes**
+
+- **L20:** Authorization — block wrong role / anonymous.
 
 ---
 
 ### `GetDashboardData` — lines 25–37
 
-```
+```csharp
 public static object GetDashboardData()
 ```
 
@@ -87,28 +97,33 @@ public static object GetDashboardData()
 
 #### Line-by-line (this function)
 
-`  25`  `        public static object GetDashboardData()`
-`  26`  `        {`
-`  27`  `            try`
-  - → Error handling block.
-`  28`  `            {`
-`  29`  `                int uid = CurrentUid();`
-`  30`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  31`  `                return LecturerRepository.GetDashboardData(uid);`
-`  32`  `            }`
-`  33`  `            catch`
-  - → Handle/log exception.
-`  34`  `            {`
-`  35`  `                return new { success = false, message = "Could not load dashboard." };`
-`  36`  `            }`
-`  37`  `        }`
+```csharp
+  25 |         public static object GetDashboardData()
+  26 |         {
+  27 |             try
+  28 |             {
+  29 |                 int uid = CurrentUid();
+  30 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  31 |                 return LecturerRepository.GetDashboardData(uid);
+  32 |             }
+  33 |             catch
+  34 |             {
+  35 |                 return new { success = false, message = "Could not load dashboard." };
+  36 |             }
+  37 |         }
+```
+
+**Line notes**
+
+- **L27:** Error handling block.
+- **L30:** Authorization — block wrong role / anonymous.
+- **L33:** Handle/log exception.
 
 ---
 
 ### `SaveGrade` — lines 41–64
 
-```
+```csharp
 public static object SaveGrade(int sid, int score, string review)
 ```
 
@@ -124,41 +139,46 @@ public static object SaveGrade(int sid, int score, string review)
 
 #### Line-by-line (this function)
 
-`  41`  `        public static object SaveGrade(int sid, int score, string review)`
-`  42`  `        {`
-`  43`  `            try`
-  - → Error handling block.
-`  44`  `            {`
-`  45`  `                int uid = CurrentUid();`
-`  46`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  47`  `                LecturerRepository.SaveGrade(uid, sid, score, review ?? "");`
-`  48`  `                try`
-  - → Error handling block.
-`  49`  `                {`
-`  50`  `                    var ctx = System.Web.HttpContext.Current;`
-`  51`  `                    if (ctx != null && ctx.Session != null)`
-`  52`  `                    {`
-`  53`  `                        ctx.Session.Remove("PendingGradeCount");`
-`  54`  `                        ctx.Session.Remove("PendingGradeCountAt");`
-`  55`  `                    }`
-`  56`  `                }`
-`  57`  `                catch { }`
-  - → Handle/log exception.
-`  58`  `                return new { success = true };`
-`  59`  `            }`
-`  60`  `            catch`
-  - → Handle/log exception.
-`  61`  `            {`
-`  62`  `                return new { success = false, message = "Could not save grade." };`
-`  63`  `            }`
-`  64`  `        }`
+```csharp
+  41 |         public static object SaveGrade(int sid, int score, string review)
+  42 |         {
+  43 |             try
+  44 |             {
+  45 |                 int uid = CurrentUid();
+  46 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  47 |                 LecturerRepository.SaveGrade(uid, sid, score, review ?? "");
+  48 |                 try
+  49 |                 {
+  50 |                     var ctx = System.Web.HttpContext.Current;
+  51 |                     if (ctx != null && ctx.Session != null)
+  52 |                     {
+  53 |                         ctx.Session.Remove("PendingGradeCount");
+  54 |                         ctx.Session.Remove("PendingGradeCountAt");
+  55 |                     }
+  56 |                 }
+  57 |                 catch { }
+  58 |                 return new { success = true };
+  59 |             }
+  60 |             catch
+  61 |             {
+  62 |                 return new { success = false, message = "Could not save grade." };
+  63 |             }
+  64 |         }
+```
+
+**Line notes**
+
+- **L43:** Error handling block.
+- **L46:** Authorization — block wrong role / anonymous.
+- **L48:** Error handling block.
+- **L57:** Handle/log exception.
+- **L60:** Handle/log exception.
 
 ---
 
 ### `GetPendingCount` — lines 68–80
 
-```
+```csharp
 public static object GetPendingCount()
 ```
 
@@ -172,28 +192,33 @@ public static object GetPendingCount()
 
 #### Line-by-line (this function)
 
-`  68`  `        public static object GetPendingCount()`
-`  69`  `        {`
-`  70`  `            try`
-  - → Error handling block.
-`  71`  `            {`
-`  72`  `                int uid = CurrentUid();`
-`  73`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  74`  `                return new { success = true, pending = LecturerRepository.CountPendingGrading(uid) };`
-`  75`  `            }`
-`  76`  `            catch`
-  - → Handle/log exception.
-`  77`  `            {`
-`  78`  `                return new { success = false, pending = 0 };`
-`  79`  `            }`
-`  80`  `        }`
+```csharp
+  68 |         public static object GetPendingCount()
+  69 |         {
+  70 |             try
+  71 |             {
+  72 |                 int uid = CurrentUid();
+  73 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  74 |                 return new { success = true, pending = LecturerRepository.CountPendingGrading(uid) };
+  75 |             }
+  76 |             catch
+  77 |             {
+  78 |                 return new { success = false, pending = 0 };
+  79 |             }
+  80 |         }
+```
+
+**Line notes**
+
+- **L70:** Error handling block.
+- **L73:** Authorization — block wrong role / anonymous.
+- **L76:** Handle/log exception.
 
 ---
 
 ### `ExportGradesCsv` — lines 84–102
 
-```
+```csharp
 public static object ExportGradesCsv(int cid)
 ```
 
@@ -207,175 +232,185 @@ public static object ExportGradesCsv(int cid)
 
 #### Line-by-line (this function)
 
-`  84`  `        public static object ExportGradesCsv(int cid)`
-  - → CSV export.
-`  85`  `        {`
-`  86`  `            try`
-  - → Error handling block.
-`  87`  `            {`
-`  88`  `                int uid = CurrentUid();`
-`  89`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  90`  `                string csv = LecturerRepository.BuildGradesCsv(uid, cid);`
-  - → CSV export.
-`  91`  `                return new`
-`  92`  `                {`
-`  93`  `                    success = true,`
-`  94`  `                    csv = csv,`
-  - → CSV export.
-`  95`  `                    fileName = cid > 0 ? "grades-course-" + cid + ".csv" : "grades-all.csv"`
-  - → CSV export.
-`  96`  `                };`
-`  97`  `            }`
-`  98`  `            catch`
-  - → Handle/log exception.
-`  99`  `            {`
-` 100`  `                return new { success = false, message = "Could not export grades." };`
-` 101`  `            }`
-` 102`  `        }`
+```csharp
+  84 |         public static object ExportGradesCsv(int cid)
+  85 |         {
+  86 |             try
+  87 |             {
+  88 |                 int uid = CurrentUid();
+  89 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  90 |                 string csv = LecturerRepository.BuildGradesCsv(uid, cid);
+  91 |                 return new
+  92 |                 {
+  93 |                     success = true,
+  94 |                     csv = csv,
+  95 |                     fileName = cid > 0 ? "grades-course-" + cid + ".csv" : "grades-all.csv"
+  96 |                 };
+  97 |             }
+  98 |             catch
+  99 |             {
+ 100 |                 return new { success = false, message = "Could not export grades." };
+ 101 |             }
+ 102 |         }
+```
+
+**Line notes**
+
+- **L84:** CSV export.
+- **L86:** Error handling block.
+- **L89:** Authorization — block wrong role / anonymous.
+- **L90:** CSV export.
+- **L94:** CSV export.
+- **L95:** CSV export.
+- **L98:** Handle/log exception.
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `using System;`
-  - → Import namespace/types.
-`   2`  `using System.Web.Script.Services;`
-  - → Import namespace/types.
-`   3`  `using System.Web.Services;`
-  - → Import namespace/types.
-`   4`  `using System.Web.UI;`
-  - → Import namespace/types.
-`   5`  `using WebAppAssignment.Data;`
-  - → Import namespace/types.
-`   6`  `using WebAppAssignment.Data.Security;`
-  - → Import namespace/types.
-`   7`  ``
-`   8`  `namespace WebAppAssignment.Pages.Lecturer`
-  - → C# namespace grouping.
-`   9`  `{`
-`  10`  `    public partial class Dashboard : Page`
-`  11`  `    {`
-`  12`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  13`  `        {`
-`  14`  `            if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))`
-  - → Authorization — block wrong role / anonymous.
-`  15`  `                return;`
-`  16`  `        }`
-`  17`  ``
-`  18`  `        private static int CurrentUid()`
-`  19`  `        {`
-`  20`  `            return AuthGate.RequireLecturer();`
-  - → Authorization — block wrong role / anonymous.
-`  21`  `        }`
-`  22`  ``
-`  23`  `        [WebMethod(EnableSession = true)]`
-  - → Expose method to AJAX JSON calls.
-`  24`  `        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]`
-`  25`  `        public static object GetDashboardData()`
-`  26`  `        {`
-`  27`  `            try`
-  - → Error handling block.
-`  28`  `            {`
-`  29`  `                int uid = CurrentUid();`
-`  30`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  31`  `                return LecturerRepository.GetDashboardData(uid);`
-`  32`  `            }`
-`  33`  `            catch`
-  - → Handle/log exception.
-`  34`  `            {`
-`  35`  `                return new { success = false, message = "Could not load dashboard." };`
-`  36`  `            }`
-`  37`  `        }`
-`  38`  ``
-`  39`  `        [WebMethod(EnableSession = true)]`
-  - → Expose method to AJAX JSON calls.
-`  40`  `        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]`
-`  41`  `        public static object SaveGrade(int sid, int score, string review)`
-`  42`  `        {`
-`  43`  `            try`
-  - → Error handling block.
-`  44`  `            {`
-`  45`  `                int uid = CurrentUid();`
-`  46`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  47`  `                LecturerRepository.SaveGrade(uid, sid, score, review ?? "");`
-`  48`  `                try`
-  - → Error handling block.
-`  49`  `                {`
-`  50`  `                    var ctx = System.Web.HttpContext.Current;`
-`  51`  `                    if (ctx != null && ctx.Session != null)`
-`  52`  `                    {`
-`  53`  `                        ctx.Session.Remove("PendingGradeCount");`
-`  54`  `                        ctx.Session.Remove("PendingGradeCountAt");`
-`  55`  `                    }`
-`  56`  `                }`
-`  57`  `                catch { }`
-  - → Handle/log exception.
-`  58`  `                return new { success = true };`
-`  59`  `            }`
-`  60`  `            catch`
-  - → Handle/log exception.
-`  61`  `            {`
-`  62`  `                return new { success = false, message = "Could not save grade." };`
-`  63`  `            }`
-`  64`  `        }`
-`  65`  ``
-`  66`  `        [WebMethod(EnableSession = true)]`
-  - → Expose method to AJAX JSON calls.
-`  67`  `        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]`
-`  68`  `        public static object GetPendingCount()`
-`  69`  `        {`
-`  70`  `            try`
-  - → Error handling block.
-`  71`  `            {`
-`  72`  `                int uid = CurrentUid();`
-`  73`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  74`  `                return new { success = true, pending = LecturerRepository.CountPendingGrading(uid) };`
-`  75`  `            }`
-`  76`  `            catch`
-  - → Handle/log exception.
-`  77`  `            {`
-`  78`  `                return new { success = false, pending = 0 };`
-`  79`  `            }`
-`  80`  `        }`
-`  81`  ``
-`  82`  `        [WebMethod(EnableSession = true)]`
-  - → Expose method to AJAX JSON calls.
-`  83`  `        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]`
-`  84`  `        public static object ExportGradesCsv(int cid)`
-  - → CSV export.
-`  85`  `        {`
-`  86`  `            try`
-  - → Error handling block.
-`  87`  `            {`
-`  88`  `                int uid = CurrentUid();`
-`  89`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  90`  `                string csv = LecturerRepository.BuildGradesCsv(uid, cid);`
-  - → CSV export.
-`  91`  `                return new`
-`  92`  `                {`
-`  93`  `                    success = true,`
-`  94`  `                    csv = csv,`
-  - → CSV export.
-`  95`  `                    fileName = cid > 0 ? "grades-course-" + cid + ".csv" : "grades-all.csv"`
-  - → CSV export.
-`  96`  `                };`
-`  97`  `            }`
-`  98`  `            catch`
-  - → Handle/log exception.
-`  99`  `            {`
-` 100`  `                return new { success = false, message = "Could not export grades." };`
-` 101`  `            }`
-` 102`  `        }`
-` 103`  `    }`
-` 104`  `}`
+```csharp
+   1 | using System;
+   2 | using System.Web.Script.Services;
+   3 | using System.Web.Services;
+   4 | using System.Web.UI;
+   5 | using WebAppAssignment.Data;
+   6 | using WebAppAssignment.Data.Security;
+   7 | 
+   8 | namespace WebAppAssignment.Pages.Lecturer
+   9 | {
+  10 |     public partial class Dashboard : Page
+  11 |     {
+  12 |         protected void Page_Load(object sender, EventArgs e)
+  13 |         {
+  14 |             if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))
+  15 |                 return;
+  16 |         }
+  17 | 
+  18 |         private static int CurrentUid()
+  19 |         {
+  20 |             return AuthGate.RequireLecturer();
+  21 |         }
+  22 | 
+  23 |         [WebMethod(EnableSession = true)]
+  24 |         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+  25 |         public static object GetDashboardData()
+  26 |         {
+  27 |             try
+  28 |             {
+  29 |                 int uid = CurrentUid();
+  30 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  31 |                 return LecturerRepository.GetDashboardData(uid);
+  32 |             }
+  33 |             catch
+  34 |             {
+  35 |                 return new { success = false, message = "Could not load dashboard." };
+  36 |             }
+  37 |         }
+  38 | 
+  39 |         [WebMethod(EnableSession = true)]
+  40 |         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+  41 |         public static object SaveGrade(int sid, int score, string review)
+  42 |         {
+  43 |             try
+  44 |             {
+  45 |                 int uid = CurrentUid();
+  46 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  47 |                 LecturerRepository.SaveGrade(uid, sid, score, review ?? "");
+  48 |                 try
+  49 |                 {
+  50 |                     var ctx = System.Web.HttpContext.Current;
+  51 |                     if (ctx != null && ctx.Session != null)
+  52 |                     {
+  53 |                         ctx.Session.Remove("PendingGradeCount");
+  54 |                         ctx.Session.Remove("PendingGradeCountAt");
+  55 |                     }
+  56 |                 }
+  57 |                 catch { }
+  58 |                 return new { success = true };
+  59 |             }
+  60 |             catch
+  61 |             {
+  62 |                 return new { success = false, message = "Could not save grade." };
+  63 |             }
+  64 |         }
+  65 | 
+  66 |         [WebMethod(EnableSession = true)]
+  67 |         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+  68 |         public static object GetPendingCount()
+  69 |         {
+  70 |             try
+  71 |             {
+  72 |                 int uid = CurrentUid();
+  73 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  74 |                 return new { success = true, pending = LecturerRepository.CountPendingGrading(uid) };
+  75 |             }
+  76 |             catch
+  77 |             {
+  78 |                 return new { success = false, pending = 0 };
+  79 |             }
+  80 |         }
+  81 | 
+  82 |         [WebMethod(EnableSession = true)]
+  83 |         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+  84 |         public static object ExportGradesCsv(int cid)
+  85 |         {
+  86 |             try
+  87 |             {
+  88 |                 int uid = CurrentUid();
+  89 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  90 |                 string csv = LecturerRepository.BuildGradesCsv(uid, cid);
+  91 |                 return new
+  92 |                 {
+  93 |                     success = true,
+  94 |                     csv = csv,
+  95 |                     fileName = cid > 0 ? "grades-course-" + cid + ".csv" : "grades-all.csv"
+  96 |                 };
+  97 |             }
+  98 |             catch
+  99 |             {
+ 100 |                 return new { success = false, message = "Could not export grades." };
+ 101 |             }
+ 102 |         }
+ 103 |     }
+ 104 | }
+```
+
+**Line notes**
+
+- **L1:** Import namespace/types.
+- **L2:** Import namespace/types.
+- **L3:** Import namespace/types.
+- **L4:** Import namespace/types.
+- **L5:** Import namespace/types.
+- **L6:** Import namespace/types.
+- **L8:** C# namespace grouping.
+- **L12:** Page load entry (GET or postback).
+- **L14:** Authorization — block wrong role / anonymous.
+- **L20:** Authorization — block wrong role / anonymous.
+- **L23:** Expose method to AJAX JSON calls.
+- **L27:** Error handling block.
+- **L30:** Authorization — block wrong role / anonymous.
+- **L33:** Handle/log exception.
+- **L39:** Expose method to AJAX JSON calls.
+- **L43:** Error handling block.
+- **L46:** Authorization — block wrong role / anonymous.
+- **L48:** Error handling block.
+- **L57:** Handle/log exception.
+- **L60:** Handle/log exception.
+- **L66:** Expose method to AJAX JSON calls.
+- **L70:** Error handling block.
+- **L73:** Authorization — block wrong role / anonymous.
+- **L76:** Handle/log exception.
+- **L82:** Expose method to AJAX JSON calls.
+- **L84:** CSV export.
+- **L86:** Error handling block.
+- **L89:** Authorization — block wrong role / anonymous.
+- **L90:** CSV export.
+- **L94:** CSV export.
+- **L95:** CSV export.
+- **L98:** Handle/log exception.
 
 ## Source snapshot (raw)
 

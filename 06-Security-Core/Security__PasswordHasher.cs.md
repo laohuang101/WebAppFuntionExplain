@@ -1,6 +1,6 @@
 # PasswordHasher.cs
 **Source:** `Data/Security/PasswordHasher.cs`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -27,7 +27,7 @@ PBKDF2 password hashing and verification; upgrades legacy plain-text on successf
 
 ### `Hash` — lines 17–31
 
-```
+```csharp
 public static string Hash(string password)
 ```
 
@@ -39,28 +39,33 @@ public static string Hash(string password)
 
 #### Line-by-line (this function)
 
-`  17`  ``
-`  18`  `        public static string Hash(string password)`
-`  19`  `        {`
-`  20`  `            if (password == null) password = "";`
-`  21`  `            var salt = new byte[SaltSize];`
-`  22`  `            using (var rng = RandomNumberGenerator.Create())`
-  - → Import namespace/types.
-`  23`  `            rng.GetBytes(salt);`
-`  24`  ``
-`  25`  `            var hash = Pbkdf2(password, salt, DefaultIterations, KeySize);`
-`  26`  `            return string.Format("{0}.{1}.{2}.{3}",`
-`  27`  `            Prefix,`
-`  28`  `            DefaultIterations,`
-`  29`  `            Convert.ToBase64String(salt),`
-`  30`  `            Convert.ToBase64String(hash));`
-`  31`  `        }`
+```csharp
+  17 | 
+  18 |         public static string Hash(string password)
+  19 |         {
+  20 |             if (password == null) password = "";
+  21 |             var salt = new byte[SaltSize];
+  22 |             using (var rng = RandomNumberGenerator.Create())
+  23 |             rng.GetBytes(salt);
+  24 | 
+  25 |             var hash = Pbkdf2(password, salt, DefaultIterations, KeySize);
+  26 |             return string.Format("{0}.{1}.{2}.{3}",
+  27 |             Prefix,
+  28 |             DefaultIterations,
+  29 |             Convert.ToBase64String(salt),
+  30 |             Convert.ToBase64String(hash));
+  31 |         }
+```
+
+**Line notes**
+
+- **L22:** Import namespace/types.
 
 ---
 
 ### `Verify` — lines 32–58
 
-```
+```csharp
 public static bool Verify(string password, string stored)
 ```
 
@@ -72,42 +77,47 @@ public static bool Verify(string password, string stored)
 
 #### Line-by-line (this function)
 
-`  32`  ``
-`  33`  `        public static bool Verify(string password, string stored)`
-`  34`  `        {`
-`  35`  `            if (string.IsNullOrEmpty(stored)) return false;`
-`  36`  ``
-`  37`  `            // Already hashed format`
-`  38`  `            if (stored.StartsWith(Prefix + ".", StringComparison.Ordinal))`
-`  39`  `            {`
-`  40`  `                var parts = stored.Split('.');`
-`  41`  `                if (parts.Length != 4) return false;`
-`  42`  `                int iterations;`
-`  43`  `                if (!int.TryParse(parts[1], out iterations)) return false;`
-`  44`  `                byte[] salt, expected;`
-`  45`  `                try`
-  - → Error handling block.
-`  46`  `                {`
-`  47`  `                    salt = Convert.FromBase64String(parts[2]);`
-`  48`  `                    expected = Convert.FromBase64String(parts[3]);`
-`  49`  `                }`
-`  50`  `                catch { return false; }`
-  - → Handle/log exception.
-`  51`  ``
-`  52`  `                var actual = Pbkdf2(password ?? "", salt, iterations, expected.Length);`
-`  53`  `                return FixedTimeEquals(actual, expected);`
-  - → Constant-time string compare (reduce timing leaks).
-`  54`  `            }`
-`  55`  ``
-`  56`  `            // Legacy plain-text (upgrade path)`
-`  57`  `            return string.Equals(password ?? "", stored, StringComparison.Ordinal);`
-`  58`  `        }`
+```csharp
+  32 | 
+  33 |         public static bool Verify(string password, string stored)
+  34 |         {
+  35 |             if (string.IsNullOrEmpty(stored)) return false;
+  36 | 
+  37 |             // Already hashed format
+  38 |             if (stored.StartsWith(Prefix + ".", StringComparison.Ordinal))
+  39 |             {
+  40 |                 var parts = stored.Split('.');
+  41 |                 if (parts.Length != 4) return false;
+  42 |                 int iterations;
+  43 |                 if (!int.TryParse(parts[1], out iterations)) return false;
+  44 |                 byte[] salt, expected;
+  45 |                 try
+  46 |                 {
+  47 |                     salt = Convert.FromBase64String(parts[2]);
+  48 |                     expected = Convert.FromBase64String(parts[3]);
+  49 |                 }
+  50 |                 catch { return false; }
+  51 | 
+  52 |                 var actual = Pbkdf2(password ?? "", salt, iterations, expected.Length);
+  53 |                 return FixedTimeEquals(actual, expected);
+  54 |             }
+  55 | 
+  56 |             // Legacy plain-text (upgrade path)
+  57 |             return string.Equals(password ?? "", stored, StringComparison.Ordinal);
+  58 |         }
+```
+
+**Line notes**
+
+- **L45:** Error handling block.
+- **L50:** Handle/log exception.
+- **L53:** Constant-time string compare (reduce timing leaks).
 
 ---
 
 ### `IsHashed` — lines 59–63
 
-```
+```csharp
 public static bool IsHashed(string stored)
 ```
 
@@ -118,17 +128,19 @@ public static bool IsHashed(string stored)
 
 #### Line-by-line (this function)
 
-`  59`  ``
-`  60`  `        public static bool IsHashed(string stored)`
-`  61`  `        {`
-`  62`  `            return !string.IsNullOrEmpty(stored) && stored.StartsWith(Prefix + ".", StringComparison.Ordinal);`
-`  63`  `        }`
+```csharp
+  59 | 
+  60 |         public static bool IsHashed(string stored)
+  61 |         {
+  62 |             return !string.IsNullOrEmpty(stored) && stored.StartsWith(Prefix + ".", StringComparison.Ordinal);
+  63 |         }
+```
 
 ---
 
 ### `Pbkdf2` — lines 64–70
 
-```
+```csharp
 private static byte[] Pbkdf2(string password, byte[] salt, int iterations, int length)
 ```
 
@@ -140,20 +152,25 @@ private static byte[] Pbkdf2(string password, byte[] salt, int iterations, int l
 
 #### Line-by-line (this function)
 
-`  64`  ``
-`  65`  `        private static byte[] Pbkdf2(string password, byte[] salt, int iterations, int length)`
-`  66`  `        {`
-`  67`  `            // 3-arg ctor uses HMAC-SHA1 (widely available on .NET Framework 4.7.2)`
-`  68`  `            using (var pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations))`
-  - → Import namespace/types.
-`  69`  `            return pbkdf2.GetBytes(length);`
-`  70`  `        }`
+```csharp
+  64 | 
+  65 |         private static byte[] Pbkdf2(string password, byte[] salt, int iterations, int length)
+  66 |         {
+  67 |             // 3-arg ctor uses HMAC-SHA1 (widely available on .NET Framework 4.7.2)
+  68 |             using (var pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations))
+  69 |             return pbkdf2.GetBytes(length);
+  70 |         }
+```
+
+**Line notes**
+
+- **L68:** Import namespace/types.
 
 ---
 
 ### `FixedTimeEquals` — lines 71–79
 
-```
+```csharp
 private static bool FixedTimeEquals(byte[] a, byte[] b)
 ```
 
@@ -165,115 +182,125 @@ private static bool FixedTimeEquals(byte[] a, byte[] b)
 
 #### Line-by-line (this function)
 
-`  71`  ``
-`  72`  `        private static bool FixedTimeEquals(byte[] a, byte[] b)`
-  - → Constant-time string compare (reduce timing leaks).
-`  73`  `        {`
-`  74`  `            if (a == null || b == null || a.Length != b.Length) return false;`
-`  75`  `            int diff = 0;`
-`  76`  `            for (int i = 0; i < a.Length; i++)`
-`  77`  `            diff |= a[i] ^ b[i];`
-`  78`  `            return diff == 0;`
-`  79`  `        }`
+```csharp
+  71 | 
+  72 |         private static bool FixedTimeEquals(byte[] a, byte[] b)
+  73 |         {
+  74 |             if (a == null || b == null || a.Length != b.Length) return false;
+  75 |             int diff = 0;
+  76 |             for (int i = 0; i < a.Length; i++)
+  77 |             diff |= a[i] ^ b[i];
+  78 |             return diff == 0;
+  79 |         }
+```
+
+**Line notes**
+
+- **L72:** Constant-time string compare (reduce timing leaks).
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `using System;`
-  - → Import namespace/types.
-`   2`  `using System.Security.Cryptography;`
-  - → Import namespace/types.
-`   3`  `using System.Text;`
-  - → Import namespace/types.
-`   4`  ``
-`   5`  `namespace WebAppAssignment.Data.Security`
-  - → C# namespace grouping.
-`   6`  `{`
-`   7`  `    /// <summary>`
-`   8`  `    /// PBKDF2-SHA256 password hashing (no external packages).`
-`   9`  `    /// Stored format: v1.{iterations}.{saltB64}.{hashB64}`
-`  10`  `    /// </summary>`
-`  11`  `    public static class PasswordHasher`
-  - → Password hashing (PBKDF2).
-`  12`  `    {`
-`  13`  `        private const int SaltSize = 16;`
-`  14`  `        private const int KeySize = 32;`
-`  15`  `        private const int DefaultIterations = 100_000;`
-`  16`  `        private const string Prefix = "v1";`
-`  17`  ``
-`  18`  `        public static string Hash(string password)`
-`  19`  `        {`
-`  20`  `            if (password == null) password = "";`
-`  21`  `            var salt = new byte[SaltSize];`
-`  22`  `            using (var rng = RandomNumberGenerator.Create())`
-  - → Import namespace/types.
-`  23`  `            rng.GetBytes(salt);`
-`  24`  ``
-`  25`  `            var hash = Pbkdf2(password, salt, DefaultIterations, KeySize);`
-`  26`  `            return string.Format("{0}.{1}.{2}.{3}",`
-`  27`  `            Prefix,`
-`  28`  `            DefaultIterations,`
-`  29`  `            Convert.ToBase64String(salt),`
-`  30`  `            Convert.ToBase64String(hash));`
-`  31`  `        }`
-`  32`  ``
-`  33`  `        public static bool Verify(string password, string stored)`
-`  34`  `        {`
-`  35`  `            if (string.IsNullOrEmpty(stored)) return false;`
-`  36`  ``
-`  37`  `            // Already hashed format`
-`  38`  `            if (stored.StartsWith(Prefix + ".", StringComparison.Ordinal))`
-`  39`  `            {`
-`  40`  `                var parts = stored.Split('.');`
-`  41`  `                if (parts.Length != 4) return false;`
-`  42`  `                int iterations;`
-`  43`  `                if (!int.TryParse(parts[1], out iterations)) return false;`
-`  44`  `                byte[] salt, expected;`
-`  45`  `                try`
-  - → Error handling block.
-`  46`  `                {`
-`  47`  `                    salt = Convert.FromBase64String(parts[2]);`
-`  48`  `                    expected = Convert.FromBase64String(parts[3]);`
-`  49`  `                }`
-`  50`  `                catch { return false; }`
-  - → Handle/log exception.
-`  51`  ``
-`  52`  `                var actual = Pbkdf2(password ?? "", salt, iterations, expected.Length);`
-`  53`  `                return FixedTimeEquals(actual, expected);`
-  - → Constant-time string compare (reduce timing leaks).
-`  54`  `            }`
-`  55`  ``
-`  56`  `            // Legacy plain-text (upgrade path)`
-`  57`  `            return string.Equals(password ?? "", stored, StringComparison.Ordinal);`
-`  58`  `        }`
-`  59`  ``
-`  60`  `        public static bool IsHashed(string stored)`
-`  61`  `        {`
-`  62`  `            return !string.IsNullOrEmpty(stored) && stored.StartsWith(Prefix + ".", StringComparison.Ordinal);`
-`  63`  `        }`
-`  64`  ``
-`  65`  `        private static byte[] Pbkdf2(string password, byte[] salt, int iterations, int length)`
-`  66`  `        {`
-`  67`  `            // 3-arg ctor uses HMAC-SHA1 (widely available on .NET Framework 4.7.2)`
-`  68`  `            using (var pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations))`
-  - → Import namespace/types.
-`  69`  `            return pbkdf2.GetBytes(length);`
-`  70`  `        }`
-`  71`  ``
-`  72`  `        private static bool FixedTimeEquals(byte[] a, byte[] b)`
-  - → Constant-time string compare (reduce timing leaks).
-`  73`  `        {`
-`  74`  `            if (a == null || b == null || a.Length != b.Length) return false;`
-`  75`  `            int diff = 0;`
-`  76`  `            for (int i = 0; i < a.Length; i++)`
-`  77`  `            diff |= a[i] ^ b[i];`
-`  78`  `            return diff == 0;`
-`  79`  `        }`
-`  80`  `    }`
-`  81`  `}`
+```csharp
+   1 | using System;
+   2 | using System.Security.Cryptography;
+   3 | using System.Text;
+   4 | 
+   5 | namespace WebAppAssignment.Data.Security
+   6 | {
+   7 |     /// <summary>
+   8 |     /// PBKDF2-SHA256 password hashing (no external packages).
+   9 |     /// Stored format: v1.{iterations}.{saltB64}.{hashB64}
+  10 |     /// </summary>
+  11 |     public static class PasswordHasher
+  12 |     {
+  13 |         private const int SaltSize = 16;
+  14 |         private const int KeySize = 32;
+  15 |         private const int DefaultIterations = 100_000;
+  16 |         private const string Prefix = "v1";
+  17 | 
+  18 |         public static string Hash(string password)
+  19 |         {
+  20 |             if (password == null) password = "";
+  21 |             var salt = new byte[SaltSize];
+  22 |             using (var rng = RandomNumberGenerator.Create())
+  23 |             rng.GetBytes(salt);
+  24 | 
+  25 |             var hash = Pbkdf2(password, salt, DefaultIterations, KeySize);
+  26 |             return string.Format("{0}.{1}.{2}.{3}",
+  27 |             Prefix,
+  28 |             DefaultIterations,
+  29 |             Convert.ToBase64String(salt),
+  30 |             Convert.ToBase64String(hash));
+  31 |         }
+  32 | 
+  33 |         public static bool Verify(string password, string stored)
+  34 |         {
+  35 |             if (string.IsNullOrEmpty(stored)) return false;
+  36 | 
+  37 |             // Already hashed format
+  38 |             if (stored.StartsWith(Prefix + ".", StringComparison.Ordinal))
+  39 |             {
+  40 |                 var parts = stored.Split('.');
+  41 |                 if (parts.Length != 4) return false;
+  42 |                 int iterations;
+  43 |                 if (!int.TryParse(parts[1], out iterations)) return false;
+  44 |                 byte[] salt, expected;
+  45 |                 try
+  46 |                 {
+  47 |                     salt = Convert.FromBase64String(parts[2]);
+  48 |                     expected = Convert.FromBase64String(parts[3]);
+  49 |                 }
+  50 |                 catch { return false; }
+  51 | 
+  52 |                 var actual = Pbkdf2(password ?? "", salt, iterations, expected.Length);
+  53 |                 return FixedTimeEquals(actual, expected);
+  54 |             }
+  55 | 
+  56 |             // Legacy plain-text (upgrade path)
+  57 |             return string.Equals(password ?? "", stored, StringComparison.Ordinal);
+  58 |         }
+  59 | 
+  60 |         public static bool IsHashed(string stored)
+  61 |         {
+  62 |             return !string.IsNullOrEmpty(stored) && stored.StartsWith(Prefix + ".", StringComparison.Ordinal);
+  63 |         }
+  64 | 
+  65 |         private static byte[] Pbkdf2(string password, byte[] salt, int iterations, int length)
+  66 |         {
+  67 |             // 3-arg ctor uses HMAC-SHA1 (widely available on .NET Framework 4.7.2)
+  68 |             using (var pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations))
+  69 |             return pbkdf2.GetBytes(length);
+  70 |         }
+  71 | 
+  72 |         private static bool FixedTimeEquals(byte[] a, byte[] b)
+  73 |         {
+  74 |             if (a == null || b == null || a.Length != b.Length) return false;
+  75 |             int diff = 0;
+  76 |             for (int i = 0; i < a.Length; i++)
+  77 |             diff |= a[i] ^ b[i];
+  78 |             return diff == 0;
+  79 |         }
+  80 |     }
+  81 | }
+```
+
+**Line notes**
+
+- **L1:** Import namespace/types.
+- **L2:** Import namespace/types.
+- **L3:** Import namespace/types.
+- **L5:** C# namespace grouping.
+- **L11:** Password hashing (PBKDF2).
+- **L22:** Import namespace/types.
+- **L45:** Error handling block.
+- **L50:** Handle/log exception.
+- **L53:** Constant-time string compare (reduce timing leaks).
+- **L68:** Import namespace/types.
+- **L72:** Constant-time string compare (reduce timing leaks).
 
 ## Source snapshot (raw)
 

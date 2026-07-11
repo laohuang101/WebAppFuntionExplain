@@ -1,6 +1,6 @@
 # JwtHelper.cs
 **Source:** `Data/Security/JwtHelper.cs`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -48,7 +48,7 @@ HS256 JWT create/validate and EduLMS.Auth cookie set/clear for session restore.
 
 ### `CreateToken` — lines 41–63
 
-```
+```csharp
 public static string CreateToken(int uid, string name, string role)
 ```
 
@@ -61,36 +61,41 @@ public static string CreateToken(int uid, string name, string role)
 
 #### Line-by-line (this function)
 
-`  41`  ``
-`  42`  `        public static string CreateToken(int uid, string name, string role)`
-`  43`  `        {`
-`  44`  `            var header = new Dictionary<string, object>`
-`  45`  `            {`
-`  46`  `                { "alg", "HS256" },`
-  - → JWT cookie create/validate/clear.
-`  47`  `                { "typ", "JWT" }`
-`  48`  `            };`
-`  49`  `            long now = UnixNow();`
-`  50`  `            var payload = new Dictionary<string, object>`
-`  51`  `            {`
-`  52`  `                { "sub", uid.ToString() },`
-`  53`  `                { "name", name ?? "" },`
-`  54`  `                { "role", role ?? "Student" },`
-`  55`  `                { "iat", now },`
-`  56`  `                { "exp", now + (ExpiryHours * 3600L) }`
-`  57`  `            };`
-`  58`  ``
-`  59`  `            string h = Base64UrlEncode(Encoding.UTF8.GetBytes(Json.Serialize(header)));`
-`  60`  `            string p = Base64UrlEncode(Encoding.UTF8.GetBytes(Json.Serialize(payload)));`
-`  61`  `            string sig = Sign(h + "." + p);`
-`  62`  `            return h + "." + p + "." + sig;`
-`  63`  `        }`
+```csharp
+  41 | 
+  42 |         public static string CreateToken(int uid, string name, string role)
+  43 |         {
+  44 |             var header = new Dictionary<string, object>
+  45 |             {
+  46 |                 { "alg", "HS256" },
+  47 |                 { "typ", "JWT" }
+  48 |             };
+  49 |             long now = UnixNow();
+  50 |             var payload = new Dictionary<string, object>
+  51 |             {
+  52 |                 { "sub", uid.ToString() },
+  53 |                 { "name", name ?? "" },
+  54 |                 { "role", role ?? "Student" },
+  55 |                 { "iat", now },
+  56 |                 { "exp", now + (ExpiryHours * 3600L) }
+  57 |             };
+  58 | 
+  59 |             string h = Base64UrlEncode(Encoding.UTF8.GetBytes(Json.Serialize(header)));
+  60 |             string p = Base64UrlEncode(Encoding.UTF8.GetBytes(Json.Serialize(payload)));
+  61 |             string sig = Sign(h + "." + p);
+  62 |             return h + "." + p + "." + sig;
+  63 |         }
+```
+
+**Line notes**
+
+- **L46:** JWT cookie create/validate/clear.
 
 ---
 
 ### `TryValidate` — lines 64–97
 
-```
+```csharp
 public static bool TryValidate(string token, out int uid, out string name, out string role)
 ```
 
@@ -103,49 +108,54 @@ public static bool TryValidate(string token, out int uid, out string name, out s
 
 #### Line-by-line (this function)
 
-`  64`  ``
-`  65`  `        public static bool TryValidate(string token, out int uid, out string name, out string role)`
-`  66`  `        {`
-`  67`  `            uid = 0;`
-`  68`  `            name = null;`
-`  69`  `            role = null;`
-`  70`  `            if (string.IsNullOrWhiteSpace(token)) return false;`
-`  71`  ``
-`  72`  `            var parts = token.Split('.');`
-`  73`  `            if (parts.Length != 3) return false;`
-`  74`  ``
-`  75`  `            string data = parts[0] + "." + parts[1];`
-`  76`  `            string expected = Sign(data);`
-`  77`  `            if (!FixedTimeEquals(expected, parts[2])) return false;`
-  - → Constant-time string compare (reduce timing leaks).
-`  78`  ``
-`  79`  `            try`
-  - → Error handling block.
-`  80`  `            {`
-`  81`  `                var json = Encoding.UTF8.GetString(Base64UrlDecode(parts[1]));`
-`  82`  `                var payload = Json.Deserialize<Dictionary<string, object>>(json);`
-`  83`  `                if (payload == null) return false;`
-`  84`  ``
-`  85`  `                long exp = Convert.ToInt64(payload["exp"]);`
-`  86`  `                if (UnixNow() > exp) return false;`
-`  87`  ``
-`  88`  `                uid = Convert.ToInt32(payload["sub"].ToString());`
-`  89`  `                name = payload.ContainsKey("name") ? Convert.ToString(payload["name"]) : "";`
-`  90`  `                role = payload.ContainsKey("role") ? Convert.ToString(payload["role"]) : "Student";`
-`  91`  `                return uid > 0;`
-`  92`  `            }`
-`  93`  `            catch`
-  - → Handle/log exception.
-`  94`  `            {`
-`  95`  `                return false;`
-`  96`  `            }`
-`  97`  `        }`
+```csharp
+  64 | 
+  65 |         public static bool TryValidate(string token, out int uid, out string name, out string role)
+  66 |         {
+  67 |             uid = 0;
+  68 |             name = null;
+  69 |             role = null;
+  70 |             if (string.IsNullOrWhiteSpace(token)) return false;
+  71 | 
+  72 |             var parts = token.Split('.');
+  73 |             if (parts.Length != 3) return false;
+  74 | 
+  75 |             string data = parts[0] + "." + parts[1];
+  76 |             string expected = Sign(data);
+  77 |             if (!FixedTimeEquals(expected, parts[2])) return false;
+  78 | 
+  79 |             try
+  80 |             {
+  81 |                 var json = Encoding.UTF8.GetString(Base64UrlDecode(parts[1]));
+  82 |                 var payload = Json.Deserialize<Dictionary<string, object>>(json);
+  83 |                 if (payload == null) return false;
+  84 | 
+  85 |                 long exp = Convert.ToInt64(payload["exp"]);
+  86 |                 if (UnixNow() > exp) return false;
+  87 | 
+  88 |                 uid = Convert.ToInt32(payload["sub"].ToString());
+  89 |                 name = payload.ContainsKey("name") ? Convert.ToString(payload["name"]) : "";
+  90 |                 role = payload.ContainsKey("role") ? Convert.ToString(payload["role"]) : "Student";
+  91 |                 return uid > 0;
+  92 |             }
+  93 |             catch
+  94 |             {
+  95 |                 return false;
+  96 |             }
+  97 |         }
+```
+
+**Line notes**
+
+- **L77:** Constant-time string compare (reduce timing leaks).
+- **L79:** Error handling block.
+- **L93:** Handle/log exception.
 
 ---
 
 ### `SetAuthCookie` — lines 115–133
 
-```
+```csharp
 public static void SetAuthCookie(HttpResponse response, string token)
 ```
 
@@ -158,33 +168,38 @@ public static void SetAuthCookie(HttpResponse response, string token)
 
 #### Line-by-line (this function)
 
-` 115`  ``
-` 116`  `        public static void SetAuthCookie(HttpResponse response, string token)`
-` 117`  `        {`
-` 118`  `            if (response == null) return;`
-` 119`  `            var cookie = new HttpCookie(CookieName, token)`
-` 120`  `            {`
-` 121`  `                HttpOnly = true,`
-` 122`  `                Secure = UseSecureCookie,`
-` 123`  `                Path = "/",`
-` 124`  `                Expires = DateTime.UtcNow.AddHours(ExpiryHours)`
-` 125`  `            };`
-` 126`  `            try`
-  - → Error handling block.
-` 127`  `            {`
-` 128`  `                // .NET 4.7.2+ SameSite`
-` 129`  `                cookie.SameSite = SameSiteMode.Lax;`
-` 130`  `            }`
-` 131`  `            catch { }`
-  - → Handle/log exception.
-` 132`  `            response.Cookies.Set(cookie);`
-` 133`  `        }`
+```csharp
+ 115 | 
+ 116 |         public static void SetAuthCookie(HttpResponse response, string token)
+ 117 |         {
+ 118 |             if (response == null) return;
+ 119 |             var cookie = new HttpCookie(CookieName, token)
+ 120 |             {
+ 121 |                 HttpOnly = true,
+ 122 |                 Secure = UseSecureCookie,
+ 123 |                 Path = "/",
+ 124 |                 Expires = DateTime.UtcNow.AddHours(ExpiryHours)
+ 125 |             };
+ 126 |             try
+ 127 |             {
+ 128 |                 // .NET 4.7.2+ SameSite
+ 129 |                 cookie.SameSite = SameSiteMode.Lax;
+ 130 |             }
+ 131 |             catch { }
+ 132 |             response.Cookies.Set(cookie);
+ 133 |         }
+```
+
+**Line notes**
+
+- **L126:** Error handling block.
+- **L131:** Handle/log exception.
 
 ---
 
 ### `ClearAuthCookie` — lines 134–147
 
-```
+```csharp
 public static void ClearAuthCookie(HttpResponse response)
 ```
 
@@ -197,27 +212,32 @@ public static void ClearAuthCookie(HttpResponse response)
 
 #### Line-by-line (this function)
 
-` 134`  ``
-` 135`  `        public static void ClearAuthCookie(HttpResponse response)`
-` 136`  `        {`
-` 137`  `            if (response == null) return;`
-` 138`  `            var cookie = new HttpCookie(CookieName, "")`
-` 139`  `            {`
-` 140`  `                HttpOnly = true,`
-` 141`  `                Secure = UseSecureCookie,`
-` 142`  `                Path = "/",`
-` 143`  `                Expires = DateTime.UtcNow.AddDays(-1)`
-` 144`  `            };`
-` 145`  `            try { cookie.SameSite = SameSiteMode.Lax; } catch { }`
-  - → Error handling block.
-` 146`  `            response.Cookies.Set(cookie);`
-` 147`  `        }`
+```csharp
+ 134 | 
+ 135 |         public static void ClearAuthCookie(HttpResponse response)
+ 136 |         {
+ 137 |             if (response == null) return;
+ 138 |             var cookie = new HttpCookie(CookieName, "")
+ 139 |             {
+ 140 |                 HttpOnly = true,
+ 141 |                 Secure = UseSecureCookie,
+ 142 |                 Path = "/",
+ 143 |                 Expires = DateTime.UtcNow.AddDays(-1)
+ 144 |             };
+ 145 |             try { cookie.SameSite = SameSiteMode.Lax; } catch { }
+ 146 |             response.Cookies.Set(cookie);
+ 147 |         }
+```
+
+**Line notes**
+
+- **L145:** Error handling block.
 
 ---
 
 ### `ReadToken` — lines 148–154
 
-```
+```csharp
 public static string ReadToken(HttpRequest request)
 ```
 
@@ -229,19 +249,21 @@ public static string ReadToken(HttpRequest request)
 
 #### Line-by-line (this function)
 
-` 148`  ``
-` 149`  `        public static string ReadToken(HttpRequest request)`
-` 150`  `        {`
-` 151`  `            if (request == null) return null;`
-` 152`  `            var c = request.Cookies[CookieName];`
-` 153`  `            return c != null ? c.Value : null;`
-` 154`  `        }`
+```csharp
+ 148 | 
+ 149 |         public static string ReadToken(HttpRequest request)
+ 150 |         {
+ 151 |             if (request == null) return null;
+ 152 |             var c = request.Cookies[CookieName];
+ 153 |             return c != null ? c.Value : null;
+ 154 |         }
+```
 
 ---
 
 ### `Sign` — lines 155–163
 
-```
+```csharp
 private static string Sign(string data)
 ```
 
@@ -253,22 +275,27 @@ private static string Sign(string data)
 
 #### Line-by-line (this function)
 
-` 155`  ``
-` 156`  `        private static string Sign(string data)`
-` 157`  `        {`
-` 158`  `            using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(Secret)))`
-  - → Import namespace/types.
-` 159`  `            {`
-` 160`  `                var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(data));`
-` 161`  `                return Base64UrlEncode(hash);`
-` 162`  `            }`
-` 163`  `        }`
+```csharp
+ 155 | 
+ 156 |         private static string Sign(string data)
+ 157 |         {
+ 158 |             using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(Secret)))
+ 159 |             {
+ 160 |                 var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(data));
+ 161 |                 return Base64UrlEncode(hash);
+ 162 |             }
+ 163 |         }
+```
+
+**Line notes**
+
+- **L158:** Import namespace/types.
 
 ---
 
 ### `Base64UrlEncode` — lines 164–168
 
-```
+```csharp
 private static string Base64UrlEncode(byte[] input)
 ```
 
@@ -279,17 +306,19 @@ private static string Base64UrlEncode(byte[] input)
 
 #### Line-by-line (this function)
 
-` 164`  ``
-` 165`  `        private static string Base64UrlEncode(byte[] input)`
-` 166`  `        {`
-` 167`  `            return Convert.ToBase64String(input).TrimEnd('=').Replace('+', '-').Replace('/', '_');`
-` 168`  `        }`
+```csharp
+ 164 | 
+ 165 |         private static string Base64UrlEncode(byte[] input)
+ 166 |         {
+ 167 |             return Convert.ToBase64String(input).TrimEnd('=').Replace('+', '-').Replace('/', '_');
+ 168 |         }
+```
 
 ---
 
 ### `Base64UrlDecode` — lines 169–179
 
-```
+```csharp
 private static byte[] Base64UrlDecode(string input)
 ```
 
@@ -301,23 +330,25 @@ private static byte[] Base64UrlDecode(string input)
 
 #### Line-by-line (this function)
 
-` 169`  ``
-` 170`  `        private static byte[] Base64UrlDecode(string input)`
-` 171`  `        {`
-` 172`  `            string s = input.Replace('-', '+').Replace('_', '/');`
-` 173`  `            switch (s.Length % 4)`
-` 174`  `            {`
-` 175`  `                case 2: s += "=="; break;`
-` 176`  `                case 3: s += "="; break;`
-` 177`  `            }`
-` 178`  `            return Convert.FromBase64String(s);`
-` 179`  `        }`
+```csharp
+ 169 | 
+ 170 |         private static byte[] Base64UrlDecode(string input)
+ 171 |         {
+ 172 |             string s = input.Replace('-', '+').Replace('_', '/');
+ 173 |             switch (s.Length % 4)
+ 174 |             {
+ 175 |                 case 2: s += "=="; break;
+ 176 |                 case 3: s += "="; break;
+ 177 |             }
+ 178 |             return Convert.FromBase64String(s);
+ 179 |         }
+```
 
 ---
 
 ### `FixedTimeEquals` — lines 180–188
 
-```
+```csharp
 private static bool FixedTimeEquals(string a, string b)
 ```
 
@@ -329,22 +360,27 @@ private static bool FixedTimeEquals(string a, string b)
 
 #### Line-by-line (this function)
 
-` 180`  ``
-` 181`  `        private static bool FixedTimeEquals(string a, string b)`
-  - → Constant-time string compare (reduce timing leaks).
-` 182`  `        {`
-` 183`  `            if (a == null || b == null || a.Length != b.Length) return false;`
-` 184`  `            int diff = 0;`
-` 185`  `            for (int i = 0; i < a.Length; i++)`
-` 186`  `            diff |= a[i] ^ b[i];`
-` 187`  `            return diff == 0;`
-` 188`  `        }`
+```csharp
+ 180 | 
+ 181 |         private static bool FixedTimeEquals(string a, string b)
+ 182 |         {
+ 183 |             if (a == null || b == null || a.Length != b.Length) return false;
+ 184 |             int diff = 0;
+ 185 |             for (int i = 0; i < a.Length; i++)
+ 186 |             diff |= a[i] ^ b[i];
+ 187 |             return diff == 0;
+ 188 |         }
+```
+
+**Line notes**
+
+- **L181:** Constant-time string compare (reduce timing leaks).
 
 ---
 
 ### `UnixNow` — lines 189–193
 
-```
+```csharp
 private static long UnixNow()
 ```
 
@@ -354,234 +390,241 @@ private static long UnixNow()
 
 #### Line-by-line (this function)
 
-` 189`  ``
-` 190`  `        private static long UnixNow()`
-` 191`  `        {`
-` 192`  `            return (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;`
-` 193`  `        }`
+```csharp
+ 189 | 
+ 190 |         private static long UnixNow()
+ 191 |         {
+ 192 |             return (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+ 193 |         }
+```
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `using System;`
-  - → Import namespace/types.
-`   2`  `using System.Collections.Generic;`
-  - → Import namespace/types.
-`   3`  `using System.Configuration;`
-  - → Import namespace/types.
-`   4`  `using System.Security.Cryptography;`
-  - → Import namespace/types.
-`   5`  `using System.Text;`
-  - → Import namespace/types.
-`   6`  `using System.Web;`
-  - → Import namespace/types.
-`   7`  `using System.Web.Script.Serialization;`
-  - → Import namespace/types.
-`   8`  ``
-`   9`  `namespace WebAppAssignment.Data.Security`
-  - → C# namespace grouping.
-`  10`  `{`
-`  11`  `    /// <summary>`
-`  12`  `    /// Compact HS256 JWT (no NuGet). Cookie name: EduLMS.Auth`
-`  13`  `    /// Claims: sub (uid), name, role, exp, iat`
-`  14`  `    /// </summary>`
-`  15`  `    public static class JwtHelper`
-  - → JWT cookie create/validate/clear.
-`  16`  `    {`
-`  17`  `        public const string CookieName = "EduLMS.Auth";`
-  - → JWT cookie create/validate/clear.
-`  18`  `        private static readonly JavaScriptSerializer Json = new JavaScriptSerializer();`
-`  19`  ``
-`  20`  `        private static string Secret`
-`  21`  `        {`
-`  22`  `            get`
-`  23`  `            {`
-`  24`  `                var s = ConfigurationManager.AppSettings["JwtSecret"];`
-`  25`  `                if (string.IsNullOrWhiteSpace(s))`
-`  26`  `                s = "EduLMS-Dev-Secret-Change-Me-In-Production-2026!";`
-`  27`  `                return s;`
-`  28`  `            }`
-`  29`  `        }`
-`  30`  ``
-`  31`  `        private static int ExpiryHours`
-`  32`  `        {`
-`  33`  `            get`
-`  34`  `            {`
-`  35`  `                int h;`
-`  36`  `                if (int.TryParse(ConfigurationManager.AppSettings["JwtExpiryHours"], out h) && h > 0)`
-`  37`  `                return h;`
-`  38`  `                return 12;`
-`  39`  `            }`
-`  40`  `        }`
-`  41`  ``
-`  42`  `        public static string CreateToken(int uid, string name, string role)`
-`  43`  `        {`
-`  44`  `            var header = new Dictionary<string, object>`
-`  45`  `            {`
-`  46`  `                { "alg", "HS256" },`
-  - → JWT cookie create/validate/clear.
-`  47`  `                { "typ", "JWT" }`
-`  48`  `            };`
-`  49`  `            long now = UnixNow();`
-`  50`  `            var payload = new Dictionary<string, object>`
-`  51`  `            {`
-`  52`  `                { "sub", uid.ToString() },`
-`  53`  `                { "name", name ?? "" },`
-`  54`  `                { "role", role ?? "Student" },`
-`  55`  `                { "iat", now },`
-`  56`  `                { "exp", now + (ExpiryHours * 3600L) }`
-`  57`  `            };`
-`  58`  ``
-`  59`  `            string h = Base64UrlEncode(Encoding.UTF8.GetBytes(Json.Serialize(header)));`
-`  60`  `            string p = Base64UrlEncode(Encoding.UTF8.GetBytes(Json.Serialize(payload)));`
-`  61`  `            string sig = Sign(h + "." + p);`
-`  62`  `            return h + "." + p + "." + sig;`
-`  63`  `        }`
-`  64`  ``
-`  65`  `        public static bool TryValidate(string token, out int uid, out string name, out string role)`
-`  66`  `        {`
-`  67`  `            uid = 0;`
-`  68`  `            name = null;`
-`  69`  `            role = null;`
-`  70`  `            if (string.IsNullOrWhiteSpace(token)) return false;`
-`  71`  ``
-`  72`  `            var parts = token.Split('.');`
-`  73`  `            if (parts.Length != 3) return false;`
-`  74`  ``
-`  75`  `            string data = parts[0] + "." + parts[1];`
-`  76`  `            string expected = Sign(data);`
-`  77`  `            if (!FixedTimeEquals(expected, parts[2])) return false;`
-  - → Constant-time string compare (reduce timing leaks).
-`  78`  ``
-`  79`  `            try`
-  - → Error handling block.
-`  80`  `            {`
-`  81`  `                var json = Encoding.UTF8.GetString(Base64UrlDecode(parts[1]));`
-`  82`  `                var payload = Json.Deserialize<Dictionary<string, object>>(json);`
-`  83`  `                if (payload == null) return false;`
-`  84`  ``
-`  85`  `                long exp = Convert.ToInt64(payload["exp"]);`
-`  86`  `                if (UnixNow() > exp) return false;`
-`  87`  ``
-`  88`  `                uid = Convert.ToInt32(payload["sub"].ToString());`
-`  89`  `                name = payload.ContainsKey("name") ? Convert.ToString(payload["name"]) : "";`
-`  90`  `                role = payload.ContainsKey("role") ? Convert.ToString(payload["role"]) : "Student";`
-`  91`  `                return uid > 0;`
-`  92`  `            }`
-`  93`  `            catch`
-  - → Handle/log exception.
-`  94`  `            {`
-`  95`  `                return false;`
-`  96`  `            }`
-`  97`  `        }`
-`  98`  ``
-`  99`  `        private static bool UseSecureCookie`
-` 100`  `        {`
-` 101`  `            get`
-` 102`  `            {`
-` 103`  `                // Prefer HTTPS when request is secure, or when forced in config`
-` 104`  `                string forced = ConfigurationManager.AppSettings["JwtCookieSecure"];`
-` 105`  `                if (string.Equals(forced, "true", StringComparison.OrdinalIgnoreCase)) return true;`
-` 106`  `                if (string.Equals(forced, "false", StringComparison.OrdinalIgnoreCase)) return false;`
-` 107`  `                try`
-  - → Error handling block.
-` 108`  `                {`
-` 109`  `                    var req = HttpContext.Current != null ? HttpContext.Current.Request : null;`
-` 110`  `                    return req != null && req.IsSecureConnection;`
-` 111`  `                }`
-` 112`  `                catch { return false; }`
-  - → Handle/log exception.
-` 113`  `            }`
-` 114`  `        }`
-` 115`  ``
-` 116`  `        public static void SetAuthCookie(HttpResponse response, string token)`
-` 117`  `        {`
-` 118`  `            if (response == null) return;`
-` 119`  `            var cookie = new HttpCookie(CookieName, token)`
-` 120`  `            {`
-` 121`  `                HttpOnly = true,`
-` 122`  `                Secure = UseSecureCookie,`
-` 123`  `                Path = "/",`
-` 124`  `                Expires = DateTime.UtcNow.AddHours(ExpiryHours)`
-` 125`  `            };`
-` 126`  `            try`
-  - → Error handling block.
-` 127`  `            {`
-` 128`  `                // .NET 4.7.2+ SameSite`
-` 129`  `                cookie.SameSite = SameSiteMode.Lax;`
-` 130`  `            }`
-` 131`  `            catch { }`
-  - → Handle/log exception.
-` 132`  `            response.Cookies.Set(cookie);`
-` 133`  `        }`
-` 134`  ``
-` 135`  `        public static void ClearAuthCookie(HttpResponse response)`
-` 136`  `        {`
-` 137`  `            if (response == null) return;`
-` 138`  `            var cookie = new HttpCookie(CookieName, "")`
-` 139`  `            {`
-` 140`  `                HttpOnly = true,`
-` 141`  `                Secure = UseSecureCookie,`
-` 142`  `                Path = "/",`
-` 143`  `                Expires = DateTime.UtcNow.AddDays(-1)`
-` 144`  `            };`
-` 145`  `            try { cookie.SameSite = SameSiteMode.Lax; } catch { }`
-  - → Error handling block.
-` 146`  `            response.Cookies.Set(cookie);`
-` 147`  `        }`
-` 148`  ``
-` 149`  `        public static string ReadToken(HttpRequest request)`
-` 150`  `        {`
-` 151`  `            if (request == null) return null;`
-` 152`  `            var c = request.Cookies[CookieName];`
-` 153`  `            return c != null ? c.Value : null;`
-` 154`  `        }`
-` 155`  ``
-` 156`  `        private static string Sign(string data)`
-` 157`  `        {`
-` 158`  `            using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(Secret)))`
-  - → Import namespace/types.
-` 159`  `            {`
-` 160`  `                var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(data));`
-` 161`  `                return Base64UrlEncode(hash);`
-` 162`  `            }`
-` 163`  `        }`
-` 164`  ``
-` 165`  `        private static string Base64UrlEncode(byte[] input)`
-` 166`  `        {`
-` 167`  `            return Convert.ToBase64String(input).TrimEnd('=').Replace('+', '-').Replace('/', '_');`
-` 168`  `        }`
-` 169`  ``
-` 170`  `        private static byte[] Base64UrlDecode(string input)`
-` 171`  `        {`
-` 172`  `            string s = input.Replace('-', '+').Replace('_', '/');`
-` 173`  `            switch (s.Length % 4)`
-` 174`  `            {`
-` 175`  `                case 2: s += "=="; break;`
-` 176`  `                case 3: s += "="; break;`
-` 177`  `            }`
-` 178`  `            return Convert.FromBase64String(s);`
-` 179`  `        }`
-` 180`  ``
-` 181`  `        private static bool FixedTimeEquals(string a, string b)`
-  - → Constant-time string compare (reduce timing leaks).
-` 182`  `        {`
-` 183`  `            if (a == null || b == null || a.Length != b.Length) return false;`
-` 184`  `            int diff = 0;`
-` 185`  `            for (int i = 0; i < a.Length; i++)`
-` 186`  `            diff |= a[i] ^ b[i];`
-` 187`  `            return diff == 0;`
-` 188`  `        }`
-` 189`  ``
-` 190`  `        private static long UnixNow()`
-` 191`  `        {`
-` 192`  `            return (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;`
-` 193`  `        }`
-` 194`  `    }`
-` 195`  `}`
+```csharp
+   1 | using System;
+   2 | using System.Collections.Generic;
+   3 | using System.Configuration;
+   4 | using System.Security.Cryptography;
+   5 | using System.Text;
+   6 | using System.Web;
+   7 | using System.Web.Script.Serialization;
+   8 | 
+   9 | namespace WebAppAssignment.Data.Security
+  10 | {
+  11 |     /// <summary>
+  12 |     /// Compact HS256 JWT (no NuGet). Cookie name: EduLMS.Auth
+  13 |     /// Claims: sub (uid), name, role, exp, iat
+  14 |     /// </summary>
+  15 |     public static class JwtHelper
+  16 |     {
+  17 |         public const string CookieName = "EduLMS.Auth";
+  18 |         private static readonly JavaScriptSerializer Json = new JavaScriptSerializer();
+  19 | 
+  20 |         private static string Secret
+  21 |         {
+  22 |             get
+  23 |             {
+  24 |                 var s = ConfigurationManager.AppSettings["JwtSecret"];
+  25 |                 if (string.IsNullOrWhiteSpace(s))
+  26 |                 s = "EduLMS-Dev-Secret-Change-Me-In-Production-2026!";
+  27 |                 return s;
+  28 |             }
+  29 |         }
+  30 | 
+  31 |         private static int ExpiryHours
+  32 |         {
+  33 |             get
+  34 |             {
+  35 |                 int h;
+  36 |                 if (int.TryParse(ConfigurationManager.AppSettings["JwtExpiryHours"], out h) && h > 0)
+  37 |                 return h;
+  38 |                 return 12;
+  39 |             }
+  40 |         }
+  41 | 
+  42 |         public static string CreateToken(int uid, string name, string role)
+  43 |         {
+  44 |             var header = new Dictionary<string, object>
+  45 |             {
+  46 |                 { "alg", "HS256" },
+  47 |                 { "typ", "JWT" }
+  48 |             };
+  49 |             long now = UnixNow();
+  50 |             var payload = new Dictionary<string, object>
+  51 |             {
+  52 |                 { "sub", uid.ToString() },
+  53 |                 { "name", name ?? "" },
+  54 |                 { "role", role ?? "Student" },
+  55 |                 { "iat", now },
+  56 |                 { "exp", now + (ExpiryHours * 3600L) }
+  57 |             };
+  58 | 
+  59 |             string h = Base64UrlEncode(Encoding.UTF8.GetBytes(Json.Serialize(header)));
+  60 |             string p = Base64UrlEncode(Encoding.UTF8.GetBytes(Json.Serialize(payload)));
+  61 |             string sig = Sign(h + "." + p);
+  62 |             return h + "." + p + "." + sig;
+  63 |         }
+  64 | 
+  65 |         public static bool TryValidate(string token, out int uid, out string name, out string role)
+  66 |         {
+  67 |             uid = 0;
+  68 |             name = null;
+  69 |             role = null;
+  70 |             if (string.IsNullOrWhiteSpace(token)) return false;
+  71 | 
+  72 |             var parts = token.Split('.');
+  73 |             if (parts.Length != 3) return false;
+  74 | 
+  75 |             string data = parts[0] + "." + parts[1];
+  76 |             string expected = Sign(data);
+  77 |             if (!FixedTimeEquals(expected, parts[2])) return false;
+  78 | 
+  79 |             try
+  80 |             {
+  81 |                 var json = Encoding.UTF8.GetString(Base64UrlDecode(parts[1]));
+  82 |                 var payload = Json.Deserialize<Dictionary<string, object>>(json);
+  83 |                 if (payload == null) return false;
+  84 | 
+  85 |                 long exp = Convert.ToInt64(payload["exp"]);
+  86 |                 if (UnixNow() > exp) return false;
+  87 | 
+  88 |                 uid = Convert.ToInt32(payload["sub"].ToString());
+  89 |                 name = payload.ContainsKey("name") ? Convert.ToString(payload["name"]) : "";
+  90 |                 role = payload.ContainsKey("role") ? Convert.ToString(payload["role"]) : "Student";
+  91 |                 return uid > 0;
+  92 |             }
+  93 |             catch
+  94 |             {
+  95 |                 return false;
+  96 |             }
+  97 |         }
+  98 | 
+  99 |         private static bool UseSecureCookie
+ 100 |         {
+ 101 |             get
+ 102 |             {
+ 103 |                 // Prefer HTTPS when request is secure, or when forced in config
+ 104 |                 string forced = ConfigurationManager.AppSettings["JwtCookieSecure"];
+ 105 |                 if (string.Equals(forced, "true", StringComparison.OrdinalIgnoreCase)) return true;
+ 106 |                 if (string.Equals(forced, "false", StringComparison.OrdinalIgnoreCase)) return false;
+ 107 |                 try
+ 108 |                 {
+ 109 |                     var req = HttpContext.Current != null ? HttpContext.Current.Request : null;
+ 110 |                     return req != null && req.IsSecureConnection;
+ 111 |                 }
+ 112 |                 catch { return false; }
+ 113 |             }
+ 114 |         }
+ 115 | 
+ 116 |         public static void SetAuthCookie(HttpResponse response, string token)
+ 117 |         {
+ 118 |             if (response == null) return;
+ 119 |             var cookie = new HttpCookie(CookieName, token)
+ 120 |             {
+ 121 |                 HttpOnly = true,
+ 122 |                 Secure = UseSecureCookie,
+ 123 |                 Path = "/",
+ 124 |                 Expires = DateTime.UtcNow.AddHours(ExpiryHours)
+ 125 |             };
+ 126 |             try
+ 127 |             {
+ 128 |                 // .NET 4.7.2+ SameSite
+ 129 |                 cookie.SameSite = SameSiteMode.Lax;
+ 130 |             }
+ 131 |             catch { }
+ 132 |             response.Cookies.Set(cookie);
+ 133 |         }
+ 134 | 
+ 135 |         public static void ClearAuthCookie(HttpResponse response)
+ 136 |         {
+ 137 |             if (response == null) return;
+ 138 |             var cookie = new HttpCookie(CookieName, "")
+ 139 |             {
+ 140 |                 HttpOnly = true,
+ 141 |                 Secure = UseSecureCookie,
+ 142 |                 Path = "/",
+ 143 |                 Expires = DateTime.UtcNow.AddDays(-1)
+ 144 |             };
+ 145 |             try { cookie.SameSite = SameSiteMode.Lax; } catch { }
+ 146 |             response.Cookies.Set(cookie);
+ 147 |         }
+ 148 | 
+ 149 |         public static string ReadToken(HttpRequest request)
+ 150 |         {
+ 151 |             if (request == null) return null;
+ 152 |             var c = request.Cookies[CookieName];
+ 153 |             return c != null ? c.Value : null;
+ 154 |         }
+ 155 | 
+ 156 |         private static string Sign(string data)
+ 157 |         {
+ 158 |             using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(Secret)))
+ 159 |             {
+ 160 |                 var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(data));
+ 161 |                 return Base64UrlEncode(hash);
+ 162 |             }
+ 163 |         }
+ 164 | 
+ 165 |         private static string Base64UrlEncode(byte[] input)
+ 166 |         {
+ 167 |             return Convert.ToBase64String(input).TrimEnd('=').Replace('+', '-').Replace('/', '_');
+ 168 |         }
+ 169 | 
+ 170 |         private static byte[] Base64UrlDecode(string input)
+ 171 |         {
+ 172 |             string s = input.Replace('-', '+').Replace('_', '/');
+ 173 |             switch (s.Length % 4)
+ 174 |             {
+ 175 |                 case 2: s += "=="; break;
+ 176 |                 case 3: s += "="; break;
+ 177 |             }
+ 178 |             return Convert.FromBase64String(s);
+ 179 |         }
+ 180 | 
+ 181 |         private static bool FixedTimeEquals(string a, string b)
+ 182 |         {
+ 183 |             if (a == null || b == null || a.Length != b.Length) return false;
+ 184 |             int diff = 0;
+ 185 |             for (int i = 0; i < a.Length; i++)
+ 186 |             diff |= a[i] ^ b[i];
+ 187 |             return diff == 0;
+ 188 |         }
+ 189 | 
+ 190 |         private static long UnixNow()
+ 191 |         {
+ 192 |             return (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+ 193 |         }
+ 194 |     }
+ 195 | }
+```
+
+**Line notes**
+
+- **L1:** Import namespace/types.
+- **L2:** Import namespace/types.
+- **L3:** Import namespace/types.
+- **L4:** Import namespace/types.
+- **L5:** Import namespace/types.
+- **L6:** Import namespace/types.
+- **L7:** Import namespace/types.
+- **L9:** C# namespace grouping.
+- **L15:** JWT cookie create/validate/clear.
+- **L17:** JWT cookie create/validate/clear.
+- **L46:** JWT cookie create/validate/clear.
+- **L77:** Constant-time string compare (reduce timing leaks).
+- **L79:** Error handling block.
+- **L93:** Handle/log exception.
+- **L107:** Error handling block.
+- **L112:** Handle/log exception.
+- **L126:** Error handling block.
+- **L131:** Handle/log exception.
+- **L145:** Error handling block.
+- **L158:** Import namespace/types.
+- **L181:** Constant-time string compare (reduce timing leaks).
 
 ## Source snapshot (raw)
 

@@ -1,6 +1,6 @@
 # UploadThumbnail.ashx
 **Source:** `Pages/Lecturer/UploadThumbnail.ashx`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -21,7 +21,7 @@ Markup/mixed file. Server controls and expressions are explained with code-behin
 
 ### `ProcessRequest` — lines 14–92
 
-```
+```html
 public void ProcessRequest(HttpContext context)
 ```
 
@@ -35,100 +35,105 @@ public void ProcessRequest(HttpContext context)
 
 #### Line-by-line (this function)
 
-`  14`  ``
-`  15`  `    public void ProcessRequest(HttpContext context)`
-  - → IHttpHandler entry for ashx.
-`  16`  `    {`
-`  17`  `        context.Response.ContentType = "application/json; charset=utf-8";`
-`  18`  `        context.Response.Cache.SetCacheability(HttpCacheability.NoCache);`
-`  19`  ``
-`  20`  `        try`
-  - → Error handling block.
-`  21`  `        {`
-`  22`  `            int uid;`
-`  23`  `            if (!AuthGate.EnsureHandlerRole(context, out uid, "Lecturer", "Admin"))`
-  - → Authorization — block wrong role / anonymous.
-`  24`  `                return;`
-`  25`  ``
-`  26`  `            if (context.Request.Files.Count == 0)`
-`  27`  `            {`
-`  28`  `                WriteJson(context, new { success = false, message = "No file uploaded." });`
-`  29`  `                return;`
-`  30`  `            }`
-`  31`  ``
-`  32`  `            var file = context.Request.Files[0];`
-`  33`  `            if (file == null || file.ContentLength <= 0)`
-`  34`  `            {`
-`  35`  `                WriteJson(context, new { success = false, message = "Empty file." });`
-`  36`  `                return;`
-`  37`  `            }`
-`  38`  ``
-`  39`  `            var ext = Path.GetExtension(file.FileName).ToLowerInvariant();`
-`  40`  `            if (!UploadPathGuard.IsAllowedExtension(ext, ImageExts))`
-  - → Sandbox path under ~/Uploads.
-`  41`  `            {`
-`  42`  `                WriteJson(context, new { success = false, message = "Only image files are allowed." });`
-`  43`  `                return;`
-`  44`  `            }`
-`  45`  ``
-`  46`  `            if (file.ContentLength > 5 * 1024 * 1024)`
-`  47`  `            {`
-`  48`  `                WriteJson(context, new { success = false, message = "Thumbnail must be under 5 MB." });`
-`  49`  `                return;`
-`  50`  `            }`
-`  51`  ``
-`  52`  `            string magicMsg;`
-  - → File magic-byte validation on upload.
-`  53`  `            if (!FileMagic.LooksValid(file, ext, out magicMsg))`
-  - → Validate upload by file signature.
-`  54`  `            {`
-`  55`  `                SecurityAudit.Log("upload.reject", uid, magicMsg + " thumb");`
-  - → Write/read security audit events.
-`  56`  `                WriteJson(context, new { success = false, message = magicMsg ?? "Invalid image content." });`
-  - → File magic-byte validation on upload.
-`  57`  `                return;`
-`  58`  `            }`
-`  59`  ``
-`  60`  `            var uploadsFolder = context.Server.MapPath("~/Uploads/CourseThumbnails");`
-`  61`  `            if (!Directory.Exists(uploadsFolder)) Directory.CreateDirectory(uploadsFolder);`
-`  62`  ``
-`  63`  `            var fileName = Guid.NewGuid().ToString("N") + ext;`
-`  64`  `            var savePath = Path.Combine(uploadsFolder, fileName);`
-`  65`  `            // Ensure still under thumbnails folder`
-`  66`  `            string full = Path.GetFullPath(savePath);`
-`  67`  `            string root = Path.GetFullPath(uploadsFolder) + Path.DirectorySeparatorChar;`
-`  68`  `            if (!full.StartsWith(root, StringComparison.OrdinalIgnoreCase))`
-`  69`  `            {`
-`  70`  `                WriteJson(context, new { success = false, message = "Invalid save path." });`
-`  71`  `                return;`
-`  72`  `            }`
-`  73`  ``
-`  74`  `            file.SaveAs(savePath);`
-`  75`  ``
-`  76`  `            string under = "CourseThumbnails/" + fileName;`
-`  77`  `            string mediaUrl = VirtualPathUtility.ToAbsolute("~/Media.ashx") + "?f=" + HttpUtility.UrlEncode(under);`
-`  78`  `            string staticUrl = VirtualPathUtility.ToAbsolute("~/Uploads/" + under);`
-`  79`  ``
-`  80`  `            WriteJson(context, new`
-`  81`  `            {`
-`  82`  `                success = true,`
-`  83`  `                url = mediaUrl,`
-`  84`  `                staticUrl = staticUrl,`
-`  85`  `                storePath = "Uploads/" + under`
-`  86`  `            });`
-`  87`  `        }`
-`  88`  `        catch`
-  - → Handle/log exception.
-`  89`  `        {`
-`  90`  `            WriteJson(context, new { success = false, message = "Thumbnail upload failed." });`
-`  91`  `        }`
-`  92`  `    }`
+```html
+  14 | 
+  15 |     public void ProcessRequest(HttpContext context)
+  16 |     {
+  17 |         context.Response.ContentType = "application/json; charset=utf-8";
+  18 |         context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+  19 | 
+  20 |         try
+  21 |         {
+  22 |             int uid;
+  23 |             if (!AuthGate.EnsureHandlerRole(context, out uid, "Lecturer", "Admin"))
+  24 |                 return;
+  25 | 
+  26 |             if (context.Request.Files.Count == 0)
+  27 |             {
+  28 |                 WriteJson(context, new { success = false, message = "No file uploaded." });
+  29 |                 return;
+  30 |             }
+  31 | 
+  32 |             var file = context.Request.Files[0];
+  33 |             if (file == null || file.ContentLength <= 0)
+  34 |             {
+  35 |                 WriteJson(context, new { success = false, message = "Empty file." });
+  36 |                 return;
+  37 |             }
+  38 | 
+  39 |             var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+  40 |             if (!UploadPathGuard.IsAllowedExtension(ext, ImageExts))
+  41 |             {
+  42 |                 WriteJson(context, new { success = false, message = "Only image files are allowed." });
+  43 |                 return;
+  44 |             }
+  45 | 
+  46 |             if (file.ContentLength > 5 * 1024 * 1024)
+  47 |             {
+  48 |                 WriteJson(context, new { success = false, message = "Thumbnail must be under 5 MB." });
+  49 |                 return;
+  50 |             }
+  51 | 
+  52 |             string magicMsg;
+  53 |             if (!FileMagic.LooksValid(file, ext, out magicMsg))
+  54 |             {
+  55 |                 SecurityAudit.Log("upload.reject", uid, magicMsg + " thumb");
+  56 |                 WriteJson(context, new { success = false, message = magicMsg ?? "Invalid image content." });
+  57 |                 return;
+  58 |             }
+  59 | 
+  60 |             var uploadsFolder = context.Server.MapPath("~/Uploads/CourseThumbnails");
+  61 |             if (!Directory.Exists(uploadsFolder)) Directory.CreateDirectory(uploadsFolder);
+  62 | 
+  63 |             var fileName = Guid.NewGuid().ToString("N") + ext;
+  64 |             var savePath = Path.Combine(uploadsFolder, fileName);
+  65 |             // Ensure still under thumbnails folder
+  66 |             string full = Path.GetFullPath(savePath);
+  67 |             string root = Path.GetFullPath(uploadsFolder) + Path.DirectorySeparatorChar;
+  68 |             if (!full.StartsWith(root, StringComparison.OrdinalIgnoreCase))
+  69 |             {
+  70 |                 WriteJson(context, new { success = false, message = "Invalid save path." });
+  71 |                 return;
+  72 |             }
+  73 | 
+  74 |             file.SaveAs(savePath);
+  75 | 
+  76 |             string under = "CourseThumbnails/" + fileName;
+  77 |             string mediaUrl = VirtualPathUtility.ToAbsolute("~/Media.ashx") + "?f=" + HttpUtility.UrlEncode(under);
+  78 |             string staticUrl = VirtualPathUtility.ToAbsolute("~/Uploads/" + under);
+  79 | 
+  80 |             WriteJson(context, new
+  81 |             {
+  82 |                 success = true,
+  83 |                 url = mediaUrl,
+  84 |                 staticUrl = staticUrl,
+  85 |                 storePath = "Uploads/" + under
+  86 |             });
+  87 |         }
+  88 |         catch
+  89 |         {
+  90 |             WriteJson(context, new { success = false, message = "Thumbnail upload failed." });
+  91 |         }
+  92 |     }
+```
+
+**Line notes**
+
+- **L15:** IHttpHandler entry for ashx.
+- **L20:** Error handling block.
+- **L23:** Authorization — block wrong role / anonymous.
+- **L40:** Sandbox path under ~/Uploads.
+- **L52:** File magic-byte validation on upload.
+- **L53:** Validate upload by file signature.
+- **L55:** Write/read security audit events.
+- **L56:** File magic-byte validation on upload.
+- **L88:** Handle/log exception.
 
 ---
 
 ### `WriteJson` — lines 93–98
 
-```
+```html
 private void WriteJson(HttpContext context, object obj)
 ```
 
@@ -141,136 +146,143 @@ private void WriteJson(HttpContext context, object obj)
 
 #### Line-by-line (this function)
 
-`  93`  ``
-`  94`  `    private void WriteJson(HttpContext context, object obj)`
-`  95`  `    {`
-`  96`  `        var js = new JavaScriptSerializer();`
-`  97`  `        context.Response.Write(js.Serialize(obj));`
-`  98`  `    }`
+```html
+  93 | 
+  94 |     private void WriteJson(HttpContext context, object obj)
+  95 |     {
+  96 |         var js = new JavaScriptSerializer();
+  97 |         context.Response.Write(js.Serialize(obj));
+  98 |     }
+```
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `<%@ WebHandler Language="C#" Class="UploadThumbnail" %>`
-`   2`  ``
-`   3`  `using System;`
-  - → Import namespace/types.
-`   4`  `using System.IO;`
-  - → Import namespace/types.
-`   5`  `using System.Web;`
-  - → Import namespace/types.
-`   6`  `using System.Web.Script.Serialization;`
-  - → Import namespace/types.
-`   7`  `using System.Web.SessionState;`
-  - → Import namespace/types.
-`   8`  `using WebAppAssignment.Data.Security;`
-  - → Import namespace/types.
-`   9`  ``
-`  10`  `/// <summary>Course thumbnail upload — Lecturer/Admin only.</summary>`
-`  11`  `public class UploadThumbnail : IHttpHandler, IRequiresSessionState`
-  - → Class declaration for this page/service.
-`  12`  `{`
-`  13`  `    private static readonly string[] ImageExts = { ".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp" };`
-`  14`  ``
-`  15`  `    public void ProcessRequest(HttpContext context)`
-  - → IHttpHandler entry for ashx.
-`  16`  `    {`
-`  17`  `        context.Response.ContentType = "application/json; charset=utf-8";`
-`  18`  `        context.Response.Cache.SetCacheability(HttpCacheability.NoCache);`
-`  19`  ``
-`  20`  `        try`
-  - → Error handling block.
-`  21`  `        {`
-`  22`  `            int uid;`
-`  23`  `            if (!AuthGate.EnsureHandlerRole(context, out uid, "Lecturer", "Admin"))`
-  - → Authorization — block wrong role / anonymous.
-`  24`  `                return;`
-`  25`  ``
-`  26`  `            if (context.Request.Files.Count == 0)`
-`  27`  `            {`
-`  28`  `                WriteJson(context, new { success = false, message = "No file uploaded." });`
-`  29`  `                return;`
-`  30`  `            }`
-`  31`  ``
-`  32`  `            var file = context.Request.Files[0];`
-`  33`  `            if (file == null || file.ContentLength <= 0)`
-`  34`  `            {`
-`  35`  `                WriteJson(context, new { success = false, message = "Empty file." });`
-`  36`  `                return;`
-`  37`  `            }`
-`  38`  ``
-`  39`  `            var ext = Path.GetExtension(file.FileName).ToLowerInvariant();`
-`  40`  `            if (!UploadPathGuard.IsAllowedExtension(ext, ImageExts))`
-  - → Sandbox path under ~/Uploads.
-`  41`  `            {`
-`  42`  `                WriteJson(context, new { success = false, message = "Only image files are allowed." });`
-`  43`  `                return;`
-`  44`  `            }`
-`  45`  ``
-`  46`  `            if (file.ContentLength > 5 * 1024 * 1024)`
-`  47`  `            {`
-`  48`  `                WriteJson(context, new { success = false, message = "Thumbnail must be under 5 MB." });`
-`  49`  `                return;`
-`  50`  `            }`
-`  51`  ``
-`  52`  `            string magicMsg;`
-  - → File magic-byte validation on upload.
-`  53`  `            if (!FileMagic.LooksValid(file, ext, out magicMsg))`
-  - → Validate upload by file signature.
-`  54`  `            {`
-`  55`  `                SecurityAudit.Log("upload.reject", uid, magicMsg + " thumb");`
-  - → Write/read security audit events.
-`  56`  `                WriteJson(context, new { success = false, message = magicMsg ?? "Invalid image content." });`
-  - → File magic-byte validation on upload.
-`  57`  `                return;`
-`  58`  `            }`
-`  59`  ``
-`  60`  `            var uploadsFolder = context.Server.MapPath("~/Uploads/CourseThumbnails");`
-`  61`  `            if (!Directory.Exists(uploadsFolder)) Directory.CreateDirectory(uploadsFolder);`
-`  62`  ``
-`  63`  `            var fileName = Guid.NewGuid().ToString("N") + ext;`
-`  64`  `            var savePath = Path.Combine(uploadsFolder, fileName);`
-`  65`  `            // Ensure still under thumbnails folder`
-`  66`  `            string full = Path.GetFullPath(savePath);`
-`  67`  `            string root = Path.GetFullPath(uploadsFolder) + Path.DirectorySeparatorChar;`
-`  68`  `            if (!full.StartsWith(root, StringComparison.OrdinalIgnoreCase))`
-`  69`  `            {`
-`  70`  `                WriteJson(context, new { success = false, message = "Invalid save path." });`
-`  71`  `                return;`
-`  72`  `            }`
-`  73`  ``
-`  74`  `            file.SaveAs(savePath);`
-`  75`  ``
-`  76`  `            string under = "CourseThumbnails/" + fileName;`
-`  77`  `            string mediaUrl = VirtualPathUtility.ToAbsolute("~/Media.ashx") + "?f=" + HttpUtility.UrlEncode(under);`
-`  78`  `            string staticUrl = VirtualPathUtility.ToAbsolute("~/Uploads/" + under);`
-`  79`  ``
-`  80`  `            WriteJson(context, new`
-`  81`  `            {`
-`  82`  `                success = true,`
-`  83`  `                url = mediaUrl,`
-`  84`  `                staticUrl = staticUrl,`
-`  85`  `                storePath = "Uploads/" + under`
-`  86`  `            });`
-`  87`  `        }`
-`  88`  `        catch`
-  - → Handle/log exception.
-`  89`  `        {`
-`  90`  `            WriteJson(context, new { success = false, message = "Thumbnail upload failed." });`
-`  91`  `        }`
-`  92`  `    }`
-`  93`  ``
-`  94`  `    private void WriteJson(HttpContext context, object obj)`
-`  95`  `    {`
-`  96`  `        var js = new JavaScriptSerializer();`
-`  97`  `        context.Response.Write(js.Serialize(obj));`
-`  98`  `    }`
-`  99`  ``
-` 100`  `    public bool IsReusable { get { return false; } }`
-` 101`  `}`
+```html
+   1 | <%@ WebHandler Language="C#" Class="UploadThumbnail" %>
+   2 | 
+   3 | using System;
+   4 | using System.IO;
+   5 | using System.Web;
+   6 | using System.Web.Script.Serialization;
+   7 | using System.Web.SessionState;
+   8 | using WebAppAssignment.Data.Security;
+   9 | 
+  10 | /// <summary>Course thumbnail upload — Lecturer/Admin only.</summary>
+  11 | public class UploadThumbnail : IHttpHandler, IRequiresSessionState
+  12 | {
+  13 |     private static readonly string[] ImageExts = { ".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp" };
+  14 | 
+  15 |     public void ProcessRequest(HttpContext context)
+  16 |     {
+  17 |         context.Response.ContentType = "application/json; charset=utf-8";
+  18 |         context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+  19 | 
+  20 |         try
+  21 |         {
+  22 |             int uid;
+  23 |             if (!AuthGate.EnsureHandlerRole(context, out uid, "Lecturer", "Admin"))
+  24 |                 return;
+  25 | 
+  26 |             if (context.Request.Files.Count == 0)
+  27 |             {
+  28 |                 WriteJson(context, new { success = false, message = "No file uploaded." });
+  29 |                 return;
+  30 |             }
+  31 | 
+  32 |             var file = context.Request.Files[0];
+  33 |             if (file == null || file.ContentLength <= 0)
+  34 |             {
+  35 |                 WriteJson(context, new { success = false, message = "Empty file." });
+  36 |                 return;
+  37 |             }
+  38 | 
+  39 |             var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+  40 |             if (!UploadPathGuard.IsAllowedExtension(ext, ImageExts))
+  41 |             {
+  42 |                 WriteJson(context, new { success = false, message = "Only image files are allowed." });
+  43 |                 return;
+  44 |             }
+  45 | 
+  46 |             if (file.ContentLength > 5 * 1024 * 1024)
+  47 |             {
+  48 |                 WriteJson(context, new { success = false, message = "Thumbnail must be under 5 MB." });
+  49 |                 return;
+  50 |             }
+  51 | 
+  52 |             string magicMsg;
+  53 |             if (!FileMagic.LooksValid(file, ext, out magicMsg))
+  54 |             {
+  55 |                 SecurityAudit.Log("upload.reject", uid, magicMsg + " thumb");
+  56 |                 WriteJson(context, new { success = false, message = magicMsg ?? "Invalid image content." });
+  57 |                 return;
+  58 |             }
+  59 | 
+  60 |             var uploadsFolder = context.Server.MapPath("~/Uploads/CourseThumbnails");
+  61 |             if (!Directory.Exists(uploadsFolder)) Directory.CreateDirectory(uploadsFolder);
+  62 | 
+  63 |             var fileName = Guid.NewGuid().ToString("N") + ext;
+  64 |             var savePath = Path.Combine(uploadsFolder, fileName);
+  65 |             // Ensure still under thumbnails folder
+  66 |             string full = Path.GetFullPath(savePath);
+  67 |             string root = Path.GetFullPath(uploadsFolder) + Path.DirectorySeparatorChar;
+  68 |             if (!full.StartsWith(root, StringComparison.OrdinalIgnoreCase))
+  69 |             {
+  70 |                 WriteJson(context, new { success = false, message = "Invalid save path." });
+  71 |                 return;
+  72 |             }
+  73 | 
+  74 |             file.SaveAs(savePath);
+  75 | 
+  76 |             string under = "CourseThumbnails/" + fileName;
+  77 |             string mediaUrl = VirtualPathUtility.ToAbsolute("~/Media.ashx") + "?f=" + HttpUtility.UrlEncode(under);
+  78 |             string staticUrl = VirtualPathUtility.ToAbsolute("~/Uploads/" + under);
+  79 | 
+  80 |             WriteJson(context, new
+  81 |             {
+  82 |                 success = true,
+  83 |                 url = mediaUrl,
+  84 |                 staticUrl = staticUrl,
+  85 |                 storePath = "Uploads/" + under
+  86 |             });
+  87 |         }
+  88 |         catch
+  89 |         {
+  90 |             WriteJson(context, new { success = false, message = "Thumbnail upload failed." });
+  91 |         }
+  92 |     }
+  93 | 
+  94 |     private void WriteJson(HttpContext context, object obj)
+  95 |     {
+  96 |         var js = new JavaScriptSerializer();
+  97 |         context.Response.Write(js.Serialize(obj));
+  98 |     }
+  99 | 
+ 100 |     public bool IsReusable { get { return false; } }
+ 101 | }
+```
+
+**Line notes**
+
+- **L3:** Import namespace/types.
+- **L4:** Import namespace/types.
+- **L5:** Import namespace/types.
+- **L6:** Import namespace/types.
+- **L7:** Import namespace/types.
+- **L8:** Import namespace/types.
+- **L11:** Class declaration for this page/service.
+- **L15:** IHttpHandler entry for ashx.
+- **L20:** Error handling block.
+- **L23:** Authorization — block wrong role / anonymous.
+- **L40:** Sandbox path under ~/Uploads.
+- **L52:** File magic-byte validation on upload.
+- **L53:** Validate upload by file signature.
+- **L55:** Write/read security audit events.
+- **L56:** File magic-byte validation on upload.
+- **L88:** Handle/log exception.
 
 ## Source snapshot (raw)
 

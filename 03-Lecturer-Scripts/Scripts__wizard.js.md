@@ -1,6 +1,6 @@
 # wizard.js
 **Source:** `Pages/Lecturer/Scripts/wizard.js`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -23,15 +23,17 @@ _No methods matched the scanner (markup-only or unconventional structure). See f
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `// wizard.js: lightweight wizard controls for CourseCreation modal`
-`   2`  `(function(){`
-`   3`  `    window.initWizardControls = function(){`
-`   4`  `        // nothing fancy here; page includes functions used by markup. Keep init hook for future`
-`   5`  `        console.log('wizard controls initialized');`
-`   6`  `    };`
-`   7`  `})();`
+```javascript
+   1 | // wizard.js: lightweight wizard controls for CourseCreation modal
+   2 | (function(){
+   3 |     window.initWizardControls = function(){
+   4 |         // nothing fancy here; page includes functions used by markup. Keep init hook for future
+   5 |         console.log('wizard controls initialized');
+   6 |     };
+   7 | })();
+```
 
 ## Source snapshot (raw)
 

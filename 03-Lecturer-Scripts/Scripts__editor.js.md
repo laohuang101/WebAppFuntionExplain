@@ -1,6 +1,6 @@
 # editor.js
 **Source:** `Pages/Lecturer/Scripts/editor.js`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -26,7 +26,7 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ### `execCmd` — lines 2–11
 
-```
+```javascript
 function execCmd(cmd, value)
 ```
 
@@ -38,22 +38,24 @@ function execCmd(cmd, value)
 
 #### Line-by-line (this function)
 
-`   2`  ``
-`   3`  `    function execCmd(cmd, value) {`
-`   4`  `        if(cmd === 'createLink'){`
-`   5`  `            const url = prompt('Enter URL');`
-`   6`  `            if(!url) return;`
-`   7`  `            document.execCommand('createLink', false, url);`
-`   8`  `            return;`
-`   9`  `        }`
-`  10`  `        document.execCommand(cmd, false, value || null);`
-`  11`  `    }`
+```javascript
+   2 | 
+   3 |     function execCmd(cmd, value) {
+   4 |         if(cmd === 'createLink'){
+   5 |             const url = prompt('Enter URL');
+   6 |             if(!url) return;
+   7 |             document.execCommand('createLink', false, url);
+   8 |             return;
+   9 |         }
+  10 |         document.execCommand(cmd, false, value || null);
+  11 |     }
+```
 
 ---
 
 ### `sync` — lines 17–21
 
-```
+```javascript
 function sync()
 ```
 
@@ -64,68 +66,78 @@ function sync()
 
 #### Line-by-line (this function)
 
-`  17`  ``
-`  18`  `        function sync(){`
-`  19`  `            const hidden = document.getElementById('txtLessonContent');`
-  - → Get HTML element by id.
-`  20`  `            if(hidden) hidden.value = htmlEditor.innerHTML;`
-  - → Update page HTML.
-`  21`  `        }`
+```javascript
+  17 | 
+  18 |         function sync(){
+  19 |             const hidden = document.getElementById('txtLessonContent');
+  20 |             if(hidden) hidden.value = htmlEditor.innerHTML;
+  21 |         }
+```
+
+**Line notes**
+
+- **L19:** Get HTML element by id.
+- **L20:** Update page HTML.
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `// editor.js: small helpers for lesson editor`
-`   2`  `(function(){`
-`   3`  `    function execCmd(cmd, value) {`
-`   4`  `        if(cmd === 'createLink'){`
-`   5`  `            const url = prompt('Enter URL');`
-`   6`  `            if(!url) return;`
-`   7`  `            document.execCommand('createLink', false, url);`
-`   8`  `            return;`
-`   9`  `        }`
-`  10`  `        document.execCommand(cmd, false, value || null);`
-`  11`  `    }`
-`  12`  ``
-`  13`  `    window.initEditor = function(){`
-`  14`  `        const htmlEditor = document.getElementById('htmlEditor');`
-  - → Get HTML element by id.
-`  15`  `        if(!htmlEditor) return;`
-`  16`  ``
-`  17`  `        // sync to hidden textarea`
-`  18`  `        function sync(){`
-`  19`  `            const hidden = document.getElementById('txtLessonContent');`
-  - → Get HTML element by id.
-`  20`  `            if(hidden) hidden.value = htmlEditor.innerHTML;`
-  - → Update page HTML.
-`  21`  `        }`
-`  22`  ``
-`  23`  `        htmlEditor.addEventListener('input', sync);`
-  - → DOM event handler.
-`  24`  `        htmlEditor.addEventListener('blur', sync);`
-  - → DOM event handler.
-`  25`  ``
-`  26`  `        // toolbar bindings`
-`  27`  `        const toolbar = document.getElementById('editorToolbar');`
-  - → Get HTML element by id.
-`  28`  `        if(toolbar){`
-`  29`  `            toolbar.addEventListener('click', function(e){`
-  - → DOM event handler.
-`  30`  `                const btn = e.target.closest('button[data-cmd]');`
-`  31`  `                if(!btn) return;`
-`  32`  `                const cmd = btn.getAttribute('data-cmd');`
-`  33`  `                execCmd(cmd);`
-`  34`  `                sync();`
-`  35`  `            });`
-`  36`  `        }`
-`  37`  ``
-`  38`  `        // expose quick API`
-`  39`  `        window.__editorSync = sync;`
-`  40`  `    };`
-`  41`  `})();`
+```javascript
+   1 | // editor.js: small helpers for lesson editor
+   2 | (function(){
+   3 |     function execCmd(cmd, value) {
+   4 |         if(cmd === 'createLink'){
+   5 |             const url = prompt('Enter URL');
+   6 |             if(!url) return;
+   7 |             document.execCommand('createLink', false, url);
+   8 |             return;
+   9 |         }
+  10 |         document.execCommand(cmd, false, value || null);
+  11 |     }
+  12 | 
+  13 |     window.initEditor = function(){
+  14 |         const htmlEditor = document.getElementById('htmlEditor');
+  15 |         if(!htmlEditor) return;
+  16 | 
+  17 |         // sync to hidden textarea
+  18 |         function sync(){
+  19 |             const hidden = document.getElementById('txtLessonContent');
+  20 |             if(hidden) hidden.value = htmlEditor.innerHTML;
+  21 |         }
+  22 | 
+  23 |         htmlEditor.addEventListener('input', sync);
+  24 |         htmlEditor.addEventListener('blur', sync);
+  25 | 
+  26 |         // toolbar bindings
+  27 |         const toolbar = document.getElementById('editorToolbar');
+  28 |         if(toolbar){
+  29 |             toolbar.addEventListener('click', function(e){
+  30 |                 const btn = e.target.closest('button[data-cmd]');
+  31 |                 if(!btn) return;
+  32 |                 const cmd = btn.getAttribute('data-cmd');
+  33 |                 execCmd(cmd);
+  34 |                 sync();
+  35 |             });
+  36 |         }
+  37 | 
+  38 |         // expose quick API
+  39 |         window.__editorSync = sync;
+  40 |     };
+  41 | })();
+```
+
+**Line notes**
+
+- **L14:** Get HTML element by id.
+- **L19:** Get HTML element by id.
+- **L20:** Update page HTML.
+- **L23:** DOM event handler.
+- **L24:** DOM event handler.
+- **L27:** Get HTML element by id.
+- **L29:** DOM event handler.
 
 ## Source snapshot (raw)
 

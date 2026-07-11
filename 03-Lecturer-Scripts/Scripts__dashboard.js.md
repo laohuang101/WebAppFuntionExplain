@@ -1,6 +1,6 @@
 # dashboard.js
 **Source:** `Pages/Lecturer/Scripts/dashboard.js`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -54,7 +54,7 @@ Lecturer home: course stats, recent submissions, charts. Backed by LecturerRepos
 
 ### `ensureChartJs` — lines 4–18
 
-```
+```javascript
 function ensureChartJs(cb)
 ```
 
@@ -66,31 +66,36 @@ function ensureChartJs(cb)
 
 #### Line-by-line (this function)
 
-`   4`  ``
-`   5`  ``
-`   6`  `function ensureChartJs(cb) {`
-  - → Dashboard chart/visualization.
-`   7`  `    if (typeof Chart !== 'undefined') { cb && cb(); return; }`
-  - → Dashboard chart/visualization.
-`   8`  `    if (__chartJsLoading) { __chartJsLoading.then(function () { cb && cb(); }); return; }`
-`   9`  `    __chartJsLoading = new Promise(function (resolve, reject) {`
-`  10`  `        var s = document.createElement('script');`
-`  11`  `        s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';`
-  - → Dashboard chart/visualization.
-`  12`  `        s.async = true;`
-`  13`  `        s.onload = function () { resolve(); };`
-`  14`  `        s.onerror = function () { reject(new Error('Chart.js failed to load')); };`
-  - → Dashboard chart/visualization.
-`  15`  `        document.head.appendChild(s);`
-`  16`  `    });`
-`  17`  `    __chartJsLoading.then(function () { cb && cb(); }).catch(function (e) { console.error(e); });`
-`  18`  `}`
+```javascript
+   4 | 
+   5 | 
+   6 | function ensureChartJs(cb) {
+   7 |     if (typeof Chart !== 'undefined') { cb && cb(); return; }
+   8 |     if (__chartJsLoading) { __chartJsLoading.then(function () { cb && cb(); }); return; }
+   9 |     __chartJsLoading = new Promise(function (resolve, reject) {
+  10 |         var s = document.createElement('script');
+  11 |         s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
+  12 |         s.async = true;
+  13 |         s.onload = function () { resolve(); };
+  14 |         s.onerror = function () { reject(new Error('Chart.js failed to load')); };
+  15 |         document.head.appendChild(s);
+  16 |     });
+  17 |     __chartJsLoading.then(function () { cb && cb(); }).catch(function (e) { console.error(e); });
+  18 | }
+```
+
+**Line notes**
+
+- **L6:** Dashboard chart/visualization.
+- **L7:** Dashboard chart/visualization.
+- **L11:** Dashboard chart/visualization.
+- **L14:** Dashboard chart/visualization.
 
 ---
 
 ### `whenChartsVisible` — lines 18–40
 
-```
+```javascript
 function whenChartsVisible(run)
 ```
 
@@ -102,38 +107,43 @@ function whenChartsVisible(run)
 
 #### Line-by-line (this function)
 
-`  18`  ``
-`  19`  ``
-`  20`  `function whenChartsVisible(run) {`
-  - → Dashboard chart/visualization.
-`  21`  `    var targets = [`
-`  22`  `        document.getElementById('chartEnrollmentTrend'),`
-  - → Get HTML element by id.
-`  23`  `        document.getElementById('chartGradeDistribution')`
-  - → Get HTML element by id.
-`  24`  `    ].filter(Boolean);`
-`  25`  `    if (!targets.length) { run(); return; }`
-`  26`  `    if (!('IntersectionObserver' in window)) { run(); return; }`
-`  27`  `    var done = false;`
-`  28`  `    var io = new IntersectionObserver(function (entries) {`
-`  29`  `        if (done) return;`
-`  30`  `        for (var i = 0; i < entries.length; i++) {`
-`  31`  `            if (entries[i].isIntersecting) {`
-`  32`  `                done = true;`
-`  33`  `                io.disconnect();`
-`  34`  `                run();`
-`  35`  `                break;`
-`  36`  `            }`
-`  37`  `        }`
-`  38`  `    }, { rootMargin: '120px', threshold: 0.05 });`
-`  39`  `    targets.forEach(function (el) { io.observe(el); });`
-`  40`  `}`
+```javascript
+  18 | 
+  19 | 
+  20 | function whenChartsVisible(run) {
+  21 |     var targets = [
+  22 |         document.getElementById('chartEnrollmentTrend'),
+  23 |         document.getElementById('chartGradeDistribution')
+  24 |     ].filter(Boolean);
+  25 |     if (!targets.length) { run(); return; }
+  26 |     if (!('IntersectionObserver' in window)) { run(); return; }
+  27 |     var done = false;
+  28 |     var io = new IntersectionObserver(function (entries) {
+  29 |         if (done) return;
+  30 |         for (var i = 0; i < entries.length; i++) {
+  31 |             if (entries[i].isIntersecting) {
+  32 |                 done = true;
+  33 |                 io.disconnect();
+  34 |                 run();
+  35 |                 break;
+  36 |             }
+  37 |         }
+  38 |     }, { rootMargin: '120px', threshold: 0.05 });
+  39 |     targets.forEach(function (el) { io.observe(el); });
+  40 | }
+```
+
+**Line notes**
+
+- **L20:** Dashboard chart/visualization.
+- **L22:** Get HTML element by id.
+- **L23:** Get HTML element by id.
 
 ---
 
 ### `renderEnrollmentTrendWithChart` — lines 43–112
 
-```
+```javascript
 function renderEnrollmentTrendWithChart(data)
 ```
 
@@ -145,95 +155,100 @@ function renderEnrollmentTrendWithChart(data)
 
 #### Line-by-line (this function)
 
-`  43`  ``
-`  44`  ``
-`  45`  `  function renderEnrollmentTrendWithChart(data) {`
-  - → Dashboard chart/visualization.
-`  46`  `  try {`
-  - → Error handling block.
-`  47`  `  if (!data || !Array.isArray(data) || data.length === 0) {`
-`  48`  `  // destroy existing chart and show empty state`
-`  49`  `  if (enrollmentChart) {`
-  - → Dashboard chart/visualization.
-`  50`  `  try { enrollmentChart.destroy(); } catch(e){}`
-  - → Error handling block.
-`  51`  `  enrollmentChart = null;`
-  - → Dashboard chart/visualization.
-`  52`  `  }`
-`  53`  `  const ctxEl = document.getElementById('chartEnrollmentTrend');`
-  - → Get HTML element by id.
-`  54`  `  if (ctxEl) {`
-`  55`  `  const ctx = ctxEl.getContext('2d');`
-`  56`  `  ctx.clearRect(0, 0, ctxEl.width, ctxEl.height);`
-`  57`  `  // draw "No data" text`
-`  58`  `  ctx.font = '16px Arial';`
-`  59`  `  ctx.fillStyle = '#9ca3af';`
-`  60`  `  ctx.textAlign = 'center';`
-`  61`  `  ctx.textBaseline = 'middle';`
-`  62`  `  ctx.fillText('No enrollment data', ctxEl.width / 2, ctxEl.height / 2);`
-`  63`  `  }`
-`  64`  `  return;`
-`  65`  `  }`
-`  66`  ``
-`  67`  `  if (typeof Chart === 'undefined') {`
-  - → Dashboard chart/visualization.
-`  68`  `  console.warn('Chart.js not available; cannot render enrollment chart.');`
-  - → Dashboard chart/visualization.
-`  69`  `  // draw simple text as fallback`
-`  70`  `  const ctxEl = document.getElementById('chartEnrollmentTrend');`
-  - → Get HTML element by id.
-`  71`  `  if (ctxEl) {`
-`  72`  `  const ctx = ctxEl.getContext('2d');`
-`  73`  `  ctx.clearRect(0, 0, ctxEl.width, ctxEl.height);`
-`  74`  `  ctx.font = '16px Arial';`
-`  75`  `  ctx.fillStyle = '#9ca3af';`
-`  76`  `  ctx.textAlign = 'center';`
-`  77`  `  ctx.textBaseline = 'middle';`
-`  78`  `  ctx.fillText('Chart library blocked by browser. Enable CDN or use local file.', ctxEl.width / 2, ctxEl.height / 2);`
-  - → Dashboard chart/visualization.
-`  79`  `  }`
-`  80`  `  return;`
-`  81`  `  }`
-`  82`  ``
-`  83`  `  const labels = data.map(d => d.label);`
-`  84`  `  const values = data.map(d => d.value);`
-`  85`  `  const ctx = document.getElementById('chartEnrollmentTrend').getContext('2d');`
-  - → Get HTML element by id.
-`  86`  `  if (enrollmentChart) enrollmentChart.destroy();`
-  - → Dashboard chart/visualization.
-`  87`  `  enrollmentChart = new Chart(ctx, {`
-  - → Dashboard chart/visualization.
-`  88`  `  type: 'line',`
-`  89`  `  data: {`
-`  90`  `  labels: labels,`
-`  91`  `  datasets: [{`
-`  92`  `  label: 'Enrollments',`
-`  93`  `  data: values,`
-`  94`  `  fill: true,`
-`  95`  `  backgroundColor: 'rgba(241,127,84,0.12)',`
-`  96`  `  borderColor: '#f17f54',`
-`  97`  `  tension: 0.4,`
-`  98`  `  pointRadius: 3`
-`  99`  `  }]`
-` 100`  `  },`
-` 101`  `  options: {`
-` 102`  `  responsive: true,`
-` 103`  `  maintainAspectRatio: false,`
-` 104`  `  scales: {`
-` 105`  `  y: { beginAtZero: true, ticks: { precision: 0 } }`
-` 106`  `  }`
-` 107`  `  }`
-` 108`  `  });`
-` 109`  `  } catch (err) {`
-` 110`  `  console.error('Error rendering enrollment chart:', err);`
-` 111`  `  }`
-` 112`  `  }`
+```javascript
+  43 | 
+  44 | 
+  45 |   function renderEnrollmentTrendWithChart(data) {
+  46 |   try {
+  47 |   if (!data || !Array.isArray(data) || data.length === 0) {
+  48 |   // destroy existing chart and show empty state
+  49 |   if (enrollmentChart) {
+  50 |   try { enrollmentChart.destroy(); } catch(e){}
+  51 |   enrollmentChart = null;
+  52 |   }
+  53 |   const ctxEl = document.getElementById('chartEnrollmentTrend');
+  54 |   if (ctxEl) {
+  55 |   const ctx = ctxEl.getContext('2d');
+  56 |   ctx.clearRect(0, 0, ctxEl.width, ctxEl.height);
+  57 |   // draw "No data" text
+  58 |   ctx.font = '16px Arial';
+  59 |   ctx.fillStyle = '#9ca3af';
+  60 |   ctx.textAlign = 'center';
+  61 |   ctx.textBaseline = 'middle';
+  62 |   ctx.fillText('No enrollment data', ctxEl.width / 2, ctxEl.height / 2);
+  63 |   }
+  64 |   return;
+  65 |   }
+  66 | 
+  67 |   if (typeof Chart === 'undefined') {
+  68 |   console.warn('Chart.js not available; cannot render enrollment chart.');
+  69 |   // draw simple text as fallback
+  70 |   const ctxEl = document.getElementById('chartEnrollmentTrend');
+  71 |   if (ctxEl) {
+  72 |   const ctx = ctxEl.getContext('2d');
+  73 |   ctx.clearRect(0, 0, ctxEl.width, ctxEl.height);
+  74 |   ctx.font = '16px Arial';
+  75 |   ctx.fillStyle = '#9ca3af';
+  76 |   ctx.textAlign = 'center';
+  77 |   ctx.textBaseline = 'middle';
+  78 |   ctx.fillText('Chart library blocked by browser. Enable CDN or use local file.', ctxEl.width / 2, ctxEl.height / 2);
+  79 |   }
+  80 |   return;
+  81 |   }
+  82 | 
+  83 |   const labels = data.map(d => d.label);
+  84 |   const values = data.map(d => d.value);
+  85 |   const ctx = document.getElementById('chartEnrollmentTrend').getContext('2d');
+  86 |   if (enrollmentChart) enrollmentChart.destroy();
+  87 |   enrollmentChart = new Chart(ctx, {
+  88 |   type: 'line',
+  89 |   data: {
+  90 |   labels: labels,
+  91 |   datasets: [{
+  92 |   label: 'Enrollments',
+  93 |   data: values,
+  94 |   fill: true,
+  95 |   backgroundColor: 'rgba(241,127,84,0.12)',
+  96 |   borderColor: '#f17f54',
+  97 |   tension: 0.4,
+  98 |   pointRadius: 3
+  99 |   }]
+ 100 |   },
+ 101 |   options: {
+ 102 |   responsive: true,
+ 103 |   maintainAspectRatio: false,
+ 104 |   scales: {
+ 105 |   y: { beginAtZero: true, ticks: { precision: 0 } }
+ 106 |   }
+ 107 |   }
+ 108 |   });
+ 109 |   } catch (err) {
+ 110 |   console.error('Error rendering enrollment chart:', err);
+ 111 |   }
+ 112 |   }
+```
+
+**Line notes**
+
+- **L45:** Dashboard chart/visualization.
+- **L46:** Error handling block.
+- **L49:** Dashboard chart/visualization.
+- **L50:** Error handling block.
+- **L51:** Dashboard chart/visualization.
+- **L53:** Get HTML element by id.
+- **L67:** Dashboard chart/visualization.
+- **L68:** Dashboard chart/visualization.
+- **L70:** Get HTML element by id.
+- **L78:** Dashboard chart/visualization.
+- **L85:** Get HTML element by id.
+- **L86:** Dashboard chart/visualization.
+- **L87:** Dashboard chart/visualization.
 
 ---
 
 ### `renderGradeDistributionWithChart` — lines 112–163
 
-```
+```javascript
 function renderGradeDistributionWithChart(data)
 ```
 
@@ -245,72 +260,77 @@ function renderGradeDistributionWithChart(data)
 
 #### Line-by-line (this function)
 
-` 112`  ``
-` 113`  ``
-` 114`  `  function renderGradeDistributionWithChart(data) {`
-  - → Dashboard chart/visualization.
-` 115`  `  try {`
-  - → Error handling block.
-` 116`  `  const defaultLabels = ['A', 'B', 'C', 'D', 'F'];`
-` 117`  `  if (!data || !Array.isArray(data) || data.length === 0) {`
-` 118`  `  // render zeroed chart so layout is consistent`
-` 119`  `  if (gradeChart) gradeChart.destroy();`
-  - → Dashboard chart/visualization.
-` 120`  `  const ctx = document.getElementById('chartGradeDistribution').getContext('2d');`
-  - → Get HTML element by id.
-` 121`  `  gradeChart = new Chart(ctx, {`
-  - → Dashboard chart/visualization.
-` 122`  `  type: 'bar',`
-` 123`  `  data: {`
-` 124`  `  labels: defaultLabels,`
-` 125`  `  datasets: [{`
-` 126`  `  label: 'Students',`
-` 127`  `  data: [0, 0, 0, 0, 0],`
-` 128`  `  backgroundColor: ['#f17f54','#3b82f6','#10b981','#f59e0b','#ef4444']`
-` 129`  `  }]`
-` 130`  `  },`
-` 131`  `  options: {`
-` 132`  `  responsive: true,`
-` 133`  `  maintainAspectRatio: false,`
-` 134`  `  scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }`
-` 135`  `  }`
-` 136`  `  });`
-` 137`  `  return;`
-` 138`  `  }`
-` 139`  ``
-` 140`  `  const labels = data.map(d => d.label);`
-` 141`  `  const values = data.map(d => d.value);`
-` 142`  `  const ctx = document.getElementById('chartGradeDistribution').getContext('2d');`
-  - → Get HTML element by id.
-` 143`  `  if (gradeChart) gradeChart.destroy();`
-  - → Dashboard chart/visualization.
-` 144`  `  gradeChart = new Chart(ctx, {`
-  - → Dashboard chart/visualization.
-` 145`  `  type: 'bar',`
-` 146`  `  data: {`
-` 147`  `  labels: labels,`
-` 148`  `  datasets: [{`
-` 149`  `  label: 'Students',`
-` 150`  `  data: values,`
-` 151`  `  backgroundColor: ['#f17f54','#3b82f6','#10b981','#f59e0b','#ef4444']`
-` 152`  `  }]`
-` 153`  `  },`
-` 154`  `  options: {`
-` 155`  `  responsive: true,`
-` 156`  `  maintainAspectRatio: false,`
-` 157`  `  scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }`
-` 158`  `  }`
-` 159`  `  });`
-` 160`  `  } catch (err) {`
-` 161`  `  console.error('Error rendering grade distribution chart:', err);`
-` 162`  `  }`
-` 163`  `  }`
+```javascript
+ 112 | 
+ 113 | 
+ 114 |   function renderGradeDistributionWithChart(data) {
+ 115 |   try {
+ 116 |   const defaultLabels = ['A', 'B', 'C', 'D', 'F'];
+ 117 |   if (!data || !Array.isArray(data) || data.length === 0) {
+ 118 |   // render zeroed chart so layout is consistent
+ 119 |   if (gradeChart) gradeChart.destroy();
+ 120 |   const ctx = document.getElementById('chartGradeDistribution').getContext('2d');
+ 121 |   gradeChart = new Chart(ctx, {
+ 122 |   type: 'bar',
+ 123 |   data: {
+ 124 |   labels: defaultLabels,
+ 125 |   datasets: [{
+ 126 |   label: 'Students',
+ 127 |   data: [0, 0, 0, 0, 0],
+ 128 |   backgroundColor: ['#f17f54','#3b82f6','#10b981','#f59e0b','#ef4444']
+ 129 |   }]
+ 130 |   },
+ 131 |   options: {
+ 132 |   responsive: true,
+ 133 |   maintainAspectRatio: false,
+ 134 |   scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+ 135 |   }
+ 136 |   });
+ 137 |   return;
+ 138 |   }
+ 139 | 
+ 140 |   const labels = data.map(d => d.label);
+ 141 |   const values = data.map(d => d.value);
+ 142 |   const ctx = document.getElementById('chartGradeDistribution').getContext('2d');
+ 143 |   if (gradeChart) gradeChart.destroy();
+ 144 |   gradeChart = new Chart(ctx, {
+ 145 |   type: 'bar',
+ 146 |   data: {
+ 147 |   labels: labels,
+ 148 |   datasets: [{
+ 149 |   label: 'Students',
+ 150 |   data: values,
+ 151 |   backgroundColor: ['#f17f54','#3b82f6','#10b981','#f59e0b','#ef4444']
+ 152 |   }]
+ 153 |   },
+ 154 |   options: {
+ 155 |   responsive: true,
+ 156 |   maintainAspectRatio: false,
+ 157 |   scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+ 158 |   }
+ 159 |   });
+ 160 |   } catch (err) {
+ 161 |   console.error('Error rendering grade distribution chart:', err);
+ 162 |   }
+ 163 |   }
+```
+
+**Line notes**
+
+- **L114:** Dashboard chart/visualization.
+- **L115:** Error handling block.
+- **L119:** Dashboard chart/visualization.
+- **L120:** Get HTML element by id.
+- **L121:** Dashboard chart/visualization.
+- **L142:** Get HTML element by id.
+- **L143:** Dashboard chart/visualization.
+- **L144:** Dashboard chart/visualization.
 
 ---
 
 ### `escapeHtmlDash` — lines 172–404
 
-```
+```javascript
 function escapeHtmlDash(str)
 ```
 
@@ -324,280 +344,287 @@ function escapeHtmlDash(str)
 
 #### Line-by-line (this function)
 
-` 172`  ``
-` 173`  ``
-` 174`  `    function escapeHtmlDash(str) {`
-  - → Encode text to reduce XSS risk.
-` 175`  `    if (str == null) return '';`
-` 176`  `    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');`
-` 177`  `  }`
-` 178`  ``
-` 179`  `  function renderDashSubmissions(list) {`
-` 180`  `  var wrap = document.getElementById('dashSubmissionsWrap');`
-  - → Get HTML element by id.
-` 181`  `  if (!wrap) return;`
-` 182`  `  var colors = ['#f59e0b', '#3b82f6', '#10b981', '#ec4899', '#8b5cf6'];`
-` 183`  `  dashSubmissionsMap = {};`
-` 184`  `  (list || []).forEach(function (s) { dashSubmissionsMap[s.sid] = s; });`
-` 185`  ``
-` 186`  `  if (typeof EduDataTable === 'undefined') {`
-` 187`  `  wrap.innerHTML = '<div class="text-muted p-3">No table component.</div>';`
-  - → Update page HTML.
-` 188`  `  return;`
-` 189`  `  }`
-` 190`  `  if (!dashSubmissionsDt) {`
-` 191`  `  dashSubmissionsDt = EduDataTable.create({`
-` 192`  `  container: wrap,`
-` 193`  `  pageSize: 8,`
-` 194`  `  pageSizeOptions: [5, 8, 15, 25],`
-` 195`  `  searchPlaceholder: 'Search student, assignment, course...',`
-` 196`  `  emptyMessage: 'No recent submissions found.',`
-` 197`  `  tableClass: 'table table-hover submissions-table mb-0 edt-table',`
-` 198`  `  columns: [`
-` 199`  `  {`
-` 200`  `  key: 'studentName', title: 'Student', sortable: true,`
-` 201`  `  render: function (sub, i) {`
-` 202`  `  return '<div class="d-flex align-items-center"><div class="student-avatar me-2" style="background-color:' +`
-` 203`  `    colors[i % colors.length] + ';">' + escapeHtmlDash(sub.initials || '?') +`
-  - → Encode text to reduce XSS risk.
-` 204`  `    '</div><span class="fw-semibold text-dark">' + escapeHtmlDash(sub.studentName) + '</span></div>';`
-  - → Encode text to reduce XSS risk.
-` 205`  `},`
-` 206`  `searchValue: function (s) { return (s.studentName || '') + ' ' + (s.studentEmail || ''); }`
-` 207`  `},`
-` 208`  `{ key: 'assignmentTitle', title: 'Assignment', sortable: true, filter: true, filterLabel: 'Assignment' },`
-` 209`  `{ key: 'courseName', title: 'Course', sortable: true, filter: true, filterLabel: 'Course' },`
-` 210`  `{ key: 'timeText', title: 'Time', sortable: true, cellClass: 'text-muted small',`
-` 211`  `sortValue: function (s) { return s.timestamp || s.timeText || ''; }, type: 'date' },`
-` 212`  `{`
-` 213`  `key: 'status', title: 'Action', sortable: true, filter: true, filterLabel: 'Status',`
-` 214`  `render: function (sub) {`
-` 215`  `if (sub.isGraded) {`
-` 216`  `return '<span class="badge-graded"><i class="fa-solid fa-circle-check"></i> Graded</span>';`
-` 217`  `}`
-` 218`  `return '<button type="button" class="btn btn-grade-now" onclick="openGradeModalBySid(' +`
-` 219`  `sub.sid + ')">Grade Now</button>';`
-` 220`  `},`
-` 221`  `sortValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; },`
-` 222`  `searchValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; }`
-` 223`  `}`
-` 224`  `]`
-` 225`  `});`
-` 226`  `}`
-` 227`  `// Normalize status field for filter`
-` 228`  `var rows = (list || []).map(function (s) {`
-` 229`  `s.status = s.isGraded ? 'Graded' : 'Pending';`
-` 230`  `return s;`
-` 231`  `});`
-` 232`  `dashSubmissionsDt.setData(rows);`
-` 233`  `}`
-` 234`  ``
-` 235`  `function openGradeModalBySid(sid) {`
-` 236`  `var sub = dashSubmissionsMap[sid];`
-` 237`  `if (sub) openGradeModal(sub);`
-` 238`  `}`
-` 239`  ``
-` 240`  `// dashboard initialization is deferred until Chart.js and chart helper functions are available (handled at bottom of page)`
-` 241`  ``
-` 242`  `function exportDashGradesCsv() {`
-  - → CSV export.
-` 243`  `  fetch(window.location.pathname + '/ExportGradesCsv', {`
-  - → HTTP request to server WebMethod/ashx.
-` 244`  `    method: 'POST',`
-` 245`  `    headers: { 'Content-Type': 'application/json' },`
-` 246`  `    body: JSON.stringify({ cid: 0 }),`
-  - → JS object ↔ JSON text.
-` 247`  `    credentials: 'same-origin'`
-` 248`  `  })`
-` 249`  `  .then(function (r) { return r.json(); })`
-` 250`  `  .then(function (data) {`
-` 251`  `    var res = (data && data.d) ? (data.d.d || data.d) : data;`
-` 252`  `    if (!res || !res.success) { alert((res && res.message) || 'Export failed'); return; }`
-` 253`  `    var blob = new Blob([res.csv || ''], { type: 'text/csv;charset=utf-8;' });`
-  - → CSV export.
-` 254`  `    var a = document.createElement('a');`
-` 255`  `    a.href = URL.createObjectURL(blob);`
-` 256`  `    a.download = res.fileName || 'grades.csv';`
-  - → CSV export.
-` 257`  `    document.body.appendChild(a);`
-` 258`  `    a.click();`
-` 259`  `    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 400);`
-` 260`  `  })`
-` 261`  `  .catch(function () { alert('Network error exporting grades.'); });`
-` 262`  `}`
-` 263`  ``
-` 264`  `function loadDashboardData() {`
-` 265`  `// Fetch dashboard statistics and submissions from code-behind`
-` 266`  `fetch(window.location.pathname + '/GetDashboardData', {`
-  - → HTTP request to server WebMethod/ashx.
-` 267`  `method: 'POST',`
-` 268`  `headers: {`
-` 269`  `'Content-Type': 'application/json'`
-` 270`  `}`
-` 271`  `})`
-` 272`  `.then(res => res.json())`
-` 273`  `.then(data => {`
-` 274`  `// Normalize ASP.NET PageMethod response which may be wrapped as { d: {...} }`
-` 275`  `// In some environments it can be double-wrapped: { d: { d: {...} } }`
-` 276`  `let resObj = null;`
-` 277`  `if (data && data.d) {`
-` 278`  `resObj = data.d.d ? data.d.d : data.d;`
-` 279`  `} else {`
-` 280`  `resObj = data;`
-` 281`  `}`
-` 282`  `if (!resObj || resObj.notAuthenticated) {`
-` 283`  `// Redirect to login`
-` 284`  `window.location.href = '/Pages/Authentication/Login.aspx';`
-` 285`  `return;`
-` 286`  `}`
-` 287`  `if (!resObj.success) {`
-` 288`  `console.error('Failed to load dashboard:', resObj.message || resObj);`
-` 289`  `return;`
-` 290`  `}`
-` 291`  ``
-` 292`  `if (resObj.success) {`
-` 293`  `// Update Stats`
-` 294`  `document.getElementById('lblTotalStudents').innerText = formatNumber(resObj.totalStudents);`
-  - → Get HTML element by id.
-` 295`  `document.getElementById('lblActiveCourses').innerText = resObj.activeCourses;`
-  - → Get HTML element by id.
-` 296`  `document.getElementById('lblPendingGrading').innerText = resObj.pendingGrading;`
-  - → Get HTML element by id.
-` 297`  `if (!resObj.hasGrades) {`
-` 298`  `document.getElementById('lblAverageGrade').innerText = "N/A";`
-  - → Get HTML element by id.
-` 299`  `} else {`
-` 300`  `document.getElementById('lblAverageGrade').innerText = resObj.averageGrade + "%";`
-  - → Get HTML element by id.
-` 301`  `}`
-` 302`  ``
-` 303`  `// Stats + table first; charts only when visible (lazy Chart.js CDN)`
-` 304`  `var enrollData = (resObj.enrollmentTrends && Array.isArray(resObj.enrollmentTrends))`
-` 305`  `  ? resObj.enrollmentTrends : [];`
-` 306`  `var gradeData = (resObj.gradeDistribution && Array.isArray(resObj.gradeDistribution))`
-` 307`  `  ? resObj.gradeDistribution : [];`
-` 308`  `whenChartsVisible(function () {`
-  - → Dashboard chart/visualization.
-` 309`  `  ensureChartJs(function () {`
-  - → Dashboard chart/visualization.
-` 310`  `    renderEnrollmentTrendWithChart(enrollData);`
-  - → Dashboard chart/visualization.
-` 311`  `    renderGradeDistributionWithChart(gradeData);`
-  - → Dashboard chart/visualization.
-` 312`  `  });`
-` 313`  `});`
-` 314`  ``
-` 315`  `// Submissions table with search / sort / filter / pagination`
-` 316`  `renderDashSubmissions(resObj.submissions || []);`
-` 317`  `}`
-` 318`  `})`
-` 319`  `.catch(err => {`
-` 320`  `console.error("Error loading dashboard data: ", err);`
-` 321`  `});`
-` 322`  `}`
-` 323`  ``
-` 324`  `function formatNumber(num) {`
-` 325`  `return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");`
-` 326`  `}`
-` 327`  ``
-` 328`  `function openGradeModal(sub) {`
-` 329`  `currentSubmissionId = sub.sid;`
-` 330`  ``
-` 331`  `// Set student initials and name`
-` 332`  `const avatar = document.getElementById('modalStudentAvatar');`
-  - → Get HTML element by id.
-` 333`  `avatar.innerText = sub.initials;`
-` 334`  `avatar.style.backgroundColor = '#f17f54';`
-` 335`  `document.getElementById('modalStudentName').innerText = sub.studentName;`
-  - → Get HTML element by id.
-` 336`  ``
-` 337`  `// Set details`
-` 338`  `document.getElementById('modalAssignment').innerText = sub.assignmentTitle;`
-  - → Get HTML element by id.
-` 339`  `document.getElementById('modalAnswer').innerText = sub.studentAnswer;`
-  - → Get HTML element by id.
-` 340`  `document.getElementById('lblMaxScore').innerText = "/ " + sub.maxScore;`
-  - → Get HTML element by id.
-` 341`  ``
-` 342`  `// Reset inputs`
-` 343`  `const txtScore = document.getElementById('txtScore');`
-  - → Get HTML element by id.
-` 344`  `txtScore.value = 0;`
-` 345`  `txtScore.max = sub.maxScore;`
-` 346`  `document.getElementById('txtReview').value = '';`
-  - → Get HTML element by id.
-` 347`  ``
-` 348`  `// Hide error`
-` 349`  `document.getElementById('modalErrorMessage').style.display = 'none';`
-  - → Get HTML element by id.
-` 350`  ``
-` 351`  `// Show modal`
-` 352`  `const myModal = new bootstrap.Modal(document.getElementById('gradingModal'));`
-  - → Get HTML element by id.
-` 353`  `myModal.show();`
-` 354`  `}`
-` 355`  ``
-` 356`  `function submitGrading() {`
-` 357`  `const score = parseInt(document.getElementById('txtScore').value);`
-  - → Get HTML element by id.
-` 358`  `const review = document.getElementById('txtReview').value.trim();`
-  - → Get HTML element by id.
-` 359`  `const errDiv = document.getElementById('modalErrorMessage');`
-  - → Get HTML element by id.
-` 360`  ``
-` 361`  `errDiv.style.display = 'none';`
-` 362`  ``
-` 363`  `if (isNaN(score) || score < 0) {`
-` 364`  `errDiv.innerText = "Please enter a valid score.";`
-` 365`  `errDiv.style.display = 'block';`
-` 366`  `return;`
-` 367`  `}`
-` 368`  ``
-` 369`  `// Call SaveGrade WebMethod`
-` 370`  `fetch(window.location.pathname + '/SaveGrade', {`
-  - → HTTP request to server WebMethod/ashx.
-` 371`  `method: 'POST',`
-` 372`  `headers: {`
-` 373`  `'Content-Type': 'application/json'`
-` 374`  `},`
-` 375`  `body: JSON.stringify({`
-  - → JS object ↔ JSON text.
-` 376`  `sid: currentSubmissionId,`
-` 377`  `score: score,`
-` 378`  `review: review`
-` 379`  `})`
-` 380`  `})`
-` 381`  `.then(res => res.json())`
-` 382`  `.then(data => {`
-` 383`  `let resObj = null;`
-` 384`  `if (data && data.d) resObj = data.d.d ? data.d.d : data.d; else resObj = data;`
-` 385`  `if (resObj && resObj.success) {`
-` 386`  `// Close Modal`
-` 387`  `const modalEl = document.getElementById('gradingModal');`
-  - → Get HTML element by id.
-` 388`  `const modal = bootstrap.Modal.getInstance(modalEl);`
-` 389`  `modal.hide();`
-` 390`  ``
-` 391`  `// Refresh dashboard data`
-` 392`  `loadDashboardData();`
-` 393`  `} else {`
-` 394`  `errDiv.innerText = resObj.message || "Failed to save grade.";`
-` 395`  `errDiv.style.display = 'block';`
-` 396`  `}`
-` 397`  `})`
-` 398`  `.catch(err => {`
-` 399`  `errDiv.innerText = "Network error. Please try again.";`
-` 400`  `errDiv.style.display = 'block';`
-` 401`  `console.error(err);`
-` 402`  `});`
-` 403`  `}`
-` 404`  ``
+```javascript
+ 172 | 
+ 173 | 
+ 174 |     function escapeHtmlDash(str) {
+ 175 |     if (str == null) return '';
+ 176 |     return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+ 177 |   }
+ 178 | 
+ 179 |   function renderDashSubmissions(list) {
+ 180 |   var wrap = document.getElementById('dashSubmissionsWrap');
+ 181 |   if (!wrap) return;
+ 182 |   var colors = ['#f59e0b', '#3b82f6', '#10b981', '#ec4899', '#8b5cf6'];
+ 183 |   dashSubmissionsMap = {};
+ 184 |   (list || []).forEach(function (s) { dashSubmissionsMap[s.sid] = s; });
+ 185 | 
+ 186 |   if (typeof EduDataTable === 'undefined') {
+ 187 |   wrap.innerHTML = '<div class="text-muted p-3">No table component.</div>';
+ 188 |   return;
+ 189 |   }
+ 190 |   if (!dashSubmissionsDt) {
+ 191 |   dashSubmissionsDt = EduDataTable.create({
+ 192 |   container: wrap,
+ 193 |   pageSize: 8,
+ 194 |   pageSizeOptions: [5, 8, 15, 25],
+ 195 |   searchPlaceholder: 'Search student, assignment, course...',
+ 196 |   emptyMessage: 'No recent submissions found.',
+ 197 |   tableClass: 'table table-hover submissions-table mb-0 edt-table',
+ 198 |   columns: [
+ 199 |   {
+ 200 |   key: 'studentName', title: 'Student', sortable: true,
+ 201 |   render: function (sub, i) {
+ 202 |   return '<div class="d-flex align-items-center"><div class="student-avatar me-2" style="background-color:' +
+ 203 |     colors[i % colors.length] + ';">' + escapeHtmlDash(sub.initials || '?') +
+ 204 |     '</div><span class="fw-semibold text-dark">' + escapeHtmlDash(sub.studentName) + '</span></div>';
+ 205 | },
+ 206 | searchValue: function (s) { return (s.studentName || '') + ' ' + (s.studentEmail || ''); }
+ 207 | },
+ 208 | { key: 'assignmentTitle', title: 'Assignment', sortable: true, filter: true, filterLabel: 'Assignment' },
+ 209 | { key: 'courseName', title: 'Course', sortable: true, filter: true, filterLabel: 'Course' },
+ 210 | { key: 'timeText', title: 'Time', sortable: true, cellClass: 'text-muted small',
+ 211 | sortValue: function (s) { return s.timestamp || s.timeText || ''; }, type: 'date' },
+ 212 | {
+ 213 | key: 'status', title: 'Action', sortable: true, filter: true, filterLabel: 'Status',
+ 214 | render: function (sub) {
+ 215 | if (sub.isGraded) {
+ 216 | return '<span class="badge-graded"><i class="fa-solid fa-circle-check"></i> Graded</span>';
+ 217 | }
+ 218 | return '<button type="button" class="btn btn-grade-now" onclick="openGradeModalBySid(' +
+ 219 | sub.sid + ')">Grade Now</button>';
+ 220 | },
+ 221 | sortValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; },
+ 222 | searchValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; }
+ 223 | }
+ 224 | ]
+ 225 | });
+ 226 | }
+ 227 | // Normalize status field for filter
+ 228 | var rows = (list || []).map(function (s) {
+ 229 | s.status = s.isGraded ? 'Graded' : 'Pending';
+ 230 | return s;
+ 231 | });
+ 232 | dashSubmissionsDt.setData(rows);
+ 233 | }
+ 234 | 
+ 235 | function openGradeModalBySid(sid) {
+ 236 | var sub = dashSubmissionsMap[sid];
+ 237 | if (sub) openGradeModal(sub);
+ 238 | }
+ 239 | 
+ 240 | // dashboard initialization is deferred until Chart.js and chart helper functions are available (handled at bottom of page)
+ 241 | 
+ 242 | function exportDashGradesCsv() {
+ 243 |   fetch(window.location.pathname + '/ExportGradesCsv', {
+ 244 |     method: 'POST',
+ 245 |     headers: { 'Content-Type': 'application/json' },
+ 246 |     body: JSON.stringify({ cid: 0 }),
+ 247 |     credentials: 'same-origin'
+ 248 |   })
+ 249 |   .then(function (r) { return r.json(); })
+ 250 |   .then(function (data) {
+ 251 |     var res = (data && data.d) ? (data.d.d || data.d) : data;
+ 252 |     if (!res || !res.success) { alert((res && res.message) || 'Export failed'); return; }
+ 253 |     var blob = new Blob([res.csv || ''], { type: 'text/csv;charset=utf-8;' });
+ 254 |     var a = document.createElement('a');
+ 255 |     a.href = URL.createObjectURL(blob);
+ 256 |     a.download = res.fileName || 'grades.csv';
+ 257 |     document.body.appendChild(a);
+ 258 |     a.click();
+ 259 |     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 400);
+ 260 |   })
+ 261 |   .catch(function () { alert('Network error exporting grades.'); });
+ 262 | }
+ 263 | 
+ 264 | function loadDashboardData() {
+ 265 | // Fetch dashboard statistics and submissions from code-behind
+ 266 | fetch(window.location.pathname + '/GetDashboardData', {
+ 267 | method: 'POST',
+ 268 | headers: {
+ 269 | 'Content-Type': 'application/json'
+ 270 | }
+ 271 | })
+ 272 | .then(res => res.json())
+ 273 | .then(data => {
+ 274 | // Normalize ASP.NET PageMethod response which may be wrapped as { d: {...} }
+ 275 | // In some environments it can be double-wrapped: { d: { d: {...} } }
+ 276 | let resObj = null;
+ 277 | if (data && data.d) {
+ 278 | resObj = data.d.d ? data.d.d : data.d;
+ 279 | } else {
+ 280 | resObj = data;
+ 281 | }
+ 282 | if (!resObj || resObj.notAuthenticated) {
+ 283 | // Redirect to login
+ 284 | window.location.href = '/Pages/Authentication/Login.aspx';
+ 285 | return;
+ 286 | }
+ 287 | if (!resObj.success) {
+ 288 | console.error('Failed to load dashboard:', resObj.message || resObj);
+ 289 | return;
+ 290 | }
+ 291 | 
+ 292 | if (resObj.success) {
+ 293 | // Update Stats
+ 294 | document.getElementById('lblTotalStudents').innerText = formatNumber(resObj.totalStudents);
+ 295 | document.getElementById('lblActiveCourses').innerText = resObj.activeCourses;
+ 296 | document.getElementById('lblPendingGrading').innerText = resObj.pendingGrading;
+ 297 | if (!resObj.hasGrades) {
+ 298 | document.getElementById('lblAverageGrade').innerText = "N/A";
+ 299 | } else {
+ 300 | document.getElementById('lblAverageGrade').innerText = resObj.averageGrade + "%";
+ 301 | }
+ 302 | 
+ 303 | // Stats + table first; charts only when visible (lazy Chart.js CDN)
+ 304 | var enrollData = (resObj.enrollmentTrends && Array.isArray(resObj.enrollmentTrends))
+ 305 |   ? resObj.enrollmentTrends : [];
+ 306 | var gradeData = (resObj.gradeDistribution && Array.isArray(resObj.gradeDistribution))
+ 307 |   ? resObj.gradeDistribution : [];
+ 308 | whenChartsVisible(function () {
+ 309 |   ensureChartJs(function () {
+ 310 |     renderEnrollmentTrendWithChart(enrollData);
+ 311 |     renderGradeDistributionWithChart(gradeData);
+ 312 |   });
+ 313 | });
+ 314 | 
+ 315 | // Submissions table with search / sort / filter / pagination
+ 316 | renderDashSubmissions(resObj.submissions || []);
+ 317 | }
+ 318 | })
+ 319 | .catch(err => {
+ 320 | console.error("Error loading dashboard data: ", err);
+ 321 | });
+ 322 | }
+ 323 | 
+ 324 | function formatNumber(num) {
+ 325 | return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+ 326 | }
+ 327 | 
+ 328 | function openGradeModal(sub) {
+ 329 | currentSubmissionId = sub.sid;
+ 330 | 
+ 331 | // Set student initials and name
+ 332 | const avatar = document.getElementById('modalStudentAvatar');
+ 333 | avatar.innerText = sub.initials;
+ 334 | avatar.style.backgroundColor = '#f17f54';
+ 335 | document.getElementById('modalStudentName').innerText = sub.studentName;
+ 336 | 
+ 337 | // Set details
+ 338 | document.getElementById('modalAssignment').innerText = sub.assignmentTitle;
+ 339 | document.getElementById('modalAnswer').innerText = sub.studentAnswer;
+ 340 | document.getElementById('lblMaxScore').innerText = "/ " + sub.maxScore;
+ 341 | 
+ 342 | // Reset inputs
+ 343 | const txtScore = document.getElementById('txtScore');
+ 344 | txtScore.value = 0;
+ 345 | txtScore.max = sub.maxScore;
+ 346 | document.getElementById('txtReview').value = '';
+ 347 | 
+ 348 | // Hide error
+ 349 | document.getElementById('modalErrorMessage').style.display = 'none';
+ 350 | 
+ 351 | // Show modal
+ 352 | const myModal = new bootstrap.Modal(document.getElementById('gradingModal'));
+ 353 | myModal.show();
+ 354 | }
+ 355 | 
+ 356 | function submitGrading() {
+ 357 | const score = parseInt(document.getElementById('txtScore').value);
+ 358 | const review = document.getElementById('txtReview').value.trim();
+ 359 | const errDiv = document.getElementById('modalErrorMessage');
+ 360 | 
+ 361 | errDiv.style.display = 'none';
+ 362 | 
+ 363 | if (isNaN(score) || score < 0) {
+ 364 | errDiv.innerText = "Please enter a valid score.";
+ 365 | errDiv.style.display = 'block';
+ 366 | return;
+ 367 | }
+ 368 | 
+ 369 | // Call SaveGrade WebMethod
+ 370 | fetch(window.location.pathname + '/SaveGrade', {
+ 371 | method: 'POST',
+ 372 | headers: {
+ 373 | 'Content-Type': 'application/json'
+ 374 | },
+ 375 | body: JSON.stringify({
+ 376 | sid: currentSubmissionId,
+ 377 | score: score,
+ 378 | review: review
+ 379 | })
+ 380 | })
+ 381 | .then(res => res.json())
+ 382 | .then(data => {
+ 383 | let resObj = null;
+ 384 | if (data && data.d) resObj = data.d.d ? data.d.d : data.d; else resObj = data;
+ 385 | if (resObj && resObj.success) {
+ 386 | // Close Modal
+ 387 | const modalEl = document.getElementById('gradingModal');
+ 388 | const modal = bootstrap.Modal.getInstance(modalEl);
+ 389 | modal.hide();
+ 390 | 
+ 391 | // Refresh dashboard data
+ 392 | loadDashboardData();
+ 393 | } else {
+ 394 | errDiv.innerText = resObj.message || "Failed to save grade.";
+ 395 | errDiv.style.display = 'block';
+ 396 | }
+ 397 | })
+ 398 | .catch(err => {
+ 399 | errDiv.innerText = "Network error. Please try again.";
+ 400 | errDiv.style.display = 'block';
+ 401 | console.error(err);
+ 402 | });
+ 403 | }
+ 404 | 
+```
+
+**Line notes**
+
+- **L174:** Encode text to reduce XSS risk.
+- **L180:** Get HTML element by id.
+- **L186:** In-memory result set from ADO.NET.
+- **L187:** Update page HTML.
+- **L191:** In-memory result set from ADO.NET.
+- **L203:** Encode text to reduce XSS risk.
+- **L204:** Encode text to reduce XSS risk.
+- **L242:** CSV export.
+- **L243:** HTTP request to server WebMethod/ashx.
+- **L246:** JS object ↔ JSON text.
+- **L253:** CSV export.
+- **L256:** CSV export.
+- **L266:** HTTP request to server WebMethod/ashx.
+- **L294:** Get HTML element by id.
+- **L295:** Get HTML element by id.
+- **L296:** Get HTML element by id.
+- **L298:** Get HTML element by id.
+- **L300:** Get HTML element by id.
+- **L308:** Dashboard chart/visualization.
+- **L309:** Dashboard chart/visualization.
+- **L310:** Dashboard chart/visualization.
+- **L311:** Dashboard chart/visualization.
+- **L332:** Get HTML element by id.
+- **L335:** Get HTML element by id.
+- **L338:** Get HTML element by id.
+- **L339:** Get HTML element by id.
+- **L340:** Get HTML element by id.
+- **L343:** Get HTML element by id.
+- **L346:** Get HTML element by id.
+- **L349:** Get HTML element by id.
+- **L352:** Get HTML element by id.
+- **L357:** Get HTML element by id.
+- **L358:** Get HTML element by id.
+- **L359:** Get HTML element by id.
+- **L370:** HTTP request to server WebMethod/ashx.
+- **L375:** JS object ↔ JSON text.
+- **L387:** Get HTML element by id.
 
 ---
 
 ### `renderDashSubmissions` — lines 177–233
 
-```
+```javascript
 function renderDashSubmissions(list)
 ```
 
@@ -609,73 +636,80 @@ function renderDashSubmissions(list)
 
 #### Line-by-line (this function)
 
-` 177`  ``
-` 178`  ``
-` 179`  `  function renderDashSubmissions(list) {`
-` 180`  `  var wrap = document.getElementById('dashSubmissionsWrap');`
-  - → Get HTML element by id.
-` 181`  `  if (!wrap) return;`
-` 182`  `  var colors = ['#f59e0b', '#3b82f6', '#10b981', '#ec4899', '#8b5cf6'];`
-` 183`  `  dashSubmissionsMap = {};`
-` 184`  `  (list || []).forEach(function (s) { dashSubmissionsMap[s.sid] = s; });`
-` 185`  ``
-` 186`  `  if (typeof EduDataTable === 'undefined') {`
-` 187`  `  wrap.innerHTML = '<div class="text-muted p-3">No table component.</div>';`
-  - → Update page HTML.
-` 188`  `  return;`
-` 189`  `  }`
-` 190`  `  if (!dashSubmissionsDt) {`
-` 191`  `  dashSubmissionsDt = EduDataTable.create({`
-` 192`  `  container: wrap,`
-` 193`  `  pageSize: 8,`
-` 194`  `  pageSizeOptions: [5, 8, 15, 25],`
-` 195`  `  searchPlaceholder: 'Search student, assignment, course...',`
-` 196`  `  emptyMessage: 'No recent submissions found.',`
-` 197`  `  tableClass: 'table table-hover submissions-table mb-0 edt-table',`
-` 198`  `  columns: [`
-` 199`  `  {`
-` 200`  `  key: 'studentName', title: 'Student', sortable: true,`
-` 201`  `  render: function (sub, i) {`
-` 202`  `  return '<div class="d-flex align-items-center"><div class="student-avatar me-2" style="background-color:' +`
-` 203`  `    colors[i % colors.length] + ';">' + escapeHtmlDash(sub.initials || '?') +`
-  - → Encode text to reduce XSS risk.
-` 204`  `    '</div><span class="fw-semibold text-dark">' + escapeHtmlDash(sub.studentName) + '</span></div>';`
-  - → Encode text to reduce XSS risk.
-` 205`  `},`
-` 206`  `searchValue: function (s) { return (s.studentName || '') + ' ' + (s.studentEmail || ''); }`
-` 207`  `},`
-` 208`  `{ key: 'assignmentTitle', title: 'Assignment', sortable: true, filter: true, filterLabel: 'Assignment' },`
-` 209`  `{ key: 'courseName', title: 'Course', sortable: true, filter: true, filterLabel: 'Course' },`
-` 210`  `{ key: 'timeText', title: 'Time', sortable: true, cellClass: 'text-muted small',`
-` 211`  `sortValue: function (s) { return s.timestamp || s.timeText || ''; }, type: 'date' },`
-` 212`  `{`
-` 213`  `key: 'status', title: 'Action', sortable: true, filter: true, filterLabel: 'Status',`
-` 214`  `render: function (sub) {`
-` 215`  `if (sub.isGraded) {`
-` 216`  `return '<span class="badge-graded"><i class="fa-solid fa-circle-check"></i> Graded</span>';`
-` 217`  `}`
-` 218`  `return '<button type="button" class="btn btn-grade-now" onclick="openGradeModalBySid(' +`
-` 219`  `sub.sid + ')">Grade Now</button>';`
-` 220`  `},`
-` 221`  `sortValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; },`
-` 222`  `searchValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; }`
-` 223`  `}`
-` 224`  `]`
-` 225`  `});`
-` 226`  `}`
-` 227`  `// Normalize status field for filter`
-` 228`  `var rows = (list || []).map(function (s) {`
-` 229`  `s.status = s.isGraded ? 'Graded' : 'Pending';`
-` 230`  `return s;`
-` 231`  `});`
-` 232`  `dashSubmissionsDt.setData(rows);`
-` 233`  `}`
+```javascript
+ 177 | 
+ 178 | 
+ 179 |   function renderDashSubmissions(list) {
+ 180 |   var wrap = document.getElementById('dashSubmissionsWrap');
+ 181 |   if (!wrap) return;
+ 182 |   var colors = ['#f59e0b', '#3b82f6', '#10b981', '#ec4899', '#8b5cf6'];
+ 183 |   dashSubmissionsMap = {};
+ 184 |   (list || []).forEach(function (s) { dashSubmissionsMap[s.sid] = s; });
+ 185 | 
+ 186 |   if (typeof EduDataTable === 'undefined') {
+ 187 |   wrap.innerHTML = '<div class="text-muted p-3">No table component.</div>';
+ 188 |   return;
+ 189 |   }
+ 190 |   if (!dashSubmissionsDt) {
+ 191 |   dashSubmissionsDt = EduDataTable.create({
+ 192 |   container: wrap,
+ 193 |   pageSize: 8,
+ 194 |   pageSizeOptions: [5, 8, 15, 25],
+ 195 |   searchPlaceholder: 'Search student, assignment, course...',
+ 196 |   emptyMessage: 'No recent submissions found.',
+ 197 |   tableClass: 'table table-hover submissions-table mb-0 edt-table',
+ 198 |   columns: [
+ 199 |   {
+ 200 |   key: 'studentName', title: 'Student', sortable: true,
+ 201 |   render: function (sub, i) {
+ 202 |   return '<div class="d-flex align-items-center"><div class="student-avatar me-2" style="background-color:' +
+ 203 |     colors[i % colors.length] + ';">' + escapeHtmlDash(sub.initials || '?') +
+ 204 |     '</div><span class="fw-semibold text-dark">' + escapeHtmlDash(sub.studentName) + '</span></div>';
+ 205 | },
+ 206 | searchValue: function (s) { return (s.studentName || '') + ' ' + (s.studentEmail || ''); }
+ 207 | },
+ 208 | { key: 'assignmentTitle', title: 'Assignment', sortable: true, filter: true, filterLabel: 'Assignment' },
+ 209 | { key: 'courseName', title: 'Course', sortable: true, filter: true, filterLabel: 'Course' },
+ 210 | { key: 'timeText', title: 'Time', sortable: true, cellClass: 'text-muted small',
+ 211 | sortValue: function (s) { return s.timestamp || s.timeText || ''; }, type: 'date' },
+ 212 | {
+ 213 | key: 'status', title: 'Action', sortable: true, filter: true, filterLabel: 'Status',
+ 214 | render: function (sub) {
+ 215 | if (sub.isGraded) {
+ 216 | return '<span class="badge-graded"><i class="fa-solid fa-circle-check"></i> Graded</span>';
+ 217 | }
+ 218 | return '<button type="button" class="btn btn-grade-now" onclick="openGradeModalBySid(' +
+ 219 | sub.sid + ')">Grade Now</button>';
+ 220 | },
+ 221 | sortValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; },
+ 222 | searchValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; }
+ 223 | }
+ 224 | ]
+ 225 | });
+ 226 | }
+ 227 | // Normalize status field for filter
+ 228 | var rows = (list || []).map(function (s) {
+ 229 | s.status = s.isGraded ? 'Graded' : 'Pending';
+ 230 | return s;
+ 231 | });
+ 232 | dashSubmissionsDt.setData(rows);
+ 233 | }
+```
+
+**Line notes**
+
+- **L180:** Get HTML element by id.
+- **L186:** In-memory result set from ADO.NET.
+- **L187:** Update page HTML.
+- **L191:** In-memory result set from ADO.NET.
+- **L203:** Encode text to reduce XSS risk.
+- **L204:** Encode text to reduce XSS risk.
 
 ---
 
 ### `render` — lines 201–205
 
-```
+```javascript
 function render(sub, i)
 ```
 
@@ -686,19 +720,24 @@ function render(sub, i)
 
 #### Line-by-line (this function)
 
-` 201`  `  render: function (sub, i) {`
-` 202`  `  return '<div class="d-flex align-items-center"><div class="student-avatar me-2" style="background-color:' +`
-` 203`  `    colors[i % colors.length] + ';">' + escapeHtmlDash(sub.initials || '?') +`
-  - → Encode text to reduce XSS risk.
-` 204`  `    '</div><span class="fw-semibold text-dark">' + escapeHtmlDash(sub.studentName) + '</span></div>';`
-  - → Encode text to reduce XSS risk.
-` 205`  `}`
+```javascript
+ 201 |   render: function (sub, i) {
+ 202 |   return '<div class="d-flex align-items-center"><div class="student-avatar me-2" style="background-color:' +
+ 203 |     colors[i % colors.length] + ';">' + escapeHtmlDash(sub.initials || '?') +
+ 204 |     '</div><span class="fw-semibold text-dark">' + escapeHtmlDash(sub.studentName) + '</span></div>';
+ 205 | }
+```
+
+**Line notes**
+
+- **L203:** Encode text to reduce XSS risk.
+- **L204:** Encode text to reduce XSS risk.
 
 ---
 
 ### `searchValue` — lines 206–206
 
-```
+```javascript
 function searchValue(s)
 ```
 
@@ -709,13 +748,15 @@ function searchValue(s)
 
 #### Line-by-line (this function)
 
-` 206`  `searchValue: function (s) { return (s.studentName || '') + ' ' + (s.studentEmail || ''); }`
+```javascript
+ 206 | searchValue: function (s) { return (s.studentName || '') + ' ' + (s.studentEmail || ''); }
+```
 
 ---
 
 ### `sortValue` — lines 211–211
 
-```
+```javascript
 function sortValue(s)
 ```
 
@@ -726,13 +767,15 @@ function sortValue(s)
 
 #### Line-by-line (this function)
 
-` 211`  `sortValue: function (s) { return s.timestamp || s.timeText || ''; }`
+```javascript
+ 211 | sortValue: function (s) { return s.timestamp || s.timeText || ''; }
+```
 
 ---
 
 ### `render` — lines 214–220
 
-```
+```javascript
 function render(sub)
 ```
 
@@ -743,19 +786,21 @@ function render(sub)
 
 #### Line-by-line (this function)
 
-` 214`  `render: function (sub) {`
-` 215`  `if (sub.isGraded) {`
-` 216`  `return '<span class="badge-graded"><i class="fa-solid fa-circle-check"></i> Graded</span>';`
-` 217`  `}`
-` 218`  `return '<button type="button" class="btn btn-grade-now" onclick="openGradeModalBySid(' +`
-` 219`  `sub.sid + ')">Grade Now</button>';`
-` 220`  `}`
+```javascript
+ 214 | render: function (sub) {
+ 215 | if (sub.isGraded) {
+ 216 | return '<span class="badge-graded"><i class="fa-solid fa-circle-check"></i> Graded</span>';
+ 217 | }
+ 218 | return '<button type="button" class="btn btn-grade-now" onclick="openGradeModalBySid(' +
+ 219 | sub.sid + ')">Grade Now</button>';
+ 220 | }
+```
 
 ---
 
 ### `sortValue` — lines 221–221
 
-```
+```javascript
 function sortValue(s)
 ```
 
@@ -766,13 +811,15 @@ function sortValue(s)
 
 #### Line-by-line (this function)
 
-` 221`  `sortValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; }`
+```javascript
+ 221 | sortValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; }
+```
 
 ---
 
 ### `searchValue` — lines 222–222
 
-```
+```javascript
 function searchValue(s)
 ```
 
@@ -783,13 +830,15 @@ function searchValue(s)
 
 #### Line-by-line (this function)
 
-` 222`  `searchValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; }`
+```javascript
+ 222 | searchValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; }
+```
 
 ---
 
 ### `openGradeModalBySid` — lines 233–238
 
-```
+```javascript
 function openGradeModalBySid(sid)
 ```
 
@@ -801,18 +850,20 @@ function openGradeModalBySid(sid)
 
 #### Line-by-line (this function)
 
-` 233`  ``
-` 234`  ``
-` 235`  `function openGradeModalBySid(sid) {`
-` 236`  `var sub = dashSubmissionsMap[sid];`
-` 237`  `if (sub) openGradeModal(sub);`
-` 238`  `}`
+```javascript
+ 233 | 
+ 234 | 
+ 235 | function openGradeModalBySid(sid) {
+ 236 | var sub = dashSubmissionsMap[sid];
+ 237 | if (sub) openGradeModal(sub);
+ 238 | }
+```
 
 ---
 
 ### `exportDashGradesCsv` — lines 240–262
 
-```
+```javascript
 function exportDashGradesCsv()
 ```
 
@@ -825,40 +876,45 @@ function exportDashGradesCsv()
 
 #### Line-by-line (this function)
 
-` 240`  ``
-` 241`  ``
-` 242`  `function exportDashGradesCsv() {`
-  - → CSV export.
-` 243`  `  fetch(window.location.pathname + '/ExportGradesCsv', {`
-  - → HTTP request to server WebMethod/ashx.
-` 244`  `    method: 'POST',`
-` 245`  `    headers: { 'Content-Type': 'application/json' },`
-` 246`  `    body: JSON.stringify({ cid: 0 }),`
-  - → JS object ↔ JSON text.
-` 247`  `    credentials: 'same-origin'`
-` 248`  `  })`
-` 249`  `  .then(function (r) { return r.json(); })`
-` 250`  `  .then(function (data) {`
-` 251`  `    var res = (data && data.d) ? (data.d.d || data.d) : data;`
-` 252`  `    if (!res || !res.success) { alert((res && res.message) || 'Export failed'); return; }`
-` 253`  `    var blob = new Blob([res.csv || ''], { type: 'text/csv;charset=utf-8;' });`
-  - → CSV export.
-` 254`  `    var a = document.createElement('a');`
-` 255`  `    a.href = URL.createObjectURL(blob);`
-` 256`  `    a.download = res.fileName || 'grades.csv';`
-  - → CSV export.
-` 257`  `    document.body.appendChild(a);`
-` 258`  `    a.click();`
-` 259`  `    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 400);`
-` 260`  `  })`
-` 261`  `  .catch(function () { alert('Network error exporting grades.'); });`
-` 262`  `}`
+```javascript
+ 240 | 
+ 241 | 
+ 242 | function exportDashGradesCsv() {
+ 243 |   fetch(window.location.pathname + '/ExportGradesCsv', {
+ 244 |     method: 'POST',
+ 245 |     headers: { 'Content-Type': 'application/json' },
+ 246 |     body: JSON.stringify({ cid: 0 }),
+ 247 |     credentials: 'same-origin'
+ 248 |   })
+ 249 |   .then(function (r) { return r.json(); })
+ 250 |   .then(function (data) {
+ 251 |     var res = (data && data.d) ? (data.d.d || data.d) : data;
+ 252 |     if (!res || !res.success) { alert((res && res.message) || 'Export failed'); return; }
+ 253 |     var blob = new Blob([res.csv || ''], { type: 'text/csv;charset=utf-8;' });
+ 254 |     var a = document.createElement('a');
+ 255 |     a.href = URL.createObjectURL(blob);
+ 256 |     a.download = res.fileName || 'grades.csv';
+ 257 |     document.body.appendChild(a);
+ 258 |     a.click();
+ 259 |     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 400);
+ 260 |   })
+ 261 |   .catch(function () { alert('Network error exporting grades.'); });
+ 262 | }
+```
+
+**Line notes**
+
+- **L242:** CSV export.
+- **L243:** HTTP request to server WebMethod/ashx.
+- **L246:** JS object ↔ JSON text.
+- **L253:** CSV export.
+- **L256:** CSV export.
 
 ---
 
 ### `loadDashboardData` — lines 262–322
 
-```
+```javascript
 function loadDashboardData()
 ```
 
@@ -873,83 +929,88 @@ function loadDashboardData()
 
 #### Line-by-line (this function)
 
-` 262`  ``
-` 263`  ``
-` 264`  `function loadDashboardData() {`
-` 265`  `// Fetch dashboard statistics and submissions from code-behind`
-` 266`  `fetch(window.location.pathname + '/GetDashboardData', {`
-  - → HTTP request to server WebMethod/ashx.
-` 267`  `method: 'POST',`
-` 268`  `headers: {`
-` 269`  `'Content-Type': 'application/json'`
-` 270`  `}`
-` 271`  `})`
-` 272`  `.then(res => res.json())`
-` 273`  `.then(data => {`
-` 274`  `// Normalize ASP.NET PageMethod response which may be wrapped as { d: {...} }`
-` 275`  `// In some environments it can be double-wrapped: { d: { d: {...} } }`
-` 276`  `let resObj = null;`
-` 277`  `if (data && data.d) {`
-` 278`  `resObj = data.d.d ? data.d.d : data.d;`
-` 279`  `} else {`
-` 280`  `resObj = data;`
-` 281`  `}`
-` 282`  `if (!resObj || resObj.notAuthenticated) {`
-` 283`  `// Redirect to login`
-` 284`  `window.location.href = '/Pages/Authentication/Login.aspx';`
-` 285`  `return;`
-` 286`  `}`
-` 287`  `if (!resObj.success) {`
-` 288`  `console.error('Failed to load dashboard:', resObj.message || resObj);`
-` 289`  `return;`
-` 290`  `}`
-` 291`  ``
-` 292`  `if (resObj.success) {`
-` 293`  `// Update Stats`
-` 294`  `document.getElementById('lblTotalStudents').innerText = formatNumber(resObj.totalStudents);`
-  - → Get HTML element by id.
-` 295`  `document.getElementById('lblActiveCourses').innerText = resObj.activeCourses;`
-  - → Get HTML element by id.
-` 296`  `document.getElementById('lblPendingGrading').innerText = resObj.pendingGrading;`
-  - → Get HTML element by id.
-` 297`  `if (!resObj.hasGrades) {`
-` 298`  `document.getElementById('lblAverageGrade').innerText = "N/A";`
-  - → Get HTML element by id.
-` 299`  `} else {`
-` 300`  `document.getElementById('lblAverageGrade').innerText = resObj.averageGrade + "%";`
-  - → Get HTML element by id.
-` 301`  `}`
-` 302`  ``
-` 303`  `// Stats + table first; charts only when visible (lazy Chart.js CDN)`
-` 304`  `var enrollData = (resObj.enrollmentTrends && Array.isArray(resObj.enrollmentTrends))`
-` 305`  `  ? resObj.enrollmentTrends : [];`
-` 306`  `var gradeData = (resObj.gradeDistribution && Array.isArray(resObj.gradeDistribution))`
-` 307`  `  ? resObj.gradeDistribution : [];`
-` 308`  `whenChartsVisible(function () {`
-  - → Dashboard chart/visualization.
-` 309`  `  ensureChartJs(function () {`
-  - → Dashboard chart/visualization.
-` 310`  `    renderEnrollmentTrendWithChart(enrollData);`
-  - → Dashboard chart/visualization.
-` 311`  `    renderGradeDistributionWithChart(gradeData);`
-  - → Dashboard chart/visualization.
-` 312`  `  });`
-` 313`  `});`
-` 314`  ``
-` 315`  `// Submissions table with search / sort / filter / pagination`
-` 316`  `renderDashSubmissions(resObj.submissions || []);`
-` 317`  `}`
-` 318`  `})`
-` 319`  `.catch(err => {`
-` 320`  `console.error("Error loading dashboard data: ", err);`
-` 321`  `});`
-` 322`  `}`
+```javascript
+ 262 | 
+ 263 | 
+ 264 | function loadDashboardData() {
+ 265 | // Fetch dashboard statistics and submissions from code-behind
+ 266 | fetch(window.location.pathname + '/GetDashboardData', {
+ 267 | method: 'POST',
+ 268 | headers: {
+ 269 | 'Content-Type': 'application/json'
+ 270 | }
+ 271 | })
+ 272 | .then(res => res.json())
+ 273 | .then(data => {
+ 274 | // Normalize ASP.NET PageMethod response which may be wrapped as { d: {...} }
+ 275 | // In some environments it can be double-wrapped: { d: { d: {...} } }
+ 276 | let resObj = null;
+ 277 | if (data && data.d) {
+ 278 | resObj = data.d.d ? data.d.d : data.d;
+ 279 | } else {
+ 280 | resObj = data;
+ 281 | }
+ 282 | if (!resObj || resObj.notAuthenticated) {
+ 283 | // Redirect to login
+ 284 | window.location.href = '/Pages/Authentication/Login.aspx';
+ 285 | return;
+ 286 | }
+ 287 | if (!resObj.success) {
+ 288 | console.error('Failed to load dashboard:', resObj.message || resObj);
+ 289 | return;
+ 290 | }
+ 291 | 
+ 292 | if (resObj.success) {
+ 293 | // Update Stats
+ 294 | document.getElementById('lblTotalStudents').innerText = formatNumber(resObj.totalStudents);
+ 295 | document.getElementById('lblActiveCourses').innerText = resObj.activeCourses;
+ 296 | document.getElementById('lblPendingGrading').innerText = resObj.pendingGrading;
+ 297 | if (!resObj.hasGrades) {
+ 298 | document.getElementById('lblAverageGrade').innerText = "N/A";
+ 299 | } else {
+ 300 | document.getElementById('lblAverageGrade').innerText = resObj.averageGrade + "%";
+ 301 | }
+ 302 | 
+ 303 | // Stats + table first; charts only when visible (lazy Chart.js CDN)
+ 304 | var enrollData = (resObj.enrollmentTrends && Array.isArray(resObj.enrollmentTrends))
+ 305 |   ? resObj.enrollmentTrends : [];
+ 306 | var gradeData = (resObj.gradeDistribution && Array.isArray(resObj.gradeDistribution))
+ 307 |   ? resObj.gradeDistribution : [];
+ 308 | whenChartsVisible(function () {
+ 309 |   ensureChartJs(function () {
+ 310 |     renderEnrollmentTrendWithChart(enrollData);
+ 311 |     renderGradeDistributionWithChart(gradeData);
+ 312 |   });
+ 313 | });
+ 314 | 
+ 315 | // Submissions table with search / sort / filter / pagination
+ 316 | renderDashSubmissions(resObj.submissions || []);
+ 317 | }
+ 318 | })
+ 319 | .catch(err => {
+ 320 | console.error("Error loading dashboard data: ", err);
+ 321 | });
+ 322 | }
+```
+
+**Line notes**
+
+- **L266:** HTTP request to server WebMethod/ashx.
+- **L294:** Get HTML element by id.
+- **L295:** Get HTML element by id.
+- **L296:** Get HTML element by id.
+- **L298:** Get HTML element by id.
+- **L300:** Get HTML element by id.
+- **L308:** Dashboard chart/visualization.
+- **L309:** Dashboard chart/visualization.
+- **L310:** Dashboard chart/visualization.
+- **L311:** Dashboard chart/visualization.
 
 ---
 
 ### `formatNumber` — lines 322–326
 
-```
+```javascript
 function formatNumber(num)
 ```
 
@@ -960,17 +1021,19 @@ function formatNumber(num)
 
 #### Line-by-line (this function)
 
-` 322`  ``
-` 323`  ``
-` 324`  `function formatNumber(num) {`
-` 325`  `return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");`
-` 326`  `}`
+```javascript
+ 322 | 
+ 323 | 
+ 324 | function formatNumber(num) {
+ 325 | return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+ 326 | }
+```
 
 ---
 
 ### `openGradeModal` — lines 326–354
 
-```
+```javascript
 function openGradeModal(sub)
 ```
 
@@ -982,50 +1045,55 @@ function openGradeModal(sub)
 
 #### Line-by-line (this function)
 
-` 326`  ``
-` 327`  ``
-` 328`  `function openGradeModal(sub) {`
-` 329`  `currentSubmissionId = sub.sid;`
-` 330`  ``
-` 331`  `// Set student initials and name`
-` 332`  `const avatar = document.getElementById('modalStudentAvatar');`
-  - → Get HTML element by id.
-` 333`  `avatar.innerText = sub.initials;`
-` 334`  `avatar.style.backgroundColor = '#f17f54';`
-` 335`  `document.getElementById('modalStudentName').innerText = sub.studentName;`
-  - → Get HTML element by id.
-` 336`  ``
-` 337`  `// Set details`
-` 338`  `document.getElementById('modalAssignment').innerText = sub.assignmentTitle;`
-  - → Get HTML element by id.
-` 339`  `document.getElementById('modalAnswer').innerText = sub.studentAnswer;`
-  - → Get HTML element by id.
-` 340`  `document.getElementById('lblMaxScore').innerText = "/ " + sub.maxScore;`
-  - → Get HTML element by id.
-` 341`  ``
-` 342`  `// Reset inputs`
-` 343`  `const txtScore = document.getElementById('txtScore');`
-  - → Get HTML element by id.
-` 344`  `txtScore.value = 0;`
-` 345`  `txtScore.max = sub.maxScore;`
-` 346`  `document.getElementById('txtReview').value = '';`
-  - → Get HTML element by id.
-` 347`  ``
-` 348`  `// Hide error`
-` 349`  `document.getElementById('modalErrorMessage').style.display = 'none';`
-  - → Get HTML element by id.
-` 350`  ``
-` 351`  `// Show modal`
-` 352`  `const myModal = new bootstrap.Modal(document.getElementById('gradingModal'));`
-  - → Get HTML element by id.
-` 353`  `myModal.show();`
-` 354`  `}`
+```javascript
+ 326 | 
+ 327 | 
+ 328 | function openGradeModal(sub) {
+ 329 | currentSubmissionId = sub.sid;
+ 330 | 
+ 331 | // Set student initials and name
+ 332 | const avatar = document.getElementById('modalStudentAvatar');
+ 333 | avatar.innerText = sub.initials;
+ 334 | avatar.style.backgroundColor = '#f17f54';
+ 335 | document.getElementById('modalStudentName').innerText = sub.studentName;
+ 336 | 
+ 337 | // Set details
+ 338 | document.getElementById('modalAssignment').innerText = sub.assignmentTitle;
+ 339 | document.getElementById('modalAnswer').innerText = sub.studentAnswer;
+ 340 | document.getElementById('lblMaxScore').innerText = "/ " + sub.maxScore;
+ 341 | 
+ 342 | // Reset inputs
+ 343 | const txtScore = document.getElementById('txtScore');
+ 344 | txtScore.value = 0;
+ 345 | txtScore.max = sub.maxScore;
+ 346 | document.getElementById('txtReview').value = '';
+ 347 | 
+ 348 | // Hide error
+ 349 | document.getElementById('modalErrorMessage').style.display = 'none';
+ 350 | 
+ 351 | // Show modal
+ 352 | const myModal = new bootstrap.Modal(document.getElementById('gradingModal'));
+ 353 | myModal.show();
+ 354 | }
+```
+
+**Line notes**
+
+- **L332:** Get HTML element by id.
+- **L335:** Get HTML element by id.
+- **L338:** Get HTML element by id.
+- **L339:** Get HTML element by id.
+- **L340:** Get HTML element by id.
+- **L343:** Get HTML element by id.
+- **L346:** Get HTML element by id.
+- **L349:** Get HTML element by id.
+- **L352:** Get HTML element by id.
 
 ---
 
 ### `submitGrading` — lines 354–403
 
-```
+```javascript
 function submitGrading()
 ```
 
@@ -1039,539 +1107,551 @@ function submitGrading()
 
 #### Line-by-line (this function)
 
-` 354`  ``
-` 355`  ``
-` 356`  `function submitGrading() {`
-` 357`  `const score = parseInt(document.getElementById('txtScore').value);`
-  - → Get HTML element by id.
-` 358`  `const review = document.getElementById('txtReview').value.trim();`
-  - → Get HTML element by id.
-` 359`  `const errDiv = document.getElementById('modalErrorMessage');`
-  - → Get HTML element by id.
-` 360`  ``
-` 361`  `errDiv.style.display = 'none';`
-` 362`  ``
-` 363`  `if (isNaN(score) || score < 0) {`
-` 364`  `errDiv.innerText = "Please enter a valid score.";`
-` 365`  `errDiv.style.display = 'block';`
-` 366`  `return;`
-` 367`  `}`
-` 368`  ``
-` 369`  `// Call SaveGrade WebMethod`
-` 370`  `fetch(window.location.pathname + '/SaveGrade', {`
-  - → HTTP request to server WebMethod/ashx.
-` 371`  `method: 'POST',`
-` 372`  `headers: {`
-` 373`  `'Content-Type': 'application/json'`
-` 374`  `},`
-` 375`  `body: JSON.stringify({`
-  - → JS object ↔ JSON text.
-` 376`  `sid: currentSubmissionId,`
-` 377`  `score: score,`
-` 378`  `review: review`
-` 379`  `})`
-` 380`  `})`
-` 381`  `.then(res => res.json())`
-` 382`  `.then(data => {`
-` 383`  `let resObj = null;`
-` 384`  `if (data && data.d) resObj = data.d.d ? data.d.d : data.d; else resObj = data;`
-` 385`  `if (resObj && resObj.success) {`
-` 386`  `// Close Modal`
-` 387`  `const modalEl = document.getElementById('gradingModal');`
-  - → Get HTML element by id.
-` 388`  `const modal = bootstrap.Modal.getInstance(modalEl);`
-` 389`  `modal.hide();`
-` 390`  ``
-` 391`  `// Refresh dashboard data`
-` 392`  `loadDashboardData();`
-` 393`  `} else {`
-` 394`  `errDiv.innerText = resObj.message || "Failed to save grade.";`
-` 395`  `errDiv.style.display = 'block';`
-` 396`  `}`
-` 397`  `})`
-` 398`  `.catch(err => {`
-` 399`  `errDiv.innerText = "Network error. Please try again.";`
-` 400`  `errDiv.style.display = 'block';`
-` 401`  `console.error(err);`
-` 402`  `});`
-` 403`  `}`
+```javascript
+ 354 | 
+ 355 | 
+ 356 | function submitGrading() {
+ 357 | const score = parseInt(document.getElementById('txtScore').value);
+ 358 | const review = document.getElementById('txtReview').value.trim();
+ 359 | const errDiv = document.getElementById('modalErrorMessage');
+ 360 | 
+ 361 | errDiv.style.display = 'none';
+ 362 | 
+ 363 | if (isNaN(score) || score < 0) {
+ 364 | errDiv.innerText = "Please enter a valid score.";
+ 365 | errDiv.style.display = 'block';
+ 366 | return;
+ 367 | }
+ 368 | 
+ 369 | // Call SaveGrade WebMethod
+ 370 | fetch(window.location.pathname + '/SaveGrade', {
+ 371 | method: 'POST',
+ 372 | headers: {
+ 373 | 'Content-Type': 'application/json'
+ 374 | },
+ 375 | body: JSON.stringify({
+ 376 | sid: currentSubmissionId,
+ 377 | score: score,
+ 378 | review: review
+ 379 | })
+ 380 | })
+ 381 | .then(res => res.json())
+ 382 | .then(data => {
+ 383 | let resObj = null;
+ 384 | if (data && data.d) resObj = data.d.d ? data.d.d : data.d; else resObj = data;
+ 385 | if (resObj && resObj.success) {
+ 386 | // Close Modal
+ 387 | const modalEl = document.getElementById('gradingModal');
+ 388 | const modal = bootstrap.Modal.getInstance(modalEl);
+ 389 | modal.hide();
+ 390 | 
+ 391 | // Refresh dashboard data
+ 392 | loadDashboardData();
+ 393 | } else {
+ 394 | errDiv.innerText = resObj.message || "Failed to save grade.";
+ 395 | errDiv.style.display = 'block';
+ 396 | }
+ 397 | })
+ 398 | .catch(err => {
+ 399 | errDiv.innerText = "Network error. Please try again.";
+ 400 | errDiv.style.display = 'block';
+ 401 | console.error(err);
+ 402 | });
+ 403 | }
+```
+
+**Line notes**
+
+- **L357:** Get HTML element by id.
+- **L358:** Get HTML element by id.
+- **L359:** Get HTML element by id.
+- **L370:** HTTP request to server WebMethod/ashx.
+- **L375:** JS object ↔ JSON text.
+- **L387:** Get HTML element by id.
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  ``
-`   2`  `/* Lazy Chart.js loader — only fetch when chart canvases are near viewport */`
-`   3`  `var __chartJsLoading = null;`
-`   4`  `var __chartPending = { enrollment: null, grade: null };`
-`   5`  ``
-`   6`  `function ensureChartJs(cb) {`
-  - → Dashboard chart/visualization.
-`   7`  `    if (typeof Chart !== 'undefined') { cb && cb(); return; }`
-  - → Dashboard chart/visualization.
-`   8`  `    if (__chartJsLoading) { __chartJsLoading.then(function () { cb && cb(); }); return; }`
-`   9`  `    __chartJsLoading = new Promise(function (resolve, reject) {`
-`  10`  `        var s = document.createElement('script');`
-`  11`  `        s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';`
-  - → Dashboard chart/visualization.
-`  12`  `        s.async = true;`
-`  13`  `        s.onload = function () { resolve(); };`
-`  14`  `        s.onerror = function () { reject(new Error('Chart.js failed to load')); };`
-  - → Dashboard chart/visualization.
-`  15`  `        document.head.appendChild(s);`
-`  16`  `    });`
-`  17`  `    __chartJsLoading.then(function () { cb && cb(); }).catch(function (e) { console.error(e); });`
-`  18`  `}`
-`  19`  ``
-`  20`  `function whenChartsVisible(run) {`
-  - → Dashboard chart/visualization.
-`  21`  `    var targets = [`
-`  22`  `        document.getElementById('chartEnrollmentTrend'),`
-  - → Get HTML element by id.
-`  23`  `        document.getElementById('chartGradeDistribution')`
-  - → Get HTML element by id.
-`  24`  `    ].filter(Boolean);`
-`  25`  `    if (!targets.length) { run(); return; }`
-`  26`  `    if (!('IntersectionObserver' in window)) { run(); return; }`
-`  27`  `    var done = false;`
-`  28`  `    var io = new IntersectionObserver(function (entries) {`
-`  29`  `        if (done) return;`
-`  30`  `        for (var i = 0; i < entries.length; i++) {`
-`  31`  `            if (entries[i].isIntersecting) {`
-`  32`  `                done = true;`
-`  33`  `                io.disconnect();`
-`  34`  `                run();`
-`  35`  `                break;`
-`  36`  `            }`
-`  37`  `        }`
-`  38`  `    }, { rootMargin: '120px', threshold: 0.05 });`
-`  39`  `    targets.forEach(function (el) { io.observe(el); });`
-`  40`  `}`
-`  41`  ``
-`  42`  `let enrollmentChart = null;`
-  - → Dashboard chart/visualization.
-`  43`  `  let gradeChart = null;`
-  - → Dashboard chart/visualization.
-`  44`  ``
-`  45`  `  function renderEnrollmentTrendWithChart(data) {`
-  - → Dashboard chart/visualization.
-`  46`  `  try {`
-  - → Error handling block.
-`  47`  `  if (!data || !Array.isArray(data) || data.length === 0) {`
-`  48`  `  // destroy existing chart and show empty state`
-`  49`  `  if (enrollmentChart) {`
-  - → Dashboard chart/visualization.
-`  50`  `  try { enrollmentChart.destroy(); } catch(e){}`
-  - → Error handling block.
-`  51`  `  enrollmentChart = null;`
-  - → Dashboard chart/visualization.
-`  52`  `  }`
-`  53`  `  const ctxEl = document.getElementById('chartEnrollmentTrend');`
-  - → Get HTML element by id.
-`  54`  `  if (ctxEl) {`
-`  55`  `  const ctx = ctxEl.getContext('2d');`
-`  56`  `  ctx.clearRect(0, 0, ctxEl.width, ctxEl.height);`
-`  57`  `  // draw "No data" text`
-`  58`  `  ctx.font = '16px Arial';`
-`  59`  `  ctx.fillStyle = '#9ca3af';`
-`  60`  `  ctx.textAlign = 'center';`
-`  61`  `  ctx.textBaseline = 'middle';`
-`  62`  `  ctx.fillText('No enrollment data', ctxEl.width / 2, ctxEl.height / 2);`
-`  63`  `  }`
-`  64`  `  return;`
-`  65`  `  }`
-`  66`  ``
-`  67`  `  if (typeof Chart === 'undefined') {`
-  - → Dashboard chart/visualization.
-`  68`  `  console.warn('Chart.js not available; cannot render enrollment chart.');`
-  - → Dashboard chart/visualization.
-`  69`  `  // draw simple text as fallback`
-`  70`  `  const ctxEl = document.getElementById('chartEnrollmentTrend');`
-  - → Get HTML element by id.
-`  71`  `  if (ctxEl) {`
-`  72`  `  const ctx = ctxEl.getContext('2d');`
-`  73`  `  ctx.clearRect(0, 0, ctxEl.width, ctxEl.height);`
-`  74`  `  ctx.font = '16px Arial';`
-`  75`  `  ctx.fillStyle = '#9ca3af';`
-`  76`  `  ctx.textAlign = 'center';`
-`  77`  `  ctx.textBaseline = 'middle';`
-`  78`  `  ctx.fillText('Chart library blocked by browser. Enable CDN or use local file.', ctxEl.width / 2, ctxEl.height / 2);`
-  - → Dashboard chart/visualization.
-`  79`  `  }`
-`  80`  `  return;`
-`  81`  `  }`
-`  82`  ``
-`  83`  `  const labels = data.map(d => d.label);`
-`  84`  `  const values = data.map(d => d.value);`
-`  85`  `  const ctx = document.getElementById('chartEnrollmentTrend').getContext('2d');`
-  - → Get HTML element by id.
-`  86`  `  if (enrollmentChart) enrollmentChart.destroy();`
-  - → Dashboard chart/visualization.
-`  87`  `  enrollmentChart = new Chart(ctx, {`
-  - → Dashboard chart/visualization.
-`  88`  `  type: 'line',`
-`  89`  `  data: {`
-`  90`  `  labels: labels,`
-`  91`  `  datasets: [{`
-`  92`  `  label: 'Enrollments',`
-`  93`  `  data: values,`
-`  94`  `  fill: true,`
-`  95`  `  backgroundColor: 'rgba(241,127,84,0.12)',`
-`  96`  `  borderColor: '#f17f54',`
-`  97`  `  tension: 0.4,`
-`  98`  `  pointRadius: 3`
-`  99`  `  }]`
-` 100`  `  },`
-` 101`  `  options: {`
-` 102`  `  responsive: true,`
-` 103`  `  maintainAspectRatio: false,`
-` 104`  `  scales: {`
-` 105`  `  y: { beginAtZero: true, ticks: { precision: 0 } }`
-` 106`  `  }`
-` 107`  `  }`
-` 108`  `  });`
-` 109`  `  } catch (err) {`
-` 110`  `  console.error('Error rendering enrollment chart:', err);`
-` 111`  `  }`
-` 112`  `  }`
-` 113`  ``
-` 114`  `  function renderGradeDistributionWithChart(data) {`
-  - → Dashboard chart/visualization.
-` 115`  `  try {`
-  - → Error handling block.
-` 116`  `  const defaultLabels = ['A', 'B', 'C', 'D', 'F'];`
-` 117`  `  if (!data || !Array.isArray(data) || data.length === 0) {`
-` 118`  `  // render zeroed chart so layout is consistent`
-` 119`  `  if (gradeChart) gradeChart.destroy();`
-  - → Dashboard chart/visualization.
-` 120`  `  const ctx = document.getElementById('chartGradeDistribution').getContext('2d');`
-  - → Get HTML element by id.
-` 121`  `  gradeChart = new Chart(ctx, {`
-  - → Dashboard chart/visualization.
-` 122`  `  type: 'bar',`
-` 123`  `  data: {`
-` 124`  `  labels: defaultLabels,`
-` 125`  `  datasets: [{`
-` 126`  `  label: 'Students',`
-` 127`  `  data: [0, 0, 0, 0, 0],`
-` 128`  `  backgroundColor: ['#f17f54','#3b82f6','#10b981','#f59e0b','#ef4444']`
-` 129`  `  }]`
-` 130`  `  },`
-` 131`  `  options: {`
-` 132`  `  responsive: true,`
-` 133`  `  maintainAspectRatio: false,`
-` 134`  `  scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }`
-` 135`  `  }`
-` 136`  `  });`
-` 137`  `  return;`
-` 138`  `  }`
-` 139`  ``
-` 140`  `  const labels = data.map(d => d.label);`
-` 141`  `  const values = data.map(d => d.value);`
-` 142`  `  const ctx = document.getElementById('chartGradeDistribution').getContext('2d');`
-  - → Get HTML element by id.
-` 143`  `  if (gradeChart) gradeChart.destroy();`
-  - → Dashboard chart/visualization.
-` 144`  `  gradeChart = new Chart(ctx, {`
-  - → Dashboard chart/visualization.
-` 145`  `  type: 'bar',`
-` 146`  `  data: {`
-` 147`  `  labels: labels,`
-` 148`  `  datasets: [{`
-` 149`  `  label: 'Students',`
-` 150`  `  data: values,`
-` 151`  `  backgroundColor: ['#f17f54','#3b82f6','#10b981','#f59e0b','#ef4444']`
-` 152`  `  }]`
-` 153`  `  },`
-` 154`  `  options: {`
-` 155`  `  responsive: true,`
-` 156`  `  maintainAspectRatio: false,`
-` 157`  `  scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }`
-` 158`  `  }`
-` 159`  `  });`
-` 160`  `  } catch (err) {`
-` 161`  `  console.error('Error rendering grade distribution chart:', err);`
-` 162`  `  }`
-` 163`  `  }`
-` 164`  ``
-` 165`  `  // Initialize dashboard when page loads`
-` 166`  `  document.addEventListener('DOMContentLoaded', function () {`
-  - → DOM event handler.
-` 167`  `  loadDashboardData();`
-` 168`  `});`
-` 169`  ``
-` 170`  `let currentSubmissionId = null;`
-` 171`  `    let dashSubmissionsDt = null;`
-` 172`  `    let dashSubmissionsMap = {};`
-` 173`  ``
-` 174`  `    function escapeHtmlDash(str) {`
-  - → Encode text to reduce XSS risk.
-` 175`  `    if (str == null) return '';`
-` 176`  `    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');`
-` 177`  `  }`
-` 178`  ``
-` 179`  `  function renderDashSubmissions(list) {`
-` 180`  `  var wrap = document.getElementById('dashSubmissionsWrap');`
-  - → Get HTML element by id.
-` 181`  `  if (!wrap) return;`
-` 182`  `  var colors = ['#f59e0b', '#3b82f6', '#10b981', '#ec4899', '#8b5cf6'];`
-` 183`  `  dashSubmissionsMap = {};`
-` 184`  `  (list || []).forEach(function (s) { dashSubmissionsMap[s.sid] = s; });`
-` 185`  ``
-` 186`  `  if (typeof EduDataTable === 'undefined') {`
-` 187`  `  wrap.innerHTML = '<div class="text-muted p-3">No table component.</div>';`
-  - → Update page HTML.
-` 188`  `  return;`
-` 189`  `  }`
-` 190`  `  if (!dashSubmissionsDt) {`
-` 191`  `  dashSubmissionsDt = EduDataTable.create({`
-` 192`  `  container: wrap,`
-` 193`  `  pageSize: 8,`
-` 194`  `  pageSizeOptions: [5, 8, 15, 25],`
-` 195`  `  searchPlaceholder: 'Search student, assignment, course...',`
-` 196`  `  emptyMessage: 'No recent submissions found.',`
-` 197`  `  tableClass: 'table table-hover submissions-table mb-0 edt-table',`
-` 198`  `  columns: [`
-` 199`  `  {`
-` 200`  `  key: 'studentName', title: 'Student', sortable: true,`
-` 201`  `  render: function (sub, i) {`
-` 202`  `  return '<div class="d-flex align-items-center"><div class="student-avatar me-2" style="background-color:' +`
-` 203`  `    colors[i % colors.length] + ';">' + escapeHtmlDash(sub.initials || '?') +`
-  - → Encode text to reduce XSS risk.
-` 204`  `    '</div><span class="fw-semibold text-dark">' + escapeHtmlDash(sub.studentName) + '</span></div>';`
-  - → Encode text to reduce XSS risk.
-` 205`  `},`
-` 206`  `searchValue: function (s) { return (s.studentName || '') + ' ' + (s.studentEmail || ''); }`
-` 207`  `},`
-` 208`  `{ key: 'assignmentTitle', title: 'Assignment', sortable: true, filter: true, filterLabel: 'Assignment' },`
-` 209`  `{ key: 'courseName', title: 'Course', sortable: true, filter: true, filterLabel: 'Course' },`
-` 210`  `{ key: 'timeText', title: 'Time', sortable: true, cellClass: 'text-muted small',`
-` 211`  `sortValue: function (s) { return s.timestamp || s.timeText || ''; }, type: 'date' },`
-` 212`  `{`
-` 213`  `key: 'status', title: 'Action', sortable: true, filter: true, filterLabel: 'Status',`
-` 214`  `render: function (sub) {`
-` 215`  `if (sub.isGraded) {`
-` 216`  `return '<span class="badge-graded"><i class="fa-solid fa-circle-check"></i> Graded</span>';`
-` 217`  `}`
-` 218`  `return '<button type="button" class="btn btn-grade-now" onclick="openGradeModalBySid(' +`
-` 219`  `sub.sid + ')">Grade Now</button>';`
-` 220`  `},`
-` 221`  `sortValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; },`
-` 222`  `searchValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; }`
-` 223`  `}`
-` 224`  `]`
-` 225`  `});`
-` 226`  `}`
-` 227`  `// Normalize status field for filter`
-` 228`  `var rows = (list || []).map(function (s) {`
-` 229`  `s.status = s.isGraded ? 'Graded' : 'Pending';`
-` 230`  `return s;`
-` 231`  `});`
-` 232`  `dashSubmissionsDt.setData(rows);`
-` 233`  `}`
-` 234`  ``
-` 235`  `function openGradeModalBySid(sid) {`
-` 236`  `var sub = dashSubmissionsMap[sid];`
-` 237`  `if (sub) openGradeModal(sub);`
-` 238`  `}`
-` 239`  ``
-` 240`  `// dashboard initialization is deferred until Chart.js and chart helper functions are available (handled at bottom of page)`
-` 241`  ``
-` 242`  `function exportDashGradesCsv() {`
-  - → CSV export.
-` 243`  `  fetch(window.location.pathname + '/ExportGradesCsv', {`
-  - → HTTP request to server WebMethod/ashx.
-` 244`  `    method: 'POST',`
-` 245`  `    headers: { 'Content-Type': 'application/json' },`
-` 246`  `    body: JSON.stringify({ cid: 0 }),`
-  - → JS object ↔ JSON text.
-` 247`  `    credentials: 'same-origin'`
-` 248`  `  })`
-` 249`  `  .then(function (r) { return r.json(); })`
-` 250`  `  .then(function (data) {`
-` 251`  `    var res = (data && data.d) ? (data.d.d || data.d) : data;`
-` 252`  `    if (!res || !res.success) { alert((res && res.message) || 'Export failed'); return; }`
-` 253`  `    var blob = new Blob([res.csv || ''], { type: 'text/csv;charset=utf-8;' });`
-  - → CSV export.
-` 254`  `    var a = document.createElement('a');`
-` 255`  `    a.href = URL.createObjectURL(blob);`
-` 256`  `    a.download = res.fileName || 'grades.csv';`
-  - → CSV export.
-` 257`  `    document.body.appendChild(a);`
-` 258`  `    a.click();`
-` 259`  `    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 400);`
-` 260`  `  })`
-` 261`  `  .catch(function () { alert('Network error exporting grades.'); });`
-` 262`  `}`
-` 263`  ``
-` 264`  `function loadDashboardData() {`
-` 265`  `// Fetch dashboard statistics and submissions from code-behind`
-` 266`  `fetch(window.location.pathname + '/GetDashboardData', {`
-  - → HTTP request to server WebMethod/ashx.
-` 267`  `method: 'POST',`
-` 268`  `headers: {`
-` 269`  `'Content-Type': 'application/json'`
-` 270`  `}`
-` 271`  `})`
-` 272`  `.then(res => res.json())`
-` 273`  `.then(data => {`
-` 274`  `// Normalize ASP.NET PageMethod response which may be wrapped as { d: {...} }`
-` 275`  `// In some environments it can be double-wrapped: { d: { d: {...} } }`
-` 276`  `let resObj = null;`
-` 277`  `if (data && data.d) {`
-` 278`  `resObj = data.d.d ? data.d.d : data.d;`
-` 279`  `} else {`
-` 280`  `resObj = data;`
-` 281`  `}`
-` 282`  `if (!resObj || resObj.notAuthenticated) {`
-` 283`  `// Redirect to login`
-` 284`  `window.location.href = '/Pages/Authentication/Login.aspx';`
-` 285`  `return;`
-` 286`  `}`
-` 287`  `if (!resObj.success) {`
-` 288`  `console.error('Failed to load dashboard:', resObj.message || resObj);`
-` 289`  `return;`
-` 290`  `}`
-` 291`  ``
-` 292`  `if (resObj.success) {`
-` 293`  `// Update Stats`
-` 294`  `document.getElementById('lblTotalStudents').innerText = formatNumber(resObj.totalStudents);`
-  - → Get HTML element by id.
-` 295`  `document.getElementById('lblActiveCourses').innerText = resObj.activeCourses;`
-  - → Get HTML element by id.
-` 296`  `document.getElementById('lblPendingGrading').innerText = resObj.pendingGrading;`
-  - → Get HTML element by id.
-` 297`  `if (!resObj.hasGrades) {`
-` 298`  `document.getElementById('lblAverageGrade').innerText = "N/A";`
-  - → Get HTML element by id.
-` 299`  `} else {`
-` 300`  `document.getElementById('lblAverageGrade').innerText = resObj.averageGrade + "%";`
-  - → Get HTML element by id.
-` 301`  `}`
-` 302`  ``
-` 303`  `// Stats + table first; charts only when visible (lazy Chart.js CDN)`
-` 304`  `var enrollData = (resObj.enrollmentTrends && Array.isArray(resObj.enrollmentTrends))`
-` 305`  `  ? resObj.enrollmentTrends : [];`
-` 306`  `var gradeData = (resObj.gradeDistribution && Array.isArray(resObj.gradeDistribution))`
-` 307`  `  ? resObj.gradeDistribution : [];`
-` 308`  `whenChartsVisible(function () {`
-  - → Dashboard chart/visualization.
-` 309`  `  ensureChartJs(function () {`
-  - → Dashboard chart/visualization.
-` 310`  `    renderEnrollmentTrendWithChart(enrollData);`
-  - → Dashboard chart/visualization.
-` 311`  `    renderGradeDistributionWithChart(gradeData);`
-  - → Dashboard chart/visualization.
-` 312`  `  });`
-` 313`  `});`
-` 314`  ``
-` 315`  `// Submissions table with search / sort / filter / pagination`
-` 316`  `renderDashSubmissions(resObj.submissions || []);`
-` 317`  `}`
-` 318`  `})`
-` 319`  `.catch(err => {`
-` 320`  `console.error("Error loading dashboard data: ", err);`
-` 321`  `});`
-` 322`  `}`
-` 323`  ``
-` 324`  `function formatNumber(num) {`
-` 325`  `return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");`
-` 326`  `}`
-` 327`  ``
-` 328`  `function openGradeModal(sub) {`
-` 329`  `currentSubmissionId = sub.sid;`
-` 330`  ``
-` 331`  `// Set student initials and name`
-` 332`  `const avatar = document.getElementById('modalStudentAvatar');`
-  - → Get HTML element by id.
-` 333`  `avatar.innerText = sub.initials;`
-` 334`  `avatar.style.backgroundColor = '#f17f54';`
-` 335`  `document.getElementById('modalStudentName').innerText = sub.studentName;`
-  - → Get HTML element by id.
-` 336`  ``
-` 337`  `// Set details`
-` 338`  `document.getElementById('modalAssignment').innerText = sub.assignmentTitle;`
-  - → Get HTML element by id.
-` 339`  `document.getElementById('modalAnswer').innerText = sub.studentAnswer;`
-  - → Get HTML element by id.
-` 340`  `document.getElementById('lblMaxScore').innerText = "/ " + sub.maxScore;`
-  - → Get HTML element by id.
-` 341`  ``
-` 342`  `// Reset inputs`
-` 343`  `const txtScore = document.getElementById('txtScore');`
-  - → Get HTML element by id.
-` 344`  `txtScore.value = 0;`
-` 345`  `txtScore.max = sub.maxScore;`
-` 346`  `document.getElementById('txtReview').value = '';`
-  - → Get HTML element by id.
-` 347`  ``
-` 348`  `// Hide error`
-` 349`  `document.getElementById('modalErrorMessage').style.display = 'none';`
-  - → Get HTML element by id.
-` 350`  ``
-` 351`  `// Show modal`
-` 352`  `const myModal = new bootstrap.Modal(document.getElementById('gradingModal'));`
-  - → Get HTML element by id.
-` 353`  `myModal.show();`
-` 354`  `}`
-` 355`  ``
-` 356`  `function submitGrading() {`
-` 357`  `const score = parseInt(document.getElementById('txtScore').value);`
-  - → Get HTML element by id.
-` 358`  `const review = document.getElementById('txtReview').value.trim();`
-  - → Get HTML element by id.
-` 359`  `const errDiv = document.getElementById('modalErrorMessage');`
-  - → Get HTML element by id.
-` 360`  ``
-` 361`  `errDiv.style.display = 'none';`
-` 362`  ``
-` 363`  `if (isNaN(score) || score < 0) {`
-` 364`  `errDiv.innerText = "Please enter a valid score.";`
-` 365`  `errDiv.style.display = 'block';`
-` 366`  `return;`
-` 367`  `}`
-` 368`  ``
-` 369`  `// Call SaveGrade WebMethod`
-` 370`  `fetch(window.location.pathname + '/SaveGrade', {`
-  - → HTTP request to server WebMethod/ashx.
-` 371`  `method: 'POST',`
-` 372`  `headers: {`
-` 373`  `'Content-Type': 'application/json'`
-` 374`  `},`
-` 375`  `body: JSON.stringify({`
-  - → JS object ↔ JSON text.
-` 376`  `sid: currentSubmissionId,`
-` 377`  `score: score,`
-` 378`  `review: review`
-` 379`  `})`
-` 380`  `})`
-` 381`  `.then(res => res.json())`
-` 382`  `.then(data => {`
-` 383`  `let resObj = null;`
-` 384`  `if (data && data.d) resObj = data.d.d ? data.d.d : data.d; else resObj = data;`
-` 385`  `if (resObj && resObj.success) {`
-` 386`  `// Close Modal`
-` 387`  `const modalEl = document.getElementById('gradingModal');`
-  - → Get HTML element by id.
-` 388`  `const modal = bootstrap.Modal.getInstance(modalEl);`
-` 389`  `modal.hide();`
-` 390`  ``
-` 391`  `// Refresh dashboard data`
-` 392`  `loadDashboardData();`
-` 393`  `} else {`
-` 394`  `errDiv.innerText = resObj.message || "Failed to save grade.";`
-` 395`  `errDiv.style.display = 'block';`
-` 396`  `}`
-` 397`  `})`
-` 398`  `.catch(err => {`
-` 399`  `errDiv.innerText = "Network error. Please try again.";`
-` 400`  `errDiv.style.display = 'block';`
-` 401`  `console.error(err);`
-` 402`  `});`
-` 403`  `}`
-` 404`  ``
+```javascript
+   1 | 
+   2 | /* Lazy Chart.js loader — only fetch when chart canvases are near viewport */
+   3 | var __chartJsLoading = null;
+   4 | var __chartPending = { enrollment: null, grade: null };
+   5 | 
+   6 | function ensureChartJs(cb) {
+   7 |     if (typeof Chart !== 'undefined') { cb && cb(); return; }
+   8 |     if (__chartJsLoading) { __chartJsLoading.then(function () { cb && cb(); }); return; }
+   9 |     __chartJsLoading = new Promise(function (resolve, reject) {
+  10 |         var s = document.createElement('script');
+  11 |         s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
+  12 |         s.async = true;
+  13 |         s.onload = function () { resolve(); };
+  14 |         s.onerror = function () { reject(new Error('Chart.js failed to load')); };
+  15 |         document.head.appendChild(s);
+  16 |     });
+  17 |     __chartJsLoading.then(function () { cb && cb(); }).catch(function (e) { console.error(e); });
+  18 | }
+  19 | 
+  20 | function whenChartsVisible(run) {
+  21 |     var targets = [
+  22 |         document.getElementById('chartEnrollmentTrend'),
+  23 |         document.getElementById('chartGradeDistribution')
+  24 |     ].filter(Boolean);
+  25 |     if (!targets.length) { run(); return; }
+  26 |     if (!('IntersectionObserver' in window)) { run(); return; }
+  27 |     var done = false;
+  28 |     var io = new IntersectionObserver(function (entries) {
+  29 |         if (done) return;
+  30 |         for (var i = 0; i < entries.length; i++) {
+  31 |             if (entries[i].isIntersecting) {
+  32 |                 done = true;
+  33 |                 io.disconnect();
+  34 |                 run();
+  35 |                 break;
+  36 |             }
+  37 |         }
+  38 |     }, { rootMargin: '120px', threshold: 0.05 });
+  39 |     targets.forEach(function (el) { io.observe(el); });
+  40 | }
+  41 | 
+  42 | let enrollmentChart = null;
+  43 |   let gradeChart = null;
+  44 | 
+  45 |   function renderEnrollmentTrendWithChart(data) {
+  46 |   try {
+  47 |   if (!data || !Array.isArray(data) || data.length === 0) {
+  48 |   // destroy existing chart and show empty state
+  49 |   if (enrollmentChart) {
+  50 |   try { enrollmentChart.destroy(); } catch(e){}
+  51 |   enrollmentChart = null;
+  52 |   }
+  53 |   const ctxEl = document.getElementById('chartEnrollmentTrend');
+  54 |   if (ctxEl) {
+  55 |   const ctx = ctxEl.getContext('2d');
+  56 |   ctx.clearRect(0, 0, ctxEl.width, ctxEl.height);
+  57 |   // draw "No data" text
+  58 |   ctx.font = '16px Arial';
+  59 |   ctx.fillStyle = '#9ca3af';
+  60 |   ctx.textAlign = 'center';
+  61 |   ctx.textBaseline = 'middle';
+  62 |   ctx.fillText('No enrollment data', ctxEl.width / 2, ctxEl.height / 2);
+  63 |   }
+  64 |   return;
+  65 |   }
+  66 | 
+  67 |   if (typeof Chart === 'undefined') {
+  68 |   console.warn('Chart.js not available; cannot render enrollment chart.');
+  69 |   // draw simple text as fallback
+  70 |   const ctxEl = document.getElementById('chartEnrollmentTrend');
+  71 |   if (ctxEl) {
+  72 |   const ctx = ctxEl.getContext('2d');
+  73 |   ctx.clearRect(0, 0, ctxEl.width, ctxEl.height);
+  74 |   ctx.font = '16px Arial';
+  75 |   ctx.fillStyle = '#9ca3af';
+  76 |   ctx.textAlign = 'center';
+  77 |   ctx.textBaseline = 'middle';
+  78 |   ctx.fillText('Chart library blocked by browser. Enable CDN or use local file.', ctxEl.width / 2, ctxEl.height / 2);
+  79 |   }
+  80 |   return;
+  81 |   }
+  82 | 
+  83 |   const labels = data.map(d => d.label);
+  84 |   const values = data.map(d => d.value);
+  85 |   const ctx = document.getElementById('chartEnrollmentTrend').getContext('2d');
+  86 |   if (enrollmentChart) enrollmentChart.destroy();
+  87 |   enrollmentChart = new Chart(ctx, {
+  88 |   type: 'line',
+  89 |   data: {
+  90 |   labels: labels,
+  91 |   datasets: [{
+  92 |   label: 'Enrollments',
+  93 |   data: values,
+  94 |   fill: true,
+  95 |   backgroundColor: 'rgba(241,127,84,0.12)',
+  96 |   borderColor: '#f17f54',
+  97 |   tension: 0.4,
+  98 |   pointRadius: 3
+  99 |   }]
+ 100 |   },
+ 101 |   options: {
+ 102 |   responsive: true,
+ 103 |   maintainAspectRatio: false,
+ 104 |   scales: {
+ 105 |   y: { beginAtZero: true, ticks: { precision: 0 } }
+ 106 |   }
+ 107 |   }
+ 108 |   });
+ 109 |   } catch (err) {
+ 110 |   console.error('Error rendering enrollment chart:', err);
+ 111 |   }
+ 112 |   }
+ 113 | 
+ 114 |   function renderGradeDistributionWithChart(data) {
+ 115 |   try {
+ 116 |   const defaultLabels = ['A', 'B', 'C', 'D', 'F'];
+ 117 |   if (!data || !Array.isArray(data) || data.length === 0) {
+ 118 |   // render zeroed chart so layout is consistent
+ 119 |   if (gradeChart) gradeChart.destroy();
+ 120 |   const ctx = document.getElementById('chartGradeDistribution').getContext('2d');
+ 121 |   gradeChart = new Chart(ctx, {
+ 122 |   type: 'bar',
+ 123 |   data: {
+ 124 |   labels: defaultLabels,
+ 125 |   datasets: [{
+ 126 |   label: 'Students',
+ 127 |   data: [0, 0, 0, 0, 0],
+ 128 |   backgroundColor: ['#f17f54','#3b82f6','#10b981','#f59e0b','#ef4444']
+ 129 |   }]
+ 130 |   },
+ 131 |   options: {
+ 132 |   responsive: true,
+ 133 |   maintainAspectRatio: false,
+ 134 |   scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+ 135 |   }
+ 136 |   });
+ 137 |   return;
+ 138 |   }
+ 139 | 
+ 140 |   const labels = data.map(d => d.label);
+ 141 |   const values = data.map(d => d.value);
+ 142 |   const ctx = document.getElementById('chartGradeDistribution').getContext('2d');
+ 143 |   if (gradeChart) gradeChart.destroy();
+ 144 |   gradeChart = new Chart(ctx, {
+ 145 |   type: 'bar',
+ 146 |   data: {
+ 147 |   labels: labels,
+ 148 |   datasets: [{
+ 149 |   label: 'Students',
+ 150 |   data: values,
+ 151 |   backgroundColor: ['#f17f54','#3b82f6','#10b981','#f59e0b','#ef4444']
+ 152 |   }]
+ 153 |   },
+ 154 |   options: {
+ 155 |   responsive: true,
+ 156 |   maintainAspectRatio: false,
+ 157 |   scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+ 158 |   }
+ 159 |   });
+ 160 |   } catch (err) {
+ 161 |   console.error('Error rendering grade distribution chart:', err);
+ 162 |   }
+ 163 |   }
+ 164 | 
+ 165 |   // Initialize dashboard when page loads
+ 166 |   document.addEventListener('DOMContentLoaded', function () {
+ 167 |   loadDashboardData();
+ 168 | });
+ 169 | 
+ 170 | let currentSubmissionId = null;
+ 171 |     let dashSubmissionsDt = null;
+ 172 |     let dashSubmissionsMap = {};
+ 173 | 
+ 174 |     function escapeHtmlDash(str) {
+ 175 |     if (str == null) return '';
+ 176 |     return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+ 177 |   }
+ 178 | 
+ 179 |   function renderDashSubmissions(list) {
+ 180 |   var wrap = document.getElementById('dashSubmissionsWrap');
+ 181 |   if (!wrap) return;
+ 182 |   var colors = ['#f59e0b', '#3b82f6', '#10b981', '#ec4899', '#8b5cf6'];
+ 183 |   dashSubmissionsMap = {};
+ 184 |   (list || []).forEach(function (s) { dashSubmissionsMap[s.sid] = s; });
+ 185 | 
+ 186 |   if (typeof EduDataTable === 'undefined') {
+ 187 |   wrap.innerHTML = '<div class="text-muted p-3">No table component.</div>';
+ 188 |   return;
+ 189 |   }
+ 190 |   if (!dashSubmissionsDt) {
+ 191 |   dashSubmissionsDt = EduDataTable.create({
+ 192 |   container: wrap,
+ 193 |   pageSize: 8,
+ 194 |   pageSizeOptions: [5, 8, 15, 25],
+ 195 |   searchPlaceholder: 'Search student, assignment, course...',
+ 196 |   emptyMessage: 'No recent submissions found.',
+ 197 |   tableClass: 'table table-hover submissions-table mb-0 edt-table',
+ 198 |   columns: [
+ 199 |   {
+ 200 |   key: 'studentName', title: 'Student', sortable: true,
+ 201 |   render: function (sub, i) {
+ 202 |   return '<div class="d-flex align-items-center"><div class="student-avatar me-2" style="background-color:' +
+ 203 |     colors[i % colors.length] + ';">' + escapeHtmlDash(sub.initials || '?') +
+ 204 |     '</div><span class="fw-semibold text-dark">' + escapeHtmlDash(sub.studentName) + '</span></div>';
+ 205 | },
+ 206 | searchValue: function (s) { return (s.studentName || '') + ' ' + (s.studentEmail || ''); }
+ 207 | },
+ 208 | { key: 'assignmentTitle', title: 'Assignment', sortable: true, filter: true, filterLabel: 'Assignment' },
+ 209 | { key: 'courseName', title: 'Course', sortable: true, filter: true, filterLabel: 'Course' },
+ 210 | { key: 'timeText', title: 'Time', sortable: true, cellClass: 'text-muted small',
+ 211 | sortValue: function (s) { return s.timestamp || s.timeText || ''; }, type: 'date' },
+ 212 | {
+ 213 | key: 'status', title: 'Action', sortable: true, filter: true, filterLabel: 'Status',
+ 214 | render: function (sub) {
+ 215 | if (sub.isGraded) {
+ 216 | return '<span class="badge-graded"><i class="fa-solid fa-circle-check"></i> Graded</span>';
+ 217 | }
+ 218 | return '<button type="button" class="btn btn-grade-now" onclick="openGradeModalBySid(' +
+ 219 | sub.sid + ')">Grade Now</button>';
+ 220 | },
+ 221 | sortValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; },
+ 222 | searchValue: function (s) { return s.isGraded ? 'Graded' : 'Pending'; }
+ 223 | }
+ 224 | ]
+ 225 | });
+ 226 | }
+ 227 | // Normalize status field for filter
+ 228 | var rows = (list || []).map(function (s) {
+ 229 | s.status = s.isGraded ? 'Graded' : 'Pending';
+ 230 | return s;
+ 231 | });
+ 232 | dashSubmissionsDt.setData(rows);
+ 233 | }
+ 234 | 
+ 235 | function openGradeModalBySid(sid) {
+ 236 | var sub = dashSubmissionsMap[sid];
+ 237 | if (sub) openGradeModal(sub);
+ 238 | }
+ 239 | 
+ 240 | // dashboard initialization is deferred until Chart.js and chart helper functions are available (handled at bottom of page)
+ 241 | 
+ 242 | function exportDashGradesCsv() {
+ 243 |   fetch(window.location.pathname + '/ExportGradesCsv', {
+ 244 |     method: 'POST',
+ 245 |     headers: { 'Content-Type': 'application/json' },
+ 246 |     body: JSON.stringify({ cid: 0 }),
+ 247 |     credentials: 'same-origin'
+ 248 |   })
+ 249 |   .then(function (r) { return r.json(); })
+ 250 |   .then(function (data) {
+ 251 |     var res = (data && data.d) ? (data.d.d || data.d) : data;
+ 252 |     if (!res || !res.success) { alert((res && res.message) || 'Export failed'); return; }
+ 253 |     var blob = new Blob([res.csv || ''], { type: 'text/csv;charset=utf-8;' });
+ 254 |     var a = document.createElement('a');
+ 255 |     a.href = URL.createObjectURL(blob);
+ 256 |     a.download = res.fileName || 'grades.csv';
+ 257 |     document.body.appendChild(a);
+ 258 |     a.click();
+ 259 |     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 400);
+ 260 |   })
+ 261 |   .catch(function () { alert('Network error exporting grades.'); });
+ 262 | }
+ 263 | 
+ 264 | function loadDashboardData() {
+ 265 | // Fetch dashboard statistics and submissions from code-behind
+ 266 | fetch(window.location.pathname + '/GetDashboardData', {
+ 267 | method: 'POST',
+ 268 | headers: {
+ 269 | 'Content-Type': 'application/json'
+ 270 | }
+ 271 | })
+ 272 | .then(res => res.json())
+ 273 | .then(data => {
+ 274 | // Normalize ASP.NET PageMethod response which may be wrapped as { d: {...} }
+ 275 | // In some environments it can be double-wrapped: { d: { d: {...} } }
+ 276 | let resObj = null;
+ 277 | if (data && data.d) {
+ 278 | resObj = data.d.d ? data.d.d : data.d;
+ 279 | } else {
+ 280 | resObj = data;
+ 281 | }
+ 282 | if (!resObj || resObj.notAuthenticated) {
+ 283 | // Redirect to login
+ 284 | window.location.href = '/Pages/Authentication/Login.aspx';
+ 285 | return;
+ 286 | }
+ 287 | if (!resObj.success) {
+ 288 | console.error('Failed to load dashboard:', resObj.message || resObj);
+ 289 | return;
+ 290 | }
+ 291 | 
+ 292 | if (resObj.success) {
+ 293 | // Update Stats
+ 294 | document.getElementById('lblTotalStudents').innerText = formatNumber(resObj.totalStudents);
+ 295 | document.getElementById('lblActiveCourses').innerText = resObj.activeCourses;
+ 296 | document.getElementById('lblPendingGrading').innerText = resObj.pendingGrading;
+ 297 | if (!resObj.hasGrades) {
+ 298 | document.getElementById('lblAverageGrade').innerText = "N/A";
+ 299 | } else {
+ 300 | document.getElementById('lblAverageGrade').innerText = resObj.averageGrade + "%";
+ 301 | }
+ 302 | 
+ 303 | // Stats + table first; charts only when visible (lazy Chart.js CDN)
+ 304 | var enrollData = (resObj.enrollmentTrends && Array.isArray(resObj.enrollmentTrends))
+ 305 |   ? resObj.enrollmentTrends : [];
+ 306 | var gradeData = (resObj.gradeDistribution && Array.isArray(resObj.gradeDistribution))
+ 307 |   ? resObj.gradeDistribution : [];
+ 308 | whenChartsVisible(function () {
+ 309 |   ensureChartJs(function () {
+ 310 |     renderEnrollmentTrendWithChart(enrollData);
+ 311 |     renderGradeDistributionWithChart(gradeData);
+ 312 |   });
+ 313 | });
+ 314 | 
+ 315 | // Submissions table with search / sort / filter / pagination
+ 316 | renderDashSubmissions(resObj.submissions || []);
+ 317 | }
+ 318 | })
+ 319 | .catch(err => {
+ 320 | console.error("Error loading dashboard data: ", err);
+ 321 | });
+ 322 | }
+ 323 | 
+ 324 | function formatNumber(num) {
+ 325 | return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+ 326 | }
+ 327 | 
+ 328 | function openGradeModal(sub) {
+ 329 | currentSubmissionId = sub.sid;
+ 330 | 
+ 331 | // Set student initials and name
+ 332 | const avatar = document.getElementById('modalStudentAvatar');
+ 333 | avatar.innerText = sub.initials;
+ 334 | avatar.style.backgroundColor = '#f17f54';
+ 335 | document.getElementById('modalStudentName').innerText = sub.studentName;
+ 336 | 
+ 337 | // Set details
+ 338 | document.getElementById('modalAssignment').innerText = sub.assignmentTitle;
+ 339 | document.getElementById('modalAnswer').innerText = sub.studentAnswer;
+ 340 | document.getElementById('lblMaxScore').innerText = "/ " + sub.maxScore;
+ 341 | 
+ 342 | // Reset inputs
+ 343 | const txtScore = document.getElementById('txtScore');
+ 344 | txtScore.value = 0;
+ 345 | txtScore.max = sub.maxScore;
+ 346 | document.getElementById('txtReview').value = '';
+ 347 | 
+ 348 | // Hide error
+ 349 | document.getElementById('modalErrorMessage').style.display = 'none';
+ 350 | 
+ 351 | // Show modal
+ 352 | const myModal = new bootstrap.Modal(document.getElementById('gradingModal'));
+ 353 | myModal.show();
+ 354 | }
+ 355 | 
+ 356 | function submitGrading() {
+ 357 | const score = parseInt(document.getElementById('txtScore').value);
+ 358 | const review = document.getElementById('txtReview').value.trim();
+ 359 | const errDiv = document.getElementById('modalErrorMessage');
+ 360 | 
+ 361 | errDiv.style.display = 'none';
+ 362 | 
+ 363 | if (isNaN(score) || score < 0) {
+ 364 | errDiv.innerText = "Please enter a valid score.";
+ 365 | errDiv.style.display = 'block';
+ 366 | return;
+ 367 | }
+ 368 | 
+ 369 | // Call SaveGrade WebMethod
+ 370 | fetch(window.location.pathname + '/SaveGrade', {
+ 371 | method: 'POST',
+ 372 | headers: {
+ 373 | 'Content-Type': 'application/json'
+ 374 | },
+ 375 | body: JSON.stringify({
+ 376 | sid: currentSubmissionId,
+ 377 | score: score,
+ 378 | review: review
+ 379 | })
+ 380 | })
+ 381 | .then(res => res.json())
+ 382 | .then(data => {
+ 383 | let resObj = null;
+ 384 | if (data && data.d) resObj = data.d.d ? data.d.d : data.d; else resObj = data;
+ 385 | if (resObj && resObj.success) {
+ 386 | // Close Modal
+ 387 | const modalEl = document.getElementById('gradingModal');
+ 388 | const modal = bootstrap.Modal.getInstance(modalEl);
+ 389 | modal.hide();
+ 390 | 
+ 391 | // Refresh dashboard data
+ 392 | loadDashboardData();
+ 393 | } else {
+ 394 | errDiv.innerText = resObj.message || "Failed to save grade.";
+ 395 | errDiv.style.display = 'block';
+ 396 | }
+ 397 | })
+ 398 | .catch(err => {
+ 399 | errDiv.innerText = "Network error. Please try again.";
+ 400 | errDiv.style.display = 'block';
+ 401 | console.error(err);
+ 402 | });
+ 403 | }
+ 404 | 
+```
+
+**Line notes**
+
+- **L6:** Dashboard chart/visualization.
+- **L7:** Dashboard chart/visualization.
+- **L11:** Dashboard chart/visualization.
+- **L14:** Dashboard chart/visualization.
+- **L20:** Dashboard chart/visualization.
+- **L22:** Get HTML element by id.
+- **L23:** Get HTML element by id.
+- **L42:** Dashboard chart/visualization.
+- **L43:** Dashboard chart/visualization.
+- **L45:** Dashboard chart/visualization.
+- **L46:** Error handling block.
+- **L49:** Dashboard chart/visualization.
+- **L50:** Error handling block.
+- **L51:** Dashboard chart/visualization.
+- **L53:** Get HTML element by id.
+- **L67:** Dashboard chart/visualization.
+- **L68:** Dashboard chart/visualization.
+- **L70:** Get HTML element by id.
+- **L78:** Dashboard chart/visualization.
+- **L85:** Get HTML element by id.
+- **L86:** Dashboard chart/visualization.
+- **L87:** Dashboard chart/visualization.
+- **L114:** Dashboard chart/visualization.
+- **L115:** Error handling block.
+- **L119:** Dashboard chart/visualization.
+- **L120:** Get HTML element by id.
+- **L121:** Dashboard chart/visualization.
+- **L142:** Get HTML element by id.
+- **L143:** Dashboard chart/visualization.
+- **L144:** Dashboard chart/visualization.
+- **L166:** DOM event handler.
+- **L174:** Encode text to reduce XSS risk.
+- **L180:** Get HTML element by id.
+- **L186:** In-memory result set from ADO.NET.
+- **L187:** Update page HTML.
+- **L191:** In-memory result set from ADO.NET.
+- **L203:** Encode text to reduce XSS risk.
+- **L204:** Encode text to reduce XSS risk.
+- **L242:** CSV export.
+- **L243:** HTTP request to server WebMethod/ashx.
+- **L246:** JS object ↔ JSON text.
+- **L253:** CSV export.
+- **L256:** CSV export.
+- **L266:** HTTP request to server WebMethod/ashx.
+- **L294:** Get HTML element by id.
+- **L295:** Get HTML element by id.
+- **L296:** Get HTML element by id.
+- **L298:** Get HTML element by id.
+- **L300:** Get HTML element by id.
+- **L308:** Dashboard chart/visualization.
+- **L309:** Dashboard chart/visualization.
+- **L310:** Dashboard chart/visualization.
+- **L311:** Dashboard chart/visualization.
+- **L332:** Get HTML element by id.
+- **L335:** Get HTML element by id.
+- **L338:** Get HTML element by id.
+- **L339:** Get HTML element by id.
+- **L340:** Get HTML element by id.
+- **L343:** Get HTML element by id.
+- **L346:** Get HTML element by id.
+- **L349:** Get HTML element by id.
+- **L352:** Get HTML element by id.
+- **L357:** Get HTML element by id.
+- **L358:** Get HTML element by id.
+- **L359:** Get HTML element by id.
+- **L370:** HTTP request to server WebMethod/ashx.
+- **L375:** JS object ↔ JSON text.
+- **L387:** Get HTML element by id.
 
 ## Source snapshot (raw)
 

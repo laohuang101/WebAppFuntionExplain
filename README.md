@@ -15,20 +15,27 @@ Detailed **Landing + Lecturer + Security** documentation for EduLMS.
 | `02-Lecturer-Pages` | ASPX + code-behind |
 | `03-Lecturer-Scripts` | JavaScript |
 | `04-Lecturer-Handlers` | ashx + Media |
-| `05-Lecturer-Data` | Repository & SQL helpers |
+| `05-Data-Layer` | DbHelper, LecturerRepository, schema, indexes |
 | `06-Security-Core` | AuthService, JWT, TOTP, CSRF, throttle, audit |
 | `07-Security-AuthPages` | Login, Register, MFA, Forgot/Reset, Logout |
 
-### Security quick links
+### Quick links
 
+**Data**
+
+- [02-DATA-OVERVIEW.md](00-Overview/02-DATA-OVERVIEW.md)
+- [Data__DbHelper.cs.md](05-Data-Layer/Data__DbHelper.cs.md)
+- [Data__LecturerRepository.cs.md](05-Data-Layer/Data__LecturerRepository.cs.md)
+- [Data__Models.cs.md](05-Data-Layer/Data__Models.cs.md)
+
+**Security**
+
+- [01-SECURITY-OVERVIEW.md](00-Overview/01-SECURITY-OVERVIEW.md)
 - [Security__AuthService.cs.md](06-Security-Core/Security__AuthService.cs.md)
 - [Security__AuthGate.cs.md](06-Security-Core/Security__AuthGate.cs.md)
-- [Security__TotpHelper.cs.md](06-Security-Core/Security__TotpHelper.cs.md)
-- [Security__PasswordHasher.cs.md](06-Security-Core/Security__PasswordHasher.cs.md)
 - [Auth__Login.aspx.cs.md](07-Security-AuthPages/Auth__Login.aspx.cs.md)
-- [Auth__Register.aspx.cs.md](07-Security-AuthPages/Auth__Register.aspx.cs.md)
 
-Generated: 2026-07-11T21:21:04
+Generated: 2026-07-11T21:33:45
 
 ```bash
 python3 /home/loke/Documents/WebAppFuntionExplain/_generate_md_docs.py

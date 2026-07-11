@@ -1,6 +1,6 @@
 # UploadMedia.ashx
 **Source:** `Pages/Lecturer/UploadMedia.ashx`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -21,7 +21,7 @@ Markup/mixed file. Server controls and expressions are explained with code-behin
 
 ### `ProcessRequest` — lines 17–222
 
-```
+```html
 public void ProcessRequest(HttpContext context)
 ```
 
@@ -35,235 +35,240 @@ public void ProcessRequest(HttpContext context)
 
 #### Line-by-line (this function)
 
-`  17`  `    public void ProcessRequest(HttpContext context)`
-  - → IHttpHandler entry for ashx.
-`  18`  `    {`
-`  19`  `        context.Response.ContentType = "application/json; charset=utf-8";`
-`  20`  `        context.Response.Cache.SetCacheability(HttpCacheability.NoCache);`
-`  21`  ``
-`  22`  `        try`
-  - → Error handling block.
-`  23`  `        {`
-`  24`  `            string kind = (context.Request["kind"] ?? context.Request.Form["kind"] ?? "").Trim().ToLowerInvariant();`
-`  25`  `            bool isSubmission = kind == "submission" || kind == "submissions" || kind == "answer";`
-`  26`  ``
-`  27`  `            int uid;`
-`  28`  `            if (isSubmission)`
-`  29`  `            {`
-`  30`  `                if (!AuthGate.EnsureHandlerUser(context, out uid)) return;`
-  - → Authorization — block wrong role / anonymous.
-`  31`  `            }`
-`  32`  `            else`
-`  33`  `            {`
-`  34`  `                if (!AuthGate.EnsureHandlerRole(context, out uid, "Lecturer", "Admin")) return;`
-  - → Authorization — block wrong role / anonymous.
-`  35`  `            }`
-`  36`  ``
-`  37`  `            HttpPostedFile file = null;`
-`  38`  `            if (context.Request.Files.Count > 0)`
-`  39`  `                file = context.Request.Files["file"] ?? context.Request.Files[0];`
-`  40`  ``
-`  41`  `            if (file == null || file.ContentLength <= 0)`
-`  42`  `            {`
-`  43`  `                WriteJson(context, new { success = false, message = "No file uploaded. Use multipart form field 'file'." });`
-`  44`  `                return;`
-`  45`  `            }`
-`  46`  ``
-`  47`  `            var originalName = Path.GetFileName(file.FileName);`
-`  48`  `            var ext = Path.GetExtension(originalName).ToLowerInvariant();`
-`  49`  `            if (string.IsNullOrEmpty(ext))`
-`  50`  `            {`
-`  51`  `                WriteJson(context, new { success = false, message = "File must have an extension." });`
-`  52`  `                return;`
-`  53`  `            }`
-`  54`  ``
-`  55`  `            string magicMsg;`
-  - → File magic-byte validation on upload.
-`  56`  `            if (!FileMagic.LooksValid(file, ext, out magicMsg))`
-  - → Validate upload by file signature.
-`  57`  `            {`
-`  58`  `                SecurityAudit.Log("upload.reject", uid, magicMsg + " ext=" + ext);`
-  - → Write/read security audit events.
-`  59`  `                WriteJson(context, new { success = false, message = magicMsg ?? "File content does not match extension." });`
-  - → File magic-byte validation on upload.
-`  60`  `                return;`
-`  61`  `            }`
-`  62`  ``
-`  63`  `            var videoExts = new[] { ".mp4", ".webm", ".mov" };`
-`  64`  `            var materialExts = new[] { ".pdf", ".ppt", ".pptx", ".docx", ".pptm", ".doc", ".txt", ".zip" };`
-`  65`  `            var imageExts = new[] { ".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp" };`
-`  66`  ``
-`  67`  `            // kind already resolved above (auth)`
-`  68`  `            string subFolder;`
-`  69`  `            long maxSize;`
-`  70`  ``
-`  71`  `            if (isSubmission)`
-`  72`  `            {`
-`  73`  `                // Student assessment files (prefer PDF; allow office/images too)`
-`  74`  `                if (Array.IndexOf(videoExts, ext) >= 0)`
-`  75`  `                {`
-`  76`  `                    subFolder = "CourseSubmissions";`
-`  77`  `                    maxSize = 100L * 1024 * 1024;`
-`  78`  `                }`
-`  79`  `                else if (Array.IndexOf(materialExts, ext) >= 0 || Array.IndexOf(imageExts, ext) >= 0)`
-`  80`  `                {`
-`  81`  `                    subFolder = "CourseSubmissions";`
-`  82`  `                    maxSize = 30L * 1024 * 1024;`
-`  83`  `                }`
-`  84`  `                else`
-`  85`  `                {`
-`  86`  `                    WriteJson(context, new { success = false, message = "Submission file type not allowed: " + ext });`
-`  87`  `                    return;`
-`  88`  `                }`
-`  89`  `            }`
-`  90`  `            else if (Array.IndexOf(videoExts, ext) >= 0)`
-`  91`  `            {`
-`  92`  `                subFolder = "CourseVideos";`
-`  93`  `                maxSize = 200L * 1024 * 1024;`
-`  94`  `            }`
-`  95`  `            else if (Array.IndexOf(materialExts, ext) >= 0)`
-`  96`  `            {`
-`  97`  `                subFolder = "CourseMaterials";`
-`  98`  `                maxSize = 30L * 1024 * 1024;`
-`  99`  `            }`
-` 100`  `            else if (Array.IndexOf(imageExts, ext) >= 0)`
-` 101`  `            {`
-` 102`  `                subFolder = "CourseMaterials";`
-` 103`  `                maxSize = 10L * 1024 * 1024;`
-` 104`  `            }`
-` 105`  `            else`
-` 106`  `            {`
-` 107`  `                WriteJson(context, new`
-` 108`  `                {`
-` 109`  `                    success = false,`
-` 110`  `                    message = "File type not allowed: " + ext`
-` 111`  `                });`
-` 112`  `                return;`
-` 113`  `            }`
-` 114`  ``
-` 115`  `            if (file.ContentLength > maxSize)`
-` 116`  `            {`
-` 117`  `                WriteJson(context, new`
-` 118`  `                {`
-` 119`  `                    success = false,`
-` 120`  `                    message = "File too large (" + (file.ContentLength / (1024 * 1024)) + " MB)."`
-` 121`  `                });`
-` 122`  `                return;`
-` 123`  `            }`
-` 124`  ``
-` 125`  `            // Ensure uploads root + subfolder exist (physical under site)`
-` 126`  `            string uploadsRoot = context.Server.MapPath("~/Uploads");`
-` 127`  `            if (!Directory.Exists(uploadsRoot))`
-` 128`  `                Directory.CreateDirectory(uploadsRoot);`
-` 129`  ``
-` 130`  `            string uploadsFolder = Path.Combine(uploadsRoot, subFolder);`
-` 131`  `            if (!Directory.Exists(uploadsFolder))`
-` 132`  `                Directory.CreateDirectory(uploadsFolder);`
-` 133`  ``
-` 134`  `            // Write a marker so folder is never empty/missing in git/IIS`
-` 135`  `            string keep = Path.Combine(uploadsFolder, ".keep");`
-` 136`  `            if (!File.Exists(keep))`
-` 137`  `            {`
-` 138`  `                try { File.WriteAllText(keep, "keep"); } catch { }`
-  - → Error handling block.
-` 139`  `            }`
-` 140`  ``
-` 141`  `            // ALWAYS save as GUID on disk — never the original file name`
-` 142`  `            var savedName = Guid.NewGuid().ToString("N") + ext;`
-` 143`  `            var savePath = Path.Combine(uploadsFolder, savedName);`
-` 144`  `            file.SaveAs(savePath);`
-` 145`  ``
-` 146`  `            // Verify write`
-` 147`  `            if (!File.Exists(savePath))`
-` 148`  `            {`
-` 149`  `                WriteJson(context, new`
-` 150`  `                {`
-` 151`  `                    success = false,`
-` 152`  `                    message = "Save reported OK but file missing on disk: " + savePath`
-` 153`  `                });`
-` 154`  `                return;`
-` 155`  `            }`
-` 156`  ``
-` 157`  `            long written = new FileInfo(savePath).Length;`
-` 158`  `            if (written <= 0)`
-` 159`  `            {`
-` 160`  `                WriteJson(context, new { success = false, message = "Saved file is empty: " + savePath });`
-` 161`  `                return;`
-` 162`  `            }`
-` 163`  ``
-` 164`  `            // Sidecar maps GUID file → original name (for Media.ashx fallback + download filename)`
-` 165`  `            try`
-  - → Error handling block.
-` 166`  `            {`
-` 167`  `                File.WriteAllText(savePath + ".meta", originalName ?? savedName, Encoding.UTF8);`
-` 168`  `            }`
-` 169`  `            catch { }`
-  - → Handle/log exception.
-` 170`  ``
-` 171`  `            // Portable store path for DB — MUST be the GUID path, not original name`
-` 172`  `            string under = subFolder + "/" + savedName;            // CourseMaterials/{guid}.pdf`
-` 173`  `            string storePath = "Uploads/" + under;                 // Uploads/CourseMaterials/{guid}.pdf`
-` 174`  ``
-` 175`  `            // ALWAYS use root Media.ashx for view/download`
-` 176`  `            string mediaBase = VirtualPathUtility.ToAbsolute("~/Media.ashx");`
-` 177`  `            string serveUrl = mediaBase + "?f=" + HttpUtility.UrlEncode(under);`
-` 178`  `            string downloadUrl = serveUrl + "&dl=1";`
-` 179`  `            string absUrl = VirtualPathUtility.ToAbsolute("~/" + storePath);`
-` 180`  ``
-` 181`  `            try`
-  - → Error handling block.
-` 182`  `            {`
-` 183`  `                string logDir = context.Server.MapPath("~/App_Data/Logs");`
-` 184`  `                if (!Directory.Exists(logDir)) Directory.CreateDirectory(logDir);`
-` 185`  `                File.AppendAllText(Path.Combine(logDir, "uploads.log"),`
-` 186`  `                    DateTime.Now.ToString("s") + " OK under=" + under +`
-` 187`  `                    " original=" + originalName + " bytes=" + written + Environment.NewLine);`
-` 188`  `            }`
-` 189`  `            catch { }`
-  - → Handle/log exception.
-` 190`  ``
-` 191`  `            try { SecurityAudit.Log("upload.ok", uid, under + " original=" + originalName); } catch { }`
-  - → Error handling block.
-` 192`  ``
-` 193`  `            WriteJson(context, new`
-` 194`  `            {`
-` 195`  `                success = true,`
-` 196`  `                // Prefer GUID store path for DB fields (not original name, not Media.ashx URL)`
-` 197`  `                url = storePath,`
-` 198`  `                storePath = storePath,`
-` 199`  `                under = under,`
-` 200`  `                serveUrl = serveUrl,`
-` 201`  `                downloadUrl = downloadUrl,`
-` 202`  `                staticUrl = absUrl,`
-` 203`  `                fileName = originalName,`
-` 204`  `                size = written,`
-` 205`  `                physical = savePath,`
-` 206`  `                ext = ext`
-` 207`  `            });`
-` 208`  `        }`
-` 209`  `        catch (Exception ex)`
-  - → Handle/log exception.
-` 210`  `        {`
-` 211`  `            try`
-  - → Error handling block.
-` 212`  `            {`
-` 213`  `                string logDir = context.Server.MapPath("~/App_Data/Logs");`
-` 214`  `                if (!Directory.Exists(logDir)) Directory.CreateDirectory(logDir);`
-` 215`  `                File.AppendAllText(Path.Combine(logDir, "uploads.log"),`
-` 216`  `                    DateTime.Now.ToString("s") + " FAIL " + ex.Message + Environment.NewLine);`
-` 217`  `            }`
-` 218`  `            catch { }`
-  - → Handle/log exception.
-` 219`  `            // Do not leak exception details to client`
-` 220`  `            WriteJson(context, new { success = false, message = "Upload failed. Check file type/size and try again." });`
-` 221`  `        }`
-` 222`  `    }`
+```html
+  17 |     public void ProcessRequest(HttpContext context)
+  18 |     {
+  19 |         context.Response.ContentType = "application/json; charset=utf-8";
+  20 |         context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+  21 | 
+  22 |         try
+  23 |         {
+  24 |             string kind = (context.Request["kind"] ?? context.Request.Form["kind"] ?? "").Trim().ToLowerInvariant();
+  25 |             bool isSubmission = kind == "submission" || kind == "submissions" || kind == "answer";
+  26 | 
+  27 |             int uid;
+  28 |             if (isSubmission)
+  29 |             {
+  30 |                 if (!AuthGate.EnsureHandlerUser(context, out uid)) return;
+  31 |             }
+  32 |             else
+  33 |             {
+  34 |                 if (!AuthGate.EnsureHandlerRole(context, out uid, "Lecturer", "Admin")) return;
+  35 |             }
+  36 | 
+  37 |             HttpPostedFile file = null;
+  38 |             if (context.Request.Files.Count > 0)
+  39 |                 file = context.Request.Files["file"] ?? context.Request.Files[0];
+  40 | 
+  41 |             if (file == null || file.ContentLength <= 0)
+  42 |             {
+  43 |                 WriteJson(context, new { success = false, message = "No file uploaded. Use multipart form field 'file'." });
+  44 |                 return;
+  45 |             }
+  46 | 
+  47 |             var originalName = Path.GetFileName(file.FileName);
+  48 |             var ext = Path.GetExtension(originalName).ToLowerInvariant();
+  49 |             if (string.IsNullOrEmpty(ext))
+  50 |             {
+  51 |                 WriteJson(context, new { success = false, message = "File must have an extension." });
+  52 |                 return;
+  53 |             }
+  54 | 
+  55 |             string magicMsg;
+  56 |             if (!FileMagic.LooksValid(file, ext, out magicMsg))
+  57 |             {
+  58 |                 SecurityAudit.Log("upload.reject", uid, magicMsg + " ext=" + ext);
+  59 |                 WriteJson(context, new { success = false, message = magicMsg ?? "File content does not match extension." });
+  60 |                 return;
+  61 |             }
+  62 | 
+  63 |             var videoExts = new[] { ".mp4", ".webm", ".mov" };
+  64 |             var materialExts = new[] { ".pdf", ".ppt", ".pptx", ".docx", ".pptm", ".doc", ".txt", ".zip" };
+  65 |             var imageExts = new[] { ".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp" };
+  66 | 
+  67 |             // kind already resolved above (auth)
+  68 |             string subFolder;
+  69 |             long maxSize;
+  70 | 
+  71 |             if (isSubmission)
+  72 |             {
+  73 |                 // Student assessment files (prefer PDF; allow office/images too)
+  74 |                 if (Array.IndexOf(videoExts, ext) >= 0)
+  75 |                 {
+  76 |                     subFolder = "CourseSubmissions";
+  77 |                     maxSize = 100L * 1024 * 1024;
+  78 |                 }
+  79 |                 else if (Array.IndexOf(materialExts, ext) >= 0 || Array.IndexOf(imageExts, ext) >= 0)
+  80 |                 {
+  81 |                     subFolder = "CourseSubmissions";
+  82 |                     maxSize = 30L * 1024 * 1024;
+  83 |                 }
+  84 |                 else
+  85 |                 {
+  86 |                     WriteJson(context, new { success = false, message = "Submission file type not allowed: " + ext });
+  87 |                     return;
+  88 |                 }
+  89 |             }
+  90 |             else if (Array.IndexOf(videoExts, ext) >= 0)
+  91 |             {
+  92 |                 subFolder = "CourseVideos";
+  93 |                 maxSize = 200L * 1024 * 1024;
+  94 |             }
+  95 |             else if (Array.IndexOf(materialExts, ext) >= 0)
+  96 |             {
+  97 |                 subFolder = "CourseMaterials";
+  98 |                 maxSize = 30L * 1024 * 1024;
+  99 |             }
+ 100 |             else if (Array.IndexOf(imageExts, ext) >= 0)
+ 101 |             {
+ 102 |                 subFolder = "CourseMaterials";
+ 103 |                 maxSize = 10L * 1024 * 1024;
+ 104 |             }
+ 105 |             else
+ 106 |             {
+ 107 |                 WriteJson(context, new
+ 108 |                 {
+ 109 |                     success = false,
+ 110 |                     message = "File type not allowed: " + ext
+ 111 |                 });
+ 112 |                 return;
+ 113 |             }
+ 114 | 
+ 115 |             if (file.ContentLength > maxSize)
+ 116 |             {
+ 117 |                 WriteJson(context, new
+ 118 |                 {
+ 119 |                     success = false,
+ 120 |                     message = "File too large (" + (file.ContentLength / (1024 * 1024)) + " MB)."
+ 121 |                 });
+ 122 |                 return;
+ 123 |             }
+ 124 | 
+ 125 |             // Ensure uploads root + subfolder exist (physical under site)
+ 126 |             string uploadsRoot = context.Server.MapPath("~/Uploads");
+ 127 |             if (!Directory.Exists(uploadsRoot))
+ 128 |                 Directory.CreateDirectory(uploadsRoot);
+ 129 | 
+ 130 |             string uploadsFolder = Path.Combine(uploadsRoot, subFolder);
+ 131 |             if (!Directory.Exists(uploadsFolder))
+ 132 |                 Directory.CreateDirectory(uploadsFolder);
+ 133 | 
+ 134 |             // Write a marker so folder is never empty/missing in git/IIS
+ 135 |             string keep = Path.Combine(uploadsFolder, ".keep");
+ 136 |             if (!File.Exists(keep))
+ 137 |             {
+ 138 |                 try { File.WriteAllText(keep, "keep"); } catch { }
+ 139 |             }
+ 140 | 
+ 141 |             // ALWAYS save as GUID on disk — never the original file name
+ 142 |             var savedName = Guid.NewGuid().ToString("N") + ext;
+ 143 |             var savePath = Path.Combine(uploadsFolder, savedName);
+ 144 |             file.SaveAs(savePath);
+ 145 | 
+ 146 |             // Verify write
+ 147 |             if (!File.Exists(savePath))
+ 148 |             {
+ 149 |                 WriteJson(context, new
+ 150 |                 {
+ 151 |                     success = false,
+ 152 |                     message = "Save reported OK but file missing on disk: " + savePath
+ 153 |                 });
+ 154 |                 return;
+ 155 |             }
+ 156 | 
+ 157 |             long written = new FileInfo(savePath).Length;
+ 158 |             if (written <= 0)
+ 159 |             {
+ 160 |                 WriteJson(context, new { success = false, message = "Saved file is empty: " + savePath });
+ 161 |                 return;
+ 162 |             }
+ 163 | 
+ 164 |             // Sidecar maps GUID file → original name (for Media.ashx fallback + download filename)
+ 165 |             try
+ 166 |             {
+ 167 |                 File.WriteAllText(savePath + ".meta", originalName ?? savedName, Encoding.UTF8);
+ 168 |             }
+ 169 |             catch { }
+ 170 | 
+ 171 |             // Portable store path for DB — MUST be the GUID path, not original name
+ 172 |             string under = subFolder + "/" + savedName;            // CourseMaterials/{guid}.pdf
+ 173 |             string storePath = "Uploads/" + under;                 // Uploads/CourseMaterials/{guid}.pdf
+ 174 | 
+ 175 |             // ALWAYS use root Media.ashx for view/download
+ 176 |             string mediaBase = VirtualPathUtility.ToAbsolute("~/Media.ashx");
+ 177 |             string serveUrl = mediaBase + "?f=" + HttpUtility.UrlEncode(under);
+ 178 |             string downloadUrl = serveUrl + "&dl=1";
+ 179 |             string absUrl = VirtualPathUtility.ToAbsolute("~/" + storePath);
+ 180 | 
+ 181 |             try
+ 182 |             {
+ 183 |                 string logDir = context.Server.MapPath("~/App_Data/Logs");
+ 184 |                 if (!Directory.Exists(logDir)) Directory.CreateDirectory(logDir);
+ 185 |                 File.AppendAllText(Path.Combine(logDir, "uploads.log"),
+ 186 |                     DateTime.Now.ToString("s") + " OK under=" + under +
+ 187 |                     " original=" + originalName + " bytes=" + written + Environment.NewLine);
+ 188 |             }
+ 189 |             catch { }
+ 190 | 
+ 191 |             try { SecurityAudit.Log("upload.ok", uid, under + " original=" + originalName); } catch { }
+ 192 | 
+ 193 |             WriteJson(context, new
+ 194 |             {
+ 195 |                 success = true,
+ 196 |                 // Prefer GUID store path for DB fields (not original name, not Media.ashx URL)
+ 197 |                 url = storePath,
+ 198 |                 storePath = storePath,
+ 199 |                 under = under,
+ 200 |                 serveUrl = serveUrl,
+ 201 |                 downloadUrl = downloadUrl,
+ 202 |                 staticUrl = absUrl,
+ 203 |                 fileName = originalName,
+ 204 |                 size = written,
+ 205 |                 physical = savePath,
+ 206 |                 ext = ext
+ 207 |             });
+ 208 |         }
+ 209 |         catch (Exception ex)
+ 210 |         {
+ 211 |             try
+ 212 |             {
+ 213 |                 string logDir = context.Server.MapPath("~/App_Data/Logs");
+ 214 |                 if (!Directory.Exists(logDir)) Directory.CreateDirectory(logDir);
+ 215 |                 File.AppendAllText(Path.Combine(logDir, "uploads.log"),
+ 216 |                     DateTime.Now.ToString("s") + " FAIL " + ex.Message + Environment.NewLine);
+ 217 |             }
+ 218 |             catch { }
+ 219 |             // Do not leak exception details to client
+ 220 |             WriteJson(context, new { success = false, message = "Upload failed. Check file type/size and try again." });
+ 221 |         }
+ 222 |     }
+```
+
+**Line notes**
+
+- **L17:** IHttpHandler entry for ashx.
+- **L22:** Error handling block.
+- **L30:** Authorization — block wrong role / anonymous.
+- **L34:** Authorization — block wrong role / anonymous.
+- **L55:** File magic-byte validation on upload.
+- **L56:** Validate upload by file signature.
+- **L58:** Write/read security audit events.
+- **L59:** File magic-byte validation on upload.
+- **L138:** Error handling block.
+- **L165:** Error handling block.
+- **L169:** Handle/log exception.
+- **L181:** Error handling block.
+- **L189:** Handle/log exception.
+- **L191:** Error handling block.
+- **L209:** Handle/log exception.
+- **L211:** Error handling block.
+- **L218:** Handle/log exception.
 
 ---
 
 ### `WriteJson` — lines 223–228
 
-```
+```html
 private void WriteJson(HttpContext context, object obj)
 ```
 
@@ -276,275 +281,282 @@ private void WriteJson(HttpContext context, object obj)
 
 #### Line-by-line (this function)
 
-` 223`  ``
-` 224`  `    private void WriteJson(HttpContext context, object obj)`
-` 225`  `    {`
-` 226`  `        var js = new JavaScriptSerializer();`
-` 227`  `        context.Response.Write(js.Serialize(obj));`
-` 228`  `    }`
+```html
+ 223 | 
+ 224 |     private void WriteJson(HttpContext context, object obj)
+ 225 |     {
+ 226 |         var js = new JavaScriptSerializer();
+ 227 |         context.Response.Write(js.Serialize(obj));
+ 228 |     }
+```
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `<%@ WebHandler Language="C#" Class="UploadMedia" %>`
-`   2`  ``
-`   3`  `using System;`
-  - → Import namespace/types.
-`   4`  `using System.IO;`
-  - → Import namespace/types.
-`   5`  `using System.Text;`
-  - → Import namespace/types.
-`   6`  `using System.Web;`
-  - → Import namespace/types.
-`   7`  `using System.Web.Script.Serialization;`
-  - → Import namespace/types.
-`   8`  `using System.Web.SessionState;`
-  - → Import namespace/types.
-`   9`  `using WebAppAssignment.Data.Security;`
-  - → Import namespace/types.
-`  10`  ``
-`  11`  `/// <summary>`
-`  12`  `/// Saves lesson media under ~/Uploads/{CourseVideos|CourseMaterials}/`
-`  13`  `/// Requires authentication. Submissions: any logged-in user. Materials/videos: Lecturer/Admin.`
-`  14`  `/// </summary>`
-`  15`  `public class UploadMedia : IHttpHandler, IRequiresSessionState`
-  - → Class declaration for this page/service.
-`  16`  `{`
-`  17`  `    public void ProcessRequest(HttpContext context)`
-  - → IHttpHandler entry for ashx.
-`  18`  `    {`
-`  19`  `        context.Response.ContentType = "application/json; charset=utf-8";`
-`  20`  `        context.Response.Cache.SetCacheability(HttpCacheability.NoCache);`
-`  21`  ``
-`  22`  `        try`
-  - → Error handling block.
-`  23`  `        {`
-`  24`  `            string kind = (context.Request["kind"] ?? context.Request.Form["kind"] ?? "").Trim().ToLowerInvariant();`
-`  25`  `            bool isSubmission = kind == "submission" || kind == "submissions" || kind == "answer";`
-`  26`  ``
-`  27`  `            int uid;`
-`  28`  `            if (isSubmission)`
-`  29`  `            {`
-`  30`  `                if (!AuthGate.EnsureHandlerUser(context, out uid)) return;`
-  - → Authorization — block wrong role / anonymous.
-`  31`  `            }`
-`  32`  `            else`
-`  33`  `            {`
-`  34`  `                if (!AuthGate.EnsureHandlerRole(context, out uid, "Lecturer", "Admin")) return;`
-  - → Authorization — block wrong role / anonymous.
-`  35`  `            }`
-`  36`  ``
-`  37`  `            HttpPostedFile file = null;`
-`  38`  `            if (context.Request.Files.Count > 0)`
-`  39`  `                file = context.Request.Files["file"] ?? context.Request.Files[0];`
-`  40`  ``
-`  41`  `            if (file == null || file.ContentLength <= 0)`
-`  42`  `            {`
-`  43`  `                WriteJson(context, new { success = false, message = "No file uploaded. Use multipart form field 'file'." });`
-`  44`  `                return;`
-`  45`  `            }`
-`  46`  ``
-`  47`  `            var originalName = Path.GetFileName(file.FileName);`
-`  48`  `            var ext = Path.GetExtension(originalName).ToLowerInvariant();`
-`  49`  `            if (string.IsNullOrEmpty(ext))`
-`  50`  `            {`
-`  51`  `                WriteJson(context, new { success = false, message = "File must have an extension." });`
-`  52`  `                return;`
-`  53`  `            }`
-`  54`  ``
-`  55`  `            string magicMsg;`
-  - → File magic-byte validation on upload.
-`  56`  `            if (!FileMagic.LooksValid(file, ext, out magicMsg))`
-  - → Validate upload by file signature.
-`  57`  `            {`
-`  58`  `                SecurityAudit.Log("upload.reject", uid, magicMsg + " ext=" + ext);`
-  - → Write/read security audit events.
-`  59`  `                WriteJson(context, new { success = false, message = magicMsg ?? "File content does not match extension." });`
-  - → File magic-byte validation on upload.
-`  60`  `                return;`
-`  61`  `            }`
-`  62`  ``
-`  63`  `            var videoExts = new[] { ".mp4", ".webm", ".mov" };`
-`  64`  `            var materialExts = new[] { ".pdf", ".ppt", ".pptx", ".docx", ".pptm", ".doc", ".txt", ".zip" };`
-`  65`  `            var imageExts = new[] { ".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp" };`
-`  66`  ``
-`  67`  `            // kind already resolved above (auth)`
-`  68`  `            string subFolder;`
-`  69`  `            long maxSize;`
-`  70`  ``
-`  71`  `            if (isSubmission)`
-`  72`  `            {`
-`  73`  `                // Student assessment files (prefer PDF; allow office/images too)`
-`  74`  `                if (Array.IndexOf(videoExts, ext) >= 0)`
-`  75`  `                {`
-`  76`  `                    subFolder = "CourseSubmissions";`
-`  77`  `                    maxSize = 100L * 1024 * 1024;`
-`  78`  `                }`
-`  79`  `                else if (Array.IndexOf(materialExts, ext) >= 0 || Array.IndexOf(imageExts, ext) >= 0)`
-`  80`  `                {`
-`  81`  `                    subFolder = "CourseSubmissions";`
-`  82`  `                    maxSize = 30L * 1024 * 1024;`
-`  83`  `                }`
-`  84`  `                else`
-`  85`  `                {`
-`  86`  `                    WriteJson(context, new { success = false, message = "Submission file type not allowed: " + ext });`
-`  87`  `                    return;`
-`  88`  `                }`
-`  89`  `            }`
-`  90`  `            else if (Array.IndexOf(videoExts, ext) >= 0)`
-`  91`  `            {`
-`  92`  `                subFolder = "CourseVideos";`
-`  93`  `                maxSize = 200L * 1024 * 1024;`
-`  94`  `            }`
-`  95`  `            else if (Array.IndexOf(materialExts, ext) >= 0)`
-`  96`  `            {`
-`  97`  `                subFolder = "CourseMaterials";`
-`  98`  `                maxSize = 30L * 1024 * 1024;`
-`  99`  `            }`
-` 100`  `            else if (Array.IndexOf(imageExts, ext) >= 0)`
-` 101`  `            {`
-` 102`  `                subFolder = "CourseMaterials";`
-` 103`  `                maxSize = 10L * 1024 * 1024;`
-` 104`  `            }`
-` 105`  `            else`
-` 106`  `            {`
-` 107`  `                WriteJson(context, new`
-` 108`  `                {`
-` 109`  `                    success = false,`
-` 110`  `                    message = "File type not allowed: " + ext`
-` 111`  `                });`
-` 112`  `                return;`
-` 113`  `            }`
-` 114`  ``
-` 115`  `            if (file.ContentLength > maxSize)`
-` 116`  `            {`
-` 117`  `                WriteJson(context, new`
-` 118`  `                {`
-` 119`  `                    success = false,`
-` 120`  `                    message = "File too large (" + (file.ContentLength / (1024 * 1024)) + " MB)."`
-` 121`  `                });`
-` 122`  `                return;`
-` 123`  `            }`
-` 124`  ``
-` 125`  `            // Ensure uploads root + subfolder exist (physical under site)`
-` 126`  `            string uploadsRoot = context.Server.MapPath("~/Uploads");`
-` 127`  `            if (!Directory.Exists(uploadsRoot))`
-` 128`  `                Directory.CreateDirectory(uploadsRoot);`
-` 129`  ``
-` 130`  `            string uploadsFolder = Path.Combine(uploadsRoot, subFolder);`
-` 131`  `            if (!Directory.Exists(uploadsFolder))`
-` 132`  `                Directory.CreateDirectory(uploadsFolder);`
-` 133`  ``
-` 134`  `            // Write a marker so folder is never empty/missing in git/IIS`
-` 135`  `            string keep = Path.Combine(uploadsFolder, ".keep");`
-` 136`  `            if (!File.Exists(keep))`
-` 137`  `            {`
-` 138`  `                try { File.WriteAllText(keep, "keep"); } catch { }`
-  - → Error handling block.
-` 139`  `            }`
-` 140`  ``
-` 141`  `            // ALWAYS save as GUID on disk — never the original file name`
-` 142`  `            var savedName = Guid.NewGuid().ToString("N") + ext;`
-` 143`  `            var savePath = Path.Combine(uploadsFolder, savedName);`
-` 144`  `            file.SaveAs(savePath);`
-` 145`  ``
-` 146`  `            // Verify write`
-` 147`  `            if (!File.Exists(savePath))`
-` 148`  `            {`
-` 149`  `                WriteJson(context, new`
-` 150`  `                {`
-` 151`  `                    success = false,`
-` 152`  `                    message = "Save reported OK but file missing on disk: " + savePath`
-` 153`  `                });`
-` 154`  `                return;`
-` 155`  `            }`
-` 156`  ``
-` 157`  `            long written = new FileInfo(savePath).Length;`
-` 158`  `            if (written <= 0)`
-` 159`  `            {`
-` 160`  `                WriteJson(context, new { success = false, message = "Saved file is empty: " + savePath });`
-` 161`  `                return;`
-` 162`  `            }`
-` 163`  ``
-` 164`  `            // Sidecar maps GUID file → original name (for Media.ashx fallback + download filename)`
-` 165`  `            try`
-  - → Error handling block.
-` 166`  `            {`
-` 167`  `                File.WriteAllText(savePath + ".meta", originalName ?? savedName, Encoding.UTF8);`
-` 168`  `            }`
-` 169`  `            catch { }`
-  - → Handle/log exception.
-` 170`  ``
-` 171`  `            // Portable store path for DB — MUST be the GUID path, not original name`
-` 172`  `            string under = subFolder + "/" + savedName;            // CourseMaterials/{guid}.pdf`
-` 173`  `            string storePath = "Uploads/" + under;                 // Uploads/CourseMaterials/{guid}.pdf`
-` 174`  ``
-` 175`  `            // ALWAYS use root Media.ashx for view/download`
-` 176`  `            string mediaBase = VirtualPathUtility.ToAbsolute("~/Media.ashx");`
-` 177`  `            string serveUrl = mediaBase + "?f=" + HttpUtility.UrlEncode(under);`
-` 178`  `            string downloadUrl = serveUrl + "&dl=1";`
-` 179`  `            string absUrl = VirtualPathUtility.ToAbsolute("~/" + storePath);`
-` 180`  ``
-` 181`  `            try`
-  - → Error handling block.
-` 182`  `            {`
-` 183`  `                string logDir = context.Server.MapPath("~/App_Data/Logs");`
-` 184`  `                if (!Directory.Exists(logDir)) Directory.CreateDirectory(logDir);`
-` 185`  `                File.AppendAllText(Path.Combine(logDir, "uploads.log"),`
-` 186`  `                    DateTime.Now.ToString("s") + " OK under=" + under +`
-` 187`  `                    " original=" + originalName + " bytes=" + written + Environment.NewLine);`
-` 188`  `            }`
-` 189`  `            catch { }`
-  - → Handle/log exception.
-` 190`  ``
-` 191`  `            try { SecurityAudit.Log("upload.ok", uid, under + " original=" + originalName); } catch { }`
-  - → Error handling block.
-` 192`  ``
-` 193`  `            WriteJson(context, new`
-` 194`  `            {`
-` 195`  `                success = true,`
-` 196`  `                // Prefer GUID store path for DB fields (not original name, not Media.ashx URL)`
-` 197`  `                url = storePath,`
-` 198`  `                storePath = storePath,`
-` 199`  `                under = under,`
-` 200`  `                serveUrl = serveUrl,`
-` 201`  `                downloadUrl = downloadUrl,`
-` 202`  `                staticUrl = absUrl,`
-` 203`  `                fileName = originalName,`
-` 204`  `                size = written,`
-` 205`  `                physical = savePath,`
-` 206`  `                ext = ext`
-` 207`  `            });`
-` 208`  `        }`
-` 209`  `        catch (Exception ex)`
-  - → Handle/log exception.
-` 210`  `        {`
-` 211`  `            try`
-  - → Error handling block.
-` 212`  `            {`
-` 213`  `                string logDir = context.Server.MapPath("~/App_Data/Logs");`
-` 214`  `                if (!Directory.Exists(logDir)) Directory.CreateDirectory(logDir);`
-` 215`  `                File.AppendAllText(Path.Combine(logDir, "uploads.log"),`
-` 216`  `                    DateTime.Now.ToString("s") + " FAIL " + ex.Message + Environment.NewLine);`
-` 217`  `            }`
-` 218`  `            catch { }`
-  - → Handle/log exception.
-` 219`  `            // Do not leak exception details to client`
-` 220`  `            WriteJson(context, new { success = false, message = "Upload failed. Check file type/size and try again." });`
-` 221`  `        }`
-` 222`  `    }`
-` 223`  ``
-` 224`  `    private void WriteJson(HttpContext context, object obj)`
-` 225`  `    {`
-` 226`  `        var js = new JavaScriptSerializer();`
-` 227`  `        context.Response.Write(js.Serialize(obj));`
-` 228`  `    }`
-` 229`  ``
-` 230`  `    public bool IsReusable { get { return false; } }`
-` 231`  `}`
+```html
+   1 | <%@ WebHandler Language="C#" Class="UploadMedia" %>
+   2 | 
+   3 | using System;
+   4 | using System.IO;
+   5 | using System.Text;
+   6 | using System.Web;
+   7 | using System.Web.Script.Serialization;
+   8 | using System.Web.SessionState;
+   9 | using WebAppAssignment.Data.Security;
+  10 | 
+  11 | /// <summary>
+  12 | /// Saves lesson media under ~/Uploads/{CourseVideos|CourseMaterials}/
+  13 | /// Requires authentication. Submissions: any logged-in user. Materials/videos: Lecturer/Admin.
+  14 | /// </summary>
+  15 | public class UploadMedia : IHttpHandler, IRequiresSessionState
+  16 | {
+  17 |     public void ProcessRequest(HttpContext context)
+  18 |     {
+  19 |         context.Response.ContentType = "application/json; charset=utf-8";
+  20 |         context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+  21 | 
+  22 |         try
+  23 |         {
+  24 |             string kind = (context.Request["kind"] ?? context.Request.Form["kind"] ?? "").Trim().ToLowerInvariant();
+  25 |             bool isSubmission = kind == "submission" || kind == "submissions" || kind == "answer";
+  26 | 
+  27 |             int uid;
+  28 |             if (isSubmission)
+  29 |             {
+  30 |                 if (!AuthGate.EnsureHandlerUser(context, out uid)) return;
+  31 |             }
+  32 |             else
+  33 |             {
+  34 |                 if (!AuthGate.EnsureHandlerRole(context, out uid, "Lecturer", "Admin")) return;
+  35 |             }
+  36 | 
+  37 |             HttpPostedFile file = null;
+  38 |             if (context.Request.Files.Count > 0)
+  39 |                 file = context.Request.Files["file"] ?? context.Request.Files[0];
+  40 | 
+  41 |             if (file == null || file.ContentLength <= 0)
+  42 |             {
+  43 |                 WriteJson(context, new { success = false, message = "No file uploaded. Use multipart form field 'file'." });
+  44 |                 return;
+  45 |             }
+  46 | 
+  47 |             var originalName = Path.GetFileName(file.FileName);
+  48 |             var ext = Path.GetExtension(originalName).ToLowerInvariant();
+  49 |             if (string.IsNullOrEmpty(ext))
+  50 |             {
+  51 |                 WriteJson(context, new { success = false, message = "File must have an extension." });
+  52 |                 return;
+  53 |             }
+  54 | 
+  55 |             string magicMsg;
+  56 |             if (!FileMagic.LooksValid(file, ext, out magicMsg))
+  57 |             {
+  58 |                 SecurityAudit.Log("upload.reject", uid, magicMsg + " ext=" + ext);
+  59 |                 WriteJson(context, new { success = false, message = magicMsg ?? "File content does not match extension." });
+  60 |                 return;
+  61 |             }
+  62 | 
+  63 |             var videoExts = new[] { ".mp4", ".webm", ".mov" };
+  64 |             var materialExts = new[] { ".pdf", ".ppt", ".pptx", ".docx", ".pptm", ".doc", ".txt", ".zip" };
+  65 |             var imageExts = new[] { ".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp" };
+  66 | 
+  67 |             // kind already resolved above (auth)
+  68 |             string subFolder;
+  69 |             long maxSize;
+  70 | 
+  71 |             if (isSubmission)
+  72 |             {
+  73 |                 // Student assessment files (prefer PDF; allow office/images too)
+  74 |                 if (Array.IndexOf(videoExts, ext) >= 0)
+  75 |                 {
+  76 |                     subFolder = "CourseSubmissions";
+  77 |                     maxSize = 100L * 1024 * 1024;
+  78 |                 }
+  79 |                 else if (Array.IndexOf(materialExts, ext) >= 0 || Array.IndexOf(imageExts, ext) >= 0)
+  80 |                 {
+  81 |                     subFolder = "CourseSubmissions";
+  82 |                     maxSize = 30L * 1024 * 1024;
+  83 |                 }
+  84 |                 else
+  85 |                 {
+  86 |                     WriteJson(context, new { success = false, message = "Submission file type not allowed: " + ext });
+  87 |                     return;
+  88 |                 }
+  89 |             }
+  90 |             else if (Array.IndexOf(videoExts, ext) >= 0)
+  91 |             {
+  92 |                 subFolder = "CourseVideos";
+  93 |                 maxSize = 200L * 1024 * 1024;
+  94 |             }
+  95 |             else if (Array.IndexOf(materialExts, ext) >= 0)
+  96 |             {
+  97 |                 subFolder = "CourseMaterials";
+  98 |                 maxSize = 30L * 1024 * 1024;
+  99 |             }
+ 100 |             else if (Array.IndexOf(imageExts, ext) >= 0)
+ 101 |             {
+ 102 |                 subFolder = "CourseMaterials";
+ 103 |                 maxSize = 10L * 1024 * 1024;
+ 104 |             }
+ 105 |             else
+ 106 |             {
+ 107 |                 WriteJson(context, new
+ 108 |                 {
+ 109 |                     success = false,
+ 110 |                     message = "File type not allowed: " + ext
+ 111 |                 });
+ 112 |                 return;
+ 113 |             }
+ 114 | 
+ 115 |             if (file.ContentLength > maxSize)
+ 116 |             {
+ 117 |                 WriteJson(context, new
+ 118 |                 {
+ 119 |                     success = false,
+ 120 |                     message = "File too large (" + (file.ContentLength / (1024 * 1024)) + " MB)."
+ 121 |                 });
+ 122 |                 return;
+ 123 |             }
+ 124 | 
+ 125 |             // Ensure uploads root + subfolder exist (physical under site)
+ 126 |             string uploadsRoot = context.Server.MapPath("~/Uploads");
+ 127 |             if (!Directory.Exists(uploadsRoot))
+ 128 |                 Directory.CreateDirectory(uploadsRoot);
+ 129 | 
+ 130 |             string uploadsFolder = Path.Combine(uploadsRoot, subFolder);
+ 131 |             if (!Directory.Exists(uploadsFolder))
+ 132 |                 Directory.CreateDirectory(uploadsFolder);
+ 133 | 
+ 134 |             // Write a marker so folder is never empty/missing in git/IIS
+ 135 |             string keep = Path.Combine(uploadsFolder, ".keep");
+ 136 |             if (!File.Exists(keep))
+ 137 |             {
+ 138 |                 try { File.WriteAllText(keep, "keep"); } catch { }
+ 139 |             }
+ 140 | 
+ 141 |             // ALWAYS save as GUID on disk — never the original file name
+ 142 |             var savedName = Guid.NewGuid().ToString("N") + ext;
+ 143 |             var savePath = Path.Combine(uploadsFolder, savedName);
+ 144 |             file.SaveAs(savePath);
+ 145 | 
+ 146 |             // Verify write
+ 147 |             if (!File.Exists(savePath))
+ 148 |             {
+ 149 |                 WriteJson(context, new
+ 150 |                 {
+ 151 |                     success = false,
+ 152 |                     message = "Save reported OK but file missing on disk: " + savePath
+ 153 |                 });
+ 154 |                 return;
+ 155 |             }
+ 156 | 
+ 157 |             long written = new FileInfo(savePath).Length;
+ 158 |             if (written <= 0)
+ 159 |             {
+ 160 |                 WriteJson(context, new { success = false, message = "Saved file is empty: " + savePath });
+ 161 |                 return;
+ 162 |             }
+ 163 | 
+ 164 |             // Sidecar maps GUID file → original name (for Media.ashx fallback + download filename)
+ 165 |             try
+ 166 |             {
+ 167 |                 File.WriteAllText(savePath + ".meta", originalName ?? savedName, Encoding.UTF8);
+ 168 |             }
+ 169 |             catch { }
+ 170 | 
+ 171 |             // Portable store path for DB — MUST be the GUID path, not original name
+ 172 |             string under = subFolder + "/" + savedName;            // CourseMaterials/{guid}.pdf
+ 173 |             string storePath = "Uploads/" + under;                 // Uploads/CourseMaterials/{guid}.pdf
+ 174 | 
+ 175 |             // ALWAYS use root Media.ashx for view/download
+ 176 |             string mediaBase = VirtualPathUtility.ToAbsolute("~/Media.ashx");
+ 177 |             string serveUrl = mediaBase + "?f=" + HttpUtility.UrlEncode(under);
+ 178 |             string downloadUrl = serveUrl + "&dl=1";
+ 179 |             string absUrl = VirtualPathUtility.ToAbsolute("~/" + storePath);
+ 180 | 
+ 181 |             try
+ 182 |             {
+ 183 |                 string logDir = context.Server.MapPath("~/App_Data/Logs");
+ 184 |                 if (!Directory.Exists(logDir)) Directory.CreateDirectory(logDir);
+ 185 |                 File.AppendAllText(Path.Combine(logDir, "uploads.log"),
+ 186 |                     DateTime.Now.ToString("s") + " OK under=" + under +
+ 187 |                     " original=" + originalName + " bytes=" + written + Environment.NewLine);
+ 188 |             }
+ 189 |             catch { }
+ 190 | 
+ 191 |             try { SecurityAudit.Log("upload.ok", uid, under + " original=" + originalName); } catch { }
+ 192 | 
+ 193 |             WriteJson(context, new
+ 194 |             {
+ 195 |                 success = true,
+ 196 |                 // Prefer GUID store path for DB fields (not original name, not Media.ashx URL)
+ 197 |                 url = storePath,
+ 198 |                 storePath = storePath,
+ 199 |                 under = under,
+ 200 |                 serveUrl = serveUrl,
+ 201 |                 downloadUrl = downloadUrl,
+ 202 |                 staticUrl = absUrl,
+ 203 |                 fileName = originalName,
+ 204 |                 size = written,
+ 205 |                 physical = savePath,
+ 206 |                 ext = ext
+ 207 |             });
+ 208 |         }
+ 209 |         catch (Exception ex)
+ 210 |         {
+ 211 |             try
+ 212 |             {
+ 213 |                 string logDir = context.Server.MapPath("~/App_Data/Logs");
+ 214 |                 if (!Directory.Exists(logDir)) Directory.CreateDirectory(logDir);
+ 215 |                 File.AppendAllText(Path.Combine(logDir, "uploads.log"),
+ 216 |                     DateTime.Now.ToString("s") + " FAIL " + ex.Message + Environment.NewLine);
+ 217 |             }
+ 218 |             catch { }
+ 219 |             // Do not leak exception details to client
+ 220 |             WriteJson(context, new { success = false, message = "Upload failed. Check file type/size and try again." });
+ 221 |         }
+ 222 |     }
+ 223 | 
+ 224 |     private void WriteJson(HttpContext context, object obj)
+ 225 |     {
+ 226 |         var js = new JavaScriptSerializer();
+ 227 |         context.Response.Write(js.Serialize(obj));
+ 228 |     }
+ 229 | 
+ 230 |     public bool IsReusable { get { return false; } }
+ 231 | }
+```
+
+**Line notes**
+
+- **L3:** Import namespace/types.
+- **L4:** Import namespace/types.
+- **L5:** Import namespace/types.
+- **L6:** Import namespace/types.
+- **L7:** Import namespace/types.
+- **L8:** Import namespace/types.
+- **L9:** Import namespace/types.
+- **L15:** Class declaration for this page/service.
+- **L17:** IHttpHandler entry for ashx.
+- **L22:** Error handling block.
+- **L30:** Authorization — block wrong role / anonymous.
+- **L34:** Authorization — block wrong role / anonymous.
+- **L55:** File magic-byte validation on upload.
+- **L56:** Validate upload by file signature.
+- **L58:** Write/read security audit events.
+- **L59:** File magic-byte validation on upload.
+- **L138:** Error handling block.
+- **L165:** Error handling block.
+- **L169:** Handle/log exception.
+- **L181:** Error handling block.
+- **L189:** Handle/log exception.
+- **L191:** Error handling block.
+- **L209:** Handle/log exception.
+- **L211:** Error handling block.
+- **L218:** Handle/log exception.
 
 ## Source snapshot (raw)
 

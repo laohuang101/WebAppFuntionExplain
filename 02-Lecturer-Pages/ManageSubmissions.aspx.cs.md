@@ -1,6 +1,6 @@
 # ManageSubmissions.aspx.cs
 **Source:** `Pages/Lecturer/ManageSubmissions.aspx.cs`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -37,7 +37,7 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ### `Page_Load` — lines 17–23
 
-```
+```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
@@ -50,21 +50,26 @@ protected void Page_Load(object sender, EventArgs e)
 
 #### Line-by-line (this function)
 
-`  17`  ``
-`  18`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  19`  `        {`
-`  20`  `            if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))`
-  - → Authorization — block wrong role / anonymous.
-`  21`  `                return;`
-`  22`  ``
-`  23`  `        }`
+```csharp
+  17 | 
+  18 |         protected void Page_Load(object sender, EventArgs e)
+  19 |         {
+  20 |             if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))
+  21 |                 return;
+  22 | 
+  23 |         }
+```
+
+**Line notes**
+
+- **L18:** Page load entry (GET or postback).
+- **L20:** Authorization — block wrong role / anonymous.
 
 ---
 
 ### `GetAssignments` — lines 27–62
 
-```
+```csharp
 public static object GetAssignments()
 ```
 
@@ -80,58 +85,65 @@ public static object GetAssignments()
 
 #### Line-by-line (this function)
 
-`  27`  `        public static object GetAssignments()`
-`  28`  `        {`
-`  29`  `            try`
-  - → Error handling block.
-`  30`  `            {`
-`  31`  `                int uid = AuthGate.RequireLecturer();`
-  - → Authorization — block wrong role / anonymous.
-`  32`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  33`  ``
-`  34`  `                using (var conn = new SqlConnection(ConnString))`
-  - → Import namespace/types.
-`  35`  `                using (var cmd = conn.CreateCommand())`
-  - → Import namespace/types.
-`  36`  `                {`
-`  37`  `                    conn.Open();`
-`  38`  `                    // detect owner column`
-`  39`  `                    var cols = new HashSet<string>(StringComparer.OrdinalIgnoreCase);`
-`  40`  `                    using (var cc = conn.CreateCommand()) { cc.CommandText = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Courses'"; using (var r = cc.ExecuteReader()) { while (r.Read()) cols.Add(r.GetString(0)); } }`
-  - → Import namespace/types.
-`  41`  `                    string ownerCol = cols.Contains("UID") ? "UID" : (cols.Contains("LecturerUID") ? "LecturerUID" : (cols.Contains("UserID") ? "UserID" : "UID"));`
-  - → Owner lecturer foreign key.
-`  42`  ``
-`  43`  `                    cmd.CommandText = $@"SELECT cw.CWID, cw.Title, c.Name AS CourseName FROM CourseWorks cw`
-`  44`  `                    JOIN SubChapters sc ON cw.SchID = sc.SchID`
-`  45`  `                    JOIN Chapters ch ON sc.ChID = ch.ChID`
-`  46`  `                    JOIN Courses c ON ch.CID = c.CID`
-`  47`  `                    WHERE c.[{ownerCol}] = @uid ORDER BY cw.CreatedAt DESC";`
-`  48`  `                    cmd.Parameters.AddWithValue("@uid", uid);`
-`  49`  `                    var list = new List<object>();`
-`  50`  `                    using (var rdr = cmd.ExecuteReader())`
-  - → Import namespace/types.
-`  51`  `                    {`
-`  52`  `                        while (rdr.Read()) list.Add(new { cwid = rdr.IsDBNull(0) ? 0 : rdr.GetInt32(0), title = rdr.IsDBNull(1) ? "" : rdr.GetString(1), course = rdr.IsDBNull(2) ? "" : rdr.GetString(2) });`
-`  53`  `                    }`
-`  54`  `                    return new { success = true, assignments = list };`
-`  55`  `                }`
-`  56`  `            }`
-`  57`  `            catch (Exception ex)`
-  - → Handle/log exception.
-`  58`  `            {`
-`  59`  `                try { Logger.Error(ex, "ManageSubmissions.GetAssignments"); } catch { }`
-  - → Error handling block.
-`  60`  `                return new { success = false, message = "Request failed." };`
-`  61`  `            }`
-`  62`  `        }`
+```csharp
+  27 |         public static object GetAssignments()
+  28 |         {
+  29 |             try
+  30 |             {
+  31 |                 int uid = AuthGate.RequireLecturer();
+  32 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  33 | 
+  34 |                 using (var conn = new SqlConnection(ConnString))
+  35 |                 using (var cmd = conn.CreateCommand())
+  36 |                 {
+  37 |                     conn.Open();
+  38 |                     // detect owner column
+  39 |                     var cols = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+  40 |                     using (var cc = conn.CreateCommand()) { cc.CommandText = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Courses'"; using (var r = cc.ExecuteReader()) { while (r.Read()) cols.Add(r.GetString(0)); } }
+  41 |                     string ownerCol = cols.Contains("UID") ? "UID" : (cols.Contains("LecturerUID") ? "LecturerUID" : (cols.Contains("UserID") ? "UserID" : "UID"));
+  42 | 
+  43 |                     cmd.CommandText = $@"SELECT cw.CWID, cw.Title, c.Name AS CourseName FROM CourseWorks cw
+  44 |                     JOIN SubChapters sc ON cw.SchID = sc.SchID
+  45 |                     JOIN Chapters ch ON sc.ChID = ch.ChID
+  46 |                     JOIN Courses c ON ch.CID = c.CID
+  47 |                     WHERE c.[{ownerCol}] = @uid ORDER BY cw.CreatedAt DESC";
+  48 |                     cmd.Parameters.AddWithValue("@uid", uid);
+  49 |                     var list = new List<object>();
+  50 |                     using (var rdr = cmd.ExecuteReader())
+  51 |                     {
+  52 |                         while (rdr.Read()) list.Add(new { cwid = rdr.IsDBNull(0) ? 0 : rdr.GetInt32(0), title = rdr.IsDBNull(1) ? "" : rdr.GetString(1), course = rdr.IsDBNull(2) ? "" : rdr.GetString(2) });
+  53 |                     }
+  54 |                     return new { success = true, assignments = list };
+  55 |                 }
+  56 |             }
+  57 |             catch (Exception ex)
+  58 |             {
+  59 |                 try { Logger.Error(ex, "ManageSubmissions.GetAssignments"); } catch { }
+  60 |                 return new { success = false, message = "Request failed." };
+  61 |             }
+  62 |         }
+```
+
+**Line notes**
+
+- **L29:** Error handling block.
+- **L31:** Authorization — block wrong role / anonymous.
+- **L32:** Authorization — block wrong role / anonymous.
+- **L34:** Import namespace/types.
+- **L35:** Import namespace/types.
+- **L40:** Import namespace/types.
+- **L41:** Owner lecturer foreign key.
+- **L48:** Parameterized SQL — prevents classic SQL injection.
+- **L50:** Import namespace/types.
+- **L52:** Null-safe read from database values.
+- **L57:** Handle/log exception.
+- **L59:** Error handling block.
 
 ---
 
 ### `GetSubmissions` — lines 66–108
 
-```
+```csharp
 public static object GetSubmissions(int cwid)
 ```
 
@@ -147,63 +159,78 @@ public static object GetSubmissions(int cwid)
 
 #### Line-by-line (this function)
 
-`  66`  `        public static object GetSubmissions(int cwid)`
-`  67`  `        {`
-`  68`  `            try`
-  - → Error handling block.
-`  69`  `            {`
-`  70`  `                int uid = AuthGate.RequireLecturer();`
-  - → Authorization — block wrong role / anonymous.
-`  71`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  72`  ``
-`  73`  `                using (var conn = new SqlConnection(ConnString))`
-  - → Import namespace/types.
-`  74`  `                using (var cmd = conn.CreateCommand())`
-  - → Import namespace/types.
-`  75`  `                {`
-`  76`  `                    conn.Open();`
-`  77`  `                    cmd.CommandText = @"SELECT s.SID, s.UID, ISNULL(u.Name,'') AS StudentName, ISNULL(s.Text,'') AS Text, ISNULL(s.CreatedAt,GETDATE()) AS SubmittedAt,`
-`  78`  `                    ISNULL(m.Score, -1) AS Score, ISNULL(m.Review,'') AS Review`
-`  79`  `                    FROM CWSubmissions s`
-`  80`  `                    LEFT JOIN CWMarkings m ON m.SID = s.SID`
-`  81`  `                    LEFT JOIN Users u ON u.UID = s.UID`
-`  82`  `                    WHERE s.CWID = @cwid`
-`  83`  `                    ORDER BY s.CreatedAt DESC";`
-`  84`  `                    cmd.Parameters.AddWithValue("@cwid", cwid);`
-`  85`  `                    var list = new List<object>();`
-`  86`  `                    using (var rdr = cmd.ExecuteReader())`
-  - → Import namespace/types.
-`  87`  `                    {`
-`  88`  `                        while (rdr.Read())`
-`  89`  `                        {`
-`  90`  `                            int sid = rdr.IsDBNull(0) ? 0 : rdr.GetInt32(0);`
-`  91`  `                            int studentUid = rdr.IsDBNull(1) ? 0 : rdr.GetInt32(1);`
-`  92`  `                            string studentName = rdr.IsDBNull(2) ? "" : rdr.GetString(2);`
-`  93`  `                            string text = rdr.IsDBNull(3) ? "" : rdr.GetString(3);`
-`  94`  `                            string time = rdr.IsDBNull(4) ? "" : Convert.ToDateTime(rdr.GetValue(4)).ToString("g");`
-`  95`  `                            int score = rdr.IsDBNull(5) ? -1 : Convert.ToInt32(rdr.GetValue(5));`
-`  96`  `                            string review = rdr.IsDBNull(6) ? "" : rdr.GetString(6);`
-`  97`  `                            list.Add(new { sid = sid, studentUid = studentUid, studentName = studentName, text = text, time = time, score = score, review = review });`
-`  98`  `                        }`
-`  99`  `                    }`
-` 100`  `                    return new { success = true, submissions = list };`
-` 101`  `                }`
-` 102`  `            }`
-` 103`  `            catch (Exception ex)`
-  - → Handle/log exception.
-` 104`  `            {`
-` 105`  `                try { Logger.Error(ex, "ManageSubmissions.GetSubmissions"); } catch { }`
-  - → Error handling block.
-` 106`  `                return new { success = false, message = "Request failed." };`
-` 107`  `            }`
-` 108`  `        }`
+```csharp
+  66 |         public static object GetSubmissions(int cwid)
+  67 |         {
+  68 |             try
+  69 |             {
+  70 |                 int uid = AuthGate.RequireLecturer();
+  71 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  72 | 
+  73 |                 using (var conn = new SqlConnection(ConnString))
+  74 |                 using (var cmd = conn.CreateCommand())
+  75 |                 {
+  76 |                     conn.Open();
+  77 |                     cmd.CommandText = @"SELECT s.SID, s.UID, ISNULL(u.Name,'') AS StudentName, ISNULL(s.Text,'') AS Text, ISNULL(s.CreatedAt,GETDATE()) AS SubmittedAt,
+  78 |                     ISNULL(m.Score, -1) AS Score, ISNULL(m.Review,'') AS Review
+  79 |                     FROM CWSubmissions s
+  80 |                     LEFT JOIN CWMarkings m ON m.SID = s.SID
+  81 |                     LEFT JOIN Users u ON u.UID = s.UID
+  82 |                     WHERE s.CWID = @cwid
+  83 |                     ORDER BY s.CreatedAt DESC";
+  84 |                     cmd.Parameters.AddWithValue("@cwid", cwid);
+  85 |                     var list = new List<object>();
+  86 |                     using (var rdr = cmd.ExecuteReader())
+  87 |                     {
+  88 |                         while (rdr.Read())
+  89 |                         {
+  90 |                             int sid = rdr.IsDBNull(0) ? 0 : rdr.GetInt32(0);
+  91 |                             int studentUid = rdr.IsDBNull(1) ? 0 : rdr.GetInt32(1);
+  92 |                             string studentName = rdr.IsDBNull(2) ? "" : rdr.GetString(2);
+  93 |                             string text = rdr.IsDBNull(3) ? "" : rdr.GetString(3);
+  94 |                             string time = rdr.IsDBNull(4) ? "" : Convert.ToDateTime(rdr.GetValue(4)).ToString("g");
+  95 |                             int score = rdr.IsDBNull(5) ? -1 : Convert.ToInt32(rdr.GetValue(5));
+  96 |                             string review = rdr.IsDBNull(6) ? "" : rdr.GetString(6);
+  97 |                             list.Add(new { sid = sid, studentUid = studentUid, studentName = studentName, text = text, time = time, score = score, review = review });
+  98 |                         }
+  99 |                     }
+ 100 |                     return new { success = true, submissions = list };
+ 101 |                 }
+ 102 |             }
+ 103 |             catch (Exception ex)
+ 104 |             {
+ 105 |                 try { Logger.Error(ex, "ManageSubmissions.GetSubmissions"); } catch { }
+ 106 |                 return new { success = false, message = "Request failed." };
+ 107 |             }
+ 108 |         }
+```
+
+**Line notes**
+
+- **L68:** Error handling block.
+- **L70:** Authorization — block wrong role / anonymous.
+- **L71:** Authorization — block wrong role / anonymous.
+- **L73:** Import namespace/types.
+- **L74:** Import namespace/types.
+- **L80:** Join related tables (courses ↔ chapters ↔ works ↔ users).
+- **L81:** Join related tables (courses ↔ chapters ↔ works ↔ users).
+- **L84:** Parameterized SQL — prevents classic SQL injection.
+- **L86:** Import namespace/types.
+- **L90:** Null-safe read from database values.
+- **L91:** Null-safe read from database values.
+- **L92:** Null-safe read from database values.
+- **L93:** Null-safe read from database values.
+- **L94:** Null-safe read from database values.
+- **L95:** Null-safe read from database values.
+- **L96:** Null-safe read from database values.
+- **L103:** Handle/log exception.
+- **L105:** Error handling block.
 
 ---
 
 ### `GradeSubmission` — lines 112–128
 
-```
+```csharp
 public static object GradeSubmission(int sid, int score, string review)
 ```
 
@@ -217,204 +244,226 @@ public static object GradeSubmission(int sid, int score, string review)
 
 #### Line-by-line (this function)
 
-` 112`  `        public static object GradeSubmission(int sid, int score, string review)`
-` 113`  `        {`
-` 114`  `            try`
-  - → Error handling block.
-` 115`  `            {`
-` 116`  `                int uid = AuthGate.RequireLecturer();`
-  - → Authorization — block wrong role / anonymous.
-` 117`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-` 118`  ``
-` 119`  `                // Delegate to DashboardService which enforces ownership`
-` 120`  `                var res = DashboardService.SaveGrade(uid, sid, score, review);`
-` 121`  `                return res;`
-` 122`  `            }`
-` 123`  `            catch (Exception ex)`
-  - → Handle/log exception.
-` 124`  `            {`
-` 125`  `                try { Logger.Error(ex, "ManageSubmissions.GradeSubmission"); } catch { }`
-  - → Error handling block.
-` 126`  `                return new { success = false, message = "Request failed." };`
-` 127`  `            }`
-` 128`  `        }`
+```csharp
+ 112 |         public static object GradeSubmission(int sid, int score, string review)
+ 113 |         {
+ 114 |             try
+ 115 |             {
+ 116 |                 int uid = AuthGate.RequireLecturer();
+ 117 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+ 118 | 
+ 119 |                 // Delegate to DashboardService which enforces ownership
+ 120 |                 var res = DashboardService.SaveGrade(uid, sid, score, review);
+ 121 |                 return res;
+ 122 |             }
+ 123 |             catch (Exception ex)
+ 124 |             {
+ 125 |                 try { Logger.Error(ex, "ManageSubmissions.GradeSubmission"); } catch { }
+ 126 |                 return new { success = false, message = "Request failed." };
+ 127 |             }
+ 128 |         }
+```
+
+**Line notes**
+
+- **L114:** Error handling block.
+- **L116:** Authorization — block wrong role / anonymous.
+- **L117:** Authorization — block wrong role / anonymous.
+- **L123:** Handle/log exception.
+- **L125:** Error handling block.
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `using System;`
-  - → Import namespace/types.
-`   2`  `using System.Collections.Generic;`
-  - → Import namespace/types.
-`   3`  `using System.Configuration;`
-  - → Import namespace/types.
-`   4`  `using System.Data.SqlClient;`
-  - → Import namespace/types.
-`   5`  `using System.Web.Script.Services;`
-  - → Import namespace/types.
-`   6`  `using System.Web.Services;`
-  - → Import namespace/types.
-`   7`  `using System.Web.UI;`
-  - → Import namespace/types.
-`   8`  `using WebAppAssignment.Shared.DebugLog;`
-  - → Import namespace/types.
-`   9`  `using WebAppAssignment.Pages.Lecturer.Services;`
-  - → Import namespace/types.
-`  10`  `using WebAppAssignment.Data.Security;`
-  - → Import namespace/types.
-`  11`  ``
-`  12`  `namespace WebAppAssignment.Pages.Lecturer`
-  - → C# namespace grouping.
-`  13`  `{`
-`  14`  `    public partial class ManageSubmissions : Page`
-`  15`  `    {`
-`  16`  `        private static readonly string ConnString = ConfigurationManager.ConnectionStrings["MyDbConn"]?.ConnectionString ?? string.Empty;`
-`  17`  ``
-`  18`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  19`  `        {`
-`  20`  `            if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))`
-  - → Authorization — block wrong role / anonymous.
-`  21`  `                return;`
-`  22`  ``
-`  23`  `        }`
-`  24`  ``
-`  25`  `        [WebMethod]`
-  - → Expose method to AJAX JSON calls.
-`  26`  `        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]`
-`  27`  `        public static object GetAssignments()`
-`  28`  `        {`
-`  29`  `            try`
-  - → Error handling block.
-`  30`  `            {`
-`  31`  `                int uid = AuthGate.RequireLecturer();`
-  - → Authorization — block wrong role / anonymous.
-`  32`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  33`  ``
-`  34`  `                using (var conn = new SqlConnection(ConnString))`
-  - → Import namespace/types.
-`  35`  `                using (var cmd = conn.CreateCommand())`
-  - → Import namespace/types.
-`  36`  `                {`
-`  37`  `                    conn.Open();`
-`  38`  `                    // detect owner column`
-`  39`  `                    var cols = new HashSet<string>(StringComparer.OrdinalIgnoreCase);`
-`  40`  `                    using (var cc = conn.CreateCommand()) { cc.CommandText = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Courses'"; using (var r = cc.ExecuteReader()) { while (r.Read()) cols.Add(r.GetString(0)); } }`
-  - → Import namespace/types.
-`  41`  `                    string ownerCol = cols.Contains("UID") ? "UID" : (cols.Contains("LecturerUID") ? "LecturerUID" : (cols.Contains("UserID") ? "UserID" : "UID"));`
-  - → Owner lecturer foreign key.
-`  42`  ``
-`  43`  `                    cmd.CommandText = $@"SELECT cw.CWID, cw.Title, c.Name AS CourseName FROM CourseWorks cw`
-`  44`  `                    JOIN SubChapters sc ON cw.SchID = sc.SchID`
-`  45`  `                    JOIN Chapters ch ON sc.ChID = ch.ChID`
-`  46`  `                    JOIN Courses c ON ch.CID = c.CID`
-`  47`  `                    WHERE c.[{ownerCol}] = @uid ORDER BY cw.CreatedAt DESC";`
-`  48`  `                    cmd.Parameters.AddWithValue("@uid", uid);`
-`  49`  `                    var list = new List<object>();`
-`  50`  `                    using (var rdr = cmd.ExecuteReader())`
-  - → Import namespace/types.
-`  51`  `                    {`
-`  52`  `                        while (rdr.Read()) list.Add(new { cwid = rdr.IsDBNull(0) ? 0 : rdr.GetInt32(0), title = rdr.IsDBNull(1) ? "" : rdr.GetString(1), course = rdr.IsDBNull(2) ? "" : rdr.GetString(2) });`
-`  53`  `                    }`
-`  54`  `                    return new { success = true, assignments = list };`
-`  55`  `                }`
-`  56`  `            }`
-`  57`  `            catch (Exception ex)`
-  - → Handle/log exception.
-`  58`  `            {`
-`  59`  `                try { Logger.Error(ex, "ManageSubmissions.GetAssignments"); } catch { }`
-  - → Error handling block.
-`  60`  `                return new { success = false, message = "Request failed." };`
-`  61`  `            }`
-`  62`  `        }`
-`  63`  ``
-`  64`  `        [WebMethod]`
-  - → Expose method to AJAX JSON calls.
-`  65`  `        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]`
-`  66`  `        public static object GetSubmissions(int cwid)`
-`  67`  `        {`
-`  68`  `            try`
-  - → Error handling block.
-`  69`  `            {`
-`  70`  `                int uid = AuthGate.RequireLecturer();`
-  - → Authorization — block wrong role / anonymous.
-`  71`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-`  72`  ``
-`  73`  `                using (var conn = new SqlConnection(ConnString))`
-  - → Import namespace/types.
-`  74`  `                using (var cmd = conn.CreateCommand())`
-  - → Import namespace/types.
-`  75`  `                {`
-`  76`  `                    conn.Open();`
-`  77`  `                    cmd.CommandText = @"SELECT s.SID, s.UID, ISNULL(u.Name,'') AS StudentName, ISNULL(s.Text,'') AS Text, ISNULL(s.CreatedAt,GETDATE()) AS SubmittedAt,`
-`  78`  `                    ISNULL(m.Score, -1) AS Score, ISNULL(m.Review,'') AS Review`
-`  79`  `                    FROM CWSubmissions s`
-`  80`  `                    LEFT JOIN CWMarkings m ON m.SID = s.SID`
-`  81`  `                    LEFT JOIN Users u ON u.UID = s.UID`
-`  82`  `                    WHERE s.CWID = @cwid`
-`  83`  `                    ORDER BY s.CreatedAt DESC";`
-`  84`  `                    cmd.Parameters.AddWithValue("@cwid", cwid);`
-`  85`  `                    var list = new List<object>();`
-`  86`  `                    using (var rdr = cmd.ExecuteReader())`
-  - → Import namespace/types.
-`  87`  `                    {`
-`  88`  `                        while (rdr.Read())`
-`  89`  `                        {`
-`  90`  `                            int sid = rdr.IsDBNull(0) ? 0 : rdr.GetInt32(0);`
-`  91`  `                            int studentUid = rdr.IsDBNull(1) ? 0 : rdr.GetInt32(1);`
-`  92`  `                            string studentName = rdr.IsDBNull(2) ? "" : rdr.GetString(2);`
-`  93`  `                            string text = rdr.IsDBNull(3) ? "" : rdr.GetString(3);`
-`  94`  `                            string time = rdr.IsDBNull(4) ? "" : Convert.ToDateTime(rdr.GetValue(4)).ToString("g");`
-`  95`  `                            int score = rdr.IsDBNull(5) ? -1 : Convert.ToInt32(rdr.GetValue(5));`
-`  96`  `                            string review = rdr.IsDBNull(6) ? "" : rdr.GetString(6);`
-`  97`  `                            list.Add(new { sid = sid, studentUid = studentUid, studentName = studentName, text = text, time = time, score = score, review = review });`
-`  98`  `                        }`
-`  99`  `                    }`
-` 100`  `                    return new { success = true, submissions = list };`
-` 101`  `                }`
-` 102`  `            }`
-` 103`  `            catch (Exception ex)`
-  - → Handle/log exception.
-` 104`  `            {`
-` 105`  `                try { Logger.Error(ex, "ManageSubmissions.GetSubmissions"); } catch { }`
-  - → Error handling block.
-` 106`  `                return new { success = false, message = "Request failed." };`
-` 107`  `            }`
-` 108`  `        }`
-` 109`  ``
-` 110`  `        [WebMethod]`
-  - → Expose method to AJAX JSON calls.
-` 111`  `        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]`
-` 112`  `        public static object GradeSubmission(int sid, int score, string review)`
-` 113`  `        {`
-` 114`  `            try`
-  - → Error handling block.
-` 115`  `            {`
-` 116`  `                int uid = AuthGate.RequireLecturer();`
-  - → Authorization — block wrong role / anonymous.
-` 117`  `                if (uid == 0) return AuthGate.NotAuthenticatedJson();`
-  - → Authorization — block wrong role / anonymous.
-` 118`  ``
-` 119`  `                // Delegate to DashboardService which enforces ownership`
-` 120`  `                var res = DashboardService.SaveGrade(uid, sid, score, review);`
-` 121`  `                return res;`
-` 122`  `            }`
-` 123`  `            catch (Exception ex)`
-  - → Handle/log exception.
-` 124`  `            {`
-` 125`  `                try { Logger.Error(ex, "ManageSubmissions.GradeSubmission"); } catch { }`
-  - → Error handling block.
-` 126`  `                return new { success = false, message = "Request failed." };`
-` 127`  `            }`
-` 128`  `        }`
-` 129`  `    }`
-` 130`  `}`
+```csharp
+   1 | using System;
+   2 | using System.Collections.Generic;
+   3 | using System.Configuration;
+   4 | using System.Data.SqlClient;
+   5 | using System.Web.Script.Services;
+   6 | using System.Web.Services;
+   7 | using System.Web.UI;
+   8 | using WebAppAssignment.Shared.DebugLog;
+   9 | using WebAppAssignment.Pages.Lecturer.Services;
+  10 | using WebAppAssignment.Data.Security;
+  11 | 
+  12 | namespace WebAppAssignment.Pages.Lecturer
+  13 | {
+  14 |     public partial class ManageSubmissions : Page
+  15 |     {
+  16 |         private static readonly string ConnString = ConfigurationManager.ConnectionStrings["MyDbConn"]?.ConnectionString ?? string.Empty;
+  17 | 
+  18 |         protected void Page_Load(object sender, EventArgs e)
+  19 |         {
+  20 |             if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))
+  21 |                 return;
+  22 | 
+  23 |         }
+  24 | 
+  25 |         [WebMethod]
+  26 |         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+  27 |         public static object GetAssignments()
+  28 |         {
+  29 |             try
+  30 |             {
+  31 |                 int uid = AuthGate.RequireLecturer();
+  32 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  33 | 
+  34 |                 using (var conn = new SqlConnection(ConnString))
+  35 |                 using (var cmd = conn.CreateCommand())
+  36 |                 {
+  37 |                     conn.Open();
+  38 |                     // detect owner column
+  39 |                     var cols = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+  40 |                     using (var cc = conn.CreateCommand()) { cc.CommandText = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Courses'"; using (var r = cc.ExecuteReader()) { while (r.Read()) cols.Add(r.GetString(0)); } }
+  41 |                     string ownerCol = cols.Contains("UID") ? "UID" : (cols.Contains("LecturerUID") ? "LecturerUID" : (cols.Contains("UserID") ? "UserID" : "UID"));
+  42 | 
+  43 |                     cmd.CommandText = $@"SELECT cw.CWID, cw.Title, c.Name AS CourseName FROM CourseWorks cw
+  44 |                     JOIN SubChapters sc ON cw.SchID = sc.SchID
+  45 |                     JOIN Chapters ch ON sc.ChID = ch.ChID
+  46 |                     JOIN Courses c ON ch.CID = c.CID
+  47 |                     WHERE c.[{ownerCol}] = @uid ORDER BY cw.CreatedAt DESC";
+  48 |                     cmd.Parameters.AddWithValue("@uid", uid);
+  49 |                     var list = new List<object>();
+  50 |                     using (var rdr = cmd.ExecuteReader())
+  51 |                     {
+  52 |                         while (rdr.Read()) list.Add(new { cwid = rdr.IsDBNull(0) ? 0 : rdr.GetInt32(0), title = rdr.IsDBNull(1) ? "" : rdr.GetString(1), course = rdr.IsDBNull(2) ? "" : rdr.GetString(2) });
+  53 |                     }
+  54 |                     return new { success = true, assignments = list };
+  55 |                 }
+  56 |             }
+  57 |             catch (Exception ex)
+  58 |             {
+  59 |                 try { Logger.Error(ex, "ManageSubmissions.GetAssignments"); } catch { }
+  60 |                 return new { success = false, message = "Request failed." };
+  61 |             }
+  62 |         }
+  63 | 
+  64 |         [WebMethod]
+  65 |         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+  66 |         public static object GetSubmissions(int cwid)
+  67 |         {
+  68 |             try
+  69 |             {
+  70 |                 int uid = AuthGate.RequireLecturer();
+  71 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+  72 | 
+  73 |                 using (var conn = new SqlConnection(ConnString))
+  74 |                 using (var cmd = conn.CreateCommand())
+  75 |                 {
+  76 |                     conn.Open();
+  77 |                     cmd.CommandText = @"SELECT s.SID, s.UID, ISNULL(u.Name,'') AS StudentName, ISNULL(s.Text,'') AS Text, ISNULL(s.CreatedAt,GETDATE()) AS SubmittedAt,
+  78 |                     ISNULL(m.Score, -1) AS Score, ISNULL(m.Review,'') AS Review
+  79 |                     FROM CWSubmissions s
+  80 |                     LEFT JOIN CWMarkings m ON m.SID = s.SID
+  81 |                     LEFT JOIN Users u ON u.UID = s.UID
+  82 |                     WHERE s.CWID = @cwid
+  83 |                     ORDER BY s.CreatedAt DESC";
+  84 |                     cmd.Parameters.AddWithValue("@cwid", cwid);
+  85 |                     var list = new List<object>();
+  86 |                     using (var rdr = cmd.ExecuteReader())
+  87 |                     {
+  88 |                         while (rdr.Read())
+  89 |                         {
+  90 |                             int sid = rdr.IsDBNull(0) ? 0 : rdr.GetInt32(0);
+  91 |                             int studentUid = rdr.IsDBNull(1) ? 0 : rdr.GetInt32(1);
+  92 |                             string studentName = rdr.IsDBNull(2) ? "" : rdr.GetString(2);
+  93 |                             string text = rdr.IsDBNull(3) ? "" : rdr.GetString(3);
+  94 |                             string time = rdr.IsDBNull(4) ? "" : Convert.ToDateTime(rdr.GetValue(4)).ToString("g");
+  95 |                             int score = rdr.IsDBNull(5) ? -1 : Convert.ToInt32(rdr.GetValue(5));
+  96 |                             string review = rdr.IsDBNull(6) ? "" : rdr.GetString(6);
+  97 |                             list.Add(new { sid = sid, studentUid = studentUid, studentName = studentName, text = text, time = time, score = score, review = review });
+  98 |                         }
+  99 |                     }
+ 100 |                     return new { success = true, submissions = list };
+ 101 |                 }
+ 102 |             }
+ 103 |             catch (Exception ex)
+ 104 |             {
+ 105 |                 try { Logger.Error(ex, "ManageSubmissions.GetSubmissions"); } catch { }
+ 106 |                 return new { success = false, message = "Request failed." };
+ 107 |             }
+ 108 |         }
+ 109 | 
+ 110 |         [WebMethod]
+ 111 |         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+ 112 |         public static object GradeSubmission(int sid, int score, string review)
+ 113 |         {
+ 114 |             try
+ 115 |             {
+ 116 |                 int uid = AuthGate.RequireLecturer();
+ 117 |                 if (uid == 0) return AuthGate.NotAuthenticatedJson();
+ 118 | 
+ 119 |                 // Delegate to DashboardService which enforces ownership
+ 120 |                 var res = DashboardService.SaveGrade(uid, sid, score, review);
+ 121 |                 return res;
+ 122 |             }
+ 123 |             catch (Exception ex)
+ 124 |             {
+ 125 |                 try { Logger.Error(ex, "ManageSubmissions.GradeSubmission"); } catch { }
+ 126 |                 return new { success = false, message = "Request failed." };
+ 127 |             }
+ 128 |         }
+ 129 |     }
+ 130 | }
+```
+
+**Line notes**
+
+- **L1:** Import namespace/types.
+- **L2:** Import namespace/types.
+- **L3:** Import namespace/types.
+- **L4:** Import namespace/types.
+- **L5:** Import namespace/types.
+- **L6:** Import namespace/types.
+- **L7:** Import namespace/types.
+- **L8:** Import namespace/types.
+- **L9:** Import namespace/types.
+- **L10:** Import namespace/types.
+- **L12:** C# namespace grouping.
+- **L18:** Page load entry (GET or postback).
+- **L20:** Authorization — block wrong role / anonymous.
+- **L25:** Expose method to AJAX JSON calls.
+- **L29:** Error handling block.
+- **L31:** Authorization — block wrong role / anonymous.
+- **L32:** Authorization — block wrong role / anonymous.
+- **L34:** Import namespace/types.
+- **L35:** Import namespace/types.
+- **L40:** Import namespace/types.
+- **L41:** Owner lecturer foreign key.
+- **L48:** Parameterized SQL — prevents classic SQL injection.
+- **L50:** Import namespace/types.
+- **L52:** Null-safe read from database values.
+- **L57:** Handle/log exception.
+- **L59:** Error handling block.
+- **L64:** Expose method to AJAX JSON calls.
+- **L68:** Error handling block.
+- **L70:** Authorization — block wrong role / anonymous.
+- **L71:** Authorization — block wrong role / anonymous.
+- **L73:** Import namespace/types.
+- **L74:** Import namespace/types.
+- **L80:** Join related tables (courses ↔ chapters ↔ works ↔ users).
+- **L81:** Join related tables (courses ↔ chapters ↔ works ↔ users).
+- **L84:** Parameterized SQL — prevents classic SQL injection.
+- **L86:** Import namespace/types.
+- **L90:** Null-safe read from database values.
+- **L91:** Null-safe read from database values.
+- **L92:** Null-safe read from database values.
+- **L93:** Null-safe read from database values.
+- **L94:** Null-safe read from database values.
+- **L95:** Null-safe read from database values.
+- **L96:** Null-safe read from database values.
+- **L103:** Handle/log exception.
+- **L105:** Error handling block.
+- **L110:** Expose method to AJAX JSON calls.
+- **L114:** Error handling block.
+- **L116:** Authorization — block wrong role / anonymous.
+- **L117:** Authorization — block wrong role / anonymous.
+- **L123:** Handle/log exception.
+- **L125:** Error handling block.
 
 ## Source snapshot (raw)
 

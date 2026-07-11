@@ -1,6 +1,6 @@
 # CoursePreview.aspx.cs
 **Source:** `Pages/Lecturer/CoursePreview.aspx.cs`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -21,7 +21,7 @@ _No classic field declarations detected (or mostly locals inside methods)._
 
 ### `Page_Load` — lines 9–19
 
-```
+```csharp
 protected void Page_Load(object sender, EventArgs e)
 ```
 
@@ -37,55 +37,65 @@ protected void Page_Load(object sender, EventArgs e)
 
 #### Line-by-line (this function)
 
-`   9`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  10`  `        {`
-`  11`  `            if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))`
-  - → Authorization — block wrong role / anonymous.
-`  12`  `                return;`
-`  13`  `// Preview data is loaded client-side via CourseCreation WebMethods`
-`  14`  `            // (same pure-SQL endpoints) using ?cid=`
-`  15`  `            if (string.IsNullOrWhiteSpace(Request.QueryString["cid"]))`
-`  16`  `            {`
-`  17`  `                Response.Redirect("~/Pages/Lecturer/CourseCreation.aspx");`
-  - → Navigate browser to another URL.
-`  18`  `            }`
-`  19`  `        }`
+```csharp
+   9 |         protected void Page_Load(object sender, EventArgs e)
+  10 |         {
+  11 |             if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))
+  12 |                 return;
+  13 | // Preview data is loaded client-side via CourseCreation WebMethods
+  14 |             // (same pure-SQL endpoints) using ?cid=
+  15 |             if (string.IsNullOrWhiteSpace(Request.QueryString["cid"]))
+  16 |             {
+  17 |                 Response.Redirect("~/Pages/Lecturer/CourseCreation.aspx");
+  18 |             }
+  19 |         }
+```
+
+**Line notes**
+
+- **L9:** Page load entry (GET or postback).
+- **L11:** Authorization — block wrong role / anonymous.
+- **L17:** Navigate browser to another URL.
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `using System;`
-  - → Import namespace/types.
-`   2`  `using System.Web.UI;`
-  - → Import namespace/types.
-`   3`  `using WebAppAssignment.Data.Security;`
-  - → Import namespace/types.
-`   4`  ``
-`   5`  `namespace WebAppAssignment.Pages.Lecturer`
-  - → C# namespace grouping.
-`   6`  `{`
-`   7`  `    public partial class CoursePreview : Page`
-`   8`  `    {`
-`   9`  `        protected void Page_Load(object sender, EventArgs e)`
-  - → Page load entry (GET or postback).
-`  10`  `        {`
-`  11`  `            if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))`
-  - → Authorization — block wrong role / anonymous.
-`  12`  `                return;`
-`  13`  `// Preview data is loaded client-side via CourseCreation WebMethods`
-`  14`  `            // (same pure-SQL endpoints) using ?cid=`
-`  15`  `            if (string.IsNullOrWhiteSpace(Request.QueryString["cid"]))`
-`  16`  `            {`
-`  17`  `                Response.Redirect("~/Pages/Lecturer/CourseCreation.aspx");`
-  - → Navigate browser to another URL.
-`  18`  `            }`
-`  19`  `        }`
-`  20`  `    }`
-`  21`  `}`
+```csharp
+   1 | using System;
+   2 | using System.Web.UI;
+   3 | using WebAppAssignment.Data.Security;
+   4 | 
+   5 | namespace WebAppAssignment.Pages.Lecturer
+   6 | {
+   7 |     public partial class CoursePreview : Page
+   8 |     {
+   9 |         protected void Page_Load(object sender, EventArgs e)
+  10 |         {
+  11 |             if (!AuthGate.EnsurePage(this, "Lecturer", "Admin"))
+  12 |                 return;
+  13 | // Preview data is loaded client-side via CourseCreation WebMethods
+  14 |             // (same pure-SQL endpoints) using ?cid=
+  15 |             if (string.IsNullOrWhiteSpace(Request.QueryString["cid"]))
+  16 |             {
+  17 |                 Response.Redirect("~/Pages/Lecturer/CourseCreation.aspx");
+  18 |             }
+  19 |         }
+  20 |     }
+  21 | }
+```
+
+**Line notes**
+
+- **L1:** Import namespace/types.
+- **L2:** Import namespace/types.
+- **L3:** Import namespace/types.
+- **L5:** C# namespace grouping.
+- **L9:** Page load entry (GET or postback).
+- **L11:** Authorization — block wrong role / anonymous.
+- **L17:** Navigate browser to another URL.
 
 ## Source snapshot (raw)
 

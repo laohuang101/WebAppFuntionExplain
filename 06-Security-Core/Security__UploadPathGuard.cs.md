@@ -1,6 +1,6 @@
 # UploadPathGuard.cs
 **Source:** `Data/Security/UploadPathGuard.cs`  
-**Generated:** 2026-07-11 21:21  
+**Generated:** 2026-07-11 21:33  
 
 ---
 
@@ -33,7 +33,7 @@ Normalize/sanitize paths under ~/Uploads; block traversal and illegal folders.
 
 ### `NormalizeRelative` — lines 21–64
 
-```
+```csharp
 public static string NormalizeRelative(string raw)
 ```
 
@@ -45,58 +45,63 @@ public static string NormalizeRelative(string raw)
 
 #### Line-by-line (this function)
 
-`  21`  `        public static string NormalizeRelative(string raw)`
-  - → Path sandbox under Uploads.
-`  22`  `        {`
-`  23`  `            if (string.IsNullOrWhiteSpace(raw)) return null;`
-`  24`  `            string f = raw.Replace('\\', '/').Trim();`
-`  25`  `            if (f.IndexOf('%') >= 0)`
-`  26`  `            {`
-`  27`  `                try { f = HttpUtility.UrlDecode(f); } catch { }`
-  - → Error handling block.
-`  28`  `                f = (f ?? "").Replace('\\', '/').Trim();`
-`  29`  `            }`
-`  30`  ``
-`  31`  `            while (f.StartsWith("/")) f = f.Substring(1);`
-`  32`  `            if (f.StartsWith("~/")) f = f.Substring(2);`
-`  33`  `            if (f.StartsWith("Uploads/", StringComparison.OrdinalIgnoreCase))`
-`  34`  `                f = f.Substring("Uploads/".Length);`
-`  35`  `            if (f.StartsWith("Uploads\\", StringComparison.OrdinalIgnoreCase))`
-`  36`  `                f = f.Substring("Uploads\\".Length);`
-`  37`  ``
-`  38`  `            if (string.IsNullOrEmpty(f)) return null;`
-`  39`  `            if (f.IndexOf(':') >= 0) return null; // drive letter / scheme`
-`  40`  ``
-`  41`  `            var parts = f.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);`
-`  42`  `            if (parts.Length < 1) return null;`
-`  43`  ``
-`  44`  `            foreach (var p in parts)`
-`  45`  `            {`
-`  46`  `                if (p == "." || p == ".." || p.IndexOf('\0') >= 0)`
-`  47`  `                    return null;`
-`  48`  `            }`
-`  49`  ``
-`  50`  `            // Must start with allowed root when multi-segment or single-folder style`
-`  51`  `            bool allowed = false;`
-`  52`  `            foreach (var root in AllowedRoots)`
-`  53`  `            {`
-`  54`  `                if (string.Equals(parts[0], root, StringComparison.OrdinalIgnoreCase))`
-`  55`  `                {`
-`  56`  `                    allowed = true;`
-`  57`  `                    parts[0] = root; // canonical casing`
-`  58`  `                    break;`
-`  59`  `                }`
-`  60`  `            }`
-`  61`  `            if (!allowed) return null;`
-`  62`  ``
-`  63`  `            return string.Join("/", parts);`
-`  64`  `        }`
+```csharp
+  21 |         public static string NormalizeRelative(string raw)
+  22 |         {
+  23 |             if (string.IsNullOrWhiteSpace(raw)) return null;
+  24 |             string f = raw.Replace('\\', '/').Trim();
+  25 |             if (f.IndexOf('%') >= 0)
+  26 |             {
+  27 |                 try { f = HttpUtility.UrlDecode(f); } catch { }
+  28 |                 f = (f ?? "").Replace('\\', '/').Trim();
+  29 |             }
+  30 | 
+  31 |             while (f.StartsWith("/")) f = f.Substring(1);
+  32 |             if (f.StartsWith("~/")) f = f.Substring(2);
+  33 |             if (f.StartsWith("Uploads/", StringComparison.OrdinalIgnoreCase))
+  34 |                 f = f.Substring("Uploads/".Length);
+  35 |             if (f.StartsWith("Uploads\\", StringComparison.OrdinalIgnoreCase))
+  36 |                 f = f.Substring("Uploads\\".Length);
+  37 | 
+  38 |             if (string.IsNullOrEmpty(f)) return null;
+  39 |             if (f.IndexOf(':') >= 0) return null; // drive letter / scheme
+  40 | 
+  41 |             var parts = f.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+  42 |             if (parts.Length < 1) return null;
+  43 | 
+  44 |             foreach (var p in parts)
+  45 |             {
+  46 |                 if (p == "." || p == ".." || p.IndexOf('\0') >= 0)
+  47 |                     return null;
+  48 |             }
+  49 | 
+  50 |             // Must start with allowed root when multi-segment or single-folder style
+  51 |             bool allowed = false;
+  52 |             foreach (var root in AllowedRoots)
+  53 |             {
+  54 |                 if (string.Equals(parts[0], root, StringComparison.OrdinalIgnoreCase))
+  55 |                 {
+  56 |                     allowed = true;
+  57 |                     parts[0] = root; // canonical casing
+  58 |                     break;
+  59 |                 }
+  60 |             }
+  61 |             if (!allowed) return null;
+  62 | 
+  63 |             return string.Join("/", parts);
+  64 |         }
+```
+
+**Line notes**
+
+- **L21:** Path sandbox under Uploads.
+- **L27:** Error handling block.
 
 ---
 
 ### `ToPhysical` — lines 69–92
 
-```
+```csharp
 public static string ToPhysical(HttpContext ctx, string relativeUnderUploads)
 ```
 
@@ -108,39 +113,44 @@ public static string ToPhysical(HttpContext ctx, string relativeUnderUploads)
 
 #### Line-by-line (this function)
 
-`  69`  `        public static string ToPhysical(HttpContext ctx, string relativeUnderUploads)`
-`  70`  `        {`
-`  71`  `            if (ctx == null || string.IsNullOrEmpty(relativeUnderUploads)) return null;`
-`  72`  `            string rel = NormalizeRelative(relativeUnderUploads);`
-  - → Path sandbox under Uploads.
-`  73`  `            if (string.IsNullOrEmpty(rel)) return null;`
-`  74`  ``
-`  75`  `            string uploadsRoot;`
-`  76`  `            try { uploadsRoot = ctx.Server.MapPath("~/Uploads"); }`
-  - → Error handling block.
-`  77`  `            catch { return null; }`
-  - → Handle/log exception.
-`  78`  ``
-`  79`  `            if (string.IsNullOrEmpty(uploadsRoot)) return null;`
-`  80`  `            string full = Path.GetFullPath(Path.Combine(uploadsRoot, rel.Replace('/', Path.DirectorySeparatorChar)));`
-`  81`  `            string rootFull = Path.GetFullPath(uploadsRoot);`
-`  82`  ``
-`  83`  `            // Ensure full is under root (trailing separator avoids prefix tricks)`
-`  84`  `            string rootWithSep = rootFull.TrimEnd(Path.DirectorySeparatorChar)`
-`  85`  `                                 + Path.DirectorySeparatorChar;`
-`  86`  `            if (!full.StartsWith(rootWithSep, StringComparison.OrdinalIgnoreCase)`
-`  87`  `                && !string.Equals(full, rootFull, StringComparison.OrdinalIgnoreCase))`
-`  88`  `            {`
-`  89`  `                return null;`
-`  90`  `            }`
-`  91`  `            return full;`
-`  92`  `        }`
+```csharp
+  69 |         public static string ToPhysical(HttpContext ctx, string relativeUnderUploads)
+  70 |         {
+  71 |             if (ctx == null || string.IsNullOrEmpty(relativeUnderUploads)) return null;
+  72 |             string rel = NormalizeRelative(relativeUnderUploads);
+  73 |             if (string.IsNullOrEmpty(rel)) return null;
+  74 | 
+  75 |             string uploadsRoot;
+  76 |             try { uploadsRoot = ctx.Server.MapPath("~/Uploads"); }
+  77 |             catch { return null; }
+  78 | 
+  79 |             if (string.IsNullOrEmpty(uploadsRoot)) return null;
+  80 |             string full = Path.GetFullPath(Path.Combine(uploadsRoot, rel.Replace('/', Path.DirectorySeparatorChar)));
+  81 |             string rootFull = Path.GetFullPath(uploadsRoot);
+  82 | 
+  83 |             // Ensure full is under root (trailing separator avoids prefix tricks)
+  84 |             string rootWithSep = rootFull.TrimEnd(Path.DirectorySeparatorChar)
+  85 |                                  + Path.DirectorySeparatorChar;
+  86 |             if (!full.StartsWith(rootWithSep, StringComparison.OrdinalIgnoreCase)
+  87 |                 && !string.Equals(full, rootFull, StringComparison.OrdinalIgnoreCase))
+  88 |             {
+  89 |                 return null;
+  90 |             }
+  91 |             return full;
+  92 |         }
+```
+
+**Line notes**
+
+- **L72:** Path sandbox under Uploads.
+- **L76:** Error handling block.
+- **L77:** Handle/log exception.
 
 ---
 
 ### `IsAllowedExtension` — lines 93–101
 
-```
+```csharp
 public static bool IsAllowedExtension(string ext, string[] allow)
 ```
 
@@ -151,135 +161,142 @@ public static bool IsAllowedExtension(string ext, string[] allow)
 
 #### Line-by-line (this function)
 
-`  93`  ``
-`  94`  `        public static bool IsAllowedExtension(string ext, string[] allow)`
-`  95`  `        {`
-`  96`  `            if (string.IsNullOrEmpty(ext) || allow == null) return false;`
-`  97`  `            ext = ext.ToLowerInvariant();`
-`  98`  `            foreach (var a in allow)`
-`  99`  `                if (string.Equals(a, ext, StringComparison.OrdinalIgnoreCase)) return true;`
-` 100`  `            return false;`
-` 101`  `        }`
+```csharp
+  93 | 
+  94 |         public static bool IsAllowedExtension(string ext, string[] allow)
+  95 |         {
+  96 |             if (string.IsNullOrEmpty(ext) || allow == null) return false;
+  97 |             ext = ext.ToLowerInvariant();
+  98 |             foreach (var a in allow)
+  99 |                 if (string.Equals(a, ext, StringComparison.OrdinalIgnoreCase)) return true;
+ 100 |             return false;
+ 101 |         }
+```
 
 ---
 
 ## Full file listing with line notes
 
-Every line of the source is listed (truncated only if extremely long). Notes appear under lines the analyzer recognizes.
+Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
 
-`   1`  `using System;`
-  - → Import namespace/types.
-`   2`  `using System.IO;`
-  - → Import namespace/types.
-`   3`  `using System.Web;`
-  - → Import namespace/types.
-`   4`  ``
-`   5`  `namespace WebAppAssignment.Data.Security`
-  - → C# namespace grouping.
-`   6`  `{`
-`   7`  `    /// <summary>`
-`   8`  `    /// Resolve upload paths only under ~/Uploads and known subfolders.`
-`   9`  `    /// Blocks path traversal and absolute paths.`
-`  10`  `    /// </summary>`
-`  11`  `    public static class UploadPathGuard`
-  - → Sandbox path under ~/Uploads.
-`  12`  `    {`
-`  13`  `        public static readonly string[] AllowedRoots =`
-`  14`  `        {`
-`  15`  `            "CourseMaterials", "CourseVideos", "CourseThumbnails", "CourseSubmissions"`
-`  16`  `        };`
-`  17`  ``
-`  18`  `        /// <summary>`
-`  19`  `        /// Normalize client path to "Folder/file.ext" under Uploads, or null if invalid.`
-`  20`  `        /// </summary>`
-`  21`  `        public static string NormalizeRelative(string raw)`
-  - → Path sandbox under Uploads.
-`  22`  `        {`
-`  23`  `            if (string.IsNullOrWhiteSpace(raw)) return null;`
-`  24`  `            string f = raw.Replace('\\', '/').Trim();`
-`  25`  `            if (f.IndexOf('%') >= 0)`
-`  26`  `            {`
-`  27`  `                try { f = HttpUtility.UrlDecode(f); } catch { }`
-  - → Error handling block.
-`  28`  `                f = (f ?? "").Replace('\\', '/').Trim();`
-`  29`  `            }`
-`  30`  ``
-`  31`  `            while (f.StartsWith("/")) f = f.Substring(1);`
-`  32`  `            if (f.StartsWith("~/")) f = f.Substring(2);`
-`  33`  `            if (f.StartsWith("Uploads/", StringComparison.OrdinalIgnoreCase))`
-`  34`  `                f = f.Substring("Uploads/".Length);`
-`  35`  `            if (f.StartsWith("Uploads\\", StringComparison.OrdinalIgnoreCase))`
-`  36`  `                f = f.Substring("Uploads\\".Length);`
-`  37`  ``
-`  38`  `            if (string.IsNullOrEmpty(f)) return null;`
-`  39`  `            if (f.IndexOf(':') >= 0) return null; // drive letter / scheme`
-`  40`  ``
-`  41`  `            var parts = f.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);`
-`  42`  `            if (parts.Length < 1) return null;`
-`  43`  ``
-`  44`  `            foreach (var p in parts)`
-`  45`  `            {`
-`  46`  `                if (p == "." || p == ".." || p.IndexOf('\0') >= 0)`
-`  47`  `                    return null;`
-`  48`  `            }`
-`  49`  ``
-`  50`  `            // Must start with allowed root when multi-segment or single-folder style`
-`  51`  `            bool allowed = false;`
-`  52`  `            foreach (var root in AllowedRoots)`
-`  53`  `            {`
-`  54`  `                if (string.Equals(parts[0], root, StringComparison.OrdinalIgnoreCase))`
-`  55`  `                {`
-`  56`  `                    allowed = true;`
-`  57`  `                    parts[0] = root; // canonical casing`
-`  58`  `                    break;`
-`  59`  `                }`
-`  60`  `            }`
-`  61`  `            if (!allowed) return null;`
-`  62`  ``
-`  63`  `            return string.Join("/", parts);`
-`  64`  `        }`
-`  65`  ``
-`  66`  `        /// <summary>`
-`  67`  `        /// Map relative Folder/file to physical path under Uploads; null if outside sandbox.`
-`  68`  `        /// </summary>`
-`  69`  `        public static string ToPhysical(HttpContext ctx, string relativeUnderUploads)`
-`  70`  `        {`
-`  71`  `            if (ctx == null || string.IsNullOrEmpty(relativeUnderUploads)) return null;`
-`  72`  `            string rel = NormalizeRelative(relativeUnderUploads);`
-  - → Path sandbox under Uploads.
-`  73`  `            if (string.IsNullOrEmpty(rel)) return null;`
-`  74`  ``
-`  75`  `            string uploadsRoot;`
-`  76`  `            try { uploadsRoot = ctx.Server.MapPath("~/Uploads"); }`
-  - → Error handling block.
-`  77`  `            catch { return null; }`
-  - → Handle/log exception.
-`  78`  ``
-`  79`  `            if (string.IsNullOrEmpty(uploadsRoot)) return null;`
-`  80`  `            string full = Path.GetFullPath(Path.Combine(uploadsRoot, rel.Replace('/', Path.DirectorySeparatorChar)));`
-`  81`  `            string rootFull = Path.GetFullPath(uploadsRoot);`
-`  82`  ``
-`  83`  `            // Ensure full is under root (trailing separator avoids prefix tricks)`
-`  84`  `            string rootWithSep = rootFull.TrimEnd(Path.DirectorySeparatorChar)`
-`  85`  `                                 + Path.DirectorySeparatorChar;`
-`  86`  `            if (!full.StartsWith(rootWithSep, StringComparison.OrdinalIgnoreCase)`
-`  87`  `                && !string.Equals(full, rootFull, StringComparison.OrdinalIgnoreCase))`
-`  88`  `            {`
-`  89`  `                return null;`
-`  90`  `            }`
-`  91`  `            return full;`
-`  92`  `        }`
-`  93`  ``
-`  94`  `        public static bool IsAllowedExtension(string ext, string[] allow)`
-`  95`  `        {`
-`  96`  `            if (string.IsNullOrEmpty(ext) || allow == null) return false;`
-`  97`  `            ext = ext.ToLowerInvariant();`
-`  98`  `            foreach (var a in allow)`
-`  99`  `                if (string.Equals(a, ext, StringComparison.OrdinalIgnoreCase)) return true;`
-` 100`  `            return false;`
-` 101`  `        }`
-` 102`  `    }`
-` 103`  `}`
+```csharp
+   1 | using System;
+   2 | using System.IO;
+   3 | using System.Web;
+   4 | 
+   5 | namespace WebAppAssignment.Data.Security
+   6 | {
+   7 |     /// <summary>
+   8 |     /// Resolve upload paths only under ~/Uploads and known subfolders.
+   9 |     /// Blocks path traversal and absolute paths.
+  10 |     /// </summary>
+  11 |     public static class UploadPathGuard
+  12 |     {
+  13 |         public static readonly string[] AllowedRoots =
+  14 |         {
+  15 |             "CourseMaterials", "CourseVideos", "CourseThumbnails", "CourseSubmissions"
+  16 |         };
+  17 | 
+  18 |         /// <summary>
+  19 |         /// Normalize client path to "Folder/file.ext" under Uploads, or null if invalid.
+  20 |         /// </summary>
+  21 |         public static string NormalizeRelative(string raw)
+  22 |         {
+  23 |             if (string.IsNullOrWhiteSpace(raw)) return null;
+  24 |             string f = raw.Replace('\\', '/').Trim();
+  25 |             if (f.IndexOf('%') >= 0)
+  26 |             {
+  27 |                 try { f = HttpUtility.UrlDecode(f); } catch { }
+  28 |                 f = (f ?? "").Replace('\\', '/').Trim();
+  29 |             }
+  30 | 
+  31 |             while (f.StartsWith("/")) f = f.Substring(1);
+  32 |             if (f.StartsWith("~/")) f = f.Substring(2);
+  33 |             if (f.StartsWith("Uploads/", StringComparison.OrdinalIgnoreCase))
+  34 |                 f = f.Substring("Uploads/".Length);
+  35 |             if (f.StartsWith("Uploads\\", StringComparison.OrdinalIgnoreCase))
+  36 |                 f = f.Substring("Uploads\\".Length);
+  37 | 
+  38 |             if (string.IsNullOrEmpty(f)) return null;
+  39 |             if (f.IndexOf(':') >= 0) return null; // drive letter / scheme
+  40 | 
+  41 |             var parts = f.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+  42 |             if (parts.Length < 1) return null;
+  43 | 
+  44 |             foreach (var p in parts)
+  45 |             {
+  46 |                 if (p == "." || p == ".." || p.IndexOf('\0') >= 0)
+  47 |                     return null;
+  48 |             }
+  49 | 
+  50 |             // Must start with allowed root when multi-segment or single-folder style
+  51 |             bool allowed = false;
+  52 |             foreach (var root in AllowedRoots)
+  53 |             {
+  54 |                 if (string.Equals(parts[0], root, StringComparison.OrdinalIgnoreCase))
+  55 |                 {
+  56 |                     allowed = true;
+  57 |                     parts[0] = root; // canonical casing
+  58 |                     break;
+  59 |                 }
+  60 |             }
+  61 |             if (!allowed) return null;
+  62 | 
+  63 |             return string.Join("/", parts);
+  64 |         }
+  65 | 
+  66 |         /// <summary>
+  67 |         /// Map relative Folder/file to physical path under Uploads; null if outside sandbox.
+  68 |         /// </summary>
+  69 |         public static string ToPhysical(HttpContext ctx, string relativeUnderUploads)
+  70 |         {
+  71 |             if (ctx == null || string.IsNullOrEmpty(relativeUnderUploads)) return null;
+  72 |             string rel = NormalizeRelative(relativeUnderUploads);
+  73 |             if (string.IsNullOrEmpty(rel)) return null;
+  74 | 
+  75 |             string uploadsRoot;
+  76 |             try { uploadsRoot = ctx.Server.MapPath("~/Uploads"); }
+  77 |             catch { return null; }
+  78 | 
+  79 |             if (string.IsNullOrEmpty(uploadsRoot)) return null;
+  80 |             string full = Path.GetFullPath(Path.Combine(uploadsRoot, rel.Replace('/', Path.DirectorySeparatorChar)));
+  81 |             string rootFull = Path.GetFullPath(uploadsRoot);
+  82 | 
+  83 |             // Ensure full is under root (trailing separator avoids prefix tricks)
+  84 |             string rootWithSep = rootFull.TrimEnd(Path.DirectorySeparatorChar)
+  85 |                                  + Path.DirectorySeparatorChar;
+  86 |             if (!full.StartsWith(rootWithSep, StringComparison.OrdinalIgnoreCase)
+  87 |                 && !string.Equals(full, rootFull, StringComparison.OrdinalIgnoreCase))
+  88 |             {
+  89 |                 return null;
+  90 |             }
+  91 |             return full;
+  92 |         }
+  93 | 
+  94 |         public static bool IsAllowedExtension(string ext, string[] allow)
+  95 |         {
+  96 |             if (string.IsNullOrEmpty(ext) || allow == null) return false;
+  97 |             ext = ext.ToLowerInvariant();
+  98 |             foreach (var a in allow)
+  99 |                 if (string.Equals(a, ext, StringComparison.OrdinalIgnoreCase)) return true;
+ 100 |             return false;
+ 101 |         }
+ 102 |     }
+ 103 | }
+```
+
+**Line notes**
+
+- **L1:** Import namespace/types.
+- **L2:** Import namespace/types.
+- **L3:** Import namespace/types.
+- **L5:** C# namespace grouping.
+- **L11:** Sandbox path under ~/Uploads.
+- **L21:** Path sandbox under Uploads.
+- **L27:** Error handling block.
+- **L72:** Path sandbox under Uploads.
+- **L76:** Error handling block.
+- **L77:** Handle/log exception.
 
 ## Source snapshot (raw)
 
