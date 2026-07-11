@@ -1,6 +1,10 @@
 # CourseSchema.cs
 **Source:** `Data/CourseSchema.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,8 +19,10 @@ Ensures optional Courses columns exist at runtime (e.g. IsPublished BIT) and bac
 
 ## Variables / fields (file level)
 
-- **Line 9:** `Gate` — type `object`
-- **Line 10:** `_ready` — type `bool`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 9:** `Gate` (`object`) — **Holds “Gate” for this scope.**
+- **Line 10:** `_ready` (`bool`) — **Holds “ready” for this scope. (true/false)**
 
 ## Functions / methods (3 found)
 
@@ -31,7 +37,9 @@ public static void Ensure()
 - **Purpose:** Implements `Ensure`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.
-- **Local variables:** `conn`, `up`
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
+- `up` (`var`) — Holds “up” for this scope.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -64,7 +72,11 @@ public static void Ensure()
   36 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L18:** Error handling block.
 - **L20:** Import namespace/types.
@@ -88,8 +100,14 @@ private static void EnsureColumn(SqlConnection conn, string table, string column
 
 - **Purpose:** Implements `EnsureColumn`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, string table, string column, string definition`
-- **Local variables:** `check`, `alter`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `table` (`string`) — DataTable or HTML table container.
+- `column` (`string`) — Holds “column” for this scope. (text)
+- `definition` (`string`) — Holds “definition” for this scope. (text)
+- **Local variables (what each means):**
+- `check` (`var`) — Holds “check” for this scope.  Newly constructed object.
+- `alter` (`var`) — Holds “alter” for this scope.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -115,7 +133,11 @@ private static void EnsureColumn(SqlConnection conn, string table, string column
   55 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L38:** Database access (pure SQL).
 - **L40:** Import namespace/types.
@@ -158,7 +180,11 @@ public static bool HasIsPublished()
   67 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L57:** Course publish flag for Landing catalog.
 - **L60:** Error handling block.
@@ -170,7 +196,11 @@ public static bool HasIsPublished()
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;

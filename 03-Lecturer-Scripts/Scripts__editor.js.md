@@ -1,6 +1,10 @@
 # editor.js
 **Source:** `Pages/Lecturer/Scripts/editor.js`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,12 +19,14 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-- **Line 5:** `url` — script-level `const`/`let`/`var`
-- **Line 14:** `htmlEditor` — script-level `const`/`let`/`var`
-- **Line 19:** `hidden` — script-level `const`/`let`/`var`
-- **Line 27:** `toolbar` — script-level `const`/`let`/`var`
-- **Line 30:** `btn` — script-level `const`/`let`/`var`
-- **Line 32:** `cmd` — script-level `const`/`let`/`var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 5:** `url` — script-level `const`/`let`/`var` — **HTTP URL to media or page.**
+- **Line 14:** `htmlEditor` — script-level `const`/`let`/`var` — **Holds “html Editor” for this scope.**
+- **Line 19:** `hidden` — script-level `const`/`let`/`var` — **Holds “hidden” for this scope.**
+- **Line 27:** `toolbar` — script-level `const`/`let`/`var` — **Holds “toolbar” for this scope.**
+- **Line 30:** `btn` — script-level `const`/`let`/`var` — **Button DOM element.**
+- **Line 32:** `cmd` — script-level `const`/`let`/`var` — **SqlCommand — the SQL statement + parameters object.**
 
 ## Functions / methods (2 found)
 
@@ -33,8 +39,11 @@ function execCmd(cmd, value)
 #### Explanation
 
 - **Purpose:** Implements `execCmd`.
-- **Parameters:** `cmd, value`
-- **Local variables:** `url`
+- **Parameters (what each means):**
+- `cmd` — SqlCommand — the SQL statement + parameters object.
+- `value` — Holds “value” for this scope.
+- **Local variables (what each means):**
+- `url` — HTTP URL to media or page.
 
 #### Line-by-line (this function)
 
@@ -50,6 +59,13 @@ function execCmd(cmd, value)
   10 |         document.execCommand(cmd, false, value || null);
   11 |     }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L5:** `url` means: HTTP URL to media or page.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -62,7 +78,8 @@ function sync()
 #### Explanation
 
 - **Purpose:** Implements `sync`.
-- **Local variables:** `hidden`
+- **Local variables (what each means):**
+- `hidden` — Holds “hidden” for this scope.  DOM element from the page.
 
 #### Line-by-line (this function)
 
@@ -74,16 +91,26 @@ function sync()
   21 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L19:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L19:** Get HTML element by id. | `hidden` means: Holds “hidden” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L20:** Update page HTML.
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | // editor.js: small helpers for lesson editor
@@ -131,6 +158,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 
 **Line notes**
 
+<<<<<<< HEAD
 - **L14:** Get HTML element by id.
 - **L19:** Get HTML element by id.
 - **L20:** Update page HTML.
@@ -138,6 +166,18 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L24:** DOM event handler.
 - **L27:** Get HTML element by id.
 - **L29:** DOM event handler.
+=======
+- **L5:** `url` means: HTTP URL to media or page.
+- **L14:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
+- **L19:** Get HTML element by id. | `hidden` means: Holds “hidden” for this scope.  DOM element from the page.
+- **L20:** Update page HTML.
+- **L23:** DOM event handler.
+- **L24:** DOM event handler.
+- **L27:** Get HTML element by id. | `toolbar` means: Holds “toolbar” for this scope.  DOM element from the page.
+- **L29:** DOM event handler.
+- **L30:** `btn` means: Button DOM element.
+- **L32:** `cmd` means: SqlCommand — the SQL statement + parameters object.
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

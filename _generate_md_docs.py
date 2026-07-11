@@ -335,6 +335,478 @@ def extract_vars_js(text: str):
     return vars_[:120]
 
 
+# Short names used heavily in this codebase → plain English
+VAR_GLOSSARY = {
+    # single / short
+    "n": "Count or number of rows/items (often from COUNT(*) or list length).",
+    "i": "Loop index (0-based counter in for-loops).",
+    "j": "Inner loop index.",
+    "k": "Key name when iterating object keys, or secondary index.",
+    "e": "Event object (JS click/input) OR caught Exception (C# catch).",
+    "ex": "Exception object in catch blocks.",
+    "r": "One DataRow from a query result, or HTTP Response shorthand.",
+    "c": "Often a course object/row, or a single character when looping strings.",
+    "d": "Deserialized dictionary/JSON payload, or Date/day value.",
+    "s": "String value being cleaned/built, or submission object.",
+    "t": "Temporary string/token/time value.",
+    "p": "Parameter, path, or password fragment depending on context.",
+    "q": "Search query text, or SQL command text.",
+    "v": "Generic value (version flag in JSON, or loop value).",
+    "x": "Generic temporary / coordinate / exception alias.",
+    "sb": "StringBuilder — efficient string concatenation.",
+    "dt": "DataTable — full result set from SQL (many rows/columns).",
+    "dr": "DataReader / DataRow depending on API.",
+    "cmd": "SqlCommand — the SQL statement + parameters object.",
+    "conn": "SqlConnection — open link to LocalDB/SQL Server.",
+    "ctx": "Current HTTP request context (Request, Response, Session).",
+    "uid": "User ID (Users.UID) of the logged-in or target user.",
+    "cid": "Course ID (Courses.CID).",
+    "cwid": "CourseWork ID (assignment) (CourseWorks.CWID).",
+    "chid": "Chapter ID (Chapters.ChID).",
+    "schid": "SubChapter / lesson ID.",
+    "sid": "Submission ID (CWSubmissions.SID).",
+    "qid": "Question ID (objective quiz).",
+    "id": "Generic primary key / identifier.",
+    "ok": "Boolean success flag.",
+    "res": "Result object returned from fetch/WebMethod (`data.d` unwrapped).",
+    "msg": "Human-readable message (error or success).",
+    "err": "Error message string or error element.",
+    "sql": "SQL query text (should use parameters, not raw user input).",
+    "hash": "Password hash (PBKDF2) stored in DB.",
+    "token": "JWT or CSRF token string.",
+    "secret": "MFA TOTP Base32 secret for authenticator apps.",
+    "code": "6-digit TOTP / OTP the user typed.",
+    "email": "Account email address (usually lowercased).",
+    "password": "Plain password from the form (never log this).",
+    "role": "User role code or name (Admin/Student/Lecturer).",
+    "name": "Display name of user/course/criterion.",
+    "title": "Title of course work / page heading.",
+    "path": "File path under Uploads or URL path.",
+    "url": "HTTP URL to media or page.",
+    "file": "Uploaded file object or file name.",
+    "fileName": "Original file name for display/download.",
+    "fileUrl": "Stored relative path or Media.ashx URL of upload.",
+    "dueDate": "Assignment deadline (date); after end of that day submissions close.",
+    "isClosed": "True when past due date — student cannot submit.",
+    "isPublished": "Course visibility flag for Landing catalog.",
+    "published": "UI/publish intent flag when saving a course/work.",
+    "requireFile": "Assignment requires a file upload.",
+    "maxScore": "Maximum points (usually 100).",
+    "score": "Points earned or max points depending on context.",
+    "rubric": "List of grading criteria (name + points).",
+    "questions": "Objective quiz questions array.",
+    "answers": "Student selected answers for quiz.",
+    "content": "Submission body text or JSON payload in CWSubmissions.",
+    "desc": "Description text (may embed <<<META>>> JSON).",
+    "instructions": "Student-facing assignment instructions (plain part of Description).",
+    "meta": "Extra settings packed as JSON (dueDate, requireFile, …).",
+    "extra": "Dictionary of optional fields inside META.",
+    "packed": "Parsed Description META structure.",
+    "list": "In-memory collection being built for JSON return.",
+    "items": "Array of rows for UI tables.",
+    "row": "Single database or table row.",
+    "rows": "Collection of rows.",
+    "user": "AuthUser or user row (UID, Email, Role, MfaSecret, …).",
+    "result": "AuthResult or API result { success, message, … }.",
+    "success": "Boolean — operation succeeded.",
+    "message": "Status text for the UI.",
+    "lecturerUid": "Users.UID of the course owner (lecturer).",
+    "studentUid": "Users.UID of the student.",
+    "studentName": "Student display name.",
+    "courseName": "Course display name.",
+    "assignmentTitle": "CourseWork title.",
+    "owner": "LecturerUID looked up for ownership check.",
+    "exists": "Count > 0 check (email/user/row already exists).",
+    "count": "Number of matching records.",
+    "total": "Sum of points or total items.",
+    "page": "Page number for pagination, or Page instance.",
+    "filter": "Search/filter text for lists.",
+    "json": "JSON string (to parse or serialize).",
+    "dict": "Dictionary / map of key → value.",
+    "payload": "Object about to be JSON-serialized or sent over network.",
+    "headers": "HTTP headers object for fetch.",
+    "body": "HTTP request body.",
+    "method": "HTTP method (GET/POST) or MFA method (totp/email).",
+    "window": "TOTP time-step window (± steps for clock skew).",
+    "step": "TOTP 30-second time step counter.",
+    "key": "HMAC key bytes or dictionary key.",
+    "raw": "Raw bytes or unprocessed input string.",
+    "normalized": "Cleaned secret/code (spaces removed, uppercased).",
+    "parts": "Split path or name segments.",
+    "folder": "Uploads subfolder (CourseMaterials, CourseVideos, …).",
+    "relative": "Path relative to Uploads root.",
+    "physical": "Absolute disk path on the server.",
+    "root": "Root directory path (Uploads).",
+    "full": "Fully resolved absolute path.",
+    "allowed": "Boolean — path/role is permitted.",
+    "locked": "Account locked by LoginThrottle.",
+    "failures": "Failed login attempt count.",
+    "bucket": "Throttle state for one email+IP.",
+    "ip": "Client IP address for throttle/audit.",
+    "at": "Timestamp (CreatedUtc / PwdResetAt).",
+    "exp": "Expiry DateTime.",
+    "now": "Current time (usually UTC or server local).",
+    "ttl": "Time-to-live duration for pending session data.",
+    "session": "ASP.NET Session state bag.",
+    "cookie": "HTTP cookie (JWT or CSRF).",
+    "issuer": "TOTP issuer label (EduLMS).",
+    "label": "otpauth account label (issuer:email).",
+    "uri": "otpauth:// or other URI string.",
+    "qrUrl": "URL of QR image for authenticator setup.",
+    "bytes": "Byte array (hash, random, file content).",
+    "salt": "Random salt for PBKDF2.",
+    "iter": "PBKDF2 iteration count.",
+    "algo": "Hash algorithm name.",
+    "plain": "Plain-text description without META trailer.",
+    "start": "Range start (file stream) or string index.",
+    "end": "Range end or string end index.",
+    "len": "Length of string/array.",
+    "ext": "File extension (.pdf, .mp4, …).",
+    "mime": "MIME content type.",
+    "kind": "Upload kind (material/video/thumbnail/submission).",
+    "storePath": "Relative path where file was saved.",
+    "serveUrl": "Public/handler URL to download/preview file.",
+    "btn": "Button DOM element.",
+    "el": "Generic DOM element.",
+    "box": "Container element for lists/tables.",
+    "ddl": "Drop-down list (select) element.",
+    "opt": "Option element or optional label.",
+    "img": "Image element or image path.",
+    "canvas": "Chart/canvas element.",
+    "chart": "Chart.js instance.",
+    "builderType": "Assignment builder mode: Text vs Objective.",
+    "rubricRows": "UI state: grading rubric criteria rows.",
+    "objectiveQuestions": "UI state: quiz questions being edited.",
+    "currentMeta": "Cached coursework flags (requireFile, isClosed, …).",
+    "currentQuestions": "Quiz questions loaded for student submit.",
+    "UserID": "Session key for logged-in Users.UID.",
+    "UserRole": "Session key for role (Admin/Student/Lecturer).",
+    "UserName": "Session key for display name.",
+    "AuthToken": "Session copy of JWT string.",
+    "MfaPendingUid": "Session: user waiting for MFA after password OK.",
+    "MfaMethod": "Session: totp or email OTP method.",
+    "PwdResetUid": "Session: user allowed to set new password after MFA.",
+    "PwdResetEmail": "Session: email shown on reset step 2.",
+    "PwdResetAt": "Session: when MFA for reset was verified (timeout).",
+    "Reg.Name": "Pending registration name (Session until MFA).",
+    "Reg.Email": "Pending registration email.",
+    "Reg.PasswordHash": "Pending registration hashed password.",
+    "Reg.MfaSecret": "Pending registration TOTP secret.",
+    "Reg.CreatedUtc": "When pending registration started.",
+    # more common in this project
+    "adapter": "SqlDataAdapter — fills a DataTable from a SqlCommand.",
+    "parameters": "Array of SQL parameters (@Name values) for a query.",
+    "xff": "X-Forwarded-For header value (client IP when behind a proxy).",
+    "comma": "Index of the first comma in a string (split helper).",
+    "table": "DataTable or HTML table container.",
+    "cmdText": "SQL command text.",
+    "reader": "SqlDataReader for streaming query results.",
+    "tran": "SqlTransaction for multi-statement commit/rollback.",
+    "cs": "Connection string text.",
+    "connString": "Database connection string from Web.config.",
+    "connectionString": "Database connection string from Web.config.",
+    "map": "Dictionary mapping keys to values (e.g. throttle buckets).",
+    "bucket": "Throttle state for one email+IP (failures + lockout).",
+    "failures": "Number of failed login attempts in the current window.",
+    "lockMsg": "Message shown when the account is temporarily locked.",
+    "lockout": "DateTime until which login is blocked.",
+    "plain": "Text without META trailer (student-visible instructions).",
+    "enableMfa": "Whether MFA should be enabled for the account.",
+    "mfaOn": "1/0 flag written to Users.MfaEnabled.",
+    "mfaSecret": "Authenticator secret stored for the user.",
+    "totpCode": "User-entered 6-digit authenticator code.",
+    "roleCode": "Stored role value (0 Admin / 1 Student / 2 Lecturer).",
+    "roleNormalized": "Friendly role name (Admin, Student, Lecturer).",
+    "roleChoice": "Role selected on the register form.",
+    "p1": "New password field (first entry).",
+    "p2": "Confirm password field (must match p1).",
+    "pass": "Password from a form field.",
+    "confirm": "Confirm-password form field.",
+}
+
+
+def split_camel(name: str) -> str:
+    s = re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", name)
+    s = s.replace("_", " ").replace(".", " ")
+    return s.strip()
+
+
+def explain_variable(name: str, typ: str | None = None, rhs: str | None = None, lang: str = "cs") -> str:
+    """
+    Return plain-English meaning for a variable/parameter/field name.
+    """
+    if not name:
+        return "Unnamed value."
+    raw = name.strip()
+    # strip common prefixes for lookup
+    key = raw
+    if key.startswith("_"):
+        key = key[1:]
+    low = key.lower()
+
+    typ_l = (typ or "").lower()
+    rhs_l = (rhs or "").lower()
+
+    # Disambiguate short names using type / assignment
+    meaning = None
+    if low == "e":
+        if "exception" in typ_l or "exception" in rhs_l:
+            meaning = "Caught Exception object."
+        elif "string" in typ_l or "email" in rhs_l or "tolower" in rhs_l:
+            meaning = "Normalized email string (trimmed/lowercased)."
+        else:
+            meaning = "Often email string (C#) or DOM event (JS)."
+    elif low == "r":
+        if "datarow" in typ_l or "rows[" in rhs_l:
+            meaning = "One DataRow from a SQL result."
+        elif "response" in typ_l or "httpresponse" in typ_l:
+            meaning = "HTTP response object."
+        else:
+            meaning = "Usually one database row (DataRow) in query loops."
+    elif low == "c":
+        if "char" in typ_l:
+            meaning = "Single character while scanning a string."
+        elif "course" in rhs_l or "cid" in rhs_l:
+            meaning = "Course object/row."
+        else:
+            meaning = "Temporary value (character, course, or counter depending on loop)."
+    elif low == "n":
+        if "count" in rhs_l or "length" in rhs_l or "int" in typ_l:
+            meaning = "Integer count (rows, items, or length)."
+        else:
+            meaning = "Numeric count or temporary integer."
+    elif low == "d":
+        if "dict" in typ_l or "dictionary" in typ_l or "deserialize" in rhs_l:
+            meaning = "Dictionary/map from JSON or META payload."
+        elif "datetime" in typ_l or "date" in rhs_l:
+            meaning = "Date/time value."
+        else:
+            meaning = "Often a dictionary payload or date value."
+    elif low == "s":
+        if "string" in typ_l or "trim" in rhs_l or "tostring" in rhs_l:
+            meaning = "String being cleaned or built."
+        else:
+            meaning = "String value or submission-related object."
+
+    # exact glossary (if not disambiguated)
+    if meaning is None:
+        if key in VAR_GLOSSARY:
+            meaning = VAR_GLOSSARY[key]
+        elif low in VAR_GLOSSARY:
+            meaning = VAR_GLOSSARY[low]
+        else:
+            # prefix/suffix heuristics
+            if low.endswith("uid") or (low.endswith("id") and len(low) <= 6):
+                meaning = f"Identifier (`{key}`) — database primary/foreign key."
+            elif low.endswith("count") or low.startswith("num"):
+                meaning = f"Numeric count of items related to `{split_camel(key)}`."
+            elif low.startswith("is") or low.startswith("has") or low.startswith("can"):
+                meaning = f"Boolean flag: {split_camel(key)}."
+            elif low.startswith(("txt", "lbl", "btn", "ddl", "hf", "pnl", "lit", "gv", "img", "chk")):
+                meaning = f"UI control reference ({split_camel(key)})."
+            elif low.startswith("str"):
+                meaning = f"String value: {split_camel(key[3:] or key)}."
+            elif "password" in low or low in ("pass", "pwd"):
+                meaning = "Password (plain input — hash before storing)."
+            elif "email" in low:
+                meaning = "Email address."
+            elif "token" in low:
+                meaning = "Security token (JWT or CSRF)."
+            elif "secret" in low:
+                meaning = "Secret key material (MFA Base32 or crypto secret)."
+            elif "hash" in low:
+                meaning = "Cryptographic hash string."
+            elif "path" in low or "dir" in low or "folder" in low:
+                meaning = "Filesystem or URL path."
+            elif "url" in low or "href" in low:
+                meaning = "URL string."
+            elif "date" in low or "time" in low or low.endswith("at") or low.endswith("utc"):
+                meaning = "Date/time value."
+            elif "list" in low or "items" in low or "rows" in low:
+                meaning = f"Collection / list related to {split_camel(key)}."
+            elif low.endswith("s") and len(low) > 3 and low not in ("success", "status", "address", "process"):
+                meaning = f"Often a collection related to {split_camel(key)} (plural name)."
+            else:
+                meaning = f"Holds “{split_camel(key)}” for this scope."
+
+    # enrich from type (skip if glossary already covers the concept)
+    type_note = ""
+    if typ:
+        t = typ.strip()
+        tl = t.lower()
+        glossed = low in VAR_GLOSSARY or key in VAR_GLOSSARY
+        if "datatable" in tl and not glossed:
+            type_note = " (`DataTable` = SQL result grid)"
+        elif "datarow" in tl and not glossed:
+            type_note = " (`DataRow` = one SQL row)"
+        elif "sqlconnection" in tl and not glossed:
+            type_note = " (open DB connection)"
+        elif "sqlcommand" in tl and not glossed:
+            type_note = " (SQL + parameters)"
+        elif "httpcontext" in tl and not glossed:
+            type_note = " (current HTTP request)"
+        elif "stringbuilder" in tl and not glossed:
+            type_note = " (string buffer)"
+        elif "authuser" in tl and not glossed:
+            type_note = " (user DTO)"
+        elif "authresult" in tl and not glossed:
+            type_note = " (auth result DTO)"
+        elif tl == "var":
+            type_note = ""  # inferred type
+        elif tl in ("int", "int32", "long", "int64") and not glossed:
+            type_note = " (integer)"
+        elif tl in ("bool", "boolean") and not glossed:
+            type_note = " (true/false)"
+        elif "string" in tl and not glossed:
+            type_note = " (text)"
+        elif "datetime" in tl and not glossed:
+            type_note = " (date/time)"
+        elif ("decimal" in tl or "double" in tl or "float" in tl) and not glossed:
+            type_note = " (number/score)"
+        elif ("dictionary" in tl or "list<" in tl) and not glossed:
+            type_note = f" (`{t}` collection)"
+        elif not glossed and tl not in ("object",):
+            type_note = f" (type `{t}`)"
+
+    # enrich from RHS assignment snippet
+    rhs_note = ""
+    if rhs:
+        r = rhs.strip()
+        rl = r.lower()
+        if "executequery" in rl:
+            rhs_note = " Assigned from SQL SELECT result set."
+        elif "executenonquery" in rl:
+            rhs_note = " Assigned from rows-affected of INSERT/UPDATE/DELETE."
+        elif "executescalar" in rl:
+            rhs_note = " Assigned from single SQL scalar (COUNT/IDENTITY)."
+        elif "getvalidateduserid" in rl or "requirelecturer" in rl or "requirestudent" in rl or "currentuserid" in rl:
+            rhs_note = " Assigned from logged-in user id (0 if anonymous)."
+        elif "hash(" in rl or "passwordhasher" in rl:
+            rhs_note = " Assigned from password hash function."
+        elif "verify" in rl:
+            rhs_note = " Assigned from verification boolean/result."
+        elif "generatesecret" in rl:
+            rhs_note = " New random MFA secret."
+        elif "generatecode" in rl or "verifycode" in rl:
+            rhs_note = " TOTP related value."
+        elif "json" in rl and ("serial" in rl or "parse" in rl or "stringify" in rl):
+            rhs_note = " JSON serialize/parse result."
+        elif "session[" in rl:
+            rhs_note = " Read from ASP.NET Session."
+        elif "request[" in rl or "querystring" in rl:
+            rhs_note = " Comes from HTTP request."
+        elif "configurationmanager" in rl:
+            rhs_note = " Read from Web.config."
+        elif "fetch(" in rl:
+            rhs_note = " HTTP response from browser fetch."
+        elif "getelementbyid" in rl:
+            rhs_note = " DOM element from the page."
+        elif "new " in rl:
+            rhs_note = " Newly constructed object."
+        elif re.match(r"^[\d.]+m?$", r):
+            rhs_note = f" Literal number `{r}`."
+        elif r.startswith('"') or r.startswith("'"):
+            rhs_note = " Literal text string."
+
+    return meaning + type_note + ((" " + rhs_note) if rhs_note else "")
+
+
+def extract_locals_with_context(body: str, lang: str) -> list[tuple[str, str | None, str | None]]:
+    """
+    Return list of (name, type_or_None, rhs_snippet) for locals in a function body.
+    Skips the signature line so parameters are not double-listed as locals.
+    """
+    found = []
+    seen = set()
+    # Drop first line (method signature) — params are documented separately
+    body_lines = body.splitlines()
+    if body_lines:
+        scan = "\n".join(body_lines[1:])
+    else:
+        scan = body
+
+    # Also mark parameter names so they are never listed as locals
+    header_line = body_lines[0] if body_lines else ""
+    for pname, _ in extract_params_from_header(header_line if "(" in header_line else "x()"):
+        seen.add(pname)
+
+    if lang == "cs":
+        patterns = [
+            re.compile(
+                r"\b(?P<type>var|string|int|bool|decimal|double|float|object|long|byte\[\]|DateTime|DateTime\?|DataTable|DataRow|SqlConnection|SqlCommand|StringBuilder|AuthUser|AuthResult|HttpContext|List<[^>]+>|Dictionary<[^>]+>|IEnumerable<[^>]+>)\s+(?P<name>\w+)\s*=\s*(?P<rhs>[^;]+);",
+                re.M,
+            ),
+            re.compile(r"\bforeach\s*\(\s*(?:var|[\w.<>\?]+)\s+(?P<name>\w+)\s+in\b", re.M),
+        ]
+    else:
+        patterns = [
+            re.compile(
+                r"\b(?:const|let|var)\s+(?P<name>\w+)\s*=\s*(?P<rhs>[^;\n]+)",
+                re.M,
+            ),
+            re.compile(r"\bfor\s*\(\s*(?:let|var|const)?\s*(?P<name>\w+)\s*=", re.M),
+        ]
+
+    for pat in patterns:
+        for m in pat.finditer(scan):
+            name = m.group("name")
+            if name in seen:
+                continue
+            if name in ("if", "for", "return", "new", "this", "true", "false", "null"):
+                continue
+            seen.add(name)
+            typ = m.groupdict().get("type")
+            rhs = m.groupdict().get("rhs")
+            if rhs:
+                rhs = rhs.strip()
+                if len(rhs) > 80:
+                    rhs = rhs[:77] + "..."
+            found.append((name, typ, rhs))
+    return found[:40]
+
+
+def extract_params_from_header(header: str) -> list[tuple[str, str | None]]:
+    """Parse (Type name, Type name = default) from C#/JS signature."""
+    pm = re.search(r"\((.*)\)", header, re.S)
+    if not pm or not pm.group(1).strip():
+        return []
+    inner = pm.group(1).strip()
+    if not inner or inner == "void":
+        return []
+    parts = []
+    # naive split on commas not inside <>
+    depth = 0
+    cur = []
+    for ch in inner:
+        if ch == "<":
+            depth += 1
+            cur.append(ch)
+        elif ch == ">":
+            depth -= 1
+            cur.append(ch)
+        elif ch == "," and depth == 0:
+            parts.append("".join(cur).strip())
+            cur = []
+        else:
+            cur.append(ch)
+    if cur:
+        parts.append("".join(cur).strip())
+
+    out = []
+    for p in parts:
+        p = re.sub(r"\s*=\s*.*$", "", p).strip()  # drop default
+        p = p.replace("params ", "").replace("this ", "").replace("out ", "").replace("ref ", "")
+        if not p:
+            continue
+        bits = p.split()
+        if len(bits) == 1:
+            out.append((bits[0], None))
+        else:
+            # last token is name, rest is type
+            out.append((bits[-1].strip(","), " ".join(bits[:-1])))
+    return out
+
+
 def explain_method(name: str, header: str, body: str, lang: str) -> list[str]:
     notes = []
     low = (name + " " + header + " " + body[:1200]).lower()
@@ -369,22 +841,26 @@ def explain_method(name: str, header: str, body: str, lang: str) -> list[str]:
         notes.append("**Pattern:** Delete/clear data.")
     if name.lower() in ("pageload", "page_load"):
         notes.append("**Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.")
-    pm = re.search(r"\((.*?)\)", header, re.S)
-    if pm and pm.group(1).strip():
-        notes.append(f"**Parameters:** `{pm.group(1).strip()[:240]}`")
-    if lang == "cs":
-        locals_ = re.findall(
-            r"\b(?:var|string|int|bool|decimal|object|DateTime|DataTable|List<[^>]+>)\s+(\w+)\s*=",
-            body,
-        )
-    else:
-        locals_ = re.findall(r"\b(?:const|let|var)\s+(\w+)\s*=", body)
+
+    # Parameters with meanings
+    params = extract_params_from_header(header)
+    if params:
+        notes.append("**Parameters (what each means):**")
+        for pname, ptyp in params:
+            meaning = explain_variable(pname, ptyp, None, lang)
+            notes.append(
+                f"- `{pname}`" + (f" (`{ptyp}`)" if ptyp else "") + f" — {meaning}"
+            )
+
+    # Locals with meanings
+    locals_ = extract_locals_with_context(body, lang)
     if locals_:
-        uniq = []
-        for x in locals_:
-            if x not in uniq:
-                uniq.append(x)
-        notes.append("**Local variables:** " + ", ".join(f"`{x}`" for x in uniq[:30]))
+        notes.append("**Local variables (what each means):**")
+        for lname, ltyp, rhs in locals_:
+            meaning = explain_variable(lname, ltyp, rhs, lang)
+            notes.append(
+                f"- `{lname}`" + (f" (`{ltyp}`)" if ltyp else "") + f" — {meaning}"
+            )
     return notes
 
 
@@ -531,6 +1007,7 @@ def format_numbered_code(body_lines: list[str], start_line: int, fence_lang: str
     return md_fence("\n".join(rows), fence_lang)
 
 
+<<<<<<< HEAD
 def format_line_notes(body_lines: list[str], start_line: int, max_lines: int = 250) -> list[str]:
     """Bullet notes keyed by absolute line number (only lines with a recognized pattern)."""
     out = []
@@ -540,6 +1017,34 @@ def format_line_notes(body_lines: list[str], start_line: int, max_lines: int = 2
             continue
         abs_ln = start_line + i
         out.append(f"- **L{abs_ln}:** {n}\n")
+=======
+def format_line_notes(body_lines: list[str], start_line: int, max_lines: int = 250, lang: str = "cs") -> list[str]:
+    """Bullet notes keyed by absolute line number (patterns + assignment variable meanings)."""
+    out = []
+    for i, raw in enumerate(body_lines[:max_lines]):
+        abs_ln = start_line + i
+        bits = []
+        n = line_note(raw)
+        if n:
+            bits.append(n)
+        # If this line declares/assigns a variable, explain it
+        s = raw.strip()
+        m_cs = re.match(
+            r"^(?:var|string|int|bool|decimal|double|float|object|long|DateTime\??|DataTable|DataRow|SqlConnection|SqlCommand|StringBuilder|AuthUser|AuthResult|List<[^>]+>|Dictionary<[^>]+>)\s+(\w+)\s*=\s*(.+);?\s*$",
+            s,
+        )
+        m_js = re.match(r"^(?:const|let|var)\s+(\w+)\s*=\s*(.+);?\s*$", s)
+        m = m_cs or m_js
+        if m:
+            vname, rhs = m.group(1), m.group(2).rstrip(";").strip()
+            typ = None
+            if m_cs:
+                typ = s.split()[0]
+            meaning = explain_variable(vname, typ, rhs, "js" if m_js else "cs")
+            bits.append(f"`{vname}` means: {meaning}")
+        if bits:
+            out.append(f"- **L{abs_ln}:** " + " | ".join(bits) + "\n")
+>>>>>>> eb8ce01 (update)
     return out
 
 
@@ -588,18 +1093,30 @@ def write_file_md(path: Path, out_md: Path, title: str, feature_blurb: str, rel:
     lines_out.append(f"- **Kind:** `{ext or 'unknown'}`\n\n")
 
     lines_out.append("## Variables / fields (file level)\n\n")
+    lines_out.append(
+        "Each name is explained in plain English (what it stores / why it exists).\n\n"
+    )
     if lang == "cs":
         fields = extract_fields_cs(text)
         if fields:
             for name, typ, ln in fields:
-                lines_out.append(f"- **Line {ln}:** `{name}` — type `{typ}`\n")
+                meaning = explain_variable(name, typ, None, "cs")
+                lines_out.append(
+                    f"- **Line {ln}:** `{name}` (`{typ}`) — **{meaning}**\n"
+                )
         else:
-            lines_out.append("_No classic field declarations detected (or mostly locals inside methods)._\n")
+            lines_out.append(
+                "_No classic field declarations detected (or mostly locals inside methods — "
+                "see each function’s **Local variables** section)._\n"
+            )
     elif lang == "js":
         vars_ = extract_vars_js(text)
         if vars_:
             for name, ln in vars_:
-                lines_out.append(f"- **Line {ln}:** `{name}` — script-level `const`/`let`/`var`\n")
+                meaning = explain_variable(name, None, None, "js")
+                lines_out.append(
+                    f"- **Line {ln}:** `{name}` — script-level `const`/`let`/`var` — **{meaning}**\n"
+                )
         else:
             lines_out.append("_No top-level variables detected by scanner._\n")
     else:
@@ -628,14 +1145,24 @@ def write_file_md(path: Path, out_md: Path, title: str, feature_blurb: str, rel:
         lines_out.append(md_fence(meth["header"][:400], fence_lang))
         lines_out.append("\n#### Explanation\n\n")
         for note in explain_method(meth["name"], meth["header"], meth["body"], "js" if lang == "js" else "cs"):
-            lines_out.append(f"- {note}\n")
+            # notes may already be markdown bullets ("- `x` — ...")
+            if note.startswith("- ") or note.startswith("* "):
+                lines_out.append(f"{note}\n")
+            else:
+                lines_out.append(f"- {note}\n")
         lines_out.append("\n#### Line-by-line (this function)\n\n")
         body_lines = meth["body"].splitlines()
         max_fn = 250
         lines_out.append(format_numbered_code(body_lines, meth["start"], fence_lang, max_fn))
+<<<<<<< HEAD
         notes = format_line_notes(body_lines, meth["start"], max_fn)
         if notes:
             lines_out.append("\n**Line notes**\n\n")
+=======
+        notes = format_line_notes(body_lines, meth["start"], max_fn, lang)
+        if notes:
+            lines_out.append("\n**Line notes** (what code + variables mean)\n\n")
+>>>>>>> eb8ce01 (update)
             lines_out.extend(notes)
         if len(body_lines) > max_fn:
             lines_out.append(
@@ -646,11 +1173,19 @@ def write_file_md(path: Path, out_md: Path, title: str, feature_blurb: str, rel:
     lines_out.append("## Full file listing with line notes\n\n")
     lines_out.append(
         "Source is shown as a single fenced code block with line numbers. "
+<<<<<<< HEAD
         "Recognized patterns are listed under **Line notes** after the block.\n\n"
     )
     max_full = min(len(lines), 900)
     lines_out.append(format_numbered_code(lines[:max_full], 1, fence_lang, max_full))
     full_notes = format_line_notes(lines[:max_full], 1, max_full)
+=======
+        "Recognized patterns and **variable meanings** are listed under **Line notes**.\n\n"
+    )
+    max_full = min(len(lines), 900)
+    lines_out.append(format_numbered_code(lines[:max_full], 1, fence_lang, max_full))
+    full_notes = format_line_notes(lines[:max_full], 1, max_full, lang)
+>>>>>>> eb8ce01 (update)
     if full_notes:
         lines_out.append("\n**Line notes**\n\n")
         lines_out.extend(full_notes)

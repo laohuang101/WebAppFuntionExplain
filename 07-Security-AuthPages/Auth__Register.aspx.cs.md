@@ -1,6 +1,10 @@
 # Register.aspx.cs
 **Source:** `Pages/Authentication/Register.aspx.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,18 +19,20 @@ Two-step: form → Session pending → QR/MFA confirm → only then INSERT user.
 
 ## Variables / fields (file level)
 
-- **Line 34:** `name` — type `string`
-- **Line 35:** `email` — type `string`
-- **Line 36:** `pass` — type `string`
-- **Line 37:** `confirm` — type `string`
-- **Line 38:** `role` — type `string`
-- **Line 45:** `result` — type `var`
-- **Line 55:** `secret` — type `string`
-- **Line 71:** `code` — type `string`
-- **Line 89:** `result` — type `var`
-- **Line 126:** `normalized` — type `string`
-- **Line 130:** `uri` — type `string`
-- **Line 132:** `qrUrl` — type `string`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 34:** `name` (`string`) — **Display name of user/course/criterion.**
+- **Line 35:** `email` (`string`) — **Account email address (usually lowercased).**
+- **Line 36:** `pass` (`string`) — **Password from a form field.**
+- **Line 37:** `confirm` (`string`) — **Confirm-password form field.**
+- **Line 38:** `role` (`string`) — **User role code or name (Admin/Student/Lecturer).**
+- **Line 45:** `result` (`var`) — **AuthResult or API result { success, message, … }.**
+- **Line 55:** `secret` (`string`) — **MFA TOTP Base32 secret for authenticator apps.**
+- **Line 71:** `code` (`string`) — **6-digit TOTP / OTP the user typed.**
+- **Line 89:** `result` (`var`) — **AuthResult or API result { success, message, … }.**
+- **Line 126:** `normalized` (`string`) — **Cleaned secret/code (spaces removed, uppercased).**
+- **Line 130:** `uri` (`string`) — **otpauth:// or other URI string.**
+- **Line 132:** `qrUrl` (`string`) — **URL of QR image for authenticator setup.**
 
 ## Functions / methods (5 found)
 
@@ -42,7 +48,9 @@ protected void Page_Load(object sender, EventArgs e)
 - **Session:** Reads/writes ASP.NET Session.
 - **Navigation:** Redirects the browser.
 - **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters:** `object sender, EventArgs e`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
 
 #### Line-by-line (this function)
 
@@ -68,7 +76,11 @@ protected void Page_Load(object sender, EventArgs e)
   28 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L10:** Page load entry (GET or postback).
 - **L12:** Server session for logged-in user.
@@ -86,8 +98,17 @@ protected void btnRegister_Click(object sender, EventArgs e)
 #### Explanation
 
 - **Purpose:** Implements `btnRegister_Click`.
-- **Parameters:** `object sender, EventArgs e`
-- **Local variables:** `name`, `email`, `pass`, `confirm`, `role`, `result`, `secret`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+- **Local variables (what each means):**
+- `name` (`string`) — Display name of user/course/criterion.
+- `email` (`string`) — Account email address (usually lowercased).
+- `pass` (`string`) — Password from a form field.
+- `confirm` (`string`) — Confirm-password form field.
+- `role` (`string`) — User role code or name (Admin/Student/Lecturer).
+- `result` (`var`) — AuthResult or API result { success, message, … }.
+- `secret` (`string`) — MFA TOTP Base32 secret for authenticator apps.
 
 #### Line-by-line (this function)
 
@@ -129,9 +150,21 @@ protected void btnRegister_Click(object sender, EventArgs e)
   65 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L46:** Pending registration in Session until MFA confirmed.
+=======
+**Line notes** (what code + variables mean)
+
+- **L34:** `name` means: Display name of user/course/criterion.
+- **L35:** `email` means: Account email address (usually lowercased).
+- **L36:** `pass` means: Password from a form field.
+- **L37:** `confirm` means: Confirm-password form field.
+- **L38:** `role` means: User role code or name (Admin/Student/Lecturer).
+- **L46:** Pending registration in Session until MFA confirmed. | `result` means: AuthResult or API result { success, message, … }.
+- **L55:** `secret` means: MFA TOTP Base32 secret for authenticator apps.
+>>>>>>> eb8ce01 (update)
 - **L58:** Pending registration in Session until MFA confirmed.
 
 ---
@@ -146,8 +179,12 @@ protected void btnConfirmMfa_Click(object sender, EventArgs e)
 
 - **Purpose:** Implements `btnConfirmMfa_Click`.
 - **Session:** Reads/writes ASP.NET Session.
-- **Parameters:** `object sender, EventArgs e`
-- **Local variables:** `code`, `result`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+- **Local variables (what each means):**
+- `code` (`string`) — 6-digit TOTP / OTP the user typed.
+- `result` (`var`) — AuthResult or API result { success, message, … }.
 
 #### Line-by-line (this function)
 
@@ -196,9 +233,16 @@ protected void btnConfirmMfa_Click(object sender, EventArgs e)
  109 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L90:** Pending registration in Session until MFA confirmed.
+=======
+**Line notes** (what code + variables mean)
+
+- **L71:** `code` means: 6-digit TOTP / OTP the user typed.
+- **L90:** Pending registration in Session until MFA confirmed. | `result` means: AuthResult or API result { success, message, … }.
+>>>>>>> eb8ce01 (update)
 - **L94:** Pending registration in Session until MFA confirmed.
 
 ---
@@ -212,7 +256,9 @@ protected void lnkCancelMfa_Click(object sender, EventArgs e)
 #### Explanation
 
 - **Purpose:** Implements `lnkCancelMfa_Click`.
-- **Parameters:** `object sender, EventArgs e`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
 
 #### Line-by-line (this function)
 
@@ -231,7 +277,11 @@ protected void lnkCancelMfa_Click(object sender, EventArgs e)
  121 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L113:** Pending registration in Session until MFA confirmed.
 
@@ -246,8 +296,13 @@ private void ShowMfaSetup(string email, string secret)
 #### Explanation
 
 - **Purpose:** Implements `ShowMfaSetup`.
-- **Parameters:** `string email, string secret`
-- **Local variables:** `normalized`, `uri`, `qrUrl`
+- **Parameters (what each means):**
+- `email` (`string`) — Account email address (usually lowercased).
+- `secret` (`string`) — MFA TOTP Base32 secret for authenticator apps.
+- **Local variables (what each means):**
+- `normalized` (`string`) — Cleaned secret/code (spaces removed, uppercased).
+- `uri` (`string`) — otpauth:// or other URI string.
+- `qrUrl` (`string`) — URL of QR image for authenticator setup.  Literal text string.
 
 #### Line-by-line (this function)
 
@@ -269,17 +324,30 @@ private void ShowMfaSetup(string email, string secret)
  136 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L126:** TOTP / authenticator (RFC 6238) helper.
 - **L127:** TOTP / authenticator (RFC 6238) helper.
 - **L131:** TOTP / authenticator (RFC 6238) helper.
+=======
+**Line notes** (what code + variables mean)
+
+- **L126:** TOTP / authenticator (RFC 6238) helper. | `normalized` means: Cleaned secret/code (spaces removed, uppercased).
+- **L127:** TOTP / authenticator (RFC 6238) helper.
+- **L131:** TOTP / authenticator (RFC 6238) helper. | `uri` means: otpauth:// or other URI string.
+- **L132:** `qrUrl` means: URL of QR image for authenticator setup.  Literal text string.
+>>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -433,6 +501,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L12:** Server session for logged-in user.
 - **L14:** Navigate browser to another URL.
 - **L18:** False on first open; true after postback.
+<<<<<<< HEAD
 - **L46:** Pending registration in Session until MFA confirmed.
 - **L58:** Pending registration in Session until MFA confirmed.
 - **L90:** Pending registration in Session until MFA confirmed.
@@ -441,6 +510,24 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L126:** TOTP / authenticator (RFC 6238) helper.
 - **L127:** TOTP / authenticator (RFC 6238) helper.
 - **L131:** TOTP / authenticator (RFC 6238) helper.
+=======
+- **L34:** `name` means: Display name of user/course/criterion.
+- **L35:** `email` means: Account email address (usually lowercased).
+- **L36:** `pass` means: Password from a form field.
+- **L37:** `confirm` means: Confirm-password form field.
+- **L38:** `role` means: User role code or name (Admin/Student/Lecturer).
+- **L46:** Pending registration in Session until MFA confirmed. | `result` means: AuthResult or API result { success, message, … }.
+- **L55:** `secret` means: MFA TOTP Base32 secret for authenticator apps.
+- **L58:** Pending registration in Session until MFA confirmed.
+- **L71:** `code` means: 6-digit TOTP / OTP the user typed.
+- **L90:** Pending registration in Session until MFA confirmed. | `result` means: AuthResult or API result { success, message, … }.
+- **L94:** Pending registration in Session until MFA confirmed.
+- **L113:** Pending registration in Session until MFA confirmed.
+- **L126:** TOTP / authenticator (RFC 6238) helper. | `normalized` means: Cleaned secret/code (spaces removed, uppercased).
+- **L127:** TOTP / authenticator (RFC 6238) helper.
+- **L131:** TOTP / authenticator (RFC 6238) helper. | `uri` means: otpauth:// or other URI string.
+- **L132:** `qrUrl` means: URL of QR image for authenticator setup.  Literal text string.
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

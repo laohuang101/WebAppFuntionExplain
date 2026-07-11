@@ -1,6 +1,10 @@
 # FileMagic.cs
 **Source:** `Data/Security/FileMagic.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,28 +19,30 @@ Upload content-type validation by magic bytes (PDF, images, video, office docs).
 
 ## Variables / fields (file level)
 
-- **Line 18:** `false` — type `return`
-- **Line 29:** `false` — type `return`
-- **Line 31:** `ext` — type `string`
-- **Line 34:** `pos` — type `long`
-- **Line 37:** `header` — type `byte[]`
-- **Line 39:** `read` — type `int`
-- **Line 47:** `false` — type `return`
-- **Line 57:** `false` — type `return`
-- **Line 65:** `true` — type `return`
-- **Line 70:** `true` — type `return`
-- **Line 76:** `true` — type `return`
-- **Line 81:** `true` — type `return`
-- **Line 87:** `true` — type `return`
-- **Line 92:** `true` — type `return`
-- **Line 99:** `false` — type `return`
-- **Line 104:** `true` — type `return`
-- **Line 113:** `true` — type `return`
-- **Line 120:** `true` — type `return`
-- **Line 125:** `true` — type `return`
-- **Line 130:** `true` — type `return`
-- **Line 136:** `bytes` — type `var`
-- **Line 140:** `true` — type `return`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 18:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 29:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 31:** `ext` (`string`) — **File extension (.pdf, .mp4, …).**
+- **Line 34:** `pos` (`long`) — **Holds “pos” for this scope. (integer)**
+- **Line 37:** `header` (`byte[]`) — **Holds “header” for this scope. (type `byte[]`)**
+- **Line 39:** `read` (`int`) — **Holds “read” for this scope. (integer)**
+- **Line 47:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 57:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 65:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 70:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 76:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 81:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 87:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 92:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 99:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 104:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 113:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 120:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 125:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 130:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 136:** `bytes` (`var`) — **Byte array (hash, random, file content).**
+- **Line 140:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
 
 ## Functions / methods (3 found)
 
@@ -49,7 +55,10 @@ public static bool LooksValid(HttpPostedFile file, string extension, out string 
 #### Explanation
 
 - **Purpose:** Implements `LooksValid`.
-- **Parameters:** `HttpPostedFile file, string extension, out string message`
+- **Parameters (what each means):**
+- `file` (`HttpPostedFile`) — Uploaded file object or file name.
+- `extension` (`string`) — Holds “extension” for this scope. (text)
+- `message` (`string`) — Status text for the UI.
 
 #### Line-by-line (this function)
 
@@ -77,8 +86,14 @@ public static bool LooksValid(Stream stream, string extension, out string messag
 #### Explanation
 
 - **Purpose:** Implements `LooksValid`.
-- **Parameters:** `Stream stream, string extension, out string message`
-- **Local variables:** `ext`
+- **Parameters (what each means):**
+- `stream` (`Stream`) — String value: eam. (type `Stream`)
+- `extension` (`string`) — Holds “extension” for this scope. (text)
+- `message` (`string`) — Status text for the UI.
+- **Local variables (what each means):**
+- `ext` (`string`) — File extension (.pdf, .mp4, …).
+- `pos` (`long`) — Holds “pos” for this scope. (integer)  Literal number `0`.
+- `header` (`byte[]`) — Holds “header” for this scope. (type `byte[]`)  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -196,8 +211,15 @@ public static bool LooksValid(Stream stream, string extension, out string messag
  132 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
+=======
+**Line notes** (what code + variables mean)
+
+- **L32:** `ext` means: File extension (.pdf, .mp4, …).
+- **L35:** `pos` means: Holds “pos” for this scope. (integer)  Literal number `0`.
+>>>>>>> eb8ce01 (update)
 - **L36:** Error handling block.
 - **L40:** Error handling block.
 - **L44:** Handle/log exception.
@@ -215,8 +237,13 @@ private static bool StartsWith(byte[] buf, int len, string ascii)
 #### Explanation
 
 - **Purpose:** Implements `StartsWith`.
-- **Parameters:** `byte[] buf, int len, string ascii`
-- **Local variables:** `bytes`, `i`
+- **Parameters (what each means):**
+- `buf` (`byte[]`) — Holds “buf” for this scope. (type `byte[]`)
+- `len` (`int`) — Length of string/array.
+- `ascii` (`string`) — Holds “ascii” for this scope. (text)
+- **Local variables (what each means):**
+- `bytes` (`var`) — Byte array (hash, random, file content).
+- `i` (`int`) — Loop index (0-based counter in for-loops).  Literal number `0`.
 
 #### Line-by-line (this function)
 
@@ -231,12 +258,23 @@ private static bool StartsWith(byte[] buf, int len, string ascii)
  140 |             return true;
  141 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L136:** `bytes` means: Byte array (hash, random, file content).
+>>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System.IO;
@@ -391,11 +429,20 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L3:** Import namespace/types.
 - **L5:** C# namespace grouping.
 - **L10:** Validate upload by file signature.
+<<<<<<< HEAD
+=======
+- **L32:** `ext` means: File extension (.pdf, .mp4, …).
+- **L35:** `pos` means: Holds “pos” for this scope. (integer)  Literal number `0`.
+>>>>>>> eb8ce01 (update)
 - **L36:** Error handling block.
 - **L40:** Error handling block.
 - **L44:** Handle/log exception.
 - **L51:** Error handling block.
 - **L64:** File magic-byte validation on upload.
+<<<<<<< HEAD
+=======
+- **L136:** `bytes` means: Byte array (hash, random, file content).
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

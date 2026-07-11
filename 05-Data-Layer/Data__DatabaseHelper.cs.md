@@ -1,6 +1,10 @@
 # DatabaseHelper.cs
 **Source:** `Data/DatabaseHelper.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,9 +19,11 @@ Legacy/alternate connection helper (same MyDbConn). Prefer DbHelper for new code
 
 ## Variables / fields (file level)
 
-- **Line 10:** `ConnString` — type `string`
-- **Line 24:** `dt` — type `DataTable`
-- **Line 26:** `dt` — type `return`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 10:** `ConnString` (`string`) — **Holds “Conn String” for this scope. (text)**
+- **Line 24:** `dt` (`DataTable`) — **DataTable — full result set from SQL (many rows/columns).**
+- **Line 26:** `dt` (`return`) — **DataTable — full result set from SQL (many rows/columns).**
 
 ## Functions / methods (3 found)
 
@@ -31,8 +37,12 @@ public static DataTable ExecuteQuery(string query, SqlParameter[] parameters = n
 
 - **Purpose:** Implements `ExecuteQuery`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `string query, SqlParameter[] parameters = null`
-- **Local variables:** `dt`
+- **Parameters (what each means):**
+- `query` (`string`) — Holds “query” for this scope. (text)
+- `parameters` (`SqlParameter[]`) — Array of SQL parameters (@Name values) for a query.
+- **Local variables (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+- `dt` (`DataTable`) — DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -59,13 +69,21 @@ public static DataTable ExecuteQuery(string query, SqlParameter[] parameters = n
   30 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L12:** Run SQL; return table / rows / scalar.
 - **L14:** Import namespace/types.
 - **L16:** Import namespace/types.
 - **L22:** Import namespace/types.
+<<<<<<< HEAD
 - **L24:** In-memory result set from ADO.NET.
+=======
+- **L24:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -79,7 +97,11 @@ public static int ExecuteNonQuery(string query, SqlParameter[] parameters = null
 
 - **Purpose:** Implements `ExecuteNonQuery`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `string query, SqlParameter[] parameters = null`
+- **Parameters (what each means):**
+- `query` (`string`) — Holds “query” for this scope. (text)
+- `parameters` (`SqlParameter[]`) — Array of SQL parameters (@Name values) for a query.
+- **Local variables (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -102,7 +124,11 @@ public static int ExecuteNonQuery(string query, SqlParameter[] parameters = null
   46 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L32:** Run SQL; return table / rows / scalar.
 - **L34:** Import namespace/types.
@@ -121,7 +147,11 @@ public static object ExecuteScalar(string query, SqlParameter[] parameters = nul
 
 - **Purpose:** Implements `ExecuteScalar`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `string query, SqlParameter[] parameters = null`
+- **Parameters (what each means):**
+- `query` (`string`) — Holds “query” for this scope. (text)
+- `parameters` (`SqlParameter[]`) — Array of SQL parameters (@Name values) for a query.
+- **Local variables (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -144,7 +174,11 @@ public static object ExecuteScalar(string query, SqlParameter[] parameters = nul
   62 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L48:** Run SQL; return table / rows / scalar.
 - **L50:** Import namespace/types.
@@ -155,7 +189,11 @@ public static object ExecuteScalar(string query, SqlParameter[] parameters = nul
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -235,7 +273,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L14:** Import namespace/types.
 - **L16:** Import namespace/types.
 - **L22:** Import namespace/types.
+<<<<<<< HEAD
 - **L24:** In-memory result set from ADO.NET.
+=======
+- **L24:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L32:** Run SQL; return table / rows / scalar.
 - **L34:** Import namespace/types.
 - **L36:** Import namespace/types.

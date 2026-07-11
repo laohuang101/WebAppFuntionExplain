@@ -1,6 +1,10 @@
 # grading.js
 **Source:** `Pages/Lecturer/Scripts/grading.js`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,51 +19,53 @@ List submissions for lecturer courses; assign marks and feedback; CSV export.
 
 ## Variables / fields (file level)
 
-- **Line 2:** `submissions` — script-level `const`/`let`/`var`
-- **Line 4:** `filtered` — script-level `const`/`let`/`var`
-- **Line 5:** `currentIndex` — script-level `const`/`let`/`var`
-- **Line 6:** `statusFilter` — script-level `const`/`let`/`var`
-- **Line 11:** `params` — script-level `const`/`let`/`var`
-- **Line 12:** `f` — script-level `const`/`let`/`var`
-- **Line 15:** `btn` — script-level `const`/`let`/`var`
-- **Line 28:** `p` — script-level `const`/`let`/`var`
-- **Line 29:** `i` — script-level `const`/`let`/`var`
-- **Line 36:** `u` — script-level `const`/`let`/`var`
-- **Line 45:** `a` — script-level `const`/`let`/`var`
-- **Line 50:** `path` — script-level `const`/`let`/`var`
-- **Line 51:** `idx` — script-level `const`/`let`/`var`
-- **Line 58:** `url` — script-level `const`/`let`/`var`
-- **Line 73:** `out` — script-level `const`/`let`/`var`
-- **Line 75:** `s` — script-level `const`/`let`/`var`
-- **Line 79:** `o` — script-level `const`/`let`/`var`
-- **Line 88:** `m` — script-level `const`/`let`/`var`
-- **Line 113:** `res` — script-level `const`/`let`/`var`
-- **Line 121:** `graded` — script-level `const`/`let`/`var`
-- **Line 122:** `total` — script-level `const`/`let`/`var`
-- **Line 123:** `pending` — script-level `const`/`let`/`var`
-- **Line 125:** `bp` — script-level `const`/`let`/`var`
-- **Line 144:** `pct` — script-level `const`/`let`/`var`
-- **Line 160:** `q` — script-level `const`/`let`/`var`
-- **Line 190:** `blob` — script-level `const`/`let`/`var`
-- **Line 205:** `box` — script-level `const`/`let`/`var`
-- **Line 211:** `colors` — script-level `const`/`let`/`var`
-- **Line 213:** `div` — script-level `const`/`let`/`var`
-- **Line 216:** `parsed` — script-level `const`/`let`/`var`
-- **Line 217:** `fileIcon` — script-level `const`/`let`/`var`
-- **Line 220:** `scoreHtml` — script-level `const`/`let`/`var`
-- **Line 247:** `raw` — script-level `const`/`let`/`var`
-- **Line 254:** `preview` — script-level `const`/`let`/`var`
-- **Line 256:** `btnDl` — script-level `const`/`let`/`var`
-- **Line 257:** `html` — script-level `const`/`let`/`var`
-- **Line 260:** `view` — script-level `const`/`let`/`var`
-- **Line 261:** `dl` — script-level `const`/`let`/`var`
-- **Line 262:** `kind` — script-level `const`/`let`/`var`
-- **Line 263:** `label` — script-level `const`/`let`/`var`
-- **Line 300:** `max` — script-level `const`/`let`/`var`
-- **Line 312:** `score` — script-level `const`/`let`/`var`
-- **Line 318:** `next` — script-level `const`/`let`/`var`
-- **Line 328:** `review` — script-level `const`/`let`/`var`
-- **Line 329:** `err` — script-level `const`/`let`/`var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 2:** `submissions` — script-level `const`/`let`/`var` — **Often a collection related to submissions (plural name).**
+- **Line 4:** `filtered` — script-level `const`/`let`/`var` — **Holds “filtered” for this scope.**
+- **Line 5:** `currentIndex` — script-level `const`/`let`/`var` — **Holds “current Index” for this scope.**
+- **Line 6:** `statusFilter` — script-level `const`/`let`/`var` — **Holds “status Filter” for this scope.**
+- **Line 11:** `params` — script-level `const`/`let`/`var` — **Often a collection related to params (plural name).**
+- **Line 12:** `f` — script-level `const`/`let`/`var` — **Holds “f” for this scope.**
+- **Line 15:** `btn` — script-level `const`/`let`/`var` — **Button DOM element.**
+- **Line 28:** `p` — script-level `const`/`let`/`var` — **Parameter, path, or password fragment depending on context.**
+- **Line 29:** `i` — script-level `const`/`let`/`var` — **Loop index (0-based counter in for-loops).**
+- **Line 36:** `u` — script-level `const`/`let`/`var` — **Holds “u” for this scope.**
+- **Line 45:** `a` — script-level `const`/`let`/`var` — **Holds “a” for this scope.**
+- **Line 50:** `path` — script-level `const`/`let`/`var` — **File path under Uploads or URL path.**
+- **Line 51:** `idx` — script-level `const`/`let`/`var` — **Holds “idx” for this scope.**
+- **Line 58:** `url` — script-level `const`/`let`/`var` — **HTTP URL to media or page.**
+- **Line 73:** `out` — script-level `const`/`let`/`var` — **Holds “out” for this scope.**
+- **Line 75:** `s` — script-level `const`/`let`/`var` — **String value or submission-related object.**
+- **Line 79:** `o` — script-level `const`/`let`/`var` — **Holds “o” for this scope.**
+- **Line 88:** `m` — script-level `const`/`let`/`var` — **Holds “m” for this scope.**
+- **Line 113:** `res` — script-level `const`/`let`/`var` — **Result object returned from fetch/WebMethod (`data.d` unwrapped).**
+- **Line 121:** `graded` — script-level `const`/`let`/`var` — **Holds “graded” for this scope.**
+- **Line 122:** `total` — script-level `const`/`let`/`var` — **Sum of points or total items.**
+- **Line 123:** `pending` — script-level `const`/`let`/`var` — **Holds “pending” for this scope.**
+- **Line 125:** `bp` — script-level `const`/`let`/`var` — **Holds “bp” for this scope.**
+- **Line 144:** `pct` — script-level `const`/`let`/`var` — **Holds “pct” for this scope.**
+- **Line 160:** `q` — script-level `const`/`let`/`var` — **Search query text, or SQL command text.**
+- **Line 190:** `blob` — script-level `const`/`let`/`var` — **Holds “blob” for this scope.**
+- **Line 205:** `box` — script-level `const`/`let`/`var` — **Container element for lists/tables.**
+- **Line 211:** `colors` — script-level `const`/`let`/`var` — **Often a collection related to colors (plural name).**
+- **Line 213:** `div` — script-level `const`/`let`/`var` — **Holds “div” for this scope.**
+- **Line 216:** `parsed` — script-level `const`/`let`/`var` — **Holds “parsed” for this scope.**
+- **Line 217:** `fileIcon` — script-level `const`/`let`/`var` — **Holds “file Icon” for this scope.**
+- **Line 220:** `scoreHtml` — script-level `const`/`let`/`var` — **Holds “score Html” for this scope.**
+- **Line 247:** `raw` — script-level `const`/`let`/`var` — **Raw bytes or unprocessed input string.**
+- **Line 254:** `preview` — script-level `const`/`let`/`var` — **Holds “preview” for this scope.**
+- **Line 256:** `btnDl` — script-level `const`/`let`/`var` — **UI control reference (btn Dl).**
+- **Line 257:** `html` — script-level `const`/`let`/`var` — **Holds “html” for this scope.**
+- **Line 260:** `view` — script-level `const`/`let`/`var` — **Holds “view” for this scope.**
+- **Line 261:** `dl` — script-level `const`/`let`/`var` — **Holds “dl” for this scope.**
+- **Line 262:** `kind` — script-level `const`/`let`/`var` — **Upload kind (material/video/thumbnail/submission).**
+- **Line 263:** `label` — script-level `const`/`let`/`var` — **otpauth account label (issuer:email).**
+- **Line 300:** `max` — script-level `const`/`let`/`var` — **Holds “max” for this scope.**
+- **Line 312:** `score` — script-level `const`/`let`/`var` — **Points earned or max points depending on context.**
+- **Line 318:** `next` — script-level `const`/`let`/`var` — **Holds “next” for this scope.**
+- **Line 328:** `review` — script-level `const`/`let`/`var` — **Holds “review” for this scope.**
+- **Line 329:** `err` — script-level `const`/`let`/`var` — **Error message string or error element.**
 
 ## Functions / methods (16 found)
 
@@ -72,7 +78,9 @@ function mediaAppRoot()
 #### Explanation
 
 - **Purpose:** Implements `mediaAppRoot`.
-- **Local variables:** `p`, `i`
+- **Local variables (what each means):**
+- `p` — Parameter, path, or password fragment depending on context.
+- `i` — Loop index (0-based counter in for-loops).
 
 #### Line-by-line (this function)
 
@@ -86,6 +94,14 @@ function mediaAppRoot()
   31 |     return '';
   32 | }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L28:** `p` means: Parameter, path, or password fragment depending on context.
+- **L29:** `i` means: Loop index (0-based counter in for-loops).
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -98,8 +114,12 @@ function resolveMediaUrl(raw, forDownload)
 #### Explanation
 
 - **Purpose:** Implements `resolveMediaUrl`.
-- **Parameters:** `raw, forDownload`
-- **Local variables:** `u`, `a`
+- **Parameters (what each means):**
+- `raw` — Raw bytes or unprocessed input string.
+- `forDownload` — Holds “for Download” for this scope.
+- **Local variables (what each means):**
+- `u` — Holds “u” for this scope.
+- `a` — Holds “a” for this scope.
 
 #### Line-by-line (this function)
 
@@ -124,9 +144,17 @@ function resolveMediaUrl(raw, forDownload)
   49 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L43:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L36:** `u` means: Holds “u” for this scope.
+- **L43:** Error handling block.
+- **L45:** `a` means: Holds “a” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -139,7 +167,8 @@ function mediaKind(s)
 #### Explanation
 
 - **Purpose:** Implements `mediaKind`.
-- **Parameters:** `s`
+- **Parameters (what each means):**
+- `s` — String value or submission-related object.
 
 #### Line-by-line (this function)
 
@@ -167,8 +196,13 @@ function parseAnswerContent(raw)
 
 - **Purpose:** Implements `parseAnswerContent`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `raw`
-- **Local variables:** `out`, `s`, `o`, `m`
+- **Parameters (what each means):**
+- `raw` — Raw bytes or unprocessed input string.
+- **Local variables (what each means):**
+- `out` — Holds “out” for this scope.
+- `s` — String being cleaned or built.
+- `o` — Holds “o” for this scope.  JSON serialize/parse result.
+- `m` — Holds “m” for this scope.
 
 #### Line-by-line (this function)
 
@@ -204,10 +238,20 @@ function parseAnswerContent(raw)
   99 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L78:** Error handling block.
 - **L79:** JS object ↔ JSON text.
+=======
+**Line notes** (what code + variables mean)
+
+- **L73:** `out` means: Holds “out” for this scope.
+- **L75:** `s` means: String being cleaned or built.
+- **L78:** Error handling block.
+- **L79:** JS object ↔ JSON text. | `o` means: Holds “o” for this scope.  JSON serialize/parse result.
+- **L88:** `m` means: Holds “m” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -223,7 +267,12 @@ function loadSubmissions()
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **AJAX:** Browser calls server endpoints asynchronously.
 - **Pattern:** Read/load data for display.
-- **Local variables:** `res`, `graded`, `total`, `pending`, `bp`
+- **Local variables (what each means):**
+- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- `graded` — Holds “graded” for this scope.
+- `total` — Sum of points or total items.
+- `pending` — Holds “pending” for this scope.  Literal number `0`.
+- `bp` — Holds “bp” for this scope.  DOM element from the page.
 
 #### Line-by-line (this function)
 
@@ -269,12 +318,25 @@ function loadSubmissions()
  140 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L105:** HTTP request to server WebMethod/ashx.
 - **L116:** Get HTML element by id.
 - **L117:** Encode text to reduce XSS risk.
 - **L125:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L105:** HTTP request to server WebMethod/ashx.
+- **L113:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- **L116:** Get HTML element by id.
+- **L117:** Encode text to reduce XSS risk.
+- **L121:** `graded` means: Holds “graded” for this scope.
+- **L122:** `total` means: Sum of points or total items.
+- **L123:** `pending` means: Holds “pending” for this scope.  Literal number `0`.
+- **L125:** Get HTML element by id. | `bp` means: Holds “bp” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L132:** Get HTML element by id.
 - **L138:** Get HTML element by id.
 
@@ -290,8 +352,11 @@ function updateProgress(graded, total)
 
 - **Purpose:** Implements `updateProgress`.
 - **Pattern:** Persist changes.
-- **Parameters:** `graded, total`
-- **Local variables:** `pct`
+- **Parameters (what each means):**
+- `graded` — Holds “graded” for this scope.
+- `total` — Sum of points or total items.
+- **Local variables (what each means):**
+- `pct` — Holds “pct” for this scope.
 
 #### Line-by-line (this function)
 
@@ -305,9 +370,16 @@ function updateProgress(graded, total)
  146 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L143:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L143:** Get HTML element by id.
+- **L144:** `pct` means: Holds “pct” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L145:** Get HTML element by id.
 
 ---
@@ -322,7 +394,9 @@ function setStatusFilter(mode, btn)
 
 - **Purpose:** Implements `setStatusFilter`.
 - **Pattern:** Persist changes.
-- **Parameters:** `mode, btn`
+- **Parameters (what each means):**
+- `mode` — Holds “mode” for this scope.
+- `btn` — Button DOM element.
 
 #### Line-by-line (this function)
 
@@ -352,7 +426,8 @@ function filterStudents()
 #### Explanation
 
 - **Purpose:** Implements `filterStudents`.
-- **Local variables:** `q`
+- **Local variables (what each means):**
+- `q` — Search query text, or SQL command text.  DOM element from the page.
 
 #### Line-by-line (this function)
 
@@ -373,9 +448,15 @@ function filterStudents()
  170 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L160:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L160:** Get HTML element by id. | `q` means: Search query text, or SQL command text.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -391,7 +472,10 @@ function exportGradesCsv()
 - **CSRF:** Validates anti-forgery token on mutating request.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **AJAX:** Browser calls server endpoints asynchronously.
-- **Local variables:** `res`, `blob`, `a`
+- **Local variables (what each means):**
+- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- `blob` — Holds “blob” for this scope.  Newly constructed object.
+- `a` — Holds “a” for this scope.
 
 #### Line-by-line (this function)
 
@@ -431,13 +515,24 @@ function exportGradesCsv()
  202 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L172:** CSV export.
 - **L173:** HTTP request to server WebMethod/ashx.
 - **L176:** JS object ↔ JSON text.
+<<<<<<< HEAD
 - **L182:** CSRF anti-forgery protection.
 - **L190:** CSV export.
+=======
+- **L181:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- **L182:** CSRF anti-forgery protection.
+- **L190:** CSV export. | `blob` means: Holds “blob” for this scope.  Newly constructed object.
+- **L191:** `a` means: Holds “a” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L193:** CSV export.
 
 ---
@@ -451,7 +546,13 @@ function renderStudentList()
 #### Explanation
 
 - **Purpose:** Implements `renderStudentList`.
-- **Local variables:** `box`, `colors`, `div`, `parsed`, `fileIcon`, `scoreHtml`
+- **Local variables (what each means):**
+- `box` — Container element for lists/tables.  DOM element from the page.
+- `colors` — Often a collection related to colors (plural name).
+- `div` — Holds “div” for this scope.
+- `parsed` — Holds “parsed” for this scope.
+- `fileIcon` — Holds “file Icon” for this scope.
+- `scoreHtml` — Holds “score Html” for this scope.
 
 #### Line-by-line (this function)
 
@@ -489,11 +590,24 @@ function renderStudentList()
  232 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L205:** Get HTML element by id.
 - **L206:** Update page HTML.
 - **L208:** Update page HTML.
+=======
+**Line notes** (what code + variables mean)
+
+- **L205:** Get HTML element by id. | `box` means: Container element for lists/tables.  DOM element from the page.
+- **L206:** Update page HTML.
+- **L208:** Update page HTML.
+- **L211:** `colors` means: Often a collection related to colors (plural name).
+- **L213:** `div` means: Holds “div” for this scope.
+- **L216:** `parsed` means: Holds “parsed” for this scope.
+- **L217:** `fileIcon` means: Holds “file Icon” for this scope.
+- **L220:** `scoreHtml` means: Holds “score Html” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L223:** Update page HTML.
 - **L225:** Encode text to reduce XSS risk.
 - **L227:** Encode text to reduce XSS risk.
@@ -510,8 +624,20 @@ function selectStudent(index)
 #### Explanation
 
 - **Purpose:** Implements `selectStudent`.
-- **Parameters:** `index`
-- **Local variables:** `s`, `raw`, `parsed`, `preview`, `btnDl`, `html`, `view`, `dl`, `kind`, `label`, `max`
+- **Parameters (what each means):**
+- `index` — Holds “index” for this scope.
+- **Local variables (what each means):**
+- `s` — String value or submission-related object.
+- `raw` — Raw bytes or unprocessed input string.
+- `parsed` — Holds “parsed” for this scope.
+- `preview` — Holds “preview” for this scope.  DOM element from the page.
+- `btnDl` — UI control reference (btn Dl).  DOM element from the page.
+- `html` — Holds “html” for this scope.  Literal text string.
+- `view` — Holds “view” for this scope.
+- `dl` — Holds “dl” for this scope.
+- `kind` — Upload kind (material/video/thumbnail/submission).
+- `label` — otpauth account label (issuer:email).
+- `max` — Holds “max” for this scope.
 
 #### Line-by-line (this function)
 
@@ -595,17 +721,39 @@ function selectStudent(index)
  308 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
+=======
+**Line notes** (what code + variables mean)
+
+- **L237:** `s` means: String value or submission-related object.
+>>>>>>> eb8ce01 (update)
 - **L240:** Get HTML element by id.
 - **L241:** Get HTML element by id.
 - **L245:** Get HTML element by id.
 - **L246:** Get HTML element by id.
+<<<<<<< HEAD
 - **L255:** Get HTML element by id.
 - **L256:** Get HTML element by id.
 - **L267:** Encode text to reduce XSS risk.
 - **L292:** Encode text to reduce XSS risk.
 - **L299:** Update page HTML.
+=======
+- **L248:** `raw` means: Raw bytes or unprocessed input string.
+- **L249:** `parsed` means: Holds “parsed” for this scope.
+- **L255:** Get HTML element by id. | `preview` means: Holds “preview” for this scope.  DOM element from the page.
+- **L256:** Get HTML element by id. | `btnDl` means: UI control reference (btn Dl).  DOM element from the page.
+- **L257:** `html` means: Holds “html” for this scope.  Literal text string.
+- **L260:** `view` means: Holds “view” for this scope.
+- **L261:** `dl` means: Holds “dl” for this scope.
+- **L262:** `kind` means: Upload kind (material/video/thumbnail/submission).
+- **L263:** `label` means: otpauth account label (issuer:email).
+- **L267:** Encode text to reduce XSS risk.
+- **L292:** Encode text to reduce XSS risk.
+- **L299:** Update page HTML.
+- **L301:** `max` means: Holds “max” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L302:** Get HTML element by id.
 - **L303:** Get HTML element by id.
 - **L304:** Get HTML element by id.
@@ -624,7 +772,9 @@ function updateTotalDisplay()
 
 - **Purpose:** Implements `updateTotalDisplay`.
 - **Pattern:** Persist changes.
-- **Local variables:** `max`, `score`
+- **Local variables (what each means):**
+- `max` — Holds “max” for this scope.
+- `score` — Points earned or max points depending on context.  DOM element from the page.
 
 #### Line-by-line (this function)
 
@@ -638,9 +788,16 @@ function updateTotalDisplay()
  314 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L312:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L311:** `max` means: Holds “max” for this scope.
+- **L312:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L313:** Get HTML element by id.
 
 ---
@@ -654,8 +811,10 @@ function navStudent(delta)
 #### Explanation
 
 - **Purpose:** Implements `navStudent`.
-- **Parameters:** `delta`
-- **Local variables:** `next`
+- **Parameters (what each means):**
+- `delta` — Holds “delta” for this scope.
+- **Local variables (what each means):**
+- `next` — Holds “next” for this scope.
 
 #### Line-by-line (this function)
 
@@ -670,6 +829,13 @@ function navStudent(delta)
  321 |     selectStudent(next);
  322 | }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L318:** `next` means: Holds “next” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -684,7 +850,12 @@ function submitGrade()
 - **Purpose:** Implements `submitGrade`.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **AJAX:** Browser calls server endpoints asynchronously.
-- **Local variables:** `s`, `score`, `review`, `err`, `res`
+- **Local variables (what each means):**
+- `s` — String value or submission-related object.
+- `score` — Points earned or max points depending on context.  DOM element from the page.
+- `review` — Holds “review” for this scope.  DOM element from the page.
+- `err` — Error message string or error element.  DOM element from the page.
+- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
 
 #### Line-by-line (this function)
 
@@ -728,6 +899,7 @@ function submitGrade()
  358 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L327:** Get HTML element by id.
@@ -735,6 +907,17 @@ function submitGrade()
 - **L329:** Get HTML element by id.
 - **L338:** HTTP request to server WebMethod/ashx.
 - **L341:** JS object ↔ JSON text.
+=======
+**Line notes** (what code + variables mean)
+
+- **L326:** `s` means: String value or submission-related object.
+- **L327:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
+- **L328:** Get HTML element by id. | `review` means: Holds “review” for this scope.  DOM element from the page.
+- **L329:** Get HTML element by id. | `err` means: Error message string or error element.  DOM element from the page.
+- **L338:** HTTP request to server WebMethod/ashx.
+- **L341:** JS object ↔ JSON text.
+- **L346:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -747,7 +930,8 @@ function escapeHtml(str)
 #### Explanation
 
 - **Purpose:** Implements `escapeHtml`.
-- **Parameters:** `str`
+- **Parameters (what each means):**
+- `str` — String value: str.
 
 #### Line-by-line (this function)
 
@@ -763,7 +947,11 @@ function escapeHtml(str)
  366 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L360:** Encode text to reduce XSS risk.
 - **L365:** Encode text to reduce XSS risk.
@@ -779,7 +967,8 @@ function escapeAttr(str)
 #### Explanation
 
 - **Purpose:** Implements `escapeAttr`.
-- **Parameters:** `str`
+- **Parameters (what each means):**
+- `str` — String value: str.
 
 #### Line-by-line (this function)
 
@@ -790,7 +979,11 @@ function escapeAttr(str)
  366 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L365:** Encode text to reduce XSS risk.
 
@@ -798,7 +991,11 @@ function escapeAttr(str)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | /* Grading page - CWSubmissions + CWMarkings; PDF/image/video preview for file answers */
@@ -1171,6 +1368,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 
 **Line notes**
 
+<<<<<<< HEAD
 - **L8:** DOM event handler.
 - **L10:** Error handling block.
 - **L43:** Error handling block.
@@ -1194,24 +1392,99 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L205:** Get HTML element by id.
 - **L206:** Update page HTML.
 - **L208:** Update page HTML.
+=======
+- **L3:** `submissions` means: Often a collection related to submissions (plural name).
+- **L4:** `filtered` means: Holds “filtered” for this scope.
+- **L5:** `currentIndex` means: Holds “current Index” for this scope.
+- **L6:** `statusFilter` means: Holds “status Filter” for this scope.  Literal text string.
+- **L8:** DOM event handler.
+- **L10:** Error handling block.
+- **L11:** `params` means: Often a collection related to params (plural name).  Newly constructed object.
+- **L12:** `f` means: Holds “f” for this scope.
+- **L15:** `btn` means: Button DOM element.
+- **L28:** `p` means: Parameter, path, or password fragment depending on context.
+- **L29:** `i` means: Loop index (0-based counter in for-loops).
+- **L36:** `u` means: Holds “u” for this scope.
+- **L43:** Error handling block.
+- **L45:** `a` means: Holds “a” for this scope.
+- **L50:** `path` means: File path under Uploads or URL path.
+- **L51:** `idx` means: Holds “idx” for this scope.
+- **L58:** `url` means: HTTP URL to media or page.
+- **L73:** `out` means: Holds “out” for this scope.
+- **L75:** `s` means: String being cleaned or built.
+- **L78:** Error handling block.
+- **L79:** JS object ↔ JSON text. | `o` means: Holds “o” for this scope.  JSON serialize/parse result.
+- **L88:** `m` means: Holds “m” for this scope.
+- **L105:** HTTP request to server WebMethod/ashx.
+- **L113:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- **L116:** Get HTML element by id.
+- **L117:** Encode text to reduce XSS risk.
+- **L121:** `graded` means: Holds “graded” for this scope.
+- **L122:** `total` means: Sum of points or total items.
+- **L123:** `pending` means: Holds “pending” for this scope.  Literal number `0`.
+- **L125:** Get HTML element by id. | `bp` means: Holds “bp” for this scope.  DOM element from the page.
+- **L132:** Get HTML element by id.
+- **L138:** Get HTML element by id.
+- **L143:** Get HTML element by id.
+- **L144:** `pct` means: Holds “pct” for this scope.
+- **L145:** Get HTML element by id.
+- **L160:** Get HTML element by id. | `q` means: Search query text, or SQL command text.  DOM element from the page.
+- **L172:** CSV export.
+- **L173:** HTTP request to server WebMethod/ashx.
+- **L176:** JS object ↔ JSON text.
+- **L181:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- **L182:** CSRF anti-forgery protection.
+- **L190:** CSV export. | `blob` means: Holds “blob” for this scope.  Newly constructed object.
+- **L191:** `a` means: Holds “a” for this scope.
+- **L193:** CSV export.
+- **L205:** Get HTML element by id. | `box` means: Container element for lists/tables.  DOM element from the page.
+- **L206:** Update page HTML.
+- **L208:** Update page HTML.
+- **L211:** `colors` means: Often a collection related to colors (plural name).
+- **L213:** `div` means: Holds “div” for this scope.
+- **L216:** `parsed` means: Holds “parsed” for this scope.
+- **L217:** `fileIcon` means: Holds “file Icon” for this scope.
+- **L220:** `scoreHtml` means: Holds “score Html” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L223:** Update page HTML.
 - **L225:** Encode text to reduce XSS risk.
 - **L227:** Encode text to reduce XSS risk.
 - **L229:** Encode text to reduce XSS risk.
+<<<<<<< HEAD
+=======
+- **L237:** `s` means: String value or submission-related object.
+>>>>>>> eb8ce01 (update)
 - **L240:** Get HTML element by id.
 - **L241:** Get HTML element by id.
 - **L245:** Get HTML element by id.
 - **L246:** Get HTML element by id.
+<<<<<<< HEAD
 - **L255:** Get HTML element by id.
 - **L256:** Get HTML element by id.
 - **L267:** Encode text to reduce XSS risk.
 - **L292:** Encode text to reduce XSS risk.
 - **L299:** Update page HTML.
+=======
+- **L248:** `raw` means: Raw bytes or unprocessed input string.
+- **L249:** `parsed` means: Holds “parsed” for this scope.
+- **L255:** Get HTML element by id. | `preview` means: Holds “preview” for this scope.  DOM element from the page.
+- **L256:** Get HTML element by id. | `btnDl` means: UI control reference (btn Dl).  DOM element from the page.
+- **L257:** `html` means: Holds “html” for this scope.  Literal text string.
+- **L260:** `view` means: Holds “view” for this scope.
+- **L261:** `dl` means: Holds “dl” for this scope.
+- **L262:** `kind` means: Upload kind (material/video/thumbnail/submission).
+- **L263:** `label` means: otpauth account label (issuer:email).
+- **L267:** Encode text to reduce XSS risk.
+- **L292:** Encode text to reduce XSS risk.
+- **L299:** Update page HTML.
+- **L301:** `max` means: Holds “max” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L302:** Get HTML element by id.
 - **L303:** Get HTML element by id.
 - **L304:** Get HTML element by id.
 - **L305:** Get HTML element by id.
 - **L307:** Get HTML element by id.
+<<<<<<< HEAD
 - **L312:** Get HTML element by id.
 - **L313:** Get HTML element by id.
 - **L327:** Get HTML element by id.
@@ -1219,6 +1492,19 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L329:** Get HTML element by id.
 - **L338:** HTTP request to server WebMethod/ashx.
 - **L341:** JS object ↔ JSON text.
+=======
+- **L311:** `max` means: Holds “max” for this scope.
+- **L312:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
+- **L313:** Get HTML element by id.
+- **L318:** `next` means: Holds “next” for this scope.
+- **L326:** `s` means: String value or submission-related object.
+- **L327:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
+- **L328:** Get HTML element by id. | `review` means: Holds “review” for this scope.  DOM element from the page.
+- **L329:** Get HTML element by id. | `err` means: Error message string or error element.  DOM element from the page.
+- **L338:** HTTP request to server WebMethod/ashx.
+- **L341:** JS object ↔ JSON text.
+- **L346:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+>>>>>>> eb8ce01 (update)
 - **L360:** Encode text to reduce XSS risk.
 - **L365:** Encode text to reduce XSS risk.
 

@@ -1,6 +1,10 @@
 # TotpHelper.cs
 **Source:** `Data/Security/TotpHelper.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,48 +19,50 @@ RFC 6238 TOTP (Google Authenticator): secret generate, verify ± window, otpauth
 
 ## Variables / fields (file level)
 
-- **Line 21:** `raw` — type `var`
-- **Line 29:** `key` — type `byte[]`
-- **Line 32:** `timestep` — type `long`
-- **Line 42:** `false` — type `return`
-- **Line 46:** `key` — type `byte[]`
-- **Line 51:** `step` — type `long`
-- **Line 55:** `true` — type `return`
-- **Line 57:** `false` — type `return`
-- **Line 64:** `cleaned` — type `var`
-- **Line 73:** `nv` — type `double`
-- **Line 92:** `secret` — type `string`
-- **Line 95:** `label` — type `string`
-- **Line 96:** `qs` — type `var`
-- **Line 110:** `s` — type `string`
-- **Line 112:** `sb` — type `var`
-- **Line 124:** `sb` — type `var`
-- **Line 138:** `bytes` — type `var`
-- **Line 141:** `n` — type `int`
-- **Line 154:** `utc` — type `DateTime`
-- **Line 157:** `epoch` — type `DateTime`
-- **Line 158:** `unix` — type `long`
-- **Line 166:** `counter` — type `byte[]`
-- **Line 167:** `ts` — type `ulong`
-- **Line 179:** `hash` — type `byte[]`
-- **Line 180:** `offset` — type `int`
-- **Line 181:** `binary` — type `int`
-- **Line 186:** `otp` — type `int`
-- **Line 194:** `diff` — type `int`
-- **Line 197:** `diff` — type `return`
-- **Line 203:** `sb` — type `var`
-- **Line 204:** `buffer` — type `int`
-- **Line 205:** `next` — type `int`
-- **Line 206:** `bitsLeft` — type `int`
-- **Line 219:** `pad` — type `int`
-- **Line 224:** `index` — type `int`
-- **Line 233:** `s` — type `string`
-- **Line 235:** `output` — type `var`
-- **Line 237:** `buffer` — type `int`
-- **Line 240:** `val` — type `int`
-- **Line 252:** `trimmed` — type `var`
-- **Line 254:** `trimmed` — type `return`
-- **Line 256:** `output` — type `return`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 21:** `raw` (`var`) — **Raw bytes or unprocessed input string.**
+- **Line 29:** `key` (`byte[]`) — **HMAC key bytes or dictionary key.**
+- **Line 32:** `timestep` (`long`) — **Date/time value. (integer)**
+- **Line 42:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 46:** `key` (`byte[]`) — **HMAC key bytes or dictionary key.**
+- **Line 51:** `step` (`long`) — **TOTP 30-second time step counter.**
+- **Line 55:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 57:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 64:** `cleaned` (`var`) — **Holds “cleaned” for this scope.**
+- **Line 73:** `nv` (`double`) — **Holds “nv” for this scope. (number/score)**
+- **Line 92:** `secret` (`string`) — **MFA TOTP Base32 secret for authenticator apps.**
+- **Line 95:** `label` (`string`) — **otpauth account label (issuer:email).**
+- **Line 96:** `qs` (`var`) — **Holds “qs” for this scope.**
+- **Line 110:** `s` (`string`) — **String being cleaned or built.**
+- **Line 112:** `sb` (`var`) — **StringBuilder — efficient string concatenation.**
+- **Line 124:** `sb` (`var`) — **StringBuilder — efficient string concatenation.**
+- **Line 138:** `bytes` (`var`) — **Byte array (hash, random, file content).**
+- **Line 141:** `n` (`int`) — **Integer count (rows, items, or length).**
+- **Line 154:** `utc` (`DateTime`) — **Date/time value. (date/time)**
+- **Line 157:** `epoch` (`DateTime`) — **Holds “epoch” for this scope. (date/time)**
+- **Line 158:** `unix` (`long`) — **Holds “unix” for this scope. (integer)**
+- **Line 166:** `counter` (`byte[]`) — **Holds “counter” for this scope. (type `byte[]`)**
+- **Line 167:** `ts` (`ulong`) — **Holds “ts” for this scope. (type `ulong`)**
+- **Line 179:** `hash` (`byte[]`) — **Password hash (PBKDF2) stored in DB.**
+- **Line 180:** `offset` (`int`) — **Holds “offset” for this scope. (integer)**
+- **Line 181:** `binary` (`int`) — **Holds “binary” for this scope. (integer)**
+- **Line 186:** `otp` (`int`) — **Holds “otp” for this scope. (integer)**
+- **Line 194:** `diff` (`int`) — **Holds “diff” for this scope. (integer)**
+- **Line 197:** `diff` (`return`) — **Holds “diff” for this scope. (type `return`)**
+- **Line 203:** `sb` (`var`) — **StringBuilder — efficient string concatenation.**
+- **Line 204:** `buffer` (`int`) — **Holds “buffer” for this scope. (integer)**
+- **Line 205:** `next` (`int`) — **Holds “next” for this scope. (integer)**
+- **Line 206:** `bitsLeft` (`int`) — **Holds “bits Left” for this scope. (integer)**
+- **Line 219:** `pad` (`int`) — **Holds “pad” for this scope. (integer)**
+- **Line 224:** `index` (`int`) — **Holds “index” for this scope. (integer)**
+- **Line 233:** `s` (`string`) — **String being cleaned or built.**
+- **Line 235:** `output` (`var`) — **Holds “output” for this scope.**
+- **Line 237:** `buffer` (`int`) — **Holds “buffer” for this scope. (integer)**
+- **Line 240:** `val` (`int`) — **Holds “val” for this scope. (integer)**
+- **Line 252:** `trimmed` (`var`) — **Holds “trimmed” for this scope.**
+- **Line 254:** `trimmed` (`return`) — **Holds “trimmed” for this scope. (type `return`)**
+- **Line 256:** `output` (`return`) — **Holds “output” for this scope. (type `return`)**
 
 ## Functions / methods (14 found)
 
@@ -69,8 +75,11 @@ public static string GenerateSecret(int bytes = 20)
 #### Explanation
 
 - **Purpose:** Implements `GenerateSecret`.
-- **Parameters:** `int bytes = 20`
-- **Local variables:** `bytes`, `raw`, `rng`
+- **Parameters (what each means):**
+- `bytes` (`int`) — Byte array (hash, random, file content).
+- **Local variables (what each means):**
+- `bytes` (`int`) — Byte array (hash, random, file content).  Newly constructed object.
+- `rng` (`var`) — Holds “rng” for this scope.
 
 #### Line-by-line (this function)
 
@@ -85,9 +94,16 @@ public static string GenerateSecret(int bytes = 20)
   25 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L19:** Create new authenticator secret (Base32).
+=======
+**Line notes** (what code + variables mean)
+
+- **L19:** Create new authenticator secret (Base32).
+- **L21:** `raw` means: Raw bytes or unprocessed input string.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L22:** Import namespace/types.
 - **L24:** TOTP / authenticator (RFC 6238) helper.
 
@@ -102,7 +118,12 @@ public static string GenerateCode(string base32Secret, DateTime? utcNow = null)
 #### Explanation
 
 - **Purpose:** Implements `GenerateCode`.
-- **Parameters:** `string base32Secret, DateTime? utcNow = null`
+- **Parameters (what each means):**
+- `base32Secret` (`string`) — Secret key material (MFA Base32 or crypto secret). (text)
+- `utcNow` (`DateTime?`) — Holds “utc Now” for this scope. (date/time)
+- **Local variables (what each means):**
+- `utcNow` (`DateTime?`) — Holds “utc Now” for this scope. (date/time)
+- `timestep` (`long`) — Date/time value. (integer)
 
 #### Line-by-line (this function)
 
@@ -118,9 +139,16 @@ public static string GenerateCode(string base32Secret, DateTime? utcNow = null)
   34 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L29:** TOTP / authenticator (RFC 6238) helper.
+=======
+**Line notes** (what code + variables mean)
+
+- **L29:** TOTP / authenticator (RFC 6238) helper.
+- **L32:** `timestep` means: Date/time value. (integer)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -133,8 +161,14 @@ public static bool VerifyCode(string base32Secret, string code, int window = 4)
 #### Explanation
 
 - **Purpose:** Implements `VerifyCode`.
-- **Parameters:** `string base32Secret, string code, int window = 4`
-- **Local variables:** `window`, `w`
+- **Parameters (what each means):**
+- `base32Secret` (`string`) — Secret key material (MFA Base32 or crypto secret). (text)
+- `code` (`string`) — 6-digit TOTP / OTP the user typed.
+- `window` (`int`) — TOTP time-step window (± steps for clock skew).
+- **Local variables (what each means):**
+- `key` (`byte[]`) — HMAC key bytes or dictionary key.
+- `step` (`long`) — TOTP 30-second time step counter.
+- `w` (`int`) — Holds “w” for this scope. (integer)
 
 #### Line-by-line (this function)
 
@@ -161,10 +195,18 @@ public static bool VerifyCode(string base32Secret, string code, int window = 4)
   58 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L39:** Verify multi-factor / TOTP code.
 - **L47:** TOTP / authenticator (RFC 6238) helper.
+=======
+**Line notes** (what code + variables mean)
+
+- **L39:** Verify multi-factor / TOTP code.
+- **L47:** TOTP / authenticator (RFC 6238) helper.
+- **L51:** `step` means: TOTP 30-second time step counter.
+>>>>>>> eb8ce01 (update)
 - **L54:** Constant-time string compare (reduce timing leaks).
 
 ---
@@ -178,8 +220,12 @@ public static string NormalizeCode(string code)
 #### Explanation
 
 - **Purpose:** Implements `NormalizeCode`.
-- **Parameters:** `string code`
-- **Local variables:** `cleaned`
+- **Parameters (what each means):**
+- `code` (`string`) — 6-digit TOTP / OTP the user typed.
+- **Local variables (what each means):**
+- `cleaned` (`var`) — Holds “cleaned” for this scope.  Newly constructed object.
+- `nv` (`double`) — Holds “nv” for this scope. (number/score)
+- `c` — Temporary value (character, course, or counter depending on loop).
 
 #### Line-by-line (this function)
 
@@ -203,6 +249,14 @@ public static string NormalizeCode(string code)
   77 |             return cleaned.ToString();
   78 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L64:** `cleaned` means: Holds “cleaned” for this scope.  Newly constructed object.
+- **L73:** `nv` means: Holds “nv” for this scope. (number/score)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -215,8 +269,14 @@ public static string BuildOtpAuthUri(string email, string base32Secret, string i
 #### Explanation
 
 - **Purpose:** Implements `BuildOtpAuthUri`.
-- **Parameters:** `string email, string base32Secret, string issuer = "EduLMS"`
-- **Local variables:** `issuer`, `secret`, `label`, `qs`
+- **Parameters (what each means):**
+- `email` (`string`) — Account email address (usually lowercased).
+- `base32Secret` (`string`) — Secret key material (MFA Base32 or crypto secret). (text)
+- `issuer` (`string`) — TOTP issuer label (EduLMS).
+- **Local variables (what each means):**
+- `secret` (`string`) — MFA TOTP Base32 secret for authenticator apps.
+- `label` (`string`) — otpauth account label (issuer:email).
+- `qs` (`var`) — Holds “qs” for this scope.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -244,9 +304,18 @@ public static string BuildOtpAuthUri(string email, string base32Secret, string i
  105 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L85:** Build otpauth:// URI for QR code.
+=======
+**Line notes** (what code + variables mean)
+
+- **L85:** Build otpauth:// URI for QR code.
+- **L92:** `secret` means: MFA TOTP Base32 secret for authenticator apps.
+- **L95:** `label` means: otpauth account label (issuer:email).
+- **L97:** `qs` means: Holds “qs” for this scope.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L104:** TOTP / authenticator (RFC 6238) helper.
 
 ---
@@ -260,8 +329,12 @@ public static string FormatSecretForDisplay(string base32Secret)
 #### Explanation
 
 - **Purpose:** Implements `FormatSecretForDisplay`.
-- **Parameters:** `string base32Secret`
-- **Local variables:** `s`, `sb`, `i`
+- **Parameters (what each means):**
+- `base32Secret` (`string`) — Secret key material (MFA Base32 or crypto secret). (text)
+- **Local variables (what each means):**
+- `s` (`string`) — String being cleaned or built.
+- `sb` (`var`) — StringBuilder — efficient string concatenation.  Newly constructed object.
+- `i` (`int`) — Loop index (0-based counter in for-loops).  Literal number `0`.
 
 #### Line-by-line (this function)
 
@@ -279,6 +352,14 @@ public static string FormatSecretForDisplay(string base32Secret)
  118 |             return sb.ToString();
  119 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L110:** `s` means: String being cleaned or built.
+- **L112:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -291,8 +372,11 @@ public static string NormalizeSecret(string base32Secret)
 #### Explanation
 
 - **Purpose:** Implements `NormalizeSecret`.
-- **Parameters:** `string base32Secret`
-- **Local variables:** `sb`
+- **Parameters (what each means):**
+- `base32Secret` (`string`) — Secret key material (MFA Base32 or crypto secret). (text)
+- **Local variables (what each means):**
+- `sb` (`var`) — StringBuilder — efficient string concatenation.  Newly constructed object.
+- `c` — Temporary value (character, course, or counter depending on loop).
 
 #### Line-by-line (this function)
 
@@ -312,6 +396,13 @@ public static string NormalizeSecret(string base32Secret)
  132 |             return sb.ToString();
  133 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L124:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -324,8 +415,12 @@ public static string GenerateEmailOtp(int length = 6)
 #### Explanation
 
 - **Purpose:** Implements `GenerateEmailOtp`.
-- **Parameters:** `int length = 6`
-- **Local variables:** `length`, `bytes`, `rng`, `n`
+- **Parameters (what each means):**
+- `length` (`int`) — Holds “length” for this scope. (integer)
+- **Local variables (what each means):**
+- `bytes` (`var`) — Byte array (hash, random, file content).  Newly constructed object.
+- `rng` (`var`) — Holds “rng” for this scope.
+- `n` (`int`) — Integer count (rows, items, or length).
 
 #### Line-by-line (this function)
 
@@ -340,9 +435,17 @@ public static string GenerateEmailOtp(int length = 6)
  143 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L139:** Import namespace/types.
+=======
+**Line notes** (what code + variables mean)
+
+- **L138:** `bytes` means: Byte array (hash, random, file content).  Newly constructed object.
+- **L139:** Import namespace/types.
+- **L141:** `n` means: Integer count (rows, items, or length).
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -355,7 +458,8 @@ private static string EncodePathSegment(string value)
 #### Explanation
 
 - **Purpose:** Implements `EncodePathSegment`.
-- **Parameters:** `string value`
+- **Parameters (what each means):**
+- `value` (`string`) — Holds “value” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -380,8 +484,12 @@ private static long GetTimeStep(DateTime when)
 
 - **Purpose:** Implements `GetTimeStep`.
 - **Pattern:** Read/load data for display.
-- **Parameters:** `DateTime when`
-- **Local variables:** `utc`, `epoch`
+- **Parameters (what each means):**
+- `when` (`DateTime`) — Holds “when” for this scope. (date/time)
+- **Local variables (what each means):**
+- `utc` (`DateTime`) — Date/time value. (date/time)
+- `epoch` (`DateTime`) — Holds “epoch” for this scope. (date/time)  Newly constructed object.
+- `unix` (`long`) — Holds “unix” for this scope. (integer)
 
 #### Line-by-line (this function)
 
@@ -399,6 +507,15 @@ private static long GetTimeStep(DateTime when)
  160 |             return unix / StepSeconds;
  161 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L154:** `utc` means: Date/time value. (date/time)
+- **L157:** `epoch` means: Holds “epoch” for this scope. (date/time)  Newly constructed object.
+- **L158:** `unix` means: Holds “unix” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -411,8 +528,15 @@ private static string ComputeTotp(byte[] key, long timestep)
 #### Explanation
 
 - **Purpose:** Implements `ComputeTotp`.
-- **Parameters:** `byte[] key, long timestep`
-- **Local variables:** `hmac`, `offset`, `binary`, `otp`
+- **Parameters (what each means):**
+- `key` (`byte[]`) — HMAC key bytes or dictionary key.
+- `timestep` (`long`) — Date/time value. (integer)
+- **Local variables (what each means):**
+- `counter` (`byte[]`) — Holds “counter” for this scope. (type `byte[]`)  Newly constructed object.
+- `hmac` (`var`) — Holds “hmac” for this scope.  Newly constructed object.
+- `offset` (`int`) — Holds “offset” for this scope. (integer)
+- `binary` (`int`) — Holds “binary” for this scope. (integer)
+- `otp` (`int`) — Holds “otp” for this scope. (integer)
 
 #### Line-by-line (this function)
 
@@ -447,9 +571,17 @@ private static string ComputeTotp(byte[] key, long timestep)
  189 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L177:** Import namespace/types.
+=======
+**Line notes** (what code + variables mean)
+
+- **L177:** Import namespace/types.
+- **L180:** `offset` means: Holds “offset” for this scope. (integer)
+- **L186:** `otp` means: Holds “otp” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -462,8 +594,12 @@ private static bool FixedTimeEquals(string a, string b)
 #### Explanation
 
 - **Purpose:** Implements `FixedTimeEquals`.
-- **Parameters:** `string a, string b`
-- **Local variables:** `diff`, `i`
+- **Parameters (what each means):**
+- `a` (`string`) — Holds “a” for this scope. (text)
+- `b` (`string`) — Holds “b” for this scope. (text)
+- **Local variables (what each means):**
+- `diff` (`int`) — Holds “diff” for this scope. (integer)  Literal number `0`.
+- `i` (`int`) — Loop index (0-based counter in for-loops).  Literal number `0`.
 
 #### Line-by-line (this function)
 
@@ -479,9 +615,16 @@ private static bool FixedTimeEquals(string a, string b)
  198 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L191:** Constant-time string compare (reduce timing leaks).
+=======
+**Line notes** (what code + variables mean)
+
+- **L191:** Constant-time string compare (reduce timing leaks).
+- **L194:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -494,8 +637,15 @@ private static string Base32Encode(byte[] data)
 #### Explanation
 
 - **Purpose:** Implements `Base32Encode`.
-- **Parameters:** `byte[] data`
-- **Local variables:** `sb`, `buffer`, `next`, `bitsLeft`, `pad`, `index`
+- **Parameters (what each means):**
+- `data` (`byte[]`) — Holds “data” for this scope. (type `byte[]`)
+- **Local variables (what each means):**
+- `sb` (`var`) — StringBuilder — efficient string concatenation.  Newly constructed object.
+- `buffer` (`int`) — Holds “buffer” for this scope. (integer)
+- `next` (`int`) — Holds “next” for this scope. (integer)  Literal number `1`.
+- `bitsLeft` (`int`) — Holds “bits Left” for this scope. (integer)  Literal number `8`.
+- `pad` (`int`) — Holds “pad” for this scope. (integer)
+- `index` (`int`) — Holds “index” for this scope. (integer)
 
 #### Line-by-line (this function)
 
@@ -533,9 +683,21 @@ private static string Base32Encode(byte[] data)
  229 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L200:** TOTP / authenticator (RFC 6238) helper.
+=======
+**Line notes** (what code + variables mean)
+
+- **L200:** TOTP / authenticator (RFC 6238) helper.
+- **L203:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
+- **L204:** `buffer` means: Holds “buffer” for this scope. (integer)
+- **L205:** `next` means: Holds “next” for this scope. (integer)  Literal number `1`.
+- **L206:** `bitsLeft` means: Holds “bits Left” for this scope. (integer)  Literal number `8`.
+- **L219:** `pad` means: Holds “pad” for this scope. (integer)
+- **L224:** `index` means: Holds “index” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -548,8 +710,15 @@ private static byte[] Base32Decode(string input)
 #### Explanation
 
 - **Purpose:** Implements `Base32Decode`.
-- **Parameters:** `string input`
-- **Local variables:** `s`, `output`, `buffer`, `val`, `trimmed`
+- **Parameters (what each means):**
+- `input` (`string`) — Holds “input” for this scope. (text)
+- **Local variables (what each means):**
+- `s` (`string`) — String being cleaned or built.
+- `output` (`var`) — Holds “output” for this scope.  Newly constructed object.
+- `buffer` (`int`) — Holds “buffer” for this scope. (integer)
+- `val` (`int`) — Holds “val” for this scope. (integer)
+- `trimmed` (`var`) — Holds “trimmed” for this scope.  Newly constructed object.
+- `c` — Temporary value (character, course, or counter depending on loop).
 
 #### Line-by-line (this function)
 
@@ -584,15 +753,30 @@ private static byte[] Base32Decode(string input)
  257 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L231:** TOTP / authenticator (RFC 6238) helper.
+=======
+**Line notes** (what code + variables mean)
+
+- **L231:** TOTP / authenticator (RFC 6238) helper.
+- **L233:** `s` means: String being cleaned or built.
+- **L236:** `output` means: Holds “output” for this scope.  Newly constructed object.
+- **L237:** `buffer` means: Holds “buffer” for this scope. (integer)
+- **L240:** `val` means: Holds “val” for this scope. (integer)
+- **L252:** `trimmed` means: Holds “trimmed” for this scope.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -866,6 +1050,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L7:** C# namespace grouping.
 - **L13:** TOTP / authenticator (RFC 6238) helper.
 - **L19:** Create new authenticator secret (Base32).
+<<<<<<< HEAD
 - **L22:** Import namespace/types.
 - **L24:** TOTP / authenticator (RFC 6238) helper.
 - **L29:** TOTP / authenticator (RFC 6238) helper.
@@ -879,6 +1064,51 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L191:** Constant-time string compare (reduce timing leaks).
 - **L200:** TOTP / authenticator (RFC 6238) helper.
 - **L231:** TOTP / authenticator (RFC 6238) helper.
+=======
+- **L21:** `raw` means: Raw bytes or unprocessed input string.  Newly constructed object.
+- **L22:** Import namespace/types.
+- **L24:** TOTP / authenticator (RFC 6238) helper.
+- **L29:** TOTP / authenticator (RFC 6238) helper.
+- **L32:** `timestep` means: Date/time value. (integer)
+- **L39:** Verify multi-factor / TOTP code.
+- **L47:** TOTP / authenticator (RFC 6238) helper.
+- **L51:** `step` means: TOTP 30-second time step counter.
+- **L54:** Constant-time string compare (reduce timing leaks).
+- **L64:** `cleaned` means: Holds “cleaned” for this scope.  Newly constructed object.
+- **L73:** `nv` means: Holds “nv” for this scope. (number/score)
+- **L85:** Build otpauth:// URI for QR code.
+- **L92:** `secret` means: MFA TOTP Base32 secret for authenticator apps.
+- **L95:** `label` means: otpauth account label (issuer:email).
+- **L97:** `qs` means: Holds “qs” for this scope.  Newly constructed object.
+- **L104:** TOTP / authenticator (RFC 6238) helper.
+- **L110:** `s` means: String being cleaned or built.
+- **L112:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
+- **L124:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
+- **L138:** `bytes` means: Byte array (hash, random, file content).  Newly constructed object.
+- **L139:** Import namespace/types.
+- **L141:** `n` means: Integer count (rows, items, or length).
+- **L154:** `utc` means: Date/time value. (date/time)
+- **L157:** `epoch` means: Holds “epoch” for this scope. (date/time)  Newly constructed object.
+- **L158:** `unix` means: Holds “unix” for this scope. (integer)
+- **L177:** Import namespace/types.
+- **L180:** `offset` means: Holds “offset” for this scope. (integer)
+- **L186:** `otp` means: Holds “otp” for this scope. (integer)
+- **L191:** Constant-time string compare (reduce timing leaks).
+- **L194:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
+- **L200:** TOTP / authenticator (RFC 6238) helper.
+- **L203:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
+- **L204:** `buffer` means: Holds “buffer” for this scope. (integer)
+- **L205:** `next` means: Holds “next” for this scope. (integer)  Literal number `1`.
+- **L206:** `bitsLeft` means: Holds “bits Left” for this scope. (integer)  Literal number `8`.
+- **L219:** `pad` means: Holds “pad” for this scope. (integer)
+- **L224:** `index` means: Holds “index” for this scope. (integer)
+- **L231:** TOTP / authenticator (RFC 6238) helper.
+- **L233:** `s` means: String being cleaned or built.
+- **L236:** `output` means: Holds “output” for this scope.  Newly constructed object.
+- **L237:** `buffer` means: Holds “buffer” for this scope. (integer)
+- **L240:** `val` means: Holds “val” for this scope. (integer)
+- **L252:** `trimmed` means: Holds “trimmed” for this scope.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

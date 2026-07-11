@@ -1,6 +1,10 @@
 # landing.js
 **Source:** `Pages/Landing/Scripts/landing.js`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,36 +19,38 @@ Public marketing + course catalog. Shows published courses only (`IsPublished`).
 
 ## Variables / fields (file level)
 
-- **Line 2:** `sections` — script-level `const`/`let`/`var`
-- **Line 3:** `track` — script-level `const`/`let`/`var`
-- **Line 4:** `ids` — script-level `const`/`let`/`var`
-- **Line 5:** `index` — script-level `const`/`let`/`var`
-- **Line 6:** `locked` — script-level `const`/`let`/`var`
-- **Line 7:** `touchY` — script-level `const`/`let`/`var`
-- **Line 8:** `DURATION` — script-level `const`/`let`/`var`
-- **Line 16:** `prev` — script-level `const`/`let`/`var`
-- **Line 44:** `hash` — script-level `const`/`let`/`var`
-- **Line 56:** `id` — script-level `const`/`let`/`var`
-- **Line 58:** `g` — script-level `const`/`let`/`var`
-- **Line 72:** `root` — script-level `const`/`let`/`var`
-- **Line 73:** `cTrack` — script-level `const`/`let`/`var`
-- **Line 75:** `prevBtn` — script-level `const`/`let`/`var`
-- **Line 77:** `nextBtn` — script-level `const`/`let`/`var`
-- **Line 80:** `w` — script-level `const`/`let`/`var`
-- **Line 89:** `n` — script-level `const`/`let`/`var`
-- **Line 90:** `show` — script-level `const`/`let`/`var`
-- **Line 93:** `hideArrows` — script-level `const`/`let`/`var`
-- **Line 99:** `cards` — script-level `const`/`let`/`var`
-- **Line 124:** `wheelAcc` — script-level `const`/`let`/`var`
-- **Line 125:** `wheelTimer` — script-level `const`/`let`/`var`
-- **Line 128:** `t` — script-level `const`/`let`/`var`
-- **Line 139:** `dir` — script-level `const`/`let`/`var`
-- **Line 147:** `key` — script-level `const`/`let`/`var`
-- **Line 169:** `y` — script-level `const`/`let`/`var`
-- **Line 170:** `dy` — script-level `const`/`let`/`var`
-- **Line 177:** `el` — script-level `const`/`let`/`var`
-- **Line 180:** `i` — script-level `const`/`let`/`var`
-- **Line 188:** `h` — script-level `const`/`let`/`var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 2:** `sections` — script-level `const`/`let`/`var` — **Often a collection related to sections (plural name).**
+- **Line 3:** `track` — script-level `const`/`let`/`var` — **Holds “track” for this scope.**
+- **Line 4:** `ids` — script-level `const`/`let`/`var` — **Holds “ids” for this scope.**
+- **Line 5:** `index` — script-level `const`/`let`/`var` — **Holds “index” for this scope.**
+- **Line 6:** `locked` — script-level `const`/`let`/`var` — **Account locked by LoginThrottle.**
+- **Line 7:** `touchY` — script-level `const`/`let`/`var` — **Holds “touch Y” for this scope.**
+- **Line 8:** `DURATION` — script-level `const`/`let`/`var` — **Holds “DURATION” for this scope.**
+- **Line 16:** `prev` — script-level `const`/`let`/`var` — **Holds “prev” for this scope.**
+- **Line 44:** `hash` — script-level `const`/`let`/`var` — **Password hash (PBKDF2) stored in DB.**
+- **Line 56:** `id` — script-level `const`/`let`/`var` — **Generic primary key / identifier.**
+- **Line 58:** `g` — script-level `const`/`let`/`var` — **Holds “g” for this scope.**
+- **Line 72:** `root` — script-level `const`/`let`/`var` — **Root directory path (Uploads).**
+- **Line 73:** `cTrack` — script-level `const`/`let`/`var` — **Holds “c Track” for this scope.**
+- **Line 75:** `prevBtn` — script-level `const`/`let`/`var` — **Holds “prev Btn” for this scope.**
+- **Line 77:** `nextBtn` — script-level `const`/`let`/`var` — **Holds “next Btn” for this scope.**
+- **Line 80:** `w` — script-level `const`/`let`/`var` — **Holds “w” for this scope.**
+- **Line 89:** `n` — script-level `const`/`let`/`var` — **Numeric count or temporary integer.**
+- **Line 90:** `show` — script-level `const`/`let`/`var` — **Holds “show” for this scope.**
+- **Line 93:** `hideArrows` — script-level `const`/`let`/`var` — **Collection / list related to hide Arrows.**
+- **Line 99:** `cards` — script-level `const`/`let`/`var` — **Often a collection related to cards (plural name).**
+- **Line 124:** `wheelAcc` — script-level `const`/`let`/`var` — **Holds “wheel Acc” for this scope.**
+- **Line 125:** `wheelTimer` — script-level `const`/`let`/`var` — **Date/time value.**
+- **Line 128:** `t` — script-level `const`/`let`/`var` — **Temporary string/token/time value.**
+- **Line 139:** `dir` — script-level `const`/`let`/`var` — **Filesystem or URL path.**
+- **Line 147:** `key` — script-level `const`/`let`/`var` — **HMAC key bytes or dictionary key.**
+- **Line 169:** `y` — script-level `const`/`let`/`var` — **Holds “y” for this scope.**
+- **Line 170:** `dy` — script-level `const`/`let`/`var` — **Holds “dy” for this scope.**
+- **Line 177:** `el` — script-level `const`/`let`/`var` — **Generic DOM element.**
+- **Line 180:** `i` — script-level `const`/`let`/`var` — **Loop index (0-based counter in for-loops).**
+- **Line 188:** `h` — script-level `const`/`let`/`var` — **Holds “h” for this scope.**
 
 ## Functions / methods (8 found)
 
@@ -57,7 +63,8 @@ function clamp(i)
 #### Explanation
 
 - **Purpose:** Implements `clamp`.
-- **Parameters:** `i`
+- **Parameters (what each means):**
+- `i` — Loop index (0-based counter in for-loops).
 
 #### Line-by-line (this function)
 
@@ -80,8 +87,12 @@ function goTo(i, pushHash)
 #### Explanation
 
 - **Purpose:** Implements `goTo`.
-- **Parameters:** `i, pushHash`
-- **Local variables:** `prev`, `hash`
+- **Parameters (what each means):**
+- `i` — Loop index (0-based counter in for-loops).
+- `pushHash` — Cryptographic hash string.
+- **Local variables (what each means):**
+- `prev` — Holds “prev” for this scope.
+- `hash` — Password hash (PBKDF2) stored in DB.  Literal text string.
 
 #### Line-by-line (this function)
 
@@ -129,6 +140,14 @@ function goTo(i, pushHash)
   52 |             window.setTimeout(function () { locked = false; }, DURATION);
   53 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L16:** `prev` means: Holds “prev” for this scope.
+- **L44:** `hash` means: Password hash (PBKDF2) stored in DB.  Literal text string.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -142,8 +161,11 @@ function updateChrome(i)
 
 - **Purpose:** Implements `updateChrome`.
 - **Pattern:** Persist changes.
-- **Parameters:** `i`
-- **Local variables:** `id`, `g`
+- **Parameters (what each means):**
+- `i` — Loop index (0-based counter in for-loops).
+- **Local variables (what each means):**
+- `id` — Generic primary key / identifier.
+- `g` — Holds “g” for this scope.
 
 #### Line-by-line (this function)
 
@@ -160,6 +182,14 @@ function updateChrome(i)
   62 |             });
   63 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L56:** `id` means: Generic primary key / identifier.
+- **L58:** `g` means: Holds “g” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -172,7 +202,8 @@ function goBy(delta)
 #### Explanation
 
 - **Purpose:** Implements `goBy`.
-- **Parameters:** `delta`
+- **Parameters (what each means):**
+- `delta` — Holds “delta” for this scope.
 
 #### Line-by-line (this function)
 
@@ -196,7 +227,8 @@ function visibleCap()
 #### Explanation
 
 - **Purpose:** Implements `visibleCap`.
-- **Local variables:** `w`
+- **Local variables (what each means):**
+- `w` — Holds “w” for this scope.
 
 #### Line-by-line (this function)
 
@@ -212,6 +244,13 @@ function visibleCap()
   85 |                 return 5;
   86 |             }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L80:** `w` means: Holds “w” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -224,7 +263,10 @@ function layout()
 #### Explanation
 
 - **Purpose:** Implements `layout`.
-- **Local variables:** `n`, `show`, `hideArrows`
+- **Local variables (what each means):**
+- `n` — Integer count (rows, items, or length).
+- `show` — Holds “show” for this scope.
+- `hideArrows` — Collection / list related to hide Arrows.
 
 #### Line-by-line (this function)
 
@@ -241,6 +283,15 @@ function layout()
   95 |                 if (nextBtn) nextBtn.style.visibility = hideArrows ? 'hidden' : 'visible';
   96 |             }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L89:** `n` means: Integer count (rows, items, or length).
+- **L90:** `show` means: Holds “show” for this scope.
+- **L93:** `hideArrows` means: Collection / list related to hide Arrows.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -253,8 +304,10 @@ function step(dir)
 #### Explanation
 
 - **Purpose:** Implements `step`.
-- **Parameters:** `dir`
-- **Local variables:** `cards`
+- **Parameters (what each means):**
+- `dir` — Filesystem or URL path.
+- **Local variables (what each means):**
+- `cards` — Often a collection related to cards (plural name).
 
 #### Line-by-line (this function)
 
@@ -271,6 +324,13 @@ function step(dir)
  105 |                 }
  106 |             }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L99:** `cards` means: Often a collection related to cards (plural name).
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -283,7 +343,9 @@ function fromHash()
 #### Explanation
 
 - **Purpose:** Implements `fromHash`.
-- **Local variables:** `h`, `i`
+- **Local variables (what each means):**
+- `h` — Holds “h” for this scope.
+- `i` — Loop index (0-based counter in for-loops).
 
 #### Line-by-line (this function)
 
@@ -296,12 +358,24 @@ function fromHash()
  191 |             goTo(i, false);
  192 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L188:** `h` means: Holds “h” for this scope.
+- **L189:** `i` means: Loop index (0-based counter in for-loops).
+>>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```javascript
    1 |     (function () {
@@ -512,6 +586,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 
 **Line notes**
 
+<<<<<<< HEAD
 - **L3:** Get HTML element by id.
 - **L72:** Get HTML element by id.
 - **L73:** Get HTML element by id.
@@ -523,6 +598,48 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L164:** DOM event handler.
 - **L167:** DOM event handler.
 - **L176:** DOM event handler.
+=======
+- **L2:** `sections` means: Often a collection related to sections (plural name).
+- **L3:** Get HTML element by id. | `track` means: Holds “track” for this scope.  DOM element from the page.
+- **L4:** `ids` means: Holds “ids” for this scope.
+- **L5:** `index` means: Holds “index” for this scope.  Literal number `0`.
+- **L6:** `locked` means: Account locked by LoginThrottle.
+- **L7:** `touchY` means: Holds “touch Y” for this scope.  Literal number `0`.
+- **L8:** `DURATION` means: Holds “DURATION” for this scope.  Literal number `1400`.
+- **L16:** `prev` means: Holds “prev” for this scope.
+- **L44:** `hash` means: Password hash (PBKDF2) stored in DB.  Literal text string.
+- **L56:** `id` means: Generic primary key / identifier.
+- **L58:** `g` means: Holds “g” for this scope.
+- **L72:** Get HTML element by id. | `root` means: Root directory path (Uploads).  DOM element from the page.
+- **L73:** Get HTML element by id. | `cTrack` means: Holds “c Track” for this scope.  DOM element from the page.
+- **L76:** `prevBtn` means: Holds “prev Btn” for this scope.
+- **L77:** `nextBtn` means: Holds “next Btn” for this scope.
+- **L80:** `w` means: Holds “w” for this scope.
+- **L89:** `n` means: Integer count (rows, items, or length).
+- **L90:** `show` means: Holds “show” for this scope.
+- **L93:** `hideArrows` means: Collection / list related to hide Arrows.
+- **L99:** `cards` means: Often a collection related to cards (plural name).
+- **L108:** DOM event handler.
+- **L113:** DOM event handler.
+- **L120:** DOM event handler.
+- **L124:** `wheelAcc` means: Holds “wheel Acc” for this scope.  Literal number `0`.
+- **L125:** `wheelTimer` means: Date/time value.
+- **L126:** DOM event handler.
+- **L128:** `t` means: Temporary string/token/time value.
+- **L139:** `dir` means: Filesystem or URL path.
+- **L145:** DOM event handler.
+- **L147:** `key` means: HMAC key bytes or dictionary key.
+- **L164:** DOM event handler.
+- **L167:** DOM event handler.
+- **L169:** `y` means: Holds “y” for this scope.
+- **L170:** `dy` means: Holds “dy” for this scope.
+- **L176:** DOM event handler.
+- **L177:** `el` means: Generic DOM element.
+- **L179:** `id` means: Generic primary key / identifier.
+- **L180:** `i` means: Loop index (0-based counter in for-loops).
+- **L188:** `h` means: Holds “h” for this scope.
+- **L189:** `i` means: Loop index (0-based counter in for-loops).
+>>>>>>> eb8ce01 (update)
 - **L193:** DOM event handler.
 - **L197:** DOM event handler.
 

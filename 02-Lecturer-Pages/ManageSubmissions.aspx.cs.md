@@ -1,6 +1,10 @@
 # ManageSubmissions.aspx.cs
 **Source:** `Pages/Lecturer/ManageSubmissions.aspx.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,23 +19,25 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-- **Line 16:** `ConnString` — type `string`
-- **Line 31:** `uid` — type `int`
-- **Line 39:** `cols` — type `var`
-- **Line 41:** `ownerCol` — type `string`
-- **Line 49:** `list` — type `var`
-- **Line 70:** `uid` — type `int`
-- **Line 85:** `list` — type `var`
-- **Line 90:** `sid` — type `int`
-- **Line 91:** `studentUid` — type `int`
-- **Line 92:** `studentName` — type `string`
-- **Line 93:** `text` — type `string`
-- **Line 94:** `time` — type `string`
-- **Line 95:** `score` — type `int`
-- **Line 96:** `review` — type `string`
-- **Line 116:** `uid` — type `int`
-- **Line 120:** `res` — type `var`
-- **Line 121:** `res` — type `return`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 16:** `ConnString` (`string`) — **Holds “Conn String” for this scope. (text)**
+- **Line 31:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 39:** `cols` (`var`) — **Often a collection related to cols (plural name).**
+- **Line 41:** `ownerCol` (`string`) — **Holds “owner Col” for this scope. (text)**
+- **Line 49:** `list` (`var`) — **In-memory collection being built for JSON return.**
+- **Line 70:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 85:** `list` (`var`) — **In-memory collection being built for JSON return.**
+- **Line 90:** `sid` (`int`) — **Submission ID (CWSubmissions.SID).**
+- **Line 91:** `studentUid` (`int`) — **Users.UID of the student.**
+- **Line 92:** `studentName` (`string`) — **Student display name.**
+- **Line 93:** `text` (`string`) — **Holds “text” for this scope. (text)**
+- **Line 94:** `time` (`string`) — **Date/time value. (text)**
+- **Line 95:** `score` (`int`) — **Points earned or max points depending on context.**
+- **Line 96:** `review` (`string`) — **Holds “review” for this scope. (text)**
+- **Line 116:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 120:** `res` (`var`) — **Result object returned from fetch/WebMethod (`data.d` unwrapped).**
+- **Line 121:** `res` (`return`) — **Result object returned from fetch/WebMethod (`data.d` unwrapped).**
 
 ## Functions / methods (4 found)
 
@@ -46,7 +52,9 @@ protected void Page_Load(object sender, EventArgs e)
 - **Purpose:** Implements `Page_Load`.
 - **Security:** Uses AuthGate — requires logged-in role.
 - **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters:** `object sender, EventArgs e`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
 
 #### Line-by-line (this function)
 
@@ -60,7 +68,11 @@ protected void Page_Load(object sender, EventArgs e)
   23 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L18:** Page load entry (GET or postback).
 - **L20:** Authorization — block wrong role / anonymous.
@@ -81,7 +93,15 @@ public static object GetAssignments()
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Read/load data for display.
-- **Local variables:** `uid`, `conn`, `cmd`, `cols`, `cc`, `r`, `ownerCol`, `list`, `rdr`
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+- `cols` (`var`) — Often a collection related to cols (plural name).  Newly constructed object.
+- `cc` (`var`) — Holds “cc” for this scope.
+- `r` (`var`) — Usually one database row (DataRow) in query loops.
+- `ownerCol` (`string`) — Holds “owner Col” for this scope. (text)
+- `list` (`var`) — In-memory collection being built for JSON return.  Newly constructed object.
+- `rdr` (`var`) — Holds “rdr” for this scope.
 
 #### Line-by-line (this function)
 
@@ -124,6 +144,7 @@ public static object GetAssignments()
   62 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L29:** Error handling block.
@@ -134,6 +155,20 @@ public static object GetAssignments()
 - **L40:** Import namespace/types.
 - **L41:** Owner lecturer foreign key.
 - **L48:** Parameterized SQL — prevents classic SQL injection.
+=======
+**Line notes** (what code + variables mean)
+
+- **L29:** Error handling block.
+- **L31:** Authorization — block wrong role / anonymous. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+- **L32:** Authorization — block wrong role / anonymous.
+- **L34:** Import namespace/types.
+- **L35:** Import namespace/types.
+- **L39:** `cols` means: Often a collection related to cols (plural name).  Newly constructed object.
+- **L40:** Import namespace/types.
+- **L41:** Owner lecturer foreign key. | `ownerCol` means: Holds “owner Col” for this scope. (text)
+- **L48:** Parameterized SQL — prevents classic SQL injection.
+- **L49:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L50:** Import namespace/types.
 - **L52:** Null-safe read from database values.
 - **L57:** Handle/log exception.
@@ -154,8 +189,19 @@ public static object GetSubmissions(int cwid)
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Read/load data for display.
-- **Parameters:** `int cwid`
-- **Local variables:** `uid`, `conn`, `cmd`, `list`, `rdr`, `sid`, `studentUid`, `studentName`, `text`, `time`, `score`, `review`
+- **Parameters (what each means):**
+- `cwid` (`int`) — CourseWork ID (assignment) (CourseWorks.CWID).
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+- `list` (`var`) — In-memory collection being built for JSON return.  Newly constructed object.
+- `rdr` (`var`) — Holds “rdr” for this scope.
+- `studentUid` (`int`) — Users.UID of the student.
+- `studentName` (`string`) — Student display name.
+- `text` (`string`) — Holds “text” for this scope. (text)
+- `time` (`string`) — Date/time value. (text)
+- `score` (`int`) — Points earned or max points depending on context.
+- `review` (`string`) — Holds “review” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -205,16 +251,24 @@ public static object GetSubmissions(int cwid)
  108 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L68:** Error handling block.
 - **L70:** Authorization — block wrong role / anonymous.
+=======
+**Line notes** (what code + variables mean)
+
+- **L68:** Error handling block.
+- **L70:** Authorization — block wrong role / anonymous. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+>>>>>>> eb8ce01 (update)
 - **L71:** Authorization — block wrong role / anonymous.
 - **L73:** Import namespace/types.
 - **L74:** Import namespace/types.
 - **L80:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L81:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L84:** Parameterized SQL — prevents classic SQL injection.
+<<<<<<< HEAD
 - **L86:** Import namespace/types.
 - **L90:** Null-safe read from database values.
 - **L91:** Null-safe read from database values.
@@ -223,6 +277,17 @@ public static object GetSubmissions(int cwid)
 - **L94:** Null-safe read from database values.
 - **L95:** Null-safe read from database values.
 - **L96:** Null-safe read from database values.
+=======
+- **L85:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
+- **L86:** Import namespace/types.
+- **L90:** Null-safe read from database values. | `sid` means: Submission ID (CWSubmissions.SID).
+- **L91:** Null-safe read from database values. | `studentUid` means: Users.UID of the student.
+- **L92:** Null-safe read from database values. | `studentName` means: Student display name.
+- **L93:** Null-safe read from database values. | `text` means: Holds “text” for this scope. (text)
+- **L94:** Null-safe read from database values. | `time` means: Date/time value. (text)
+- **L95:** Null-safe read from database values. | `score` means: Points earned or max points depending on context.
+- **L96:** Null-safe read from database values. | `review` means: Holds “review” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 - **L103:** Handle/log exception.
 - **L105:** Error handling block.
 
@@ -239,8 +304,13 @@ public static object GradeSubmission(int sid, int score, string review)
 - **Purpose:** Implements `GradeSubmission`.
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `int sid, int score, string review`
-- **Local variables:** `uid`, `res`
+- **Parameters (what each means):**
+- `sid` (`int`) — Submission ID (CWSubmissions.SID).
+- `score` (`int`) — Points earned or max points depending on context.
+- `review` (`string`) — Holds “review” for this scope. (text)
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+- `res` (`var`) — Result object returned from fetch/WebMethod (`data.d` unwrapped).
 
 #### Line-by-line (this function)
 
@@ -264,11 +334,20 @@ public static object GradeSubmission(int sid, int score, string review)
  128 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L114:** Error handling block.
 - **L116:** Authorization — block wrong role / anonymous.
 - **L117:** Authorization — block wrong role / anonymous.
+=======
+**Line notes** (what code + variables mean)
+
+- **L114:** Error handling block.
+- **L116:** Authorization — block wrong role / anonymous. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+- **L117:** Authorization — block wrong role / anonymous.
+- **L120:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+>>>>>>> eb8ce01 (update)
 - **L123:** Handle/log exception.
 - **L125:** Error handling block.
 
@@ -276,7 +355,11 @@ public static object GradeSubmission(int sid, int score, string review)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -428,6 +511,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L20:** Authorization — block wrong role / anonymous.
 - **L25:** Expose method to AJAX JSON calls.
 - **L29:** Error handling block.
+<<<<<<< HEAD
 - **L31:** Authorization — block wrong role / anonymous.
 - **L32:** Authorization — block wrong role / anonymous.
 - **L34:** Import namespace/types.
@@ -435,19 +519,35 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L40:** Import namespace/types.
 - **L41:** Owner lecturer foreign key.
 - **L48:** Parameterized SQL — prevents classic SQL injection.
+=======
+- **L31:** Authorization — block wrong role / anonymous. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+- **L32:** Authorization — block wrong role / anonymous.
+- **L34:** Import namespace/types.
+- **L35:** Import namespace/types.
+- **L39:** `cols` means: Often a collection related to cols (plural name).  Newly constructed object.
+- **L40:** Import namespace/types.
+- **L41:** Owner lecturer foreign key. | `ownerCol` means: Holds “owner Col” for this scope. (text)
+- **L48:** Parameterized SQL — prevents classic SQL injection.
+- **L49:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L50:** Import namespace/types.
 - **L52:** Null-safe read from database values.
 - **L57:** Handle/log exception.
 - **L59:** Error handling block.
 - **L64:** Expose method to AJAX JSON calls.
 - **L68:** Error handling block.
+<<<<<<< HEAD
 - **L70:** Authorization — block wrong role / anonymous.
+=======
+- **L70:** Authorization — block wrong role / anonymous. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+>>>>>>> eb8ce01 (update)
 - **L71:** Authorization — block wrong role / anonymous.
 - **L73:** Import namespace/types.
 - **L74:** Import namespace/types.
 - **L80:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L81:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L84:** Parameterized SQL — prevents classic SQL injection.
+<<<<<<< HEAD
 - **L86:** Import namespace/types.
 - **L90:** Null-safe read from database values.
 - **L91:** Null-safe read from database values.
@@ -456,12 +556,29 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L94:** Null-safe read from database values.
 - **L95:** Null-safe read from database values.
 - **L96:** Null-safe read from database values.
+=======
+- **L85:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
+- **L86:** Import namespace/types.
+- **L90:** Null-safe read from database values. | `sid` means: Submission ID (CWSubmissions.SID).
+- **L91:** Null-safe read from database values. | `studentUid` means: Users.UID of the student.
+- **L92:** Null-safe read from database values. | `studentName` means: Student display name.
+- **L93:** Null-safe read from database values. | `text` means: Holds “text” for this scope. (text)
+- **L94:** Null-safe read from database values. | `time` means: Date/time value. (text)
+- **L95:** Null-safe read from database values. | `score` means: Points earned or max points depending on context.
+- **L96:** Null-safe read from database values. | `review` means: Holds “review” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 - **L103:** Handle/log exception.
 - **L105:** Error handling block.
 - **L110:** Expose method to AJAX JSON calls.
 - **L114:** Error handling block.
+<<<<<<< HEAD
 - **L116:** Authorization — block wrong role / anonymous.
 - **L117:** Authorization — block wrong role / anonymous.
+=======
+- **L116:** Authorization — block wrong role / anonymous. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+- **L117:** Authorization — block wrong role / anonymous.
+- **L120:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+>>>>>>> eb8ce01 (update)
 - **L123:** Handle/log exception.
 - **L125:** Error handling block.
 

@@ -1,6 +1,10 @@
 # Logout.aspx.cs
 **Source:** `Pages/Authentication/Logout.aspx.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,7 +19,9 @@ Clears session, abandons session, clears JWT auth cookie.
 
 ## Variables / fields (file level)
 
-_No classic field declarations detected (or mostly locals inside methods)._
+Each name is explained in plain English (what it stores / why it exists).
+
+_No classic field declarations detected (or mostly locals inside methods — see each function’s **Local variables** section)._
 
 ## Functions / methods (1 found)
 
@@ -30,7 +36,9 @@ protected void Page_Load(object sender, EventArgs e)
 - **Purpose:** Implements `Page_Load`.
 - **Navigation:** Redirects the browser.
 - **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters:** `object sender, EventArgs e`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
 
 #### Line-by-line (this function)
 
@@ -42,7 +50,11 @@ protected void Page_Load(object sender, EventArgs e)
   13 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L9:** Page load entry (GET or postback).
 - **L12:** Navigate browser to another URL.
@@ -51,7 +63,11 @@ protected void Page_Load(object sender, EventArgs e)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;

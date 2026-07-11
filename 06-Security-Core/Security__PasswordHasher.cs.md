@@ -1,6 +1,10 @@
 # PasswordHasher.cs
 **Source:** `Data/Security/PasswordHasher.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,13 +19,15 @@ PBKDF2 password hashing and verification; upgrades legacy plain-text on successf
 
 ## Variables / fields (file level)
 
-- **Line 21:** `salt` — type `var`
-- **Line 24:** `hash` — type `var`
-- **Line 40:** `parts` — type `var`
-- **Line 42:** `iterations` — type `int`
-- **Line 51:** `actual` — type `var`
-- **Line 75:** `diff` — type `int`
-- **Line 78:** `diff` — type `return`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 21:** `salt` (`var`) — **Random salt for PBKDF2.**
+- **Line 24:** `hash` (`var`) — **Password hash (PBKDF2) stored in DB.**
+- **Line 40:** `parts` (`var`) — **Split path or name segments.**
+- **Line 42:** `iterations` (`int`) — **Often a collection related to iterations (plural name). (integer)**
+- **Line 51:** `actual` (`var`) — **Holds “actual” for this scope.**
+- **Line 75:** `diff` (`int`) — **Holds “diff” for this scope. (integer)**
+- **Line 78:** `diff` (`return`) — **Holds “diff” for this scope. (type `return`)**
 
 ## Functions / methods (5 found)
 
@@ -34,8 +40,12 @@ public static string Hash(string password)
 #### Explanation
 
 - **Purpose:** Implements `Hash`.
-- **Parameters:** `string password`
-- **Local variables:** `salt`, `rng`, `hash`
+- **Parameters (what each means):**
+- `password` (`string`) — Plain password from the form (never log this).
+- **Local variables (what each means):**
+- `salt` (`var`) — Random salt for PBKDF2.  Newly constructed object.
+- `rng` (`var`) — Holds “rng” for this scope.
+- `hash` (`var`) — Password hash (PBKDF2) stored in DB.
 
 #### Line-by-line (this function)
 
@@ -57,9 +67,17 @@ public static string Hash(string password)
   31 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L22:** Import namespace/types.
+=======
+**Line notes** (what code + variables mean)
+
+- **L21:** `salt` means: Random salt for PBKDF2.  Newly constructed object.
+- **L22:** Import namespace/types.
+- **L25:** `hash` means: Password hash (PBKDF2) stored in DB.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -72,8 +90,12 @@ public static bool Verify(string password, string stored)
 #### Explanation
 
 - **Purpose:** Implements `Verify`.
-- **Parameters:** `string password, string stored`
-- **Local variables:** `parts`, `actual`
+- **Parameters (what each means):**
+- `password` (`string`) — Plain password from the form (never log this).
+- `stored` (`string`) — Holds “stored” for this scope. (text)
+- **Local variables (what each means):**
+- `parts` (`var`) — Split path or name segments.
+- `actual` (`var`) — Holds “actual” for this scope.
 
 #### Line-by-line (this function)
 
@@ -107,10 +129,19 @@ public static bool Verify(string password, string stored)
   58 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L45:** Error handling block.
 - **L50:** Handle/log exception.
+=======
+**Line notes** (what code + variables mean)
+
+- **L40:** `parts` means: Split path or name segments.
+- **L45:** Error handling block.
+- **L50:** Handle/log exception.
+- **L52:** `actual` means: Holds “actual” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L53:** Constant-time string compare (reduce timing leaks).
 
 ---
@@ -124,7 +155,8 @@ public static bool IsHashed(string stored)
 #### Explanation
 
 - **Purpose:** Implements `IsHashed`.
-- **Parameters:** `string stored`
+- **Parameters (what each means):**
+- `stored` (`string`) — Holds “stored” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -147,8 +179,13 @@ private static byte[] Pbkdf2(string password, byte[] salt, int iterations, int l
 #### Explanation
 
 - **Purpose:** Implements `Pbkdf2`.
-- **Parameters:** `string password, byte[] salt, int iterations, int length`
-- **Local variables:** `pbkdf2`
+- **Parameters (what each means):**
+- `password` (`string`) — Plain password from the form (never log this).
+- `salt` (`byte[]`) — Random salt for PBKDF2.
+- `iterations` (`int`) — Often a collection related to iterations (plural name). (integer)
+- `length` (`int`) — Holds “length” for this scope. (integer)
+- **Local variables (what each means):**
+- `pbkdf2` (`var`) — Holds “pbkdf2” for this scope.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -162,7 +199,11 @@ private static byte[] Pbkdf2(string password, byte[] salt, int iterations, int l
   70 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L68:** Import namespace/types.
 
@@ -177,8 +218,12 @@ private static bool FixedTimeEquals(byte[] a, byte[] b)
 #### Explanation
 
 - **Purpose:** Implements `FixedTimeEquals`.
-- **Parameters:** `byte[] a, byte[] b`
-- **Local variables:** `diff`, `i`
+- **Parameters (what each means):**
+- `a` (`byte[]`) — Holds “a” for this scope. (type `byte[]`)
+- `b` (`byte[]`) — Holds “b” for this scope. (type `byte[]`)
+- **Local variables (what each means):**
+- `diff` (`int`) — Holds “diff” for this scope. (integer)  Literal number `0`.
+- `i` (`int`) — Loop index (0-based counter in for-loops).  Literal number `0`.
 
 #### Line-by-line (this function)
 
@@ -194,15 +239,26 @@ private static bool FixedTimeEquals(byte[] a, byte[] b)
   79 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L72:** Constant-time string compare (reduce timing leaks).
+=======
+**Line notes** (what code + variables mean)
+
+- **L72:** Constant-time string compare (reduce timing leaks).
+- **L75:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
+>>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -295,12 +351,26 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L3:** Import namespace/types.
 - **L5:** C# namespace grouping.
 - **L11:** Password hashing (PBKDF2).
+<<<<<<< HEAD
 - **L22:** Import namespace/types.
 - **L45:** Error handling block.
 - **L50:** Handle/log exception.
 - **L53:** Constant-time string compare (reduce timing leaks).
 - **L68:** Import namespace/types.
 - **L72:** Constant-time string compare (reduce timing leaks).
+=======
+- **L21:** `salt` means: Random salt for PBKDF2.  Newly constructed object.
+- **L22:** Import namespace/types.
+- **L25:** `hash` means: Password hash (PBKDF2) stored in DB.
+- **L40:** `parts` means: Split path or name segments.
+- **L45:** Error handling block.
+- **L50:** Handle/log exception.
+- **L52:** `actual` means: Holds “actual” for this scope.
+- **L53:** Constant-time string compare (reduce timing leaks).
+- **L68:** Import namespace/types.
+- **L72:** Constant-time string compare (reduce timing leaks).
+- **L75:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

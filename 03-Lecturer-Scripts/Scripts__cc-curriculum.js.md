@@ -1,6 +1,10 @@
 # cc-curriculum.js
 **Source:** `Pages/Lecturer/Scripts/cc-curriculum.js`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,42 +19,44 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-- **Line 4:** `view` — script-level `const`/`let`/`var`
-- **Line 21:** `chapters` — script-level `const`/`let`/`var`
-- **Line 30:** `secDiv` — script-level `const`/`let`/`var`
-- **Line 33:** `lessonsHtml` — script-level `const`/`let`/`var`
-- **Line 35:** `lessons` — script-level `const`/`let`/`var`
-- **Line 38:** `type` — script-level `const`/`let`/`var`
-- **Line 39:** `typeClass` — script-level `const`/`let`/`var`
-- **Line 120:** `title` — script-level `const`/`let`/`var`
-- **Line 121:** `errDiv` — script-level `const`/`let`/`var`
-- **Line 136:** `chid` — script-level `const`/`let`/`var`
-- **Line 137:** `saveBtn` — script-level `const`/`let`/`var`
-- **Line 185:** `htmlEditor` — script-level `const`/`let`/`var`
-- **Line 189:** `mediaPrev` — script-level `const`/`let`/`var`
-- **Line 191:** `mediaMsg` — script-level `const`/`let`/`var`
-- **Line 193:** `matMsg` — script-level `const`/`let`/`var`
-- **Line 211:** `lessonType` — script-level `const`/`let`/`var`
-- **Line 221:** `mats` — script-level `const`/`let`/`var`
-- **Line 222:** `cleaned` — script-level `const`/`let`/`var`
-- **Line 234:** `vUrl` — script-level `const`/`let`/`var`
-- **Line 252:** `lbl` — script-level `const`/`let`/`var`
-- **Line 253:** `textarea` — script-level `const`/`let`/`var`
-- **Line 256:** `editorToolbar` — script-level `const`/`let`/`var`
-- **Line 257:** `mediaDZ` — script-level `const`/`let`/`var`
-- **Line 258:** `materialDZ` — script-level `const`/`let`/`var`
-- **Line 259:** `attachments` — script-level `const`/`let`/`var`
-- **Line 309:** `content` — script-level `const`/`let`/`var`
-- **Line 321:** `materialsField` — script-level `const`/`let`/`var`
-- **Line 323:** `materialsRaw` — script-level `const`/`let`/`var`
-- **Line 324:** `materialsArr` — script-level `const`/`let`/`var`
-- **Line 330:** `url` — script-level `const`/`let`/`var`
-- **Line 354:** `firstUrl` — script-level `const`/`let`/`var`
-- **Line 355:** `firstName` — script-level `const`/`let`/`var`
-- **Line 356:** `kind` — script-level `const`/`let`/`var`
-- **Line 361:** `plain` — script-level `const`/`let`/`var`
-- **Line 371:** `schid` — script-level `const`/`let`/`var`
-- **Line 375:** `matsJson` — script-level `const`/`let`/`var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 4:** `view` — script-level `const`/`let`/`var` — **Holds “view” for this scope.**
+- **Line 21:** `chapters` — script-level `const`/`let`/`var` — **Often a collection related to chapters (plural name).**
+- **Line 30:** `secDiv` — script-level `const`/`let`/`var` — **Holds “sec Div” for this scope.**
+- **Line 33:** `lessonsHtml` — script-level `const`/`let`/`var` — **Holds “lessons Html” for this scope.**
+- **Line 35:** `lessons` — script-level `const`/`let`/`var` — **Often a collection related to lessons (plural name).**
+- **Line 38:** `type` — script-level `const`/`let`/`var` — **Holds “type” for this scope.**
+- **Line 39:** `typeClass` — script-level `const`/`let`/`var` — **Often a collection related to type Class (plural name).**
+- **Line 120:** `title` — script-level `const`/`let`/`var` — **Title of course work / page heading.**
+- **Line 121:** `errDiv` — script-level `const`/`let`/`var` — **Holds “err Div” for this scope.**
+- **Line 136:** `chid` — script-level `const`/`let`/`var` — **Chapter ID (Chapters.ChID).**
+- **Line 137:** `saveBtn` — script-level `const`/`let`/`var` — **Holds “save Btn” for this scope.**
+- **Line 185:** `htmlEditor` — script-level `const`/`let`/`var` — **Holds “html Editor” for this scope.**
+- **Line 189:** `mediaPrev` — script-level `const`/`let`/`var` — **Holds “media Prev” for this scope.**
+- **Line 191:** `mediaMsg` — script-level `const`/`let`/`var` — **Holds “media Msg” for this scope.**
+- **Line 193:** `matMsg` — script-level `const`/`let`/`var` — **Holds “mat Msg” for this scope.**
+- **Line 211:** `lessonType` — script-level `const`/`let`/`var` — **Holds “lesson Type” for this scope.**
+- **Line 221:** `mats` — script-level `const`/`let`/`var` — **Often a collection related to mats (plural name).**
+- **Line 222:** `cleaned` — script-level `const`/`let`/`var` — **Holds “cleaned” for this scope.**
+- **Line 234:** `vUrl` — script-level `const`/`let`/`var` — **URL string.**
+- **Line 252:** `lbl` — script-level `const`/`let`/`var` — **UI control reference (lbl).**
+- **Line 253:** `textarea` — script-level `const`/`let`/`var` — **Holds “textarea” for this scope.**
+- **Line 256:** `editorToolbar` — script-level `const`/`let`/`var` — **Holds “editor Toolbar” for this scope.**
+- **Line 257:** `mediaDZ` — script-level `const`/`let`/`var` — **Holds “media DZ” for this scope.**
+- **Line 258:** `materialDZ` — script-level `const`/`let`/`var` — **Holds “material DZ” for this scope.**
+- **Line 259:** `attachments` — script-level `const`/`let`/`var` — **Often a collection related to attachments (plural name).**
+- **Line 309:** `content` — script-level `const`/`let`/`var` — **Submission body text or JSON payload in CWSubmissions.**
+- **Line 321:** `materialsField` — script-level `const`/`let`/`var` — **Holds “materials Field” for this scope.**
+- **Line 323:** `materialsRaw` — script-level `const`/`let`/`var` — **Holds “materials Raw” for this scope.**
+- **Line 324:** `materialsArr` — script-level `const`/`let`/`var` — **Holds “materials Arr” for this scope.**
+- **Line 330:** `url` — script-level `const`/`let`/`var` — **HTTP URL to media or page.**
+- **Line 354:** `firstUrl` — script-level `const`/`let`/`var` — **URL string.**
+- **Line 355:** `firstName` — script-level `const`/`let`/`var` — **Holds “first Name” for this scope.**
+- **Line 356:** `kind` — script-level `const`/`let`/`var` — **Upload kind (material/video/thumbnail/submission).**
+- **Line 361:** `plain` — script-level `const`/`let`/`var` — **Text without META trailer (student-visible instructions).**
+- **Line 371:** `schid` — script-level `const`/`let`/`var` — **SubChapter / lesson ID.**
+- **Line 375:** `matsJson` — script-level `const`/`let`/`var` — **Holds “mats Json” for this scope.**
 
 ## Functions / methods (10 found)
 
@@ -64,7 +70,14 @@ function loadCurriculumView()
 
 - **Purpose:** Implements `loadCurriculumView`.
 - **Pattern:** Read/load data for display.
-- **Local variables:** `view`, `chapters`, `secDiv`, `lessonsHtml`, `lessons`, `type`, `typeClass`
+- **Local variables (what each means):**
+- `view` — Holds “view” for this scope.  DOM element from the page.
+- `chapters` — Often a collection related to chapters (plural name).
+- `secDiv` — Holds “sec Div” for this scope.
+- `lessonsHtml` — Holds “lessons Html” for this scope.  Literal text string.
+- `lessons` — Often a collection related to lessons (plural name).
+- `type` — Holds “type” for this scope.
+- `typeClass` — Often a collection related to type Class (plural name).  Literal text string.
 
 #### Line-by-line (this function)
 
@@ -171,15 +184,32 @@ function loadCurriculumView()
  101 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L4:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L4:** Get HTML element by id. | `view` means: Holds “view” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L8:** Update page HTML.
 - **L12:** Update page HTML.
 - **L17:** Update page HTML.
 - **L18:** Encode text to reduce XSS risk.
+<<<<<<< HEAD
 - **L24:** Update page HTML.
 - **L28:** Update page HTML.
+=======
+- **L22:** `chapters` means: Often a collection related to chapters (plural name).
+- **L24:** Update page HTML.
+- **L28:** Update page HTML.
+- **L30:** `secDiv` means: Holds “sec Div” for this scope.
+- **L34:** `lessonsHtml` means: Holds “lessons Html” for this scope.  Literal text string.
+- **L35:** `lessons` means: Often a collection related to lessons (plural name).
+- **L38:** `type` means: Holds “type” for this scope.
+- **L39:** `typeClass` means: Often a collection related to type Class (plural name).  Literal text string.
+>>>>>>> eb8ce01 (update)
 - **L44:** Encode text to reduce XSS risk.
 - **L45:** Encode text to reduce XSS risk.
 - **L56:** Update page HTML.
@@ -218,7 +248,11 @@ function showAddSectionModal()
  109 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L105:** Get HTML element by id.
 - **L106:** Get HTML element by id.
@@ -235,7 +269,9 @@ function editSection(chid, title)
 #### Explanation
 
 - **Purpose:** Implements `editSection`.
-- **Parameters:** `chid, title`
+- **Parameters (what each means):**
+- `chid` — Chapter ID (Chapters.ChID).
+- `title` — Title of course work / page heading.
 
 #### Line-by-line (this function)
 
@@ -251,7 +287,11 @@ function editSection(chid, title)
  117 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L113:** Get HTML element by id.
 - **L114:** Get HTML element by id.
@@ -270,7 +310,11 @@ function saveSection()
 - **Purpose:** Implements `saveSection`.
 - **ASP.NET WebMethod:** Called from browser JS via `Page.aspx/MethodName` POST JSON.
 - **Pattern:** Persist changes.
-- **Local variables:** `title`, `errDiv`, `chid`, `saveBtn`
+- **Local variables (what each means):**
+- `title` — Title of course work / page heading.  DOM element from the page.
+- `errDiv` — Holds “err Div” for this scope.  DOM element from the page.
+- `chid` — Chapter ID (Chapters.ChID).
+- `saveBtn` — Holds “save Btn” for this scope.
 
 #### Line-by-line (this function)
 
@@ -324,10 +368,19 @@ function saveSection()
  163 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L120:** Get HTML element by id.
 - **L121:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L120:** Get HTML element by id. | `title` means: Title of course work / page heading.  DOM element from the page.
+- **L121:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
+- **L136:** `chid` means: Chapter ID (Chapters.ChID).
+- **L138:** `saveBtn` means: Holds “save Btn” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -341,7 +394,8 @@ function deleteSection(chid)
 
 - **Purpose:** Implements `deleteSection`.
 - **Pattern:** Delete/clear data.
-- **Parameters:** `chid`
+- **Parameters (what each means):**
+- `chid` — Chapter ID (Chapters.ChID).
 
 #### Line-by-line (this function)
 
@@ -371,8 +425,13 @@ function showAddLessonModal(chid)
 #### Explanation
 
 - **Purpose:** Implements `showAddLessonModal`.
-- **Parameters:** `chid`
-- **Local variables:** `htmlEditor`, `mediaPrev`, `mediaMsg`, `matMsg`
+- **Parameters (what each means):**
+- `chid` — Chapter ID (Chapters.ChID).
+- **Local variables (what each means):**
+- `htmlEditor` — Holds “html Editor” for this scope.  DOM element from the page.
+- `mediaPrev` — Holds “media Prev” for this scope.  DOM element from the page.
+- `mediaMsg` — Holds “media Msg” for this scope.
+- `matMsg` — Holds “mat Msg” for this scope.
 
 #### Line-by-line (this function)
 
@@ -405,7 +464,11 @@ function showAddLessonModal(chid)
  199 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L179:** Get HTML element by id.
 - **L180:** Get HTML element by id.
@@ -413,12 +476,23 @@ function showAddLessonModal(chid)
 - **L182:** Get HTML element by id.
 - **L183:** Get HTML element by id.
 - **L184:** Get HTML element by id.
+<<<<<<< HEAD
 - **L186:** Get HTML element by id.
 - **L187:** Update page HTML.
 - **L188:** Get HTML element by id.
 - **L189:** Get HTML element by id.
 - **L190:** Update page HTML.
 - **L192:** Update page HTML.
+=======
+- **L186:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
+- **L187:** Update page HTML.
+- **L188:** Get HTML element by id.
+- **L189:** Get HTML element by id. | `mediaPrev` means: Holds “media Prev” for this scope.  DOM element from the page.
+- **L190:** Update page HTML.
+- **L191:** `mediaMsg` means: Holds “media Msg” for this scope.
+- **L192:** Update page HTML.
+- **L193:** `matMsg` means: Holds “mat Msg” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L194:** Update page HTML.
 
 ---
@@ -432,8 +506,16 @@ function editLesson(schid, chid)
 #### Explanation
 
 - **Purpose:** Implements `editLesson`.
-- **Parameters:** `schid, chid`
-- **Local variables:** `lessonType`, `htmlEditor`, `mats`, `cleaned`, `mediaPrev`, `vUrl`
+- **Parameters (what each means):**
+- `schid` — SubChapter / lesson ID.
+- `chid` — Chapter ID (Chapters.ChID).
+- **Local variables (what each means):**
+- `lessonType` — Holds “lesson Type” for this scope.
+- `htmlEditor` — Holds “html Editor” for this scope.  DOM element from the page.
+- `mats` — Often a collection related to mats (plural name).
+- `cleaned` — Holds “cleaned” for this scope.
+- `mediaPrev` — Holds “media Prev” for this scope.  DOM element from the page.
+- `vUrl` — URL string.
 
 #### Line-by-line (this function)
 
@@ -490,17 +572,34 @@ function editLesson(schid, chid)
  248 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L204:** Get HTML element by id.
 - **L205:** Get HTML element by id.
 - **L210:** Get HTML element by id.
+<<<<<<< HEAD
 - **L214:** Get HTML element by id.
 - **L215:** Get HTML element by id.
 - **L216:** Get HTML element by id.
 - **L218:** Update page HTML.
 - **L231:** Get HTML element by id.
 - **L232:** Get HTML element by id.
+=======
+- **L211:** `lessonType` means: Holds “lesson Type” for this scope.
+- **L214:** Get HTML element by id.
+- **L215:** Get HTML element by id.
+- **L216:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
+- **L218:** Update page HTML.
+- **L221:** `mats` means: Often a collection related to mats (plural name).
+- **L222:** `cleaned` means: Holds “cleaned” for this scope.
+- **L231:** Get HTML element by id.
+- **L232:** Get HTML element by id. | `mediaPrev` means: Holds “media Prev” for this scope.  DOM element from the page.
+- **L234:** `vUrl` means: URL string.
+>>>>>>> eb8ce01 (update)
 - **L235:** Update page HTML.
 - **L236:** Encode text to reduce XSS risk.
 - **L237:** Encode text to reduce XSS risk.
@@ -516,7 +615,15 @@ function toggleLessonContentFields()
 #### Explanation
 
 - **Purpose:** Implements `toggleLessonContentFields`.
-- **Local variables:** `type`, `lbl`, `textarea`, `htmlEditor`, `editorToolbar`, `mediaDZ`, `materialDZ`, `attachments`
+- **Local variables (what each means):**
+- `type` — Holds “type” for this scope.  DOM element from the page.
+- `lbl` — UI control reference (lbl).  DOM element from the page.
+- `textarea` — Holds “textarea” for this scope.  DOM element from the page.
+- `htmlEditor` — Holds “html Editor” for this scope.  DOM element from the page.
+- `editorToolbar` — Holds “editor Toolbar” for this scope.  DOM element from the page.
+- `mediaDZ` — Holds “media DZ” for this scope.  DOM element from the page.
+- `materialDZ` — Holds “material DZ” for this scope.  DOM element from the page.
+- `attachments` — Often a collection related to attachments (plural name).  DOM element from the page.
 
 #### Line-by-line (this function)
 
@@ -566,6 +673,7 @@ function toggleLessonContentFields()
  290 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L251:** Get HTML element by id.
@@ -576,6 +684,18 @@ function toggleLessonContentFields()
 - **L257:** Get HTML element by id.
 - **L258:** Get HTML element by id.
 - **L259:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L251:** Get HTML element by id. | `type` means: Holds “type” for this scope.  DOM element from the page.
+- **L252:** Get HTML element by id. | `lbl` means: UI control reference (lbl).  DOM element from the page.
+- **L253:** Get HTML element by id. | `textarea` means: Holds “textarea” for this scope.  DOM element from the page.
+- **L255:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
+- **L256:** Get HTML element by id. | `editorToolbar` means: Holds “editor Toolbar” for this scope.  DOM element from the page.
+- **L257:** Get HTML element by id. | `mediaDZ` means: Holds “media DZ” for this scope.  DOM element from the page.
+- **L258:** Get HTML element by id. | `materialDZ` means: Holds “material DZ” for this scope.  DOM element from the page.
+- **L259:** Get HTML element by id. | `attachments` means: Often a collection related to attachments (plural name).  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -589,7 +709,23 @@ function saveLesson()
 
 - **Purpose:** Implements `saveLesson`.
 - **Pattern:** Persist changes.
-- **Local variables:** `title`, `type`, `errDiv`, `content`, `htmlEditor`, `materialsField`, `materialsRaw`, `materialsArr`, `url`, `firstUrl`, `firstName`, `kind`, `plain`, `schid`, `saveBtn`, `matsJson`
+- **Local variables (what each means):**
+- `title` — Title of course work / page heading.  DOM element from the page.
+- `type` — Holds “type” for this scope.  DOM element from the page.
+- `errDiv` — Holds “err Div” for this scope.  DOM element from the page.
+- `content` — Submission body text or JSON payload in CWSubmissions.  Literal text string.
+- `htmlEditor` — Holds “html Editor” for this scope.  DOM element from the page.
+- `materialsField` — Holds “materials Field” for this scope.  DOM element from the page.
+- `materialsRaw` — Holds “materials Raw” for this scope.
+- `materialsArr` — Holds “materials Arr” for this scope.
+- `url` — HTTP URL to media or page.
+- `firstUrl` — URL string.
+- `firstName` — Holds “first Name” for this scope.
+- `kind` — Upload kind (material/video/thumbnail/submission).
+- `plain` — Text without META trailer (student-visible instructions).
+- `schid` — SubChapter / lesson ID.
+- `saveBtn` — Holds “save Btn” for this scope.
+- `matsJson` — Holds “mats Json” for this scope.  JSON serialize/parse result.
 
 #### Line-by-line (this function)
 
@@ -715,6 +851,7 @@ function saveLesson()
  408 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L293:** Get HTML element by id.
@@ -727,6 +864,30 @@ function saveLesson()
 - **L322:** Get HTML element by id.
 - **L325:** JS object ↔ JSON text.
 - **L376:** JS object ↔ JSON text.
+=======
+**Line notes** (what code + variables mean)
+
+- **L293:** Get HTML element by id. | `title` means: Title of course work / page heading.  DOM element from the page.
+- **L294:** Get HTML element by id. | `type` means: Holds “type” for this scope.  DOM element from the page.
+- **L295:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
+- **L310:** `content` means: Submission body text or JSON payload in CWSubmissions.  Literal text string.
+- **L312:** Get HTML element by id.
+- **L314:** Get HTML element by id.
+- **L316:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
+- **L317:** Get HTML element by id.
+- **L322:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
+- **L323:** `materialsRaw` means: Holds “materials Raw” for this scope.
+- **L324:** `materialsArr` means: Holds “materials Arr” for this scope.
+- **L325:** JS object ↔ JSON text.
+- **L330:** `url` means: HTTP URL to media or page.
+- **L354:** `firstUrl` means: URL string.
+- **L355:** `firstName` means: Holds “first Name” for this scope.
+- **L356:** `kind` means: Upload kind (material/video/thumbnail/submission).
+- **L361:** `plain` means: Text without META trailer (student-visible instructions).
+- **L372:** `schid` means: SubChapter / lesson ID.
+- **L373:** `saveBtn` means: Holds “save Btn” for this scope.
+- **L376:** JS object ↔ JSON text. | `matsJson` means: Holds “mats Json” for this scope.  JSON serialize/parse result.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -740,7 +901,8 @@ function deleteLesson(schid)
 
 - **Purpose:** Implements `deleteLesson`.
 - **Pattern:** Delete/clear data.
-- **Parameters:** `schid`
+- **Parameters (what each means):**
+- `schid` — SubChapter / lesson ID.
 
 #### Line-by-line (this function)
 
@@ -763,7 +925,11 @@ function deleteLesson(schid)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | // Course Creation — sections & lessons
@@ -1190,13 +1356,28 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 
 **Line notes**
 
+<<<<<<< HEAD
 - **L4:** Get HTML element by id.
+=======
+- **L4:** Get HTML element by id. | `view` means: Holds “view” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L8:** Update page HTML.
 - **L12:** Update page HTML.
 - **L17:** Update page HTML.
 - **L18:** Encode text to reduce XSS risk.
+<<<<<<< HEAD
 - **L24:** Update page HTML.
 - **L28:** Update page HTML.
+=======
+- **L22:** `chapters` means: Often a collection related to chapters (plural name).
+- **L24:** Update page HTML.
+- **L28:** Update page HTML.
+- **L30:** `secDiv` means: Holds “sec Div” for this scope.
+- **L34:** `lessonsHtml` means: Holds “lessons Html” for this scope.  Literal text string.
+- **L35:** `lessons` means: Often a collection related to lessons (plural name).
+- **L38:** `type` means: Holds “type” for this scope.
+- **L39:** `typeClass` means: Often a collection related to type Class (plural name).  Literal text string.
+>>>>>>> eb8ce01 (update)
 - **L44:** Encode text to reduce XSS risk.
 - **L45:** Encode text to reduce XSS risk.
 - **L56:** Update page HTML.
@@ -1214,24 +1395,43 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L113:** Get HTML element by id.
 - **L114:** Get HTML element by id.
 - **L115:** Get HTML element by id.
+<<<<<<< HEAD
 - **L120:** Get HTML element by id.
 - **L121:** Get HTML element by id.
+=======
+- **L120:** Get HTML element by id. | `title` means: Title of course work / page heading.  DOM element from the page.
+- **L121:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
+- **L136:** `chid` means: Chapter ID (Chapters.ChID).
+- **L138:** `saveBtn` means: Holds “save Btn” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L179:** Get HTML element by id.
 - **L180:** Get HTML element by id.
 - **L181:** Get HTML element by id.
 - **L182:** Get HTML element by id.
 - **L183:** Get HTML element by id.
 - **L184:** Get HTML element by id.
+<<<<<<< HEAD
 - **L186:** Get HTML element by id.
 - **L187:** Update page HTML.
 - **L188:** Get HTML element by id.
 - **L189:** Get HTML element by id.
 - **L190:** Update page HTML.
 - **L192:** Update page HTML.
+=======
+- **L186:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
+- **L187:** Update page HTML.
+- **L188:** Get HTML element by id.
+- **L189:** Get HTML element by id. | `mediaPrev` means: Holds “media Prev” for this scope.  DOM element from the page.
+- **L190:** Update page HTML.
+- **L191:** `mediaMsg` means: Holds “media Msg” for this scope.
+- **L192:** Update page HTML.
+- **L193:** `matMsg` means: Holds “mat Msg” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L194:** Update page HTML.
 - **L204:** Get HTML element by id.
 - **L205:** Get HTML element by id.
 - **L210:** Get HTML element by id.
+<<<<<<< HEAD
 - **L214:** Get HTML element by id.
 - **L215:** Get HTML element by id.
 - **L216:** Get HTML element by id.
@@ -1259,6 +1459,49 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L322:** Get HTML element by id.
 - **L325:** JS object ↔ JSON text.
 - **L376:** JS object ↔ JSON text.
+=======
+- **L211:** `lessonType` means: Holds “lesson Type” for this scope.
+- **L214:** Get HTML element by id.
+- **L215:** Get HTML element by id.
+- **L216:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
+- **L218:** Update page HTML.
+- **L221:** `mats` means: Often a collection related to mats (plural name).
+- **L222:** `cleaned` means: Holds “cleaned” for this scope.
+- **L231:** Get HTML element by id.
+- **L232:** Get HTML element by id. | `mediaPrev` means: Holds “media Prev” for this scope.  DOM element from the page.
+- **L234:** `vUrl` means: URL string.
+- **L235:** Update page HTML.
+- **L236:** Encode text to reduce XSS risk.
+- **L237:** Encode text to reduce XSS risk.
+- **L251:** Get HTML element by id. | `type` means: Holds “type” for this scope.  DOM element from the page.
+- **L252:** Get HTML element by id. | `lbl` means: UI control reference (lbl).  DOM element from the page.
+- **L253:** Get HTML element by id. | `textarea` means: Holds “textarea” for this scope.  DOM element from the page.
+- **L255:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
+- **L256:** Get HTML element by id. | `editorToolbar` means: Holds “editor Toolbar” for this scope.  DOM element from the page.
+- **L257:** Get HTML element by id. | `mediaDZ` means: Holds “media DZ” for this scope.  DOM element from the page.
+- **L258:** Get HTML element by id. | `materialDZ` means: Holds “material DZ” for this scope.  DOM element from the page.
+- **L259:** Get HTML element by id. | `attachments` means: Often a collection related to attachments (plural name).  DOM element from the page.
+- **L293:** Get HTML element by id. | `title` means: Title of course work / page heading.  DOM element from the page.
+- **L294:** Get HTML element by id. | `type` means: Holds “type” for this scope.  DOM element from the page.
+- **L295:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
+- **L310:** `content` means: Submission body text or JSON payload in CWSubmissions.  Literal text string.
+- **L312:** Get HTML element by id.
+- **L314:** Get HTML element by id.
+- **L316:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
+- **L317:** Get HTML element by id.
+- **L322:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
+- **L323:** `materialsRaw` means: Holds “materials Raw” for this scope.
+- **L324:** `materialsArr` means: Holds “materials Arr” for this scope.
+- **L325:** JS object ↔ JSON text.
+- **L330:** `url` means: HTTP URL to media or page.
+- **L354:** `firstUrl` means: URL string.
+- **L355:** `firstName` means: Holds “first Name” for this scope.
+- **L356:** `kind` means: Upload kind (material/video/thumbnail/submission).
+- **L361:** `plain` means: Text without META trailer (student-visible instructions).
+- **L372:** `schid` means: SubChapter / lesson ID.
+- **L373:** `saveBtn` means: Holds “save Btn” for this scope.
+- **L376:** JS object ↔ JSON text. | `matsJson` means: Holds “mats Json” for this scope.  JSON serialize/parse result.
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

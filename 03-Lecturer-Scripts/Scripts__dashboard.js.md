@@ -1,6 +1,10 @@
 # dashboard.js
 **Source:** `Pages/Lecturer/Scripts/dashboard.js`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,40 +19,42 @@ Lecturer home: course stats, recent submissions, charts. Backed by LecturerRepos
 
 ## Variables / fields (file level)
 
-- **Line 3:** `__chartJsLoading` — script-level `const`/`let`/`var`
-- **Line 4:** `__chartPending` — script-level `const`/`let`/`var`
-- **Line 10:** `s` — script-level `const`/`let`/`var`
-- **Line 21:** `targets` — script-level `const`/`let`/`var`
-- **Line 27:** `done` — script-level `const`/`let`/`var`
-- **Line 28:** `io` — script-level `const`/`let`/`var`
-- **Line 41:** `enrollmentChart` — script-level `const`/`let`/`var`
-- **Line 43:** `gradeChart` — script-level `const`/`let`/`var`
-- **Line 53:** `ctxEl` — script-level `const`/`let`/`var`
-- **Line 55:** `ctx` — script-level `const`/`let`/`var`
-- **Line 82:** `labels` — script-level `const`/`let`/`var`
-- **Line 84:** `values` — script-level `const`/`let`/`var`
-- **Line 116:** `defaultLabels` — script-level `const`/`let`/`var`
-- **Line 169:** `currentSubmissionId` — script-level `const`/`let`/`var`
-- **Line 171:** `dashSubmissionsDt` — script-level `const`/`let`/`var`
-- **Line 172:** `dashSubmissionsMap` — script-level `const`/`let`/`var`
-- **Line 180:** `wrap` — script-level `const`/`let`/`var`
-- **Line 182:** `colors` — script-level `const`/`let`/`var`
-- **Line 228:** `rows` — script-level `const`/`let`/`var`
-- **Line 236:** `sub` — script-level `const`/`let`/`var`
-- **Line 251:** `res` — script-level `const`/`let`/`var`
-- **Line 253:** `blob` — script-level `const`/`let`/`var`
-- **Line 254:** `a` — script-level `const`/`let`/`var`
-- **Line 276:** `resObj` — script-level `const`/`let`/`var`
-- **Line 304:** `enrollData` — script-level `const`/`let`/`var`
-- **Line 306:** `gradeData` — script-level `const`/`let`/`var`
-- **Line 332:** `avatar` — script-level `const`/`let`/`var`
-- **Line 343:** `txtScore` — script-level `const`/`let`/`var`
-- **Line 352:** `myModal` — script-level `const`/`let`/`var`
-- **Line 357:** `score` — script-level `const`/`let`/`var`
-- **Line 358:** `review` — script-level `const`/`let`/`var`
-- **Line 359:** `errDiv` — script-level `const`/`let`/`var`
-- **Line 387:** `modalEl` — script-level `const`/`let`/`var`
-- **Line 388:** `modal` — script-level `const`/`let`/`var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 3:** `__chartJsLoading` — script-level `const`/`let`/`var` — **Holds “chart Js Loading” for this scope.**
+- **Line 4:** `__chartPending` — script-level `const`/`let`/`var` — **Holds “chart Pending” for this scope.**
+- **Line 10:** `s` — script-level `const`/`let`/`var` — **String value or submission-related object.**
+- **Line 21:** `targets` — script-level `const`/`let`/`var` — **Often a collection related to targets (plural name).**
+- **Line 27:** `done` — script-level `const`/`let`/`var` — **Holds “done” for this scope.**
+- **Line 28:** `io` — script-level `const`/`let`/`var` — **Holds “io” for this scope.**
+- **Line 41:** `enrollmentChart` — script-level `const`/`let`/`var` — **Holds “enrollment Chart” for this scope.**
+- **Line 43:** `gradeChart` — script-level `const`/`let`/`var` — **Holds “grade Chart” for this scope.**
+- **Line 53:** `ctxEl` — script-level `const`/`let`/`var` — **Holds “ctx El” for this scope.**
+- **Line 55:** `ctx` — script-level `const`/`let`/`var` — **Current HTTP request context (Request, Response, Session).**
+- **Line 82:** `labels` — script-level `const`/`let`/`var` — **Often a collection related to labels (plural name).**
+- **Line 84:** `values` — script-level `const`/`let`/`var` — **Often a collection related to values (plural name).**
+- **Line 116:** `defaultLabels` — script-level `const`/`let`/`var` — **Often a collection related to default Labels (plural name).**
+- **Line 169:** `currentSubmissionId` — script-level `const`/`let`/`var` — **Holds “current Submission Id” for this scope.**
+- **Line 171:** `dashSubmissionsDt` — script-level `const`/`let`/`var` — **Holds “dash Submissions Dt” for this scope.**
+- **Line 172:** `dashSubmissionsMap` — script-level `const`/`let`/`var` — **Holds “dash Submissions Map” for this scope.**
+- **Line 180:** `wrap` — script-level `const`/`let`/`var` — **Holds “wrap” for this scope.**
+- **Line 182:** `colors` — script-level `const`/`let`/`var` — **Often a collection related to colors (plural name).**
+- **Line 228:** `rows` — script-level `const`/`let`/`var` — **Collection of rows.**
+- **Line 236:** `sub` — script-level `const`/`let`/`var` — **Holds “sub” for this scope.**
+- **Line 251:** `res` — script-level `const`/`let`/`var` — **Result object returned from fetch/WebMethod (`data.d` unwrapped).**
+- **Line 253:** `blob` — script-level `const`/`let`/`var` — **Holds “blob” for this scope.**
+- **Line 254:** `a` — script-level `const`/`let`/`var` — **Holds “a” for this scope.**
+- **Line 276:** `resObj` — script-level `const`/`let`/`var` — **Holds “res Obj” for this scope.**
+- **Line 304:** `enrollData` — script-level `const`/`let`/`var` — **Holds “enroll Data” for this scope.**
+- **Line 306:** `gradeData` — script-level `const`/`let`/`var` — **Holds “grade Data” for this scope.**
+- **Line 332:** `avatar` — script-level `const`/`let`/`var` — **Holds “avatar” for this scope.**
+- **Line 343:** `txtScore` — script-level `const`/`let`/`var` — **UI control reference (txt Score).**
+- **Line 352:** `myModal` — script-level `const`/`let`/`var` — **Holds “my Modal” for this scope.**
+- **Line 357:** `score` — script-level `const`/`let`/`var` — **Points earned or max points depending on context.**
+- **Line 358:** `review` — script-level `const`/`let`/`var` — **Holds “review” for this scope.**
+- **Line 359:** `errDiv` — script-level `const`/`let`/`var` — **Holds “err Div” for this scope.**
+- **Line 387:** `modalEl` — script-level `const`/`let`/`var` — **Holds “modal El” for this scope.**
+- **Line 388:** `modal` — script-level `const`/`let`/`var` — **Holds “modal” for this scope.**
 
 ## Functions / methods (18 found)
 
@@ -61,8 +67,10 @@ function ensureChartJs(cb)
 #### Explanation
 
 - **Purpose:** Implements `ensureChartJs`.
-- **Parameters:** `cb`
-- **Local variables:** `s`
+- **Parameters (what each means):**
+- `cb` — Holds “cb” for this scope.
+- **Local variables (what each means):**
+- `s` — String value or submission-related object.
 
 #### Line-by-line (this function)
 
@@ -84,10 +92,18 @@ function ensureChartJs(cb)
   18 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L6:** Dashboard chart/visualization.
 - **L7:** Dashboard chart/visualization.
+=======
+**Line notes** (what code + variables mean)
+
+- **L6:** Dashboard chart/visualization.
+- **L7:** Dashboard chart/visualization.
+- **L10:** `s` means: String value or submission-related object.
+>>>>>>> eb8ce01 (update)
 - **L11:** Dashboard chart/visualization.
 - **L14:** Dashboard chart/visualization.
 
@@ -102,8 +118,13 @@ function whenChartsVisible(run)
 #### Explanation
 
 - **Purpose:** Implements `whenChartsVisible`.
-- **Parameters:** `run`
-- **Local variables:** `targets`, `done`, `io`, `i`
+- **Parameters (what each means):**
+- `run` — Holds “run” for this scope.
+- **Local variables (what each means):**
+- `targets` — Often a collection related to targets (plural name).
+- `done` — Holds “done” for this scope.
+- `io` — Holds “io” for this scope.  Newly constructed object.
+- `i` — Loop index (0-based counter in for-loops).  Literal number `0`.
 
 #### Line-by-line (this function)
 
@@ -133,11 +154,22 @@ function whenChartsVisible(run)
   40 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L20:** Dashboard chart/visualization.
 - **L22:** Get HTML element by id.
 - **L23:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L20:** Dashboard chart/visualization.
+- **L21:** `targets` means: Often a collection related to targets (plural name).
+- **L22:** Get HTML element by id.
+- **L23:** Get HTML element by id.
+- **L27:** `done` means: Holds “done” for this scope.
+- **L28:** `io` means: Holds “io” for this scope.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -150,8 +182,13 @@ function renderEnrollmentTrendWithChart(data)
 #### Explanation
 
 - **Purpose:** Implements `renderEnrollmentTrendWithChart`.
-- **Parameters:** `data`
-- **Local variables:** `ctxEl`, `ctx`, `labels`, `values`
+- **Parameters (what each means):**
+- `data` — Holds “data” for this scope.
+- **Local variables (what each means):**
+- `ctxEl` — Holds “ctx El” for this scope.  DOM element from the page.
+- `ctx` — Current HTTP request context (Request, Response, Session).
+- `labels` — Often a collection related to labels (plural name).
+- `values` — Often a collection related to values (plural name).
 
 #### Line-by-line (this function)
 
@@ -228,19 +265,36 @@ function renderEnrollmentTrendWithChart(data)
  112 |   }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L45:** Dashboard chart/visualization.
 - **L46:** Error handling block.
 - **L49:** Dashboard chart/visualization.
 - **L50:** Error handling block.
 - **L51:** Dashboard chart/visualization.
+<<<<<<< HEAD
 - **L53:** Get HTML element by id.
 - **L67:** Dashboard chart/visualization.
 - **L68:** Dashboard chart/visualization.
 - **L70:** Get HTML element by id.
 - **L78:** Dashboard chart/visualization.
 - **L85:** Get HTML element by id.
+=======
+- **L53:** Get HTML element by id. | `ctxEl` means: Holds “ctx El” for this scope.  DOM element from the page.
+- **L55:** `ctx` means: Current HTTP request context (Request, Response, Session).
+- **L67:** Dashboard chart/visualization.
+- **L68:** Dashboard chart/visualization.
+- **L70:** Get HTML element by id. | `ctxEl` means: Holds “ctx El” for this scope.  DOM element from the page.
+- **L72:** `ctx` means: Current HTTP request context (Request, Response, Session).
+- **L78:** Dashboard chart/visualization.
+- **L83:** `labels` means: Often a collection related to labels (plural name).
+- **L84:** `values` means: Often a collection related to values (plural name).
+- **L85:** Get HTML element by id. | `ctx` means: Current HTTP request context (Request, Response, Session).  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L86:** Dashboard chart/visualization.
 - **L87:** Dashboard chart/visualization.
 
@@ -255,8 +309,13 @@ function renderGradeDistributionWithChart(data)
 #### Explanation
 
 - **Purpose:** Implements `renderGradeDistributionWithChart`.
-- **Parameters:** `data`
-- **Local variables:** `defaultLabels`, `ctx`, `labels`, `values`
+- **Parameters (what each means):**
+- `data` — Holds “data” for this scope.
+- **Local variables (what each means):**
+- `defaultLabels` — Often a collection related to default Labels (plural name).
+- `ctx` — Current HTTP request context (Request, Response, Session).  DOM element from the page.
+- `labels` — Often a collection related to labels (plural name).
+- `values` — Often a collection related to values (plural name).
 
 #### Line-by-line (this function)
 
@@ -315,6 +374,7 @@ function renderGradeDistributionWithChart(data)
  163 |   }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L114:** Dashboard chart/visualization.
@@ -323,6 +383,19 @@ function renderGradeDistributionWithChart(data)
 - **L120:** Get HTML element by id.
 - **L121:** Dashboard chart/visualization.
 - **L142:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L114:** Dashboard chart/visualization.
+- **L115:** Error handling block.
+- **L116:** `defaultLabels` means: Often a collection related to default Labels (plural name).
+- **L119:** Dashboard chart/visualization.
+- **L120:** Get HTML element by id. | `ctx` means: Current HTTP request context (Request, Response, Session).  DOM element from the page.
+- **L121:** Dashboard chart/visualization.
+- **L140:** `labels` means: Often a collection related to labels (plural name).
+- **L141:** `values` means: Often a collection related to values (plural name).
+- **L142:** Get HTML element by id. | `ctx` means: Current HTTP request context (Request, Response, Session).  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L143:** Dashboard chart/visualization.
 - **L144:** Dashboard chart/visualization.
 
@@ -339,8 +412,27 @@ function escapeHtmlDash(str)
 - **Purpose:** Implements `escapeHtmlDash`.
 - **ASP.NET WebMethod:** Called from browser JS via `Page.aspx/MethodName` POST JSON.
 - **AJAX:** Browser calls server endpoints asynchronously.
-- **Parameters:** `str`
-- **Local variables:** `wrap`, `colors`, `rows`, `sub`, `res`, `blob`, `a`, `resObj`, `enrollData`, `gradeData`, `avatar`, `txtScore`, `myModal`, `score`, `review`, `errDiv`, `modalEl`, `modal`
+- **Parameters (what each means):**
+- `str` — String value: str.
+- **Local variables (what each means):**
+- `wrap` — Holds “wrap” for this scope.  DOM element from the page.
+- `colors` — Often a collection related to colors (plural name).
+- `rows` — Collection of rows.
+- `sub` — Holds “sub” for this scope.
+- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- `blob` — Holds “blob” for this scope.  Newly constructed object.
+- `a` — Holds “a” for this scope.
+- `resObj` — Holds “res Obj” for this scope.
+- `enrollData` — Holds “enroll Data” for this scope.
+- `gradeData` — Holds “grade Data” for this scope.
+- `avatar` — Holds “avatar” for this scope.  DOM element from the page.
+- `txtScore` — UI control reference (txt Score).  DOM element from the page.
+- `myModal` — Holds “my Modal” for this scope.  DOM element from the page.
+- `score` — Points earned or max points depending on context.  DOM element from the page.
+- `review` — Holds “review” for this scope.  DOM element from the page.
+- `errDiv` — Holds “err Div” for this scope.  DOM element from the page.
+- `modalEl` — Holds “modal El” for this scope.  DOM element from the page.
+- `modal` — Holds “modal” for this scope.
 
 #### Line-by-line (this function)
 
@@ -580,35 +672,67 @@ function escapeHtmlDash(str)
  404 | 
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L174:** Encode text to reduce XSS risk.
 - **L180:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L174:** Encode text to reduce XSS risk.
+- **L180:** Get HTML element by id. | `wrap` means: Holds “wrap” for this scope.  DOM element from the page.
+- **L182:** `colors` means: Often a collection related to colors (plural name).
+>>>>>>> eb8ce01 (update)
 - **L186:** In-memory result set from ADO.NET.
 - **L187:** Update page HTML.
 - **L191:** In-memory result set from ADO.NET.
 - **L203:** Encode text to reduce XSS risk.
 - **L204:** Encode text to reduce XSS risk.
+<<<<<<< HEAD
 - **L242:** CSV export.
 - **L243:** HTTP request to server WebMethod/ashx.
 - **L246:** JS object ↔ JSON text.
 - **L253:** CSV export.
 - **L256:** CSV export.
 - **L266:** HTTP request to server WebMethod/ashx.
+=======
+- **L228:** `rows` means: Collection of rows.
+- **L236:** `sub` means: Holds “sub” for this scope.
+- **L242:** CSV export.
+- **L243:** HTTP request to server WebMethod/ashx.
+- **L246:** JS object ↔ JSON text.
+- **L251:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- **L253:** CSV export. | `blob` means: Holds “blob” for this scope.  Newly constructed object.
+- **L254:** `a` means: Holds “a” for this scope.
+- **L256:** CSV export.
+- **L266:** HTTP request to server WebMethod/ashx.
+- **L276:** `resObj` means: Holds “res Obj” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L294:** Get HTML element by id.
 - **L295:** Get HTML element by id.
 - **L296:** Get HTML element by id.
 - **L298:** Get HTML element by id.
 - **L300:** Get HTML element by id.
+<<<<<<< HEAD
+=======
+- **L304:** `enrollData` means: Holds “enroll Data” for this scope.
+- **L306:** `gradeData` means: Holds “grade Data” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L308:** Dashboard chart/visualization.
 - **L309:** Dashboard chart/visualization.
 - **L310:** Dashboard chart/visualization.
 - **L311:** Dashboard chart/visualization.
+<<<<<<< HEAD
 - **L332:** Get HTML element by id.
+=======
+- **L332:** Get HTML element by id. | `avatar` means: Holds “avatar” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L335:** Get HTML element by id.
 - **L338:** Get HTML element by id.
 - **L339:** Get HTML element by id.
 - **L340:** Get HTML element by id.
+<<<<<<< HEAD
 - **L343:** Get HTML element by id.
 - **L346:** Get HTML element by id.
 - **L349:** Get HTML element by id.
@@ -619,6 +743,20 @@ function escapeHtmlDash(str)
 - **L370:** HTTP request to server WebMethod/ashx.
 - **L375:** JS object ↔ JSON text.
 - **L387:** Get HTML element by id.
+=======
+- **L343:** Get HTML element by id. | `txtScore` means: UI control reference (txt Score).  DOM element from the page.
+- **L346:** Get HTML element by id.
+- **L349:** Get HTML element by id.
+- **L352:** Get HTML element by id. | `myModal` means: Holds “my Modal” for this scope.  DOM element from the page.
+- **L357:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
+- **L358:** Get HTML element by id. | `review` means: Holds “review” for this scope.  DOM element from the page.
+- **L359:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
+- **L370:** HTTP request to server WebMethod/ashx.
+- **L375:** JS object ↔ JSON text.
+- **L383:** `resObj` means: Holds “res Obj” for this scope.
+- **L387:** Get HTML element by id. | `modalEl` means: Holds “modal El” for this scope.  DOM element from the page.
+- **L388:** `modal` means: Holds “modal” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -631,8 +769,12 @@ function renderDashSubmissions(list)
 #### Explanation
 
 - **Purpose:** Implements `renderDashSubmissions`.
-- **Parameters:** `list`
-- **Local variables:** `wrap`, `colors`, `rows`
+- **Parameters (what each means):**
+- `list` — In-memory collection being built for JSON return.
+- **Local variables (what each means):**
+- `wrap` — Holds “wrap” for this scope.  DOM element from the page.
+- `colors` — Often a collection related to colors (plural name).
+- `rows` — Collection of rows.
 
 #### Line-by-line (this function)
 
@@ -696,14 +838,25 @@ function renderDashSubmissions(list)
  233 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L180:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L180:** Get HTML element by id. | `wrap` means: Holds “wrap” for this scope.  DOM element from the page.
+- **L182:** `colors` means: Often a collection related to colors (plural name).
+>>>>>>> eb8ce01 (update)
 - **L186:** In-memory result set from ADO.NET.
 - **L187:** Update page HTML.
 - **L191:** In-memory result set from ADO.NET.
 - **L203:** Encode text to reduce XSS risk.
 - **L204:** Encode text to reduce XSS risk.
+<<<<<<< HEAD
+=======
+- **L228:** `rows` means: Collection of rows.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -716,7 +869,9 @@ function render(sub, i)
 #### Explanation
 
 - **Purpose:** Implements `render`.
-- **Parameters:** `sub, i`
+- **Parameters (what each means):**
+- `sub` — Holds “sub” for this scope.
+- `i` — Loop index (0-based counter in for-loops).
 
 #### Line-by-line (this function)
 
@@ -728,7 +883,11 @@ function render(sub, i)
  205 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L203:** Encode text to reduce XSS risk.
 - **L204:** Encode text to reduce XSS risk.
@@ -744,7 +903,8 @@ function searchValue(s)
 #### Explanation
 
 - **Purpose:** Implements `searchValue`.
-- **Parameters:** `s`
+- **Parameters (what each means):**
+- `s` — String value or submission-related object.
 
 #### Line-by-line (this function)
 
@@ -763,7 +923,8 @@ function sortValue(s)
 #### Explanation
 
 - **Purpose:** Implements `sortValue`.
-- **Parameters:** `s`
+- **Parameters (what each means):**
+- `s` — String value or submission-related object.
 
 #### Line-by-line (this function)
 
@@ -782,7 +943,8 @@ function render(sub)
 #### Explanation
 
 - **Purpose:** Implements `render`.
-- **Parameters:** `sub`
+- **Parameters (what each means):**
+- `sub` — Holds “sub” for this scope.
 
 #### Line-by-line (this function)
 
@@ -807,7 +969,8 @@ function sortValue(s)
 #### Explanation
 
 - **Purpose:** Implements `sortValue`.
-- **Parameters:** `s`
+- **Parameters (what each means):**
+- `s` — String value or submission-related object.
 
 #### Line-by-line (this function)
 
@@ -826,7 +989,8 @@ function searchValue(s)
 #### Explanation
 
 - **Purpose:** Implements `searchValue`.
-- **Parameters:** `s`
+- **Parameters (what each means):**
+- `s` — String value or submission-related object.
 
 #### Line-by-line (this function)
 
@@ -845,8 +1009,10 @@ function openGradeModalBySid(sid)
 #### Explanation
 
 - **Purpose:** Implements `openGradeModalBySid`.
-- **Parameters:** `sid`
-- **Local variables:** `sub`
+- **Parameters (what each means):**
+- `sid` — Submission ID (CWSubmissions.SID).
+- **Local variables (what each means):**
+- `sub` — Holds “sub” for this scope.
 
 #### Line-by-line (this function)
 
@@ -858,6 +1024,13 @@ function openGradeModalBySid(sid)
  237 | if (sub) openGradeModal(sub);
  238 | }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L236:** `sub` means: Holds “sub” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -872,7 +1045,10 @@ function exportDashGradesCsv()
 - **Purpose:** Implements `exportDashGradesCsv`.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **AJAX:** Browser calls server endpoints asynchronously.
-- **Local variables:** `res`, `blob`, `a`
+- **Local variables (what each means):**
+- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- `blob` — Holds “blob” for this scope.  Newly constructed object.
+- `a` — Holds “a” for this scope.
 
 #### Line-by-line (this function)
 
@@ -902,12 +1078,22 @@ function exportDashGradesCsv()
  262 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L242:** CSV export.
 - **L243:** HTTP request to server WebMethod/ashx.
 - **L246:** JS object ↔ JSON text.
+<<<<<<< HEAD
 - **L253:** CSV export.
+=======
+- **L251:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- **L253:** CSV export. | `blob` means: Holds “blob” for this scope.  Newly constructed object.
+- **L254:** `a` means: Holds “a” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L256:** CSV export.
 
 ---
@@ -925,7 +1111,10 @@ function loadDashboardData()
 - **AJAX:** Browser calls server endpoints asynchronously.
 - **Navigation:** Redirects the browser.
 - **Pattern:** Read/load data for display.
-- **Local variables:** `resObj`, `enrollData`, `gradeData`
+- **Local variables (what each means):**
+- `resObj` — Holds “res Obj” for this scope.
+- `enrollData` — Holds “enroll Data” for this scope.
+- `gradeData` — Holds “grade Data” for this scope.
 
 #### Line-by-line (this function)
 
@@ -993,14 +1182,26 @@ function loadDashboardData()
  322 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L266:** HTTP request to server WebMethod/ashx.
+=======
+**Line notes** (what code + variables mean)
+
+- **L266:** HTTP request to server WebMethod/ashx.
+- **L276:** `resObj` means: Holds “res Obj” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L294:** Get HTML element by id.
 - **L295:** Get HTML element by id.
 - **L296:** Get HTML element by id.
 - **L298:** Get HTML element by id.
 - **L300:** Get HTML element by id.
+<<<<<<< HEAD
+=======
+- **L304:** `enrollData` means: Holds “enroll Data” for this scope.
+- **L306:** `gradeData` means: Holds “grade Data” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L308:** Dashboard chart/visualization.
 - **L309:** Dashboard chart/visualization.
 - **L310:** Dashboard chart/visualization.
@@ -1017,7 +1218,8 @@ function formatNumber(num)
 #### Explanation
 
 - **Purpose:** Implements `formatNumber`.
-- **Parameters:** `num`
+- **Parameters (what each means):**
+- `num` — Numeric count of items related to `num`.
 
 #### Line-by-line (this function)
 
@@ -1040,8 +1242,12 @@ function openGradeModal(sub)
 #### Explanation
 
 - **Purpose:** Implements `openGradeModal`.
-- **Parameters:** `sub`
-- **Local variables:** `avatar`, `txtScore`, `myModal`
+- **Parameters (what each means):**
+- `sub` — Holds “sub” for this scope.
+- **Local variables (what each means):**
+- `avatar` — Holds “avatar” for this scope.  DOM element from the page.
+- `txtScore` — UI control reference (txt Score).  DOM element from the page.
+- `myModal` — Holds “my Modal” for this scope.  DOM element from the page.
 
 #### Line-by-line (this function)
 
@@ -1077,17 +1283,30 @@ function openGradeModal(sub)
  354 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L332:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L332:** Get HTML element by id. | `avatar` means: Holds “avatar” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L335:** Get HTML element by id.
 - **L338:** Get HTML element by id.
 - **L339:** Get HTML element by id.
 - **L340:** Get HTML element by id.
+<<<<<<< HEAD
 - **L343:** Get HTML element by id.
 - **L346:** Get HTML element by id.
 - **L349:** Get HTML element by id.
 - **L352:** Get HTML element by id.
+=======
+- **L343:** Get HTML element by id. | `txtScore` means: UI control reference (txt Score).  DOM element from the page.
+- **L346:** Get HTML element by id.
+- **L349:** Get HTML element by id.
+- **L352:** Get HTML element by id. | `myModal` means: Holds “my Modal” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1103,7 +1322,13 @@ function submitGrading()
 - **ASP.NET WebMethod:** Called from browser JS via `Page.aspx/MethodName` POST JSON.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **AJAX:** Browser calls server endpoints asynchronously.
-- **Local variables:** `score`, `review`, `errDiv`, `resObj`, `modalEl`, `modal`
+- **Local variables (what each means):**
+- `score` — Points earned or max points depending on context.  DOM element from the page.
+- `review` — Holds “review” for this scope.  DOM element from the page.
+- `errDiv` — Holds “err Div” for this scope.  DOM element from the page.
+- `resObj` — Holds “res Obj” for this scope.
+- `modalEl` — Holds “modal El” for this scope.  DOM element from the page.
+- `modal` — Holds “modal” for this scope.
 
 #### Line-by-line (this function)
 
@@ -1160,6 +1385,7 @@ function submitGrading()
  403 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L357:** Get HTML element by id.
@@ -1168,12 +1394,28 @@ function submitGrading()
 - **L370:** HTTP request to server WebMethod/ashx.
 - **L375:** JS object ↔ JSON text.
 - **L387:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L357:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
+- **L358:** Get HTML element by id. | `review` means: Holds “review” for this scope.  DOM element from the page.
+- **L359:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
+- **L370:** HTTP request to server WebMethod/ashx.
+- **L375:** JS object ↔ JSON text.
+- **L383:** `resObj` means: Holds “res Obj” for this scope.
+- **L387:** Get HTML element by id. | `modalEl` means: Holds “modal El” for this scope.  DOM element from the page.
+- **L388:** `modal` means: Holds “modal” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | 
@@ -1584,6 +1826,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 
 **Line notes**
 
+<<<<<<< HEAD
 - **L6:** Dashboard chart/visualization.
 - **L7:** Dashboard chart/visualization.
 - **L11:** Dashboard chart/visualization.
@@ -1593,21 +1836,52 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L23:** Get HTML element by id.
 - **L42:** Dashboard chart/visualization.
 - **L43:** Dashboard chart/visualization.
+=======
+- **L3:** `__chartJsLoading` means: Holds “chart Js Loading” for this scope.
+- **L4:** `__chartPending` means: Holds “chart Pending” for this scope.
+- **L6:** Dashboard chart/visualization.
+- **L7:** Dashboard chart/visualization.
+- **L10:** `s` means: String value or submission-related object.
+- **L11:** Dashboard chart/visualization.
+- **L14:** Dashboard chart/visualization.
+- **L20:** Dashboard chart/visualization.
+- **L21:** `targets` means: Often a collection related to targets (plural name).
+- **L22:** Get HTML element by id.
+- **L23:** Get HTML element by id.
+- **L27:** `done` means: Holds “done” for this scope.
+- **L28:** `io` means: Holds “io” for this scope.  Newly constructed object.
+- **L42:** Dashboard chart/visualization. | `enrollmentChart` means: Holds “enrollment Chart” for this scope.
+- **L43:** Dashboard chart/visualization. | `gradeChart` means: Holds “grade Chart” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L45:** Dashboard chart/visualization.
 - **L46:** Error handling block.
 - **L49:** Dashboard chart/visualization.
 - **L50:** Error handling block.
 - **L51:** Dashboard chart/visualization.
+<<<<<<< HEAD
 - **L53:** Get HTML element by id.
 - **L67:** Dashboard chart/visualization.
 - **L68:** Dashboard chart/visualization.
 - **L70:** Get HTML element by id.
 - **L78:** Dashboard chart/visualization.
 - **L85:** Get HTML element by id.
+=======
+- **L53:** Get HTML element by id. | `ctxEl` means: Holds “ctx El” for this scope.  DOM element from the page.
+- **L55:** `ctx` means: Current HTTP request context (Request, Response, Session).
+- **L67:** Dashboard chart/visualization.
+- **L68:** Dashboard chart/visualization.
+- **L70:** Get HTML element by id. | `ctxEl` means: Holds “ctx El” for this scope.  DOM element from the page.
+- **L72:** `ctx` means: Current HTTP request context (Request, Response, Session).
+- **L78:** Dashboard chart/visualization.
+- **L83:** `labels` means: Often a collection related to labels (plural name).
+- **L84:** `values` means: Often a collection related to values (plural name).
+- **L85:** Get HTML element by id. | `ctx` means: Current HTTP request context (Request, Response, Session).  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L86:** Dashboard chart/visualization.
 - **L87:** Dashboard chart/visualization.
 - **L114:** Dashboard chart/visualization.
 - **L115:** Error handling block.
+<<<<<<< HEAD
 - **L119:** Dashboard chart/visualization.
 - **L120:** Get HTML element by id.
 - **L121:** Dashboard chart/visualization.
@@ -1617,31 +1891,73 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L166:** DOM event handler.
 - **L174:** Encode text to reduce XSS risk.
 - **L180:** Get HTML element by id.
+=======
+- **L116:** `defaultLabels` means: Often a collection related to default Labels (plural name).
+- **L119:** Dashboard chart/visualization.
+- **L120:** Get HTML element by id. | `ctx` means: Current HTTP request context (Request, Response, Session).  DOM element from the page.
+- **L121:** Dashboard chart/visualization.
+- **L140:** `labels` means: Often a collection related to labels (plural name).
+- **L141:** `values` means: Often a collection related to values (plural name).
+- **L142:** Get HTML element by id. | `ctx` means: Current HTTP request context (Request, Response, Session).  DOM element from the page.
+- **L143:** Dashboard chart/visualization.
+- **L144:** Dashboard chart/visualization.
+- **L166:** DOM event handler.
+- **L170:** `currentSubmissionId` means: Holds “current Submission Id” for this scope.
+- **L171:** `dashSubmissionsDt` means: Holds “dash Submissions Dt” for this scope.
+- **L172:** `dashSubmissionsMap` means: Holds “dash Submissions Map” for this scope.
+- **L174:** Encode text to reduce XSS risk.
+- **L180:** Get HTML element by id. | `wrap` means: Holds “wrap” for this scope.  DOM element from the page.
+- **L182:** `colors` means: Often a collection related to colors (plural name).
+>>>>>>> eb8ce01 (update)
 - **L186:** In-memory result set from ADO.NET.
 - **L187:** Update page HTML.
 - **L191:** In-memory result set from ADO.NET.
 - **L203:** Encode text to reduce XSS risk.
 - **L204:** Encode text to reduce XSS risk.
+<<<<<<< HEAD
 - **L242:** CSV export.
 - **L243:** HTTP request to server WebMethod/ashx.
 - **L246:** JS object ↔ JSON text.
 - **L253:** CSV export.
 - **L256:** CSV export.
 - **L266:** HTTP request to server WebMethod/ashx.
+=======
+- **L228:** `rows` means: Collection of rows.
+- **L236:** `sub` means: Holds “sub” for this scope.
+- **L242:** CSV export.
+- **L243:** HTTP request to server WebMethod/ashx.
+- **L246:** JS object ↔ JSON text.
+- **L251:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- **L253:** CSV export. | `blob` means: Holds “blob” for this scope.  Newly constructed object.
+- **L254:** `a` means: Holds “a” for this scope.
+- **L256:** CSV export.
+- **L266:** HTTP request to server WebMethod/ashx.
+- **L276:** `resObj` means: Holds “res Obj” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L294:** Get HTML element by id.
 - **L295:** Get HTML element by id.
 - **L296:** Get HTML element by id.
 - **L298:** Get HTML element by id.
 - **L300:** Get HTML element by id.
+<<<<<<< HEAD
+=======
+- **L304:** `enrollData` means: Holds “enroll Data” for this scope.
+- **L306:** `gradeData` means: Holds “grade Data” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L308:** Dashboard chart/visualization.
 - **L309:** Dashboard chart/visualization.
 - **L310:** Dashboard chart/visualization.
 - **L311:** Dashboard chart/visualization.
+<<<<<<< HEAD
 - **L332:** Get HTML element by id.
+=======
+- **L332:** Get HTML element by id. | `avatar` means: Holds “avatar” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L335:** Get HTML element by id.
 - **L338:** Get HTML element by id.
 - **L339:** Get HTML element by id.
 - **L340:** Get HTML element by id.
+<<<<<<< HEAD
 - **L343:** Get HTML element by id.
 - **L346:** Get HTML element by id.
 - **L349:** Get HTML element by id.
@@ -1652,6 +1968,20 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L370:** HTTP request to server WebMethod/ashx.
 - **L375:** JS object ↔ JSON text.
 - **L387:** Get HTML element by id.
+=======
+- **L343:** Get HTML element by id. | `txtScore` means: UI control reference (txt Score).  DOM element from the page.
+- **L346:** Get HTML element by id.
+- **L349:** Get HTML element by id.
+- **L352:** Get HTML element by id. | `myModal` means: Holds “my Modal” for this scope.  DOM element from the page.
+- **L357:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
+- **L358:** Get HTML element by id. | `review` means: Holds “review” for this scope.  DOM element from the page.
+- **L359:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
+- **L370:** HTTP request to server WebMethod/ashx.
+- **L375:** JS object ↔ JSON text.
+- **L383:** `resObj` means: Holds “res Obj” for this scope.
+- **L387:** Get HTML element by id. | `modalEl` means: Holds “modal El” for this scope.  DOM element from the page.
+- **L388:** `modal` means: Holds “modal” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

@@ -1,6 +1,10 @@
 # CsrfProtection.cs
 **Source:** `Data/Security/CsrfProtection.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,19 +19,21 @@ Session CSRF token + cookie + meta tag; validates X-CSRF-Token / form field on P
 
 ## Variables / fields (file level)
 
-- **Line 21:** `token` — type `string`
-- **Line 24:** `bytes` — type `var`
-- **Line 35:** `cookie` — type `var`
-- **Line 45:** `token` — type `return`
-- **Line 53:** `method` — type `return`
-- **Line 64:** `sessionToken` — type `string`
-- **Line 69:** `false` — type `return`
-- **Line 71:** `provided` — type `string`
-- **Line 83:** `c` — type `var`
-- **Line 106:** `false` — type `return`
-- **Line 112:** `diff` — type `int`
-- **Line 115:** `diff` — type `return`
-- **Line 120:** `t` — type `string`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 21:** `token` (`string`) — **JWT or CSRF token string.**
+- **Line 24:** `bytes` (`var`) — **Byte array (hash, random, file content).**
+- **Line 35:** `cookie` (`var`) — **HTTP cookie (JWT or CSRF).**
+- **Line 45:** `token` (`return`) — **JWT or CSRF token string.**
+- **Line 53:** `method` (`return`) — **HTTP method (GET/POST) or MFA method (totp/email).**
+- **Line 64:** `sessionToken` (`string`) — **Security token (JWT or CSRF). (text)**
+- **Line 69:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 71:** `provided` (`string`) — **Holds “provided” for this scope. (text)**
+- **Line 83:** `c` (`var`) — **Temporary value (character, course, or counter depending on loop).**
+- **Line 106:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 112:** `diff` (`int`) — **Holds “diff” for this scope. (integer)**
+- **Line 115:** `diff` (`return`) — **Holds “diff” for this scope. (type `return`)**
+- **Line 120:** `t` (`string`) — **Temporary string/token/time value.**
 
 ## Functions / methods (6 found)
 
@@ -41,8 +47,13 @@ public static string EnsureToken(HttpContext ctx)
 
 - **Purpose:** Implements `EnsureToken`.
 - **Session:** Reads/writes ASP.NET Session.
-- **Parameters:** `HttpContext ctx`
-- **Local variables:** `token`, `bytes`, `rng`, `cookie`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- **Local variables (what each means):**
+- `token` (`string`) — JWT or CSRF token string.  Read from ASP.NET Session.
+- `bytes` (`var`) — Byte array (hash, random, file content).  Newly constructed object.
+- `rng` (`var`) — Holds “rng” for this scope.
+- `cookie` (`var`) — HTTP cookie (JWT or CSRF).  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -80,6 +91,7 @@ public static string EnsureToken(HttpContext ctx)
   47 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L18:** CSRF token ensure/validate.
@@ -87,6 +99,17 @@ public static string EnsureToken(HttpContext ctx)
 - **L25:** Import namespace/types.
 - **L29:** Server session for logged-in user.
 - **L33:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L18:** CSRF token ensure/validate.
+- **L21:** Server session for logged-in user. | `token` means: JWT or CSRF token string.  Read from ASP.NET Session.
+- **L24:** `bytes` means: Byte array (hash, random, file content).  Newly constructed object.
+- **L25:** Import namespace/types.
+- **L29:** Server session for logged-in user.
+- **L33:** Error handling block.
+- **L35:** `cookie` means: HTTP cookie (JWT or CSRF).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L41:** Error handling block.
 - **L44:** Handle/log exception.
 
@@ -101,7 +124,8 @@ public static bool IsSafeMethod(string method)
 #### Explanation
 
 - **Purpose:** Implements `IsSafeMethod`.
-- **Parameters:** `string method`
+- **Parameters (what each means):**
+- `method` (`string`) — HTTP method (GET/POST) or MFA method (totp/email).
 
 #### Line-by-line (this function)
 
@@ -127,8 +151,12 @@ public static bool Validate(HttpContext ctx)
 
 - **Purpose:** Implements `Validate`.
 - **Session:** Reads/writes ASP.NET Session.
-- **Parameters:** `HttpContext ctx`
-- **Local variables:** `sessionToken`, `provided`, `c`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- **Local variables (what each means):**
+- `sessionToken` (`string`) — Security token (JWT or CSRF). (text)  Read from ASP.NET Session.
+- `provided` (`string`) — Holds “provided” for this scope. (text)
+- `c` (`var`) — Temporary value (character, course, or counter depending on loop).
 
 #### Line-by-line (this function)
 
@@ -168,10 +196,19 @@ public static bool Validate(HttpContext ctx)
   89 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L64:** Server session for logged-in user.
 - **L68:** CSRF token ensure/validate.
+=======
+**Line notes** (what code + variables mean)
+
+- **L64:** Server session for logged-in user. | `sessionToken` means: Security token (JWT or CSRF). (text)  Read from ASP.NET Session.
+- **L68:** CSRF token ensure/validate.
+- **L72:** `provided` means: Holds “provided” for this scope. (text)
+- **L83:** `c` means: Temporary value (character, course, or counter depending on loop).
+>>>>>>> eb8ce01 (update)
 - **L88:** Constant-time string compare (reduce timing leaks).
 
 ---
@@ -187,8 +224,11 @@ public static bool ValidateOrReject(HttpContext ctx, bool writeJsonError = true)
 - **Purpose:** Implements `ValidateOrReject`.
 - **CSRF:** Validates anti-forgery token on mutating request.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `HttpContext ctx, bool writeJsonError = true`
-- **Local variables:** `writeJsonError`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- `writeJsonError` (`bool`) — Holds “write Json Error” for this scope. (true/false)
+- **Local variables (what each means):**
+- `writeJsonError` (`bool`) — Holds “write Json Error” for this scope. (true/false)
 
 #### Line-by-line (this function)
 
@@ -213,7 +253,11 @@ public static bool ValidateOrReject(HttpContext ctx, bool writeJsonError = true)
  107 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L96:** Error handling block.
 - **L102:** CSRF anti-forgery protection.
@@ -230,8 +274,12 @@ private static bool FixedTimeEquals(string a, string b)
 #### Explanation
 
 - **Purpose:** Implements `FixedTimeEquals`.
-- **Parameters:** `string a, string b`
-- **Local variables:** `diff`, `i`
+- **Parameters (what each means):**
+- `a` (`string`) — Holds “a” for this scope. (text)
+- `b` (`string`) — Holds “b” for this scope. (text)
+- **Local variables (what each means):**
+- `diff` (`int`) — Holds “diff” for this scope. (integer)  Literal number `0`.
+- `i` (`int`) — Loop index (0-based counter in for-loops).  Literal number `0`.
 
 #### Line-by-line (this function)
 
@@ -247,9 +295,16 @@ private static bool FixedTimeEquals(string a, string b)
  116 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L109:** Constant-time string compare (reduce timing leaks).
+=======
+**Line notes** (what code + variables mean)
+
+- **L109:** Constant-time string compare (reduce timing leaks).
+- **L112:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -263,8 +318,10 @@ public static string MetaTag(HttpContext ctx)
 
 - **Purpose:** Implements `MetaTag`.
 - **CSRF:** Validates anti-forgery token on mutating request.
-- **Parameters:** `HttpContext ctx`
-- **Local variables:** `t`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- **Local variables (what each means):**
+- `t` (`string`) — Temporary string/token/time value.
 
 #### Line-by-line (this function)
 
@@ -277,16 +334,26 @@ public static string MetaTag(HttpContext ctx)
  122 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L120:** CSRF token ensure/validate.
+=======
+**Line notes** (what code + variables mean)
+
+- **L120:** CSRF token ensure/validate. | `t` means: Temporary string/token/time value.
+>>>>>>> eb8ce01 (update)
 - **L121:** CSRF anti-forgery protection.
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -427,6 +494,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L15:** CSRF anti-forgery protection.
 - **L16:** CSRF anti-forgery protection.
 - **L18:** CSRF token ensure/validate.
+<<<<<<< HEAD
 - **L21:** Server session for logged-in user.
 - **L25:** Import namespace/types.
 - **L29:** Server session for logged-in user.
@@ -435,12 +503,31 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L44:** Handle/log exception.
 - **L64:** Server session for logged-in user.
 - **L68:** CSRF token ensure/validate.
+=======
+- **L21:** Server session for logged-in user. | `token` means: JWT or CSRF token string.  Read from ASP.NET Session.
+- **L24:** `bytes` means: Byte array (hash, random, file content).  Newly constructed object.
+- **L25:** Import namespace/types.
+- **L29:** Server session for logged-in user.
+- **L33:** Error handling block.
+- **L35:** `cookie` means: HTTP cookie (JWT or CSRF).  Newly constructed object.
+- **L41:** Error handling block.
+- **L44:** Handle/log exception.
+- **L64:** Server session for logged-in user. | `sessionToken` means: Security token (JWT or CSRF). (text)  Read from ASP.NET Session.
+- **L68:** CSRF token ensure/validate.
+- **L72:** `provided` means: Holds “provided” for this scope. (text)
+- **L83:** `c` means: Temporary value (character, course, or counter depending on loop).
+>>>>>>> eb8ce01 (update)
 - **L88:** Constant-time string compare (reduce timing leaks).
 - **L96:** Error handling block.
 - **L102:** CSRF anti-forgery protection.
 - **L104:** Handle/log exception.
 - **L109:** Constant-time string compare (reduce timing leaks).
+<<<<<<< HEAD
 - **L120:** CSRF token ensure/validate.
+=======
+- **L112:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
+- **L120:** CSRF token ensure/validate. | `t` means: Temporary string/token/time value.
+>>>>>>> eb8ce01 (update)
 - **L121:** CSRF anti-forgery protection.
 
 ## Source snapshot (raw)

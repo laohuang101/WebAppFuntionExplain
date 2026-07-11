@@ -1,6 +1,10 @@
 # Landing.aspx.cs
 **Source:** `Pages/Landing/Landing.aspx.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,22 +19,24 @@ Public marketing + course catalog. Shows published courses only (`IsPublished`).
 
 ## Variables / fields (file level)
 
-- **Line 18:** `cs` — type `var`
-- **Line 40:** `role` — type `string`
-- **Line 42:** `dash` — type `string`
-- **Line 108:** `sql` — type `string`
-- **Line 113:** `r` — type `SqlDataReader`
-- **Line 114:** `cmd` — type `SqlCommand`
-- **Line 132:** `grid` — type `var`
-- **Line 137:** `count` — type `int`
-- **Line 141:** `name` — type `string`
-- **Line 142:** `desc` — type `string`
-- **Line 143:** `bg` — type `string`
-- **Line 144:** `cat` — type `string`
-- **Line 145:** `level` — type `string`
-- **Line 146:** `rating` — type `decimal`
-- **Line 147:** `img` — type `string`
-- **Line 202:** `o` — type `var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 18:** `cs` (`var`) — **Connection string text.**
+- **Line 40:** `role` (`string`) — **User role code or name (Admin/Student/Lecturer).**
+- **Line 42:** `dash` (`string`) — **Holds “dash” for this scope. (text)**
+- **Line 108:** `sql` (`string`) — **SQL query text (should use parameters, not raw user input).**
+- **Line 113:** `r` (`SqlDataReader`) — **Usually one database row (DataRow) in query loops.**
+- **Line 114:** `cmd` (`SqlCommand`) — **SqlCommand — the SQL statement + parameters object.**
+- **Line 132:** `grid` (`var`) — **Identifier (`grid`) — database primary/foreign key.**
+- **Line 137:** `count` (`int`) — **Number of matching records.**
+- **Line 141:** `name` (`string`) — **Display name of user/course/criterion.**
+- **Line 142:** `desc` (`string`) — **Description text (may embed <<<META>>> JSON).**
+- **Line 143:** `bg` (`string`) — **Holds “bg” for this scope. (text)**
+- **Line 144:** `cat` (`string`) — **Date/time value. (text)**
+- **Line 145:** `level` (`string`) — **Holds “level” for this scope. (text)**
+- **Line 146:** `rating` (`decimal`) — **Holds “rating” for this scope. (number/score)**
+- **Line 147:** `img` (`string`) — **Image element or image path.**
+- **Line 202:** `o` (`var`) — **Holds “o” for this scope.**
 
 ## Functions / methods (6 found)
 
@@ -44,7 +50,9 @@ protected void Page_Load(object sender, EventArgs e)
 
 - **Purpose:** Implements `Page_Load`.
 - **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters:** `object sender, EventArgs e`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
 
 #### Line-by-line (this function)
 
@@ -61,7 +69,11 @@ protected void Page_Load(object sender, EventArgs e)
   31 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L23:** Page load entry (GET or postback).
 - **L25:** False on first open; true after postback.
@@ -78,7 +90,9 @@ private void BindAuthChrome()
 
 - **Purpose:** Implements `BindAuthChrome`.
 - **Session:** Reads/writes ASP.NET Session.
-- **Local variables:** `role`, `dash`
+- **Local variables (what each means):**
+- `role` (`string`) — User role code or name (Admin/Student/Lecturer).  Read from ASP.NET Session.
+- `dash` (`string`) — Holds “dash” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -109,11 +123,20 @@ private void BindAuthChrome()
   55 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L35:** Server session for logged-in user.
 - **L39:** Server session for logged-in user.
 - **L41:** Server session for logged-in user.
+=======
+**Line notes** (what code + variables mean)
+
+- **L35:** Server session for logged-in user.
+- **L39:** Server session for logged-in user.
+- **L41:** Server session for logged-in user. | `role` means: User role code or name (Admin/Student/Lecturer).  Read from ASP.NET Session.
+- **L42:** `dash` means: Holds “dash” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -129,7 +152,8 @@ private void LoadStats()
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **Pattern:** Read/load data for display.
-- **Local variables:** `conn`
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -177,7 +201,11 @@ private void LoadStats()
   96 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L59:** Error handling block.
 - **L61:** Import namespace/types.
@@ -202,7 +230,19 @@ private void LoadCourses()
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.
 - **Pattern:** Read/load data for display.
-- **Local variables:** `conn`, `sql`, `grid`, `count`, `name`, `desc`, `bg`, `cat`, `level`, `rating`, `img`
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- `cmd` (`SqlCommand`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
+- `grid` (`var`) — Identifier (`grid`) — database primary/foreign key.  Newly constructed object.
+- `count` (`int`) — Number of matching records.  Literal number `0`.
+- `name` (`string`) — Display name of user/course/criterion.
+- `desc` (`string`) — Description text (may embed <<<META>>> JSON).
+- `bg` (`string`) — Holds “bg” for this scope. (text)
+- `cat` (`string`) — Date/time value. (text)
+- `level` (`string`) — Holds “level” for this scope. (text)
+- `rating` (`decimal`) — Holds “rating” for this scope. (number/score)
+- `img` (`string`) — Image element or image path.
 
 #### Line-by-line (this function)
 
@@ -309,19 +349,41 @@ private void LoadCourses()
  196 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L101:** Error handling block.
 - **L103:** Error handling block.
 - **L105:** Import namespace/types.
+<<<<<<< HEAD
 - **L111:** Course publish flag for Landing catalog.
 - **L114:** Database access (pure SQL).
+=======
+- **L108:** `sql` means: SQL query text (should use parameters, not raw user input).
+- **L111:** Course publish flag for Landing catalog.
+- **L114:** Database access (pure SQL). | `cmd` means: SqlCommand — the SQL statement + parameters object.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L115:** Error handling block.
 - **L119:** Handle/log exception.
 - **L122:** Database access (pure SQL).
 - **L129:** Import namespace/types.
 - **L130:** Import namespace/types.
+<<<<<<< HEAD
 - **L146:** Null-safe read from database values.
+=======
+- **L132:** `grid` means: Identifier (`grid`) — database primary/foreign key.  Newly constructed object.
+- **L137:** `count` means: Number of matching records.  Literal number `0`.
+- **L141:** `name` means: Display name of user/course/criterion.
+- **L142:** `desc` means: Description text (may embed <<<META>>> JSON).
+- **L143:** `bg` means: Holds “bg” for this scope. (text)
+- **L144:** `cat` means: Date/time value. (text)
+- **L145:** `level` means: Holds “level” for this scope. (text)
+- **L146:** Null-safe read from database values. | `rating` means: Holds “rating” for this scope. (number/score)
+- **L148:** `img` means: Image element or image path.
+>>>>>>> eb8ce01 (update)
 - **L159:** Encode text to reduce XSS risk.
 - **L161:** Encode text to reduce XSS risk.
 - **L163:** Encode text to reduce XSS risk.
@@ -340,8 +402,11 @@ private static int ScalarInt(SqlConnection conn, string sql)
 
 - **Purpose:** Implements `ScalarInt`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, string sql`
-- **Local variables:** `cmd`, `o`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- **Local variables (what each means):**
+- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -358,11 +423,19 @@ private static int ScalarInt(SqlConnection conn, string sql)
  206 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L198:** Database access (pure SQL).
 - **L200:** Import namespace/types.
 - **L202:** Run SQL; return table / rows / scalar.
+=======
+**Line notes** (what code + variables mean)
+
+- **L198:** Database access (pure SQL).
+- **L200:** Import namespace/types.
+- **L202:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L203:** Null-safe read from database values.
 
 ---
@@ -376,7 +449,8 @@ private static string Safe(object o)
 #### Explanation
 
 - **Purpose:** Implements `Safe`.
-- **Parameters:** `object o`
+- **Parameters (what each means):**
+- `o` (`object`) — Holds “o” for this scope.
 
 #### Line-by-line (this function)
 
@@ -389,7 +463,11 @@ private static string Safe(object o)
  212 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L210:** Null-safe read from database values.
 
@@ -397,7 +475,11 @@ private static string Safe(object o)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -627,11 +709,20 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L7:** Import namespace/types.
 - **L8:** Import namespace/types.
 - **L10:** C# namespace grouping.
+<<<<<<< HEAD
+=======
+- **L18:** `cs` means: Connection string text.  Read from Web.config.
+>>>>>>> eb8ce01 (update)
 - **L23:** Page load entry (GET or postback).
 - **L25:** False on first open; true after postback.
 - **L35:** Server session for logged-in user.
 - **L39:** Server session for logged-in user.
+<<<<<<< HEAD
 - **L41:** Server session for logged-in user.
+=======
+- **L41:** Server session for logged-in user. | `role` means: User role code or name (Admin/Student/Lecturer).  Read from ASP.NET Session.
+- **L42:** `dash` means: Holds “dash” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 - **L59:** Error handling block.
 - **L61:** Import namespace/types.
 - **L68:** Error handling block.
@@ -643,14 +734,32 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L101:** Error handling block.
 - **L103:** Error handling block.
 - **L105:** Import namespace/types.
+<<<<<<< HEAD
 - **L111:** Course publish flag for Landing catalog.
 - **L114:** Database access (pure SQL).
+=======
+- **L108:** `sql` means: SQL query text (should use parameters, not raw user input).
+- **L111:** Course publish flag for Landing catalog.
+- **L114:** Database access (pure SQL). | `cmd` means: SqlCommand — the SQL statement + parameters object.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L115:** Error handling block.
 - **L119:** Handle/log exception.
 - **L122:** Database access (pure SQL).
 - **L129:** Import namespace/types.
 - **L130:** Import namespace/types.
+<<<<<<< HEAD
 - **L146:** Null-safe read from database values.
+=======
+- **L132:** `grid` means: Identifier (`grid`) — database primary/foreign key.  Newly constructed object.
+- **L137:** `count` means: Number of matching records.  Literal number `0`.
+- **L141:** `name` means: Display name of user/course/criterion.
+- **L142:** `desc` means: Description text (may embed <<<META>>> JSON).
+- **L143:** `bg` means: Holds “bg” for this scope. (text)
+- **L144:** `cat` means: Date/time value. (text)
+- **L145:** `level` means: Holds “level” for this scope. (text)
+- **L146:** Null-safe read from database values. | `rating` means: Holds “rating” for this scope. (number/score)
+- **L148:** `img` means: Image element or image path.
+>>>>>>> eb8ce01 (update)
 - **L159:** Encode text to reduce XSS risk.
 - **L161:** Encode text to reduce XSS risk.
 - **L163:** Encode text to reduce XSS risk.
@@ -658,7 +767,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L192:** Handle/log exception.
 - **L198:** Database access (pure SQL).
 - **L200:** Import namespace/types.
+<<<<<<< HEAD
 - **L202:** Run SQL; return table / rows / scalar.
+=======
+- **L202:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L203:** Null-safe read from database values.
 - **L210:** Null-safe read from database values.
 

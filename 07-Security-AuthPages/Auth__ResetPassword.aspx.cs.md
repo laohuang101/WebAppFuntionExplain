@@ -1,6 +1,10 @@
 # ResetPassword.aspx.cs
 **Source:** `Pages/Authentication/ResetPassword.aspx.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,10 +19,12 @@ One-shot TOTP + new password form (uses AuthService.ResetPasswordWithTotp).
 
 ## Variables / fields (file level)
 
-- **Line 15:** `email` — type `string`
-- **Line 24:** `p1` — type `string`
-- **Line 25:** `p2` — type `string`
-- **Line 31:** `result` — type `var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 15:** `email` (`string`) — **Account email address (usually lowercased).**
+- **Line 24:** `p1` (`string`) — **New password field (first entry).**
+- **Line 25:** `p2` (`string`) — **Confirm password field (must match p1).**
+- **Line 31:** `result` (`var`) — **AuthResult or API result { success, message, … }.**
 
 ## Functions / methods (2 found)
 
@@ -33,8 +39,11 @@ protected void Page_Load(object sender, EventArgs e)
 - **Purpose:** Implements `Page_Load`.
 - **CSRF:** Validates anti-forgery token on mutating request.
 - **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters:** `object sender, EventArgs e`
-- **Local variables:** `email`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+- **Local variables (what each means):**
+- `email` (`string`) — Account email address (usually lowercased).  Comes from HTTP request.
 
 #### Line-by-line (this function)
 
@@ -52,11 +61,19 @@ protected void Page_Load(object sender, EventArgs e)
   19 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L9:** Page load entry (GET or postback).
 - **L12:** CSRF anti-forgery protection.
 - **L13:** False on first open; true after postback.
+<<<<<<< HEAD
+=======
+- **L15:** `email` means: Account email address (usually lowercased).  Comes from HTTP request.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -70,8 +87,13 @@ protected void btnReset_Click(object sender, EventArgs e)
 
 - **Purpose:** Implements `btnReset_Click`.
 - **Navigation:** Redirects the browser.
-- **Parameters:** `object sender, EventArgs e`
-- **Local variables:** `p1`, `p2`, `result`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+- **Local variables (what each means):**
+- `p1` (`string`) — New password field (first entry).
+- `p2` (`string`) — Confirm password field (must match p1).
+- `result` (`var`) — AuthResult or API result { success, message, … }.
 
 #### Line-by-line (this function)
 
@@ -100,12 +122,25 @@ protected void btnReset_Click(object sender, EventArgs e)
   41 |             Response.AddHeader("Refresh", "2;url=" + ResolveUrl("~/Pages/Authentication/Login.aspx"));
   42 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L24:** `p1` means: New password field (first entry).
+- **L25:** `p2` means: Confirm password field (must match p1).
+- **L32:** `result` means: AuthResult or API result { success, message, … }.
+>>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -163,6 +198,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L9:** Page load entry (GET or postback).
 - **L12:** CSRF anti-forgery protection.
 - **L13:** False on first open; true after postback.
+<<<<<<< HEAD
+=======
+- **L15:** `email` means: Account email address (usually lowercased).  Comes from HTTP request.
+- **L24:** `p1` means: New password field (first entry).
+- **L25:** `p2` means: Confirm password field (must match p1).
+- **L32:** `result` means: AuthResult or API result { success, message, … }.
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

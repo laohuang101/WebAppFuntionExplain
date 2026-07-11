@@ -1,6 +1,10 @@
 # DbHelper.cs
 **Source:** `Data/DbHelper.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,13 +19,15 @@ Primary SQL helper: open connection from Web.config MyDbConn, ExecuteQuery / Non
 
 ## Variables / fields (file level)
 
-- **Line 17:** `cs` — type `var`
-- **Line 26:** `conn` — type `var`
-- **Line 28:** `conn` — type `return`
-- **Line 40:** `dt` — type `var`
-- **Line 42:** `dt` — type `return`
-- **Line 71:** `result` — type `var`
-- **Line 78:** `result` — type `var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 17:** `cs` (`var`) — **Connection string text.**
+- **Line 26:** `conn` (`var`) — **SqlConnection — open link to LocalDB/SQL Server.**
+- **Line 28:** `conn` (`return`) — **SqlConnection — open link to LocalDB/SQL Server.**
+- **Line 40:** `dt` (`var`) — **DataTable — full result set from SQL (many rows/columns).**
+- **Line 42:** `dt` (`return`) — **DataTable — full result set from SQL (many rows/columns).**
+- **Line 71:** `result` (`var`) — **AuthResult or API result { success, message, … }.**
+- **Line 78:** `result` (`var`) — **AuthResult or API result { success, message, … }.**
 
 ## Functions / methods (11 found)
 
@@ -35,7 +41,8 @@ public static SqlConnection OpenConnection()
 
 - **Purpose:** Implements `OpenConnection`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Local variables:** `conn`
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -49,10 +56,17 @@ public static SqlConnection OpenConnection()
   29 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L24:** Database access (pure SQL).
 - **L26:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L24:** Database access (pure SQL).
+- **L26:** Database access (pure SQL). | `conn` means: SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -66,8 +80,12 @@ public static DataTable ExecuteQuery(string sql, params SqlParameter[] parameter
 
 - **Purpose:** Implements `ExecuteQuery`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `string sql, params SqlParameter[] parameters`
-- **Local variables:** `conn`, `cmd`, `adapter`, `dt`
+- **Parameters (what each means):**
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- `parameters` (`SqlParameter[]`) — Array of SQL parameters (@Name values) for a query.
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+- `adapter` (`var`) — SqlDataAdapter — fills a DataTable from a SqlCommand.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -90,13 +108,21 @@ public static DataTable ExecuteQuery(string sql, params SqlParameter[] parameter
   45 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L31:** Run SQL; return table / rows / scalar.
 - **L33:** Import namespace/types.
 - **L34:** Import namespace/types.
 - **L38:** Import namespace/types.
+<<<<<<< HEAD
 - **L40:** In-memory result set from ADO.NET.
+=======
+- **L40:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -110,8 +136,11 @@ public static int ExecuteNonQuery(string sql, params SqlParameter[] parameters)
 
 - **Purpose:** Implements `ExecuteNonQuery`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `string sql, params SqlParameter[] parameters`
-- **Local variables:** `conn`, `cmd`
+- **Parameters (what each means):**
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- `parameters` (`SqlParameter[]`) — Array of SQL parameters (@Name values) for a query.
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -129,7 +158,11 @@ public static int ExecuteNonQuery(string sql, params SqlParameter[] parameters)
   56 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L47:** Run SQL; return table / rows / scalar.
 - **L49:** Import namespace/types.
@@ -148,8 +181,11 @@ public static object ExecuteScalar(string sql, params SqlParameter[] parameters)
 
 - **Purpose:** Implements `ExecuteScalar`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `string sql, params SqlParameter[] parameters`
-- **Local variables:** `conn`, `cmd`
+- **Parameters (what each means):**
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- `parameters` (`SqlParameter[]`) — Array of SQL parameters (@Name values) for a query.
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -167,7 +203,11 @@ public static object ExecuteScalar(string sql, params SqlParameter[] parameters)
   67 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L58:** Run SQL; return table / rows / scalar.
 - **L60:** Import namespace/types.
@@ -186,8 +226,11 @@ public static int ExecuteScalarInt(string sql, params SqlParameter[] parameters)
 
 - **Purpose:** Implements `ExecuteScalarInt`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `string sql, params SqlParameter[] parameters`
-- **Local variables:** `result`
+- **Parameters (what each means):**
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- `parameters` (`SqlParameter[]`) — Array of SQL parameters (@Name values) for a query.
+- **Local variables (what each means):**
+- `result` (`var`) — AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY).
 
 #### Line-by-line (this function)
 
@@ -201,10 +244,17 @@ public static int ExecuteScalarInt(string sql, params SqlParameter[] parameters)
   74 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L69:** Run SQL; return table / rows / scalar.
 - **L71:** Run SQL; return table / rows / scalar.
+=======
+**Line notes** (what code + variables mean)
+
+- **L69:** Run SQL; return table / rows / scalar.
+- **L71:** Run SQL; return table / rows / scalar. | `result` means: AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L72:** Null-safe read from database values.
 
 ---
@@ -219,8 +269,11 @@ public static decimal ExecuteScalarDecimal(string sql, params SqlParameter[] par
 
 - **Purpose:** Implements `ExecuteScalarDecimal`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `string sql, params SqlParameter[] parameters`
-- **Local variables:** `result`
+- **Parameters (what each means):**
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- `parameters` (`SqlParameter[]`) — Array of SQL parameters (@Name values) for a query.
+- **Local variables (what each means):**
+- `result` (`var`) — AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY).
 
 #### Line-by-line (this function)
 
@@ -234,10 +287,17 @@ public static decimal ExecuteScalarDecimal(string sql, params SqlParameter[] par
   81 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L76:** Run SQL; return table / rows / scalar.
 - **L78:** Run SQL; return table / rows / scalar.
+=======
+**Line notes** (what code + variables mean)
+
+- **L76:** Run SQL; return table / rows / scalar.
+- **L78:** Run SQL; return table / rows / scalar. | `result` means: AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L79:** Null-safe read from database values.
 
 ---
@@ -252,7 +312,9 @@ public static SqlParameter P(string name, object value)
 
 - **Purpose:** Implements `P`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `string name, object value`
+- **Parameters (what each means):**
+- `name` (`string`) — Display name of user/course/criterion.
+- `value` (`object`) — Holds “value” for this scope.
 
 #### Line-by-line (this function)
 
@@ -264,7 +326,11 @@ public static SqlParameter P(string name, object value)
   86 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L83:** Parameterized SQL — prevents classic SQL injection.
 - **L85:** Parameterized SQL — prevents classic SQL injection.
@@ -280,7 +346,8 @@ public static string SafeString(object value)
 #### Explanation
 
 - **Purpose:** Implements `SafeString`.
-- **Parameters:** `object value`
+- **Parameters (what each means):**
+- `value` (`object`) — Holds “value” for this scope.
 
 #### Line-by-line (this function)
 
@@ -293,7 +360,11 @@ public static string SafeString(object value)
   92 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L88:** Null-safe read from database values.
 - **L90:** Null-safe read from database values.
@@ -309,7 +380,8 @@ public static int? SafeInt(object value)
 #### Explanation
 
 - **Purpose:** Implements `SafeInt`.
-- **Parameters:** `object value`
+- **Parameters (what each means):**
+- `value` (`object`) — Holds “value” for this scope.
 
 #### Line-by-line (this function)
 
@@ -322,7 +394,11 @@ public static int? SafeInt(object value)
   98 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L96:** Null-safe read from database values.
 
@@ -337,7 +413,8 @@ public static decimal? SafeDecimal(object value)
 #### Explanation
 
 - **Purpose:** Implements `SafeDecimal`.
-- **Parameters:** `object value`
+- **Parameters (what each means):**
+- `value` (`object`) — Holds “value” for this scope.
 
 #### Line-by-line (this function)
 
@@ -350,7 +427,11 @@ public static decimal? SafeDecimal(object value)
  104 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L102:** Null-safe read from database values.
 
@@ -365,7 +446,8 @@ public static DateTime? SafeDate(object value)
 #### Explanation
 
 - **Purpose:** Implements `SafeDate`.
-- **Parameters:** `object value`
+- **Parameters (what each means):**
+- `value` (`object`) — Holds “value” for this scope.
 
 #### Line-by-line (this function)
 
@@ -378,7 +460,11 @@ public static DateTime? SafeDate(object value)
  110 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L108:** Null-safe read from database values.
 
@@ -386,7 +472,11 @@ public static DateTime? SafeDate(object value)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -511,13 +601,23 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L4:** Import namespace/types.
 - **L6:** C# namespace grouping.
 - **L11:** Database access (pure SQL).
+<<<<<<< HEAD
 - **L24:** Database access (pure SQL).
 - **L26:** Database access (pure SQL).
+=======
+- **L17:** `cs` means: Connection string text.  Read from Web.config.
+- **L24:** Database access (pure SQL).
+- **L26:** Database access (pure SQL). | `conn` means: SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L31:** Run SQL; return table / rows / scalar.
 - **L33:** Import namespace/types.
 - **L34:** Import namespace/types.
 - **L38:** Import namespace/types.
+<<<<<<< HEAD
 - **L40:** In-memory result set from ADO.NET.
+=======
+- **L40:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L47:** Run SQL; return table / rows / scalar.
 - **L49:** Import namespace/types.
 - **L50:** Import namespace/types.
@@ -527,10 +627,17 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L61:** Import namespace/types.
 - **L65:** Run SQL; return table / rows / scalar.
 - **L69:** Run SQL; return table / rows / scalar.
+<<<<<<< HEAD
 - **L71:** Run SQL; return table / rows / scalar.
 - **L72:** Null-safe read from database values.
 - **L76:** Run SQL; return table / rows / scalar.
 - **L78:** Run SQL; return table / rows / scalar.
+=======
+- **L71:** Run SQL; return table / rows / scalar. | `result` means: AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L72:** Null-safe read from database values.
+- **L76:** Run SQL; return table / rows / scalar.
+- **L78:** Run SQL; return table / rows / scalar. | `result` means: AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L79:** Null-safe read from database values.
 - **L83:** Parameterized SQL — prevents classic SQL injection.
 - **L85:** Parameterized SQL — prevents classic SQL injection.

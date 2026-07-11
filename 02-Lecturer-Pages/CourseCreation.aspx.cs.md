@@ -1,6 +1,10 @@
 # CourseCreation.aspx.cs
 **Source:** `Pages/Lecturer/CourseCreation.aspx.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,33 +19,35 @@ Create/edit courses, curriculum (chapters/lessons), media, publish/draft.
 
 ## Variables / fields (file level)
 
-- **Line 35:** `uid` — type `int`
-- **Line 37:** `courses` — type `var`
-- **Line 52:** `uid` — type `int`
-- **Line 56:** `existing` — type `int?`
-- **Line 58:** `newCid` — type `int`
-- **Line 74:** `uid` — type `int`
-- **Line 77:** `state` — type `bool`
-- **Line 96:** `uid` — type `int`
-- **Line 98:** `chapters` — type `var`
-- **Line 113:** `uid` — type `int`
-- **Line 118:** `existing` — type `int?`
-- **Line 119:** `id` — type `int`
-- **Line 134:** `uid` — type `int`
-- **Line 151:** `uid` — type `int`
-- **Line 157:** `body` — type `string`
-- **Line 158:** `materialsJson` — type `string`
-- **Line 160:** `idx` — type `int`
-- **Line 166:** `existing` — type `int?`
-- **Line 168:** `id` — type `int`
-- **Line 183:** `uid` — type `int`
-- **Line 200:** `uid` — type `int`
-- **Line 217:** `uid` — type `int`
-- **Line 221:** `titleObj` — type `var`
-- **Line 226:** `title` — type `string`
-- **Line 228:** `type` — type `string`
-- **Line 229:** `content` — type `string`
-- **Line 230:** `mats` — type `var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 35:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 37:** `courses` (`var`) — **Often a collection related to courses (plural name).**
+- **Line 52:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 56:** `existing` (`int?`) — **Holds “existing” for this scope. (type `int?`)**
+- **Line 58:** `newCid` (`int`) — **Identifier (`newCid`) — database primary/foreign key. (integer)**
+- **Line 74:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 77:** `state` (`bool`) — **Holds “state” for this scope. (true/false)**
+- **Line 96:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 98:** `chapters` (`var`) — **Often a collection related to chapters (plural name).**
+- **Line 113:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 118:** `existing` (`int?`) — **Holds “existing” for this scope. (type `int?`)**
+- **Line 119:** `id` (`int`) — **Generic primary key / identifier.**
+- **Line 134:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 151:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 157:** `body` (`string`) — **HTTP request body.**
+- **Line 158:** `materialsJson` (`string`) — **Holds “materials Json” for this scope. (text)**
+- **Line 160:** `idx` (`int`) — **Holds “idx” for this scope. (integer)**
+- **Line 166:** `existing` (`int?`) — **Holds “existing” for this scope. (type `int?`)**
+- **Line 168:** `id` (`int`) — **Generic primary key / identifier.**
+- **Line 183:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 200:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 217:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 221:** `titleObj` (`var`) — **Holds “title Obj” for this scope.**
+- **Line 226:** `title` (`string`) — **Title of course work / page heading.**
+- **Line 228:** `type` (`string`) — **Holds “type” for this scope. (text)**
+- **Line 229:** `content` (`string`) — **Submission body text or JSON payload in CWSubmissions.**
+- **Line 230:** `mats` (`var`) — **Often a collection related to mats (plural name).**
 
 ## Functions / methods (13 found)
 
@@ -56,7 +62,9 @@ protected void Page_Load(object sender, EventArgs e)
 - **Purpose:** Implements `Page_Load`.
 - **Security:** Uses AuthGate — requires logged-in role.
 - **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters:** `object sender, EventArgs e`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
 
 #### Line-by-line (this function)
 
@@ -68,7 +76,11 @@ protected void Page_Load(object sender, EventArgs e)
   16 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L12:** Page load entry (GET or postback).
 - **L14:** Authorization — block wrong role / anonymous.
@@ -97,7 +109,11 @@ private static int CurrentUid()
   22 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L21:** Authorization — block wrong role / anonymous.
 
@@ -112,7 +128,8 @@ private static object Fail(string message)
 #### Explanation
 
 - **Purpose:** Implements `Fail`.
-- **Parameters:** `string message`
+- **Parameters (what each means):**
+- `message` (`string`) — Status text for the UI.
 
 #### Line-by-line (this function)
 
@@ -138,7 +155,9 @@ public static object GetCoursesData()
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Read/load data for display.
-- **Local variables:** `uid`, `courses`
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `courses` (`var`) — Often a collection related to courses (plural name).
 
 #### Line-by-line (this function)
 
@@ -159,10 +178,19 @@ public static object GetCoursesData()
   44 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L33:** Error handling block.
 - **L36:** Authorization — block wrong role / anonymous.
+=======
+**Line notes** (what code + variables mean)
+
+- **L33:** Error handling block.
+- **L35:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L36:** Authorization — block wrong role / anonymous.
+- **L37:** `courses` means: Often a collection related to courses (plural name).
+>>>>>>> eb8ce01 (update)
 - **L40:** Handle/log exception.
 
 ---
@@ -179,8 +207,16 @@ public static object SaveCourseInfo(string name, string desc, string category, s
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Persist changes.
-- **Parameters:** `string name, string desc, string category, string level, string bgImg, int cid`
-- **Local variables:** `uid`, `newCid`
+- **Parameters (what each means):**
+- `name` (`string`) — Display name of user/course/criterion.
+- `desc` (`string`) — Description text (may embed <<<META>>> JSON).
+- `category` (`string`) — Holds “category” for this scope. (text)
+- `level` (`string`) — Holds “level” for this scope. (text)
+- `bgImg` (`string`) — Holds “bg Img” for this scope. (text)
+- `cid` (`int`) — Course ID (Courses.CID).
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `newCid` (`int`) — Identifier (`newCid`) — database primary/foreign key. (integer)
 
 #### Line-by-line (this function)
 
@@ -206,10 +242,19 @@ public static object SaveCourseInfo(string name, string desc, string category, s
   66 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L50:** Error handling block.
 - **L54:** Authorization — block wrong role / anonymous.
+=======
+**Line notes** (what code + variables mean)
+
+- **L50:** Error handling block.
+- **L52:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L54:** Authorization — block wrong role / anonymous.
+- **L58:** `newCid` means: Identifier (`newCid`) — database primary/foreign key. (integer)
+>>>>>>> eb8ce01 (update)
 - **L62:** Handle/log exception.
 
 ---
@@ -227,8 +272,12 @@ public static object SetCoursePublished(int cid, bool published)
 - **Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Persist changes.
-- **Parameters:** `int cid, bool published`
-- **Local variables:** `uid`, `state`
+- **Parameters (what each means):**
+- `cid` (`int`) — Course ID (Courses.CID).
+- `published` (`bool`) — UI/publish intent flag when saving a course/work.
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `state` (`bool`) — Holds “state” for this scope. (true/false)
 
 #### Line-by-line (this function)
 
@@ -254,10 +303,19 @@ public static object SetCoursePublished(int cid, bool published)
   88 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L72:** Error handling block.
 - **L75:** Authorization — block wrong role / anonymous.
+=======
+**Line notes** (what code + variables mean)
+
+- **L72:** Error handling block.
+- **L74:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L75:** Authorization — block wrong role / anonymous.
+- **L77:** `state` means: Holds “state” for this scope. (true/false)
+>>>>>>> eb8ce01 (update)
 - **L80:** Handle/log exception.
 - **L82:** Authorization — block wrong role / anonymous.
 - **L84:** Handle/log exception.
@@ -276,8 +334,11 @@ public static object GetCourseCurriculum(int cid)
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Read/load data for display.
-- **Parameters:** `int cid`
-- **Local variables:** `uid`, `chapters`
+- **Parameters (what each means):**
+- `cid` (`int`) — Course ID (Courses.CID).
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `chapters` (`var`) — Often a collection related to chapters (plural name).
 
 #### Line-by-line (this function)
 
@@ -298,10 +359,19 @@ public static object GetCourseCurriculum(int cid)
  105 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L94:** Error handling block.
 - **L97:** Authorization — block wrong role / anonymous.
+=======
+**Line notes** (what code + variables mean)
+
+- **L94:** Error handling block.
+- **L96:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L97:** Authorization — block wrong role / anonymous.
+- **L98:** `chapters` means: Often a collection related to chapters (plural name).
+>>>>>>> eb8ce01 (update)
 - **L101:** Handle/log exception.
 
 ---
@@ -318,8 +388,13 @@ public static object SaveChapter(int chid, int cid, string title)
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Persist changes.
-- **Parameters:** `int chid, int cid, string title`
-- **Local variables:** `uid`, `id`
+- **Parameters (what each means):**
+- `chid` (`int`) — Chapter ID (Chapters.ChID).
+- `cid` (`int`) — Course ID (Courses.CID).
+- `title` (`string`) — Title of course work / page heading.
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `id` (`int`) — Generic primary key / identifier.
 
 #### Line-by-line (this function)
 
@@ -344,10 +419,19 @@ public static object SaveChapter(int chid, int cid, string title)
  126 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L111:** Error handling block.
 - **L114:** Authorization — block wrong role / anonymous.
+=======
+**Line notes** (what code + variables mean)
+
+- **L111:** Error handling block.
+- **L113:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L114:** Authorization — block wrong role / anonymous.
+- **L119:** `id` means: Generic primary key / identifier.
+>>>>>>> eb8ce01 (update)
 - **L122:** Handle/log exception.
 
 ---
@@ -364,8 +448,10 @@ public static object DeleteChapter(int chid)
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Delete/clear data.
-- **Parameters:** `int chid`
-- **Local variables:** `uid`
+- **Parameters (what each means):**
+- `chid` (`int`) — Chapter ID (Chapters.ChID).
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
 
 #### Line-by-line (this function)
 
@@ -386,9 +472,16 @@ public static object DeleteChapter(int chid)
  143 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L132:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L132:** Error handling block.
+- **L134:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+>>>>>>> eb8ce01 (update)
 - **L135:** Authorization — block wrong role / anonymous.
 - **L139:** Handle/log exception.
 
@@ -406,8 +499,19 @@ public static object SaveSubChapter(int schid, int chid, string title, string ty
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Persist changes.
-- **Parameters:** `int schid, int chid, string title, string type, string content`
-- **Local variables:** `uid`, `body`, `materialsJson`, `sep`, `idx`, `id`
+- **Parameters (what each means):**
+- `schid` (`int`) — SubChapter / lesson ID.
+- `chid` (`int`) — Chapter ID (Chapters.ChID).
+- `title` (`string`) — Title of course work / page heading.
+- `type` (`string`) — Holds “type” for this scope. (text)
+- `content` (`string`) — Submission body text or JSON payload in CWSubmissions.
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `body` (`string`) — HTTP request body.
+- `materialsJson` (`string`) — Holds “materials Json” for this scope. (text)
+- `sep` (`string`) — Holds “sep” for this scope. (text)  Literal text string.
+- `idx` (`int`) — Holds “idx” for this scope. (integer)
+- `id` (`int`) — Generic primary key / identifier.
 
 #### Line-by-line (this function)
 
@@ -443,10 +547,22 @@ public static object SaveSubChapter(int schid, int chid, string title, string ty
  175 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L149:** Error handling block.
 - **L152:** Authorization — block wrong role / anonymous.
+=======
+**Line notes** (what code + variables mean)
+
+- **L149:** Error handling block.
+- **L151:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L152:** Authorization — block wrong role / anonymous.
+- **L157:** `body` means: HTTP request body.
+- **L158:** `materialsJson` means: Holds “materials Json” for this scope. (text)
+- **L160:** `idx` means: Holds “idx” for this scope. (integer)
+- **L168:** `id` means: Generic primary key / identifier.
+>>>>>>> eb8ce01 (update)
 - **L171:** Handle/log exception.
 
 ---
@@ -463,8 +579,10 @@ public static object DeleteSubChapter(int schid)
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Delete/clear data.
-- **Parameters:** `int schid`
-- **Local variables:** `uid`
+- **Parameters (what each means):**
+- `schid` (`int`) — SubChapter / lesson ID.
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
 
 #### Line-by-line (this function)
 
@@ -485,9 +603,16 @@ public static object DeleteSubChapter(int schid)
  192 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L181:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L181:** Error handling block.
+- **L183:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+>>>>>>> eb8ce01 (update)
 - **L184:** Authorization — block wrong role / anonymous.
 - **L188:** Handle/log exception.
 
@@ -505,8 +630,10 @@ public static object DeleteCourse(int cid)
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Delete/clear data.
-- **Parameters:** `int cid`
-- **Local variables:** `uid`
+- **Parameters (what each means):**
+- `cid` (`int`) — Course ID (Courses.CID).
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
 
 #### Line-by-line (this function)
 
@@ -527,9 +654,16 @@ public static object DeleteCourse(int cid)
  209 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L198:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L198:** Error handling block.
+- **L200:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+>>>>>>> eb8ce01 (update)
 - **L201:** Authorization — block wrong role / anonymous.
 - **L205:** Handle/log exception.
 
@@ -548,8 +682,15 @@ public static object GetLessonDetails(int schid)
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Read/load data for display.
-- **Parameters:** `int schid`
-- **Local variables:** `uid`, `titleObj`, `title`, `type`, `content`, `mats`
+- **Parameters (what each means):**
+- `schid` (`int`) — SubChapter / lesson ID.
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `titleObj` (`var`) — Holds “title Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
+- `title` (`string`) — Title of course work / page heading.
+- `type` (`string`) — Holds “type” for this scope. (text)  Literal text string.
+- `content` (`string`) — Submission body text or JSON payload in CWSubmissions.  Literal text string.
+- `mats` (`var`) — Often a collection related to mats (plural name).  Assigned from SQL SELECT result set.
 
 #### Line-by-line (this function)
 
@@ -593,6 +734,7 @@ public static object GetLessonDetails(int schid)
  249 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L215:** Error handling block.
@@ -601,6 +743,20 @@ public static object GetLessonDetails(int schid)
 - **L223:** Database access (pure SQL).
 - **L224:** Null-safe read from database values.
 - **L231:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L215:** Error handling block.
+- **L217:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L218:** Authorization — block wrong role / anonymous.
+- **L221:** Database access (pure SQL). | `titleObj` means: Holds “title Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L223:** Database access (pure SQL).
+- **L224:** Null-safe read from database values.
+- **L227:** `title` means: Title of course work / page heading.
+- **L228:** `type` means: Holds “type” for this scope. (text)  Literal text string.
+- **L229:** `content` means: Submission body text or JSON payload in CWSubmissions.  Literal text string.
+- **L231:** Database access (pure SQL). | `mats` means: Often a collection related to mats (plural name).  Assigned from SQL SELECT result set.
+>>>>>>> eb8ce01 (update)
 - **L233:** Database access (pure SQL).
 - **L236:** Database access (pure SQL).
 - **L238:** Database access (pure SQL).
@@ -612,7 +768,11 @@ public static object GetLessonDetails(int schid)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -882,6 +1042,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L21:** Authorization — block wrong role / anonymous.
 - **L29:** Expose method to AJAX JSON calls.
 - **L33:** Error handling block.
+<<<<<<< HEAD
 - **L36:** Authorization — block wrong role / anonymous.
 - **L40:** Handle/log exception.
 - **L46:** Expose method to AJAX JSON calls.
@@ -891,11 +1052,29 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L68:** Expose method to AJAX JSON calls.
 - **L72:** Error handling block.
 - **L75:** Authorization — block wrong role / anonymous.
+=======
+- **L35:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L36:** Authorization — block wrong role / anonymous.
+- **L37:** `courses` means: Often a collection related to courses (plural name).
+- **L40:** Handle/log exception.
+- **L46:** Expose method to AJAX JSON calls.
+- **L50:** Error handling block.
+- **L52:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L54:** Authorization — block wrong role / anonymous.
+- **L58:** `newCid` means: Identifier (`newCid`) — database primary/foreign key. (integer)
+- **L62:** Handle/log exception.
+- **L68:** Expose method to AJAX JSON calls.
+- **L72:** Error handling block.
+- **L74:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L75:** Authorization — block wrong role / anonymous.
+- **L77:** `state` means: Holds “state” for this scope. (true/false)
+>>>>>>> eb8ce01 (update)
 - **L80:** Handle/log exception.
 - **L82:** Authorization — block wrong role / anonymous.
 - **L84:** Handle/log exception.
 - **L90:** Expose method to AJAX JSON calls.
 - **L94:** Error handling block.
+<<<<<<< HEAD
 - **L97:** Authorization — block wrong role / anonymous.
 - **L101:** Handle/log exception.
 - **L107:** Expose method to AJAX JSON calls.
@@ -904,27 +1083,71 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L122:** Handle/log exception.
 - **L128:** Expose method to AJAX JSON calls.
 - **L132:** Error handling block.
+=======
+- **L96:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L97:** Authorization — block wrong role / anonymous.
+- **L98:** `chapters` means: Often a collection related to chapters (plural name).
+- **L101:** Handle/log exception.
+- **L107:** Expose method to AJAX JSON calls.
+- **L111:** Error handling block.
+- **L113:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L114:** Authorization — block wrong role / anonymous.
+- **L119:** `id` means: Generic primary key / identifier.
+- **L122:** Handle/log exception.
+- **L128:** Expose method to AJAX JSON calls.
+- **L132:** Error handling block.
+- **L134:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+>>>>>>> eb8ce01 (update)
 - **L135:** Authorization — block wrong role / anonymous.
 - **L139:** Handle/log exception.
 - **L145:** Expose method to AJAX JSON calls.
 - **L149:** Error handling block.
+<<<<<<< HEAD
 - **L152:** Authorization — block wrong role / anonymous.
 - **L171:** Handle/log exception.
 - **L177:** Expose method to AJAX JSON calls.
 - **L181:** Error handling block.
+=======
+- **L151:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L152:** Authorization — block wrong role / anonymous.
+- **L157:** `body` means: HTTP request body.
+- **L158:** `materialsJson` means: Holds “materials Json” for this scope. (text)
+- **L160:** `idx` means: Holds “idx” for this scope. (integer)
+- **L168:** `id` means: Generic primary key / identifier.
+- **L171:** Handle/log exception.
+- **L177:** Expose method to AJAX JSON calls.
+- **L181:** Error handling block.
+- **L183:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+>>>>>>> eb8ce01 (update)
 - **L184:** Authorization — block wrong role / anonymous.
 - **L188:** Handle/log exception.
 - **L194:** Expose method to AJAX JSON calls.
 - **L198:** Error handling block.
+<<<<<<< HEAD
+=======
+- **L200:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+>>>>>>> eb8ce01 (update)
 - **L201:** Authorization — block wrong role / anonymous.
 - **L205:** Handle/log exception.
 - **L211:** Expose method to AJAX JSON calls.
 - **L215:** Error handling block.
+<<<<<<< HEAD
 - **L218:** Authorization — block wrong role / anonymous.
 - **L221:** Database access (pure SQL).
 - **L223:** Database access (pure SQL).
 - **L224:** Null-safe read from database values.
 - **L231:** Database access (pure SQL).
+=======
+- **L217:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L218:** Authorization — block wrong role / anonymous.
+- **L221:** Database access (pure SQL). | `titleObj` means: Holds “title Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L223:** Database access (pure SQL).
+- **L224:** Null-safe read from database values.
+- **L227:** `title` means: Title of course work / page heading.
+- **L228:** `type` means: Holds “type” for this scope. (text)  Literal text string.
+- **L229:** `content` means: Submission body text or JSON payload in CWSubmissions.  Literal text string.
+- **L231:** Database access (pure SQL). | `mats` means: Often a collection related to mats (plural name).  Assigned from SQL SELECT result set.
+>>>>>>> eb8ce01 (update)
 - **L233:** Database access (pure SQL).
 - **L236:** Database access (pure SQL).
 - **L238:** Database access (pure SQL).

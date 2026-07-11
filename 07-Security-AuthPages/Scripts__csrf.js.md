@@ -1,6 +1,10 @@
 # csrf.js
 **Source:** `Shared/Scripts/csrf.js`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,13 +19,15 @@ Client helper: attach X-CSRF-Token header to fetch/XHR from meta/cookie.
 
 ## Variables / fields (file level)
 
-- **Line 9:** `m` — script-level `const`/`let`/`var`
-- **Line 14:** `meta` — script-level `const`/`let`/`var`
-- **Line 26:** `h` — script-level `const`/`let`/`var`
-- **Line 33:** `_fetch` — script-level `const`/`let`/`var`
-- **Line 36:** `method` — script-level `const`/`let`/`var`
-- **Line 47:** `_open` — script-level `const`/`let`/`var`
-- **Line 48:** `_send` — script-level `const`/`let`/`var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 9:** `m` — script-level `const`/`let`/`var` — **Holds “m” for this scope.**
+- **Line 14:** `meta` — script-level `const`/`let`/`var` — **Extra settings packed as JSON (dueDate, requireFile, …).**
+- **Line 26:** `h` — script-level `const`/`let`/`var` — **Holds “h” for this scope.**
+- **Line 33:** `_fetch` — script-level `const`/`let`/`var` — **Holds “fetch” for this scope.**
+- **Line 36:** `method` — script-level `const`/`let`/`var` — **HTTP method (GET/POST) or MFA method (totp/email).**
+- **Line 47:** `_open` — script-level `const`/`let`/`var` — **Holds “open” for this scope.**
+- **Line 48:** `_send` — script-level `const`/`let`/`var` — **Holds “send” for this scope.**
 
 ## Functions / methods (3 found)
 
@@ -34,8 +40,10 @@ function readCookie(name)
 #### Explanation
 
 - **Purpose:** Implements `readCookie`.
-- **Parameters:** `name`
-- **Local variables:** `m`
+- **Parameters (what each means):**
+- `name` — Display name of user/course/criterion.
+- **Local variables (what each means):**
+- `m` — Holds “m” for this scope.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -47,6 +55,13 @@ function readCookie(name)
   10 |         return m ? decodeURIComponent(m[1]) : '';
   11 |     }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L9:** `m` means: Holds “m” for this scope.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -61,7 +76,8 @@ function getToken()
 - **Purpose:** Implements `getToken`.
 - **CSRF:** Validates anti-forgery token on mutating request.
 - **Pattern:** Read/load data for display.
-- **Local variables:** `meta`
+- **Local variables (what each means):**
+- `meta` — Extra settings packed as JSON (dueDate, requireFile, …).
 
 #### Line-by-line (this function)
 
@@ -75,9 +91,15 @@ function getToken()
   17 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L14:** CSRF anti-forgery protection.
+=======
+**Line notes** (what code + variables mean)
+
+- **L14:** CSRF anti-forgery protection. | `meta` means: Extra settings packed as JSON (dueDate, requireFile, …).
+>>>>>>> eb8ce01 (update)
 - **L16:** CSRF anti-forgery protection.
 
 ---
@@ -92,8 +114,11 @@ function applyHeaders(headers, token)
 
 - **Purpose:** Implements `applyHeaders`.
 - **CSRF:** Validates anti-forgery token on mutating request.
-- **Parameters:** `headers, token`
-- **Local variables:** `h`
+- **Parameters (what each means):**
+- `headers` — HTTP headers object for fetch.
+- `token` — JWT or CSRF token string.
+- **Local variables (what each means):**
+- `h` — Holds “h” for this scope.
 
 #### Line-by-line (this function)
 
@@ -113,16 +138,27 @@ function applyHeaders(headers, token)
   29 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L23:** CSRF token ensure/validate.
+=======
+**Line notes** (what code + variables mean)
+
+- **L23:** CSRF token ensure/validate.
+- **L26:** `h` means: Holds “h” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L27:** CSRF anti-forgery protection.
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | /**
@@ -194,6 +230,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 
 **Line notes**
 
+<<<<<<< HEAD
 - **L14:** CSRF anti-forgery protection.
 - **L16:** CSRF anti-forgery protection.
 - **L23:** CSRF token ensure/validate.
@@ -201,6 +238,21 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L50:** CSRF anti-forgery protection.
 - **L54:** Error handling block.
 - **L55:** CSRF anti-forgery protection.
+=======
+- **L9:** `m` means: Holds “m” for this scope.  Newly constructed object.
+- **L14:** CSRF anti-forgery protection. | `meta` means: Extra settings packed as JSON (dueDate, requireFile, …).
+- **L16:** CSRF anti-forgery protection.
+- **L23:** CSRF token ensure/validate.
+- **L26:** `h` means: Holds “h” for this scope.
+- **L27:** CSRF anti-forgery protection.
+- **L33:** `_fetch` means: Holds “fetch” for this scope.
+- **L36:** `method` means: HTTP method (GET/POST) or MFA method (totp/email).
+- **L47:** `_open` means: Holds “open” for this scope.
+- **L48:** `_send` means: Holds “send” for this scope.
+- **L50:** CSRF anti-forgery protection.
+- **L54:** Error handling block.
+- **L55:** CSRF anti-forgery protection. | `m` means: Holds “m” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L57:** CSRF token ensure/validate.
 - **L64:** CSRF anti-forgery protection.
 

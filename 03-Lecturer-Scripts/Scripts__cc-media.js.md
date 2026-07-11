@@ -1,6 +1,10 @@
 # cc-media.js
 **Source:** `Pages/Lecturer/Scripts/cc-media.js`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,47 +19,49 @@ Serve files under Uploads with path sandbox + auth policy by folder.
 
 ## Variables / fields (file level)
 
-- **Line 4:** `dz` — script-level `const`/`let`/`var`
-- **Line 8:** `fileInput` — script-level `const`/`let`/`var`
-- **Line 13:** `preview` — script-level `const`/`let`/`var`
-- **Line 15:** `hiddenField` — script-level `const`/`let`/`var`
-- **Line 16:** `dzMsg` — script-level `const`/`let`/`var`
-- **Line 24:** `formData` — script-level `const`/`let`/`var`
-- **Line 60:** `file` — script-level `const`/`let`/`var`
-- **Line 83:** `fd` — script-level `const`/`let`/`var`
-- **Line 103:** `p` — script-level `const`/`let`/`var`
-- **Line 104:** `lower` — script-level `const`/`let`/`var`
-- **Line 105:** `i` — script-level `const`/`let`/`var`
-- **Line 117:** `u` — script-level `const`/`let`/`var`
-- **Line 129:** `key` — script-level `const`/`let`/`var`
-- **Line 131:** `q` — script-level `const`/`let`/`var`
-- **Line 139:** `a` — script-level `const`/`let`/`var`
-- **Line 144:** `path` — script-level `const`/`let`/`var`
-- **Line 146:** `idx` — script-level `const`/`let`/`var`
-- **Line 156:** `root` — script-level `const`/`let`/`var`
-- **Line 158:** `url` — script-level `const`/`let`/`var`
-- **Line 164:** `s` — script-level `const`/`let`/`var`
-- **Line 173:** `safeView` — script-level `const`/`let`/`var`
-- **Line 174:** `safeName` — script-level `const`/`let`/`var`
-- **Line 194:** `area` — script-level `const`/`let`/`var`
-- **Line 196:** `input` — script-level `const`/`let`/`var`
-- **Line 205:** `msg` — script-level `const`/`let`/`var`
-- **Line 215:** `ext` — script-level `const`/`let`/`var`
-- **Line 228:** `store` — script-level `const`/`let`/`var`
-- **Line 229:** `viewUrl` — script-level `const`/`let`/`var`
-- **Line 230:** `dlUrl` — script-level `const`/`let`/`var`
-- **Line 231:** `txt` — script-level `const`/`let`/`var`
-- **Line 239:** `prev` — script-level `const`/`let`/`var`
-- **Line 299:** `allowed` — script-level `const`/`let`/`var`
-- **Line 305:** `maxMb` — script-level `const`/`let`/`var`
-- **Line 314:** `materialsField` — script-level `const`/`let`/`var`
-- **Line 315:** `materials` — script-level `const`/`let`/`var`
-- **Line 361:** `attachments` — script-level `const`/`let`/`var`
-- **Line 368:** `heading` — script-level `const`/`let`/`var`
-- **Line 375:** `raw` — script-level `const`/`let`/`var`
-- **Line 378:** `name` — script-level `const`/`let`/`var`
-- **Line 379:** `kind` — script-level `const`/`let`/`var`
-- **Line 380:** `card` — script-level `const`/`let`/`var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 4:** `dz` — script-level `const`/`let`/`var` — **Holds “dz” for this scope.**
+- **Line 8:** `fileInput` — script-level `const`/`let`/`var` — **Holds “file Input” for this scope.**
+- **Line 13:** `preview` — script-level `const`/`let`/`var` — **Holds “preview” for this scope.**
+- **Line 15:** `hiddenField` — script-level `const`/`let`/`var` — **Holds “hidden Field” for this scope.**
+- **Line 16:** `dzMsg` — script-level `const`/`let`/`var` — **Holds “dz Msg” for this scope.**
+- **Line 24:** `formData` — script-level `const`/`let`/`var` — **Holds “form Data” for this scope.**
+- **Line 60:** `file` — script-level `const`/`let`/`var` — **Uploaded file object or file name.**
+- **Line 83:** `fd` — script-level `const`/`let`/`var` — **Holds “fd” for this scope.**
+- **Line 103:** `p` — script-level `const`/`let`/`var` — **Parameter, path, or password fragment depending on context.**
+- **Line 104:** `lower` — script-level `const`/`let`/`var` — **Holds “lower” for this scope.**
+- **Line 105:** `i` — script-level `const`/`let`/`var` — **Loop index (0-based counter in for-loops).**
+- **Line 117:** `u` — script-level `const`/`let`/`var` — **Holds “u” for this scope.**
+- **Line 129:** `key` — script-level `const`/`let`/`var` — **HMAC key bytes or dictionary key.**
+- **Line 131:** `q` — script-level `const`/`let`/`var` — **Search query text, or SQL command text.**
+- **Line 139:** `a` — script-level `const`/`let`/`var` — **Holds “a” for this scope.**
+- **Line 144:** `path` — script-level `const`/`let`/`var` — **File path under Uploads or URL path.**
+- **Line 146:** `idx` — script-level `const`/`let`/`var` — **Holds “idx” for this scope.**
+- **Line 156:** `root` — script-level `const`/`let`/`var` — **Root directory path (Uploads).**
+- **Line 158:** `url` — script-level `const`/`let`/`var` — **HTTP URL to media or page.**
+- **Line 164:** `s` — script-level `const`/`let`/`var` — **String value or submission-related object.**
+- **Line 173:** `safeView` — script-level `const`/`let`/`var` — **Holds “safe View” for this scope.**
+- **Line 174:** `safeName` — script-level `const`/`let`/`var` — **Holds “safe Name” for this scope.**
+- **Line 194:** `area` — script-level `const`/`let`/`var` — **Holds “area” for this scope.**
+- **Line 196:** `input` — script-level `const`/`let`/`var` — **Holds “input” for this scope.**
+- **Line 205:** `msg` — script-level `const`/`let`/`var` — **Human-readable message (error or success).**
+- **Line 215:** `ext` — script-level `const`/`let`/`var` — **File extension (.pdf, .mp4, …).**
+- **Line 228:** `store` — script-level `const`/`let`/`var` — **Holds “store” for this scope.**
+- **Line 229:** `viewUrl` — script-level `const`/`let`/`var` — **URL string.**
+- **Line 230:** `dlUrl` — script-level `const`/`let`/`var` — **URL string.**
+- **Line 231:** `txt` — script-level `const`/`let`/`var` — **UI control reference (txt).**
+- **Line 239:** `prev` — script-level `const`/`let`/`var` — **Holds “prev” for this scope.**
+- **Line 299:** `allowed` — script-level `const`/`let`/`var` — **Boolean — path/role is permitted.**
+- **Line 305:** `maxMb` — script-level `const`/`let`/`var` — **Holds “max Mb” for this scope.**
+- **Line 314:** `materialsField` — script-level `const`/`let`/`var` — **Holds “materials Field” for this scope.**
+- **Line 315:** `materials` — script-level `const`/`let`/`var` — **Often a collection related to materials (plural name).**
+- **Line 361:** `attachments` — script-level `const`/`let`/`var` — **Often a collection related to attachments (plural name).**
+- **Line 368:** `heading` — script-level `const`/`let`/`var` — **Holds “heading” for this scope.**
+- **Line 375:** `raw` — script-level `const`/`let`/`var` — **Raw bytes or unprocessed input string.**
+- **Line 378:** `name` — script-level `const`/`let`/`var` — **Display name of user/course/criterion.**
+- **Line 379:** `kind` — script-level `const`/`let`/`var` — **Upload kind (material/video/thumbnail/submission).**
+- **Line 380:** `card` — script-level `const`/`let`/`var` — **Holds “card” for this scope.**
 
 ## Functions / methods (13 found)
 
@@ -70,7 +76,14 @@ function initDropzone()
 - **Purpose:** Implements `initDropzone`.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **AJAX:** Browser calls server endpoints asynchronously.
-- **Local variables:** `dz`, `fileInput`, `preview`, `hiddenField`, `dzMsg`, `formData`, `file`
+- **Local variables (what each means):**
+- `dz` — Holds “dz” for this scope.  DOM element from the page.
+- `fileInput` — Holds “file Input” for this scope.
+- `preview` — Holds “preview” for this scope.  DOM element from the page.
+- `hiddenField` — Holds “hidden Field” for this scope.  DOM element from the page.
+- `dzMsg` — Holds “dz Msg” for this scope.  DOM element from the page.
+- `formData` — Holds “form Data” for this scope.  Newly constructed object.
+- `file` — Uploaded file object or file name.
 
 #### Line-by-line (this function)
 
@@ -153,6 +166,7 @@ function initDropzone()
   77 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L4:** Get HTML element by id.
@@ -165,6 +179,24 @@ function initDropzone()
 - **L64:** DOM event handler.
 - **L68:** DOM event handler.
 - **L71:** DOM event handler.
+=======
+**Line notes** (what code + variables mean)
+
+- **L4:** Get HTML element by id. | `dz` means: Holds “dz” for this scope.  DOM element from the page.
+- **L8:** `fileInput` means: Holds “file Input” for this scope.
+- **L14:** Get HTML element by id. | `preview` means: Holds “preview” for this scope.  DOM element from the page.
+- **L15:** Get HTML element by id. | `hiddenField` means: Holds “hidden Field” for this scope.  DOM element from the page.
+- **L16:** Get HTML element by id. | `dzMsg` means: Holds “dz Msg” for this scope.  DOM element from the page.
+- **L25:** `formData` means: Holds “form Data” for this scope.  Newly constructed object.
+- **L31:** HTTP request to server WebMethod/ashx.
+- **L57:** DOM event handler.
+- **L59:** DOM event handler.
+- **L60:** `file` means: Uploaded file object or file name.
+- **L64:** DOM event handler.
+- **L68:** DOM event handler.
+- **L71:** DOM event handler.
+- **L74:** `file` means: Uploaded file object or file name.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -179,8 +211,10 @@ function uploadFile(file)
 - **Purpose:** Implements `uploadFile`.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **AJAX:** Browser calls server endpoints asynchronously.
-- **Parameters:** `file`
-- **Local variables:** `formData`
+- **Parameters (what each means):**
+- `file` — Uploaded file object or file name.
+- **Local variables (what each means):**
+- `formData` — Holds “form Data” for this scope.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -227,8 +261,14 @@ function uploadFile(file)
   55 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
+=======
+**Line notes** (what code + variables mean)
+
+- **L25:** `formData` means: Holds “form Data” for this scope.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L31:** HTTP request to server WebMethod/ashx.
 
 ---
@@ -244,8 +284,10 @@ function uploadLessonFile(file)
 - **Purpose:** Implements `uploadLessonFile`.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **AJAX:** Browser calls server endpoints asynchronously.
-- **Parameters:** `file`
-- **Local variables:** `fd`
+- **Parameters (what each means):**
+- `file` — Uploaded file object or file name.
+- **Local variables (what each means):**
+- `fd` — Holds “fd” for this scope.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -271,8 +313,14 @@ function uploadLessonFile(file)
   99 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
+=======
+**Line notes** (what code + variables mean)
+
+- **L83:** `fd` means: Holds “fd” for this scope.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L85:** HTTP request to server WebMethod/ashx.
 - **L91:** Error handling block.
 - **L92:** JS object ↔ JSON text.
@@ -288,7 +336,10 @@ function mediaAppRoot()
 #### Explanation
 
 - **Purpose:** Implements `mediaAppRoot`.
-- **Local variables:** `p`, `lower`, `i`
+- **Local variables (what each means):**
+- `p` — Parameter, path, or password fragment depending on context.
+- `lower` — Holds “lower” for this scope.
+- `i` — Loop index (0-based counter in for-loops).
 
 #### Line-by-line (this function)
 
@@ -303,6 +354,15 @@ function mediaAppRoot()
  108 |     return '';
  109 | }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L103:** `p` means: Parameter, path, or password fragment depending on context.
+- **L104:** `lower` means: Holds “lower” for this scope.
+- **L105:** `i` means: Loop index (0-based counter in for-loops).
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -315,8 +375,14 @@ function resolveMediaUrl(raw, forDownload)
 #### Explanation
 
 - **Purpose:** Implements `resolveMediaUrl`.
-- **Parameters:** `raw, forDownload`
-- **Local variables:** `u`, `key`, `q`, `a`
+- **Parameters (what each means):**
+- `raw` — Raw bytes or unprocessed input string.
+- `forDownload` — Holds “for Download” for this scope.
+- **Local variables (what each means):**
+- `u` — Holds “u” for this scope.
+- `key` — HMAC key bytes or dictionary key.
+- `q` — Search query text, or SQL command text.
+- `a` — Holds “a” for this scope.
 
 #### Line-by-line (this function)
 
@@ -353,10 +419,21 @@ function resolveMediaUrl(raw, forDownload)
  143 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L128:** Error handling block.
 - **L137:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L117:** `u` means: Holds “u” for this scope.
+- **L128:** Error handling block.
+- **L129:** `key` means: HMAC key bytes or dictionary key.
+- **L131:** `q` means: Search query text, or SQL command text.
+- **L137:** Error handling block.
+- **L139:** `a` means: Holds “a” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -369,8 +446,10 @@ function mediaKind(urlOrName)
 #### Explanation
 
 - **Purpose:** Implements `mediaKind`.
-- **Parameters:** `urlOrName`
-- **Local variables:** `s`
+- **Parameters (what each means):**
+- `urlOrName` — URL string.
+- **Local variables (what each means):**
+- `s` — String value or submission-related object.
 
 #### Line-by-line (this function)
 
@@ -386,6 +465,13 @@ function mediaKind(urlOrName)
  169 |     return 'file';
  170 | }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L164:** `s` means: String value or submission-related object.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -398,8 +484,13 @@ function buildMaterialPreviewHtml(viewUrl, kind, fileName)
 #### Explanation
 
 - **Purpose:** Implements `buildMaterialPreviewHtml`.
-- **Parameters:** `viewUrl, kind, fileName`
-- **Local variables:** `safeView`, `safeName`
+- **Parameters (what each means):**
+- `viewUrl` — URL string.
+- `kind` — Upload kind (material/video/thumbnail/submission).
+- `fileName` — Original file name for display/download.
+- **Local variables (what each means):**
+- `safeView` — Holds “safe View” for this scope.
+- `safeName` — Holds “safe Name” for this scope.
 
 #### Line-by-line (this function)
 
@@ -428,10 +519,17 @@ function buildMaterialPreviewHtml(viewUrl, kind, fileName)
  191 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L173:** Encode text to reduce XSS risk.
 - **L174:** Encode text to reduce XSS risk.
+=======
+**Line notes** (what code + variables mean)
+
+- **L173:** Encode text to reduce XSS risk. | `safeView` means: Holds “safe View” for this scope.
+- **L174:** Encode text to reduce XSS risk. | `safeName` means: Holds “safe Name” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -444,7 +542,16 @@ function initMediaDropzone()
 #### Explanation
 
 - **Purpose:** Implements `initMediaDropzone`.
-- **Local variables:** `area`, `input`, `msg`, `ext`, `store`, `viewUrl`, `dlUrl`, `txt`, `prev`
+- **Local variables (what each means):**
+- `area` — Holds “area” for this scope.  DOM element from the page.
+- `input` — Holds “input” for this scope.  DOM element from the page.
+- `msg` — Human-readable message (error or success).
+- `ext` — File extension (.pdf, .mp4, …).
+- `store` — Holds “store” for this scope.
+- `viewUrl` — URL string.
+- `dlUrl` — URL string.
+- `txt` — UI control reference (txt).  DOM element from the page.
+- `prev` — Holds “prev” for this scope.  DOM element from the page.
 
 #### Line-by-line (this function)
 
@@ -536,6 +643,7 @@ function initMediaDropzone()
  275 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L194:** Get HTML element by id.
@@ -544,6 +652,21 @@ function initMediaDropzone()
 - **L237:** Update page HTML.
 - **L238:** Encode text to reduce XSS risk.
 - **L239:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L194:** Get HTML element by id. | `area` means: Holds “area” for this scope.  DOM element from the page.
+- **L196:** Get HTML element by id. | `input` means: Holds “input” for this scope.  DOM element from the page.
+- **L205:** `msg` means: Human-readable message (error or success).
+- **L215:** `ext` means: File extension (.pdf, .mp4, …).
+- **L228:** `store` means: Holds “store” for this scope.
+- **L229:** `viewUrl` means: URL string.
+- **L230:** `dlUrl` means: URL string.
+- **L231:** Get HTML element by id. | `txt` means: UI control reference (txt).  DOM element from the page.
+- **L237:** Update page HTML.
+- **L238:** Encode text to reduce XSS risk.
+- **L239:** Get HTML element by id. | `prev` means: Holds “prev” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L241:** Update page HTML.
 - **L242:** Encode text to reduce XSS risk.
 - **L243:** Encode text to reduce XSS risk.
@@ -565,8 +688,15 @@ function uploadVideo(file)
 #### Explanation
 
 - **Purpose:** Implements `uploadVideo`.
-- **Parameters:** `file`
-- **Local variables:** `ext`, `store`, `viewUrl`, `dlUrl`, `txt`, `prev`
+- **Parameters (what each means):**
+- `file` — Uploaded file object or file name.
+- **Local variables (what each means):**
+- `ext` — File extension (.pdf, .mp4, …).
+- `store` — Holds “store” for this scope.
+- `viewUrl` — URL string.
+- `dlUrl` — URL string.
+- `txt` — UI control reference (txt).  DOM element from the page.
+- `prev` — Holds “prev” for this scope.  DOM element from the page.
 
 #### Line-by-line (this function)
 
@@ -620,12 +750,25 @@ function uploadVideo(file)
  257 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L231:** Get HTML element by id.
 - **L237:** Update page HTML.
 - **L238:** Encode text to reduce XSS risk.
 - **L239:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L215:** `ext` means: File extension (.pdf, .mp4, …).
+- **L228:** `store` means: Holds “store” for this scope.
+- **L229:** `viewUrl` means: URL string.
+- **L230:** `dlUrl` means: URL string.
+- **L231:** Get HTML element by id. | `txt` means: UI control reference (txt).  DOM element from the page.
+- **L237:** Update page HTML.
+- **L238:** Encode text to reduce XSS risk.
+- **L239:** Get HTML element by id. | `prev` means: Holds “prev” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L241:** Update page HTML.
 - **L242:** Encode text to reduce XSS risk.
 - **L243:** Encode text to reduce XSS risk.
@@ -642,7 +785,16 @@ function initMaterialDropzone()
 #### Explanation
 
 - **Purpose:** Implements `initMaterialDropzone`.
-- **Local variables:** `area`, `input`, `msg`, `allowed`, `ext`, `maxMb`, `materialsField`, `materials`, `store`
+- **Local variables (what each means):**
+- `area` — Holds “area” for this scope.  DOM element from the page.
+- `input` — Holds “input” for this scope.  DOM element from the page.
+- `msg` — Human-readable message (error or success).
+- `allowed` — Boolean — path/role is permitted.
+- `ext` — File extension (.pdf, .mp4, …).
+- `maxMb` — Holds “max Mb” for this scope.
+- `materialsField` — Holds “materials Field” for this scope.  DOM element from the page.
+- `materials` — Often a collection related to materials (plural name).
+- `store` — Holds “store” for this scope.
 
 #### Line-by-line (this function)
 
@@ -733,12 +885,27 @@ function initMaterialDropzone()
  358 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L278:** Get HTML element by id.
 - **L280:** Get HTML element by id.
 - **L314:** Get HTML element by id.
 - **L316:** JS object ↔ JSON text.
+=======
+**Line notes** (what code + variables mean)
+
+- **L278:** Get HTML element by id. | `area` means: Holds “area” for this scope.  DOM element from the page.
+- **L280:** Get HTML element by id. | `input` means: Holds “input” for this scope.  DOM element from the page.
+- **L289:** `msg` means: Human-readable message (error or success).
+- **L299:** `allowed` means: Boolean — path/role is permitted.
+- **L300:** `ext` means: File extension (.pdf, .mp4, …).
+- **L305:** `maxMb` means: Holds “max Mb” for this scope.
+- **L314:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
+- **L315:** `materials` means: Often a collection related to materials (plural name).
+- **L316:** JS object ↔ JSON text.
+- **L317:** `store` means: Holds “store” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L326:** JS object ↔ JSON text.
 - **L328:** Update page HTML.
 - **L329:** Encode text to reduce XSS risk.
@@ -760,8 +927,15 @@ function uploadMaterial(file)
 
 - **Purpose:** Implements `uploadMaterial`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `file`
-- **Local variables:** `allowed`, `ext`, `maxMb`, `materialsField`, `materials`, `store`
+- **Parameters (what each means):**
+- `file` — Uploaded file object or file name.
+- **Local variables (what each means):**
+- `allowed` — Boolean — path/role is permitted.
+- `ext` — File extension (.pdf, .mp4, …).
+- `maxMb` — Holds “max Mb” for this scope.
+- `materialsField` — Holds “materials Field” for this scope.  DOM element from the page.
+- `materials` — Often a collection related to materials (plural name).
+- `store` — Holds “store” for this scope.
 
 #### Line-by-line (this function)
 
@@ -814,10 +988,22 @@ function uploadMaterial(file)
  340 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L314:** Get HTML element by id.
 - **L316:** JS object ↔ JSON text.
+=======
+**Line notes** (what code + variables mean)
+
+- **L299:** `allowed` means: Boolean — path/role is permitted.
+- **L300:** `ext` means: File extension (.pdf, .mp4, …).
+- **L305:** `maxMb` means: Holds “max Mb” for this scope.
+- **L314:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
+- **L315:** `materials` means: Often a collection related to materials (plural name).
+- **L316:** JS object ↔ JSON text.
+- **L317:** `store` means: Holds “store” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L326:** JS object ↔ JSON text.
 - **L328:** Update page HTML.
 - **L329:** Encode text to reduce XSS risk.
@@ -834,7 +1020,17 @@ function renderAttachmentsList()
 
 - **Purpose:** Implements `renderAttachmentsList`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Local variables:** `attachments`, `materialsField`, `materials`, `heading`, `raw`, `viewUrl`, `dlUrl`, `name`, `kind`, `card`
+- **Local variables (what each means):**
+- `attachments` — Often a collection related to attachments (plural name).  DOM element from the page.
+- `materialsField` — Holds “materials Field” for this scope.  DOM element from the page.
+- `materials` — Often a collection related to materials (plural name).
+- `heading` — Holds “heading” for this scope.
+- `raw` — Raw bytes or unprocessed input string.
+- `viewUrl` — URL string.
+- `dlUrl` — URL string.
+- `name` — Display name of user/course/criterion.
+- `kind` — Upload kind (material/video/thumbnail/submission).
+- `card` — Holds “card” for this scope.
 
 #### Line-by-line (this function)
 
@@ -882,12 +1078,29 @@ function renderAttachmentsList()
  398 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L361:** Get HTML element by id.
 - **L362:** Get HTML element by id.
 - **L364:** Update page HTML.
 - **L366:** JS object ↔ JSON text.
+=======
+**Line notes** (what code + variables mean)
+
+- **L361:** Get HTML element by id. | `attachments` means: Often a collection related to attachments (plural name).  DOM element from the page.
+- **L362:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
+- **L364:** Update page HTML.
+- **L365:** `materials` means: Often a collection related to materials (plural name).
+- **L366:** JS object ↔ JSON text.
+- **L369:** `heading` means: Holds “heading” for this scope.
+- **L375:** `raw` means: Raw bytes or unprocessed input string.
+- **L376:** `viewUrl` means: URL string.
+- **L377:** `dlUrl` means: URL string.
+- **L378:** `name` means: Display name of user/course/criterion.
+- **L379:** `kind` means: Upload kind (material/video/thumbnail/submission).
+- **L381:** `card` means: Holds “card” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L383:** Update page HTML.
 - **L386:** Encode text to reduce XSS risk.
 - **L387:** Encode text to reduce XSS risk.
@@ -907,8 +1120,11 @@ function removeAttachment(url)
 - **Purpose:** Implements `removeAttachment`.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Delete/clear data.
-- **Parameters:** `url`
-- **Local variables:** `materialsField`, `materials`
+- **Parameters (what each means):**
+- `url` — HTTP URL to media or page.
+- **Local variables (what each means):**
+- `materialsField` — Holds “materials Field” for this scope.  DOM element from the page.
+- `materials` — Often a collection related to materials (plural name).
 
 #### Line-by-line (this function)
 
@@ -928,9 +1144,16 @@ function removeAttachment(url)
  410 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L401:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L401:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
+- **L403:** `materials` means: Often a collection related to materials (plural name).
+>>>>>>> eb8ce01 (update)
 - **L404:** JS object ↔ JSON text.
 - **L408:** JS object ↔ JSON text.
 
@@ -938,7 +1161,11 @@ function removeAttachment(url)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | // Course Creation — media / materials dropzones
@@ -1356,6 +1583,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 
 **Line notes**
 
+<<<<<<< HEAD
 - **L4:** Get HTML element by id.
 - **L14:** Get HTML element by id.
 - **L15:** Get HTML element by id.
@@ -1379,6 +1607,53 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L237:** Update page HTML.
 - **L238:** Encode text to reduce XSS risk.
 - **L239:** Get HTML element by id.
+=======
+- **L4:** Get HTML element by id. | `dz` means: Holds “dz” for this scope.  DOM element from the page.
+- **L8:** `fileInput` means: Holds “file Input” for this scope.
+- **L14:** Get HTML element by id. | `preview` means: Holds “preview” for this scope.  DOM element from the page.
+- **L15:** Get HTML element by id. | `hiddenField` means: Holds “hidden Field” for this scope.  DOM element from the page.
+- **L16:** Get HTML element by id. | `dzMsg` means: Holds “dz Msg” for this scope.  DOM element from the page.
+- **L25:** `formData` means: Holds “form Data” for this scope.  Newly constructed object.
+- **L31:** HTTP request to server WebMethod/ashx.
+- **L57:** DOM event handler.
+- **L59:** DOM event handler.
+- **L60:** `file` means: Uploaded file object or file name.
+- **L64:** DOM event handler.
+- **L68:** DOM event handler.
+- **L71:** DOM event handler.
+- **L74:** `file` means: Uploaded file object or file name.
+- **L83:** `fd` means: Holds “fd” for this scope.  Newly constructed object.
+- **L85:** HTTP request to server WebMethod/ashx.
+- **L91:** Error handling block.
+- **L92:** JS object ↔ JSON text.
+- **L103:** `p` means: Parameter, path, or password fragment depending on context.
+- **L104:** `lower` means: Holds “lower” for this scope.
+- **L105:** `i` means: Loop index (0-based counter in for-loops).
+- **L117:** `u` means: Holds “u” for this scope.
+- **L128:** Error handling block.
+- **L129:** `key` means: HMAC key bytes or dictionary key.
+- **L131:** `q` means: Search query text, or SQL command text.
+- **L137:** Error handling block.
+- **L139:** `a` means: Holds “a” for this scope.
+- **L145:** `path` means: File path under Uploads or URL path.
+- **L146:** `idx` means: Holds “idx” for this scope.
+- **L157:** `root` means: Root directory path (Uploads).
+- **L158:** `url` means: HTTP URL to media or page.
+- **L164:** `s` means: String value or submission-related object.
+- **L173:** Encode text to reduce XSS risk. | `safeView` means: Holds “safe View” for this scope.
+- **L174:** Encode text to reduce XSS risk. | `safeName` means: Holds “safe Name” for this scope.
+- **L194:** Get HTML element by id. | `area` means: Holds “area” for this scope.  DOM element from the page.
+- **L196:** Get HTML element by id. | `input` means: Holds “input” for this scope.  DOM element from the page.
+- **L205:** `msg` means: Human-readable message (error or success).
+- **L215:** `ext` means: File extension (.pdf, .mp4, …).
+- **L228:** `store` means: Holds “store” for this scope.
+- **L229:** `viewUrl` means: URL string.
+- **L230:** `dlUrl` means: URL string.
+- **L231:** Get HTML element by id. | `txt` means: UI control reference (txt).  DOM element from the page.
+- **L237:** Update page HTML.
+- **L238:** Encode text to reduce XSS risk.
+- **L239:** Get HTML element by id. | `prev` means: Holds “prev” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L241:** Update page HTML.
 - **L242:** Encode text to reduce XSS risk.
 - **L243:** Encode text to reduce XSS risk.
@@ -1388,10 +1663,23 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L268:** DOM event handler.
 - **L269:** DOM event handler.
 - **L270:** DOM event handler.
+<<<<<<< HEAD
 - **L278:** Get HTML element by id.
 - **L280:** Get HTML element by id.
 - **L314:** Get HTML element by id.
 - **L316:** JS object ↔ JSON text.
+=======
+- **L278:** Get HTML element by id. | `area` means: Holds “area” for this scope.  DOM element from the page.
+- **L280:** Get HTML element by id. | `input` means: Holds “input” for this scope.  DOM element from the page.
+- **L289:** `msg` means: Human-readable message (error or success).
+- **L299:** `allowed` means: Boolean — path/role is permitted.
+- **L300:** `ext` means: File extension (.pdf, .mp4, …).
+- **L305:** `maxMb` means: Holds “max Mb” for this scope.
+- **L314:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
+- **L315:** `materials` means: Often a collection related to materials (plural name).
+- **L316:** JS object ↔ JSON text.
+- **L317:** `store` means: Holds “store” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L326:** JS object ↔ JSON text.
 - **L328:** Update page HTML.
 - **L329:** Encode text to reduce XSS risk.
@@ -1400,16 +1688,36 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L351:** DOM event handler.
 - **L352:** DOM event handler.
 - **L353:** DOM event handler.
+<<<<<<< HEAD
 - **L361:** Get HTML element by id.
 - **L362:** Get HTML element by id.
 - **L364:** Update page HTML.
 - **L366:** JS object ↔ JSON text.
+=======
+- **L361:** Get HTML element by id. | `attachments` means: Often a collection related to attachments (plural name).  DOM element from the page.
+- **L362:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
+- **L364:** Update page HTML.
+- **L365:** `materials` means: Often a collection related to materials (plural name).
+- **L366:** JS object ↔ JSON text.
+- **L369:** `heading` means: Holds “heading” for this scope.
+- **L375:** `raw` means: Raw bytes or unprocessed input string.
+- **L376:** `viewUrl` means: URL string.
+- **L377:** `dlUrl` means: URL string.
+- **L378:** `name` means: Display name of user/course/criterion.
+- **L379:** `kind` means: Upload kind (material/video/thumbnail/submission).
+- **L381:** `card` means: Holds “card” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L383:** Update page HTML.
 - **L386:** Encode text to reduce XSS risk.
 - **L387:** Encode text to reduce XSS risk.
 - **L388:** Encode text to reduce XSS risk.
 - **L393:** DOM event handler.
+<<<<<<< HEAD
 - **L401:** Get HTML element by id.
+=======
+- **L401:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
+- **L403:** `materials` means: Often a collection related to materials (plural name).
+>>>>>>> eb8ce01 (update)
 - **L404:** JS object ↔ JSON text.
 - **L408:** JS object ↔ JSON text.
 

@@ -1,6 +1,10 @@
 # SchemaMap.cs
 **Source:** `Data/SchemaMap.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,42 +19,44 @@ Discovers real table/column names in the attached MDF (SubChapters vs Lessons, e
 
 ## Variables / fields (file level)
 
-- **Line 15:** `Gate` — type `object`
-- **Line 16:** `_loaded` — type `bool`
-- **Line 17:** `_loadError` — type `string`
-- **Line 20:** `SubTable` — type `string`
-- **Line 21:** `SubPk` — type `string`
-- **Line 22:** `SubChapterFk` — type `string`
-- **Line 23:** `SubTitle` — type `string`
-- **Line 24:** `SubIndex` — type `string`
-- **Line 27:** `MatTable` — type `string`
-- **Line 28:** `MatPk` — type `string`
-- **Line 29:** `MatSubFk` — type `string`
-- **Line 30:** `MatLinksToSub` — type `bool`
-- **Line 31:** `MatType` — type `string`
-- **Line 32:** `MatText` — type `string`
-- **Line 33:** `MatMedia` — type `string`
-- **Line 34:** `MatIndex` — type `string`
-- **Line 37:** `ChTable` — type `string`
-- **Line 38:** `ChPk` — type `string`
-- **Line 39:** `ChCourseFk` — type `string`
-- **Line 40:** `ChTitle` — type `string`
-- **Line 41:** `ChIndex` — type `string`
-- **Line 74:** `chCols` — type `var`
-- **Line 79:** `chPk` — type `var`
-- **Line 87:** `subTable` — type `string`
-- **Line 96:** `sc` — type `var`
-- **Line 97:** `pk` — type `var`
-- **Line 107:** `matTable` — type `string`
-- **Line 115:** `mc` — type `var`
-- **Line 116:** `mPk` — type `var`
-- **Line 163:** `list` — type `var`
-- **Line 173:** `list` — type `return`
-- **Line 192:** `o` — type `var`
-- **Line 193:** `o` — type `return`
-- **Line 201:** `hit` — type `var`
-- **Line 213:** `hit` — type `var`
-- **Line 216:** `null` — type `return`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 15:** `Gate` (`object`) — **Holds “Gate” for this scope.**
+- **Line 16:** `_loaded` (`bool`) — **Holds “loaded” for this scope. (true/false)**
+- **Line 17:** `_loadError` (`string`) — **Holds “load Error” for this scope. (text)**
+- **Line 20:** `SubTable` (`string`) — **Holds “Sub Table” for this scope. (text)**
+- **Line 21:** `SubPk` (`string`) — **Holds “Sub Pk” for this scope. (text)**
+- **Line 22:** `SubChapterFk` (`string`) — **Holds “Sub Chapter Fk” for this scope. (text)**
+- **Line 23:** `SubTitle` (`string`) — **Holds “Sub Title” for this scope. (text)**
+- **Line 24:** `SubIndex` (`string`) — **Holds “Sub Index” for this scope. (text)**
+- **Line 27:** `MatTable` (`string`) — **Holds “Mat Table” for this scope. (text)**
+- **Line 28:** `MatPk` (`string`) — **Holds “Mat Pk” for this scope. (text)**
+- **Line 29:** `MatSubFk` (`string`) — **Holds “Mat Sub Fk” for this scope. (text)**
+- **Line 30:** `MatLinksToSub` (`bool`) — **Holds “Mat Links To Sub” for this scope. (true/false)**
+- **Line 31:** `MatType` (`string`) — **Holds “Mat Type” for this scope. (text)**
+- **Line 32:** `MatText` (`string`) — **Holds “Mat Text” for this scope. (text)**
+- **Line 33:** `MatMedia` (`string`) — **Holds “Mat Media” for this scope. (text)**
+- **Line 34:** `MatIndex` (`string`) — **Holds “Mat Index” for this scope. (text)**
+- **Line 37:** `ChTable` (`string`) — **Holds “Ch Table” for this scope. (text)**
+- **Line 38:** `ChPk` (`string`) — **Holds “Ch Pk” for this scope. (text)**
+- **Line 39:** `ChCourseFk` (`string`) — **Holds “Ch Course Fk” for this scope. (text)**
+- **Line 40:** `ChTitle` (`string`) — **Holds “Ch Title” for this scope. (text)**
+- **Line 41:** `ChIndex` (`string`) — **Holds “Ch Index” for this scope. (text)**
+- **Line 74:** `chCols` (`var`) — **Often a collection related to ch Cols (plural name).**
+- **Line 79:** `chPk` (`var`) — **Holds “ch Pk” for this scope.**
+- **Line 87:** `subTable` (`string`) — **Holds “sub Table” for this scope. (text)**
+- **Line 96:** `sc` (`var`) — **Holds “sc” for this scope.**
+- **Line 97:** `pk` (`var`) — **Holds “pk” for this scope.**
+- **Line 107:** `matTable` (`string`) — **Holds “mat Table” for this scope. (text)**
+- **Line 115:** `mc` (`var`) — **Holds “mc” for this scope.**
+- **Line 116:** `mPk` (`var`) — **Holds “m Pk” for this scope.**
+- **Line 163:** `list` (`var`) — **In-memory collection being built for JSON return.**
+- **Line 173:** `list` (`return`) — **In-memory collection being built for JSON return.**
+- **Line 192:** `o` (`var`) — **Holds “o” for this scope.**
+- **Line 193:** `o` (`return`) — **Holds “o” for this scope. (type `return`)**
+- **Line 201:** `hit` (`var`) — **Holds “hit” for this scope.**
+- **Line 213:** `hit` (`var`) — **Holds “hit” for this scope.**
+- **Line 216:** `null` (`return`) — **Holds “null” for this scope. (type `return`)**
 
 ## Functions / methods (11 found)
 
@@ -88,7 +94,11 @@ public static void Ensure()
   62 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L51:** Error handling block.
 - **L56:** Handle/log exception.
@@ -127,7 +137,16 @@ private static void Discover()
 
 - **Purpose:** Implements `Discover`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Local variables:** `conn`, `chCols`, `chPk`, `subTable`, `sc`, `pk`, `matTable`, `mc`, `mPk`
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
+- `chPk` (`var`) — Holds “ch Pk” for this scope.
+- `subTable` (`string`) — Holds “sub Table” for this scope. (text)
+- `sc` (`var`) — Holds “sc” for this scope.
+- `pk` (`var`) — Holds “pk” for this scope.
+- `matTable` (`string`) — Holds “mat Table” for this scope. (text)
+- `mc` (`var`) — Holds “mc” for this scope.
+- `mPk` (`var`) — Holds “m Pk” for this scope.
+- `t` — Temporary string/token/time value.
 
 #### Line-by-line (this function)
 
@@ -216,9 +235,23 @@ private static void Discover()
  149 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L71:** Import namespace/types.
+=======
+**Line notes** (what code + variables mean)
+
+- **L71:** Import namespace/types.
+- **L74:** `chCols` means: Often a collection related to ch Cols (plural name).
+- **L79:** `chPk` means: Holds “ch Pk” for this scope.
+- **L87:** `subTable` means: Holds “sub Table” for this scope. (text)
+- **L96:** `sc` means: Holds “sc” for this scope.
+- **L97:** `pk` means: Holds “pk” for this scope.
+- **L107:** `matTable` means: Holds “mat Table” for this scope. (text)
+- **L115:** `mc` means: Holds “mc” for this scope.
+- **L116:** `mPk` means: Holds “m Pk” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -232,8 +265,11 @@ private static bool TableExists(SqlConnection conn, string name)
 
 - **Purpose:** Implements `TableExists`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, string name`
-- **Local variables:** `cmd`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `name` (`string`) — Display name of user/course/criterion.
+- **Local variables (what each means):**
+- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -250,7 +286,11 @@ private static bool TableExists(SqlConnection conn, string name)
  159 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L151:** Database access (pure SQL).
 - **L153:** Import namespace/types.
@@ -269,8 +309,13 @@ private static List<string> Cols(SqlConnection conn, string table)
 
 - **Purpose:** Implements `Cols`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, string table`
-- **Local variables:** `list`, `cmd`, `r`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `table` (`string`) — DataTable or HTML table container.
+- **Local variables (what each means):**
+- `list` (`var`) — In-memory collection being built for JSON return.  Newly constructed object.
+- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
+- `r` (`var`) — Usually one database row (DataRow) in query loops.
 
 #### Line-by-line (this function)
 
@@ -292,9 +337,16 @@ private static List<string> Cols(SqlConnection conn, string table)
  174 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L161:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L161:** Database access (pure SQL).
+- **L163:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L164:** Import namespace/types.
 - **L167:** Parameterized SQL — prevents classic SQL injection.
 - **L168:** Import namespace/types.
@@ -310,7 +362,9 @@ private static bool Has(List<string> cols, string name)
 #### Explanation
 
 - **Purpose:** Implements `Has`.
-- **Parameters:** `List<string> cols, string name`
+- **Parameters (what each means):**
+- `cols` (`List<string>`) — Often a collection related to cols (plural name). (text)
+- `name` (`string`) — Display name of user/course/criterion.
 
 #### Line-by-line (this function)
 
@@ -334,8 +388,12 @@ private static string PrimaryKey(SqlConnection conn, string table)
 
 - **Purpose:** Implements `PrimaryKey`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, string table`
-- **Local variables:** `cmd`, `o`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `table` (`string`) — DataTable or HTML table container.
+- **Local variables (what each means):**
+- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
+- `o` (`var`) — Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
 
 #### Line-by-line (this function)
 
@@ -358,13 +416,21 @@ private static string PrimaryKey(SqlConnection conn, string table)
  195 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L181:** Database access (pure SQL).
 - **L183:** Import namespace/types.
 - **L186:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L191:** Parameterized SQL — prevents classic SQL injection.
+<<<<<<< HEAD
 - **L192:** Run SQL; return table / rows / scalar.
+=======
+- **L192:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L193:** Null-safe read from database values.
 
 ---
@@ -378,8 +444,12 @@ private static string Pick(List<string> cols, params string[] candidates)
 #### Explanation
 
 - **Purpose:** Implements `Pick`.
-- **Parameters:** `List<string> cols, params string[] candidates`
-- **Local variables:** `hit`
+- **Parameters (what each means):**
+- `cols` (`List<string>`) — Often a collection related to cols (plural name). (text)
+- `candidates` (`string[]`) — Boolean flag: candidates. (text)
+- **Local variables (what each means):**
+- `hit` (`var`) — Holds “hit” for this scope.
+- `c` — Temporary value (character, course, or counter depending on loop).
 
 #### Line-by-line (this function)
 
@@ -397,6 +467,13 @@ private static string Pick(List<string> cols, params string[] candidates)
  206 |             throw new InvalidOperationException("No columns found; candidates: " + string.Join(",", candidates));
  207 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L201:** `hit` means: Holds “hit” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -409,8 +486,12 @@ private static string PickOptional(List<string> cols, params string[] candidates
 #### Explanation
 
 - **Purpose:** Implements `PickOptional`.
-- **Parameters:** `List<string> cols, params string[] candidates`
-- **Local variables:** `hit`
+- **Parameters (what each means):**
+- `cols` (`List<string>`) — Often a collection related to cols (plural name). (text)
+- `candidates` (`string[]`) — Boolean flag: candidates. (text)
+- **Local variables (what each means):**
+- `hit` (`var`) — Holds “hit” for this scope.
+- `c` — Temporary value (character, course, or counter depending on loop).
 
 #### Line-by-line (this function)
 
@@ -426,6 +507,13 @@ private static string PickOptional(List<string> cols, params string[] candidates
  216 |             return null;
  217 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L213:** `hit` means: Holds “hit” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -438,7 +526,8 @@ public static string Q(string ident)
 #### Explanation
 
 - **Purpose:** Implements `Q`.
-- **Parameters:** `string ident`
+- **Parameters (what each means):**
+- `ident` (`string`) — Holds “ident” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -485,7 +574,11 @@ public static object DebugInfo()
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -739,11 +832,26 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L51:** Error handling block.
 - **L56:** Handle/log exception.
 - **L71:** Import namespace/types.
+<<<<<<< HEAD
+=======
+- **L74:** `chCols` means: Often a collection related to ch Cols (plural name).
+- **L79:** `chPk` means: Holds “ch Pk” for this scope.
+- **L87:** `subTable` means: Holds “sub Table” for this scope. (text)
+- **L96:** `sc` means: Holds “sc” for this scope.
+- **L97:** `pk` means: Holds “pk” for this scope.
+- **L107:** `matTable` means: Holds “mat Table” for this scope. (text)
+- **L115:** `mc` means: Holds “mc” for this scope.
+- **L116:** `mPk` means: Holds “m Pk” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L151:** Database access (pure SQL).
 - **L153:** Import namespace/types.
 - **L156:** Parameterized SQL — prevents classic SQL injection.
 - **L157:** Run SQL; return table / rows / scalar.
 - **L161:** Database access (pure SQL).
+<<<<<<< HEAD
+=======
+- **L163:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L164:** Import namespace/types.
 - **L167:** Parameterized SQL — prevents classic SQL injection.
 - **L168:** Import namespace/types.
@@ -751,8 +859,15 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L183:** Import namespace/types.
 - **L186:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L191:** Parameterized SQL — prevents classic SQL injection.
+<<<<<<< HEAD
 - **L192:** Run SQL; return table / rows / scalar.
 - **L193:** Null-safe read from database values.
+=======
+- **L192:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L193:** Null-safe read from database values.
+- **L201:** `hit` means: Holds “hit” for this scope.
+- **L213:** `hit` means: Holds “hit” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

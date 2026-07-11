@@ -1,6 +1,10 @@
 # DbIndexes.cs
 **Source:** `Data/DbIndexes.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,12 +19,14 @@ Creates useful nonclustered indexes if missing (LecturerUID, IsPublished, CWSubm
 
 ## Variables / fields (file level)
 
-- **Line 12:** `Gate` — type `object`
-- **Line 13:** `_done` — type `bool`
-- **Line 67:** `table` — type `string`
-- **Line 68:** `on` — type `int`
-- **Line 71:** `rest` — type `string`
-- **Line 72:** `sp` — type `int`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 12:** `Gate` (`object`) — **Holds “Gate” for this scope.**
+- **Line 13:** `_done` (`bool`) — **Holds “done” for this scope. (true/false)**
+- **Line 67:** `table` (`string`) — **DataTable or HTML table container.**
+- **Line 68:** `on` (`int`) — **Holds “on” for this scope. (integer)**
+- **Line 71:** `rest` (`string`) — **Holds “rest” for this scope. (text)**
+- **Line 72:** `sp` (`int`) — **Holds “sp” for this scope. (integer)**
 
 ## Functions / methods (2 found)
 
@@ -36,7 +42,8 @@ public static void Ensure()
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Local variables:** `conn`
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
 
 #### Line-by-line (this function)
 
@@ -87,7 +94,11 @@ public static void Ensure()
   57 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L21:** Error handling block.
 - **L23:** Import namespace/types.
@@ -115,8 +126,16 @@ private static void EnsureIndex(SqlConnection conn, string indexName, string cre
 
 - **Purpose:** Implements `EnsureIndex`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, string indexName, string createSql`
-- **Local variables:** `check`, `table`, `on`, `rest`, `sp`, `create`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `indexName` (`string`) — Holds “index Name” for this scope. (text)
+- `createSql` (`string`) — Holds “create Sql” for this scope. (text)
+- **Local variables (what each means):**
+- `check` (`var`) — Holds “check” for this scope.  Newly constructed object.
+- `on` (`int`) — Holds “on” for this scope. (integer)
+- `rest` (`string`) — Holds “rest” for this scope. (text)
+- `sp` (`int`) — Holds “sp” for this scope. (integer)
+- `create` (`var`) — Holds “create” for this scope.  Assigned from rows-affected of INSERT/UPDATE/DELETE.
 
 #### Line-by-line (this function)
 
@@ -155,12 +174,23 @@ private static void EnsureIndex(SqlConnection conn, string indexName, string cre
   89 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L59:** Database access (pure SQL).
 - **L61:** Error handling block.
 - **L63:** Import namespace/types.
 - **L64:** Inspect live database catalog for existing columns/tables.
+<<<<<<< HEAD
+=======
+- **L67:** `table` means: DataTable or HTML table container.
+- **L68:** `on` means: Holds “on” for this scope. (integer)
+- **L71:** `rest` means: Holds “rest” for this scope. (text)
+- **L72:** `sp` means: Holds “sp” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 - **L77:** Parameterized SQL — prevents classic SQL injection.
 - **L78:** Parameterized SQL — prevents classic SQL injection.
 - **L79:** Run SQL; return table / rows / scalar.
@@ -172,7 +202,11 @@ private static void EnsureIndex(SqlConnection conn, string indexName, string cre
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -290,6 +324,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L61:** Error handling block.
 - **L63:** Import namespace/types.
 - **L64:** Inspect live database catalog for existing columns/tables.
+<<<<<<< HEAD
+=======
+- **L67:** `table` means: DataTable or HTML table container.
+- **L68:** `on` means: Holds “on” for this scope. (integer)
+- **L71:** `rest` means: Holds “rest” for this scope. (text)
+- **L72:** `sp` means: Holds “sp” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 - **L77:** Parameterized SQL — prevents classic SQL injection.
 - **L78:** Parameterized SQL — prevents classic SQL injection.
 - **L79:** Run SQL; return table / rows / scalar.

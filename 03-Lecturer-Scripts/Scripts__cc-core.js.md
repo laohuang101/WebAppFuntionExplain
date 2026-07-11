@@ -1,6 +1,10 @@
 # cc-core.js
 **Source:** `Pages/Lecturer/Scripts/cc-core.js`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,19 +19,21 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-- **Line 4:** `courses` — script-level `const`/`let`/`var`
-- **Line 6:** `currentCourseId` — script-level `const`/`let`/`var`
-- **Line 7:** `activeWizardStep` — script-level `const`/`let`/`var`
-- **Line 8:** `editingSectionId` — script-level `const`/`let`/`var`
-- **Line 10:** `targetChapterId` — script-level `const`/`let`/`var`
-- **Line 11:** `editingLessonId` — script-level `const`/`let`/`var`
-- **Line 17:** `x` — script-level `const`/`let`/`var`
-- **Line 32:** `parsed` — script-level `const`/`let`/`var`
-- **Line 37:** `msg` — script-level `const`/`let`/`var`
-- **Line 47:** `body` — script-level `const`/`let`/`var`
-- **Line 53:** `el` — script-level `const`/`let`/`var`
-- **Line 55:** `inst` — script-level `const`/`let`/`var`
-- **Line 69:** `open` — script-level `const`/`let`/`var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 4:** `courses` — script-level `const`/`let`/`var` — **Often a collection related to courses (plural name).**
+- **Line 6:** `currentCourseId` — script-level `const`/`let`/`var` — **Holds “current Course Id” for this scope.**
+- **Line 7:** `activeWizardStep` — script-level `const`/`let`/`var` — **Holds “active Wizard Step” for this scope.**
+- **Line 8:** `editingSectionId` — script-level `const`/`let`/`var` — **Holds “editing Section Id” for this scope.**
+- **Line 10:** `targetChapterId` — script-level `const`/`let`/`var` — **Holds “target Chapter Id” for this scope.**
+- **Line 11:** `editingLessonId` — script-level `const`/`let`/`var` — **Holds “editing Lesson Id” for this scope.**
+- **Line 17:** `x` — script-level `const`/`let`/`var` — **Generic temporary / coordinate / exception alias.**
+- **Line 32:** `parsed` — script-level `const`/`let`/`var` — **Holds “parsed” for this scope.**
+- **Line 37:** `msg` — script-level `const`/`let`/`var` — **Human-readable message (error or success).**
+- **Line 47:** `body` — script-level `const`/`let`/`var` — **HTTP request body.**
+- **Line 53:** `el` — script-level `const`/`let`/`var` — **Generic DOM element.**
+- **Line 55:** `inst` — script-level `const`/`let`/`var` — **Holds “inst” for this scope.**
+- **Line 69:** `open` — script-level `const`/`let`/`var` — **Holds “open” for this scope.**
 
 ## Functions / methods (5 found)
 
@@ -40,8 +46,10 @@ function unwrap(data)
 #### Explanation
 
 - **Purpose:** Implements `unwrap`.
-- **Parameters:** `data`
-- **Local variables:** `x`
+- **Parameters (what each means):**
+- `data` — Holds “data” for this scope.
+- **Local variables (what each means):**
+- `x` — Generic temporary / coordinate / exception alias.
 
 #### Line-by-line (this function)
 
@@ -56,6 +64,13 @@ function unwrap(data)
   20 |     return x;
   21 | }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L17:** `x` means: Generic temporary / coordinate / exception alias.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -70,8 +85,12 @@ function postJson(url, body)
 - **Purpose:** Implements `postJson`.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **AJAX:** Browser calls server endpoints asynchronously.
-- **Parameters:** `url, body`
-- **Local variables:** `parsed`, `msg`
+- **Parameters (what each means):**
+- `url` — HTTP URL to media or page.
+- `body` — HTTP request body.
+- **Local variables (what each means):**
+- `parsed` — Holds “parsed” for this scope.
+- `msg` — Human-readable message (error or success).
 
 #### Line-by-line (this function)
 
@@ -101,11 +120,21 @@ function postJson(url, body)
   43 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L25:** HTTP request to server WebMethod/ashx.
 - **L28:** JS object ↔ JSON text.
 - **L33:** JS object ↔ JSON text.
+=======
+**Line notes** (what code + variables mean)
+
+- **L25:** HTTP request to server WebMethod/ashx.
+- **L28:** JS object ↔ JSON text.
+- **L32:** `parsed` means: Holds “parsed” for this scope.
+- **L33:** JS object ↔ JSON text.
+- **L37:** `msg` means: Human-readable message (error or success).
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -119,8 +148,11 @@ function curriculumApi(action, payload)
 
 - **Purpose:** Implements `curriculumApi`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `action, payload`
-- **Local variables:** `body`
+- **Parameters (what each means):**
+- `action` — Holds “action” for this scope.
+- `payload` — Object about to be JSON-serialized or sent over network.
+- **Local variables (what each means):**
+- `body` — HTTP request body.
 
 #### Line-by-line (this function)
 
@@ -131,6 +163,13 @@ function curriculumApi(action, payload)
   48 |     return postJson('CurriculumApi.ashx', body);
   49 | }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L47:** `body` means: HTTP request body.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -143,8 +182,11 @@ function hideModal(id)
 #### Explanation
 
 - **Purpose:** Implements `hideModal`.
-- **Parameters:** `id`
-- **Local variables:** `el`, `inst`
+- **Parameters (what each means):**
+- `id` — Generic primary key / identifier.
+- **Local variables (what each means):**
+- `el` — Generic DOM element.  DOM element from the page.
+- `inst` — Holds “inst” for this scope.
 
 #### Line-by-line (this function)
 
@@ -159,9 +201,16 @@ function hideModal(id)
   58 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L53:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L53:** Get HTML element by id. | `el` means: Generic DOM element.  DOM element from the page.
+- **L55:** `inst` means: Holds “inst” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -174,8 +223,10 @@ function showModal(id)
 #### Explanation
 
 - **Purpose:** Implements `showModal`.
-- **Parameters:** `id`
-- **Local variables:** `el`
+- **Parameters (what each means):**
+- `id` — Generic primary key / identifier.
+- **Local variables (what each means):**
+- `el` — Generic DOM element.  DOM element from the page.
 
 #### Line-by-line (this function)
 
@@ -190,15 +241,25 @@ function showModal(id)
   65 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L61:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L61:** Get HTML element by id. | `el` means: Generic DOM element.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | // Course Creation — core helpers (API, modals)
@@ -279,12 +340,33 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 
 **Line notes**
 
+<<<<<<< HEAD
 - **L25:** HTTP request to server WebMethod/ashx.
 - **L28:** JS object ↔ JSON text.
 - **L33:** JS object ↔ JSON text.
 - **L53:** Get HTML element by id.
 - **L61:** Get HTML element by id.
 - **L68:** DOM event handler.
+=======
+- **L5:** `courses` means: Often a collection related to courses (plural name).
+- **L6:** `currentCourseId` means: Holds “current Course Id” for this scope.
+- **L7:** `activeWizardStep` means: Holds “active Wizard Step” for this scope.  Literal number `1`.
+- **L9:** `editingSectionId` means: Holds “editing Section Id” for this scope.
+- **L10:** `targetChapterId` means: Holds “target Chapter Id” for this scope.
+- **L11:** `editingLessonId` means: Holds “editing Lesson Id” for this scope.
+- **L17:** `x` means: Generic temporary / coordinate / exception alias.
+- **L25:** HTTP request to server WebMethod/ashx.
+- **L28:** JS object ↔ JSON text.
+- **L32:** `parsed` means: Holds “parsed” for this scope.
+- **L33:** JS object ↔ JSON text.
+- **L37:** `msg` means: Human-readable message (error or success).
+- **L47:** `body` means: HTTP request body.
+- **L53:** Get HTML element by id. | `el` means: Generic DOM element.  DOM element from the page.
+- **L55:** `inst` means: Holds “inst” for this scope.
+- **L61:** Get HTML element by id. | `el` means: Generic DOM element.  DOM element from the page.
+- **L68:** DOM event handler.
+- **L69:** `open` means: Holds “open” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

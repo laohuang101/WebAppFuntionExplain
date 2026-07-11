@@ -1,6 +1,10 @@
 # UploadPathGuard.cs
 **Source:** `Data/Security/UploadPathGuard.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,19 +19,21 @@ Normalize/sanitize paths under ~/Uploads; block traversal and illegal folders.
 
 ## Variables / fields (file level)
 
-- **Line 13:** `AllowedRoots` — type `string[]`
-- **Line 24:** `f` — type `string`
-- **Line 40:** `parts` — type `var`
-- **Line 47:** `null` — type `return`
-- **Line 51:** `allowed` — type `bool`
-- **Line 72:** `rel` — type `string`
-- **Line 74:** `uploadsRoot` — type `string`
-- **Line 80:** `full` — type `string`
-- **Line 81:** `rootFull` — type `string`
-- **Line 84:** `rootWithSep` — type `string`
-- **Line 89:** `null` — type `return`
-- **Line 91:** `full` — type `return`
-- **Line 100:** `false` — type `return`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 13:** `AllowedRoots` (`string[]`) — **Often a collection related to Allowed Roots (plural name). (text)**
+- **Line 24:** `f` (`string`) — **Holds “f” for this scope. (text)**
+- **Line 40:** `parts` (`var`) — **Split path or name segments.**
+- **Line 47:** `null` (`return`) — **Holds “null” for this scope. (type `return`)**
+- **Line 51:** `allowed` (`bool`) — **Boolean — path/role is permitted.**
+- **Line 72:** `rel` (`string`) — **Holds “rel” for this scope. (text)**
+- **Line 74:** `uploadsRoot` (`string`) — **Holds “uploads Root” for this scope. (text)**
+- **Line 80:** `full` (`string`) — **Fully resolved absolute path.**
+- **Line 81:** `rootFull` (`string`) — **Holds “root Full” for this scope. (text)**
+- **Line 84:** `rootWithSep` (`string`) — **Holds “root With Sep” for this scope. (text)**
+- **Line 89:** `null` (`return`) — **Holds “null” for this scope. (type `return`)**
+- **Line 91:** `full` (`return`) — **Fully resolved absolute path.**
+- **Line 100:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
 
 ## Functions / methods (3 found)
 
@@ -40,8 +46,14 @@ public static string NormalizeRelative(string raw)
 #### Explanation
 
 - **Purpose:** Implements `NormalizeRelative`.
-- **Parameters:** `string raw`
-- **Local variables:** `f`, `parts`, `allowed`
+- **Parameters (what each means):**
+- `raw` (`string`) — Raw bytes or unprocessed input string.
+- **Local variables (what each means):**
+- `f` (`string`) — Holds “f” for this scope. (text)
+- `parts` (`var`) — Split path or name segments.
+- `allowed` (`bool`) — Boolean — path/role is permitted.
+- `p` — Parameter, path, or password fragment depending on context.
+- `root` — Root directory path (Uploads).
 
 #### Line-by-line (this function)
 
@@ -92,10 +104,20 @@ public static string NormalizeRelative(string raw)
   64 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L21:** Path sandbox under Uploads.
 - **L27:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L21:** Path sandbox under Uploads.
+- **L24:** `f` means: Holds “f” for this scope. (text)
+- **L27:** Error handling block.
+- **L41:** `parts` means: Split path or name segments.
+- **L51:** `allowed` means: Boolean — path/role is permitted.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -108,8 +130,14 @@ public static string ToPhysical(HttpContext ctx, string relativeUnderUploads)
 #### Explanation
 
 - **Purpose:** Implements `ToPhysical`.
-- **Parameters:** `HttpContext ctx, string relativeUnderUploads`
-- **Local variables:** `rel`, `full`, `rootFull`, `rootWithSep`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- `relativeUnderUploads` (`string`) — Often a collection related to relative Under Uploads (plural name). (text)
+- **Local variables (what each means):**
+- `rel` (`string`) — Holds “rel” for this scope. (text)
+- `full` (`string`) — Fully resolved absolute path.
+- `rootFull` (`string`) — Holds “root Full” for this scope. (text)
+- `rootWithSep` (`string`) — Holds “root With Sep” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -140,11 +168,22 @@ public static string ToPhysical(HttpContext ctx, string relativeUnderUploads)
   92 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L72:** Path sandbox under Uploads.
 - **L76:** Error handling block.
 - **L77:** Handle/log exception.
+=======
+**Line notes** (what code + variables mean)
+
+- **L72:** Path sandbox under Uploads. | `rel` means: Holds “rel” for this scope. (text)
+- **L76:** Error handling block.
+- **L77:** Handle/log exception.
+- **L80:** `full` means: Fully resolved absolute path.
+- **L81:** `rootFull` means: Holds “root Full” for this scope. (text)
+- **L84:** `rootWithSep` means: Holds “root With Sep” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -157,7 +196,11 @@ public static bool IsAllowedExtension(string ext, string[] allow)
 #### Explanation
 
 - **Purpose:** Implements `IsAllowedExtension`.
-- **Parameters:** `string ext, string[] allow`
+- **Parameters (what each means):**
+- `ext` (`string`) — File extension (.pdf, .mp4, …).
+- `allow` (`string[]`) — Holds “allow” for this scope. (text)
+- **Local variables (what each means):**
+- `a` — Holds “a” for this scope.
 
 #### Line-by-line (this function)
 
@@ -177,7 +220,11 @@ public static bool IsAllowedExtension(string ext, string[] allow)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -293,10 +340,23 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L5:** C# namespace grouping.
 - **L11:** Sandbox path under ~/Uploads.
 - **L21:** Path sandbox under Uploads.
+<<<<<<< HEAD
 - **L27:** Error handling block.
 - **L72:** Path sandbox under Uploads.
 - **L76:** Error handling block.
 - **L77:** Handle/log exception.
+=======
+- **L24:** `f` means: Holds “f” for this scope. (text)
+- **L27:** Error handling block.
+- **L41:** `parts` means: Split path or name segments.
+- **L51:** `allowed` means: Boolean — path/role is permitted.
+- **L72:** Path sandbox under Uploads. | `rel` means: Holds “rel” for this scope. (text)
+- **L76:** Error handling block.
+- **L77:** Handle/log exception.
+- **L80:** `full` means: Fully resolved absolute path.
+- **L81:** `rootFull` means: Holds “root Full” for this scope. (text)
+- **L84:** `rootWithSep` means: Holds “root With Sep” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

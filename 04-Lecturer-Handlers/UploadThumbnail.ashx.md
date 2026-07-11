@@ -1,6 +1,10 @@
 # UploadThumbnail.ashx
 **Source:** `Pages/Lecturer/UploadThumbnail.ashx`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -14,6 +18,8 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 - **Kind:** `.ashx`
 
 ## Variables / fields (file level)
+
+Each name is explained in plain English (what it stores / why it exists).
 
 Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
 
@@ -30,8 +36,19 @@ public void ProcessRequest(HttpContext context)
 - **Purpose:** Implements `ProcessRequest`.
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `HttpContext context`
-- **Local variables:** `file`, `ext`, `uploadsFolder`, `fileName`, `savePath`, `full`, `root`, `under`, `mediaUrl`, `staticUrl`
+- **Parameters (what each means):**
+- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
+- **Local variables (what each means):**
+- `file` (`var`) — Uploaded file object or file name.
+- `ext` (`var`) — File extension (.pdf, .mp4, …).
+- `uploadsFolder` (`var`) — Filesystem or URL path.
+- `fileName` (`var`) — Original file name for display/download.
+- `savePath` (`var`) — Filesystem or URL path.
+- `full` (`string`) — Fully resolved absolute path.
+- `root` (`string`) — Root directory path (Uploads).
+- `under` (`string`) — Holds “under” for this scope. (text)  Literal text string.
+- `mediaUrl` (`string`) — URL string. (text)
+- `staticUrl` (`string`) — URL string. (text)
 
 #### Line-by-line (this function)
 
@@ -117,16 +134,36 @@ public void ProcessRequest(HttpContext context)
   92 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L15:** IHttpHandler entry for ashx.
 - **L20:** Error handling block.
 - **L23:** Authorization — block wrong role / anonymous.
+<<<<<<< HEAD
+=======
+- **L32:** `file` means: Uploaded file object or file name.
+- **L39:** `ext` means: File extension (.pdf, .mp4, …).
+>>>>>>> eb8ce01 (update)
 - **L40:** Sandbox path under ~/Uploads.
 - **L52:** File magic-byte validation on upload.
 - **L53:** Validate upload by file signature.
 - **L55:** Write/read security audit events.
 - **L56:** File magic-byte validation on upload.
+<<<<<<< HEAD
+=======
+- **L60:** `uploadsFolder` means: Filesystem or URL path.
+- **L63:** `fileName` means: Original file name for display/download.
+- **L64:** `savePath` means: Filesystem or URL path.
+- **L66:** `full` means: Fully resolved absolute path.
+- **L67:** `root` means: Root directory path (Uploads).
+- **L76:** `under` means: Holds “under” for this scope. (text)  Literal text string.
+- **L77:** `mediaUrl` means: URL string. (text)
+- **L78:** `staticUrl` means: URL string. (text)
+>>>>>>> eb8ce01 (update)
 - **L88:** Handle/log exception.
 
 ---
@@ -141,8 +178,11 @@ private void WriteJson(HttpContext context, object obj)
 
 - **Purpose:** Implements `WriteJson`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `HttpContext context, object obj`
-- **Local variables:** `js`
+- **Parameters (what each means):**
+- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
+- `obj` (`object`) — Holds “obj” for this scope.
+- **Local variables (what each means):**
+- `js` (`var`) — Holds “js” for this scope.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -154,12 +194,23 @@ private void WriteJson(HttpContext context, object obj)
   97 |         context.Response.Write(js.Serialize(obj));
   98 |     }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L96:** `js` means: Holds “js” for this scope.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```html
    1 | <%@ WebHandler Language="C#" Class="UploadThumbnail" %>
@@ -277,12 +328,30 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L15:** IHttpHandler entry for ashx.
 - **L20:** Error handling block.
 - **L23:** Authorization — block wrong role / anonymous.
+<<<<<<< HEAD
+=======
+- **L32:** `file` means: Uploaded file object or file name.
+- **L39:** `ext` means: File extension (.pdf, .mp4, …).
+>>>>>>> eb8ce01 (update)
 - **L40:** Sandbox path under ~/Uploads.
 - **L52:** File magic-byte validation on upload.
 - **L53:** Validate upload by file signature.
 - **L55:** Write/read security audit events.
 - **L56:** File magic-byte validation on upload.
+<<<<<<< HEAD
 - **L88:** Handle/log exception.
+=======
+- **L60:** `uploadsFolder` means: Filesystem or URL path.
+- **L63:** `fileName` means: Original file name for display/download.
+- **L64:** `savePath` means: Filesystem or URL path.
+- **L66:** `full` means: Fully resolved absolute path.
+- **L67:** `root` means: Root directory path (Uploads).
+- **L76:** `under` means: Holds “under” for this scope. (text)  Literal text string.
+- **L77:** `mediaUrl` means: URL string. (text)
+- **L78:** `staticUrl` means: URL string. (text)
+- **L88:** Handle/log exception.
+- **L96:** `js` means: Holds “js” for this scope.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

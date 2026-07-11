@@ -1,6 +1,10 @@
 # CoursePreview.aspx
 **Source:** `Pages/Lecturer/CoursePreview.aspx`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,6 +19,8 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
+Each name is explained in plain English (what it stores / why it exists).
+
 Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
 
 ## Functions / methods (0 found)
@@ -23,7 +29,11 @@ _No methods matched the scanner (markup-only or unconventional structure). See f
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```html
    1 | <%@ Page Title="Course Preview" Language="C#" MasterPageFile="~/Shared/Header&Footer.Master" AutoEventWireup="true" CodeBehind="CoursePreview.aspx.cs" Inherits="WebAppAssignment.Pages.Lecturer.CoursePreview" %>
@@ -475,16 +485,32 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 
 **Line notes**
 
+<<<<<<< HEAD
+=======
+- **L77:** `cid` means: Course ID (Courses.CID).  Comes from HTTP request.
+- **L78:** `course` means: Holds “course” for this scope.
+- **L79:** `chapters` means: Often a collection related to chapters (plural name).
+- **L80:** `active` means: Holds “active” for this scope.
+- **L83:** `x` means: Generic temporary / coordinate / exception alias.
+>>>>>>> eb8ce01 (update)
 - **L91:** HTTP request to server WebMethod/ashx.
 - **L94:** JS object ↔ JSON text.
 - **L98:** HTTP request to server WebMethod/ashx.
 - **L101:** JS object ↔ JSON text.
 - **L110:** Get HTML element by id.
+<<<<<<< HEAD
 - **L111:** Get HTML element by id.
+=======
+- **L111:** Get HTML element by id. | `el` means: Generic DOM element.  DOM element from the page.
+- **L124:** `coursesRes` means: Often a collection related to courses Res (plural name).
+- **L125:** `currRes` means: Often a collection related to curr Res (plural name).
+- **L131:** `list` means: In-memory collection being built for JSON return.
+>>>>>>> eb8ce01 (update)
 - **L153:** Get HTML element by id.
 - **L154:** Get HTML element by id.
 - **L156:** Get HTML element by id.
 - **L157:** Get HTML element by id.
+<<<<<<< HEAD
 - **L160:** Get HTML element by id.
 - **L166:** Get HTML element by id.
 - **L170:** Get HTML element by id.
@@ -505,6 +531,67 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L434:** Update page HTML.
 - **L437:** DOM event handler.
 - **L438:** Get HTML element by id.
+=======
+- **L160:** Get HTML element by id. | `hero` means: Holds “hero” for this scope.  DOM element from the page.
+- **L164:** `totalLessons` means: Often a collection related to total Lessons (plural name).  Literal number `0`.
+- **L166:** Get HTML element by id.
+- **L169:** `pct` means: Holds “pct” for this scope.
+- **L170:** Get HTML element by id.
+- **L171:** Get HTML element by id.
+- **L173:** Get HTML element by id.
+- **L182:** `lessons` means: Often a collection related to lessons (plural name).
+- **L191:** Get HTML element by id. | `box` means: Container element for lists/tables.  DOM element from the page.
+- **L193:** Update page HTML.
+- **L196:** `html` means: Holds “html” for this scope.  Literal text string.
+- **L198:** `lessons` means: Often a collection related to lessons (plural name).
+- **L199:** `open` means: Holds “open” for this scope.
+- **L210:** `type` means: Holds “type” for this scope.
+- **L211:** `icon` means: Holds “icon” for this scope.
+- **L212:** `activeCls` means: Often a collection related to active Cls (plural name).
+- **L221:** Update page HTML.
+- **L224:** DOM event handler.
+- **L225:** `sec` means: Holds “sec” for this scope.
+- **L230:** DOM event handler.
+- **L239:** `lessons` means: Often a collection related to lessons (plural name).
+- **L249:** `p` means: Parameter, path, or password fragment depending on context.
+- **L250:** `i` means: Loop index (0-based counter in for-loops).
+- **L261:** `u` means: Holds “u” for this scope.
+- **L268:** Error handling block.
+- **L269:** `key` means: HMAC key bytes or dictionary key.
+- **L271:** `q` means: Search query text, or SQL command text.
+- **L276:** Error handling block.
+- **L278:** `a` means: Holds “a” for this scope.
+- **L283:** `path` means: File path under Uploads or URL path.
+- **L284:** `idx` means: Holds “idx” for this scope.
+- **L291:** `url` means: HTTP URL to media or page.
+- **L311:** `base` means: Holds “base” for this scope.
+- **L312:** `noext` means: Holds “noext” for this scope.
+- **L319:** `view` means: Holds “view” for this scope.
+- **L320:** `dl` means: Holds “dl” for this scope.
+- **L321:** `kind` means: Upload kind (material/video/thumbnail/submission).
+- **L322:** `h` means: Holds “h” for this scope.  Literal text string.
+- **L345:** `found` means: Holds “found” for this scope.
+- **L347:** `les` means: Holds “les” for this scope.
+- **L348:** `ch` means: Holds “ch” for this scope.
+- **L349:** Get HTML element by id.
+- **L350:** Get HTML element by id.
+- **L352:** Get HTML element by id. | `body` means: HTTP request body.  DOM element from the page.
+- **L353:** `type` means: Holds “type” for this scope.
+- **L354:** `content` means: Submission body text or JSON payload in CWSubmissions.
+- **L355:** `materials` means: Often a collection related to materials (plural name).
+- **L356:** `html` means: Holds “html” for this scope.  Literal text string.
+- **L359:** `files` means: Often a collection related to files (plural name).
+- **L366:** `tl` means: Holds “tl” for this scope.
+- **L378:** `link` means: Holds “link” for this scope.
+- **L379:** `text` means: Holds “text” for this scope.
+- **L393:** `badge` means: Holds “badge” for this scope.
+- **L399:** Get HTML element by id.
+- **L403:** Get HTML element by id.
+- **L415:** `plainNote` means: Holds “plain Note” for this scope.
+- **L434:** Update page HTML.
+- **L437:** DOM event handler.
+- **L438:** Get HTML element by id. | `panel` means: Holds “panel” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

@@ -1,6 +1,10 @@
 # manage-submissions.js
 **Source:** `Pages/Lecturer/Scripts/manage-submissions.js`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,18 +19,20 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-- **Line 8:** `cwid` — script-level `const`/`let`/`var`
-- **Line 21:** `res` — script-level `const`/`let`/`var`
-- **Line 22:** `sel` — script-level `const`/`let`/`var`
-- **Line 26:** `opt` — script-level `const`/`let`/`var`
-- **Line 33:** `container` — script-level `const`/`let`/`var`
-- **Line 42:** `div` — script-level `const`/`let`/`var`
-- **Line 58:** `s` — script-level `const`/`let`/`var`
-- **Line 60:** `body` — script-level `const`/`let`/`var`
-- **Line 64:** `modal` — script-level `const`/`let`/`var`
-- **Line 77:** `sid` — script-level `const`/`let`/`var`
-- **Line 78:** `score` — script-level `const`/`let`/`var`
-- **Line 79:** `review` — script-level `const`/`let`/`var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 8:** `cwid` — script-level `const`/`let`/`var` — **CourseWork ID (assignment) (CourseWorks.CWID).**
+- **Line 21:** `res` — script-level `const`/`let`/`var` — **Result object returned from fetch/WebMethod (`data.d` unwrapped).**
+- **Line 22:** `sel` — script-level `const`/`let`/`var` — **Holds “sel” for this scope.**
+- **Line 26:** `opt` — script-level `const`/`let`/`var` — **Option element or optional label.**
+- **Line 33:** `container` — script-level `const`/`let`/`var` — **Holds “container” for this scope.**
+- **Line 42:** `div` — script-level `const`/`let`/`var` — **Holds “div” for this scope.**
+- **Line 58:** `s` — script-level `const`/`let`/`var` — **String value or submission-related object.**
+- **Line 60:** `body` — script-level `const`/`let`/`var` — **HTTP request body.**
+- **Line 64:** `modal` — script-level `const`/`let`/`var` — **Holds “modal” for this scope.**
+- **Line 77:** `sid` — script-level `const`/`let`/`var` — **Submission ID (CWSubmissions.SID).**
+- **Line 78:** `score` — script-level `const`/`let`/`var` — **Points earned or max points depending on context.**
+- **Line 79:** `review` — script-level `const`/`let`/`var` — **Holds “review” for this scope.**
 
 ## Functions / methods (7 found)
 
@@ -39,7 +45,8 @@ function initManageSubmissions()
 #### Explanation
 
 - **Purpose:** Implements `initManageSubmissions`.
-- **Local variables:** `cwid`
+- **Local variables (what each means):**
+- `cwid` — CourseWork ID (assignment) (CourseWorks.CWID).  DOM element from the page.
 
 #### Line-by-line (this function)
 
@@ -60,10 +67,17 @@ function initManageSubmissions()
   16 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L7:** DOM event handler.
 - **L8:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L7:** DOM event handler.
+- **L8:** Get HTML element by id. | `cwid` means: CourseWork ID (assignment) (CourseWorks.CWID).  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L13:** DOM event handler.
 
 ---
@@ -80,7 +94,10 @@ function loadAssignments()
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **AJAX:** Browser calls server endpoints asynchronously.
 - **Pattern:** Read/load data for display.
-- **Local variables:** `res`, `sel`, `opt`
+- **Local variables (what each means):**
+- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- `sel` — Holds “sel” for this scope.  DOM element from the page.
+- `opt` — Option element or optional label.
 
 #### Line-by-line (this function)
 
@@ -102,11 +119,21 @@ function loadAssignments()
   30 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L19:** HTTP request to server WebMethod/ashx.
 - **L22:** Get HTML element by id.
 - **L23:** Update page HTML.
+=======
+**Line notes** (what code + variables mean)
+
+- **L19:** HTTP request to server WebMethod/ashx.
+- **L21:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- **L22:** Get HTML element by id. | `sel` means: Holds “sel” for this scope.  DOM element from the page.
+- **L23:** Update page HTML.
+- **L26:** `opt` means: Option element or optional label.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -122,8 +149,14 @@ function loadSubmissions(cwid)
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **AJAX:** Browser calls server endpoints asynchronously.
 - **Pattern:** Read/load data for display.
-- **Parameters:** `cwid`
-- **Local variables:** `container`, `res`, `div`, `sid`, `sc`
+- **Parameters (what each means):**
+- `cwid` — CourseWork ID (assignment) (CourseWorks.CWID).
+- **Local variables (what each means):**
+- `container` — Holds “container” for this scope.  DOM element from the page.
+- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- `div` — Holds “div” for this scope.
+- `sid` — Submission ID (CWSubmissions.SID).
+- `sc` — Holds “sc” for this scope.
 
 #### Line-by-line (this function)
 
@@ -151,6 +184,7 @@ function loadSubmissions(cwid)
   50 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L33:** Get HTML element by id.
@@ -159,6 +193,18 @@ function loadSubmissions(cwid)
 - **L38:** Update page HTML.
 - **L39:** Update page HTML.
 - **L40:** Update page HTML.
+=======
+**Line notes** (what code + variables mean)
+
+- **L33:** Get HTML element by id. | `container` means: Holds “container” for this scope.  DOM element from the page.
+- **L34:** Update page HTML.
+- **L35:** HTTP request to server WebMethod/ashx.
+- **L37:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- **L38:** Update page HTML.
+- **L39:** Update page HTML.
+- **L40:** Update page HTML.
+- **L42:** `div` means: Holds “div” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L43:** Update page HTML.
 - **L47:** DOM event handler.
 - **L48:** DOM event handler.
@@ -177,8 +223,13 @@ function viewSubmission(sid)
 - **Purpose:** Implements `viewSubmission`.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **AJAX:** Browser calls server endpoints asynchronously.
-- **Parameters:** `sid`
-- **Local variables:** `res`, `s`, `body`, `modal`
+- **Parameters (what each means):**
+- `sid` — Submission ID (CWSubmissions.SID).
+- **Local variables (what each means):**
+- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- `s` — String value or submission-related object.
+- `body` — HTTP request body.  DOM element from the page.
+- `modal` — Holds “modal” for this scope.  DOM element from the page.
 
 #### Line-by-line (this function)
 
@@ -205,6 +256,7 @@ function viewSubmission(sid)
   69 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L54:** HTTP request to server WebMethod/ashx.
@@ -213,6 +265,18 @@ function viewSubmission(sid)
 - **L62:** Get HTML element by id.
 - **L63:** Get HTML element by id.
 - **L64:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L54:** HTTP request to server WebMethod/ashx.
+- **L56:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- **L58:** `s` means: String value or submission-related object.
+- **L60:** Get HTML element by id. | `body` means: HTTP request body.  DOM element from the page.
+- **L61:** Update page HTML.
+- **L62:** Get HTML element by id.
+- **L63:** Get HTML element by id.
+- **L64:** Get HTML element by id. | `modal` means: Holds “modal” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L67:** Get HTML element by id.
 
 ---
@@ -226,7 +290,9 @@ function openGradeModal(sid, score)
 #### Explanation
 
 - **Purpose:** Implements `openGradeModal`.
-- **Parameters:** `sid, score`
+- **Parameters (what each means):**
+- `sid` — Submission ID (CWSubmissions.SID).
+- `score` — Points earned or max points depending on context.
 
 #### Line-by-line (this function)
 
@@ -252,7 +318,13 @@ function submitGrade()
 - **Purpose:** Implements `submitGrade`.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **AJAX:** Browser calls server endpoints asynchronously.
-- **Local variables:** `sid`, `score`, `review`, `res`, `modal`, `cwid`
+- **Local variables (what each means):**
+- `sid` — Submission ID (CWSubmissions.SID).  DOM element from the page.
+- `score` — Points earned or max points depending on context.  DOM element from the page.
+- `review` — Holds “review” for this scope.  DOM element from the page.
+- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- `modal` — Holds “modal” for this scope.  DOM element from the page.
+- `cwid` — CourseWork ID (assignment) (CourseWorks.CWID).  DOM element from the page.
 
 #### Line-by-line (this function)
 
@@ -281,6 +353,7 @@ function submitGrade()
   95 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L77:** Get HTML element by id.
@@ -290,6 +363,18 @@ function submitGrade()
 - **L81:** HTTP request to server WebMethod/ashx.
 - **L85:** Get HTML element by id.
 - **L88:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L77:** Get HTML element by id. | `sid` means: Submission ID (CWSubmissions.SID).  DOM element from the page.
+- **L78:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
+- **L79:** Get HTML element by id. | `review` means: Holds “review” for this scope.  DOM element from the page.
+- **L80:** Get HTML element by id.
+- **L81:** HTTP request to server WebMethod/ashx.
+- **L83:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- **L85:** Get HTML element by id. | `modal` means: Holds “modal” for this scope.  DOM element from the page.
+- **L88:** Get HTML element by id. | `cwid` means: CourseWork ID (assignment) (CourseWorks.CWID).  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L91:** Get HTML element by id.
 - **L92:** Get HTML element by id.
 - **L94:** Get HTML element by id.
@@ -305,7 +390,8 @@ function escapeHtml(str)
 #### Explanation
 
 - **Purpose:** Implements `escapeHtml`.
-- **Parameters:** `str`
+- **Parameters (what each means):**
+- `str` — String value: str.
 
 #### Line-by-line (this function)
 
@@ -315,7 +401,11 @@ function escapeHtml(str)
   97 | function escapeHtml(str) { if (!str) return ''; return String(str).replace(/[&<>\"]/g, function (m) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[m]; }); }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L97:** Encode text to reduce XSS risk.
 
@@ -323,7 +413,11 @@ function escapeHtml(str)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | document.addEventListener('DOMContentLoaded', function () {
@@ -429,6 +523,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 
 - **L1:** DOM event handler.
 - **L7:** DOM event handler.
+<<<<<<< HEAD
 - **L8:** Get HTML element by id.
 - **L13:** DOM event handler.
 - **L19:** HTTP request to server WebMethod/ashx.
@@ -440,11 +535,29 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L38:** Update page HTML.
 - **L39:** Update page HTML.
 - **L40:** Update page HTML.
+=======
+- **L8:** Get HTML element by id. | `cwid` means: CourseWork ID (assignment) (CourseWorks.CWID).  DOM element from the page.
+- **L13:** DOM event handler.
+- **L19:** HTTP request to server WebMethod/ashx.
+- **L21:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- **L22:** Get HTML element by id. | `sel` means: Holds “sel” for this scope.  DOM element from the page.
+- **L23:** Update page HTML.
+- **L26:** `opt` means: Option element or optional label.
+- **L33:** Get HTML element by id. | `container` means: Holds “container” for this scope.  DOM element from the page.
+- **L34:** Update page HTML.
+- **L35:** HTTP request to server WebMethod/ashx.
+- **L37:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- **L38:** Update page HTML.
+- **L39:** Update page HTML.
+- **L40:** Update page HTML.
+- **L42:** `div` means: Holds “div” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L43:** Update page HTML.
 - **L47:** DOM event handler.
 - **L48:** DOM event handler.
 - **L49:** Get HTML element by id.
 - **L54:** HTTP request to server WebMethod/ashx.
+<<<<<<< HEAD
 - **L60:** Get HTML element by id.
 - **L61:** Update page HTML.
 - **L62:** Get HTML element by id.
@@ -458,6 +571,24 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L81:** HTTP request to server WebMethod/ashx.
 - **L85:** Get HTML element by id.
 - **L88:** Get HTML element by id.
+=======
+- **L56:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- **L58:** `s` means: String value or submission-related object.
+- **L60:** Get HTML element by id. | `body` means: HTTP request body.  DOM element from the page.
+- **L61:** Update page HTML.
+- **L62:** Get HTML element by id.
+- **L63:** Get HTML element by id.
+- **L64:** Get HTML element by id. | `modal` means: Holds “modal” for this scope.  DOM element from the page.
+- **L67:** Get HTML element by id.
+- **L77:** Get HTML element by id. | `sid` means: Submission ID (CWSubmissions.SID).  DOM element from the page.
+- **L78:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
+- **L79:** Get HTML element by id. | `review` means: Holds “review” for this scope.  DOM element from the page.
+- **L80:** Get HTML element by id.
+- **L81:** HTTP request to server WebMethod/ashx.
+- **L83:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- **L85:** Get HTML element by id. | `modal` means: Holds “modal” for this scope.  DOM element from the page.
+- **L88:** Get HTML element by id. | `cwid` means: CourseWork ID (assignment) (CourseWorks.CWID).  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L91:** Get HTML element by id.
 - **L92:** Get HTML element by id.
 - **L94:** Get HTML element by id.

@@ -1,6 +1,10 @@
 # assignments-edit.js
 **Source:** `Pages/Lecturer/Scripts/assignments-edit.js`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,8 +19,10 @@ Build CourseWorks with due date, rubric or objective quiz. Due date closes stude
 
 ## Variables / fields (file level)
 
-- **Line 6:** `res` — script-level `const`/`let`/`var`
-- **Line 22:** `opts` — script-level `const`/`let`/`var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 6:** `res` — script-level `const`/`let`/`var` — **Result object returned from fetch/WebMethod (`data.d` unwrapped).**
+- **Line 22:** `opts` — script-level `const`/`let`/`var` — **Often a collection related to opts (plural name).**
 
 ## Functions / methods (1 found)
 
@@ -33,8 +39,11 @@ function loadAssignmentDetails(cwid)
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **AJAX:** Browser calls server endpoints asynchronously.
 - **Pattern:** Read/load data for display.
-- **Parameters:** `cwid`
-- **Local variables:** `res`, `opts`
+- **Parameters (what each means):**
+- `cwid` — CourseWork ID (assignment) (CourseWorks.CWID).
+- **Local variables (what each means):**
+- `res` — Result object returned from fetch/WebMethod (`data.d` unwrapped).
+- `opts` — Often a collection related to opts (plural name).
 
 #### Line-by-line (this function)
 
@@ -72,20 +81,35 @@ function loadAssignmentDetails(cwid)
   31 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L4:** HTTP request to server WebMethod/ashx.
+=======
+**Line notes** (what code + variables mean)
+
+- **L4:** HTTP request to server WebMethod/ashx.
+- **L6:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+>>>>>>> eb8ce01 (update)
 - **L9:** Get HTML element by id.
 - **L10:** Get HTML element by id.
 - **L11:** Assignment deadline; submissions close after due day.
 - **L12:** Get HTML element by id.
 - **L13:** Get HTML element by id.
+<<<<<<< HEAD
+=======
+- **L22:** `opts` means: Often a collection related to opts (plural name).
+>>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | // Helper to load assignment details into the builder for editing
@@ -124,11 +148,19 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 **Line notes**
 
 - **L4:** HTTP request to server WebMethod/ashx.
+<<<<<<< HEAD
+=======
+- **L6:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
+>>>>>>> eb8ce01 (update)
 - **L9:** Get HTML element by id.
 - **L10:** Get HTML element by id.
 - **L11:** Assignment deadline; submissions close after due day.
 - **L12:** Get HTML element by id.
 - **L13:** Get HTML element by id.
+<<<<<<< HEAD
+=======
+- **L22:** `opts` means: Often a collection related to opts (plural name).
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

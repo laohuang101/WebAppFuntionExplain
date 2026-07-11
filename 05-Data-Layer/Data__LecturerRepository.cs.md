@@ -1,6 +1,10 @@
 # LecturerRepository.cs
 **Source:** `Data/LecturerRepository.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,106 +19,108 @@ Central pure-SQL data access for lecturer features: courses, publish, curriculum
 
 ## Variables / fields (file level)
 
-- **Line 23:** `Json` — type `JavaScriptSerializer`
-- **Line 32:** `dt` — type `DataTable`
-- **Line 87:** `list` — type `var`
-- **Line 91:** `lessons` — type `int`
-- **Line 92:** `published` — type `bool`
-- **Line 95:** `published` — type `else`
-- **Line 113:** `list` — type `return`
-- **Line 120:** `owner` — type `int`
-- **Line 138:** `published` — type `return`
-- **Line 156:** `0` — type `return`
-- **Line 163:** `sql` — type `string`
-- **Line 176:** `dt` — type `DataTable`
-- **Line 182:** `dt` — type `else`
-- **Line 192:** `dt` — type `else`
-- **Line 195:** `sb` — type `var`
-- **Line 200:** `course` — type `string`
-- **Line 201:** `asg` — type `string`
-- **Line 202:** `student` — type `string`
-- **Line 203:** `email` — type `string`
-- **Line 204:** `submitted` — type `string`
-- **Line 207:** `score` — type `string`
-- **Line 208:** `fb` — type `string`
-- **Line 219:** `s` — type `return`
-- **Line 230:** `userOk` — type `int`
-- **Line 241:** `owner` — type `int`
-- **Line 249:** `Name` — type `SET`
-- **Line 251:** `CID` — type `WHERE`
-- **Line 263:** `insert` — type `string`
-- **Line 308:** `owner` — type `int`
-- **Line 363:** `chapters` — type `DataTable`
-- **Line 378:** `result` — type `var`
-- **Line 382:** `chid` — type `int`
-- **Line 383:** `lessons` — type `var`
-- **Line 384:** `chIndex` — type `int`
-- **Line 386:** `subs` — type `DataTable`
-- **Line 410:** `schid` — type `int`
-- **Line 411:** `type` — type `string`
-- **Line 412:** `content` — type `string`
-- **Line 413:** `materials` — type `var`
-- **Line 417:** `mats` — type `var`
-- **Line 441:** `scIndex` — type `int`
-- **Line 464:** `result` — type `return`
-- **Line 483:** `nextIndex` — type `int`
-- **Line 505:** `cid` — type `int`
-- **Line 522:** `cid` — type `int`
-- **Line 526:** `resolvedSchId` — type `int`
-- **Line 530:** `updated` — type `int`
-- **Line 543:** `last` — type `Exception`
-- **Line 547:** `nextIndex` — type `int`
-- **Line 578:** `matType` — type `string`
-- **Line 582:** `textContent` — type `string`
-- **Line 584:** `mediaLink` — type `string`
-- **Line 603:** `materials` — type `var`
-- **Line 606:** `matIndex` — type `int`
-- **Line 610:** `url` — type `string`
-- **Line 611:** `fileName` — type `string`
-- **Line 613:** `extType` — type `string`
-- **Line 614:** `lower` — type `var`
-- **Line 628:** `resolvedSchId` — type `return`
-- **Line 685:** `chid` — type `int`
-- **Line 686:** `cid` — type `int`
-- **Line 697:** `chDt` — type `var`
-- **Line 723:** `dt` — type `DataTable`
-- **Line 744:** `list` — type `var`
-- **Line 748:** `title` — type `string`
-- **Line 749:** `desc` — type `string`
-- **Line 750:** `packed` — type `var`
-- **Line 769:** `list` — type `return`
-- **Line 785:** `chid` — type `int`
-- **Line 786:** `desc` — type `string`
-- **Line 787:** `dueDate` — type `DateTime?`
-- **Line 793:** `extra` — type `var`
-- **Line 796:** `ds` — type `var`
-- **Line 803:** `resolvedCwid` — type `int`
-- **Line 807:** `owner` — type `int`
-- **Line 816:** `CWID` — type `WHERE`
-- **Line 844:** `questions` — type `var`
-- **Line 849:** `qText` — type `string`
-- **Line 850:** `a` — type `string`
-- **Line 855:** `opts` — type `var`
-- **Line 860:** `keys` — type `var`
-- **Line 869:** `correct` — type `string`
-- **Line 873:** `n` — type `var`
-- **Line 894:** `resolvedCwid` — type `return`
-- **Line 900:** `owner` — type `int`
-- **Line 920:** `totalStudents` — type `int`
-- **Line 924:** `activeCourses` — type `int`
-- **Line 928:** `pendingGrading` — type `int`
-- **Line 951:** `trendDt` — type `var`
-- **Line 957:** `trends` — type `var`
-- **Line 959:** `running` — type `int`
-- **Line 960:** `bucket` — type `int`
-- **Line 961:** `i` — type `int`
-- **Line 974:** `a` — type `int`
-- **Line 976:** `sumPct` — type `decimal`
-- **Line 977:** `n` — type `int`
-- **Line 980:** `gradeDt` — type `DataTable`
-- **Line 1009:** `mark` — type `decimal`
-- **Line 1011:** `pct` — type `decimal`
-- **Line 1022:** `gradeDistribution` — type `var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 23:** `Json` (`JavaScriptSerializer`) — **JSON string (to parse or serialize).**
+- **Line 32:** `dt` (`DataTable`) — **DataTable — full result set from SQL (many rows/columns).**
+- **Line 87:** `list` (`var`) — **In-memory collection being built for JSON return.**
+- **Line 91:** `lessons` (`int`) — **Often a collection related to lessons (plural name). (integer)**
+- **Line 92:** `published` (`bool`) — **UI/publish intent flag when saving a course/work.**
+- **Line 95:** `published` (`else`) — **UI/publish intent flag when saving a course/work.**
+- **Line 113:** `list` (`return`) — **In-memory collection being built for JSON return.**
+- **Line 120:** `owner` (`int`) — **LecturerUID looked up for ownership check.**
+- **Line 138:** `published` (`return`) — **UI/publish intent flag when saving a course/work.**
+- **Line 156:** `0` (`return`) — **Holds “0” for this scope. (type `return`)**
+- **Line 163:** `sql` (`string`) — **SQL query text (should use parameters, not raw user input).**
+- **Line 176:** `dt` (`DataTable`) — **DataTable — full result set from SQL (many rows/columns).**
+- **Line 182:** `dt` (`else`) — **DataTable — full result set from SQL (many rows/columns).**
+- **Line 192:** `dt` (`else`) — **DataTable — full result set from SQL (many rows/columns).**
+- **Line 195:** `sb` (`var`) — **StringBuilder — efficient string concatenation.**
+- **Line 200:** `course` (`string`) — **Holds “course” for this scope. (text)**
+- **Line 201:** `asg` (`string`) — **Holds “asg” for this scope. (text)**
+- **Line 202:** `student` (`string`) — **Holds “student” for this scope. (text)**
+- **Line 203:** `email` (`string`) — **Account email address (usually lowercased).**
+- **Line 204:** `submitted` (`string`) — **Holds “submitted” for this scope. (text)**
+- **Line 207:** `score` (`string`) — **Points earned or max points depending on context.**
+- **Line 208:** `fb` (`string`) — **Holds “fb” for this scope. (text)**
+- **Line 219:** `s` (`return`) — **String value or submission-related object.**
+- **Line 230:** `userOk` (`int`) — **Holds “user Ok” for this scope. (integer)**
+- **Line 241:** `owner` (`int`) — **LecturerUID looked up for ownership check.**
+- **Line 249:** `Name` (`SET`) — **Display name of user/course/criterion.**
+- **Line 251:** `CID` (`WHERE`) — **Course ID (Courses.CID).**
+- **Line 263:** `insert` (`string`) — **Holds “insert” for this scope. (text)**
+- **Line 308:** `owner` (`int`) — **LecturerUID looked up for ownership check.**
+- **Line 363:** `chapters` (`DataTable`) — **Often a collection related to chapters (plural name). (`DataTable` = SQL result grid)**
+- **Line 378:** `result` (`var`) — **AuthResult or API result { success, message, … }.**
+- **Line 382:** `chid` (`int`) — **Chapter ID (Chapters.ChID).**
+- **Line 383:** `lessons` (`var`) — **Often a collection related to lessons (plural name).**
+- **Line 384:** `chIndex` (`int`) — **Holds “ch Index” for this scope. (integer)**
+- **Line 386:** `subs` (`DataTable`) — **Often a collection related to subs (plural name). (`DataTable` = SQL result grid)**
+- **Line 410:** `schid` (`int`) — **SubChapter / lesson ID.**
+- **Line 411:** `type` (`string`) — **Holds “type” for this scope. (text)**
+- **Line 412:** `content` (`string`) — **Submission body text or JSON payload in CWSubmissions.**
+- **Line 413:** `materials` (`var`) — **Often a collection related to materials (plural name).**
+- **Line 417:** `mats` (`var`) — **Often a collection related to mats (plural name).**
+- **Line 441:** `scIndex` (`int`) — **Holds “sc Index” for this scope. (integer)**
+- **Line 464:** `result` (`return`) — **AuthResult or API result { success, message, … }.**
+- **Line 483:** `nextIndex` (`int`) — **Holds “next Index” for this scope. (integer)**
+- **Line 505:** `cid` (`int`) — **Course ID (Courses.CID).**
+- **Line 522:** `cid` (`int`) — **Course ID (Courses.CID).**
+- **Line 526:** `resolvedSchId` (`int`) — **Holds “resolved Sch Id” for this scope. (integer)**
+- **Line 530:** `updated` (`int`) — **Date/time value. (integer)**
+- **Line 543:** `last` (`Exception`) — **Holds “last” for this scope. (type `Exception`)**
+- **Line 547:** `nextIndex` (`int`) — **Holds “next Index” for this scope. (integer)**
+- **Line 578:** `matType` (`string`) — **Holds “mat Type” for this scope. (text)**
+- **Line 582:** `textContent` (`string`) — **Holds “text Content” for this scope. (text)**
+- **Line 584:** `mediaLink` (`string`) — **Holds “media Link” for this scope. (text)**
+- **Line 603:** `materials` (`var`) — **Often a collection related to materials (plural name).**
+- **Line 606:** `matIndex` (`int`) — **Holds “mat Index” for this scope. (integer)**
+- **Line 610:** `url` (`string`) — **HTTP URL to media or page.**
+- **Line 611:** `fileName` (`string`) — **Original file name for display/download.**
+- **Line 613:** `extType` (`string`) — **Holds “ext Type” for this scope. (text)**
+- **Line 614:** `lower` (`var`) — **Holds “lower” for this scope.**
+- **Line 628:** `resolvedSchId` (`return`) — **Holds “resolved Sch Id” for this scope. (type `return`)**
+- **Line 685:** `chid` (`int`) — **Chapter ID (Chapters.ChID).**
+- **Line 686:** `cid` (`int`) — **Course ID (Courses.CID).**
+- **Line 697:** `chDt` (`var`) — **Holds “ch Dt” for this scope.**
+- **Line 723:** `dt` (`DataTable`) — **DataTable — full result set from SQL (many rows/columns).**
+- **Line 744:** `list` (`var`) — **In-memory collection being built for JSON return.**
+- **Line 748:** `title` (`string`) — **Title of course work / page heading.**
+- **Line 749:** `desc` (`string`) — **Description text (may embed <<<META>>> JSON).**
+- **Line 750:** `packed` (`var`) — **Parsed Description META structure.**
+- **Line 769:** `list` (`return`) — **In-memory collection being built for JSON return.**
+- **Line 785:** `chid` (`int`) — **Chapter ID (Chapters.ChID).**
+- **Line 786:** `desc` (`string`) — **Description text (may embed <<<META>>> JSON).**
+- **Line 787:** `dueDate` (`DateTime?`) — **Assignment deadline (date); after end of that day submissions close.**
+- **Line 793:** `extra` (`var`) — **Dictionary of optional fields inside META.**
+- **Line 796:** `ds` (`var`) — **Holds “ds” for this scope.**
+- **Line 803:** `resolvedCwid` (`int`) — **Holds “resolved Cwid” for this scope. (integer)**
+- **Line 807:** `owner` (`int`) — **LecturerUID looked up for ownership check.**
+- **Line 816:** `CWID` (`WHERE`) — **CourseWork ID (assignment) (CourseWorks.CWID).**
+- **Line 844:** `questions` (`var`) — **Objective quiz questions array.**
+- **Line 849:** `qText` (`string`) — **Holds “q Text” for this scope. (text)**
+- **Line 850:** `a` (`string`) — **Holds “a” for this scope. (text)**
+- **Line 855:** `opts` (`var`) — **Often a collection related to opts (plural name).**
+- **Line 860:** `keys` (`var`) — **Often a collection related to keys (plural name).**
+- **Line 869:** `correct` (`string`) — **Holds “correct” for this scope. (text)**
+- **Line 873:** `n` (`var`) — **Numeric count or temporary integer.**
+- **Line 894:** `resolvedCwid` (`return`) — **Holds “resolved Cwid” for this scope. (type `return`)**
+- **Line 900:** `owner` (`int`) — **LecturerUID looked up for ownership check.**
+- **Line 920:** `totalStudents` (`int`) — **Often a collection related to total Students (plural name). (integer)**
+- **Line 924:** `activeCourses` (`int`) — **Often a collection related to active Courses (plural name). (integer)**
+- **Line 928:** `pendingGrading` (`int`) — **Holds “pending Grading” for this scope. (integer)**
+- **Line 951:** `trendDt` (`var`) — **Holds “trend Dt” for this scope.**
+- **Line 957:** `trends` (`var`) — **Often a collection related to trends (plural name).**
+- **Line 959:** `running` (`int`) — **Holds “running” for this scope. (integer)**
+- **Line 960:** `bucket` (`int`) — **Throttle state for one email+IP (failures + lockout).**
+- **Line 961:** `i` (`int`) — **Loop index (0-based counter in for-loops).**
+- **Line 974:** `a` (`int`) — **Holds “a” for this scope. (integer)**
+- **Line 976:** `sumPct` (`decimal`) — **Holds “sum Pct” for this scope. (number/score)**
+- **Line 977:** `n` (`int`) — **Integer count (rows, items, or length).**
+- **Line 980:** `gradeDt` (`DataTable`) — **Holds “grade Dt” for this scope. (`DataTable` = SQL result grid)**
+- **Line 1009:** `mark` (`decimal`) — **Holds “mark” for this scope. (number/score)**
+- **Line 1011:** `pct` (`decimal`) — **Holds “pct” for this scope. (number/score)**
+- **Line 1022:** `gradeDistribution` (`var`) — **Holds “grade Distribution” for this scope.**
 
 ## Functions / methods (24 found)
 
@@ -131,8 +137,12 @@ public static bool SetCoursePublished(int lecturerUid, int cid, bool published)
 - **Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **Pattern:** Persist changes.
-- **Parameters:** `int lecturerUid, int cid, bool published`
-- **Local variables:** `owner`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `cid` (`int`) — Course ID (Courses.CID).
+- `published` (`bool`) — UI/publish intent flag when saving a course/work.
+- **Local variables (what each means):**
+- `owner` (`int`) — LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
 
 #### Line-by-line (this function)
 
@@ -162,9 +172,15 @@ public static bool SetCoursePublished(int lecturerUid, int cid, bool published)
  139 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L120:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L120:** Database access (pure SQL). | `owner` means: LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L121:** Database access (pure SQL).
 - **L125:** Error handling block.
 - **L127:** Database access (pure SQL).
@@ -188,7 +204,8 @@ public static int CountPendingGrading(int lecturerUid)
 - **Purpose:** Implements `CountPendingGrading`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Parameters:** `int lecturerUid`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
 
 #### Line-by-line (this function)
 
@@ -214,7 +231,11 @@ public static int CountPendingGrading(int lecturerUid)
  158 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L143:** Error handling block.
 - **L145:** Database access (pure SQL).
@@ -238,8 +259,20 @@ public static string BuildGradesCsv(int lecturerUid, int cid)
 - **Purpose:** Implements `BuildGradesCsv`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Parameters:** `int lecturerUid, int cid`
-- **Local variables:** `sql`, `sb`, `course`, `asg`, `student`, `email`, `submitted`, `score`, `fb`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `cid` (`int`) — Course ID (Courses.CID).
+- **Local variables (what each means):**
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- `sb` (`var`) — StringBuilder — efficient string concatenation.  Newly constructed object.
+- `course` (`string`) — Holds “course” for this scope. (text)
+- `asg` (`string`) — Holds “asg” for this scope. (text)
+- `student` (`string`) — Holds “student” for this scope. (text)
+- `email` (`string`) — Account email address (usually lowercased).
+- `submitted` (`string`) — Holds “submitted” for this scope. (text)
+- `score` (`string`) — Points earned or max points depending on context.
+- `fb` (`string`) — Holds “fb” for this scope. (text)
+- `r` — Usually one database row (DataRow) in query loops.
 
 #### Line-by-line (this function)
 
@@ -298,9 +331,16 @@ public static string BuildGradesCsv(int lecturerUid, int cid)
  212 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L161:** CSV export.
+=======
+**Line notes** (what code + variables mean)
+
+- **L161:** CSV export.
+- **L163:** `sql` means: SQL query text (should use parameters, not raw user input).
+>>>>>>> eb8ce01 (update)
 - **L168:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L169:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L170:** Join related tables (courses ↔ chapters ↔ works ↔ users).
@@ -314,6 +354,7 @@ public static string BuildGradesCsv(int lecturerUid, int cid)
 - **L185:** Handle/log exception.
 - **L191:** Database access (pure SQL).
 - **L193:** Database access (pure SQL).
+<<<<<<< HEAD
 - **L198:** In-memory result set from ADO.NET.
 - **L200:** Database access (pure SQL).
 - **L201:** Database access (pure SQL).
@@ -322,6 +363,17 @@ public static string BuildGradesCsv(int lecturerUid, int cid)
 - **L204:** Null-safe read from database values.
 - **L207:** Null-safe read from database values.
 - **L208:** Database access (pure SQL).
+=======
+- **L196:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
+- **L198:** In-memory result set from ADO.NET.
+- **L200:** Database access (pure SQL). | `course` means: Holds “course” for this scope. (text)
+- **L201:** Database access (pure SQL). | `asg` means: Holds “asg” for this scope. (text)
+- **L202:** Database access (pure SQL). | `student` means: Holds “student” for this scope. (text)
+- **L203:** Database access (pure SQL). | `email` means: Account email address (usually lowercased).
+- **L204:** Null-safe read from database values. | `submitted` means: Holds “submitted” for this scope. (text)
+- **L207:** Null-safe read from database values. | `score` means: Points earned or max points depending on context.
+- **L208:** Database access (pure SQL). | `fb` means: Holds “fb” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 - **L209:** CSV export.
 
 ---
@@ -335,7 +387,8 @@ private static string Csv(string s)
 #### Explanation
 
 - **Purpose:** Implements `Csv`.
-- **Parameters:** `string s`
+- **Parameters (what each means):**
+- `s` (`string`) — String being cleaned or built.
 
 #### Line-by-line (this function)
 
@@ -350,7 +403,11 @@ private static string Csv(string s)
  220 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L214:** CSV export.
 
@@ -368,8 +425,18 @@ public static int SaveCourse(int lecturerUid, int? cid, string name, string desc
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **Pattern:** Persist changes.
-- **Parameters:** `int lecturerUid, int? cid, string name, string description, string bgImg, string categories, string level`
-- **Local variables:** `userOk`, `owner`, `insert`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `cid` (`int?`) — Course ID (Courses.CID).
+- `name` (`string`) — Display name of user/course/criterion.
+- `description` (`string`) — Holds “description” for this scope. (text)
+- `bgImg` (`string`) — Holds “bg Img” for this scope. (text)
+- `categories` (`string`) — Often a collection related to categories (plural name). (text)
+- `level` (`string`) — Holds “level” for this scope. (text)
+- **Local variables (what each means):**
+- `userOk` (`int`) — Holds “user Ok” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+- `owner` (`int`) — LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
+- `insert` (`string`) — Holds “insert” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -460,11 +527,19 @@ public static int SaveCourse(int lecturerUid, int? cid, string name, string desc
  304 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L230:** Database access (pure SQL).
 - **L232:** Database access (pure SQL).
 - **L241:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L230:** Database access (pure SQL). | `userOk` means: Holds “user Ok” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L232:** Database access (pure SQL).
+- **L241:** Database access (pure SQL). | `owner` means: LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L242:** Owner lecturer foreign key.
 - **L243:** Database access (pure SQL).
 - **L247:** Database access (pure SQL).
@@ -476,6 +551,10 @@ public static int SaveCourse(int lecturerUid, int? cid, string name, string desc
 - **L256:** Database access (pure SQL).
 - **L257:** Database access (pure SQL).
 - **L258:** Database access (pure SQL).
+<<<<<<< HEAD
+=======
+- **L263:** `insert` means: Holds “insert” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 - **L264:** Course publish flag for Landing catalog.
 - **L265:** Owner lecturer foreign key.
 - **L266:** Return new identity/UID after INSERT.
@@ -516,8 +595,11 @@ public static void DeleteCourse(int lecturerUid, int cid)
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **Pattern:** Delete/clear data.
-- **Parameters:** `int lecturerUid, int cid`
-- **Local variables:** `owner`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `cid` (`int`) — Course ID (Courses.CID).
+- **Local variables (what each means):**
+- `owner` (`int`) — LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
 
 #### Line-by-line (this function)
 
@@ -574,9 +656,15 @@ public static void DeleteCourse(int lecturerUid, int cid)
  354 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L308:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L308:** Database access (pure SQL). | `owner` means: LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L309:** Database access (pure SQL).
 - **L316:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L317:** Join related tables (courses ↔ chapters ↔ works ↔ users).
@@ -608,8 +696,13 @@ public static int SaveChapter(int lecturerUid, int? chid, int cid, string title)
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **Pattern:** Persist changes.
-- **Parameters:** `int lecturerUid, int? chid, int cid, string title`
-- **Local variables:** `nextIndex`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `chid` (`int?`) — Chapter ID (Chapters.ChID).
+- `cid` (`int`) — Course ID (Courses.CID).
+- `title` (`string`) — Title of course work / page heading.
+- **Local variables (what each means):**
+- `nextIndex` (`int`) — Holds “next Index” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
 
 #### Line-by-line (this function)
 
@@ -652,7 +745,11 @@ public static int SaveChapter(int lecturerUid, int? chid, int cid, string title)
  501 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L469:** Ownership check — prevent IDOR.
 - **L473:** Database access (pure SQL).
@@ -660,7 +757,11 @@ public static int SaveChapter(int lecturerUid, int? chid, int cid, string title)
 - **L476:** Database access (pure SQL).
 - **L477:** Database access (pure SQL).
 - **L481:** Error handling block.
+<<<<<<< HEAD
 - **L483:** Database access (pure SQL).
+=======
+- **L483:** Database access (pure SQL). | `nextIndex` means: Holds “next Index” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L485:** Database access (pure SQL).
 - **L486:** Database access (pure SQL).
 - **L488:** Return new identity/UID after INSERT.
@@ -687,8 +788,11 @@ public static void DeleteChapter(int lecturerUid, int chid)
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **Pattern:** Delete/clear data.
-- **Parameters:** `int lecturerUid, int chid`
-- **Local variables:** `cid`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `chid` (`int`) — Chapter ID (Chapters.ChID).
+- **Local variables (what each means):**
+- `cid` (`int`) — Course ID (Courses.CID).  Assigned from single SQL scalar (COUNT/IDENTITY).
 
 #### Line-by-line (this function)
 
@@ -712,9 +816,15 @@ public static void DeleteChapter(int lecturerUid, int chid)
  518 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L505:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L505:** Database access (pure SQL). | `cid` means: Course ID (Courses.CID).  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L506:** Ownership check — prevent IDOR.
 - **L510:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L511:** Join related tables (courses ↔ chapters ↔ works ↔ users).
@@ -737,8 +847,28 @@ public static int SaveSubChapter(int lecturerUid, int? schid, int chid, string t
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Persist changes.
-- **Parameters:** `int lecturerUid, int? schid, int chid, string title, string type, string content, string materialsJson`
-- **Local variables:** `cid`, `updated`, `nextIndex`, `matType`, `textContent`, `mediaLink`, `materials`, `matIndex`, `url`, `fileName`, `extType`, `lower`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `schid` (`int?`) — SubChapter / lesson ID.
+- `chid` (`int`) — Chapter ID (Chapters.ChID).
+- `title` (`string`) — Title of course work / page heading.
+- `type` (`string`) — Holds “type” for this scope. (text)
+- `content` (`string`) — Submission body text or JSON payload in CWSubmissions.
+- `materialsJson` (`string`) — Holds “materials Json” for this scope. (text)
+- **Local variables (what each means):**
+- `cid` (`int`) — Course ID (Courses.CID).  Assigned from single SQL scalar (COUNT/IDENTITY).
+- `updated` (`int`) — Date/time value. (integer)  Assigned from rows-affected of INSERT/UPDATE/DELETE.
+- `nextIndex` (`int`) — Holds “next Index” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+- `matType` (`string`) — Holds “mat Type” for this scope. (text)
+- `textContent` (`string`) — Holds “text Content” for this scope. (text)
+- `mediaLink` (`string`) — Holds “media Link” for this scope. (text)
+- `materials` (`var`) — Often a collection related to materials (plural name).  JSON serialize/parse result.
+- `matIndex` (`int`) — Holds “mat Index” for this scope. (integer)  Literal number `1`.
+- `url` (`string`) — HTTP URL to media or page.
+- `fileName` (`string`) — Original file name for display/download.
+- `extType` (`string`) — Holds “ext Type” for this scope. (text)  Literal text string.
+- `lower` (`var`) — Holds “lower” for this scope.
+- `m` — Holds “m” for this scope.
 
 #### Line-by-line (this function)
 
@@ -857,16 +987,28 @@ public static int SaveSubChapter(int lecturerUid, int? schid, int chid, string t
  630 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L522:** Database access (pure SQL).
 - **L525:** Ownership check — prevent IDOR.
 - **L530:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L522:** Database access (pure SQL). | `cid` means: Course ID (Courses.CID).  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L525:** Ownership check — prevent IDOR.
+- **L530:** Database access (pure SQL). | `updated` means: Date/time value. (integer)  Assigned from rows-affected of INSERT/UPDATE/DELETE.
+>>>>>>> eb8ce01 (update)
 - **L532:** Database access (pure SQL).
 - **L533:** Database access (pure SQL).
 - **L534:** Database access (pure SQL).
 - **L545:** Error handling block.
+<<<<<<< HEAD
 - **L547:** Database access (pure SQL).
+=======
+- **L547:** Database access (pure SQL). | `nextIndex` means: Holds “next Index” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L549:** Database access (pure SQL).
 - **L550:** Database access (pure SQL).
 - **L552:** Return new identity/UID after INSERT.
@@ -880,7 +1022,20 @@ public static int SaveSubChapter(int lecturerUid, int? schid, int chid, string t
 - **L565:** Database access (pure SQL).
 - **L566:** Database access (pure SQL).
 - **L568:** Handle/log exception.
+<<<<<<< HEAD
 - **L601:** Error handling block.
+=======
+- **L578:** `matType` means: Holds “mat Type” for this scope. (text)
+- **L583:** `textContent` means: Holds “text Content” for this scope. (text)
+- **L584:** `mediaLink` means: Holds “media Link” for this scope. (text)
+- **L601:** Error handling block.
+- **L603:** `materials` means: Often a collection related to materials (plural name).  JSON serialize/parse result.
+- **L606:** `matIndex` means: Holds “mat Index” for this scope. (integer)  Literal number `1`.
+- **L610:** `url` means: HTTP URL to media or page.
+- **L611:** `fileName` means: Original file name for display/download.
+- **L613:** `extType` means: Holds “ext Type” for this scope. (text)  Literal text string.
+- **L614:** `lower` means: Holds “lower” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L623:** Handle/log exception.
 
 ---
@@ -896,7 +1051,12 @@ private static void InsertStudyMat(int schid, string type, string textContent, s
 - **Purpose:** Implements `InsertStudyMat`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Pattern:** Persist changes.
-- **Parameters:** `int schid, string type, string textContent, string mediaLink, int index`
+- **Parameters (what each means):**
+- `schid` (`int`) — SubChapter / lesson ID.
+- `type` (`string`) — Holds “type” for this scope. (text)
+- `textContent` (`string`) — Holds “text Content” for this scope. (text)
+- `mediaLink` (`string`) — Holds “media Link” for this scope. (text)
+- `index` (`int`) — Holds “index” for this scope. (integer)
 
 #### Line-by-line (this function)
 
@@ -954,7 +1114,11 @@ private static void InsertStudyMat(int schid, string type, string textContent, s
  681 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L635:** Error handling block.
 - **L637:** Database access (pure SQL).
@@ -993,8 +1157,12 @@ public static void DeleteSubChapter(int lecturerUid, int schid)
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **Pattern:** Delete/clear data.
-- **Parameters:** `int lecturerUid, int schid`
-- **Local variables:** `chid`, `cid`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `schid` (`int`) — SubChapter / lesson ID.
+- **Local variables (what each means):**
+- `chid` (`int`) — Chapter ID (Chapters.ChID).  Assigned from single SQL scalar (COUNT/IDENTITY).
+- `cid` (`int`) — Course ID (Courses.CID).  Assigned from single SQL scalar (COUNT/IDENTITY).
 
 #### Line-by-line (this function)
 
@@ -1011,10 +1179,17 @@ public static void DeleteSubChapter(int lecturerUid, int schid)
  691 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L685:** Database access (pure SQL).
 - **L686:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L685:** Database access (pure SQL). | `chid` means: Chapter ID (Chapters.ChID).  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L686:** Database access (pure SQL). | `cid` means: Course ID (Courses.CID).  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L687:** Ownership check — prevent IDOR.
 - **L690:** Database access (pure SQL).
 
@@ -1031,8 +1206,11 @@ public static int EnsureAssessmentChapter(int lecturerUid, int cid)
 - **Purpose:** Implements `EnsureAssessmentChapter`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Parameters:** `int lecturerUid, int cid`
-- **Local variables:** `chDt`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `cid` (`int`) — Course ID (Courses.CID).
+- **Local variables (what each means):**
+- `chDt` (`var`) — Holds “ch Dt” for this scope.  Assigned from SQL SELECT result set.
 
 #### Line-by-line (this function)
 
@@ -1049,10 +1227,17 @@ public static int EnsureAssessmentChapter(int lecturerUid, int cid)
  703 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L696:** Ownership check — prevent IDOR.
 - **L697:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L696:** Ownership check — prevent IDOR.
+- **L697:** Database access (pure SQL). | `chDt` means: Holds “ch Dt” for this scope.  Assigned from SQL SELECT result set.
+>>>>>>> eb8ce01 (update)
 - **L699:** Database access (pure SQL).
 
 ---
@@ -1081,18 +1266,33 @@ public static int SaveCourseWork(
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Persist changes.
-- **Parameters:** `int lecturerUid,
-        int? cwid,
-        int cid,
-        string title,
-        string instructions,
-        string type,
-        decimal score,
-        decimal creditGiven,
-        string rubricJson,
-        string extraMetaJson,
-      `
-- **Local variables:** `chid`, `desc`, `extra`, `ds`, `owner`, `questions`, `qText`, `a`, `opts`, `keys`, `correct`, `n`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `cwid` (`int?`) — CourseWork ID (assignment) (CourseWorks.CWID).
+- `cid` (`int`) — Course ID (Courses.CID).
+- `title` (`string`) — Title of course work / page heading.
+- `instructions` (`string`) — Student-facing assignment instructions (plain part of Description).
+- `type` (`string`) — Holds “type” for this scope. (text)
+- `score` (`decimal`) — Points earned or max points depending on context.
+- `creditGiven` (`decimal`) — Holds “credit Given” for this scope. (number/score)
+- `rubricJson` (`string`) — Holds “rubric Json” for this scope. (text)
+- `extraMetaJson` (`string`) — Holds “extra Meta Json” for this scope. (text)
+- `objectiveQuestionsJson` (`string`) — Holds “objective Questions Json” for this scope. (text)
+- **Local variables (what each means):**
+- `chid` (`int`) — Chapter ID (Chapters.ChID).
+- `desc` (`string`) — Description text (may embed <<<META>>> JSON).
+- `dueDate` (`DateTime?`) — Assignment deadline (date); after end of that day submissions close.
+- `extra` (`var`) — Dictionary of optional fields inside META.  JSON serialize/parse result.
+- `ds` (`var`) — Holds “ds” for this scope.
+- `owner` (`int`) — LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
+- `questions` (`var`) — Objective quiz questions array.  JSON serialize/parse result.
+- `qText` (`string`) — Holds “q Text” for this scope. (text)
+- `a` (`string`) — Holds “a” for this scope. (text)  Literal text string.
+- `opts` (`var`) — Often a collection related to opts (plural name).
+- `keys` (`var`) — Often a collection related to keys (plural name).
+- `correct` (`string`) — Holds “correct” for this scope. (text)
+- `n` (`var`) — Numeric count or temporary integer.
+- `q` — Search query text, or SQL command text.
 
 #### Line-by-line (this function)
 
@@ -1225,6 +1425,7 @@ public static int SaveCourseWork(
  896 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L788:** Assignment deadline; submissions close after due day.
@@ -1234,6 +1435,20 @@ public static int SaveCourseWork(
 - **L798:** Assignment deadline; submissions close after due day.
 - **L801:** Handle/log exception.
 - **L807:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L785:** `chid` means: Chapter ID (Chapters.ChID).
+- **L786:** `desc` means: Description text (may embed <<<META>>> JSON).
+- **L788:** Assignment deadline; submissions close after due day. | `dueDate` means: Assignment deadline (date); after end of that day submissions close.
+- **L791:** Error handling block.
+- **L793:** `extra` means: Dictionary of optional fields inside META.  JSON serialize/parse result.
+- **L794:** Assignment deadline; submissions close after due day.
+- **L796:** Assignment deadline; submissions close after due day. | `ds` means: Holds “ds” for this scope.
+- **L798:** Assignment deadline; submissions close after due day.
+- **L801:** Handle/log exception.
+- **L807:** Database access (pure SQL). | `owner` means: LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L808:** Owner lecturer foreign key.
 - **L809:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L810:** Join related tables (courses ↔ chapters ↔ works ↔ users).
@@ -1254,8 +1469,20 @@ public static int SaveCourseWork(
 - **L832:** Database access (pure SQL).
 - **L833:** Database access (pure SQL).
 - **L842:** Error handling block.
+<<<<<<< HEAD
 - **L853:** Error handling block.
 - **L867:** Handle/log exception.
+=======
+- **L844:** `questions` means: Objective quiz questions array.  JSON serialize/parse result.
+- **L849:** `qText` means: Holds “q Text” for this scope. (text)
+- **L850:** `a` means: Holds “a” for this scope. (text)  Literal text string.
+- **L853:** Error handling block.
+- **L855:** `opts` means: Often a collection related to opts (plural name).
+- **L860:** `keys` means: Often a collection related to keys (plural name).
+- **L867:** Handle/log exception.
+- **L869:** `correct` means: Holds “correct” for this scope. (text)
+- **L873:** `n` means: Numeric count or temporary integer.
+>>>>>>> eb8ce01 (update)
 - **L880:** Database access (pure SQL).
 - **L883:** Database access (pure SQL).
 - **L884:** Database access (pure SQL).
@@ -1279,8 +1506,11 @@ public static void DeleteCourseWork(int lecturerUid, int cwid)
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **Pattern:** Delete/clear data.
-- **Parameters:** `int lecturerUid, int cwid`
-- **Local variables:** `owner`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `cwid` (`int`) — CourseWork ID (assignment) (CourseWorks.CWID).
+- **Local variables (what each means):**
+- `owner` (`int`) — LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
 
 #### Line-by-line (this function)
 
@@ -1302,9 +1532,15 @@ public static void DeleteCourseWork(int lecturerUid, int cwid)
  911 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L900:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L900:** Database access (pure SQL). | `owner` means: LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L901:** Owner lecturer foreign key.
 - **L902:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L903:** Join related tables (courses ↔ chapters ↔ works ↔ users).
@@ -1324,8 +1560,15 @@ public static void ParseSubmissionContent(string raw, out string text, out strin
 
 - **Purpose:** Implements `ParseSubmissionContent`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `string raw, out string text, out string file, out string fileName`
-- **Local variables:** `o`, `a`, `b`
+- **Parameters (what each means):**
+- `raw` (`string`) — Raw bytes or unprocessed input string.
+- `text` (`string`) — Holds “text” for this scope. (text)
+- `file` (`string`) — Uploaded file object or file name.
+- `fileName` (`string`) — Original file name for display/download.
+- **Local variables (what each means):**
+- `o` (`var`) — Holds “o” for this scope.  JSON serialize/parse result.
+- `a` (`int`) — Holds “a” for this scope. (integer)
+- `b` (`int`) — Holds “b” for this scope. (integer)
 
 #### Line-by-line (this function)
 
@@ -1369,10 +1612,20 @@ public static void ParseSubmissionContent(string raw, out string text, out strin
 1216 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L1189:** Error handling block.
 - **L1204:** Handle/log exception.
+=======
+**Line notes** (what code + variables mean)
+
+- **L1189:** Error handling block.
+- **L1191:** `o` means: Holds “o” for this scope.  JSON serialize/parse result.
+- **L1204:** Handle/log exception.
+- **L1206:** `a` means: Holds “a” for this scope. (integer)
+- **L1207:** `b` means: Holds “b” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1388,8 +1641,14 @@ public static void SaveGrade(int lecturerUid, int sid, decimal score, string rev
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **Pattern:** Persist changes.
-- **Parameters:** `int lecturerUid, int sid, decimal score, string review`
-- **Local variables:** `owner`, `existing`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `sid` (`int`) — Submission ID (CWSubmissions.SID).
+- `score` (`decimal`) — Points earned or max points depending on context.
+- `review` (`string`) — Holds “review” for this scope. (text)
+- **Local variables (what each means):**
+- `owner` (`int`) — LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
+- `existing` (`int`) — Holds “existing” for this scope. (integer)  Literal number `0`.
 
 #### Line-by-line (this function)
 
@@ -1476,14 +1735,24 @@ public static void SaveGrade(int lecturerUid, int sid, decimal score, string rev
 1296 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L1220:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L1220:** Database access (pure SQL). | `owner` means: LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L1221:** Owner lecturer foreign key.
 - **L1222:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L1223:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L1224:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L1225:** Database access (pure SQL).
+<<<<<<< HEAD
+=======
+- **L1228:** `existing` means: Holds “existing” for this scope. (integer)  Literal number `0`.
+>>>>>>> eb8ce01 (update)
 - **L1229:** Error handling block.
 - **L1231:** Database access (pure SQL).
 - **L1232:** Database access (pure SQL).
@@ -1532,8 +1801,11 @@ private static void AssertCourseOwner(int lecturerUid, int cid)
 - **Purpose:** Implements `AssertCourseOwner`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Parameters:** `int lecturerUid, int cid`
-- **Local variables:** `owner`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `cid` (`int`) — Course ID (Courses.CID).
+- **Local variables (what each means):**
+- `owner` (`int`) — LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
 
 #### Line-by-line (this function)
 
@@ -1548,10 +1820,17 @@ private static void AssertCourseOwner(int lecturerUid, int cid)
 1510 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L1504:** Ownership check — prevent IDOR.
 - **L1506:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L1504:** Ownership check — prevent IDOR.
+- **L1506:** Database access (pure SQL). | `owner` means: LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L1507:** Database access (pure SQL).
 
 ---
@@ -1566,8 +1845,12 @@ private static void TryExec(string sql, int id, string paramName = "@CID")
 
 - **Purpose:** Implements `TryExec`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `string sql, int id, string paramName = "@CID"`
-- **Local variables:** `paramName`
+- **Parameters (what each means):**
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- `id` (`int`) — Generic primary key / identifier.
+- `paramName` (`string`) — Holds “param Name” for this scope. (text)
+- **Local variables (what each means):**
+- `paramName` (`string`) — Holds “param Name” for this scope. (text)  Assigned from rows-affected of INSERT/UPDATE/DELETE.
 
 #### Line-by-line (this function)
 
@@ -1580,7 +1863,11 @@ private static void TryExec(string sql, int id, string paramName = "@CID")
 1516 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L1514:** Database access (pure SQL).
 - **L1515:** Handle/log exception.
@@ -1598,9 +1885,16 @@ private static string PackDescription(string instructions, string type, decimal 
 
 - **Purpose:** Implements `PackDescription`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `string instructions, string type, decimal score,
-        string rubricJson, string extraMetaJson, string objectiveQuestionsJson`
-- **Local variables:** `payload`, `plain`
+- **Parameters (what each means):**
+- `instructions` (`string`) — Student-facing assignment instructions (plain part of Description).
+- `type` (`string`) — Holds “type” for this scope. (text)
+- `score` (`decimal`) — Points earned or max points depending on context.
+- `rubricJson` (`string`) — Holds “rubric Json” for this scope. (text)
+- `extraMetaJson` (`string`) — Holds “extra Meta Json” for this scope. (text)
+- `objectiveQuestionsJson` (`string`) — Holds “objective Questions Json” for this scope. (text)
+- **Local variables (what each means):**
+- `payload` (`var`) — Object about to be JSON-serialized or sent over network.  Newly constructed object.
+- `plain` (`string`) — Text without META trailer (student-visible instructions).
 
 #### Line-by-line (this function)
 
@@ -1635,14 +1929,24 @@ private static string PackDescription(string instructions, string type, decimal 
 1559 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
+=======
+**Line notes** (what code + variables mean)
+
+- **L1535:** `payload` means: Object about to be JSON-serialized or sent over network.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L1543:** Error handling block.
 - **L1544:** Handle/log exception.
 - **L1548:** Error handling block.
 - **L1549:** Handle/log exception.
 - **L1553:** Error handling block.
 - **L1554:** Handle/log exception.
+<<<<<<< HEAD
+=======
+- **L1557:** `plain` means: Text without META trailer (student-visible instructions).
+>>>>>>> eb8ce01 (update)
 - **L1558:** Pack extra assignment fields into Description JSON meta.
 
 ---
@@ -1657,8 +1961,14 @@ private static DescMeta ParseDescriptionMeta(string desc)
 
 - **Purpose:** Implements `ParseDescriptionMeta`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `string desc`
-- **Local variables:** `meta`, `start`, `end`, `json`, `dict`
+- **Parameters (what each means):**
+- `desc` (`string`) — Description text (may embed <<<META>>> JSON).
+- **Local variables (what each means):**
+- `meta` (`var`) — Extra settings packed as JSON (dueDate, requireFile, …).  Newly constructed object.
+- `start` (`int`) — Range start (file stream) or string index.
+- `end` (`int`) — Range end or string end index.
+- `json` (`string`) — JSON string (to parse or serialize).
+- `dict` (`var`) — Dictionary / map of key → value.  JSON serialize/parse result.
 
 #### Line-by-line (this function)
 
@@ -1702,11 +2012,22 @@ private static DescMeta ParseDescriptionMeta(string desc)
 1596 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L1571:** Pack extra assignment fields into Description JSON meta.
 - **L1580:** Pack extra assignment fields into Description JSON meta.
 - **L1581:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L1563:** `meta` means: Extra settings packed as JSON (dueDate, requireFile, …).  Newly constructed object.
+- **L1571:** Pack extra assignment fields into Description JSON meta. | `start` means: Range start (file stream) or string index.
+- **L1572:** `end` means: Range end or string end index.
+- **L1580:** Pack extra assignment fields into Description JSON meta. | `json` means: JSON string (to parse or serialize).
+- **L1581:** Error handling block.
+- **L1583:** `dict` means: Dictionary / map of key → value.  JSON serialize/parse result.
+>>>>>>> eb8ce01 (update)
 - **L1594:** Handle/log exception.
 
 ---
@@ -1722,7 +2043,12 @@ private static List<GradeScaleRow> LoadGradeScales()
 - **Purpose:** Implements `LoadGradeScales`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Pattern:** Read/load data for display.
-- **Local variables:** `dt`, `list`, `min`, `max`
+- **Local variables (what each means):**
+- `dt` (`var`) — DataTable — full result set from SQL (many rows/columns).  Assigned from SQL SELECT result set.
+- `list` (`var`) — In-memory collection being built for JSON return.  Newly constructed object.
+- `min` (`decimal`) — Holds “min” for this scope. (number/score)
+- `max` (`decimal`) — Holds “max” for this scope. (number/score)
+- `r` — Usually one database row (DataRow) in query loops.
 
 #### Line-by-line (this function)
 
@@ -1783,6 +2109,7 @@ private static List<GradeScaleRow> LoadGradeScales()
 1650 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L1601:** Error handling block.
@@ -1794,6 +2121,21 @@ private static List<GradeScaleRow> LoadGradeScales()
 - **L1621:** Handle/log exception.
 - **L1623:** Error handling block.
 - **L1625:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L1601:** Error handling block.
+- **L1603:** Database access (pure SQL). | `dt` means: DataTable — full result set from SQL (many rows/columns).  Assigned from SQL SELECT result set.
+- **L1605:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
+- **L1606:** In-memory result set from ADO.NET.
+- **L1608:** Null-safe read from database values. | `min` means: Holds “min” for this scope. (number/score)
+- **L1609:** Null-safe read from database values. | `max` means: Holds “max” for this scope. (number/score)
+- **L1614:** Database access (pure SQL).
+- **L1621:** Handle/log exception.
+- **L1623:** Error handling block.
+- **L1625:** Database access (pure SQL). | `dt` means: DataTable — full result set from SQL (many rows/columns).  Assigned from SQL SELECT result set.
+- **L1626:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L1627:** In-memory result set from ADO.NET.
 - **L1632:** Database access (pure SQL).
 - **L1633:** Database access (pure SQL).
@@ -1810,8 +2152,12 @@ private static string MapGrade(decimal pct, List<GradeScaleRow> scales)
 #### Explanation
 
 - **Purpose:** Implements `MapGrade`.
-- **Parameters:** `decimal pct, List<GradeScaleRow> scales`
-- **Local variables:** `parts`
+- **Parameters (what each means):**
+- `pct` (`decimal`) — Holds “pct” for this scope. (number/score)
+- `scales` (`List<GradeScaleRow>`) — Often a collection related to scales (plural name). (`List<GradeScaleRow>` collection)
+- **Local variables (what each means):**
+- `parts` (`var`) — Split path or name segments.
+- `s` — String value or submission-related object.
 
 #### Line-by-line (this function)
 
@@ -1842,6 +2188,13 @@ private static string MapGrade(decimal pct, List<GradeScaleRow> scales)
 1674 |             return "F";
 1675 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L1662:** `parts` means: Split path or name segments.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1855,8 +2208,10 @@ public static string GetInitials(string name)
 
 - **Purpose:** Implements `GetInitials`.
 - **Pattern:** Read/load data for display.
-- **Parameters:** `string name`
-- **Local variables:** `parts`
+- **Parameters (what each means):**
+- `name` (`string`) — Display name of user/course/criterion.
+- **Local variables (what each means):**
+- `parts` (`var`) — Split path or name segments.
 
 #### Line-by-line (this function)
 
@@ -1871,6 +2226,13 @@ public static string GetInitials(string name)
 1683 |             return parts[0].Substring(0, Math.Min(2, parts[0].Length)).ToUpperInvariant();
 1684 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L1680:** `parts` means: Split path or name segments.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1883,8 +2245,10 @@ public static string FormatRelativeTime(DateTime ts)
 #### Explanation
 
 - **Purpose:** Implements `FormatRelativeTime`.
-- **Parameters:** `DateTime ts`
-- **Local variables:** `span`
+- **Parameters (what each means):**
+- `ts` (`DateTime`) — Holds “ts” for this scope. (date/time)
+- **Local variables (what each means):**
+- `span` (`var`) — Holds “span” for this scope.
 
 #### Line-by-line (this function)
 
@@ -1901,12 +2265,23 @@ public static string FormatRelativeTime(DateTime ts)
 1694 |             return ts.ToString("MMM dd, yyyy");
 1695 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L1688:** `span` means: Holds “span” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -2819,7 +3194,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L4:** Import namespace/types.
 - **L5:** Import namespace/types.
 - **L7:** C# namespace grouping.
+<<<<<<< HEAD
 - **L32:** In-memory result set from ADO.NET.
+=======
+- **L32:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).
+>>>>>>> eb8ce01 (update)
 - **L34:** Error handling block.
 - **L37:** Owner lecturer foreign key.
 - **L38:** Course publish flag for Landing catalog.
@@ -2840,7 +3219,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L78:** Owner lecturer foreign key.
 - **L82:** Owner lecturer foreign key.
 - **L84:** Database access (pure SQL).
+<<<<<<< HEAD
 - **L89:** In-memory result set from ADO.NET.
+=======
+- **L88:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
+- **L89:** In-memory result set from ADO.NET.
+- **L91:** `lessons` means: Often a collection related to lessons (plural name). (integer)
+>>>>>>> eb8ce01 (update)
 - **L93:** Null-safe read from database values.
 - **L94:** Course publish flag for Landing catalog.
 - **L101:** Database access (pure SQL).
@@ -2849,7 +3234,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L104:** Null-safe read from database values.
 - **L109:** Database access (pure SQL).
 - **L110:** Database access (pure SQL).
+<<<<<<< HEAD
 - **L120:** Database access (pure SQL).
+=======
+- **L120:** Database access (pure SQL). | `owner` means: LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L121:** Database access (pure SQL).
 - **L125:** Error handling block.
 - **L127:** Database access (pure SQL).
@@ -2868,6 +3257,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L152:** Database access (pure SQL).
 - **L154:** Handle/log exception.
 - **L161:** CSV export.
+<<<<<<< HEAD
+=======
+- **L163:** `sql` means: SQL query text (should use parameters, not raw user input).
+>>>>>>> eb8ce01 (update)
 - **L168:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L169:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L170:** Join related tables (courses ↔ chapters ↔ works ↔ users).
@@ -2881,6 +3274,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L185:** Handle/log exception.
 - **L191:** Database access (pure SQL).
 - **L193:** Database access (pure SQL).
+<<<<<<< HEAD
 - **L198:** In-memory result set from ADO.NET.
 - **L200:** Database access (pure SQL).
 - **L201:** Database access (pure SQL).
@@ -2894,6 +3288,22 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L230:** Database access (pure SQL).
 - **L232:** Database access (pure SQL).
 - **L241:** Database access (pure SQL).
+=======
+- **L196:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
+- **L198:** In-memory result set from ADO.NET.
+- **L200:** Database access (pure SQL). | `course` means: Holds “course” for this scope. (text)
+- **L201:** Database access (pure SQL). | `asg` means: Holds “asg” for this scope. (text)
+- **L202:** Database access (pure SQL). | `student` means: Holds “student” for this scope. (text)
+- **L203:** Database access (pure SQL). | `email` means: Account email address (usually lowercased).
+- **L204:** Null-safe read from database values. | `submitted` means: Holds “submitted” for this scope. (text)
+- **L207:** Null-safe read from database values. | `score` means: Points earned or max points depending on context.
+- **L208:** Database access (pure SQL). | `fb` means: Holds “fb” for this scope. (text)
+- **L209:** CSV export.
+- **L214:** CSV export.
+- **L230:** Database access (pure SQL). | `userOk` means: Holds “user Ok” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L232:** Database access (pure SQL).
+- **L241:** Database access (pure SQL). | `owner` means: LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L242:** Owner lecturer foreign key.
 - **L243:** Database access (pure SQL).
 - **L247:** Database access (pure SQL).
@@ -2905,6 +3315,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L256:** Database access (pure SQL).
 - **L257:** Database access (pure SQL).
 - **L258:** Database access (pure SQL).
+<<<<<<< HEAD
+=======
+- **L263:** `insert` means: Holds “insert” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 - **L264:** Course publish flag for Landing catalog.
 - **L265:** Owner lecturer foreign key.
 - **L266:** Return new identity/UID after INSERT.
@@ -2930,7 +3344,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L291:** Database access (pure SQL).
 - **L293:** Handle/log exception.
 - **L299:** Owner lecturer foreign key.
+<<<<<<< HEAD
 - **L308:** Database access (pure SQL).
+=======
+- **L308:** Database access (pure SQL). | `owner` means: LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L309:** Database access (pure SQL).
 - **L316:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L317:** Join related tables (courses ↔ chapters ↔ works ↔ users).
@@ -2955,8 +3373,16 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L371:** Handle/log exception.
 - **L374:** Database access (pure SQL).
 - **L376:** Database access (pure SQL).
+<<<<<<< HEAD
 - **L380:** In-memory result set from ADO.NET.
 - **L384:** Null-safe read from database values.
+=======
+- **L379:** `result` means: AuthResult or API result { success, message, … }.  Newly constructed object.
+- **L380:** In-memory result set from ADO.NET.
+- **L382:** `chid` means: Chapter ID (Chapters.ChID).
+- **L383:** `lessons` means: Often a collection related to lessons (plural name).  Newly constructed object.
+- **L384:** Null-safe read from database values. | `chIndex` means: Holds “ch Index” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 - **L387:** In-memory result set from ADO.NET.
 - **L388:** Error handling block.
 - **L390:** Database access (pure SQL).
@@ -2968,8 +3394,17 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L402:** Handle/log exception.
 - **L404:** In-memory result set from ADO.NET.
 - **L408:** In-memory result set from ADO.NET.
+<<<<<<< HEAD
 - **L415:** Error handling block.
 - **L417:** Database access (pure SQL).
+=======
+- **L410:** `schid` means: SubChapter / lesson ID.
+- **L411:** `type` means: Holds “type” for this scope. (text)  Literal text string.
+- **L412:** `content` means: Submission body text or JSON payload in CWSubmissions.  Literal text string.
+- **L413:** `materials` means: Often a collection related to materials (plural name).  Newly constructed object.
+- **L415:** Error handling block.
+- **L417:** Database access (pure SQL). | `mats` means: Often a collection related to mats (plural name).  Assigned from SQL SELECT result set.
+>>>>>>> eb8ce01 (update)
 - **L419:** Database access (pure SQL).
 - **L422:** Database access (pure SQL).
 - **L424:** Database access (pure SQL).
@@ -2981,7 +3416,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L435:** Database access (pure SQL).
 - **L436:** Null-safe read from database values.
 - **L440:** Handle/log exception.
+<<<<<<< HEAD
 - **L442:** Null-safe read from database values.
+=======
+- **L442:** Null-safe read from database values. | `scIndex` means: Holds “sc Index” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 - **L448:** Database access (pure SQL).
 - **L459:** Database access (pure SQL).
 - **L469:** Ownership check — prevent IDOR.
@@ -2990,7 +3429,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L476:** Database access (pure SQL).
 - **L477:** Database access (pure SQL).
 - **L481:** Error handling block.
+<<<<<<< HEAD
 - **L483:** Database access (pure SQL).
+=======
+- **L483:** Database access (pure SQL). | `nextIndex` means: Holds “next Index” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L485:** Database access (pure SQL).
 - **L486:** Database access (pure SQL).
 - **L488:** Return new identity/UID after INSERT.
@@ -3002,21 +3445,35 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L497:** Return new identity/UID after INSERT.
 - **L498:** Database access (pure SQL).
 - **L499:** Database access (pure SQL).
+<<<<<<< HEAD
 - **L505:** Database access (pure SQL).
+=======
+- **L505:** Database access (pure SQL). | `cid` means: Course ID (Courses.CID).  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L506:** Ownership check — prevent IDOR.
 - **L510:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L511:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L513:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L515:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L517:** Database access (pure SQL).
+<<<<<<< HEAD
 - **L522:** Database access (pure SQL).
 - **L525:** Ownership check — prevent IDOR.
 - **L530:** Database access (pure SQL).
+=======
+- **L522:** Database access (pure SQL). | `cid` means: Course ID (Courses.CID).  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L525:** Ownership check — prevent IDOR.
+- **L530:** Database access (pure SQL). | `updated` means: Date/time value. (integer)  Assigned from rows-affected of INSERT/UPDATE/DELETE.
+>>>>>>> eb8ce01 (update)
 - **L532:** Database access (pure SQL).
 - **L533:** Database access (pure SQL).
 - **L534:** Database access (pure SQL).
 - **L545:** Error handling block.
+<<<<<<< HEAD
 - **L547:** Database access (pure SQL).
+=======
+- **L547:** Database access (pure SQL). | `nextIndex` means: Holds “next Index” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L549:** Database access (pure SQL).
 - **L550:** Database access (pure SQL).
 - **L552:** Return new identity/UID after INSERT.
@@ -3030,7 +3487,20 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L565:** Database access (pure SQL).
 - **L566:** Database access (pure SQL).
 - **L568:** Handle/log exception.
+<<<<<<< HEAD
 - **L601:** Error handling block.
+=======
+- **L578:** `matType` means: Holds “mat Type” for this scope. (text)
+- **L583:** `textContent` means: Holds “text Content” for this scope. (text)
+- **L584:** `mediaLink` means: Holds “media Link” for this scope. (text)
+- **L601:** Error handling block.
+- **L603:** `materials` means: Often a collection related to materials (plural name).  JSON serialize/parse result.
+- **L606:** `matIndex` means: Holds “mat Index” for this scope. (integer)  Literal number `1`.
+- **L610:** `url` means: HTTP URL to media or page.
+- **L611:** `fileName` means: Original file name for display/download.
+- **L613:** `extType` means: Holds “ext Type” for this scope. (text)  Literal text string.
+- **L614:** `lower` means: Holds “lower” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L623:** Handle/log exception.
 - **L635:** Error handling block.
 - **L637:** Database access (pure SQL).
@@ -3054,12 +3524,21 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L671:** Database access (pure SQL).
 - **L672:** Database access (pure SQL).
 - **L675:** Handle/log exception.
+<<<<<<< HEAD
 - **L685:** Database access (pure SQL).
 - **L686:** Database access (pure SQL).
 - **L687:** Ownership check — prevent IDOR.
 - **L690:** Database access (pure SQL).
 - **L696:** Ownership check — prevent IDOR.
 - **L697:** Database access (pure SQL).
+=======
+- **L685:** Database access (pure SQL). | `chid` means: Chapter ID (Chapters.ChID).  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L686:** Database access (pure SQL). | `cid` means: Course ID (Courses.CID).  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L687:** Ownership check — prevent IDOR.
+- **L690:** Database access (pure SQL).
+- **L696:** Ownership check — prevent IDOR.
+- **L697:** Database access (pure SQL). | `chDt` means: Holds “ch Dt” for this scope.  Assigned from SQL SELECT result set.
+>>>>>>> eb8ce01 (update)
 - **L699:** Database access (pure SQL).
 - **L712:** Assignment deadline; submissions close after due day.
 - **L716:** Join related tables (courses ↔ chapters ↔ works ↔ users).
@@ -3075,6 +3554,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L739:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L740:** Owner lecturer foreign key.
 - **L742:** Database access (pure SQL).
+<<<<<<< HEAD
 - **L746:** In-memory result set from ADO.NET.
 - **L748:** Database access (pure SQL).
 - **L749:** Database access (pure SQL).
@@ -3087,6 +3567,25 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L798:** Assignment deadline; submissions close after due day.
 - **L801:** Handle/log exception.
 - **L807:** Database access (pure SQL).
+=======
+- **L745:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
+- **L746:** In-memory result set from ADO.NET.
+- **L748:** Database access (pure SQL). | `title` means: Title of course work / page heading.
+- **L749:** Database access (pure SQL). | `desc` means: Description text (may embed <<<META>>> JSON).
+- **L750:** `packed` means: Parsed Description META structure.
+- **L756:** Database access (pure SQL).
+- **L762:** Null-safe read from database values.
+- **L785:** `chid` means: Chapter ID (Chapters.ChID).
+- **L786:** `desc` means: Description text (may embed <<<META>>> JSON).
+- **L788:** Assignment deadline; submissions close after due day. | `dueDate` means: Assignment deadline (date); after end of that day submissions close.
+- **L791:** Error handling block.
+- **L793:** `extra` means: Dictionary of optional fields inside META.  JSON serialize/parse result.
+- **L794:** Assignment deadline; submissions close after due day.
+- **L796:** Assignment deadline; submissions close after due day. | `ds` means: Holds “ds” for this scope.
+- **L798:** Assignment deadline; submissions close after due day.
+- **L801:** Handle/log exception.
+- **L807:** Database access (pure SQL). | `owner` means: LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L808:** Owner lecturer foreign key.
 - **L809:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L810:** Join related tables (courses ↔ chapters ↔ works ↔ users).
@@ -3107,8 +3606,20 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L832:** Database access (pure SQL).
 - **L833:** Database access (pure SQL).
 - **L842:** Error handling block.
+<<<<<<< HEAD
 - **L853:** Error handling block.
 - **L867:** Handle/log exception.
+=======
+- **L844:** `questions` means: Objective quiz questions array.  JSON serialize/parse result.
+- **L849:** `qText` means: Holds “q Text” for this scope. (text)
+- **L850:** `a` means: Holds “a” for this scope. (text)  Literal text string.
+- **L853:** Error handling block.
+- **L855:** `opts` means: Often a collection related to opts (plural name).
+- **L860:** `keys` means: Often a collection related to keys (plural name).
+- **L867:** Handle/log exception.
+- **L869:** `correct` means: Holds “correct” for this scope. (text)
+- **L873:** `n` means: Numeric count or temporary integer.
+>>>>>>> eb8ce01 (update)
 - **L880:** Database access (pure SQL).
 - **L883:** Database access (pure SQL).
 - **L884:** Database access (pure SQL).
@@ -3117,7 +3628,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L887:** Database access (pure SQL).
 - **L888:** Database access (pure SQL).
 - **L892:** Handle/log exception.
+<<<<<<< HEAD
 - **L900:** Database access (pure SQL).
+=======
+- **L900:** Database access (pure SQL). | `owner` means: LecturerUID looked up for ownership check.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 
 _… truncated: 797 more lines in source. Open the original file for the rest._
 

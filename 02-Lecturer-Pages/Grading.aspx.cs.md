@@ -1,6 +1,10 @@
 # Grading.aspx.cs
 **Source:** `Pages/Lecturer/Grading.aspx.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,15 +19,17 @@ List submissions for lecturer courses; assign marks and feedback; CSV export.
 
 ## Variables / fields (file level)
 
-- **Line 29:** `uid` — type `int`
-- **Line 31:** `list` — type `var`
-- **Line 32:** `graded` — type `int`
-- **Line 57:** `uid` — type `int`
-- **Line 62:** `ctx` — type `var`
-- **Line 84:** `uid` — type `int`
-- **Line 86:** `csv` — type `string`
-- **Line 87:** `name` — type `string`
-- **Line 104:** `uid` — type `int`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 29:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 31:** `list` (`var`) — **In-memory collection being built for JSON return.**
+- **Line 32:** `graded` (`int`) — **Holds “graded” for this scope. (integer)**
+- **Line 57:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 62:** `ctx` (`var`) — **Current HTTP request context (Request, Response, Session).**
+- **Line 84:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 86:** `csv` (`string`) — **Holds “csv” for this scope. (text)**
+- **Line 87:** `name` (`string`) — **Display name of user/course/criterion.**
+- **Line 104:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
 
 ## Functions / methods (6 found)
 
@@ -38,7 +44,9 @@ protected void Page_Load(object sender, EventArgs e)
 - **Purpose:** Implements `Page_Load`.
 - **Security:** Uses AuthGate — requires logged-in role.
 - **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters:** `object sender, EventArgs e`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
 
 #### Line-by-line (this function)
 
@@ -50,7 +58,11 @@ protected void Page_Load(object sender, EventArgs e)
   16 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L12:** Page load entry (GET or postback).
 - **L14:** Authorization — block wrong role / anonymous.
@@ -78,7 +90,11 @@ private static int CurrentUid()
   21 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L20:** Authorization — block wrong role / anonymous.
 
@@ -96,7 +112,11 @@ public static object GetSubmissions()
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Read/load data for display.
-- **Local variables:** `uid`, `list`, `graded`
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `list` (`var`) — In-memory collection being built for JSON return.
+- `graded` (`int`) — Holds “graded” for this scope. (integer)  Literal number `0`.
+- `s` — String value or submission-related object.
 
 #### Line-by-line (this function)
 
@@ -128,10 +148,20 @@ public static object GetSubmissions()
   49 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L27:** Error handling block.
 - **L30:** Authorization — block wrong role / anonymous.
+=======
+**Line notes** (what code + variables mean)
+
+- **L27:** Error handling block.
+- **L29:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L30:** Authorization — block wrong role / anonymous.
+- **L31:** `list` means: In-memory collection being built for JSON return.
+- **L32:** `graded` means: Holds “graded” for this scope. (integer)  Literal number `0`.
+>>>>>>> eb8ce01 (update)
 - **L45:** Handle/log exception.
 
 ---
@@ -149,8 +179,13 @@ public static object SaveGrade(int sid, decimal score, string review)
 - **Session:** Reads/writes ASP.NET Session.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Persist changes.
-- **Parameters:** `int sid, decimal score, string review`
-- **Local variables:** `uid`, `ctx`
+- **Parameters (what each means):**
+- `sid` (`int`) — Submission ID (CWSubmissions.SID).
+- `score` (`decimal`) — Points earned or max points depending on context.
+- `review` (`string`) — Holds “review” for this scope. (text)
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `ctx` (`var`) — Current HTTP request context (Request, Response, Session).
 
 #### Line-by-line (this function)
 
@@ -181,11 +216,21 @@ public static object SaveGrade(int sid, decimal score, string review)
   76 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L55:** Error handling block.
 - **L58:** Authorization — block wrong role / anonymous.
 - **L60:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L55:** Error handling block.
+- **L57:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L58:** Authorization — block wrong role / anonymous.
+- **L60:** Error handling block.
+- **L62:** `ctx` means: Current HTTP request context (Request, Response, Session).
+>>>>>>> eb8ce01 (update)
 - **L69:** Handle/log exception.
 - **L72:** Handle/log exception.
 
@@ -202,8 +247,12 @@ public static object ExportGradesCsv(int cid)
 - **Purpose:** Implements `ExportGradesCsv`.
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `int cid`
-- **Local variables:** `uid`, `csv`, `name`
+- **Parameters (what each means):**
+- `cid` (`int`) — Course ID (Courses.CID).
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `csv` (`string`) — Holds “csv” for this scope. (text)
+- `name` (`string`) — Display name of user/course/criterion.
 
 #### Line-by-line (this function)
 
@@ -227,12 +276,23 @@ public static object ExportGradesCsv(int cid)
   96 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L80:** CSV export.
 - **L82:** Error handling block.
 - **L85:** Authorization — block wrong role / anonymous.
 - **L86:** CSV export.
+=======
+**Line notes** (what code + variables mean)
+
+- **L80:** CSV export.
+- **L82:** Error handling block.
+- **L84:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L85:** Authorization — block wrong role / anonymous.
+- **L86:** CSV export. | `csv` means: Holds “csv” for this scope. (text)
+- **L87:** `name` means: Display name of user/course/criterion.
+>>>>>>> eb8ce01 (update)
 - **L88:** CSV export.
 - **L89:** CSV export.
 - **L90:** CSV export.
@@ -252,7 +312,8 @@ public static object GetPendingCount()
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Read/load data for display.
-- **Local variables:** `uid`
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
 
 #### Line-by-line (this function)
 
@@ -272,9 +333,16 @@ public static object GetPendingCount()
  112 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L102:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L102:** Error handling block.
+- **L104:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+>>>>>>> eb8ce01 (update)
 - **L105:** Authorization — block wrong role / anonymous.
 - **L108:** Handle/log exception.
 
@@ -282,7 +350,11 @@ public static object GetPendingCount()
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -415,25 +487,50 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L20:** Authorization — block wrong role / anonymous.
 - **L23:** Expose method to AJAX JSON calls.
 - **L27:** Error handling block.
+<<<<<<< HEAD
 - **L30:** Authorization — block wrong role / anonymous.
 - **L45:** Handle/log exception.
 - **L51:** Expose method to AJAX JSON calls.
 - **L55:** Error handling block.
 - **L58:** Authorization — block wrong role / anonymous.
 - **L60:** Error handling block.
+=======
+- **L29:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L30:** Authorization — block wrong role / anonymous.
+- **L31:** `list` means: In-memory collection being built for JSON return.
+- **L32:** `graded` means: Holds “graded” for this scope. (integer)  Literal number `0`.
+- **L45:** Handle/log exception.
+- **L51:** Expose method to AJAX JSON calls.
+- **L55:** Error handling block.
+- **L57:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L58:** Authorization — block wrong role / anonymous.
+- **L60:** Error handling block.
+- **L62:** `ctx` means: Current HTTP request context (Request, Response, Session).
+>>>>>>> eb8ce01 (update)
 - **L69:** Handle/log exception.
 - **L72:** Handle/log exception.
 - **L78:** Expose method to AJAX JSON calls.
 - **L80:** CSV export.
 - **L82:** Error handling block.
+<<<<<<< HEAD
 - **L85:** Authorization — block wrong role / anonymous.
 - **L86:** CSV export.
+=======
+- **L84:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L85:** Authorization — block wrong role / anonymous.
+- **L86:** CSV export. | `csv` means: Holds “csv” for this scope. (text)
+- **L87:** `name` means: Display name of user/course/criterion.
+>>>>>>> eb8ce01 (update)
 - **L88:** CSV export.
 - **L89:** CSV export.
 - **L90:** CSV export.
 - **L92:** Handle/log exception.
 - **L98:** Expose method to AJAX JSON calls.
 - **L102:** Error handling block.
+<<<<<<< HEAD
+=======
+- **L104:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+>>>>>>> eb8ce01 (update)
 - **L105:** Authorization — block wrong role / anonymous.
 - **L108:** Handle/log exception.
 

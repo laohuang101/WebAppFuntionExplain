@@ -1,6 +1,10 @@
 # cc-grid.js
 **Source:** `Pages/Lecturer/Scripts/cc-grid.js`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,19 +19,21 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-- **Line 25:** `container` — script-level `const`/`let`/`var`
-- **Line 41:** `col` — script-level `const`/`let`/`var`
-- **Line 43:** `isPublished` — script-level `const`/`let`/`var`
-- **Line 45:** `statusBadgeClass` — script-level `const`/`let`/`var`
-- **Line 46:** `statusText` — script-level `const`/`let`/`var`
-- **Line 47:** `rating` — script-level `const`/`let`/`var`
-- **Line 48:** `ratingHtml` — script-level `const`/`let`/`var`
-- **Line 51:** `pubBtnLabel` — script-level `const`/`let`/`var`
-- **Line 52:** `pubBtnIcon` — script-level `const`/`let`/`var`
-- **Line 88:** `card` — script-level `const`/`let`/`var`
-- **Line 90:** `btn` — script-level `const`/`let`/`var`
-- **Line 94:** `action` — script-level `const`/`let`/`var`
-- **Line 108:** `msg` — script-level `const`/`let`/`var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 25:** `container` — script-level `const`/`let`/`var` — **Holds “container” for this scope.**
+- **Line 41:** `col` — script-level `const`/`let`/`var` — **Holds “col” for this scope.**
+- **Line 43:** `isPublished` — script-level `const`/`let`/`var` — **Course visibility flag for Landing catalog.**
+- **Line 45:** `statusBadgeClass` — script-level `const`/`let`/`var` — **Often a collection related to status Badge Class (plural name).**
+- **Line 46:** `statusText` — script-level `const`/`let`/`var` — **Holds “status Text” for this scope.**
+- **Line 47:** `rating` — script-level `const`/`let`/`var` — **Holds “rating” for this scope.**
+- **Line 48:** `ratingHtml` — script-level `const`/`let`/`var` — **Holds “rating Html” for this scope.**
+- **Line 51:** `pubBtnLabel` — script-level `const`/`let`/`var` — **Holds “pub Btn Label” for this scope.**
+- **Line 52:** `pubBtnIcon` — script-level `const`/`let`/`var` — **Holds “pub Btn Icon” for this scope.**
+- **Line 88:** `card` — script-level `const`/`let`/`var` — **Holds “card” for this scope.**
+- **Line 90:** `btn` — script-level `const`/`let`/`var` — **Button DOM element.**
+- **Line 94:** `action` — script-level `const`/`let`/`var` — **Holds “action” for this scope.**
+- **Line 108:** `msg` — script-level `const`/`let`/`var` — **Human-readable message (error or success).**
 
 ## Functions / methods (6 found)
 
@@ -68,7 +74,11 @@ function loadCourses()
   22 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L12:** Get HTML element by id.
 - **L14:** Encode text to reduce XSS risk.
@@ -86,7 +96,19 @@ function renderCourseGrid()
 
 - **Purpose:** Implements `renderCourseGrid`.
 - **Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.
-- **Local variables:** `container`, `col`, `isPublished`, `statusBadgeClass`, `statusText`, `rating`, `ratingHtml`, `pubBtnLabel`, `pubBtnIcon`, `card`, `btn`, `action`
+- **Local variables (what each means):**
+- `container` — Holds “container” for this scope.  DOM element from the page.
+- `col` — Holds “col” for this scope.
+- `isPublished` — Course visibility flag for Landing catalog.
+- `statusBadgeClass` — Often a collection related to status Badge Class (plural name).
+- `statusText` — Holds “status Text” for this scope.
+- `rating` — Holds “rating” for this scope.
+- `ratingHtml` — Holds “rating Html” for this scope.
+- `pubBtnLabel` — Holds “pub Btn Label” for this scope.
+- `pubBtnIcon` — Holds “pub Btn Icon” for this scope.
+- `card` — Holds “card” for this scope.
+- `btn` — Button DOM element.
+- `action` — Holds “action” for this scope.
 
 #### Line-by-line (this function)
 
@@ -177,6 +199,7 @@ function renderCourseGrid()
  105 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L25:** Get HTML element by id.
@@ -186,6 +209,28 @@ function renderCourseGrid()
 - **L57:** Encode text to reduce XSS risk.
 - **L63:** Encode text to reduce XSS risk.
 - **L89:** DOM event handler.
+=======
+**Line notes** (what code + variables mean)
+
+- **L25:** Get HTML element by id. | `container` means: Holds “container” for this scope.  DOM element from the page.
+- **L26:** Update page HTML.
+- **L29:** Update page HTML.
+- **L41:** `col` means: Holds “col” for this scope.
+- **L44:** `isPublished` means: Course visibility flag for Landing catalog.
+- **L45:** `statusBadgeClass` means: Often a collection related to status Badge Class (plural name).
+- **L46:** `statusText` means: Holds “status Text” for this scope.
+- **L47:** `rating` means: Holds “rating” for this scope.
+- **L48:** `ratingHtml` means: Holds “rating Html” for this scope.
+- **L51:** `pubBtnLabel` means: Holds “pub Btn Label” for this scope.
+- **L52:** `pubBtnIcon` means: Holds “pub Btn Icon” for this scope.
+- **L54:** Update page HTML.
+- **L57:** Encode text to reduce XSS risk.
+- **L63:** Encode text to reduce XSS risk.
+- **L88:** `card` means: Holds “card” for this scope.
+- **L89:** DOM event handler.
+- **L90:** `btn` means: Button DOM element.
+- **L94:** `action` means: Holds “action” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -200,8 +245,11 @@ function toggleCoursePublished(cid, publish)
 - **Purpose:** Implements `toggleCoursePublished`.
 - **Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `cid, publish`
-- **Local variables:** `msg`
+- **Parameters (what each means):**
+- `cid` — Course ID (Courses.CID).
+- `publish` — Holds “publish” for this scope.
+- **Local variables (what each means):**
+- `msg` — Human-readable message (error or success).
 
 #### Line-by-line (this function)
 
@@ -230,6 +278,13 @@ function toggleCoursePublished(cid, publish)
  126 |         });
  127 | }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L108:** `msg` means: Human-readable message (error or success).
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -242,7 +297,8 @@ function openCoursePreview(cid)
 #### Explanation
 
 - **Purpose:** Implements `openCoursePreview`.
-- **Parameters:** `cid`
+- **Parameters (what each means):**
+- `cid` — Course ID (Courses.CID).
 
 #### Line-by-line (this function)
 
@@ -266,7 +322,8 @@ function escapeHtml(str)
 
 - **Purpose:** Implements `escapeHtml`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `str`
+- **Parameters (what each means):**
+- `str` — String value: str.
 
 #### Line-by-line (this function)
 
@@ -292,7 +349,11 @@ function escapeHtml(str)
  149 | 
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L133:** Encode text to reduce XSS risk.
 
@@ -309,7 +370,8 @@ function deleteCourse(cid)
 - **Purpose:** Implements `deleteCourse`.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Delete/clear data.
-- **Parameters:** `cid`
+- **Parameters (what each means):**
+- `cid` — Course ID (Courses.CID).
 
 #### Line-by-line (this function)
 
@@ -333,7 +395,11 @@ function deleteCourse(cid)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | // Course Creation — course grid, publish, delete
@@ -492,6 +558,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L12:** Get HTML element by id.
 - **L14:** Encode text to reduce XSS risk.
 - **L19:** Get HTML element by id.
+<<<<<<< HEAD
 - **L25:** Get HTML element by id.
 - **L26:** Update page HTML.
 - **L29:** Update page HTML.
@@ -499,6 +566,27 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L57:** Encode text to reduce XSS risk.
 - **L63:** Encode text to reduce XSS risk.
 - **L89:** DOM event handler.
+=======
+- **L25:** Get HTML element by id. | `container` means: Holds “container” for this scope.  DOM element from the page.
+- **L26:** Update page HTML.
+- **L29:** Update page HTML.
+- **L41:** `col` means: Holds “col” for this scope.
+- **L44:** `isPublished` means: Course visibility flag for Landing catalog.
+- **L45:** `statusBadgeClass` means: Often a collection related to status Badge Class (plural name).
+- **L46:** `statusText` means: Holds “status Text” for this scope.
+- **L47:** `rating` means: Holds “rating” for this scope.
+- **L48:** `ratingHtml` means: Holds “rating Html” for this scope.
+- **L51:** `pubBtnLabel` means: Holds “pub Btn Label” for this scope.
+- **L52:** `pubBtnIcon` means: Holds “pub Btn Icon” for this scope.
+- **L54:** Update page HTML.
+- **L57:** Encode text to reduce XSS risk.
+- **L63:** Encode text to reduce XSS risk.
+- **L88:** `card` means: Holds “card” for this scope.
+- **L89:** DOM event handler.
+- **L90:** `btn` means: Button DOM element.
+- **L94:** `action` means: Holds “action” for this scope.
+- **L108:** `msg` means: Human-readable message (error or success).
+>>>>>>> eb8ce01 (update)
 - **L133:** Encode text to reduce XSS risk.
 
 ## Source snapshot (raw)

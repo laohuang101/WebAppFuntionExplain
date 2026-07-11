@@ -1,6 +1,10 @@
 # SeedMockData.ashx
 **Source:** `Pages/Lecturer/SeedMockData.ashx`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,6 +19,8 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
+Each name is explained in plain English (what it stores / why it exists).
+
 Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
 
 ## Functions / methods (17 found)
@@ -28,7 +34,8 @@ private static bool IsSeedAllowed()
 #### Explanation
 
 - **Purpose:** Implements `IsSeedAllowed`.
-- **Local variables:** `allow`
+- **Local variables (what each means):**
+- `allow` (`string`) — Holds “allow” for this scope. (text)  Read from Web.config.
 
 #### Line-by-line (this function)
 
@@ -49,8 +56,14 @@ private static bool IsSeedAllowed()
   43 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
+=======
+**Line notes** (what code + variables mean)
+
+- **L33:** `allow` means: Holds “allow” for this scope. (text)  Read from Web.config.
+>>>>>>> eb8ce01 (update)
 - **L37:** Error handling block.
 - **L42:** Handle/log exception.
 
@@ -68,8 +81,40 @@ public void ProcessRequest(HttpContext context)
 - **Security:** Uses AuthGate — requires logged-in role.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `HttpContext context`
-- **Local variables:** `teacherEmail`, `reset`, `log`, `courseSummaries`, `conn`, `lecturerUid`, `s1`, `s2`, `s3`, `s4`, `s5`, `studentIds`, `defs`, `enrollCount`, `cid`, `i`, `progress`, `assessCh`, `cwid1`, `cwid2`, `cwid3`, `sid1`, `sid2`, `fileJson`, `sc`, `cw`, `subs`, `marks`
+- **Parameters (what each means):**
+- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
+- **Local variables (what each means):**
+- `teacherEmail` (`string`) — Email address. (text)  Comes from HTTP request.
+- `reset` (`bool`) — Holds “reset” for this scope. (true/false)  Comes from HTTP request.
+- `log` (`var`) — Holds “log” for this scope.  Newly constructed object.
+- `courseSummaries` (`var`) — Often a collection related to course Summaries (plural name).  Newly constructed object.
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `s1` (`int`) — Holds “s1” for this scope. (integer)
+- `s2` (`int`) — Holds “s2” for this scope. (integer)
+- `s3` (`int`) — Holds “s3” for this scope. (integer)
+- `s4` (`int`) — Holds “s4” for this scope. (integer)
+- `s5` (`int`) — Holds “s5” for this scope. (integer)
+- `studentIds` (`var`) — Often a collection related to student Ids (plural name).  Newly constructed object.
+- `defs` (`var`) — Often a collection related to defs (plural name).  Newly constructed object.
+- `enrollCount` (`int`) — Numeric count of items related to `enroll Count`. (integer)
+- `cid` (`int`) — Course ID (Courses.CID).
+- `i` (`int`) — Loop index (0-based counter in for-loops).  Literal number `0`.
+- `progress` (`int`) — Often a collection related to progress (plural name). (integer)
+- `assessCh` (`int`) — Holds “assess Ch” for this scope. (integer)
+- `cwid1` (`int`) — Holds “cwid1” for this scope. (integer)
+- `cwid2` (`int`) — Holds “cwid2” for this scope. (integer)
+- `cwid3` (`int`) — Holds “cwid3” for this scope. (integer)
+- `sid1` (`int`) — Holds “sid1” for this scope. (integer)
+- `sid2` (`int`) — Holds “sid2” for this scope. (integer)
+- `fileJson` (`string`) — Holds “file Json” for this scope. (text)  Literal text string.
+- `sc` (`int`) — Holds “sc” for this scope. (integer)
+- `cw` (`int`) — Holds “cw” for this scope. (integer)
+- `subs` (`int`) — Often a collection related to subs (plural name). (integer)
+- `marks` (`int`) — Often a collection related to marks (plural name). (integer)
+- `def` — Holds “def” for this scope.
+- `chTitle` — Holds “ch Title” for this scope.
+- `stuid` — Identifier (`stuid`) — database primary/foreign key.
 
 #### Line-by-line (this function)
 
@@ -294,18 +339,56 @@ public void ProcessRequest(HttpContext context)
  271 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L55:** IHttpHandler entry for ashx.
 - **L60:** Error handling block.
 - **L64:** Authorization — block wrong role / anonymous.
 - **L69:** Authorization — block wrong role / anonymous.
 - **L72:** Write/read security audit events.
+<<<<<<< HEAD
 - **L81:** Import namespace/types.
 - **L205:** Parameterized SQL — prevents classic SQL injection.
 - **L208:** Parameterized SQL — prevents classic SQL injection.
 - **L211:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L212:** Parameterized SQL — prevents classic SQL injection.
+=======
+- **L74:** `teacherEmail` means: Email address. (text)  Comes from HTTP request.
+- **L76:** `reset` means: Holds “reset” for this scope. (true/false)  Comes from HTTP request.
+- **L78:** `log` means: Holds “log” for this scope.  Newly constructed object.
+- **L79:** `courseSummaries` means: Often a collection related to course Summaries (plural name).  Newly constructed object.
+- **L81:** Import namespace/types.
+- **L86:** `lecturerUid` means: Users.UID of the course owner (lecturer).
+- **L94:** `s1` means: Holds “s1” for this scope. (integer)
+- **L95:** `s2` means: Holds “s2” for this scope. (integer)
+- **L96:** `s3` means: Holds “s3” for this scope. (integer)
+- **L97:** `s4` means: Holds “s4” for this scope. (integer)
+- **L98:** `s5` means: Holds “s5” for this scope. (integer)
+- **L99:** `studentIds` means: Often a collection related to student Ids (plural name).  Newly constructed object.
+- **L104:** `defs` means: Often a collection related to defs (plural name).
+- **L135:** `enrollCount` means: Numeric count of items related to `enroll Count`. (integer)
+- **L139:** `cid` means: Course ID (Courses.CID).
+- **L150:** `i` means: Loop index (0-based counter in for-loops).  Literal number `0`.
+- **L153:** `progress` means: Often a collection related to progress (plural name). (integer)
+- **L159:** `assessCh` means: Holds “assess Ch” for this scope. (integer)
+- **L162:** `cwid1` means: Holds “cwid1” for this scope. (integer)
+- **L167:** `cwid2` means: Holds “cwid2” for this scope. (integer)
+- **L173:** `cwid3` means: Holds “cwid3” for this scope. (integer)
+- **L180:** `sid1` means: Holds “sid1” for this scope. (integer)
+- **L186:** `sid2` means: Holds “sid2” for this scope. (integer)
+- **L197:** `fileJson` means: Holds “file Json” for this scope. (text)  Literal text string.
+- **L205:** Parameterized SQL — prevents classic SQL injection. | `sc` means: Holds “sc” for this scope. (integer)
+- **L206:** `cw` means: Holds “cw” for this scope. (integer)
+- **L208:** Parameterized SQL — prevents classic SQL injection.
+- **L209:** `subs` means: Often a collection related to subs (plural name). (integer)
+- **L211:** Join related tables (courses ↔ chapters ↔ works ↔ users).
+- **L212:** Parameterized SQL — prevents classic SQL injection.
+- **L213:** `marks` means: Often a collection related to marks (plural name). (integer)
+>>>>>>> eb8ce01 (update)
 - **L215:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L216:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L217:** Parameterized SQL — prevents classic SQL injection.
@@ -324,8 +407,15 @@ private static int EnsureTeacher(SqlConnection conn, string email, string name, 
 
 - **Purpose:** Implements `EnsureTeacher`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, string email, string name, string password, List<string> log`
-- **Local variables:** `uid`, `hash`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `email` (`string`) — Account email address (usually lowercased).
+- `name` (`string`) — Display name of user/course/criterion.
+- `password` (`string`) — Plain password from the form (never log this).
+- `log` (`List<string>`) — Holds “log” for this scope. (text)
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `hash` (`string`) — Password hash (PBKDF2) stored in DB.  Assigned from password hash function.
 
 #### Line-by-line (this function)
 
@@ -381,16 +471,27 @@ private static int EnsureTeacher(SqlConnection conn, string email, string name, 
  320 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L273:** Database access (pure SQL).
 - **L275:** Parameterized SQL — prevents classic SQL injection.
+=======
+**Line notes** (what code + variables mean)
+
+- **L273:** Database access (pure SQL).
+- **L275:** Parameterized SQL — prevents classic SQL injection. | `uid` means: User ID (Users.UID) of the logged-in or target user.
+>>>>>>> eb8ce01 (update)
 - **L278:** Error handling block.
 - **L281:** Parameterized SQL — prevents classic SQL injection.
 - **L283:** Handle/log exception.
 - **L285:** Parameterized SQL — prevents classic SQL injection.
 - **L292:** Error handling block.
+<<<<<<< HEAD
 - **L294:** Password hashing (PBKDF2).
+=======
+- **L294:** Password hashing (PBKDF2). | `hash` means: Password hash (PBKDF2) stored in DB.  Assigned from password hash function.
+>>>>>>> eb8ce01 (update)
 - **L295:** Error handling block.
 - **L300:** Return new identity/UID after INSERT.
 - **L301:** Parameterized SQL — prevents classic SQL injection.
@@ -412,7 +513,9 @@ private static void ClearMockStudentData(SqlConnection conn, List<string> log)
 - **Purpose:** Implements `ClearMockStudentData`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Pattern:** Delete/clear data.
-- **Parameters:** `SqlConnection conn, List<string> log`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `log` (`List<string>`) — Holds “log” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -441,7 +544,11 @@ private static void ClearMockStudentData(SqlConnection conn, List<string> log)
  342 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L322:** Database access (pure SQL).
 - **L324:** Error handling block.
@@ -465,8 +572,14 @@ private static int EnsureCourse(SqlConnection conn, int lecturerUid, MockCourseD
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Publish/draft:** Touches `Courses.IsPublished` / Landing visibility.
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Parameters:** `SqlConnection conn, int lecturerUid, MockCourseDef def, List<string> log, ref int created`
-- **Local variables:** `cid`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `def` (`MockCourseDef`) — Holds “def” for this scope. (type `MockCourseDef`)
+- `log` (`List<string>`) — Holds “log” for this scope. (text)
+- `created` (`int`) — Holds “created” for this scope. (integer)
+- **Local variables (what each means):**
+- `cid` (`int`) — Course ID (Courses.CID).
 
 #### Line-by-line (this function)
 
@@ -533,9 +646,16 @@ private static int EnsureCourse(SqlConnection conn, int lecturerUid, MockCourseD
  402 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L344:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L344:** Database access (pure SQL).
+- **L347:** `cid` means: Course ID (Courses.CID).
+>>>>>>> eb8ce01 (update)
 - **L348:** Owner lecturer foreign key.
 - **L349:** Parameterized SQL — prevents classic SQL injection.
 - **L356:** Error handling block.
@@ -577,8 +697,13 @@ private static int EnsureChapter(SqlConnection conn, int cid, string title)
 
 - **Purpose:** Implements `EnsureChapter`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, int cid, string title`
-- **Local variables:** `chid`, `idx`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `cid` (`int`) — Course ID (Courses.CID).
+- `title` (`string`) — Title of course work / page heading.
+- **Local variables (what each means):**
+- `chid` (`int`) — Chapter ID (Chapters.ChID).
+- `idx` (`int`) — Holds “idx” for this scope. (integer)
 
 #### Line-by-line (this function)
 
@@ -619,12 +744,22 @@ private static int EnsureChapter(SqlConnection conn, int cid, string title)
  436 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L404:** Database access (pure SQL).
 - **L408:** Parameterized SQL — prevents classic SQL injection.
 - **L410:** Error handling block.
 - **L412:** Parameterized SQL — prevents classic SQL injection.
+=======
+**Line notes** (what code + variables mean)
+
+- **L404:** Database access (pure SQL).
+- **L406:** `chid` means: Chapter ID (Chapters.ChID).
+- **L408:** Parameterized SQL — prevents classic SQL injection.
+- **L410:** Error handling block.
+- **L412:** Parameterized SQL — prevents classic SQL injection. | `idx` means: Holds “idx” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 - **L415:** Return new identity/UID after INSERT.
 - **L416:** Parameterized SQL — prevents classic SQL injection.
 - **L418:** Handle/log exception.
@@ -647,8 +782,13 @@ private static bool EnsureEnrollment(SqlConnection conn, int cid, int studentUid
 
 - **Purpose:** Implements `EnsureEnrollment`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, int cid, int studentUid, int progress`
-- **Local variables:** `exists`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `cid` (`int`) — Course ID (Courses.CID).
+- `studentUid` (`int`) — Users.UID of the student.
+- `progress` (`int`) — Often a collection related to progress (plural name). (integer)
+- **Local variables (what each means):**
+- `exists` (`int`) — Count > 0 check (email/user/row already exists).
 
 #### Line-by-line (this function)
 
@@ -677,9 +817,16 @@ private static bool EnsureEnrollment(SqlConnection conn, int cid, int studentUid
  458 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L438:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L438:** Database access (pure SQL).
+- **L440:** `exists` means: Count > 0 check (email/user/row already exists).
+>>>>>>> eb8ce01 (update)
 - **L442:** Parameterized SQL — prevents classic SQL injection.
 - **L445:** Error handling block.
 - **L449:** Parameterized SQL — prevents classic SQL injection.
@@ -698,7 +845,11 @@ private static void EnsureGradeScales(SqlConnection conn, List<string> log)
 
 - **Purpose:** Implements `EnsureGradeScales`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, List<string> log`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `log` (`List<string>`) — Holds “log” for this scope. (text)
+- **Local variables (what each means):**
+- `sql` — SQL query text (should use parameters, not raw user input).
 
 #### Line-by-line (this function)
 
@@ -727,7 +878,11 @@ private static void EnsureGradeScales(SqlConnection conn, List<string> log)
  480 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L460:** Database access (pure SQL).
 - **L462:** Error handling block.
@@ -746,8 +901,14 @@ private static int EnsureStudent(SqlConnection conn, string name, string email, 
 
 - **Purpose:** Implements `EnsureStudent`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, string name, string email, List<string> log`
-- **Local variables:** `uid`, `hash`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `name` (`string`) — Display name of user/course/criterion.
+- `email` (`string`) — Account email address (usually lowercased).
+- `log` (`List<string>`) — Holds “log” for this scope. (text)
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `hash` (`string`) — Password hash (PBKDF2) stored in DB.  Assigned from password hash function.
 
 #### Line-by-line (this function)
 
@@ -787,12 +948,21 @@ private static int EnsureStudent(SqlConnection conn, string name, string email, 
  513 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L482:** Database access (pure SQL).
 - **L484:** Parameterized SQL — prevents classic SQL injection.
 - **L486:** Error handling block.
 - **L488:** Password hashing (PBKDF2).
+=======
+**Line notes** (what code + variables mean)
+
+- **L482:** Database access (pure SQL).
+- **L484:** Parameterized SQL — prevents classic SQL injection. | `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L486:** Error handling block.
+- **L488:** Password hashing (PBKDF2). | `hash` means: Password hash (PBKDF2) stored in DB.  Assigned from password hash function.
+>>>>>>> eb8ce01 (update)
 - **L489:** Error handling block.
 - **L494:** Return new identity/UID after INSERT.
 - **L495:** Parameterized SQL — prevents classic SQL injection.
@@ -814,8 +984,14 @@ private static string BuildCwDescription(string instructions, string type, int s
 - **Purpose:** Implements `BuildCwDescription`.
 - **Due date:** Related to assignment closing after the due day.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `string instructions, string type, int score, bool requireFile`
-- **Local variables:** `extra`, `payload`
+- **Parameters (what each means):**
+- `instructions` (`string`) — Student-facing assignment instructions (plain part of Description).
+- `type` (`string`) — Holds “type” for this scope. (text)
+- `score` (`int`) — Points earned or max points depending on context.
+- `requireFile` (`bool`) — Assignment requires a file upload.
+- **Local variables (what each means):**
+- `extra` (`var`) — Dictionary of optional fields inside META.  Newly constructed object.
+- `payload` (`var`) — Object about to be JSON-serialized or sent over network.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -838,9 +1014,17 @@ private static string BuildCwDescription(string instructions, string type, int s
  531 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L521:** Assignment deadline; submissions close after due day.
+=======
+**Line notes** (what code + variables mean)
+
+- **L518:** `extra` means: Dictionary of optional fields inside META.  Newly constructed object.
+- **L521:** Assignment deadline; submissions close after due day.
+- **L523:** `payload` means: Object about to be JSON-serialized or sent over network.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L530:** Pack extra assignment fields into Description JSON meta.
 
 ---
@@ -856,8 +1040,15 @@ private static int EnsureCourseWork(SqlConnection conn, int chid, string title, 
 - **Purpose:** Implements `EnsureCourseWork`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Due date:** Related to assignment closing after the due day.
-- **Parameters:** `SqlConnection conn, int chid, string title, string desc, DateTime due, ref int workCount`
-- **Local variables:** `cwid`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `chid` (`int`) — Chapter ID (Chapters.ChID).
+- `title` (`string`) — Title of course work / page heading.
+- `desc` (`string`) — Description text (may embed <<<META>>> JSON).
+- `due` (`DateTime`) — Holds “due” for this scope. (date/time)
+- `workCount` (`int`) — Numeric count of items related to `work Count`. (integer)
+- **Local variables (what each means):**
+- `cwid` (`int`) — CourseWork ID (assignment) (CourseWorks.CWID).
 
 #### Line-by-line (this function)
 
@@ -891,9 +1082,16 @@ private static int EnsureCourseWork(SqlConnection conn, int chid, string title, 
  558 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L533:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L533:** Database access (pure SQL).
+- **L536:** `cwid` means: CourseWork ID (assignment) (CourseWorks.CWID).
+>>>>>>> eb8ce01 (update)
 - **L538:** Parameterized SQL — prevents classic SQL injection.
 - **L540:** Error handling block.
 - **L543:** Assignment deadline; submissions close after due day.
@@ -915,8 +1113,15 @@ private static int EnsureSubmission(SqlConnection conn, int cwid, int studentUid
 
 - **Purpose:** Implements `EnsureSubmission`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, int cwid, int studentUid, string content, DateTime when, ref int subCount`
-- **Local variables:** `sid`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `cwid` (`int`) — CourseWork ID (assignment) (CourseWorks.CWID).
+- `studentUid` (`int`) — Users.UID of the student.
+- `content` (`string`) — Submission body text or JSON payload in CWSubmissions.
+- `when` (`DateTime`) — Holds “when” for this scope. (date/time)
+- `subCount` (`int`) — Numeric count of items related to `sub Count`. (integer)
+- **Local variables (what each means):**
+- `sid` (`int`) — Submission ID (CWSubmissions.SID).
 
 #### Line-by-line (this function)
 
@@ -954,9 +1159,16 @@ private static int EnsureSubmission(SqlConnection conn, int cwid, int studentUid
  589 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L560:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L560:** Database access (pure SQL).
+- **L563:** `sid` means: Submission ID (CWSubmissions.SID).
+>>>>>>> eb8ce01 (update)
 - **L565:** Parameterized SQL — prevents classic SQL injection.
 - **L567:** Error handling block.
 - **L572:** Return new identity/UID after INSERT.
@@ -979,7 +1191,12 @@ private static bool EnsureMarking(SqlConnection conn, int sid, int score, string
 
 - **Purpose:** Implements `EnsureMarking`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, int sid, int score, string feedback, ref int markCount`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `sid` (`int`) — Submission ID (CWSubmissions.SID).
+- `score` (`int`) — Points earned or max points depending on context.
+- `feedback` (`string`) — Holds “feedback” for this scope. (text)
+- `markCount` (`int`) — Numeric count of items related to `mark Count`. (integer)
 
 #### Line-by-line (this function)
 
@@ -1009,7 +1226,11 @@ private static bool EnsureMarking(SqlConnection conn, int sid, int score, string
  612 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L591:** Database access (pure SQL).
 - **L594:** Parameterized SQL — prevents classic SQL injection.
@@ -1032,7 +1253,9 @@ private static SqlParameter P(string n, object v)
 
 - **Purpose:** Implements `P`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `string n, object v`
+- **Parameters (what each means):**
+- `n` (`string`) — Numeric count or temporary integer.
+- `v` (`object`) — Generic value (version flag in JSON, or loop value).
 
 #### Line-by-line (this function)
 
@@ -1044,7 +1267,11 @@ private static SqlParameter P(string n, object v)
  617 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L614:** Parameterized SQL — prevents classic SQL injection.
 - **L616:** Parameterized SQL — prevents classic SQL injection.
@@ -1061,8 +1288,12 @@ private static void Exec(SqlConnection conn, string sql, params SqlParameter[] p
 
 - **Purpose:** Implements `Exec`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, string sql, params SqlParameter[] ps`
-- **Local variables:** `cmd`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- `ps` (`SqlParameter[]`) — Holds “ps” for this scope. (type `SqlParameter[]`)
+- **Local variables (what each means):**
+- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -1078,7 +1309,11 @@ private static void Exec(SqlConnection conn, string sql, params SqlParameter[] p
  626 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L619:** Database access (pure SQL).
 - **L621:** Import namespace/types.
@@ -1096,8 +1331,13 @@ private static int ScalarInt(SqlConnection conn, string sql, params SqlParameter
 
 - **Purpose:** Implements `ScalarInt`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, string sql, params SqlParameter[] ps`
-- **Local variables:** `cmd`, `o`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- `ps` (`SqlParameter[]`) — Holds “ps” for this scope. (type `SqlParameter[]`)
+- **Local variables (what each means):**
+- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
+- `o` (`var`) — Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
 
 #### Line-by-line (this function)
 
@@ -1115,11 +1355,19 @@ private static int ScalarInt(SqlConnection conn, string sql, params SqlParameter
  637 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L628:** Database access (pure SQL).
 - **L630:** Import namespace/types.
 - **L633:** Run SQL; return table / rows / scalar.
+=======
+**Line notes** (what code + variables mean)
+
+- **L628:** Database access (pure SQL).
+- **L630:** Import namespace/types.
+- **L633:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L634:** Null-safe read from database values.
 
 ---
@@ -1134,7 +1382,9 @@ private static void Write(HttpContext ctx, object o)
 
 - **Purpose:** Implements `Write`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `HttpContext ctx, object o`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- `o` (`object`) — Holds “o” for this scope.
 
 #### Line-by-line (this function)
 
@@ -1150,7 +1400,11 @@ private static void Write(HttpContext ctx, object o)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```html
    1 | <%@ WebHandler Language="C#" Class="SeedMockData" %>
@@ -1813,6 +2067,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L11:** Import namespace/types.
 - **L12:** Import namespace/types.
 - **L25:** Class declaration for this page/service.
+<<<<<<< HEAD
+=======
+- **L33:** `allow` means: Holds “allow” for this scope. (text)  Read from Web.config.
+>>>>>>> eb8ce01 (update)
 - **L37:** Error handling block.
 - **L42:** Handle/log exception.
 - **L45:** Class declaration for this page/service.
@@ -1821,24 +2079,66 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L64:** Authorization — block wrong role / anonymous.
 - **L69:** Authorization — block wrong role / anonymous.
 - **L72:** Write/read security audit events.
+<<<<<<< HEAD
 - **L81:** Import namespace/types.
 - **L205:** Parameterized SQL — prevents classic SQL injection.
 - **L208:** Parameterized SQL — prevents classic SQL injection.
 - **L211:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L212:** Parameterized SQL — prevents classic SQL injection.
+=======
+- **L74:** `teacherEmail` means: Email address. (text)  Comes from HTTP request.
+- **L76:** `reset` means: Holds “reset” for this scope. (true/false)  Comes from HTTP request.
+- **L78:** `log` means: Holds “log” for this scope.  Newly constructed object.
+- **L79:** `courseSummaries` means: Often a collection related to course Summaries (plural name).  Newly constructed object.
+- **L81:** Import namespace/types.
+- **L86:** `lecturerUid` means: Users.UID of the course owner (lecturer).
+- **L94:** `s1` means: Holds “s1” for this scope. (integer)
+- **L95:** `s2` means: Holds “s2” for this scope. (integer)
+- **L96:** `s3` means: Holds “s3” for this scope. (integer)
+- **L97:** `s4` means: Holds “s4” for this scope. (integer)
+- **L98:** `s5` means: Holds “s5” for this scope. (integer)
+- **L99:** `studentIds` means: Often a collection related to student Ids (plural name).  Newly constructed object.
+- **L104:** `defs` means: Often a collection related to defs (plural name).
+- **L135:** `enrollCount` means: Numeric count of items related to `enroll Count`. (integer)
+- **L139:** `cid` means: Course ID (Courses.CID).
+- **L150:** `i` means: Loop index (0-based counter in for-loops).  Literal number `0`.
+- **L153:** `progress` means: Often a collection related to progress (plural name). (integer)
+- **L159:** `assessCh` means: Holds “assess Ch” for this scope. (integer)
+- **L162:** `cwid1` means: Holds “cwid1” for this scope. (integer)
+- **L167:** `cwid2` means: Holds “cwid2” for this scope. (integer)
+- **L173:** `cwid3` means: Holds “cwid3” for this scope. (integer)
+- **L180:** `sid1` means: Holds “sid1” for this scope. (integer)
+- **L186:** `sid2` means: Holds “sid2” for this scope. (integer)
+- **L197:** `fileJson` means: Holds “file Json” for this scope. (text)  Literal text string.
+- **L205:** Parameterized SQL — prevents classic SQL injection. | `sc` means: Holds “sc” for this scope. (integer)
+- **L206:** `cw` means: Holds “cw” for this scope. (integer)
+- **L208:** Parameterized SQL — prevents classic SQL injection.
+- **L209:** `subs` means: Often a collection related to subs (plural name). (integer)
+- **L211:** Join related tables (courses ↔ chapters ↔ works ↔ users).
+- **L212:** Parameterized SQL — prevents classic SQL injection.
+- **L213:** `marks` means: Often a collection related to marks (plural name). (integer)
+>>>>>>> eb8ce01 (update)
 - **L215:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L216:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L217:** Parameterized SQL — prevents classic SQL injection.
 - **L233:** Error handling block.
 - **L267:** Handle/log exception.
 - **L273:** Database access (pure SQL).
+<<<<<<< HEAD
 - **L275:** Parameterized SQL — prevents classic SQL injection.
+=======
+- **L275:** Parameterized SQL — prevents classic SQL injection. | `uid` means: User ID (Users.UID) of the logged-in or target user.
+>>>>>>> eb8ce01 (update)
 - **L278:** Error handling block.
 - **L281:** Parameterized SQL — prevents classic SQL injection.
 - **L283:** Handle/log exception.
 - **L285:** Parameterized SQL — prevents classic SQL injection.
 - **L292:** Error handling block.
+<<<<<<< HEAD
 - **L294:** Password hashing (PBKDF2).
+=======
+- **L294:** Password hashing (PBKDF2). | `hash` means: Password hash (PBKDF2) stored in DB.  Assigned from password hash function.
+>>>>>>> eb8ce01 (update)
 - **L295:** Error handling block.
 - **L300:** Return new identity/UID after INSERT.
 - **L301:** Parameterized SQL — prevents classic SQL injection.
@@ -1854,6 +2154,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L337:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L341:** Handle/log exception.
 - **L344:** Database access (pure SQL).
+<<<<<<< HEAD
+=======
+- **L347:** `cid` means: Course ID (Courses.CID).
+>>>>>>> eb8ce01 (update)
 - **L348:** Owner lecturer foreign key.
 - **L349:** Parameterized SQL — prevents classic SQL injection.
 - **L356:** Error handling block.
@@ -1883,9 +2187,16 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L392:** Parameterized SQL — prevents classic SQL injection.
 - **L399:** Owner lecturer foreign key.
 - **L404:** Database access (pure SQL).
+<<<<<<< HEAD
 - **L408:** Parameterized SQL — prevents classic SQL injection.
 - **L410:** Error handling block.
 - **L412:** Parameterized SQL — prevents classic SQL injection.
+=======
+- **L406:** `chid` means: Chapter ID (Chapters.ChID).
+- **L408:** Parameterized SQL — prevents classic SQL injection.
+- **L410:** Error handling block.
+- **L412:** Parameterized SQL — prevents classic SQL injection. | `idx` means: Holds “idx” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 - **L415:** Return new identity/UID after INSERT.
 - **L416:** Parameterized SQL — prevents classic SQL injection.
 - **L418:** Handle/log exception.
@@ -1896,6 +2207,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L431:** Return new identity/UID after INSERT.
 - **L432:** Parameterized SQL — prevents classic SQL injection.
 - **L438:** Database access (pure SQL).
+<<<<<<< HEAD
+=======
+- **L440:** `exists` means: Count > 0 check (email/user/row already exists).
+>>>>>>> eb8ce01 (update)
 - **L442:** Parameterized SQL — prevents classic SQL injection.
 - **L445:** Error handling block.
 - **L449:** Parameterized SQL — prevents classic SQL injection.
@@ -1906,9 +2221,15 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L475:** Error handling block.
 - **L479:** Handle/log exception.
 - **L482:** Database access (pure SQL).
+<<<<<<< HEAD
 - **L484:** Parameterized SQL — prevents classic SQL injection.
 - **L486:** Error handling block.
 - **L488:** Password hashing (PBKDF2).
+=======
+- **L484:** Parameterized SQL — prevents classic SQL injection. | `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L486:** Error handling block.
+- **L488:** Password hashing (PBKDF2). | `hash` means: Password hash (PBKDF2) stored in DB.  Assigned from password hash function.
+>>>>>>> eb8ce01 (update)
 - **L489:** Error handling block.
 - **L494:** Return new identity/UID after INSERT.
 - **L495:** Parameterized SQL — prevents classic SQL injection.
@@ -1916,9 +2237,18 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L502:** Return new identity/UID after INSERT.
 - **L503:** Parameterized SQL — prevents classic SQL injection.
 - **L506:** Handle/log exception.
+<<<<<<< HEAD
 - **L521:** Assignment deadline; submissions close after due day.
 - **L530:** Pack extra assignment fields into Description JSON meta.
 - **L533:** Database access (pure SQL).
+=======
+- **L518:** `extra` means: Dictionary of optional fields inside META.  Newly constructed object.
+- **L521:** Assignment deadline; submissions close after due day.
+- **L523:** `payload` means: Object about to be JSON-serialized or sent over network.  Newly constructed object.
+- **L530:** Pack extra assignment fields into Description JSON meta.
+- **L533:** Database access (pure SQL).
+- **L536:** `cwid` means: CourseWork ID (assignment) (CourseWorks.CWID).
+>>>>>>> eb8ce01 (update)
 - **L538:** Parameterized SQL — prevents classic SQL injection.
 - **L540:** Error handling block.
 - **L543:** Assignment deadline; submissions close after due day.
@@ -1928,6 +2258,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L553:** Return new identity/UID after INSERT.
 - **L554:** Parameterized SQL — prevents classic SQL injection.
 - **L560:** Database access (pure SQL).
+<<<<<<< HEAD
+=======
+- **L563:** `sid` means: Submission ID (CWSubmissions.SID).
+>>>>>>> eb8ce01 (update)
 - **L565:** Parameterized SQL — prevents classic SQL injection.
 - **L567:** Error handling block.
 - **L572:** Return new identity/UID after INSERT.
@@ -1952,7 +2286,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L624:** Run SQL; return table / rows / scalar.
 - **L628:** Database access (pure SQL).
 - **L630:** Import namespace/types.
+<<<<<<< HEAD
 - **L633:** Run SQL; return table / rows / scalar.
+=======
+- **L633:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L634:** Null-safe read from database values.
 
 ## Source snapshot (raw)

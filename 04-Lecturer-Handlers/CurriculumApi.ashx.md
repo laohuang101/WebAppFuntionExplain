@@ -1,6 +1,10 @@
 # CurriculumApi.ashx
 **Source:** `Pages/Lecturer/CurriculumApi.ashx`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -14,6 +18,8 @@ JSON ashx API for curriculum CRUD with ownership (`LecturerUID`) checks.
 - **Kind:** `.ashx`
 
 ## Variables / fields (file level)
+
+Each name is explained in plain English (what it stores / why it exists).
 
 Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
 
@@ -30,8 +36,14 @@ public void ProcessRequest(HttpContext context)
 - **Purpose:** Implements `ProcessRequest`.
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `HttpContext context`
-- **Local variables:** `uid`, `action`, `body`, `reader`
+- **Parameters (what each means):**
+- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+- `action` (`string`) — Holds “action” for this scope. (text)  Comes from HTTP request.
+- `body` (`string`) — HTTP request body.
+- `reader` (`var`) — SqlDataReader for streaming query results.  Newly constructed object.
+- `data` (`Dictionary<string, object>`) — Holds “data” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -111,6 +123,7 @@ public void ProcessRequest(HttpContext context)
   94 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L23:** IHttpHandler entry for ashx.
@@ -118,6 +131,18 @@ public void ProcessRequest(HttpContext context)
 - **L30:** Authorization — block wrong role / anonymous.
 - **L33:** Authorization — block wrong role / anonymous.
 - **L44:** Import namespace/types.
+=======
+**Line notes** (what code + variables mean)
+
+- **L23:** IHttpHandler entry for ashx.
+- **L28:** Error handling block.
+- **L30:** Authorization — block wrong role / anonymous. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+- **L33:** Authorization — block wrong role / anonymous.
+- **L39:** `action` means: Holds “action” for this scope. (text)  Comes from HTTP request.
+- **L40:** `body` means: HTTP request body.
+- **L44:** Import namespace/types.
+- **L48:** `data` means: Holds “data” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 - **L51:** Error handling block.
 - **L90:** Handle/log exception.
 
@@ -135,8 +160,31 @@ private object GetCurriculum(int lecturerUid, int cid)
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **Pattern:** Read/load data for display.
-- **Parameters:** `int lecturerUid, int cid`
-- **Local variables:** `chapters`, `conn`, `chDt`, `chid`, `lessons`, `schid`, `materials`, `matSql`, `mats`, `lessonTitle`, `text`, `media`, `t`, `smid`, `i`, `type`, `content`, `p`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `cid` (`int`) — Course ID (Courses.CID).
+- **Local variables (what each means):**
+- `chapters` (`var`) — Often a collection related to chapters (plural name).  Newly constructed object.
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
+- `chDt` (`DataTable`) — Holds “ch Dt” for this scope. (`DataTable` = SQL result grid)
+- `chid` (`int`) — Chapter ID (Chapters.ChID).
+- `lessons` (`var`) — Often a collection related to lessons (plural name).  Newly constructed object.
+- `schid` (`int`) — SubChapter / lesson ID.
+- `materials` (`var`) — Often a collection related to materials (plural name).
+- `matSql` (`string`) — Holds “mat Sql” for this scope. (text)
+- `mats` (`var`) — Often a collection related to mats (plural name).
+- `lessonTitle` (`string`) — Holds “lesson Title” for this scope. (text)
+- `text` (`var`) — Holds “text” for this scope.
+- `media` (`var`) — Holds “media” for this scope.
+- `t` (`var`) — Temporary string/token/time value.
+- `smid` (`int`) — Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
+- `i` (`int`) — Loop index (0-based counter in for-loops).  Literal number `0`.
+- `type` (`string`) — Holds “type” for this scope. (text)
+- `content` (`string`) — Submission body text or JSON payload in CWSubmissions.
+- `p` (`int`) — Parameter, path, or password fragment depending on context.
+- `ch` — Holds “ch” for this scope.
+- `sc` — Holds “sc” for this scope.
+- `m` — Holds “m” for this scope.
 
 #### Line-by-line (this function)
 
@@ -321,17 +369,30 @@ private object GetCurriculum(int lecturerUid, int cid)
  276 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L105:** Import namespace/types.
 - **L107:** Ownership check — prevent IDOR.
 - **L123:** Parameterized SQL — prevents classic SQL injection.
 - **L125:** In-memory result set from ADO.NET.
+=======
+**Line notes** (what code + variables mean)
+
+- **L104:** `chapters` means: Often a collection related to chapters (plural name).  Newly constructed object.
+- **L105:** Import namespace/types.
+- **L107:** Ownership check — prevent IDOR.
+- **L123:** Parameterized SQL — prevents classic SQL injection. | `chDt` means: Holds “ch Dt” for this scope. (`DataTable` = SQL result grid)
+- **L125:** In-memory result set from ADO.NET.
+- **L127:** `chid` means: Chapter ID (Chapters.ChID).
+- **L128:** `lessons` means: Often a collection related to lessons (plural name).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L147:** In-memory result set from ADO.NET.
 - **L148:** Error handling block.
 - **L150:** Parameterized SQL — prevents classic SQL injection.
 - **L152:** Handle/log exception.
 - **L163:** In-memory result set from ADO.NET.
+<<<<<<< HEAD
 - **L176:** Error handling block.
 - **L179:** Parameterized SQL — prevents classic SQL injection.
 - **L184:** In-memory result set from ADO.NET.
@@ -340,6 +401,33 @@ private object GetCurriculum(int lecturerUid, int cid)
 - **L221:** Error handling block.
 - **L224:** Parameterized SQL — prevents classic SQL injection.
 - **L226:** In-memory result set from ADO.NET.
+=======
+- **L165:** `schid` means: SubChapter / lesson ID.
+- **L168:** `materials` means: Often a collection related to materials (plural name).
+- **L176:** Error handling block.
+- **L178:** `matSql` means: Holds “mat Sql” for this scope. (text)
+- **L179:** Parameterized SQL — prevents classic SQL injection. | `mats` means: Often a collection related to mats (plural name).
+- **L180:** `lessonTitle` means: Holds “lesson Title” for this scope. (text)
+- **L184:** In-memory result set from ADO.NET.
+- **L186:** `text` means: Holds “text” for this scope.
+- **L187:** `media` means: Holds “media” for this scope.
+- **L188:** `t` means: Temporary string/token/time value.
+- **L200:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
+- **L201:** Error handling block.
+- **L205:** Handle/log exception.
+- **L221:** Error handling block.
+- **L223:** `matSql` means: Holds “mat Sql” for this scope. (text)
+- **L224:** Parameterized SQL — prevents classic SQL injection. | `mats` means: Often a collection related to mats (plural name).
+- **L225:** `i` means: Loop index (0-based counter in for-loops).  Literal number `0`.
+- **L226:** In-memory result set from ADO.NET.
+- **L229:** `type` means: Holds “type” for this scope. (text)
+- **L231:** `media` means: Holds “media” for this scope.
+- **L232:** `text` means: Holds “text” for this scope.
+- **L233:** `content` means: Submission body text or JSON payload in CWSubmissions.
+- **L234:** `lessonTitle` means: Holds “lesson Title” for this scope. (text)  Literal text string.
+- **L237:** `p` means: Parameter, path, or password fragment depending on context.
+- **L250:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
+>>>>>>> eb8ce01 (update)
 - **L251:** Error handling block.
 - **L263:** Handle/log exception.
 
@@ -356,8 +444,32 @@ private List<object> LoadMats(SqlConnection conn, int parentId, out string type,
 - **Purpose:** Implements `LoadMats`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Pattern:** Read/load data for display.
-- **Parameters:** `SqlConnection conn, int parentId, out string type, out string content`
-- **Local variables:** `materials`, `mats`, `orderBy`, `sql`, `media0`, `t0`, `mediaB`, `textB`, `smid`, `media`, `text`, `t`, `bareName`, `fn`, `rel`, `linkOut`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `parentId` (`int`) — Holds “parent Id” for this scope. (integer)
+- `type` (`string`) — Holds “type” for this scope. (text)
+- `content` (`string`) — Submission body text or JSON payload in CWSubmissions.
+- **Local variables (what each means):**
+- `materials` (`var`) — Often a collection related to materials (plural name).  Newly constructed object.
+- `mats` (`DataTable`) — Often a collection related to mats (plural name). (`DataTable` = SQL result grid)
+- `orderBy` (`string`) — Holds “order By” for this scope. (text)
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- `bodyRow` (`DataRow`) — Holds “body Row” for this scope. (`DataRow` = one SQL row)
+- `fileRow` (`DataRow`) — Holds “file Row” for this scope. (`DataRow` = one SQL row)
+- `media0` (`var`) — Holds “media0” for this scope.
+- `t0` (`var`) — Holds “t0” for this scope.
+- `mediaB` (`var`) — Holds “media B” for this scope.
+- `textB` (`var`) — Holds “text B” for this scope.
+- `smid` (`int`) — Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
+- `media` (`var`) — Holds “media” for this scope.
+- `text` (`var`) — Holds “text” for this scope.
+- `t` (`var`) — Temporary string/token/time value.
+- `bareName` (`string`) — Holds “bare Name” for this scope. (text)
+- `fn` (`string`) — Holds “fn” for this scope. (text)
+- `rel` (`string`) — Holds “rel” for this scope. (text)
+- `linkOut` (`string`) — Holds “link Out” for this scope. (text)
+- `r` — Usually one database row (DataRow) in query loops.
+- `m` — Holds “m” for this scope.
 
 #### Line-by-line (this function)
 
@@ -514,12 +626,24 @@ private List<object> LoadMats(SqlConnection conn, int parentId, out string type,
  426 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L278:** Database access (pure SQL).
 - **L283:** Error handling block.
 - **L285:** In-memory result set from ADO.NET.
 - **L287:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L278:** Database access (pure SQL).
+- **L282:** `materials` means: Often a collection related to materials (plural name).  Newly constructed object.
+- **L283:** Error handling block.
+- **L285:** In-memory result set from ADO.NET. | `mats` means: Often a collection related to mats (plural name). (`DataTable` = SQL result grid)
+- **L287:** Error handling block.
+- **L291:** `orderBy` means: Holds “order By” for this scope. (text)
+- **L294:** `sql` means: SQL query text (should use parameters, not raw user input).
+>>>>>>> eb8ce01 (update)
 - **L296:** Parameterized SQL — prevents classic SQL injection.
 - **L299:** Handle/log exception.
 - **L303:** Error handling block.
@@ -528,6 +652,7 @@ private List<object> LoadMats(SqlConnection conn, int parentId, out string type,
 - **L311:** Error handling block.
 - **L315:** Parameterized SQL — prevents classic SQL injection.
 - **L317:** In-memory result set from ADO.NET.
+<<<<<<< HEAD
 - **L324:** In-memory result set from ADO.NET.
 - **L325:** In-memory result set from ADO.NET.
 - **L326:** In-memory result set from ADO.NET.
@@ -536,6 +661,30 @@ private List<object> LoadMats(SqlConnection conn, int parentId, out string type,
 - **L373:** Error handling block.
 - **L396:** Error handling block.
 - **L404:** Handle/log exception.
+=======
+- **L324:** In-memory result set from ADO.NET. | `bodyRow` means: Holds “body Row” for this scope. (`DataRow` = one SQL row)
+- **L325:** In-memory result set from ADO.NET. | `fileRow` means: Holds “file Row” for this scope. (`DataRow` = one SQL row)
+- **L326:** In-memory result set from ADO.NET.
+- **L328:** `media0` means: Holds “media0” for this scope.
+- **L329:** `t0` means: Holds “t0” for this scope.
+- **L340:** In-memory result set from ADO.NET.
+- **L342:** `t0` means: Holds “t0” for this scope.
+- **L343:** `media0` means: Holds “media0” for this scope.
+- **L363:** `mediaB` means: Holds “media B” for this scope.
+- **L364:** `textB` means: Holds “text B” for this scope.
+- **L370:** In-memory result set from ADO.NET.
+- **L372:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
+- **L373:** Error handling block.
+- **L374:** `media` means: Holds “media” for this scope.
+- **L375:** `text` means: Holds “text” for this scope.
+- **L376:** `t` means: Temporary string/token/time value.
+- **L382:** `bareName` means: Holds “bare Name” for this scope. (text)
+- **L389:** `fn` means: Holds “fn” for this scope. (text)
+- **L396:** Error handling block.
+- **L398:** `rel` means: Holds “rel” for this scope. (text)
+- **L404:** Handle/log exception.
+- **L408:** `linkOut` means: Holds “link Out” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 - **L424:** Handle/log exception.
 
 ---
@@ -549,7 +698,10 @@ private static string BuildMatSelect()
 #### Explanation
 
 - **Purpose:** Implements `BuildMatSelect`.
-- **Local variables:** `typeExpr`, `textExpr`, `mediaExpr`
+- **Local variables (what each means):**
+- `typeExpr` (`string`) — Holds “type Expr” for this scope. (text)
+- `textExpr` (`string`) — Holds “text Expr” for this scope. (text)
+- `mediaExpr` (`string`) — Holds “media Expr” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -571,6 +723,15 @@ private static string BuildMatSelect()
  441 |                "FROM " + Q(SchemaMap.MatTable);
  442 |     }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L430:** `typeExpr` means: Holds “type Expr” for this scope. (text)
+- **L432:** `textExpr` means: Holds “text Expr” for this scope. (text)
+- **L434:** `mediaExpr` means: Holds “media Expr” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -586,8 +747,15 @@ private object SaveSection(int lecturerUid, int chid, int cid, string title)
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **Pattern:** Persist changes.
-- **Parameters:** `int lecturerUid, int chid, int cid, string title`
-- **Local variables:** `conn`, `sql`, `next`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `chid` (`int`) — Chapter ID (Chapters.ChID).
+- `cid` (`int`) — Course ID (Courses.CID).
+- `title` (`string`) — Title of course work / page heading.
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- `next` (`int`) — Holds “next” for this scope. (integer)
 
 #### Line-by-line (this function)
 
@@ -633,11 +801,21 @@ private object SaveSection(int lecturerUid, int chid, int cid, string title)
  485 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L453:** Import namespace/types.
 - **L455:** Ownership check — prevent IDOR.
 - **L460:** Parameterized SQL — prevents classic SQL injection.
+=======
+**Line notes** (what code + variables mean)
+
+- **L453:** Import namespace/types.
+- **L455:** Ownership check — prevent IDOR.
+- **L458:** `sql` means: SQL query text (should use parameters, not raw user input).
+- **L460:** Parameterized SQL — prevents classic SQL injection.
+- **L467:** `next` means: Holds “next” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 - **L470:** Parameterized SQL — prevents classic SQL injection.
 - **L472:** Return new identity/UID after INSERT.
 - **L474:** Parameterized SQL — prevents classic SQL injection.
@@ -657,8 +835,11 @@ private object DeleteSection(int lecturerUid, int chid)
 - **Purpose:** Implements `DeleteSection`.
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **Pattern:** Delete/clear data.
-- **Parameters:** `int lecturerUid, int chid`
-- **Local variables:** `conn`, `cid`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `chid` (`int`) — Chapter ID (Chapters.ChID).
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
 
 #### Line-by-line (this function)
 
@@ -711,9 +892,16 @@ private object DeleteSection(int lecturerUid, int chid)
  531 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L490:** Import namespace/types.
+=======
+**Line notes** (what code + variables mean)
+
+- **L490:** Import namespace/types.
+- **L492:** `cid` means: Course ID (Courses.CID).
+>>>>>>> eb8ce01 (update)
 - **L495:** Parameterized SQL — prevents classic SQL injection.
 - **L497:** Ownership check — prevent IDOR.
 - **L502:** Error handling block.
@@ -742,8 +930,25 @@ private object SaveLesson(int lecturerUid, int schid, int chid, string title, st
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Persist changes.
-- **Parameters:** `int lecturerUid, int schid, int chid, string title, string type, string content, string materialsJson`
-- **Local variables:** `conn`, `cid`, `matType`, `n`, `next`, `matParent`, `storeText`, `warn`, `matsSaved`, `extra`, `updErr`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `schid` (`int`) — SubChapter / lesson ID.
+- `chid` (`int`) — Chapter ID (Chapters.ChID).
+- `title` (`string`) — Title of course work / page heading.
+- `type` (`string`) — Holds “type” for this scope. (text)
+- `content` (`string`) — Submission body text or JSON payload in CWSubmissions.
+- `materialsJson` (`string`) — Holds “materials Json” for this scope. (text)
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
+- `matType` (`string`) — Holds “mat Type” for this scope. (text)
+- `n` (`int`) — Integer count (rows, items, or length).
+- `next` (`int`) — Holds “next” for this scope. (integer)
+- `matParent` (`int`) — Holds “mat Parent” for this scope. (integer)
+- `storeText` (`string`) — Holds “store Text” for this scope. (text)
+- `warn` (`string`) — Holds “warn” for this scope. (text)
+- `matsSaved` (`int`) — Holds “mats Saved” for this scope. (integer)  Literal number `0`.
+- `extra` (`int`) — Dictionary of optional fields inside META.
+- `updErr` (`string`) — Holds “upd Err” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -905,11 +1110,22 @@ private object SaveLesson(int lecturerUid, int schid, int chid, string title, st
  690 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L542:** Import namespace/types.
 - **L547:** Parameterized SQL — prevents classic SQL injection.
 - **L549:** Ownership check — prevent IDOR.
+=======
+**Line notes** (what code + variables mean)
+
+- **L542:** Import namespace/types.
+- **L544:** `cid` means: Course ID (Courses.CID).
+- **L547:** Parameterized SQL — prevents classic SQL injection.
+- **L549:** Ownership check — prevent IDOR.
+- **L551:** `matType` means: Holds “mat Type” for this scope. (text)
+- **L563:** `n` means: Integer count (rows, items, or length).
+>>>>>>> eb8ce01 (update)
 - **L566:** Parameterized SQL — prevents classic SQL injection.
 - **L572:** Error handling block.
 - **L575:** Parameterized SQL — prevents classic SQL injection.
@@ -917,12 +1133,28 @@ private object SaveLesson(int lecturerUid, int schid, int chid, string title, st
 - **L579:** Parameterized SQL — prevents classic SQL injection.
 - **L580:** Parameterized SQL — prevents classic SQL injection.
 - **L584:** Error handling block.
+<<<<<<< HEAD
+=======
+- **L588:** `next` means: Holds “next” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 - **L591:** Parameterized SQL — prevents classic SQL injection.
 - **L593:** Return new identity/UID after INSERT.
 - **L595:** Parameterized SQL — prevents classic SQL injection.
 - **L600:** Return new identity/UID after INSERT.
 - **L602:** Parameterized SQL — prevents classic SQL injection.
 - **L605:** Handle/log exception.
+<<<<<<< HEAD
+=======
+- **L620:** `matParent` means: Holds “mat Parent” for this scope. (integer)
+- **L622:** `storeText` means: Holds “store Text” for this scope. (text)
+- **L633:** `warn` means: Holds “warn” for this scope. (text)
+- **L634:** `matsSaved` means: Holds “mats Saved” for this scope. (integer)  Literal number `0`.
+- **L638:** `extra` means: Dictionary of optional fields inside META.
+- **L661:** `storeText` means: Holds “store Text” for this scope. (text)
+- **L662:** `matParent` means: Holds “mat Parent” for this scope. (integer)
+- **L666:** `updErr` means: Holds “upd Err” for this scope. (text)
+- **L672:** `warn` means: Holds “warn” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 - **L676:** Parameterized SQL — prevents classic SQL injection.
 
 ---
@@ -938,8 +1170,13 @@ private object DeleteLesson(int lecturerUid, int schid)
 - **Purpose:** Implements `DeleteLesson`.
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **Pattern:** Delete/clear data.
-- **Parameters:** `int lecturerUid, int schid`
-- **Local variables:** `conn`, `chid`, `cid`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `schid` (`int`) — SubChapter / lesson ID.
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
+- `cid` (`int`) — Course ID (Courses.CID).
+- `chid` (`int`) — Chapter ID (Chapters.ChID).
 
 #### Line-by-line (this function)
 
@@ -991,17 +1228,32 @@ private object DeleteLesson(int lecturerUid, int schid)
  735 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L695:** Import namespace/types.
 - **L702:** Parameterized SQL — prevents classic SQL injection.
+=======
+**Line notes** (what code + variables mean)
+
+- **L695:** Import namespace/types.
+- **L699:** `chid` means: Chapter ID (Chapters.ChID).
+- **L702:** Parameterized SQL — prevents classic SQL injection.
+- **L703:** `cid` means: Course ID (Courses.CID).
+>>>>>>> eb8ce01 (update)
 - **L706:** Parameterized SQL — prevents classic SQL injection.
 - **L708:** Ownership check — prevent IDOR.
 - **L709:** Error handling block.
 - **L712:** Parameterized SQL — prevents classic SQL injection.
 - **L714:** Handle/log exception.
 - **L716:** Parameterized SQL — prevents classic SQL injection.
+<<<<<<< HEAD
 - **L724:** Parameterized SQL — prevents classic SQL injection.
+=======
+- **L721:** `chid` means: Chapter ID (Chapters.ChID).
+- **L724:** Parameterized SQL — prevents classic SQL injection.
+- **L725:** `cid` means: Course ID (Courses.CID).
+>>>>>>> eb8ce01 (update)
 - **L728:** Parameterized SQL — prevents classic SQL injection.
 - **L729:** Ownership check — prevent IDOR.
 - **L731:** Parameterized SQL — prevents classic SQL injection.
@@ -1019,8 +1271,19 @@ private object GetLesson(int lecturerUid, int schid)
 - **Purpose:** Implements `GetLesson`.
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
 - **Pattern:** Read/load data for display.
-- **Parameters:** `int lecturerUid, int schid`
-- **Local variables:** `conn`, `dt`, `chid`, `cid`, `materials`, `sql`, `type2`, `media2`, `text2`
+- **Parameters (what each means):**
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `schid` (`int`) — SubChapter / lesson ID.
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
+- `chid` (`int`) — Chapter ID (Chapters.ChID).
+- `cid` (`int`) — Course ID (Courses.CID).
+- `materials` (`var`) — Often a collection related to materials (plural name).
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- `dt` (`var`) — DataTable — full result set from SQL (many rows/columns).
+- `type2` (`string`) — Holds “type2” for this scope. (text)
+- `media2` (`var`) — Holds “media2” for this scope.
+- `text2` (`var`) — Holds “text2” for this scope.
 
 #### Line-by-line (this function)
 
@@ -1081,6 +1344,7 @@ private object GetLesson(int lecturerUid, int schid)
  789 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L739:** Import namespace/types.
@@ -1088,6 +1352,23 @@ private object GetLesson(int lecturerUid, int schid)
 - **L752:** Parameterized SQL — prevents classic SQL injection.
 - **L753:** Ownership check — prevent IDOR.
 - **L771:** Parameterized SQL — prevents classic SQL injection.
+=======
+**Line notes** (what code + variables mean)
+
+- **L739:** Import namespace/types.
+- **L743:** `dt` means: DataTable — full result set from SQL (many rows/columns).
+- **L746:** Parameterized SQL — prevents classic SQL injection.
+- **L748:** `chid` means: Chapter ID (Chapters.ChID).
+- **L749:** `cid` means: Course ID (Courses.CID).
+- **L752:** Parameterized SQL — prevents classic SQL injection.
+- **L753:** Ownership check — prevent IDOR.
+- **L756:** `materials` means: Often a collection related to materials (plural name).
+- **L770:** `sql` means: SQL query text (should use parameters, not raw user input).
+- **L771:** Parameterized SQL — prevents classic SQL injection. | `dt` means: DataTable — full result set from SQL (many rows/columns).
+- **L773:** `type2` means: Holds “type2” for this scope. (text)
+- **L775:** `media2` means: Holds “media2” for this scope.
+- **L776:** `text2` means: Holds “text2” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1100,8 +1381,20 @@ private static List<object> FilterFileMaterials(List<object> materials)
 #### Explanation
 
 - **Purpose:** Implements `FilterFileMaterials`.
-- **Parameters:** `List<object> materials`
-- **Local variables:** `list`, `d`, `media`, `smid`, `t`, `pMedia`, `pText`, `pType`, `pId`, `fn`
+- **Parameters (what each means):**
+- `materials` (`List<object>`) — Often a collection related to materials (plural name). (`List<object>` collection)
+- **Local variables (what each means):**
+- `list` (`var`) — In-memory collection being built for JSON return.  Newly constructed object.
+- `d` (`var`) — Often a dictionary payload or date value.
+- `media` (`string`) — Holds “media” for this scope. (text)
+- `smid` (`int`) — Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
+- `t` (`var`) — Temporary string/token/time value.
+- `pMedia` (`var`) — Holds “p Media” for this scope.
+- `pText` (`var`) — Holds “p Text” for this scope.
+- `pType` (`var`) — Holds “p Type” for this scope.
+- `pId` (`var`) — Identifier (`pId`) — database primary/foreign key.
+- `fn` (`string`) — Holds “fn” for this scope. (text)
+- `o` — Holds “o” for this scope.
 
 #### Line-by-line (this function)
 
@@ -1151,9 +1444,25 @@ private static List<object> FilterFileMaterials(List<object> materials)
  834 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L820:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L794:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
+- **L798:** `d` means: Often a dictionary payload or date value.
+- **L799:** `media` means: Holds “media” for this scope. (text)
+- **L800:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
+- **L811:** `t` means: Temporary string/token/time value.
+- **L812:** `pMedia` means: Holds “p Media” for this scope.
+- **L813:** `pText` means: Holds “p Text” for this scope.
+- **L814:** `pType` means: Holds “p Type” for this scope.
+- **L815:** `pId` means: Identifier (`pId`) — database primary/foreign key.
+- **L820:** Error handling block.
+- **L823:** `fn` means: Holds “fn” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1166,7 +1475,8 @@ private static bool LooksLikeFileUrl(string s)
 #### Explanation
 
 - **Purpose:** Implements `LooksLikeFileUrl`.
-- **Parameters:** `string s`
+- **Parameters (what each means):**
+- `s` (`string`) — String being cleaned or built.
 
 #### Line-by-line (this function)
 
@@ -1190,8 +1500,10 @@ private static string GuessTypeFromUrl(string url)
 #### Explanation
 
 - **Purpose:** Implements `GuessTypeFromUrl`.
-- **Parameters:** `string url`
-- **Local variables:** `low`
+- **Parameters (what each means):**
+- `url` (`string`) — HTTP URL to media or page.
+- **Local variables (what each means):**
+- `low` (`var`) — Holds “low” for this scope.
 
 #### Line-by-line (this function)
 
@@ -1206,6 +1518,13 @@ private static string GuessTypeFromUrl(string url)
  848 |         return "File";
  849 |     }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L844:** `low` means: Holds “low” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1220,8 +1539,19 @@ private string InsertMat(SqlConnection conn, int parentId, string type, string t
 - **Purpose:** Implements `InsertMat`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Pattern:** Persist changes.
-- **Parameters:** `SqlConnection conn, int parentId, string type, string text, string media, int index`
-- **Local variables:** `errors`, `cols`, `vals`, `pars`, `sql`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `parentId` (`int`) — Holds “parent Id” for this scope. (integer)
+- `type` (`string`) — Holds “type” for this scope. (text)
+- `text` (`string`) — Holds “text” for this scope. (text)
+- `media` (`string`) — Holds “media” for this scope. (text)
+- `index` (`int`) — Holds “index” for this scope. (integer)
+- **Local variables (what each means):**
+- `errors` (`var`) — Often a collection related to errors (plural name).  Newly constructed object.
+- `cols` (`var`) — Often a collection related to cols (plural name).  Newly constructed object.
+- `vals` (`var`) — Often a collection related to vals (plural name).  Newly constructed object.
+- `pars` (`var`) — Often a collection related to pars (plural name).  Newly constructed object.
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).  Literal text string.
 
 #### Line-by-line (this function)
 
@@ -1311,9 +1641,16 @@ private string InsertMat(SqlConnection conn, int parentId, string type, string t
  936 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L855:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L855:** Database access (pure SQL).
+- **L861:** `errors` means: Often a collection related to errors (plural name).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L873:** Error handling block.
 - **L876:** Parameterized SQL — prevents classic SQL injection.
 - **L877:** Parameterized SQL — prevents classic SQL injection.
@@ -1322,12 +1659,22 @@ private string InsertMat(SqlConnection conn, int parentId, string type, string t
 - **L880:** Parameterized SQL — prevents classic SQL injection.
 - **L883:** Handle/log exception.
 - **L887:** Error handling block.
+<<<<<<< HEAD
 - **L893:** Parameterized SQL — prevents classic SQL injection.
+=======
+- **L891:** `cols` means: Often a collection related to cols (plural name).  Newly constructed object.
+- **L892:** `vals` means: Often a collection related to vals (plural name).  Newly constructed object.
+- **L893:** Parameterized SQL — prevents classic SQL injection. | `pars` means: Often a collection related to pars (plural name).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L897:** Parameterized SQL — prevents classic SQL injection.
 - **L903:** Parameterized SQL — prevents classic SQL injection.
 - **L909:** Parameterized SQL — prevents classic SQL injection.
 - **L915:** Parameterized SQL — prevents classic SQL injection.
 - **L921:** Parameterized SQL — prevents classic SQL injection.
+<<<<<<< HEAD
+=======
+- **L926:** `sql` means: SQL query text (should use parameters, not raw user input).  Literal text string.
+>>>>>>> eb8ce01 (update)
 - **L933:** Handle/log exception.
 
 ---
@@ -1343,8 +1690,17 @@ private static void PromotePrimaryFromMaterials(
 
 - **Purpose:** Implements `PromotePrimaryFromMaterials`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `ref string matType, ref string textContent, ref string mediaLink, string materialsJson`
-- **Local variables:** `hasMedia`, `mats`, `m`, `url`, `fn`
+- **Parameters (what each means):**
+- `matType` (`string`) — Holds “mat Type” for this scope. (text)
+- `textContent` (`string`) — Holds “text Content” for this scope. (text)
+- `mediaLink` (`string`) — Holds “media Link” for this scope. (text)
+- `materialsJson` (`string`) — Holds “materials Json” for this scope. (text)
+- **Local variables (what each means):**
+- `hasMedia` (`bool`) — Boolean flag: has Media. (true/false)
+- `mats` (`var`) — Often a collection related to mats (plural name).  JSON serialize/parse result.
+- `m` (`var`) — Holds “m” for this scope.
+- `url` (`string`) — HTTP URL to media or page.  Literal text string.
+- `fn` (`string`) — Holds “fn” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -1385,9 +1741,20 @@ private static void PromotePrimaryFromMaterials(
  970 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L950:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L943:** `hasMedia` means: Boolean flag: has Media. (true/false)
+- **L950:** Error handling block.
+- **L952:** `mats` means: Often a collection related to mats (plural name).  JSON serialize/parse result.
+- **L954:** `m` means: Holds “m” for this scope.
+- **L955:** `url` means: HTTP URL to media or page.  Literal text string.
+- **L961:** `fn` means: Holds “fn” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 - **L969:** Handle/log exception.
 
 ---
@@ -1403,8 +1770,16 @@ private string UpdateMat(SqlConnection conn, int id, string type, string text, s
 - **Purpose:** Implements `UpdateMat`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Pattern:** Persist changes.
-- **Parameters:** `SqlConnection conn, int id, string type, string text, string media`
-- **Local variables:** `sets`, `pars`, `sql`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `id` (`int`) — Generic primary key / identifier.
+- `type` (`string`) — Holds “type” for this scope. (text)
+- `text` (`string`) — Holds “text” for this scope. (text)
+- `media` (`string`) — Holds “media” for this scope. (text)
+- **Local variables (what each means):**
+- `sets` (`var`) — Often a collection related to sets (plural name).  Newly constructed object.
+- `pars` (`var`) — Often a collection related to pars (plural name).  Newly constructed object.
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).  Literal text string.
 
 #### Line-by-line (this function)
 
@@ -1445,15 +1820,28 @@ private string UpdateMat(SqlConnection conn, int id, string type, string text, s
 1004 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L972:** Database access (pure SQL).
 - **L974:** Error handling block.
 - **L977:** Parameterized SQL — prevents classic SQL injection.
+=======
+**Line notes** (what code + variables mean)
+
+- **L972:** Database access (pure SQL).
+- **L974:** Error handling block.
+- **L976:** `sets` means: Often a collection related to sets (plural name).  Newly constructed object.
+- **L977:** Parameterized SQL — prevents classic SQL injection. | `pars` means: Often a collection related to pars (plural name).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L981:** Parameterized SQL — prevents classic SQL injection.
 - **L986:** Parameterized SQL — prevents classic SQL injection.
 - **L991:** Parameterized SQL — prevents classic SQL injection.
 - **L994:** Parameterized SQL — prevents classic SQL injection.
+<<<<<<< HEAD
+=======
+- **L995:** `sql` means: SQL query text (should use parameters, not raw user input).  Literal text string.
+>>>>>>> eb8ce01 (update)
 - **L1000:** Handle/log exception.
 
 ---
@@ -1470,8 +1858,20 @@ private int InsertExtraMaterials(SqlConnection conn, int parentId, string materi
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Persist changes.
-- **Parameters:** `SqlConnection conn, int parentId, string materialsJson`
-- **Local variables:** `mats`, `i`, `saved`, `url`, `fn`, `t`, `low`, `warn`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `parentId` (`int`) — Holds “parent Id” for this scope. (integer)
+- `materialsJson` (`string`) — Holds “materials Json” for this scope. (text)
+- **Local variables (what each means):**
+- `mats` (`var`) — Often a collection related to mats (plural name).  JSON serialize/parse result.
+- `i` (`int`) — Loop index (0-based counter in for-loops).  Literal number `1`.
+- `saved` (`int`) — Holds “saved” for this scope. (integer)  Literal number `0`.
+- `url` (`string`) — HTTP URL to media or page.  Literal text string.
+- `fn` (`string`) — Holds “fn” for this scope. (text)
+- `t` (`string`) — Temporary string/token/time value.
+- `low` (`var`) — Holds “low” for this scope.
+- `warn` (`string`) — Holds “warn” for this scope. (text)
+- `m` — Holds “m” for this scope.
 
 #### Line-by-line (this function)
 
@@ -1524,9 +1924,23 @@ private int InsertExtraMaterials(SqlConnection conn, int parentId, string materi
 1052 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L1007:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L1007:** Database access (pure SQL).
+- **L1010:** `mats` means: Often a collection related to mats (plural name).  JSON serialize/parse result.
+- **L1012:** `i` means: Loop index (0-based counter in for-loops).  Literal number `1`.
+- **L1013:** `saved` means: Holds “saved” for this scope. (integer)  Literal number `0`.
+- **L1018:** `url` means: HTTP URL to media or page.  Literal text string.
+- **L1025:** `fn` means: Holds “fn” for this scope. (text)
+- **L1037:** `t` means: Temporary string/token/time value.
+- **L1040:** `low` means: Holds “low” for this scope.
+- **L1047:** `warn` means: Holds “warn” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1539,8 +1953,12 @@ private static bool IsStoredMediaPath(string s)
 #### Explanation
 
 - **Purpose:** Implements `IsStoredMediaPath`.
-- **Parameters:** `string s`
-- **Local variables:** `name`, `hex`
+- **Parameters (what each means):**
+- `s` (`string`) — String being cleaned or built.
+- **Local variables (what each means):**
+- `name` (`string`) — Display name of user/course/criterion.
+- `hex` (`bool`) — Holds “hex” for this scope. (true/false)
+- `c` — Temporary value (character, course, or counter depending on loop).
 
 #### Line-by-line (this function)
 
@@ -1570,6 +1988,14 @@ private static bool IsStoredMediaPath(string s)
 1079 |         return false;
 1080 |     }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L1069:** `name` means: Display name of user/course/criterion.
+- **L1074:** `hex` means: Holds “hex” for this scope. (true/false)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1582,8 +2008,15 @@ private static string NormalizeStoredMediaPath(string url)
 #### Explanation
 
 - **Purpose:** Implements `NormalizeStoredMediaPath`.
-- **Parameters:** `string url`
-- **Local variables:** `uri`, `sp`, `rest`, `eq`, `amp`, `up`
+- **Parameters (what each means):**
+- `url` (`string`) — HTTP URL to media or page.
+- **Local variables (what each means):**
+- `uri` (`var`) — otpauth:// or other URI string.  Newly constructed object.
+- `sp` (`int`) — Holds “sp” for this scope. (integer)
+- `rest` (`string`) — Holds “rest” for this scope. (text)
+- `eq` (`int`) — Holds “eq” for this scope. (integer)
+- `amp` (`int`) — Holds “amp” for this scope. (integer)
+- `up` (`int`) — Holds “up” for this scope. (integer)
 
 #### Line-by-line (this function)
 
@@ -1645,11 +2078,25 @@ private static string NormalizeStoredMediaPath(string url)
 1137 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L1087:** Error handling block.
 - **L1101:** Handle/log exception.
 - **L1116:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L1087:** Error handling block.
+- **L1092:** `uri` means: otpauth:// or other URI string.  Newly constructed object.
+- **L1101:** Handle/log exception.
+- **L1107:** `sp` means: Holds “sp” for this scope. (integer)
+- **L1111:** `rest` means: Holds “rest” for this scope. (text)
+- **L1112:** `eq` means: Holds “eq” for this scope. (integer)
+- **L1114:** `amp` means: Holds “amp” for this scope. (integer)
+- **L1116:** Error handling block.
+- **L1124:** `up` means: Holds “up” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1662,7 +2109,8 @@ private static string NormalizeType(string type)
 #### Explanation
 
 - **Purpose:** Implements `NormalizeType`.
-- **Parameters:** `string type`
+- **Parameters (what each means):**
+- `type` (`string`) — Holds “type” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -1693,7 +2141,12 @@ private static void SplitContent(string matType, string content, string title, o
 #### Explanation
 
 - **Purpose:** Implements `SplitContent`.
-- **Parameters:** `string matType, string content, string title, out string text, out string media`
+- **Parameters (what each means):**
+- `matType` (`string`) — Holds “mat Type” for this scope. (text)
+- `content` (`string`) — Submission body text or JSON payload in CWSubmissions.
+- `title` (`string`) — Title of course work / page heading.
+- `text` (`string`) — Holds “text” for this scope. (text)
+- `media` (`string`) — Holds “media” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -1737,7 +2190,8 @@ private static string Q(string ident)
 #### Explanation
 
 - **Purpose:** Implements `Q`.
-- **Parameters:** `string ident`
+- **Parameters (what each means):**
+- `ident` (`string`) — Holds “ident” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -1759,8 +2213,12 @@ private static void AssertOwner(SqlConnection conn, int lecturerUid, int cid)
 - **Purpose:** Implements `AssertOwner`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Parameters:** `SqlConnection conn, int lecturerUid, int cid`
-- **Local variables:** `owner`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `lecturerUid` (`int`) — Users.UID of the course owner (lecturer).
+- `cid` (`int`) — Course ID (Courses.CID).
+- **Local variables (what each means):**
+- `owner` (`int`) — LecturerUID looked up for ownership check.
 
 #### Line-by-line (this function)
 
@@ -1774,10 +2232,17 @@ private static void AssertOwner(SqlConnection conn, int lecturerUid, int cid)
 1189 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L1184:** Database access (pure SQL).
 - **L1186:** Parameterized SQL — prevents classic SQL injection.
+=======
+**Line notes** (what code + variables mean)
+
+- **L1184:** Database access (pure SQL).
+- **L1186:** Parameterized SQL — prevents classic SQL injection. | `owner` means: LecturerUID looked up for ownership check.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1791,7 +2256,8 @@ private static SqlConnection Open()
 
 - **Purpose:** Implements `Open`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Local variables:** `c`
+- **Local variables (what each means):**
+- `c` (`var`) — Temporary value (character, course, or counter depending on loop).  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -1805,10 +2271,17 @@ private static SqlConnection Open()
 1201 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L1196:** Database access (pure SQL).
 - **L1198:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L1196:** Database access (pure SQL).
+- **L1198:** Database access (pure SQL). | `c` means: Temporary value (character, course, or counter depending on loop).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1822,7 +2295,9 @@ private static SqlParameter P(string n, object v)
 
 - **Purpose:** Implements `P`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `string n, object v`
+- **Parameters (what each means):**
+- `n` (`string`) — Numeric count or temporary integer.
+- `v` (`object`) — Generic value (version flag in JSON, or loop value).
 
 #### Line-by-line (this function)
 
@@ -1834,7 +2309,11 @@ private static SqlParameter P(string n, object v)
 1206 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L1203:** Parameterized SQL — prevents classic SQL injection.
 - **L1205:** Parameterized SQL — prevents classic SQL injection.
@@ -1851,8 +2330,13 @@ private static DataTable Query(SqlConnection conn, string sql, params SqlParamet
 
 - **Purpose:** Implements `Query`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, string sql, params SqlParameter[] ps`
-- **Local variables:** `cmd`, `da`, `dt`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- `ps` (`SqlParameter[]`) — Holds “ps” for this scope. (type `SqlParameter[]`)
+- **Local variables (what each means):**
+- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
+- `da` (`var`) — Holds “da” for this scope.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -1873,12 +2357,20 @@ private static DataTable Query(SqlConnection conn, string sql, params SqlParamet
 1220 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L1208:** Database access (pure SQL).
 - **L1210:** Import namespace/types.
 - **L1213:** Import namespace/types.
+<<<<<<< HEAD
 - **L1215:** In-memory result set from ADO.NET.
+=======
+- **L1215:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1892,8 +2384,12 @@ private static int Exec(SqlConnection conn, string sql, params SqlParameter[] ps
 
 - **Purpose:** Implements `Exec`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, string sql, params SqlParameter[] ps`
-- **Local variables:** `cmd`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- `ps` (`SqlParameter[]`) — Holds “ps” for this scope. (type `SqlParameter[]`)
+- **Local variables (what each means):**
+- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -1909,7 +2405,11 @@ private static int Exec(SqlConnection conn, string sql, params SqlParameter[] ps
 1229 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L1222:** Database access (pure SQL).
 - **L1224:** Import namespace/types.
@@ -1927,8 +2427,13 @@ private static int ScalarInt(SqlConnection conn, string sql, params SqlParameter
 
 - **Purpose:** Implements `ScalarInt`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, string sql, params SqlParameter[] ps`
-- **Local variables:** `cmd`, `o`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `sql` (`string`) — SQL query text (should use parameters, not raw user input).
+- `ps` (`SqlParameter[]`) — Holds “ps” for this scope. (type `SqlParameter[]`)
+- **Local variables (what each means):**
+- `cmd` (`var`) — SqlCommand — the SQL statement + parameters object.  Newly constructed object.
+- `o` (`var`) — Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
 
 #### Line-by-line (this function)
 
@@ -1946,11 +2451,19 @@ private static int ScalarInt(SqlConnection conn, string sql, params SqlParameter
 1240 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L1231:** Database access (pure SQL).
 - **L1233:** Import namespace/types.
 - **L1236:** Run SQL; return table / rows / scalar.
+=======
+**Line notes** (what code + variables mean)
+
+- **L1231:** Database access (pure SQL).
+- **L1233:** Import namespace/types.
+- **L1236:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L1237:** Null-safe read from database values.
 
 ---
@@ -1964,7 +2477,8 @@ private static string Safe(object o)
 #### Explanation
 
 - **Purpose:** Implements `Safe`.
-- **Parameters:** `object o`
+- **Parameters (what each means):**
+- `o` (`object`) — Holds “o” for this scope.
 
 #### Line-by-line (this function)
 
@@ -1977,7 +2491,11 @@ private static string Safe(object o)
 1246 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L1244:** Null-safe read from database values.
 
@@ -1992,7 +2510,11 @@ private static string Col(DataRow r, params string[] names)
 #### Explanation
 
 - **Purpose:** Implements `Col`.
-- **Parameters:** `DataRow r, params string[] names`
+- **Parameters (what each means):**
+- `r` (`DataRow`) — One DataRow from a SQL result.
+- `names` (`string[]`) — Often a collection related to names (plural name). (text)
+- **Local variables (what each means):**
+- `n` — Numeric count or temporary integer.
 
 #### Line-by-line (this function)
 
@@ -2010,7 +2532,11 @@ private static string Col(DataRow r, params string[] names)
 1257 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L1248:** In-memory result set from ADO.NET.
 - **L1253:** Null-safe read from database values.
@@ -2027,7 +2553,10 @@ private static int GetInt(Dictionary<string, object> data, HttpContext ctx, stri
 
 - **Purpose:** Implements `GetInt`.
 - **Pattern:** Read/load data for display.
-- **Parameters:** `Dictionary<string, object> data, HttpContext ctx, string key`
+- **Parameters (what each means):**
+- `data` (`Dictionary<string, object>`) — Holds “data” for this scope. (text)
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- `key` (`string`) — HMAC key bytes or dictionary key.
 
 #### Line-by-line (this function)
 
@@ -2058,7 +2587,10 @@ private static string GetStr(Dictionary<string, object> data, HttpContext ctx, s
 
 - **Purpose:** Implements `GetStr`.
 - **Pattern:** Read/load data for display.
-- **Parameters:** `Dictionary<string, object> data, HttpContext ctx, string key`
+- **Parameters (what each means):**
+- `data` (`Dictionary<string, object>`) — Holds “data” for this scope. (text)
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- `key` (`string`) — HMAC key bytes or dictionary key.
 
 #### Line-by-line (this function)
 
@@ -2084,7 +2616,9 @@ private static void Write(HttpContext ctx, object obj)
 
 - **Purpose:** Implements `Write`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `HttpContext ctx, object obj`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- `obj` (`object`) — Holds “obj” for this scope.
 
 #### Line-by-line (this function)
 
@@ -2100,7 +2634,11 @@ private static void Write(HttpContext ctx, object obj)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```html
    1 | <%@ WebHandler Language="C#" Class="CurriculumApi" %>
@@ -3021,6 +3559,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L19:** Class declaration for this page/service.
 - **L23:** IHttpHandler entry for ashx.
 - **L28:** Error handling block.
+<<<<<<< HEAD
 - **L30:** Authorization — block wrong role / anonymous.
 - **L33:** Authorization — block wrong role / anonymous.
 - **L44:** Import namespace/types.
@@ -3030,11 +3569,29 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L107:** Ownership check — prevent IDOR.
 - **L123:** Parameterized SQL — prevents classic SQL injection.
 - **L125:** In-memory result set from ADO.NET.
+=======
+- **L30:** Authorization — block wrong role / anonymous. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+- **L33:** Authorization — block wrong role / anonymous.
+- **L39:** `action` means: Holds “action” for this scope. (text)  Comes from HTTP request.
+- **L40:** `body` means: HTTP request body.
+- **L44:** Import namespace/types.
+- **L48:** `data` means: Holds “data” for this scope. (text)
+- **L51:** Error handling block.
+- **L90:** Handle/log exception.
+- **L104:** `chapters` means: Often a collection related to chapters (plural name).  Newly constructed object.
+- **L105:** Import namespace/types.
+- **L107:** Ownership check — prevent IDOR.
+- **L123:** Parameterized SQL — prevents classic SQL injection. | `chDt` means: Holds “ch Dt” for this scope. (`DataTable` = SQL result grid)
+- **L125:** In-memory result set from ADO.NET.
+- **L127:** `chid` means: Chapter ID (Chapters.ChID).
+- **L128:** `lessons` means: Often a collection related to lessons (plural name).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L147:** In-memory result set from ADO.NET.
 - **L148:** Error handling block.
 - **L150:** Parameterized SQL — prevents classic SQL injection.
 - **L152:** Handle/log exception.
 - **L163:** In-memory result set from ADO.NET.
+<<<<<<< HEAD
 - **L176:** Error handling block.
 - **L179:** Parameterized SQL — prevents classic SQL injection.
 - **L184:** In-memory result set from ADO.NET.
@@ -3049,6 +3606,42 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L283:** Error handling block.
 - **L285:** In-memory result set from ADO.NET.
 - **L287:** Error handling block.
+=======
+- **L165:** `schid` means: SubChapter / lesson ID.
+- **L168:** `materials` means: Often a collection related to materials (plural name).
+- **L176:** Error handling block.
+- **L178:** `matSql` means: Holds “mat Sql” for this scope. (text)
+- **L179:** Parameterized SQL — prevents classic SQL injection. | `mats` means: Often a collection related to mats (plural name).
+- **L180:** `lessonTitle` means: Holds “lesson Title” for this scope. (text)
+- **L184:** In-memory result set from ADO.NET.
+- **L186:** `text` means: Holds “text” for this scope.
+- **L187:** `media` means: Holds “media” for this scope.
+- **L188:** `t` means: Temporary string/token/time value.
+- **L200:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
+- **L201:** Error handling block.
+- **L205:** Handle/log exception.
+- **L221:** Error handling block.
+- **L223:** `matSql` means: Holds “mat Sql” for this scope. (text)
+- **L224:** Parameterized SQL — prevents classic SQL injection. | `mats` means: Often a collection related to mats (plural name).
+- **L225:** `i` means: Loop index (0-based counter in for-loops).  Literal number `0`.
+- **L226:** In-memory result set from ADO.NET.
+- **L229:** `type` means: Holds “type” for this scope. (text)
+- **L231:** `media` means: Holds “media” for this scope.
+- **L232:** `text` means: Holds “text” for this scope.
+- **L233:** `content` means: Submission body text or JSON payload in CWSubmissions.
+- **L234:** `lessonTitle` means: Holds “lesson Title” for this scope. (text)  Literal text string.
+- **L237:** `p` means: Parameter, path, or password fragment depending on context.
+- **L250:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
+- **L251:** Error handling block.
+- **L263:** Handle/log exception.
+- **L278:** Database access (pure SQL).
+- **L282:** `materials` means: Often a collection related to materials (plural name).  Newly constructed object.
+- **L283:** Error handling block.
+- **L285:** In-memory result set from ADO.NET. | `mats` means: Often a collection related to mats (plural name). (`DataTable` = SQL result grid)
+- **L287:** Error handling block.
+- **L291:** `orderBy` means: Holds “order By” for this scope. (text)
+- **L294:** `sql` means: SQL query text (should use parameters, not raw user input).
+>>>>>>> eb8ce01 (update)
 - **L296:** Parameterized SQL — prevents classic SQL injection.
 - **L299:** Handle/log exception.
 - **L303:** Error handling block.
@@ -3057,6 +3650,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L311:** Error handling block.
 - **L315:** Parameterized SQL — prevents classic SQL injection.
 - **L317:** In-memory result set from ADO.NET.
+<<<<<<< HEAD
 - **L324:** In-memory result set from ADO.NET.
 - **L325:** In-memory result set from ADO.NET.
 - **L326:** In-memory result set from ADO.NET.
@@ -3069,12 +3663,49 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L453:** Import namespace/types.
 - **L455:** Ownership check — prevent IDOR.
 - **L460:** Parameterized SQL — prevents classic SQL injection.
+=======
+- **L324:** In-memory result set from ADO.NET. | `bodyRow` means: Holds “body Row” for this scope. (`DataRow` = one SQL row)
+- **L325:** In-memory result set from ADO.NET. | `fileRow` means: Holds “file Row” for this scope. (`DataRow` = one SQL row)
+- **L326:** In-memory result set from ADO.NET.
+- **L328:** `media0` means: Holds “media0” for this scope.
+- **L329:** `t0` means: Holds “t0” for this scope.
+- **L340:** In-memory result set from ADO.NET.
+- **L342:** `t0` means: Holds “t0” for this scope.
+- **L343:** `media0` means: Holds “media0” for this scope.
+- **L363:** `mediaB` means: Holds “media B” for this scope.
+- **L364:** `textB` means: Holds “text B” for this scope.
+- **L370:** In-memory result set from ADO.NET.
+- **L372:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
+- **L373:** Error handling block.
+- **L374:** `media` means: Holds “media” for this scope.
+- **L375:** `text` means: Holds “text” for this scope.
+- **L376:** `t` means: Temporary string/token/time value.
+- **L382:** `bareName` means: Holds “bare Name” for this scope. (text)
+- **L389:** `fn` means: Holds “fn” for this scope. (text)
+- **L396:** Error handling block.
+- **L398:** `rel` means: Holds “rel” for this scope. (text)
+- **L404:** Handle/log exception.
+- **L408:** `linkOut` means: Holds “link Out” for this scope. (text)
+- **L424:** Handle/log exception.
+- **L430:** `typeExpr` means: Holds “type Expr” for this scope. (text)
+- **L432:** `textExpr` means: Holds “text Expr” for this scope. (text)
+- **L434:** `mediaExpr` means: Holds “media Expr” for this scope. (text)
+- **L453:** Import namespace/types.
+- **L455:** Ownership check — prevent IDOR.
+- **L458:** `sql` means: SQL query text (should use parameters, not raw user input).
+- **L460:** Parameterized SQL — prevents classic SQL injection.
+- **L467:** `next` means: Holds “next” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 - **L470:** Parameterized SQL — prevents classic SQL injection.
 - **L472:** Return new identity/UID after INSERT.
 - **L474:** Parameterized SQL — prevents classic SQL injection.
 - **L479:** Return new identity/UID after INSERT.
 - **L481:** Parameterized SQL — prevents classic SQL injection.
 - **L490:** Import namespace/types.
+<<<<<<< HEAD
+=======
+- **L492:** `cid` means: Course ID (Courses.CID).
+>>>>>>> eb8ce01 (update)
 - **L495:** Parameterized SQL — prevents classic SQL injection.
 - **L497:** Ownership check — prevent IDOR.
 - **L502:** Error handling block.
@@ -3089,8 +3720,16 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L524:** Handle/log exception.
 - **L528:** Parameterized SQL — prevents classic SQL injection.
 - **L542:** Import namespace/types.
+<<<<<<< HEAD
 - **L547:** Parameterized SQL — prevents classic SQL injection.
 - **L549:** Ownership check — prevent IDOR.
+=======
+- **L544:** `cid` means: Course ID (Courses.CID).
+- **L547:** Parameterized SQL — prevents classic SQL injection.
+- **L549:** Ownership check — prevent IDOR.
+- **L551:** `matType` means: Holds “mat Type” for this scope. (text)
+- **L563:** `n` means: Integer count (rows, items, or length).
+>>>>>>> eb8ce01 (update)
 - **L566:** Parameterized SQL — prevents classic SQL injection.
 - **L572:** Error handling block.
 - **L575:** Parameterized SQL — prevents classic SQL injection.
@@ -3098,32 +3737,88 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L579:** Parameterized SQL — prevents classic SQL injection.
 - **L580:** Parameterized SQL — prevents classic SQL injection.
 - **L584:** Error handling block.
+<<<<<<< HEAD
+=======
+- **L588:** `next` means: Holds “next” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 - **L591:** Parameterized SQL — prevents classic SQL injection.
 - **L593:** Return new identity/UID after INSERT.
 - **L595:** Parameterized SQL — prevents classic SQL injection.
 - **L600:** Return new identity/UID after INSERT.
 - **L602:** Parameterized SQL — prevents classic SQL injection.
 - **L605:** Handle/log exception.
+<<<<<<< HEAD
 - **L676:** Parameterized SQL — prevents classic SQL injection.
 - **L695:** Import namespace/types.
 - **L702:** Parameterized SQL — prevents classic SQL injection.
+=======
+- **L620:** `matParent` means: Holds “mat Parent” for this scope. (integer)
+- **L622:** `storeText` means: Holds “store Text” for this scope. (text)
+- **L633:** `warn` means: Holds “warn” for this scope. (text)
+- **L634:** `matsSaved` means: Holds “mats Saved” for this scope. (integer)  Literal number `0`.
+- **L638:** `extra` means: Dictionary of optional fields inside META.
+- **L661:** `storeText` means: Holds “store Text” for this scope. (text)
+- **L662:** `matParent` means: Holds “mat Parent” for this scope. (integer)
+- **L666:** `updErr` means: Holds “upd Err” for this scope. (text)
+- **L672:** `warn` means: Holds “warn” for this scope. (text)
+- **L676:** Parameterized SQL — prevents classic SQL injection.
+- **L695:** Import namespace/types.
+- **L699:** `chid` means: Chapter ID (Chapters.ChID).
+- **L702:** Parameterized SQL — prevents classic SQL injection.
+- **L703:** `cid` means: Course ID (Courses.CID).
+>>>>>>> eb8ce01 (update)
 - **L706:** Parameterized SQL — prevents classic SQL injection.
 - **L708:** Ownership check — prevent IDOR.
 - **L709:** Error handling block.
 - **L712:** Parameterized SQL — prevents classic SQL injection.
 - **L714:** Handle/log exception.
 - **L716:** Parameterized SQL — prevents classic SQL injection.
+<<<<<<< HEAD
 - **L724:** Parameterized SQL — prevents classic SQL injection.
+=======
+- **L721:** `chid` means: Chapter ID (Chapters.ChID).
+- **L724:** Parameterized SQL — prevents classic SQL injection.
+- **L725:** `cid` means: Course ID (Courses.CID).
+>>>>>>> eb8ce01 (update)
 - **L728:** Parameterized SQL — prevents classic SQL injection.
 - **L729:** Ownership check — prevent IDOR.
 - **L731:** Parameterized SQL — prevents classic SQL injection.
 - **L739:** Import namespace/types.
+<<<<<<< HEAD
 - **L746:** Parameterized SQL — prevents classic SQL injection.
 - **L752:** Parameterized SQL — prevents classic SQL injection.
 - **L753:** Ownership check — prevent IDOR.
 - **L771:** Parameterized SQL — prevents classic SQL injection.
 - **L820:** Error handling block.
 - **L855:** Database access (pure SQL).
+=======
+- **L743:** `dt` means: DataTable — full result set from SQL (many rows/columns).
+- **L746:** Parameterized SQL — prevents classic SQL injection.
+- **L748:** `chid` means: Chapter ID (Chapters.ChID).
+- **L749:** `cid` means: Course ID (Courses.CID).
+- **L752:** Parameterized SQL — prevents classic SQL injection.
+- **L753:** Ownership check — prevent IDOR.
+- **L756:** `materials` means: Often a collection related to materials (plural name).
+- **L770:** `sql` means: SQL query text (should use parameters, not raw user input).
+- **L771:** Parameterized SQL — prevents classic SQL injection. | `dt` means: DataTable — full result set from SQL (many rows/columns).
+- **L773:** `type2` means: Holds “type2” for this scope. (text)
+- **L775:** `media2` means: Holds “media2” for this scope.
+- **L776:** `text2` means: Holds “text2” for this scope.
+- **L794:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
+- **L798:** `d` means: Often a dictionary payload or date value.
+- **L799:** `media` means: Holds “media” for this scope. (text)
+- **L800:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
+- **L811:** `t` means: Temporary string/token/time value.
+- **L812:** `pMedia` means: Holds “p Media” for this scope.
+- **L813:** `pText` means: Holds “p Text” for this scope.
+- **L814:** `pType` means: Holds “p Type” for this scope.
+- **L815:** `pId` means: Identifier (`pId`) — database primary/foreign key.
+- **L820:** Error handling block.
+- **L823:** `fn` means: Holds “fn” for this scope. (text)
+- **L844:** `low` means: Holds “low” for this scope.
+- **L855:** Database access (pure SQL).
+- **L861:** `errors` means: Often a collection related to errors (plural name).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L873:** Error handling block.
 - **L876:** Parameterized SQL — prevents classic SQL injection.
 - **L877:** Parameterized SQL — prevents classic SQL injection.
@@ -3132,7 +3827,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L880:** Parameterized SQL — prevents classic SQL injection.
 - **L883:** Handle/log exception.
 - **L887:** Error handling block.
+<<<<<<< HEAD
 - **L893:** Parameterized SQL — prevents classic SQL injection.
+=======
+- **L891:** `cols` means: Often a collection related to cols (plural name).  Newly constructed object.
+- **L892:** `vals` means: Often a collection related to vals (plural name).  Newly constructed object.
+- **L893:** Parameterized SQL — prevents classic SQL injection. | `pars` means: Often a collection related to pars (plural name).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L897:** Parameterized SQL — prevents classic SQL injection.
 
 _… truncated: 384 more lines in source. Open the original file for the rest._

@@ -1,6 +1,10 @@
 # Register.aspx
 **Source:** `Pages/Authentication/Register.aspx`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,6 +19,8 @@ Two-step: form → Session pending → QR/MFA confirm → only then INSERT user.
 
 ## Variables / fields (file level)
 
+Each name is explained in plain English (what it stores / why it exists).
+
 Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
 
 ## Functions / methods (0 found)
@@ -23,7 +29,11 @@ _No methods matched the scanner (markup-only or unconventional structure). See f
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```html
    1 | <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="WebAppAssignment.Pages.Authentication.Register" %>

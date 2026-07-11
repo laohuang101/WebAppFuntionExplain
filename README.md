@@ -35,7 +35,11 @@ Detailed **Landing + Lecturer + Security** documentation for EduLMS.
 - [Security__AuthGate.cs.md](06-Security-Core/Security__AuthGate.cs.md)
 - [Auth__Login.aspx.cs.md](07-Security-AuthPages/Auth__Login.aspx.cs.md)
 
+<<<<<<< HEAD
 Generated: 2026-07-11T21:33:45
+=======
+Generated: 2026-07-11T21:40:54
+>>>>>>> eb8ce01 (update)
 
 ```bash
 python3 /home/loke/Documents/WebAppFuntionExplain/_generate_md_docs.py

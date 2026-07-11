@@ -1,6 +1,10 @@
 # JwtHelper.cs
 **Source:** `Data/Security/JwtHelper.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,34 +19,36 @@ HS256 JWT create/validate and EduLMS.Auth cookie set/clear for session restore.
 
 ## Variables / fields (file level)
 
-- **Line 18:** `Json` — type `JavaScriptSerializer`
-- **Line 24:** `s` — type `var`
-- **Line 27:** `s` — type `return`
-- **Line 35:** `h` — type `int`
-- **Line 37:** `h` — type `return`
-- **Line 38:** `12` — type `return`
-- **Line 44:** `header` — type `var`
-- **Line 49:** `now` — type `long`
-- **Line 50:** `payload` — type `var`
-- **Line 58:** `h` — type `string`
-- **Line 60:** `p` — type `string`
-- **Line 61:** `sig` — type `string`
-- **Line 71:** `parts` — type `var`
-- **Line 74:** `data` — type `string`
-- **Line 76:** `expected` — type `string`
-- **Line 81:** `json` — type `var`
-- **Line 82:** `payload` — type `var`
-- **Line 84:** `exp` — type `long`
-- **Line 95:** `false` — type `return`
-- **Line 104:** `forced` — type `string`
-- **Line 109:** `req` — type `var`
-- **Line 119:** `cookie` — type `var`
-- **Line 138:** `cookie` — type `var`
-- **Line 152:** `c` — type `var`
-- **Line 160:** `hash` — type `var`
-- **Line 172:** `s` — type `string`
-- **Line 184:** `diff` — type `int`
-- **Line 187:** `diff` — type `return`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 18:** `Json` (`JavaScriptSerializer`) — **JSON string (to parse or serialize).**
+- **Line 24:** `s` (`var`) — **String value or submission-related object.**
+- **Line 27:** `s` (`return`) — **String value or submission-related object.**
+- **Line 35:** `h` (`int`) — **Holds “h” for this scope. (integer)**
+- **Line 37:** `h` (`return`) — **Holds “h” for this scope. (type `return`)**
+- **Line 38:** `12` (`return`) — **Holds “12” for this scope. (type `return`)**
+- **Line 44:** `header` (`var`) — **Holds “header” for this scope.**
+- **Line 49:** `now` (`long`) — **Current time (usually UTC or server local).**
+- **Line 50:** `payload` (`var`) — **Object about to be JSON-serialized or sent over network.**
+- **Line 58:** `h` (`string`) — **Holds “h” for this scope. (text)**
+- **Line 60:** `p` (`string`) — **Parameter, path, or password fragment depending on context.**
+- **Line 61:** `sig` (`string`) — **Holds “sig” for this scope. (text)**
+- **Line 71:** `parts` (`var`) — **Split path or name segments.**
+- **Line 74:** `data` (`string`) — **Holds “data” for this scope. (text)**
+- **Line 76:** `expected` (`string`) — **Holds “expected” for this scope. (text)**
+- **Line 81:** `json` (`var`) — **JSON string (to parse or serialize).**
+- **Line 82:** `payload` (`var`) — **Object about to be JSON-serialized or sent over network.**
+- **Line 84:** `exp` (`long`) — **Expiry DateTime.**
+- **Line 95:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 104:** `forced` (`string`) — **Holds “forced” for this scope. (text)**
+- **Line 109:** `req` (`var`) — **Holds “req” for this scope.**
+- **Line 119:** `cookie` (`var`) — **HTTP cookie (JWT or CSRF).**
+- **Line 138:** `cookie` (`var`) — **HTTP cookie (JWT or CSRF).**
+- **Line 152:** `c` (`var`) — **Temporary value (character, course, or counter depending on loop).**
+- **Line 160:** `hash` (`var`) — **Password hash (PBKDF2) stored in DB.**
+- **Line 172:** `s` (`string`) — **String being cleaned or built.**
+- **Line 184:** `diff` (`int`) — **Holds “diff” for this scope. (integer)**
+- **Line 187:** `diff` (`return`) — **Holds “diff” for this scope. (type `return`)**
 
 ## Functions / methods (10 found)
 
@@ -56,8 +62,17 @@ public static string CreateToken(int uid, string name, string role)
 
 - **Purpose:** Implements `CreateToken`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `int uid, string name, string role`
-- **Local variables:** `header`, `payload`, `h`, `p`, `sig`
+- **Parameters (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `name` (`string`) — Display name of user/course/criterion.
+- `role` (`string`) — User role code or name (Admin/Student/Lecturer).
+- **Local variables (what each means):**
+- `header` (`var`) — Holds “header” for this scope.  Newly constructed object.
+- `now` (`long`) — Current time (usually UTC or server local).
+- `payload` (`var`) — Object about to be JSON-serialized or sent over network.  Newly constructed object.
+- `h` (`string`) — Holds “h” for this scope. (text)  JSON serialize/parse result.
+- `p` (`string`) — Parameter, path, or password fragment depending on context.  JSON serialize/parse result.
+- `sig` (`string`) — Holds “sig” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -87,9 +102,21 @@ public static string CreateToken(int uid, string name, string role)
   63 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L46:** JWT cookie create/validate/clear.
+=======
+**Line notes** (what code + variables mean)
+
+- **L44:** `header` means: Holds “header” for this scope.  Newly constructed object.
+- **L46:** JWT cookie create/validate/clear.
+- **L49:** `now` means: Current time (usually UTC or server local).
+- **L50:** `payload` means: Object about to be JSON-serialized or sent over network.  Newly constructed object.
+- **L59:** `h` means: Holds “h” for this scope. (text)  JSON serialize/parse result.
+- **L60:** `p` means: Parameter, path, or password fragment depending on context.  JSON serialize/parse result.
+- **L61:** `sig` means: Holds “sig” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -103,8 +130,18 @@ public static bool TryValidate(string token, out int uid, out string name, out s
 
 - **Purpose:** Implements `TryValidate`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `string token, out int uid, out string name, out string role`
-- **Local variables:** `parts`, `data`, `expected`, `json`, `payload`
+- **Parameters (what each means):**
+- `token` (`string`) — JWT or CSRF token string.
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `name` (`string`) — Display name of user/course/criterion.
+- `role` (`string`) — User role code or name (Admin/Student/Lecturer).
+- **Local variables (what each means):**
+- `parts` (`var`) — Split path or name segments.
+- `data` (`string`) — Holds “data” for this scope. (text)
+- `expected` (`string`) — Holds “expected” for this scope. (text)
+- `json` (`var`) — JSON string (to parse or serialize).
+- `payload` (`var`) — Object about to be JSON-serialized or sent over network.  JSON serialize/parse result.
+- `exp` (`long`) — Expiry DateTime.
 
 #### Line-by-line (this function)
 
@@ -145,10 +182,23 @@ public static bool TryValidate(string token, out int uid, out string name, out s
   97 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L77:** Constant-time string compare (reduce timing leaks).
 - **L79:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L72:** `parts` means: Split path or name segments.
+- **L75:** `data` means: Holds “data” for this scope. (text)
+- **L76:** `expected` means: Holds “expected” for this scope. (text)
+- **L77:** Constant-time string compare (reduce timing leaks).
+- **L79:** Error handling block.
+- **L81:** `json` means: JSON string (to parse or serialize).
+- **L82:** `payload` means: Object about to be JSON-serialized or sent over network.  JSON serialize/parse result.
+- **L85:** `exp` means: Expiry DateTime.
+>>>>>>> eb8ce01 (update)
 - **L93:** Handle/log exception.
 
 ---
@@ -163,8 +213,11 @@ public static void SetAuthCookie(HttpResponse response, string token)
 
 - **Purpose:** Implements `SetAuthCookie`.
 - **Pattern:** Persist changes.
-- **Parameters:** `HttpResponse response, string token`
-- **Local variables:** `cookie`
+- **Parameters (what each means):**
+- `response` (`HttpResponse`) — Holds “response” for this scope. (type `HttpResponse`)
+- `token` (`string`) — JWT or CSRF token string.
+- **Local variables (what each means):**
+- `cookie` (`var`) — HTTP cookie (JWT or CSRF).  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -190,8 +243,14 @@ public static void SetAuthCookie(HttpResponse response, string token)
  133 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
+=======
+**Line notes** (what code + variables mean)
+
+- **L119:** `cookie` means: HTTP cookie (JWT or CSRF).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L126:** Error handling block.
 - **L131:** Handle/log exception.
 
@@ -207,8 +266,10 @@ public static void ClearAuthCookie(HttpResponse response)
 
 - **Purpose:** Implements `ClearAuthCookie`.
 - **Pattern:** Delete/clear data.
-- **Parameters:** `HttpResponse response`
-- **Local variables:** `cookie`
+- **Parameters (what each means):**
+- `response` (`HttpResponse`) — Holds “response” for this scope. (type `HttpResponse`)
+- **Local variables (what each means):**
+- `cookie` (`var`) — HTTP cookie (JWT or CSRF).  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -229,8 +290,14 @@ public static void ClearAuthCookie(HttpResponse response)
  147 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
+=======
+**Line notes** (what code + variables mean)
+
+- **L138:** `cookie` means: HTTP cookie (JWT or CSRF).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L145:** Error handling block.
 
 ---
@@ -244,8 +311,10 @@ public static string ReadToken(HttpRequest request)
 #### Explanation
 
 - **Purpose:** Implements `ReadToken`.
-- **Parameters:** `HttpRequest request`
-- **Local variables:** `c`
+- **Parameters (what each means):**
+- `request` (`HttpRequest`) — Holds “request” for this scope. (type `HttpRequest`)
+- **Local variables (what each means):**
+- `c` (`var`) — Temporary value (character, course, or counter depending on loop).
 
 #### Line-by-line (this function)
 
@@ -258,6 +327,13 @@ public static string ReadToken(HttpRequest request)
  153 |             return c != null ? c.Value : null;
  154 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L152:** `c` means: Temporary value (character, course, or counter depending on loop).
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -270,8 +346,10 @@ private static string Sign(string data)
 #### Explanation
 
 - **Purpose:** Implements `Sign`.
-- **Parameters:** `string data`
-- **Local variables:** `hmac`, `hash`
+- **Parameters (what each means):**
+- `data` (`string`) — Holds “data” for this scope. (text)
+- **Local variables (what each means):**
+- `hmac` (`var`) — Holds “hmac” for this scope.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -287,9 +365,16 @@ private static string Sign(string data)
  163 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L158:** Import namespace/types.
+=======
+**Line notes** (what code + variables mean)
+
+- **L158:** Import namespace/types.
+- **L160:** `hash` means: Password hash (PBKDF2) stored in DB.  Assigned from password hash function.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -302,7 +387,8 @@ private static string Base64UrlEncode(byte[] input)
 #### Explanation
 
 - **Purpose:** Implements `Base64UrlEncode`.
-- **Parameters:** `byte[] input`
+- **Parameters (what each means):**
+- `input` (`byte[]`) — Holds “input” for this scope. (type `byte[]`)
 
 #### Line-by-line (this function)
 
@@ -325,8 +411,10 @@ private static byte[] Base64UrlDecode(string input)
 #### Explanation
 
 - **Purpose:** Implements `Base64UrlDecode`.
-- **Parameters:** `string input`
-- **Local variables:** `s`
+- **Parameters (what each means):**
+- `input` (`string`) — Holds “input” for this scope. (text)
+- **Local variables (what each means):**
+- `s` (`string`) — String being cleaned or built.
 
 #### Line-by-line (this function)
 
@@ -343,6 +431,13 @@ private static byte[] Base64UrlDecode(string input)
  178 |             return Convert.FromBase64String(s);
  179 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L172:** `s` means: String being cleaned or built.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -355,8 +450,12 @@ private static bool FixedTimeEquals(string a, string b)
 #### Explanation
 
 - **Purpose:** Implements `FixedTimeEquals`.
-- **Parameters:** `string a, string b`
-- **Local variables:** `diff`, `i`
+- **Parameters (what each means):**
+- `a` (`string`) — Holds “a” for this scope. (text)
+- `b` (`string`) — Holds “b” for this scope. (text)
+- **Local variables (what each means):**
+- `diff` (`int`) — Holds “diff” for this scope. (integer)  Literal number `0`.
+- `i` (`int`) — Loop index (0-based counter in for-loops).  Literal number `0`.
 
 #### Line-by-line (this function)
 
@@ -372,9 +471,16 @@ private static bool FixedTimeEquals(string a, string b)
  188 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L181:** Constant-time string compare (reduce timing leaks).
+=======
+**Line notes** (what code + variables mean)
+
+- **L181:** Constant-time string compare (reduce timing leaks).
+- **L184:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -402,7 +508,11 @@ private static long UnixNow()
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -614,6 +724,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L9:** C# namespace grouping.
 - **L15:** JWT cookie create/validate/clear.
 - **L17:** JWT cookie create/validate/clear.
+<<<<<<< HEAD
 - **L46:** JWT cookie create/validate/clear.
 - **L77:** Constant-time string compare (reduce timing leaks).
 - **L79:** Error handling block.
@@ -625,6 +736,40 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L145:** Error handling block.
 - **L158:** Import namespace/types.
 - **L181:** Constant-time string compare (reduce timing leaks).
+=======
+- **L24:** `s` means: String value or submission-related object.  Read from Web.config.
+- **L44:** `header` means: Holds “header” for this scope.  Newly constructed object.
+- **L46:** JWT cookie create/validate/clear.
+- **L49:** `now` means: Current time (usually UTC or server local).
+- **L50:** `payload` means: Object about to be JSON-serialized or sent over network.  Newly constructed object.
+- **L59:** `h` means: Holds “h” for this scope. (text)  JSON serialize/parse result.
+- **L60:** `p` means: Parameter, path, or password fragment depending on context.  JSON serialize/parse result.
+- **L61:** `sig` means: Holds “sig” for this scope. (text)
+- **L72:** `parts` means: Split path or name segments.
+- **L75:** `data` means: Holds “data” for this scope. (text)
+- **L76:** `expected` means: Holds “expected” for this scope. (text)
+- **L77:** Constant-time string compare (reduce timing leaks).
+- **L79:** Error handling block.
+- **L81:** `json` means: JSON string (to parse or serialize).
+- **L82:** `payload` means: Object about to be JSON-serialized or sent over network.  JSON serialize/parse result.
+- **L85:** `exp` means: Expiry DateTime.
+- **L93:** Handle/log exception.
+- **L104:** `forced` means: Holds “forced” for this scope. (text)  Read from Web.config.
+- **L107:** Error handling block.
+- **L109:** `req` means: Holds “req” for this scope.
+- **L112:** Handle/log exception.
+- **L119:** `cookie` means: HTTP cookie (JWT or CSRF).  Newly constructed object.
+- **L126:** Error handling block.
+- **L131:** Handle/log exception.
+- **L138:** `cookie` means: HTTP cookie (JWT or CSRF).  Newly constructed object.
+- **L145:** Error handling block.
+- **L152:** `c` means: Temporary value (character, course, or counter depending on loop).
+- **L158:** Import namespace/types.
+- **L160:** `hash` means: Password hash (PBKDF2) stored in DB.  Assigned from password hash function.
+- **L172:** `s` means: String being cleaned or built.
+- **L181:** Constant-time string compare (reduce timing leaks).
+- **L184:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

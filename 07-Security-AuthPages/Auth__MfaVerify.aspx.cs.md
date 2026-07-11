@@ -1,6 +1,10 @@
 # MfaVerify.aspx.cs
 **Source:** `Pages/Authentication/MfaVerify.aspx.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,12 +19,14 @@ Post-login TOTP (or demo email OTP) step before CompleteLogin issues session/JWT
 
 ## Variables / fields (file level)
 
-- **Line 19:** `method` — type `string`
-- **Line 35:** `uid` — type `int`
-- **Line 36:** `method` — type `string`
-- **Line 37:** `code` — type `string`
-- **Line 38:** `result` — type `var`
-- **Line 57:** `r` — type `string`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 19:** `method` (`string`) — **HTTP method (GET/POST) or MFA method (totp/email).**
+- **Line 35:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 36:** `method` (`string`) — **HTTP method (GET/POST) or MFA method (totp/email).**
+- **Line 37:** `code` (`string`) — **6-digit TOTP / OTP the user typed.**
+- **Line 38:** `result` (`var`) — **AuthResult or API result { success, message, … }.**
+- **Line 57:** `r` (`string`) — **Usually one database row (DataRow) in query loops.**
 
 ## Functions / methods (3 found)
 
@@ -36,8 +42,11 @@ protected void Page_Load(object sender, EventArgs e)
 - **Session:** Reads/writes ASP.NET Session.
 - **Navigation:** Redirects the browser.
 - **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters:** `object sender, EventArgs e`
-- **Local variables:** `method`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+- **Local variables (what each means):**
+- `method` (`string`) — HTTP method (GET/POST) or MFA method (totp/email).  Read from ASP.NET Session.
 
 #### Line-by-line (this function)
 
@@ -66,13 +75,21 @@ protected void Page_Load(object sender, EventArgs e)
   30 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L9:** Page load entry (GET or postback).
 - **L11:** Server session for logged-in user.
 - **L13:** Navigate browser to another URL.
 - **L17:** False on first open; true after postback.
+<<<<<<< HEAD
 - **L19:** Server session for logged-in user.
+=======
+- **L19:** Server session for logged-in user. | `method` means: HTTP method (GET/POST) or MFA method (totp/email).  Read from ASP.NET Session.
+>>>>>>> eb8ce01 (update)
 - **L23:** Server session for logged-in user.
 - **L26:** Server session for logged-in user.
 
@@ -89,8 +106,14 @@ protected void btnVerify_Click(object sender, EventArgs e)
 - **Purpose:** Implements `btnVerify_Click`.
 - **Session:** Reads/writes ASP.NET Session.
 - **Navigation:** Redirects the browser.
-- **Parameters:** `object sender, EventArgs e`
-- **Local variables:** `uid`, `method`, `code`, `result`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.  Read from ASP.NET Session.
+- `method` (`string`) — HTTP method (GET/POST) or MFA method (totp/email).  Read from ASP.NET Session.
+- `code` (`string`) — 6-digit TOTP / OTP the user typed.
+- `result` (`var`) — AuthResult or API result { success, message, … }.  Assigned from verification boolean/result.
 
 #### Line-by-line (this function)
 
@@ -120,11 +143,20 @@ protected void btnVerify_Click(object sender, EventArgs e)
   53 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L35:** Server session for logged-in user.
 - **L36:** Server session for logged-in user.
 - **L39:** Verify multi-factor / TOTP code.
+=======
+**Line notes** (what code + variables mean)
+
+- **L35:** Server session for logged-in user. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Read from ASP.NET Session.
+- **L36:** Server session for logged-in user. | `method` means: HTTP method (GET/POST) or MFA method (totp/email).  Read from ASP.NET Session.
+- **L37:** `code` means: 6-digit TOTP / OTP the user typed.
+- **L39:** Verify multi-factor / TOTP code. | `result` means: AuthResult or API result { success, message, … }.  Assigned from verification boolean/result.
+>>>>>>> eb8ce01 (update)
 - **L51:** Issue Session + JWT after successful auth.
 
 ---
@@ -139,8 +171,10 @@ private void RedirectUser(string role)
 
 - **Purpose:** Implements `RedirectUser`.
 - **Navigation:** Redirects the browser.
-- **Parameters:** `string role`
-- **Local variables:** `r`
+- **Parameters (what each means):**
+- `role` (`string`) — User role code or name (Admin/Student/Lecturer).
+- **Local variables (what each means):**
+- `r` (`string`) — Usually one database row (DataRow) in query loops.
 
 #### Line-by-line (this function)
 
@@ -158,8 +192,14 @@ private void RedirectUser(string role)
   64 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
+=======
+**Line notes** (what code + variables mean)
+
+- **L57:** `r` means: Usually one database row (DataRow) in query loops.
+>>>>>>> eb8ce01 (update)
 - **L59:** Navigate browser to another URL.
 - **L61:** Navigate browser to another URL.
 - **L63:** Navigate browser to another URL.
@@ -168,7 +208,11 @@ private void RedirectUser(string role)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -249,6 +293,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L11:** Server session for logged-in user.
 - **L13:** Navigate browser to another URL.
 - **L17:** False on first open; true after postback.
+<<<<<<< HEAD
 - **L19:** Server session for logged-in user.
 - **L23:** Server session for logged-in user.
 - **L26:** Server session for logged-in user.
@@ -256,6 +301,17 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L36:** Server session for logged-in user.
 - **L39:** Verify multi-factor / TOTP code.
 - **L51:** Issue Session + JWT after successful auth.
+=======
+- **L19:** Server session for logged-in user. | `method` means: HTTP method (GET/POST) or MFA method (totp/email).  Read from ASP.NET Session.
+- **L23:** Server session for logged-in user.
+- **L26:** Server session for logged-in user.
+- **L35:** Server session for logged-in user. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Read from ASP.NET Session.
+- **L36:** Server session for logged-in user. | `method` means: HTTP method (GET/POST) or MFA method (totp/email).  Read from ASP.NET Session.
+- **L37:** `code` means: 6-digit TOTP / OTP the user typed.
+- **L39:** Verify multi-factor / TOTP code. | `result` means: AuthResult or API result { success, message, … }.  Assigned from verification boolean/result.
+- **L51:** Issue Session + JWT after successful auth.
+- **L57:** `r` means: Usually one database row (DataRow) in query loops.
+>>>>>>> eb8ce01 (update)
 - **L59:** Navigate browser to another URL.
 - **L61:** Navigate browser to another URL.
 - **L63:** Navigate browser to another URL.

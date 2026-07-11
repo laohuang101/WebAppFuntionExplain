@@ -1,6 +1,10 @@
 # SchemaBootstrap.cs
 **Source:** `Data/SchemaBootstrap.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,8 +19,10 @@ App-start (or first request) orchestration: run AuthSchema, CourseSchema, DbInde
 
 ## Variables / fields (file level)
 
-- **Line 12:** `Gate` — type `object`
-- **Line 13:** `_done` — type `bool`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 12:** `Gate` (`object`) — **Holds “Gate” for this scope.**
+- **Line 13:** `_done` (`bool`) — **Holds “done” for this scope. (true/false)**
 
 ## Functions / methods (1 found)
 
@@ -48,7 +54,11 @@ public static void EnsureAll()
   26 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L21:** Error handling block.
 - **L22:** Error handling block.
@@ -58,7 +68,11 @@ public static void EnsureAll()
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;

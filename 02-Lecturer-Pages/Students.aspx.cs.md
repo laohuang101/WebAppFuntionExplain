@@ -1,6 +1,10 @@
 # Students.aspx.cs
 **Source:** `Pages/Lecturer/Students.aspx.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,10 +19,12 @@ Enrolled students per course with progress counts.
 
 ## Variables / fields (file level)
 
-- **Line 29:** `uid` — type `int`
-- **Line 31:** `list` — type `var`
-- **Line 46:** `uid` — type `int`
-- **Line 48:** `detail` — type `var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 29:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 31:** `list` (`var`) — **In-memory collection being built for JSON return.**
+- **Line 46:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 48:** `detail` (`var`) — **Holds “detail” for this scope.**
 
 ## Functions / methods (4 found)
 
@@ -33,7 +39,9 @@ protected void Page_Load(object sender, EventArgs e)
 - **Purpose:** Implements `Page_Load`.
 - **Security:** Uses AuthGate — requires logged-in role.
 - **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters:** `object sender, EventArgs e`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
 
 #### Line-by-line (this function)
 
@@ -45,7 +53,11 @@ protected void Page_Load(object sender, EventArgs e)
   16 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L12:** Page load entry (GET or postback).
 - **L14:** Authorization — block wrong role / anonymous.
@@ -73,7 +85,11 @@ private static int CurrentUid()
   21 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L20:** Authorization — block wrong role / anonymous.
 
@@ -91,8 +107,11 @@ public static object GetStudents(string search)
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Read/load data for display.
-- **Parameters:** `string search`
-- **Local variables:** `uid`, `list`
+- **Parameters (what each means):**
+- `search` (`string`) — Holds “search” for this scope. (text)
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `list` (`var`) — In-memory collection being built for JSON return.
 
 #### Line-by-line (this function)
 
@@ -113,10 +132,19 @@ public static object GetStudents(string search)
   38 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L27:** Error handling block.
 - **L30:** Authorization — block wrong role / anonymous.
+=======
+**Line notes** (what code + variables mean)
+
+- **L27:** Error handling block.
+- **L29:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L30:** Authorization — block wrong role / anonymous.
+- **L31:** `list` means: In-memory collection being built for JSON return.
+>>>>>>> eb8ce01 (update)
 - **L34:** Handle/log exception.
 
 ---
@@ -133,8 +161,12 @@ public static object GetStudentDetail(int studentUid, int cid)
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Read/load data for display.
-- **Parameters:** `int studentUid, int cid`
-- **Local variables:** `uid`, `detail`
+- **Parameters (what each means):**
+- `studentUid` (`int`) — Users.UID of the student.
+- `cid` (`int`) — Course ID (Courses.CID).
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `detail` (`var`) — Holds “detail” for this scope.
 
 #### Line-by-line (this function)
 
@@ -156,17 +188,30 @@ public static object GetStudentDetail(int studentUid, int cid)
   56 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L44:** Error handling block.
 - **L47:** Authorization — block wrong role / anonymous.
+=======
+**Line notes** (what code + variables mean)
+
+- **L44:** Error handling block.
+- **L46:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L47:** Authorization — block wrong role / anonymous.
+- **L48:** `detail` means: Holds “detail” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L52:** Handle/log exception.
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -243,11 +288,23 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L20:** Authorization — block wrong role / anonymous.
 - **L23:** Expose method to AJAX JSON calls.
 - **L27:** Error handling block.
+<<<<<<< HEAD
 - **L30:** Authorization — block wrong role / anonymous.
 - **L34:** Handle/log exception.
 - **L40:** Expose method to AJAX JSON calls.
 - **L44:** Error handling block.
 - **L47:** Authorization — block wrong role / anonymous.
+=======
+- **L29:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L30:** Authorization — block wrong role / anonymous.
+- **L31:** `list` means: In-memory collection being built for JSON return.
+- **L34:** Handle/log exception.
+- **L40:** Expose method to AJAX JSON calls.
+- **L44:** Error handling block.
+- **L46:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L47:** Authorization — block wrong role / anonymous.
+- **L48:** `detail` means: Holds “detail” for this scope.
+>>>>>>> eb8ce01 (update)
 - **L52:** Handle/log exception.
 
 ## Source snapshot (raw)

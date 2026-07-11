@@ -1,6 +1,10 @@
 # cc-wizard.js
 **Source:** `Pages/Lecturer/Scripts/cc-wizard.js`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,25 +19,27 @@ Part of EduLMS Landing or Lecturer area. See function sections below.
 
 ## Variables / fields (file level)
 
-- **Line 14:** `prev` — script-level `const`/`let`/`var`
-- **Line 16:** `dzMsg` — script-level `const`/`let`/`var`
-- **Line 31:** `params` — script-level `const`/`let`/`var`
-- **Line 32:** `editId` — script-level `const`/`let`/`var`
-- **Line 36:** `tries` — script-level `const`/`let`/`var`
-- **Line 37:** `t` — script-level `const`/`let`/`var`
-- **Line 53:** `c` — script-level `const`/`let`/`var`
-- **Line 62:** `prevEdit` — script-level `const`/`let`/`var`
-- **Line 77:** `step1` — script-level `const`/`let`/`var`
-- **Line 78:** `step2` — script-level `const`/`let`/`var`
-- **Line 79:** `stepLine` — script-level `const`/`let`/`var`
-- **Line 118:** `name` — script-level `const`/`let`/`var`
-- **Line 119:** `desc` — script-level `const`/`let`/`var`
-- **Line 120:** `category` — script-level `const`/`let`/`var`
-- **Line 121:** `level` — script-level `const`/`let`/`var`
-- **Line 122:** `bgImg` — script-level `const`/`let`/`var`
-- **Line 123:** `errDiv` — script-level `const`/`let`/`var`
-- **Line 162:** `modalEl` — script-level `const`/`let`/`var`
-- **Line 163:** `modal` — script-level `const`/`let`/`var`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 14:** `prev` — script-level `const`/`let`/`var` — **Holds “prev” for this scope.**
+- **Line 16:** `dzMsg` — script-level `const`/`let`/`var` — **Holds “dz Msg” for this scope.**
+- **Line 31:** `params` — script-level `const`/`let`/`var` — **Often a collection related to params (plural name).**
+- **Line 32:** `editId` — script-level `const`/`let`/`var` — **Identifier (`editId`) — database primary/foreign key.**
+- **Line 36:** `tries` — script-level `const`/`let`/`var` — **Often a collection related to tries (plural name).**
+- **Line 37:** `t` — script-level `const`/`let`/`var` — **Temporary string/token/time value.**
+- **Line 53:** `c` — script-level `const`/`let`/`var` — **Temporary value (character, course, or counter depending on loop).**
+- **Line 62:** `prevEdit` — script-level `const`/`let`/`var` — **Holds “prev Edit” for this scope.**
+- **Line 77:** `step1` — script-level `const`/`let`/`var` — **Holds “step1” for this scope.**
+- **Line 78:** `step2` — script-level `const`/`let`/`var` — **Holds “step2” for this scope.**
+- **Line 79:** `stepLine` — script-level `const`/`let`/`var` — **Holds “step Line” for this scope.**
+- **Line 118:** `name` — script-level `const`/`let`/`var` — **Display name of user/course/criterion.**
+- **Line 119:** `desc` — script-level `const`/`let`/`var` — **Description text (may embed <<<META>>> JSON).**
+- **Line 120:** `category` — script-level `const`/`let`/`var` — **Holds “category” for this scope.**
+- **Line 121:** `level` — script-level `const`/`let`/`var` — **Holds “level” for this scope.**
+- **Line 122:** `bgImg` — script-level `const`/`let`/`var` — **Holds “bg Img” for this scope.**
+- **Line 123:** `errDiv` — script-level `const`/`let`/`var` — **Holds “err Div” for this scope.**
+- **Line 162:** `modalEl` — script-level `const`/`let`/`var` — **Holds “modal El” for this scope.**
+- **Line 163:** `modal` — script-level `const`/`let`/`var` — **Holds “modal” for this scope.**
 
 ## Functions / methods (7 found)
 
@@ -46,7 +52,9 @@ function showCreateCourseModal()
 #### Explanation
 
 - **Purpose:** Implements `showCreateCourseModal`.
-- **Local variables:** `prev`, `dzMsg`
+- **Local variables (what each means):**
+- `prev` — Holds “prev” for this scope.  DOM element from the page.
+- `dzMsg` — Holds “dz Msg” for this scope.  DOM element from the page.
 
 #### Line-by-line (this function)
 
@@ -78,15 +86,24 @@ function showCreateCourseModal()
   26 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L9:** Get HTML element by id.
 - **L10:** Get HTML element by id.
 - **L11:** Get HTML element by id.
 - **L12:** Get HTML element by id.
 - **L13:** Get HTML element by id.
+<<<<<<< HEAD
 - **L14:** Get HTML element by id.
 - **L16:** Get HTML element by id.
+=======
+- **L14:** Get HTML element by id. | `prev` means: Holds “prev” for this scope.  DOM element from the page.
+- **L16:** Get HTML element by id. | `dzMsg` means: Holds “dz Msg” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L17:** Update page HTML.
 - **L19:** Get HTML element by id.
 - **L21:** Get HTML element by id.
@@ -102,8 +119,11 @@ function editCourseBasicInfo(cid)
 #### Explanation
 
 - **Purpose:** Implements `editCourseBasicInfo`.
-- **Parameters:** `cid`
-- **Local variables:** `c`, `prevEdit`
+- **Parameters (what each means):**
+- `cid` — Course ID (Courses.CID).
+- **Local variables (what each means):**
+- `c` — Course object/row.
+- `prevEdit` — Holds “prev Edit” for this scope.  DOM element from the page.
 
 #### Line-by-line (this function)
 
@@ -134,14 +154,24 @@ function editCourseBasicInfo(cid)
   73 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
+=======
+**Line notes** (what code + variables mean)
+
+- **L53:** `c` means: Course object/row.
+>>>>>>> eb8ce01 (update)
 - **L57:** Get HTML element by id.
 - **L58:** Get HTML element by id.
 - **L59:** Get HTML element by id.
 - **L60:** Get HTML element by id.
 - **L61:** Get HTML element by id.
+<<<<<<< HEAD
 - **L62:** Get HTML element by id.
+=======
+- **L62:** Get HTML element by id. | `prevEdit` means: Holds “prev Edit” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L68:** Get HTML element by id.
 - **L69:** Get HTML element by id.
 
@@ -157,8 +187,12 @@ function setWizardStep(step)
 
 - **Purpose:** Implements `setWizardStep`.
 - **Pattern:** Persist changes.
-- **Parameters:** `step`
-- **Local variables:** `step1`, `step2`, `stepLine`
+- **Parameters (what each means):**
+- `step` — TOTP 30-second time step counter.
+- **Local variables (what each means):**
+- `step1` — Holds “step1” for this scope.  DOM element from the page.
+- `step2` — Holds “step2” for this scope.  DOM element from the page.
+- `stepLine` — Holds “step Line” for this scope.  DOM element from the page.
 
 #### Line-by-line (this function)
 
@@ -207,11 +241,19 @@ function setWizardStep(step)
  114 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L77:** Get HTML element by id.
 - **L78:** Get HTML element by id.
 - **L79:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L77:** Get HTML element by id. | `step1` means: Holds “step1” for this scope.  DOM element from the page.
+- **L78:** Get HTML element by id. | `step2` means: Holds “step2” for this scope.  DOM element from the page.
+- **L79:** Get HTML element by id. | `stepLine` means: Holds “step Line” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L90:** Get HTML element by id.
 - **L91:** Get HTML element by id.
 - **L94:** Get HTML element by id.
@@ -233,7 +275,13 @@ function nextWizardStep()
 
 - **Purpose:** Implements `nextWizardStep`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Local variables:** `name`, `desc`, `category`, `level`, `bgImg`, `errDiv`
+- **Local variables (what each means):**
+- `name` — Display name of user/course/criterion.  DOM element from the page.
+- `desc` — Description text (may embed <<<META>>> JSON).  DOM element from the page.
+- `category` — Holds “category” for this scope.  DOM element from the page.
+- `level` — Holds “level” for this scope.  DOM element from the page.
+- `bgImg` — Holds “bg Img” for this scope.  DOM element from the page.
+- `errDiv` — Holds “err Div” for this scope.  DOM element from the page.
 
 #### Line-by-line (this function)
 
@@ -282,6 +330,7 @@ function nextWizardStep()
  155 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L118:** Get HTML element by id.
@@ -290,6 +339,16 @@ function nextWizardStep()
 - **L121:** Get HTML element by id.
 - **L122:** Get HTML element by id.
 - **L123:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L118:** Get HTML element by id. | `name` means: Display name of user/course/criterion.  DOM element from the page.
+- **L119:** Get HTML element by id. | `desc` means: Description text (may embed <<<META>>> JSON).  DOM element from the page.
+- **L120:** Get HTML element by id. | `category` means: Holds “category” for this scope.  DOM element from the page.
+- **L121:** Get HTML element by id. | `level` means: Holds “level” for this scope.  DOM element from the page.
+- **L122:** Get HTML element by id. | `bgImg` means: Holds “bg Img” for this scope.  DOM element from the page.
+- **L123:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -324,7 +383,9 @@ function completeWizard()
 #### Explanation
 
 - **Purpose:** Implements `completeWizard`.
-- **Local variables:** `modalEl`, `modal`
+- **Local variables (what each means):**
+- `modalEl` — Holds “modal El” for this scope.  DOM element from the page.
+- `modal` — Holds “modal” for this scope.
 
 #### Line-by-line (this function)
 
@@ -339,9 +400,16 @@ function completeWizard()
  166 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L162:** Get HTML element by id.
+=======
+**Line notes** (what code + variables mean)
+
+- **L162:** Get HTML element by id. | `modalEl` means: Holds “modal El” for this scope.  DOM element from the page.
+- **L163:** `modal` means: Holds “modal” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -354,7 +422,8 @@ function confirmCloseWizard(e)
 #### Explanation
 
 - **Purpose:** Implements `confirmCloseWizard`.
-- **Parameters:** `e`
+- **Parameters (what each means):**
+- `e` — Often email string (C#) or DOM event (JS).
 
 #### Line-by-line (this function)
 
@@ -371,7 +440,11 @@ function confirmCloseWizard(e)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | // Course Creation — wizard create/edit course
@@ -555,24 +628,46 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L11:** Get HTML element by id.
 - **L12:** Get HTML element by id.
 - **L13:** Get HTML element by id.
+<<<<<<< HEAD
 - **L14:** Get HTML element by id.
 - **L16:** Get HTML element by id.
+=======
+- **L14:** Get HTML element by id. | `prev` means: Holds “prev” for this scope.  DOM element from the page.
+- **L16:** Get HTML element by id. | `dzMsg` means: Holds “dz Msg” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L17:** Update page HTML.
 - **L19:** Get HTML element by id.
 - **L21:** Get HTML element by id.
 - **L29:** DOM event handler.
 - **L30:** Error handling block.
+<<<<<<< HEAD
+=======
+- **L31:** `params` means: Often a collection related to params (plural name).  Newly constructed object.
+- **L32:** `editId` means: Identifier (`editId`) — database primary/foreign key.
+- **L36:** `tries` means: Often a collection related to tries (plural name).  Literal number `0`.
+- **L37:** `t` means: Temporary string/token/time value.
+- **L53:** `c` means: Course object/row.
+>>>>>>> eb8ce01 (update)
 - **L57:** Get HTML element by id.
 - **L58:** Get HTML element by id.
 - **L59:** Get HTML element by id.
 - **L60:** Get HTML element by id.
 - **L61:** Get HTML element by id.
+<<<<<<< HEAD
 - **L62:** Get HTML element by id.
 - **L68:** Get HTML element by id.
 - **L69:** Get HTML element by id.
 - **L77:** Get HTML element by id.
 - **L78:** Get HTML element by id.
 - **L79:** Get HTML element by id.
+=======
+- **L62:** Get HTML element by id. | `prevEdit` means: Holds “prev Edit” for this scope.  DOM element from the page.
+- **L68:** Get HTML element by id.
+- **L69:** Get HTML element by id.
+- **L77:** Get HTML element by id. | `step1` means: Holds “step1” for this scope.  DOM element from the page.
+- **L78:** Get HTML element by id. | `step2` means: Holds “step2” for this scope.  DOM element from the page.
+- **L79:** Get HTML element by id. | `stepLine` means: Holds “step Line” for this scope.  DOM element from the page.
+>>>>>>> eb8ce01 (update)
 - **L90:** Get HTML element by id.
 - **L91:** Get HTML element by id.
 - **L94:** Get HTML element by id.
@@ -581,6 +676,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L105:** Get HTML element by id.
 - **L108:** Get HTML element by id.
 - **L109:** Get HTML element by id.
+<<<<<<< HEAD
 - **L118:** Get HTML element by id.
 - **L119:** Get HTML element by id.
 - **L120:** Get HTML element by id.
@@ -588,6 +684,16 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L122:** Get HTML element by id.
 - **L123:** Get HTML element by id.
 - **L162:** Get HTML element by id.
+=======
+- **L118:** Get HTML element by id. | `name` means: Display name of user/course/criterion.  DOM element from the page.
+- **L119:** Get HTML element by id. | `desc` means: Description text (may embed <<<META>>> JSON).  DOM element from the page.
+- **L120:** Get HTML element by id. | `category` means: Holds “category” for this scope.  DOM element from the page.
+- **L121:** Get HTML element by id. | `level` means: Holds “level” for this scope.  DOM element from the page.
+- **L122:** Get HTML element by id. | `bgImg` means: Holds “bg Img” for this scope.  DOM element from the page.
+- **L123:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
+- **L162:** Get HTML element by id. | `modalEl` means: Holds “modal El” for this scope.  DOM element from the page.
+- **L163:** `modal` means: Holds “modal” for this scope.
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

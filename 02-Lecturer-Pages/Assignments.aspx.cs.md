@@ -1,6 +1,10 @@
 # Assignments.aspx.cs
 **Source:** `Pages/Lecturer/Assignments.aspx.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,11 +19,13 @@ Build CourseWorks with due date, rubric or objective quiz. Due date closes stude
 
 ## Variables / fields (file level)
 
-- **Line 29:** `uid` — type `int`
-- **Line 45:** `uid` — type `int`
-- **Line 75:** `uid` — type `int`
-- **Line 83:** `id` — type `int`
-- **Line 102:** `uid` — type `int`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 29:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 45:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 75:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 83:** `id` (`int`) — **Generic primary key / identifier.**
+- **Line 102:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
 
 ## Functions / methods (6 found)
 
@@ -34,7 +40,9 @@ protected void Page_Load(object sender, EventArgs e)
 - **Purpose:** Implements `Page_Load`.
 - **Security:** Uses AuthGate — requires logged-in role.
 - **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters:** `object sender, EventArgs e`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
 
 #### Line-by-line (this function)
 
@@ -46,7 +54,11 @@ protected void Page_Load(object sender, EventArgs e)
   16 | }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L12:** Page load entry (GET or postback).
 - **L14:** Authorization — block wrong role / anonymous.
@@ -74,7 +86,11 @@ private static int CurrentUid()
   21 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L20:** Authorization — block wrong role / anonymous.
 
@@ -92,7 +108,8 @@ public static object GetCourses()
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Read/load data for display.
-- **Local variables:** `uid`
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
 
 #### Line-by-line (this function)
 
@@ -112,9 +129,16 @@ public static object GetCourses()
   37 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L27:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L27:** Error handling block.
+- **L29:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+>>>>>>> eb8ce01 (update)
 - **L30:** Authorization — block wrong role / anonymous.
 - **L33:** Handle/log exception.
 
@@ -132,7 +156,8 @@ public static object GetCourseWorks()
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Read/load data for display.
-- **Local variables:** `uid`
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
 
 #### Line-by-line (this function)
 
@@ -152,9 +177,16 @@ public static object GetCourseWorks()
   53 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L43:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L43:** Error handling block.
+- **L45:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+>>>>>>> eb8ce01 (update)
 - **L46:** Authorization — block wrong role / anonymous.
 - **L49:** Handle/log exception.
 
@@ -182,17 +214,20 @@ public static object SaveCourseWork(
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Persist changes.
-- **Parameters:** `int? cwid,
-        int cid,
-        string title,
-        string instructions,
-        string type,
-        decimal score,
-        decimal creditGiven,
-        string rubricJson,
-        string extraMetaJson,
-        string objectiveQuestio`
-- **Local variables:** `uid`, `id`
+- **Parameters (what each means):**
+- `cwid` (`int?`) — CourseWork ID (assignment) (CourseWorks.CWID).
+- `cid` (`int`) — Course ID (Courses.CID).
+- `title` (`string`) — Title of course work / page heading.
+- `instructions` (`string`) — Student-facing assignment instructions (plain part of Description).
+- `type` (`string`) — Holds “type” for this scope. (text)
+- `score` (`decimal`) — Points earned or max points depending on context.
+- `creditGiven` (`decimal`) — Holds “credit Given” for this scope. (number/score)
+- `rubricJson` (`string`) — Holds “rubric Json” for this scope. (text)
+- `extraMetaJson` (`string`) — Holds “extra Meta Json” for this scope. (text)
+- `objectiveQuestionsJson` (`string`) — Holds “objective Questions Json” for this scope. (text)
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `id` (`int`) — Generic primary key / identifier.
 
 #### Line-by-line (this function)
 
@@ -233,10 +268,19 @@ public static object SaveCourseWork(
   94 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L73:** Error handling block.
 - **L76:** Authorization — block wrong role / anonymous.
+=======
+**Line notes** (what code + variables mean)
+
+- **L73:** Error handling block.
+- **L75:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L76:** Authorization — block wrong role / anonymous.
+- **L84:** `id` means: Generic primary key / identifier.
+>>>>>>> eb8ce01 (update)
 - **L90:** Handle/log exception.
 
 ---
@@ -253,8 +297,10 @@ public static object DeleteCourseWork(int cwid)
 - **Security:** Uses AuthGate — requires logged-in role.
 - **JSON:** Serializes/deserializes UI or META payloads.
 - **Pattern:** Delete/clear data.
-- **Parameters:** `int cwid`
-- **Local variables:** `uid`
+- **Parameters (what each means):**
+- `cwid` (`int`) — CourseWork ID (assignment) (CourseWorks.CWID).
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
 
 #### Line-by-line (this function)
 
@@ -275,9 +321,16 @@ public static object DeleteCourseWork(int cwid)
  111 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L100:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L100:** Error handling block.
+- **L102:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+>>>>>>> eb8ce01 (update)
 - **L103:** Authorization — block wrong role / anonymous.
 - **L107:** Handle/log exception.
 
@@ -285,7 +338,11 @@ public static object DeleteCourseWork(int cwid)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -417,18 +474,36 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L20:** Authorization — block wrong role / anonymous.
 - **L23:** Expose method to AJAX JSON calls.
 - **L27:** Error handling block.
+<<<<<<< HEAD
+=======
+- **L29:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+>>>>>>> eb8ce01 (update)
 - **L30:** Authorization — block wrong role / anonymous.
 - **L33:** Handle/log exception.
 - **L39:** Expose method to AJAX JSON calls.
 - **L43:** Error handling block.
+<<<<<<< HEAD
+=======
+- **L45:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+>>>>>>> eb8ce01 (update)
 - **L46:** Authorization — block wrong role / anonymous.
 - **L49:** Handle/log exception.
 - **L59:** Expose method to AJAX JSON calls.
 - **L73:** Error handling block.
+<<<<<<< HEAD
 - **L76:** Authorization — block wrong role / anonymous.
 - **L90:** Handle/log exception.
 - **L96:** Expose method to AJAX JSON calls.
 - **L100:** Error handling block.
+=======
+- **L75:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+- **L76:** Authorization — block wrong role / anonymous.
+- **L84:** `id` means: Generic primary key / identifier.
+- **L90:** Handle/log exception.
+- **L96:** Expose method to AJAX JSON calls.
+- **L100:** Error handling block.
+- **L102:** `uid` means: User ID (Users.UID) of the logged-in or target user.
+>>>>>>> eb8ce01 (update)
 - **L103:** Authorization — block wrong role / anonymous.
 - **L107:** Handle/log exception.
 

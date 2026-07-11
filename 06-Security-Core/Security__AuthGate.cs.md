@@ -1,6 +1,10 @@
 # AuthGate.cs
 **Source:** `Data/Security/AuthGate.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,23 +19,25 @@ Shared gate for pages, WebMethods, and ashx handlers — role checks, CSRF on mu
 
 ## Variables / fields (file level)
 
-- **Line 52:** `n` — type `string`
-- **Line 57:** `true` — type `return`
-- **Line 59:** `false` — type `return`
-- **Line 78:** `0` — type `return`
-- **Line 80:** `uid` — type `int`
-- **Line 84:** `0` — type `return`
-- **Line 112:** `ctx` — type `var`
-- **Line 114:** `uid` — type `int`
-- **Line 120:** `false` — type `return`
-- **Line 126:** `false` — type `return`
-- **Line 128:** `true` — type `return`
-- **Line 133:** `ctx` — type `var`
-- **Line 172:** `false` — type `return`
-- **Line 186:** `false` — type `return`
-- **Line 191:** `false` — type `return`
-- **Line 193:** `true` — type `return`
-- **Line 206:** `json` — type `string`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 52:** `n` (`string`) — **Numeric count or temporary integer.**
+- **Line 57:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 59:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 78:** `0` (`return`) — **Holds “0” for this scope. (type `return`)**
+- **Line 80:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 84:** `0` (`return`) — **Holds “0” for this scope. (type `return`)**
+- **Line 112:** `ctx` (`var`) — **Current HTTP request context (Request, Response, Session).**
+- **Line 114:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 120:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 126:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 128:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 133:** `ctx` (`var`) — **Current HTTP request context (Request, Response, Session).**
+- **Line 172:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 186:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 191:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 193:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 206:** `json` (`string`) — **JSON string (to parse or serialize).**
 
 ## Functions / methods (17 found)
 
@@ -45,7 +51,8 @@ public static int CurrentUserId(HttpContext ctx = null)
 
 - **Purpose:** Implements `CurrentUserId`.
 - **CSRF:** Validates anti-forgery token on mutating request.
-- **Parameters:** `HttpContext ctx = null`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
 
 #### Line-by-line (this function)
 
@@ -59,7 +66,11 @@ public static int CurrentUserId(HttpContext ctx = null)
   24 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L22:** CSRF anti-forgery protection.
 - **L23:** Restore/validate user from Session or JWT; reject stale UIDs.
@@ -77,7 +88,8 @@ public static bool EnsureCsrf(HttpContext ctx = null)
 - **Purpose:** Implements `EnsureCsrf`.
 - **CSRF:** Validates anti-forgery token on mutating request.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `HttpContext ctx = null`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
 
 #### Line-by-line (this function)
 
@@ -91,7 +103,11 @@ public static bool EnsureCsrf(HttpContext ctx = null)
   33 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L27:** CSRF anti-forgery protection.
 - **L31:** CSRF anti-forgery protection.
@@ -109,7 +125,10 @@ public static string CurrentRole(HttpContext ctx = null)
 
 - **Purpose:** Implements `CurrentRole`.
 - **Session:** Reads/writes ASP.NET Session.
-- **Parameters:** `HttpContext ctx = null`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- **Local variables (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
 
 #### Line-by-line (this function)
 
@@ -124,7 +143,11 @@ public static string CurrentRole(HttpContext ctx = null)
   41 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L39:** Restore/validate user from Session or JWT; reject stale UIDs.
 - **L40:** Server session for logged-in user.
@@ -141,7 +164,10 @@ public static string CurrentUserName(HttpContext ctx = null)
 
 - **Purpose:** Implements `CurrentUserName`.
 - **Session:** Reads/writes ASP.NET Session.
-- **Parameters:** `HttpContext ctx = null`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- **Local variables (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
 
 #### Line-by-line (this function)
 
@@ -155,7 +181,11 @@ public static string CurrentUserName(HttpContext ctx = null)
   48 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L47:** Server session for logged-in user.
 
@@ -170,8 +200,12 @@ public static bool IsInRole(string role, params string[] allowed)
 #### Explanation
 
 - **Purpose:** Implements `IsInRole`.
-- **Parameters:** `string role, params string[] allowed`
-- **Local variables:** `n`
+- **Parameters (what each means):**
+- `role` (`string`) — User role code or name (Admin/Student/Lecturer).
+- `allowed` (`string[]`) — Boolean — path/role is permitted.
+- **Local variables (what each means):**
+- `n` (`string`) — Numeric count or temporary integer.
+- `a` — Holds “a” for this scope.
 
 #### Line-by-line (this function)
 
@@ -190,9 +224,15 @@ public static bool IsInRole(string role, params string[] allowed)
   60 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L52:** Map role codes/names to Admin/Student/Lecturer.
+=======
+**Line notes** (what code + variables mean)
+
+- **L52:** Map role codes/names to Admin/Student/Lecturer. | `n` means: Numeric count or temporary integer.
+>>>>>>> eb8ce01 (update)
 - **L56:** Map role codes/names to Admin/Student/Lecturer.
 
 ---
@@ -206,7 +246,8 @@ public static int RequireUser(HttpContext ctx = null)
 #### Explanation
 
 - **Purpose:** Implements `RequireUser`.
-- **Parameters:** `HttpContext ctx = null`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
 
 #### Line-by-line (this function)
 
@@ -229,8 +270,11 @@ public static int RequireRole(HttpContext ctx, params string[] roles)
 
 - **Purpose:** Implements `RequireRole`.
 - **CSRF:** Validates anti-forgery token on mutating request.
-- **Parameters:** `HttpContext ctx, params string[] roles`
-- **Local variables:** `uid`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- `roles` (`string[]`) — Often a collection related to roles (plural name). (text)
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
 
 #### Line-by-line (this function)
 
@@ -254,13 +298,21 @@ public static int RequireRole(HttpContext ctx, params string[] roles)
   85 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L69:** Role authorization for pages/handlers.
 - **L72:** CSRF anti-forgery protection.
 - **L74:** CSRF anti-forgery protection.
 - **L75:** CSRF anti-forgery protection.
 - **L77:** CSRF anti-forgery protection.
+<<<<<<< HEAD
+=======
+- **L80:** `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -273,7 +325,8 @@ public static int RequireRole(params string[] roles)
 #### Explanation
 
 - **Purpose:** Implements `RequireRole`.
-- **Parameters:** `params string[] roles`
+- **Parameters (what each means):**
+- `roles` (`string[]`) — Often a collection related to roles (plural name). (text)
 
 #### Line-by-line (this function)
 
@@ -285,7 +338,11 @@ public static int RequireRole(params string[] roles)
   90 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L87:** Role authorization for pages/handlers.
 - **L89:** Role authorization for pages/handlers.
@@ -302,7 +359,10 @@ public static int RequireLecturer(HttpContext ctx = null)
 
 - **Purpose:** Implements `RequireLecturer`.
 - **Security:** Uses AuthGate — requires logged-in role.
-- **Parameters:** `HttpContext ctx = null`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- **Local variables (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
 
 #### Line-by-line (this function)
 
@@ -314,7 +374,11 @@ public static int RequireLecturer(HttpContext ctx = null)
   95 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L94:** Role authorization for pages/handlers.
 
@@ -329,7 +393,10 @@ public static int RequireAdmin(HttpContext ctx = null)
 #### Explanation
 
 - **Purpose:** Implements `RequireAdmin`.
-- **Parameters:** `HttpContext ctx = null`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- **Local variables (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
 
 #### Line-by-line (this function)
 
@@ -341,7 +408,11 @@ public static int RequireAdmin(HttpContext ctx = null)
  100 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L99:** Role authorization for pages/handlers.
 
@@ -356,7 +427,10 @@ public static int RequireStudent(HttpContext ctx = null)
 #### Explanation
 
 - **Purpose:** Implements `RequireStudent`.
-- **Parameters:** `HttpContext ctx = null`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- **Local variables (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
 
 #### Line-by-line (this function)
 
@@ -368,7 +442,11 @@ public static int RequireStudent(HttpContext ctx = null)
  105 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L104:** Role authorization for pages/handlers.
 
@@ -385,8 +463,12 @@ public static bool EnsurePage(Page page, params string[] roles)
 - **Purpose:** Implements `EnsurePage`.
 - **Security:** Uses AuthGate — requires logged-in role.
 - **Navigation:** Redirects the browser.
-- **Parameters:** `Page page, params string[] roles`
-- **Local variables:** `ctx`, `uid`
+- **Parameters (what each means):**
+- `page` (`Page`) — Page number for pagination, or Page instance.
+- `roles` (`string[]`) — Often a collection related to roles (plural name). (text)
+- **Local variables (what each means):**
+- `ctx` (`var`) — Current HTTP request context (Request, Response, Session).
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
 
 #### Line-by-line (this function)
 
@@ -415,9 +497,17 @@ public static bool EnsurePage(Page page, params string[] roles)
  129 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L108:** Role authorization for pages/handlers.
+=======
+**Line notes** (what code + variables mean)
+
+- **L108:** Role authorization for pages/handlers.
+- **L112:** `ctx` means: Current HTTP request context (Request, Response, Session).
+- **L115:** `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+>>>>>>> eb8ce01 (update)
 - **L118:** Navigate browser to another URL.
 - **L119:** Error handling block.
 - **L124:** Navigate browser to another URL.
@@ -436,8 +526,10 @@ public static object NotAuthenticatedJson(string message = null)
 - **Purpose:** Implements `NotAuthenticatedJson`.
 - **CSRF:** Validates anti-forgery token on mutating request.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `string message = null`
-- **Local variables:** `message`, `ctx`
+- **Parameters (what each means):**
+- `message` (`string`) — Status text for the UI.
+- **Local variables (what each means):**
+- `message` (`string`) — Status text for the UI.
 
 #### Line-by-line (this function)
 
@@ -464,8 +556,14 @@ public static object NotAuthenticatedJson(string message = null)
  149 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
+=======
+**Line notes** (what code + variables mean)
+
+- **L133:** `ctx` means: Current HTTP request context (Request, Response, Session).
+>>>>>>> eb8ce01 (update)
 - **L134:** CSRF anti-forgery protection.
 - **L139:** CSRF anti-forgery protection.
 
@@ -481,8 +579,10 @@ public static object ForbiddenJson(string message = null)
 
 - **Purpose:** Implements `ForbiddenJson`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `string message = null`
-- **Local variables:** `message`
+- **Parameters (what each means):**
+- `message` (`string`) — Status text for the UI.
+- **Local variables (what each means):**
+- `message` (`string`) — Status text for the UI.
 
 #### Line-by-line (this function)
 
@@ -511,7 +611,9 @@ public static bool EnsureHandlerUser(HttpContext ctx, out int uid)
 
 - **Purpose:** Implements `EnsureHandlerUser`.
 - **CSRF:** Validates anti-forgery token on mutating request.
-- **Parameters:** `HttpContext ctx, out int uid`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
 
 #### Line-by-line (this function)
 
@@ -530,7 +632,11 @@ public static bool EnsureHandlerUser(HttpContext ctx, out int uid)
  173 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L165:** CSRF anti-forgery protection.
 - **L167:** CSRF anti-forgery protection.
@@ -547,7 +653,10 @@ public static bool EnsureHandlerRole(HttpContext ctx, out int uid, params string
 
 - **Purpose:** Implements `EnsureHandlerRole`.
 - **CSRF:** Validates anti-forgery token on mutating request.
-- **Parameters:** `HttpContext ctx, out int uid, params string[] roles`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `roles` (`string[]`) — Often a collection related to roles (plural name). (text)
 
 #### Line-by-line (this function)
 
@@ -575,7 +684,11 @@ public static bool EnsureHandlerRole(HttpContext ctx, out int uid, params string
  194 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L175:** Role authorization for pages/handlers.
 - **L178:** CSRF anti-forgery protection.
@@ -593,8 +706,12 @@ public static void WriteHandlerError(HttpContext ctx, int status, string message
 
 - **Purpose:** Implements `WriteHandlerError`.
 - **JSON:** Serializes/deserializes UI or META payloads.
-- **Parameters:** `HttpContext ctx, int status, string message`
-- **Local variables:** `json`
+- **Parameters (what each means):**
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- `status` (`int`) — Holds “status” for this scope. (integer)
+- `message` (`string`) — Status text for the UI.
+- **Local variables (what each means):**
+- `json` (`string`) — JSON string (to parse or serialize).  Literal text string.
 
 #### Line-by-line (this function)
 
@@ -618,16 +735,27 @@ public static void WriteHandlerError(HttpContext ctx, int status, string message
  211 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L199:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L199:** Error handling block.
+- **L206:** `json` means: JSON string (to parse or serialize).  Literal text string.
+>>>>>>> eb8ce01 (update)
 - **L210:** Handle/log exception.
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -860,23 +988,40 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L39:** Restore/validate user from Session or JWT; reject stale UIDs.
 - **L40:** Server session for logged-in user.
 - **L47:** Server session for logged-in user.
+<<<<<<< HEAD
 - **L52:** Map role codes/names to Admin/Student/Lecturer.
+=======
+- **L52:** Map role codes/names to Admin/Student/Lecturer. | `n` means: Numeric count or temporary integer.
+>>>>>>> eb8ce01 (update)
 - **L56:** Map role codes/names to Admin/Student/Lecturer.
 - **L69:** Role authorization for pages/handlers.
 - **L72:** CSRF anti-forgery protection.
 - **L74:** CSRF anti-forgery protection.
 - **L75:** CSRF anti-forgery protection.
 - **L77:** CSRF anti-forgery protection.
+<<<<<<< HEAD
+=======
+- **L80:** `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+>>>>>>> eb8ce01 (update)
 - **L87:** Role authorization for pages/handlers.
 - **L89:** Role authorization for pages/handlers.
 - **L94:** Role authorization for pages/handlers.
 - **L99:** Role authorization for pages/handlers.
 - **L104:** Role authorization for pages/handlers.
 - **L108:** Role authorization for pages/handlers.
+<<<<<<< HEAD
+=======
+- **L112:** `ctx` means: Current HTTP request context (Request, Response, Session).
+- **L115:** `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+>>>>>>> eb8ce01 (update)
 - **L118:** Navigate browser to another URL.
 - **L119:** Error handling block.
 - **L124:** Navigate browser to another URL.
 - **L125:** Error handling block.
+<<<<<<< HEAD
+=======
+- **L133:** `ctx` means: Current HTTP request context (Request, Response, Session).
+>>>>>>> eb8ce01 (update)
 - **L134:** CSRF anti-forgery protection.
 - **L139:** CSRF anti-forgery protection.
 - **L165:** CSRF anti-forgery protection.
@@ -885,6 +1030,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L178:** CSRF anti-forgery protection.
 - **L180:** CSRF anti-forgery protection.
 - **L199:** Error handling block.
+<<<<<<< HEAD
+=======
+- **L206:** `json` means: JSON string (to parse or serialize).  Literal text string.
+>>>>>>> eb8ce01 (update)
 - **L210:** Handle/log exception.
 
 ## Source snapshot (raw)

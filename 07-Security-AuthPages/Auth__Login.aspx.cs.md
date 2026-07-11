@@ -1,6 +1,10 @@
 # Login.aspx.cs
 **Source:** `Pages/Authentication/Login.aspx.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,11 +19,13 @@ Email + password; Student/Lecturer redirected to MFA; Admin password-only comple
 
 ## Variables / fields (file level)
 
-- **Line 14:** `uid` — type `int`
-- **Line 25:** `email` — type `string`
-- **Line 26:** `password` — type `string`
-- **Line 37:** `result` — type `var`
-- **Line 70:** `normalizedRole` — type `string`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 14:** `uid` (`int`) — **User ID (Users.UID) of the logged-in or target user.**
+- **Line 25:** `email` (`string`) — **Account email address (usually lowercased).**
+- **Line 26:** `password` (`string`) — **Plain password from the form (never log this).**
+- **Line 37:** `result` (`var`) — **AuthResult or API result { success, message, … }.**
+- **Line 70:** `normalizedRole` (`string`) — **Holds “normalized Role” for this scope. (text)**
 
 ## Functions / methods (3 found)
 
@@ -35,8 +41,11 @@ protected void Page_Load(object sender, EventArgs e)
 - **Session:** Reads/writes ASP.NET Session.
 - **Navigation:** Redirects the browser.
 - **Page lifecycle:** Runs on every request; `IsPostBack` distinguishes first load vs postback.
-- **Parameters:** `object sender, EventArgs e`
-- **Local variables:** `uid`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
 
 #### Line-by-line (this function)
 
@@ -55,10 +64,17 @@ protected void Page_Load(object sender, EventArgs e)
   21 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L10:** Page load entry (GET or postback).
 - **L14:** Restore/validate user from Session or JWT; reject stale UIDs.
+=======
+**Line notes** (what code + variables mean)
+
+- **L10:** Page load entry (GET or postback).
+- **L14:** Restore/validate user from Session or JWT; reject stale UIDs. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+>>>>>>> eb8ce01 (update)
 - **L16:** False on first open; true after postback.
 - **L18:** Server session for logged-in user.
 - **L19:** Server session for logged-in user.
@@ -76,8 +92,13 @@ protected void btnLogin_Click(object sender, EventArgs e)
 - **Purpose:** Implements `btnLogin_Click`.
 - **Session:** Reads/writes ASP.NET Session.
 - **Navigation:** Redirects the browser.
-- **Parameters:** `object sender, EventArgs e`
-- **Local variables:** `email`, `password`, `result`
+- **Parameters (what each means):**
+- `sender` (`object`) — Holds “sender” for this scope.
+- `e` (`EventArgs`) — Often email string (C#) or DOM event (JS).
+- **Local variables (what each means):**
+- `email` (`string`) — Account email address (usually lowercased).
+- `password` (`string`) — Plain password from the form (never log this).
+- `result` (`var`) — AuthResult or API result { success, message, … }.
 
 #### Line-by-line (this function)
 
@@ -129,9 +150,18 @@ protected void btnLogin_Click(object sender, EventArgs e)
   66 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L34:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L25:** `email` means: Account email address (usually lowercased).
+- **L26:** `password` means: Plain password from the form (never log this).
+- **L34:** Error handling block.
+- **L37:** `result` means: AuthResult or API result { success, message, … }.
+>>>>>>> eb8ce01 (update)
 - **L48:** Server session for logged-in user.
 - **L49:** Server session for logged-in user.
 - **L51:** Server session for logged-in user.
@@ -151,8 +181,10 @@ private void RedirectUser(string role)
 
 - **Purpose:** Implements `RedirectUser`.
 - **Navigation:** Redirects the browser.
-- **Parameters:** `string role`
-- **Local variables:** `normalizedRole`
+- **Parameters (what each means):**
+- `role` (`string`) — User role code or name (Admin/Student/Lecturer).
+- **Local variables (what each means):**
+- `normalizedRole` (`string`) — Holds “normalized Role” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -171,9 +203,15 @@ private void RedirectUser(string role)
   78 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L70:** Map role codes/names to Admin/Student/Lecturer.
+=======
+**Line notes** (what code + variables mean)
+
+- **L70:** Map role codes/names to Admin/Student/Lecturer. | `normalizedRole` means: Holds “normalized Role” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 - **L73:** Navigate browser to another URL.
 - **L75:** Navigate browser to another URL.
 - **L77:** Navigate browser to another URL.
@@ -182,7 +220,11 @@ private void RedirectUser(string role)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -275,18 +317,33 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L4:** Import namespace/types.
 - **L6:** C# namespace grouping.
 - **L10:** Page load entry (GET or postback).
+<<<<<<< HEAD
 - **L14:** Restore/validate user from Session or JWT; reject stale UIDs.
 - **L16:** False on first open; true after postback.
 - **L18:** Server session for logged-in user.
 - **L19:** Server session for logged-in user.
 - **L34:** Error handling block.
+=======
+- **L14:** Restore/validate user from Session or JWT; reject stale UIDs. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+- **L16:** False on first open; true after postback.
+- **L18:** Server session for logged-in user.
+- **L19:** Server session for logged-in user.
+- **L25:** `email` means: Account email address (usually lowercased).
+- **L26:** `password` means: Plain password from the form (never log this).
+- **L34:** Error handling block.
+- **L37:** `result` means: AuthResult or API result { success, message, … }.
+>>>>>>> eb8ce01 (update)
 - **L48:** Server session for logged-in user.
 - **L49:** Server session for logged-in user.
 - **L51:** Server session for logged-in user.
 - **L52:** Navigate browser to another URL.
 - **L57:** Issue Session + JWT after successful auth.
 - **L61:** Handle/log exception.
+<<<<<<< HEAD
 - **L70:** Map role codes/names to Admin/Student/Lecturer.
+=======
+- **L70:** Map role codes/names to Admin/Student/Lecturer. | `normalizedRole` means: Holds “normalized Role” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 - **L73:** Navigate browser to another URL.
 - **L75:** Navigate browser to another URL.
 - **L77:** Navigate browser to another URL.

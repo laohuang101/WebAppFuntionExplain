@@ -1,6 +1,10 @@
 # AuthSchema.cs
 **Source:** `Data/Security/AuthSchema.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,10 +19,12 @@ Ensures Users security columns exist (PasswordHash, MfaSecret, MfaEnabled, JWT-r
 
 ## Variables / fields (file level)
 
-- **Line 12:** `Gate` — type `object`
-- **Line 13:** `_ready` — type `bool`
-- **Line 77:** `TABLE_NAME` — type `WHERE`
-- **Line 94:** `simple` — type `string`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 12:** `Gate` (`object`) — **Holds “Gate” for this scope.**
+- **Line 13:** `_ready` (`bool`) — **Holds “ready” for this scope. (true/false)**
+- **Line 77:** `TABLE_NAME` (`WHERE`) — **Holds “TABLE NAME” for this scope. (type `WHERE`)**
+- **Line 94:** `simple` (`string`) — **Holds “simple” for this scope. (text)**
 
 ## Functions / methods (4 found)
 
@@ -32,7 +38,8 @@ public static void Ensure()
 
 - **Purpose:** Implements `Ensure`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Local variables:** `conn`
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.
 
 #### Line-by-line (this function)
 
@@ -69,7 +76,11 @@ public static void Ensure()
   43 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L21:** Error handling block.
 - **L23:** Import namespace/types.
@@ -95,8 +106,11 @@ private static void EnsureAuditTable(SqlConnection conn)
 
 - **Purpose:** Implements `EnsureAuditTable`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn`
-- **Local variables:** `check`, `create`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- **Local variables (what each means):**
+- `check` (`var`) — Holds “check” for this scope.  Newly constructed object.
+- `create` (`var`) — Holds “create” for this scope.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -131,7 +145,11 @@ private static void EnsureAuditTable(SqlConnection conn)
   71 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L45:** Database access (pure SQL).
 - **L47:** Error handling block.
@@ -160,7 +178,14 @@ Action NVARCHAR(80) NOT NULL,
 #### Explanation
 
 - **Purpose:** Implements `NVARCHAR`.
-- **Parameters:** `80`
+- **Parameters (what each means):**
+- `NULL` (`80) NOT`) — Holds “NULL” for this scope. (type `80) NOT`)
+- `NULL` (`UserId INT`) — Holds “NULL” for this scope. (type `UserId INT`)
+- `NULL` (`Email NVARCHAR(120)`) — Holds “NULL” for this scope. (type `Email NVARCHAR(120)`)
+- `NULL` (`Detail NVARCHAR(500)`) — Holds “NULL” for this scope. (type `Detail NVARCHAR(500)`)
+- `NULL` (`IpAddress NVARCHAR(64)`) — Holds “NULL” for this scope. (type `IpAddress NVARCHAR(64)`)
+- `)"` (`Path NVARCHAR(260) NULL`) — Holds “)"” for this scope. (type `Path NVARCHAR(260) NULL`)
+- `conn)` — Holds “conn)” for this scope.
 
 #### Line-by-line (this function)
 
@@ -177,7 +202,11 @@ Action NVARCHAR(80) NOT NULL,
   68 |                 }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L67:** Run SQL; return table / rows / scalar.
 
@@ -193,8 +222,15 @@ private static void EnsureColumn(SqlConnection conn, string table, string column
 
 - **Purpose:** Implements `EnsureColumn`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
-- **Parameters:** `SqlConnection conn, string table, string column, string definition`
-- **Local variables:** `check`, `alter`, `simple`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- `table` (`string`) — DataTable or HTML table container.
+- `column` (`string`) — Holds “column” for this scope. (text)
+- `definition` (`string`) — Holds “definition” for this scope. (text)
+- **Local variables (what each means):**
+- `check` (`var`) — Holds “check” for this scope.  Newly constructed object.
+- `alter` (`var`) — Holds “alter” for this scope.  Newly constructed object.
+- `simple` (`string`) — Holds “simple” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -237,7 +273,11 @@ private static void EnsureColumn(SqlConnection conn, string table, string column
  107 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L73:** Database access (pure SQL).
 - **L75:** Import namespace/types.
@@ -248,6 +288,10 @@ private static void EnsureColumn(SqlConnection conn, string table, string column
 - **L86:** Import namespace/types.
 - **L89:** Run SQL; return table / rows / scalar.
 - **L92:** Handle/log exception.
+<<<<<<< HEAD
+=======
+- **L94:** `simple` means: Holds “simple” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 - **L97:** Error handling block.
 - **L99:** Import namespace/types.
 - **L102:** Run SQL; return table / rows / scalar.
@@ -257,7 +301,11 @@ private static void EnsureColumn(SqlConnection conn, string table, string column
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -406,6 +454,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L86:** Import namespace/types.
 - **L89:** Run SQL; return table / rows / scalar.
 - **L92:** Handle/log exception.
+<<<<<<< HEAD
+=======
+- **L94:** `simple` means: Holds “simple” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 - **L97:** Error handling block.
 - **L99:** Import namespace/types.
 - **L102:** Run SQL; return table / rows / scalar.

@@ -1,6 +1,10 @@
 # DashboardService.cs
 **Source:** `Pages/Lecturer/Services/DashboardService.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,33 +19,35 @@ Lecturer home: course stats, recent submissions, charts. Backed by LecturerRepos
 
 ## Variables / fields (file level)
 
-- **Line 13:** `ConnString` — type `string`
-- **Line 17:** `cols` — type `var`
-- **Line 36:** `ownerCol` — type `string`
-- **Line 41:** `activeCourses` — type `int`
-- **Line 49:** `totalStudents` — type `int`
-- **Line 61:** `pending` — type `int`
-- **Line 73:** `avgObj` — type `var`
-- **Line 74:** `avg` — type `double`
-- **Line 92:** `submissions` — type `var`
-- **Line 97:** `sid` — type `int`
-- **Line 98:** `studentName` — type `string`
-- **Line 99:** `assign` — type `string`
-- **Line 100:** `courseName` — type `string`
-- **Line 101:** `answer` — type `string`
-- **Line 102:** `timeText` — type `string`
-- **Line 103:** `isGraded` — type `bool`
-- **Line 104:** `maxScore` — type `int`
-- **Line 105:** `initials` — type `var`
-- **Line 108:** `parts` — type `var`
-- **Line 133:** `gradeDist` — type `var`
-- **Line 151:** `enrollTrend` — type `var`
-- **Line 180:** `ownerCol` — type `string`
-- **Line 191:** `cnt` — type `int`
-- **Line 198:** `exist` — type `int`
-- **Line 237:** `ownerCol` — type `string`
-- **Line 246:** `true` — type `return`
-- **Line 252:** `false` — type `return`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 13:** `ConnString` (`string`) — **Holds “Conn String” for this scope. (text)**
+- **Line 17:** `cols` (`var`) — **Often a collection related to cols (plural name).**
+- **Line 36:** `ownerCol` (`string`) — **Holds “owner Col” for this scope. (text)**
+- **Line 41:** `activeCourses` (`int`) — **Often a collection related to active Courses (plural name). (integer)**
+- **Line 49:** `totalStudents` (`int`) — **Often a collection related to total Students (plural name). (integer)**
+- **Line 61:** `pending` (`int`) — **Holds “pending” for this scope. (integer)**
+- **Line 73:** `avgObj` (`var`) — **Holds “avg Obj” for this scope.**
+- **Line 74:** `avg` (`double`) — **Holds “avg” for this scope. (number/score)**
+- **Line 92:** `submissions` (`var`) — **Often a collection related to submissions (plural name).**
+- **Line 97:** `sid` (`int`) — **Submission ID (CWSubmissions.SID).**
+- **Line 98:** `studentName` (`string`) — **Student display name.**
+- **Line 99:** `assign` (`string`) — **Holds “assign” for this scope. (text)**
+- **Line 100:** `courseName` (`string`) — **Course display name.**
+- **Line 101:** `answer` (`string`) — **Holds “answer” for this scope. (text)**
+- **Line 102:** `timeText` (`string`) — **Date/time value. (text)**
+- **Line 103:** `isGraded` (`bool`) — **Boolean flag: is Graded. (true/false)**
+- **Line 104:** `maxScore` (`int`) — **Maximum points (usually 100).**
+- **Line 105:** `initials` (`var`) — **Often a collection related to initials (plural name).**
+- **Line 108:** `parts` (`var`) — **Split path or name segments.**
+- **Line 133:** `gradeDist` (`var`) — **Holds “grade Dist” for this scope.**
+- **Line 151:** `enrollTrend` (`var`) — **Holds “enroll Trend” for this scope.**
+- **Line 180:** `ownerCol` (`string`) — **Holds “owner Col” for this scope. (text)**
+- **Line 191:** `cnt` (`int`) — **Holds “cnt” for this scope. (integer)**
+- **Line 198:** `exist` (`int`) — **Holds “exist” for this scope. (integer)**
+- **Line 237:** `ownerCol` (`string`) — **Holds “owner Col” for this scope. (text)**
+- **Line 246:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 252:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
 
 ## Functions / methods (4 found)
 
@@ -56,8 +62,12 @@ private static string DetectOwnerColumn(SqlConnection conn)
 - **Purpose:** Implements `DetectOwnerColumn`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Ownership:** Checks course belongs to current lecturer (IDOR protection).
-- **Parameters:** `SqlConnection conn`
-- **Local variables:** `cols`, `cc`, `r`
+- **Parameters (what each means):**
+- `conn` (`SqlConnection`) — SqlConnection — open link to LocalDB/SQL Server.
+- **Local variables (what each means):**
+- `cols` (`var`) — Often a collection related to cols (plural name).  Newly constructed object.
+- `cc` (`var`) — Holds “cc” for this scope.
+- `r` (`var`) — Usually one database row (DataRow) in query loops.
 
 #### Line-by-line (this function)
 
@@ -75,9 +85,16 @@ private static string DetectOwnerColumn(SqlConnection conn)
   24 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L15:** Database access (pure SQL).
+=======
+**Line notes** (what code + variables mean)
+
+- **L15:** Database access (pure SQL).
+- **L17:** `cols` means: Often a collection related to cols (plural name).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L18:** Import namespace/types.
 - **L21:** Import namespace/types.
 - **L23:** Owner lecturer foreign key.
@@ -95,8 +112,30 @@ public static object GetDashboardData(int uid)
 - **Purpose:** Implements `GetDashboardData`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Pattern:** Read/load data for display.
-- **Parameters:** `int uid`
-- **Local variables:** `conn`, `cmd`, `ownerCol`, `activeCourses`, `totalStudents`, `pending`, `avgObj`, `hasGrades`, `submissions`, `rdr`, `sid`, `studentName`, `assign`, `courseName`, `answer`, `timeText`, `isGraded`, `maxScore`, `initials`, `parts`, `gradeDist`, `enrollTrend`
+- **Parameters (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+- `ownerCol` (`string`) — Holds “owner Col” for this scope. (text)
+- `activeCourses` (`int`) — Often a collection related to active Courses (plural name). (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+- `totalStudents` (`int`) — Often a collection related to total Students (plural name). (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+- `pending` (`int`) — Holds “pending” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+- `avgObj` (`var`) — Holds “avg Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
+- `avg` (`double`) — Holds “avg” for this scope. (number/score)  Literal number `0`.
+- `hasGrades` (`bool`) — Boolean flag: has Grades. (true/false)
+- `submissions` (`var`) — Often a collection related to submissions (plural name).  Newly constructed object.
+- `rdr` (`var`) — Holds “rdr” for this scope.
+- `studentName` (`string`) — Student display name.
+- `assign` (`string`) — Holds “assign” for this scope. (text)
+- `courseName` (`string`) — Course display name.
+- `answer` (`string`) — Holds “answer” for this scope. (text)
+- `timeText` (`string`) — Date/time value. (text)
+- `isGraded` (`bool`) — Boolean flag: is Graded. (true/false)
+- `maxScore` (`int`) — Maximum points (usually 100).
+- `initials` (`var`) — Often a collection related to initials (plural name).  Literal text string.
+- `parts` (`var`) — Split path or name segments.
+- `gradeDist` (`var`) — Holds “grade Dist” for this scope.  Newly constructed object.
+- `enrollTrend` (`var`) — Holds “enroll Trend” for this scope.  Newly constructed object.
 
 #### Line-by-line (this function)
 
@@ -247,11 +286,16 @@ public static object GetDashboardData(int uid)
  168 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L28:** Error handling block.
 - **L32:** Import namespace/types.
 - **L33:** Import namespace/types.
+<<<<<<< HEAD
 - **L40:** Parameterized SQL — prevents classic SQL injection.
 - **L41:** Run SQL; return table / rows / scalar.
 - **L48:** Parameterized SQL — prevents classic SQL injection.
@@ -261,10 +305,24 @@ public static object GetDashboardData(int uid)
 - **L61:** Run SQL; return table / rows / scalar.
 - **L72:** Parameterized SQL — prevents classic SQL injection.
 - **L73:** Run SQL; return table / rows / scalar.
+=======
+- **L36:** `ownerCol` means: Holds “owner Col” for this scope. (text)
+- **L40:** Parameterized SQL — prevents classic SQL injection.
+- **L41:** Run SQL; return table / rows / scalar. | `activeCourses` means: Often a collection related to active Courses (plural name). (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L48:** Parameterized SQL — prevents classic SQL injection.
+- **L49:** Run SQL; return table / rows / scalar. | `totalStudents` means: Often a collection related to total Students (plural name). (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L58:** Join related tables (courses ↔ chapters ↔ works ↔ users).
+- **L60:** Parameterized SQL — prevents classic SQL injection.
+- **L61:** Run SQL; return table / rows / scalar. | `pending` means: Holds “pending” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L72:** Parameterized SQL — prevents classic SQL injection.
+- **L73:** Run SQL; return table / rows / scalar. | `avgObj` means: Holds “avg Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L74:** `avg` means: Holds “avg” for this scope. (number/score)
+>>>>>>> eb8ce01 (update)
 - **L75:** Null-safe read from database values.
 - **L87:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L88:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L91:** Parameterized SQL — prevents classic SQL injection.
+<<<<<<< HEAD
 - **L93:** Import namespace/types.
 - **L97:** Null-safe read from database values.
 - **L98:** Null-safe read from database values.
@@ -277,6 +335,25 @@ public static object GetDashboardData(int uid)
 - **L132:** Parameterized SQL — prevents classic SQL injection.
 - **L134:** Import namespace/types.
 - **L150:** Parameterized SQL — prevents classic SQL injection.
+=======
+- **L92:** `submissions` means: Often a collection related to submissions (plural name).  Newly constructed object.
+- **L93:** Import namespace/types.
+- **L97:** Null-safe read from database values. | `sid` means: Submission ID (CWSubmissions.SID).
+- **L98:** Null-safe read from database values. | `studentName` means: Student display name.
+- **L99:** Null-safe read from database values. | `assign` means: Holds “assign” for this scope. (text)
+- **L100:** Null-safe read from database values. | `courseName` means: Course display name.
+- **L101:** Null-safe read from database values. | `answer` means: Holds “answer” for this scope. (text)
+- **L102:** Null-safe read from database values. | `timeText` means: Date/time value. (text)
+- **L103:** Null-safe read from database values. | `isGraded` means: Boolean flag: is Graded. (true/false)
+- **L104:** Null-safe read from database values. | `maxScore` means: Maximum points (usually 100).
+- **L105:** `initials` means: Often a collection related to initials (plural name).  Literal text string.
+- **L108:** `parts` means: Split path or name segments.
+- **L132:** Parameterized SQL — prevents classic SQL injection.
+- **L133:** `gradeDist` means: Holds “grade Dist” for this scope.  Newly constructed object.
+- **L134:** Import namespace/types.
+- **L150:** Parameterized SQL — prevents classic SQL injection.
+- **L151:** `enrollTrend` means: Holds “enroll Trend” for this scope.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L152:** Import namespace/types.
 - **L163:** Handle/log exception.
 - **L165:** Error handling block.
@@ -294,8 +371,16 @@ public static object SaveGrade(int uid, int sid, int score, string review)
 - **Purpose:** Implements `SaveGrade`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Pattern:** Persist changes.
-- **Parameters:** `int uid, int sid, int score, string review`
-- **Local variables:** `conn`, `cmd`, `ownerCol`, `cnt`, `exist`
+- **Parameters (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `sid` (`int`) — Submission ID (CWSubmissions.SID).
+- `score` (`int`) — Points earned or max points depending on context.
+- `review` (`string`) — Holds “review” for this scope. (text)
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+- `ownerCol` (`string`) — Holds “owner Col” for this scope. (text)
+- `cnt` (`int`) — Holds “cnt” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+- `exist` (`int`) — Holds “exist” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
 
 #### Line-by-line (this function)
 
@@ -360,16 +445,29 @@ public static object SaveGrade(int uid, int sid, int score, string review)
  226 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L172:** Error handling block.
 - **L176:** Import namespace/types.
 - **L177:** Import namespace/types.
+<<<<<<< HEAD
 - **L189:** Parameterized SQL — prevents classic SQL injection.
 - **L190:** Parameterized SQL — prevents classic SQL injection.
 - **L191:** Run SQL; return table / rows / scalar.
 - **L197:** Parameterized SQL — prevents classic SQL injection.
 - **L198:** Run SQL; return table / rows / scalar.
+=======
+- **L180:** `ownerCol` means: Holds “owner Col” for this scope. (text)
+- **L189:** Parameterized SQL — prevents classic SQL injection.
+- **L190:** Parameterized SQL — prevents classic SQL injection.
+- **L191:** Run SQL; return table / rows / scalar. | `cnt` means: Holds “cnt” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L197:** Parameterized SQL — prevents classic SQL injection.
+- **L198:** Run SQL; return table / rows / scalar. | `exist` means: Holds “exist” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L204:** Parameterized SQL — prevents classic SQL injection.
 - **L205:** Parameterized SQL — prevents classic SQL injection.
 - **L206:** Parameterized SQL — prevents classic SQL injection.
@@ -394,8 +492,12 @@ public static bool DeleteCourse(int uid, int courseId)
 - **Purpose:** Implements `DeleteCourse`.
 - **Data:** Pure SQL via DbHelper/SqlClient (parameterized).
 - **Pattern:** Delete/clear data.
-- **Parameters:** `int uid, int courseId`
-- **Local variables:** `conn`, `cmd`, `ownerCol`
+- **Parameters (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.
+- `courseId` (`int`) — Holds “course Id” for this scope. (integer)
+- **Local variables (what each means):**
+- `conn` (`var`) — SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
+- `ownerCol` (`string`) — Holds “owner Col” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -430,11 +532,19 @@ public static bool DeleteCourse(int uid, int courseId)
  254 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
+=======
+**Line notes** (what code + variables mean)
+>>>>>>> eb8ce01 (update)
 
 - **L230:** Error handling block.
 - **L233:** Import namespace/types.
 - **L234:** Import namespace/types.
+<<<<<<< HEAD
+=======
+- **L237:** `ownerCol` means: Holds “owner Col” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 - **L243:** Parameterized SQL — prevents classic SQL injection.
 - **L244:** Parameterized SQL — prevents classic SQL injection.
 - **L245:** Run SQL; return table / rows / scalar.
@@ -445,7 +555,11 @@ public static bool DeleteCourse(int uid, int courseId)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -717,12 +831,17 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L7:** Import namespace/types.
 - **L9:** C# namespace grouping.
 - **L15:** Database access (pure SQL).
+<<<<<<< HEAD
+=======
+- **L17:** `cols` means: Often a collection related to cols (plural name).  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L18:** Import namespace/types.
 - **L21:** Import namespace/types.
 - **L23:** Owner lecturer foreign key.
 - **L28:** Error handling block.
 - **L32:** Import namespace/types.
 - **L33:** Import namespace/types.
+<<<<<<< HEAD
 - **L40:** Parameterized SQL — prevents classic SQL injection.
 - **L41:** Run SQL; return table / rows / scalar.
 - **L48:** Parameterized SQL — prevents classic SQL injection.
@@ -732,10 +851,24 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L61:** Run SQL; return table / rows / scalar.
 - **L72:** Parameterized SQL — prevents classic SQL injection.
 - **L73:** Run SQL; return table / rows / scalar.
+=======
+- **L36:** `ownerCol` means: Holds “owner Col” for this scope. (text)
+- **L40:** Parameterized SQL — prevents classic SQL injection.
+- **L41:** Run SQL; return table / rows / scalar. | `activeCourses` means: Often a collection related to active Courses (plural name). (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L48:** Parameterized SQL — prevents classic SQL injection.
+- **L49:** Run SQL; return table / rows / scalar. | `totalStudents` means: Often a collection related to total Students (plural name). (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L58:** Join related tables (courses ↔ chapters ↔ works ↔ users).
+- **L60:** Parameterized SQL — prevents classic SQL injection.
+- **L61:** Run SQL; return table / rows / scalar. | `pending` means: Holds “pending” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L72:** Parameterized SQL — prevents classic SQL injection.
+- **L73:** Run SQL; return table / rows / scalar. | `avgObj` means: Holds “avg Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L74:** `avg` means: Holds “avg” for this scope. (number/score)
+>>>>>>> eb8ce01 (update)
 - **L75:** Null-safe read from database values.
 - **L87:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L88:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L91:** Parameterized SQL — prevents classic SQL injection.
+<<<<<<< HEAD
 - **L93:** Import namespace/types.
 - **L97:** Null-safe read from database values.
 - **L98:** Null-safe read from database values.
@@ -748,17 +881,45 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L132:** Parameterized SQL — prevents classic SQL injection.
 - **L134:** Import namespace/types.
 - **L150:** Parameterized SQL — prevents classic SQL injection.
+=======
+- **L92:** `submissions` means: Often a collection related to submissions (plural name).  Newly constructed object.
+- **L93:** Import namespace/types.
+- **L97:** Null-safe read from database values. | `sid` means: Submission ID (CWSubmissions.SID).
+- **L98:** Null-safe read from database values. | `studentName` means: Student display name.
+- **L99:** Null-safe read from database values. | `assign` means: Holds “assign” for this scope. (text)
+- **L100:** Null-safe read from database values. | `courseName` means: Course display name.
+- **L101:** Null-safe read from database values. | `answer` means: Holds “answer” for this scope. (text)
+- **L102:** Null-safe read from database values. | `timeText` means: Date/time value. (text)
+- **L103:** Null-safe read from database values. | `isGraded` means: Boolean flag: is Graded. (true/false)
+- **L104:** Null-safe read from database values. | `maxScore` means: Maximum points (usually 100).
+- **L105:** `initials` means: Often a collection related to initials (plural name).  Literal text string.
+- **L108:** `parts` means: Split path or name segments.
+- **L132:** Parameterized SQL — prevents classic SQL injection.
+- **L133:** `gradeDist` means: Holds “grade Dist” for this scope.  Newly constructed object.
+- **L134:** Import namespace/types.
+- **L150:** Parameterized SQL — prevents classic SQL injection.
+- **L151:** `enrollTrend` means: Holds “enroll Trend” for this scope.  Newly constructed object.
+>>>>>>> eb8ce01 (update)
 - **L152:** Import namespace/types.
 - **L163:** Handle/log exception.
 - **L165:** Error handling block.
 - **L172:** Error handling block.
 - **L176:** Import namespace/types.
 - **L177:** Import namespace/types.
+<<<<<<< HEAD
 - **L189:** Parameterized SQL — prevents classic SQL injection.
 - **L190:** Parameterized SQL — prevents classic SQL injection.
 - **L191:** Run SQL; return table / rows / scalar.
 - **L197:** Parameterized SQL — prevents classic SQL injection.
 - **L198:** Run SQL; return table / rows / scalar.
+=======
+- **L180:** `ownerCol` means: Holds “owner Col” for this scope. (text)
+- **L189:** Parameterized SQL — prevents classic SQL injection.
+- **L190:** Parameterized SQL — prevents classic SQL injection.
+- **L191:** Run SQL; return table / rows / scalar. | `cnt` means: Holds “cnt” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+- **L197:** Parameterized SQL — prevents classic SQL injection.
+- **L198:** Run SQL; return table / rows / scalar. | `exist` means: Holds “exist” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
+>>>>>>> eb8ce01 (update)
 - **L204:** Parameterized SQL — prevents classic SQL injection.
 - **L205:** Parameterized SQL — prevents classic SQL injection.
 - **L206:** Parameterized SQL — prevents classic SQL injection.
@@ -772,6 +933,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L230:** Error handling block.
 - **L233:** Import namespace/types.
 - **L234:** Import namespace/types.
+<<<<<<< HEAD
+=======
+- **L237:** `ownerCol` means: Holds “owner Col” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 - **L243:** Parameterized SQL — prevents classic SQL injection.
 - **L244:** Parameterized SQL — prevents classic SQL injection.
 - **L245:** Run SQL; return table / rows / scalar.

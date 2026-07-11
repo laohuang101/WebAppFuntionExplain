@@ -1,6 +1,10 @@
 # Media.ashx
 **Source:** `Media.ashx`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,6 +19,8 @@ Serve files under Uploads with path sandbox + auth policy by folder.
 
 ## Variables / fields (file level)
 
+Each name is explained in plain English (what it stores / why it exists).
+
 Markup/mixed file. Server controls and expressions are explained with code-behind and script companions.
 
 ## Functions / methods (11 found)
@@ -28,8 +34,22 @@ public void ProcessRequest(HttpContext context)
 #### Explanation
 
 - **Purpose:** Implements `ProcessRequest`.
-- **Parameters:** `HttpContext context`
-- **Local variables:** `f`, `relative`, `bare`, `foundBare`, `relBare`, `folderBare`, `parts`, `folder`, `physical`, `byMeta`, `sb`, `rootFull`, `full`
+- **Parameters (what each means):**
+- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
+- **Local variables (what each means):**
+- `f` (`string`) — Holds “f” for this scope. (text)  Comes from HTTP request.
+- `relative` (`string`) — Path relative to Uploads root.
+- `bare` (`string`) — Holds “bare” for this scope. (text)
+- `foundBare` (`string`) — Holds “found Bare” for this scope. (text)
+- `relBare` (`string`) — Holds “rel Bare” for this scope. (text)
+- `folderBare` (`string`) — Filesystem or URL path. (text)
+- `parts` (`var`) — Split path or name segments.
+- `folder` (`string`) — Uploads subfolder (CourseMaterials, CourseVideos, …).
+- `physical` (`string`) — Absolute disk path on the server.
+- `byMeta` (`string`) — Holds “by Meta” for this scope. (text)
+- `sb` (`var`) — StringBuilder — efficient string concatenation.  Newly constructed object.
+- `rootFull` (`string`) — Holds “root Full” for this scope. (text)
+- `full` (`string`) — Fully resolved absolute path.
 
 #### Line-by-line (this function)
 
@@ -134,12 +154,32 @@ public void ProcessRequest(HttpContext context)
  116 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L20:** IHttpHandler entry for ashx.
 - **L22:** Error handling block.
 - **L43:** Sandbox path under ~/Uploads.
 - **L71:** Sandbox path under ~/Uploads.
+=======
+**Line notes** (what code + variables mean)
+
+- **L20:** IHttpHandler entry for ashx.
+- **L22:** Error handling block.
+- **L38:** `f` means: Holds “f” for this scope. (text)  Comes from HTTP request.
+- **L43:** Sandbox path under ~/Uploads. | `relative` means: Path relative to Uploads root.
+- **L47:** `bare` means: Holds “bare” for this scope. (text)
+- **L51:** `foundBare` means: Holds “found Bare” for this scope. (text)
+- **L54:** `relBare` means: Holds “rel Bare” for this scope. (text)
+- **L55:** `folderBare` means: Filesystem or URL path. (text)
+- **L66:** `parts` means: Split path or name segments.
+- **L67:** `folder` means: Uploads subfolder (CourseMaterials, CourseVideos, …).
+- **L71:** Sandbox path under ~/Uploads. | `physical` means: Absolute disk path on the server.
+- **L76:** `byMeta` means: Holds “by Meta” for this scope. (text)
+- **L87:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
+- **L99:** `rootFull` means: Holds “root Full” for this scope. (text)
+- **L102:** `full` means: Fully resolved absolute path.
+>>>>>>> eb8ce01 (update)
 - **L111:** Handle/log exception.
 - **L114:** Error handling block.
 
@@ -155,8 +195,12 @@ private static bool AuthorizeFolder(HttpContext context, string folder)
 
 - **Purpose:** Implements `AuthorizeFolder`.
 - **Session:** Reads/writes ASP.NET Session.
-- **Parameters:** `HttpContext context, string folder`
-- **Local variables:** `uid`, `role`
+- **Parameters (what each means):**
+- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
+- `folder` (`string`) — Uploads subfolder (CourseMaterials, CourseVideos, …).
+- **Local variables (what each means):**
+- `uid` (`int`) — User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+- `role` (`string`) — User role code or name (Admin/Student/Lecturer).
 
 #### Line-by-line (this function)
 
@@ -206,10 +250,17 @@ private static bool AuthorizeFolder(HttpContext context, string folder)
  166 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L137:** Restore/validate user from Session or JWT; reject stale UIDs.
 - **L144:** Map role codes/names to Admin/Student/Lecturer.
+=======
+**Line notes** (what code + variables mean)
+
+- **L137:** Restore/validate user from Session or JWT; reject stale UIDs. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+- **L144:** Map role codes/names to Admin/Student/Lecturer. | `role` means: User role code or name (Admin/Student/Lecturer).
+>>>>>>> eb8ce01 (update)
 - **L145:** Server session for logged-in user.
 
 ---
@@ -223,8 +274,10 @@ private static string FirstFolder(string relative)
 #### Explanation
 
 - **Purpose:** Implements `FirstFolder`.
-- **Parameters:** `string relative`
-- **Local variables:** `slash`
+- **Parameters (what each means):**
+- `relative` (`string`) — Path relative to Uploads root.
+- **Local variables (what each means):**
+- `slash` (`int`) — Holds “slash” for this scope. (integer)
 
 #### Line-by-line (this function)
 
@@ -237,6 +290,13 @@ private static string FirstFolder(string relative)
  172 |         return slash < 0 ? relative : relative.Substring(0, slash);
  173 |     }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L171:** `slash` means: Holds “slash” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -249,8 +309,12 @@ private static string ToRelativeUnderUploads(HttpContext context, string physica
 #### Explanation
 
 - **Purpose:** Implements `ToRelativeUnderUploads`.
-- **Parameters:** `HttpContext context, string physical`
-- **Local variables:** `root`, `full`
+- **Parameters (what each means):**
+- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
+- `physical` (`string`) — Absolute disk path on the server.
+- **Local variables (what each means):**
+- `root` (`string`) — Root directory path (Uploads).
+- `full` (`string`) — Fully resolved absolute path.
 
 #### Line-by-line (this function)
 
@@ -271,9 +335,17 @@ private static string ToRelativeUnderUploads(HttpContext context, string physica
  187 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L177:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L177:** Error handling block.
+- **L179:** `root` means: Root directory path (Uploads).
+- **L182:** `full` means: Fully resolved absolute path.
+>>>>>>> eb8ce01 (update)
 - **L186:** Handle/log exception.
 
 ---
@@ -287,8 +359,27 @@ private static string FindByOriginalName(HttpContext context, string folderOrNul
 #### Explanation
 
 - **Purpose:** Implements `FindByOriginalName`.
-- **Parameters:** `HttpContext context, string folderOrNull, string originalName`
-- **Local variables:** `uploads`, `dir`, `exact`, `content`, `dataFile`, `log`, `o`, `orig`, `sp`, `u`, `under`, `sp2`, `phys`
+- **Parameters (what each means):**
+- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
+- `folderOrNull` (`string`) — Filesystem or URL path. (text)
+- `originalName` (`string`) — Holds “original Name” for this scope. (text)
+- **Local variables (what each means):**
+- `uploads` (`string`) — Often a collection related to uploads (plural name). (text)
+- `dir` (`string`) — Filesystem or URL path. (text)
+- `exact` (`string`) — Holds “exact” for this scope. (text)
+- `content` (`string`) — Submission body text or JSON payload in CWSubmissions.
+- `dataFile` (`string`) — Holds “data File” for this scope. (text)
+- `log` (`string`) — Holds “log” for this scope. (text)
+- `o` (`int`) — Holds “o” for this scope. (integer)
+- `orig` (`string`) — Holds “orig” for this scope. (text)
+- `sp` (`int`) — Holds “sp” for this scope. (integer)
+- `u` (`int`) — Holds “u” for this scope. (integer)
+- `under` (`string`) — Holds “under” for this scope. (text)
+- `sp2` (`int`) — Holds “sp2” for this scope. (integer)
+- `phys` (`string`) — Often a collection related to phys (plural name). (text)
+- `folder` — Uploads subfolder (CourseMaterials, CourseVideos, …).
+- `meta` — Extra settings packed as JSON (dueDate, requireFile, …).
+- `line` — Holds “line” for this scope.
 
 #### Line-by-line (this function)
 
@@ -367,11 +458,32 @@ private static string FindByOriginalName(HttpContext context, string folderOrNul
  263 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L213:** Error handling block.
 - **L222:** Handle/log exception.
 - **L227:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L196:** `uploads` means: Often a collection related to uploads (plural name). (text)
+- **L205:** `dir` means: Filesystem or URL path. (text)
+- **L208:** `exact` means: Holds “exact” for this scope. (text)
+- **L213:** Error handling block.
+- **L215:** `content` means: Submission body text or JSON payload in CWSubmissions.
+- **L218:** `dataFile` means: Holds “data File” for this scope. (text)
+- **L222:** Handle/log exception.
+- **L227:** Error handling block.
+- **L229:** `log` means: Holds “log” for this scope. (text)
+- **L236:** `o` means: Holds “o” for this scope. (integer)
+- **L237:** `orig` means: Holds “orig” for this scope. (text)
+- **L238:** `sp` means: Holds “sp” for this scope. (integer)
+- **L243:** `u` means: Holds “u” for this scope. (integer)
+- **L244:** `under` means: Holds “under” for this scope. (text)
+- **L245:** `sp2` means: Holds “sp2” for this scope. (integer)
+- **L250:** `phys` means: Often a collection related to phys (plural name). (text)
+>>>>>>> eb8ce01 (update)
 - **L254:** Error handling block.
 - **L260:** Handle/log exception.
 
@@ -386,8 +498,14 @@ private static string NormalizeRequestPath(string f)
 #### Explanation
 
 - **Purpose:** Implements `NormalizeRequestPath`.
-- **Parameters:** `string f`
-- **Local variables:** `up`, `p`, `rest`, `eq`, `amp`
+- **Parameters (what each means):**
+- `f` (`string`) — Holds “f” for this scope. (text)
+- **Local variables (what each means):**
+- `up` (`int`) — Holds “up” for this scope. (integer)
+- `p` (`int`) — Parameter, path, or password fragment depending on context.
+- `rest` (`string`) — Holds “rest” for this scope. (text)
+- `eq` (`int`) — Holds “eq” for this scope. (integer)
+- `amp` (`int`) — Holds “amp” for this scope. (integer)
 
 #### Line-by-line (this function)
 
@@ -425,8 +543,18 @@ private static string NormalizeRequestPath(string f)
  294 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
+=======
+**Line notes** (what code + variables mean)
+
+- **L272:** `up` means: Holds “up” for this scope. (integer)
+- **L278:** `p` means: Parameter, path, or password fragment depending on context.
+- **L282:** `rest` means: Holds “rest” for this scope. (text)
+- **L283:** `eq` means: Holds “eq” for this scope. (integer)
+- **L285:** `amp` means: Holds “amp” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 - **L287:** Error handling block.
 
 ---
@@ -440,8 +568,32 @@ private static void StreamFile(HttpContext context, string physical)
 #### Explanation
 
 - **Purpose:** Implements `StreamFile`.
-- **Parameters:** `HttpContext context, string physical`
-- **Local variables:** `fileName`, `metaPath`, `downloadName`, `orig`, `ext`, `contentType`, `forceDownload`, `isRange`, `rangeHeader`, `spec`, `dash`, `s1`, `s2`, `fs`, `buffer`, `toRead`, `read`
+- **Parameters (what each means):**
+- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
+- `physical` (`string`) — Absolute disk path on the server.
+- **Local variables (what each means):**
+- `fileName` (`string`) — Original file name for display/download.
+- `metaPath` (`string`) — Filesystem or URL path. (text)
+- `downloadName` (`string`) — Holds “download Name” for this scope. (text)
+- `orig` (`string`) — Holds “orig” for this scope. (text)
+- `ext` (`string`) — File extension (.pdf, .mp4, …).
+- `contentType` (`string`) — Holds “content Type” for this scope. (text)
+- `forceDownload` (`bool`) — Holds “force Download” for this scope. (true/false)  Comes from HTTP request.
+- `fileLength` (`long`) — Holds “file Length” for this scope. (integer)  Newly constructed object.
+- `start` (`long`) — Range start (file stream) or string index.  Literal number `0`.
+- `end` (`long`) — Range end or string end index.
+- `isRange` (`bool`) — Boolean flag: is Range. (true/false)
+- `rangeHeader` (`string`) — Holds “range Header” for this scope. (text)
+- `spec` (`string`) — Holds “spec” for this scope. (text)
+- `dash` (`int`) — Holds “dash” for this scope. (integer)
+- `s1` (`string`) — Holds “s1” for this scope. (text)
+- `s2` (`string`) — Holds “s2” for this scope. (text)
+- `contentLength` (`long`) — Holds “content Length” for this scope. (integer)
+- `fs` (`var`) — Holds “fs” for this scope.  Newly constructed object.
+- `buffer` (`var`) — Holds “buffer” for this scope.  Newly constructed object.
+- `remaining` (`long`) — Holds “remaining” for this scope. (integer)
+- `toRead` (`int`) — Holds “to Read” for this scope. (integer)
+- `read` (`int`) — Holds “read” for this scope. (integer)
 
 #### Line-by-line (this function)
 
@@ -537,11 +689,40 @@ private static void StreamFile(HttpContext context, string physical)
  383 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L304:** Error handling block.
 - **L309:** Handle/log exception.
 - **L367:** Import namespace/types.
+=======
+**Line notes** (what code + variables mean)
+
+- **L298:** `fileName` means: Original file name for display/download.
+- **L300:** `metaPath` means: Filesystem or URL path. (text)
+- **L301:** `downloadName` means: Holds “download Name” for this scope. (text)
+- **L304:** Error handling block.
+- **L306:** `orig` means: Holds “orig” for this scope. (text)
+- **L309:** Handle/log exception.
+- **L312:** `ext` means: File extension (.pdf, .mp4, …).
+- **L313:** `contentType` means: Holds “content Type” for this scope. (text)
+- **L314:** `forceDownload` means: Holds “force Download” for this scope. (true/false)  Comes from HTTP request.
+- **L318:** `fileLength` means: Holds “file Length” for this scope. (integer)  Newly constructed object.
+- **L319:** `start` means: Range start (file stream) or string index.  Literal number `0`.
+- **L320:** `end` means: Range end or string end index.
+- **L321:** `isRange` means: Boolean flag: is Range. (true/false)
+- **L323:** `rangeHeader` means: Holds “range Header” for this scope. (text)
+- **L328:** `spec` means: Holds “spec” for this scope. (text)
+- **L329:** `dash` means: Holds “dash” for this scope. (integer)
+- **L332:** `s1` means: Holds “s1” for this scope. (text)
+- **L333:** `s2` means: Holds “s2” for this scope. (text)
+- **L348:** `contentLength` means: Holds “content Length” for this scope. (integer)
+- **L367:** Import namespace/types.
+- **L370:** `buffer` means: Holds “buffer” for this scope.  Newly constructed object.
+- **L371:** `remaining` means: Holds “remaining” for this scope. (integer)
+- **L375:** `toRead` means: Holds “to Read” for this scope. (integer)
+- **L376:** `read` means: Holds “read” for this scope. (integer)
+>>>>>>> eb8ce01 (update)
 - **L382:** Error handling block.
 
 ---
@@ -555,8 +736,18 @@ private static void WriteDiag(HttpContext context)
 #### Explanation
 
 - **Purpose:** Implements `WriteDiag`.
-- **Parameters:** `HttpContext context`
-- **Local variables:** `sb`, `uploads`, `dir`, `files`, `n`, `fi`, `note`
+- **Parameters (what each means):**
+- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
+- **Local variables (what each means):**
+- `sb` (`var`) — StringBuilder — efficient string concatenation.  Newly constructed object.
+- `uploads` (`string`) — Often a collection related to uploads (plural name). (text)
+- `dir` (`string`) — Filesystem or URL path. (text)
+- `files` (`var`) — Often a collection related to files (plural name).
+- `n` (`int`) — Integer count (rows, items, or length).  Literal number `0`.
+- `fi` (`var`) — Holds “fi” for this scope.  Newly constructed object.
+- `note` (`string`) — Holds “note” for this scope. (text)  Literal text string.
+- `root` — Root directory path (Uploads).
+- `file` — Uploaded file object or file name.
 
 #### Line-by-line (this function)
 
@@ -600,8 +791,20 @@ private static void WriteDiag(HttpContext context)
  420 |     }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
+=======
+**Line notes** (what code + variables mean)
+
+- **L387:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
+- **L388:** `uploads` means: Often a collection related to uploads (plural name). (text)
+- **L397:** `dir` means: Filesystem or URL path. (text)
+- **L401:** `files` means: Often a collection related to files (plural name).
+- **L403:** `n` means: Integer count (rows, items, or length).  Literal number `0`.
+- **L406:** `fi` means: Holds “fi” for this scope.  Newly constructed object.
+- **L407:** `note` means: Holds “note” for this scope. (text)  Literal text string.
+>>>>>>> eb8ce01 (update)
 - **L410:** Error handling block.
 
 ---
@@ -615,7 +818,10 @@ private static void WriteText(HttpContext context, int code, string message)
 #### Explanation
 
 - **Purpose:** Implements `WriteText`.
-- **Parameters:** `HttpContext context, int code, string message`
+- **Parameters (what each means):**
+- `context` (`HttpContext`) — Holds “context” for this scope. (current HTTP request)
+- `code` (`int`) — 6-digit TOTP / OTP the user typed.
+- `message` (`string`) — Status text for the UI.
 
 #### Line-by-line (this function)
 
@@ -641,8 +847,10 @@ private static bool IsClientAbort(Exception ex)
 #### Explanation
 
 - **Purpose:** Implements `IsClientAbort`.
-- **Parameters:** `Exception ex`
-- **Local variables:** `m`
+- **Parameters (what each means):**
+- `ex` (`Exception`) — Exception object in catch blocks.
+- **Local variables (what each means):**
+- `m` (`string`) — Holds “m” for this scope. (text)
 
 #### Line-by-line (this function)
 
@@ -658,6 +866,13 @@ private static bool IsClientAbort(Exception ex)
  437 |         return ex.InnerException != null && IsClientAbort(ex.InnerException);
  438 |     }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L433:** `m` means: Holds “m” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -670,7 +885,8 @@ private static string MimeFromExt(string ext)
 #### Explanation
 
 - **Purpose:** Implements `MimeFromExt`.
-- **Parameters:** `string ext`
+- **Parameters (what each means):**
+- `ext` (`string`) — File extension (.pdf, .mp4, …).
 
 #### Line-by-line (this function)
 
@@ -703,7 +919,11 @@ private static string MimeFromExt(string ext)
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```html
    1 | <%@ WebHandler Language="C#" Class="MediaHandler" %>
@@ -1183,6 +1403,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L18:** Sandbox path under ~/Uploads.
 - **L20:** IHttpHandler entry for ashx.
 - **L22:** Error handling block.
+<<<<<<< HEAD
 - **L43:** Sandbox path under ~/Uploads.
 - **L71:** Sandbox path under ~/Uploads.
 - **L111:** Handle/log exception.
@@ -1203,6 +1424,89 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L367:** Import namespace/types.
 - **L382:** Error handling block.
 - **L410:** Error handling block.
+=======
+- **L38:** `f` means: Holds “f” for this scope. (text)  Comes from HTTP request.
+- **L43:** Sandbox path under ~/Uploads. | `relative` means: Path relative to Uploads root.
+- **L47:** `bare` means: Holds “bare” for this scope. (text)
+- **L51:** `foundBare` means: Holds “found Bare” for this scope. (text)
+- **L54:** `relBare` means: Holds “rel Bare” for this scope. (text)
+- **L55:** `folderBare` means: Filesystem or URL path. (text)
+- **L66:** `parts` means: Split path or name segments.
+- **L67:** `folder` means: Uploads subfolder (CourseMaterials, CourseVideos, …).
+- **L71:** Sandbox path under ~/Uploads. | `physical` means: Absolute disk path on the server.
+- **L76:** `byMeta` means: Holds “by Meta” for this scope. (text)
+- **L87:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
+- **L99:** `rootFull` means: Holds “root Full” for this scope. (text)
+- **L102:** `full` means: Fully resolved absolute path.
+- **L111:** Handle/log exception.
+- **L114:** Error handling block.
+- **L137:** Restore/validate user from Session or JWT; reject stale UIDs. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
+- **L144:** Map role codes/names to Admin/Student/Lecturer. | `role` means: User role code or name (Admin/Student/Lecturer).
+- **L145:** Server session for logged-in user.
+- **L171:** `slash` means: Holds “slash” for this scope. (integer)
+- **L177:** Error handling block.
+- **L179:** `root` means: Root directory path (Uploads).
+- **L182:** `full` means: Fully resolved absolute path.
+- **L186:** Handle/log exception.
+- **L196:** `uploads` means: Often a collection related to uploads (plural name). (text)
+- **L205:** `dir` means: Filesystem or URL path. (text)
+- **L208:** `exact` means: Holds “exact” for this scope. (text)
+- **L213:** Error handling block.
+- **L215:** `content` means: Submission body text or JSON payload in CWSubmissions.
+- **L218:** `dataFile` means: Holds “data File” for this scope. (text)
+- **L222:** Handle/log exception.
+- **L227:** Error handling block.
+- **L229:** `log` means: Holds “log” for this scope. (text)
+- **L236:** `o` means: Holds “o” for this scope. (integer)
+- **L237:** `orig` means: Holds “orig” for this scope. (text)
+- **L238:** `sp` means: Holds “sp” for this scope. (integer)
+- **L243:** `u` means: Holds “u” for this scope. (integer)
+- **L244:** `under` means: Holds “under” for this scope. (text)
+- **L245:** `sp2` means: Holds “sp2” for this scope. (integer)
+- **L250:** `phys` means: Often a collection related to phys (plural name). (text)
+- **L254:** Error handling block.
+- **L260:** Handle/log exception.
+- **L272:** `up` means: Holds “up” for this scope. (integer)
+- **L278:** `p` means: Parameter, path, or password fragment depending on context.
+- **L282:** `rest` means: Holds “rest” for this scope. (text)
+- **L283:** `eq` means: Holds “eq” for this scope. (integer)
+- **L285:** `amp` means: Holds “amp” for this scope. (integer)
+- **L287:** Error handling block.
+- **L298:** `fileName` means: Original file name for display/download.
+- **L300:** `metaPath` means: Filesystem or URL path. (text)
+- **L301:** `downloadName` means: Holds “download Name” for this scope. (text)
+- **L304:** Error handling block.
+- **L306:** `orig` means: Holds “orig” for this scope. (text)
+- **L309:** Handle/log exception.
+- **L312:** `ext` means: File extension (.pdf, .mp4, …).
+- **L313:** `contentType` means: Holds “content Type” for this scope. (text)
+- **L314:** `forceDownload` means: Holds “force Download” for this scope. (true/false)  Comes from HTTP request.
+- **L318:** `fileLength` means: Holds “file Length” for this scope. (integer)  Newly constructed object.
+- **L319:** `start` means: Range start (file stream) or string index.  Literal number `0`.
+- **L320:** `end` means: Range end or string end index.
+- **L321:** `isRange` means: Boolean flag: is Range. (true/false)
+- **L323:** `rangeHeader` means: Holds “range Header” for this scope. (text)
+- **L328:** `spec` means: Holds “spec” for this scope. (text)
+- **L329:** `dash` means: Holds “dash” for this scope. (integer)
+- **L332:** `s1` means: Holds “s1” for this scope. (text)
+- **L333:** `s2` means: Holds “s2” for this scope. (text)
+- **L348:** `contentLength` means: Holds “content Length” for this scope. (integer)
+- **L367:** Import namespace/types.
+- **L370:** `buffer` means: Holds “buffer” for this scope.  Newly constructed object.
+- **L371:** `remaining` means: Holds “remaining” for this scope. (integer)
+- **L375:** `toRead` means: Holds “to Read” for this scope. (integer)
+- **L376:** `read` means: Holds “read” for this scope. (integer)
+- **L382:** Error handling block.
+- **L387:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
+- **L388:** `uploads` means: Often a collection related to uploads (plural name). (text)
+- **L397:** `dir` means: Filesystem or URL path. (text)
+- **L401:** `files` means: Often a collection related to files (plural name).
+- **L403:** `n` means: Integer count (rows, items, or length).  Literal number `0`.
+- **L406:** `fi` means: Holds “fi” for this scope.  Newly constructed object.
+- **L407:** `note` means: Holds “note” for this scope. (text)  Literal text string.
+- **L410:** Error handling block.
+- **L433:** `m` means: Holds “m” for this scope. (text)
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

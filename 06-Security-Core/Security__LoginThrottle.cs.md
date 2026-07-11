@@ -1,6 +1,10 @@
 # LoginThrottle.cs
 **Source:** `Data/Security/LoginThrottle.cs`  
+<<<<<<< HEAD
 **Generated:** 2026-07-11 21:33  
+=======
+**Generated:** 2026-07-11 21:40  
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -15,33 +19,35 @@ In-memory brute-force protection per email+IP (failures, lockout window).
 
 ## Variables / fields (file level)
 
-- **Line 16:** `Failures` — type `int`
-- **Line 17:** `WindowStartUtc` — type `DateTime`
-- **Line 18:** `LockedUntilUtc` — type `DateTime?`
-- **Line 28:** `n` — type `int`
-- **Line 30:** `n` — type `return`
-- **Line 31:** `5` — type `return`
-- **Line 39:** `n` — type `int`
-- **Line 41:** `n` — type `return`
-- **Line 42:** `15` — type `return`
-- **Line 50:** `n` — type `int`
-- **Line 52:** `n` — type `return`
-- **Line 53:** `15` — type `return`
-- **Line 59:** `e` — type `string`
-- **Line 60:** `ip` — type `string`
-- **Line 67:** `xff` — type `string`
-- **Line 70:** `comma` — type `int`
-- **Line 82:** `key` — type `string`
-- **Line 83:** `b` — type `Bucket`
-- **Line 90:** `remain` — type `var`
-- **Line 91:** `mins` — type `int`
-- **Line 93:** `true` — type `return`
-- **Line 100:** `false` — type `return`
-- **Line 105:** `key` — type `string`
-- **Line 106:** `now` — type `var`
-- **Line 123:** `b` — type `return`
-- **Line 129:** `key` — type `string`
-- **Line 130:** `removed` — type `Bucket`
+Each name is explained in plain English (what it stores / why it exists).
+
+- **Line 16:** `Failures` (`int`) — **Number of failed login attempts in the current window.**
+- **Line 17:** `WindowStartUtc` (`DateTime`) — **Date/time value. (date/time)**
+- **Line 18:** `LockedUntilUtc` (`DateTime?`) — **Date/time value. (date/time)**
+- **Line 28:** `n` (`int`) — **Integer count (rows, items, or length).**
+- **Line 30:** `n` (`return`) — **Numeric count or temporary integer.**
+- **Line 31:** `5` (`return`) — **Holds “5” for this scope. (type `return`)**
+- **Line 39:** `n` (`int`) — **Integer count (rows, items, or length).**
+- **Line 41:** `n` (`return`) — **Numeric count or temporary integer.**
+- **Line 42:** `15` (`return`) — **Holds “15” for this scope. (type `return`)**
+- **Line 50:** `n` (`int`) — **Integer count (rows, items, or length).**
+- **Line 52:** `n` (`return`) — **Numeric count or temporary integer.**
+- **Line 53:** `15` (`return`) — **Holds “15” for this scope. (type `return`)**
+- **Line 59:** `e` (`string`) — **Normalized email string (trimmed/lowercased).**
+- **Line 60:** `ip` (`string`) — **Client IP address for throttle/audit.**
+- **Line 67:** `xff` (`string`) — **X-Forwarded-For header value (client IP when behind a proxy).**
+- **Line 70:** `comma` (`int`) — **Index of the first comma in a string (split helper).**
+- **Line 82:** `key` (`string`) — **HMAC key bytes or dictionary key.**
+- **Line 83:** `b` (`Bucket`) — **Holds “b” for this scope. (type `Bucket`)**
+- **Line 90:** `remain` (`var`) — **Holds “remain” for this scope.**
+- **Line 91:** `mins` (`int`) — **Often a collection related to mins (plural name). (integer)**
+- **Line 93:** `true` (`return`) — **Holds “true” for this scope. (type `return`)**
+- **Line 100:** `false` (`return`) — **Holds “false” for this scope. (type `return`)**
+- **Line 105:** `key` (`string`) — **HMAC key bytes or dictionary key.**
+- **Line 106:** `now` (`var`) — **Current time (usually UTC or server local).**
+- **Line 123:** `b` (`return`) — **Holds “b” for this scope. (type `return`)**
+- **Line 129:** `key` (`string`) — **HMAC key bytes or dictionary key.**
+- **Line 130:** `removed` (`Bucket`) — **Holds “removed” for this scope. (type `Bucket`)**
 
 ## Functions / methods (4 found)
 
@@ -54,8 +60,14 @@ public static string ClientKey(string email, HttpContext ctx)
 #### Explanation
 
 - **Purpose:** Implements `ClientKey`.
-- **Parameters:** `string email, HttpContext ctx`
-- **Local variables:** `e`, `ip`, `xff`, `comma`
+- **Parameters (what each means):**
+- `email` (`string`) — Account email address (usually lowercased).
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- **Local variables (what each means):**
+- `e` (`string`) — Normalized email string (trimmed/lowercased).
+- `ip` (`string`) — Client IP address for throttle/audit.  Literal text string.
+- `xff` (`string`) — X-Forwarded-For header value (client IP when behind a proxy).
+- `comma` (`int`) — Index of the first comma in a string (split helper).
 
 #### Line-by-line (this function)
 
@@ -84,9 +96,19 @@ public static string ClientKey(string email, HttpContext ctx)
   77 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L61:** Error handling block.
+=======
+**Line notes** (what code + variables mean)
+
+- **L59:** `e` means: Normalized email string (trimmed/lowercased).
+- **L60:** `ip` means: Client IP address for throttle/audit.  Literal text string.
+- **L61:** Error handling block.
+- **L67:** `xff` means: X-Forwarded-For header value (client IP when behind a proxy).
+- **L70:** `comma` means: Index of the first comma in a string (split helper).
+>>>>>>> eb8ce01 (update)
 - **L75:** Handle/log exception.
 
 ---
@@ -100,8 +122,14 @@ public static bool IsLocked(string email, HttpContext ctx, out string message)
 #### Explanation
 
 - **Purpose:** Implements `IsLocked`.
-- **Parameters:** `string email, HttpContext ctx, out string message`
-- **Local variables:** `key`, `remain`, `mins`
+- **Parameters (what each means):**
+- `email` (`string`) — Account email address (usually lowercased).
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- `message` (`string`) — Status text for the UI.
+- **Local variables (what each means):**
+- `key` (`string`) — HMAC key bytes or dictionary key.
+- `remain` (`var`) — Holds “remain” for this scope.
+- `mins` (`int`) — Often a collection related to mins (plural name). (integer)
 
 #### Line-by-line (this function)
 
@@ -132,9 +160,18 @@ public static bool IsLocked(string email, HttpContext ctx, out string message)
  101 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L79:** Brute-force lockout tracking.
+=======
+**Line notes** (what code + variables mean)
+
+- **L79:** Brute-force lockout tracking.
+- **L82:** `key` means: HMAC key bytes or dictionary key.
+- **L90:** `remain` means: Holds “remain” for this scope.
+- **L91:** `mins` means: Often a collection related to mins (plural name). (integer)
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -147,8 +184,12 @@ public static void RegisterFailure(string email, HttpContext ctx)
 #### Explanation
 
 - **Purpose:** Implements `RegisterFailure`.
-- **Parameters:** `string email, HttpContext ctx`
-- **Local variables:** `key`, `now`
+- **Parameters (what each means):**
+- `email` (`string`) — Account email address (usually lowercased).
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- **Local variables (what each means):**
+- `key` (`string`) — HMAC key bytes or dictionary key.
+- `now` (`var`) — Current time (usually UTC or server local).
 
 #### Line-by-line (this function)
 
@@ -179,9 +220,17 @@ public static void RegisterFailure(string email, HttpContext ctx)
  125 |         }
 ```
 
+<<<<<<< HEAD
 **Line notes**
 
 - **L103:** Brute-force lockout tracking.
+=======
+**Line notes** (what code + variables mean)
+
+- **L103:** Brute-force lockout tracking.
+- **L105:** `key` means: HMAC key bytes or dictionary key.
+- **L106:** `now` means: Current time (usually UTC or server local).
+>>>>>>> eb8ce01 (update)
 
 ---
 
@@ -194,8 +243,11 @@ public static void RegisterSuccess(string email, HttpContext ctx)
 #### Explanation
 
 - **Purpose:** Implements `RegisterSuccess`.
-- **Parameters:** `string email, HttpContext ctx`
-- **Local variables:** `key`
+- **Parameters (what each means):**
+- `email` (`string`) — Account email address (usually lowercased).
+- `ctx` (`HttpContext`) — Current HTTP request context (Request, Response, Session).
+- **Local variables (what each means):**
+- `key` (`string`) — HMAC key bytes or dictionary key.
 
 #### Line-by-line (this function)
 
@@ -208,12 +260,23 @@ public static void RegisterSuccess(string email, HttpContext ctx)
  131 |             Map.TryRemove(key, out removed);
  132 |         }
 ```
+<<<<<<< HEAD
+=======
+
+**Line notes** (what code + variables mean)
+
+- **L129:** `key` means: HMAC key bytes or dictionary key.
+>>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
+<<<<<<< HEAD
 Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
+=======
+Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
+>>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -361,10 +424,27 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L6:** C# namespace grouping.
 - **L12:** Brute-force lockout tracking.
 - **L14:** Class declaration for this page/service.
+<<<<<<< HEAD
 - **L61:** Error handling block.
 - **L75:** Handle/log exception.
 - **L79:** Brute-force lockout tracking.
 - **L103:** Brute-force lockout tracking.
+=======
+- **L59:** `e` means: Normalized email string (trimmed/lowercased).
+- **L60:** `ip` means: Client IP address for throttle/audit.  Literal text string.
+- **L61:** Error handling block.
+- **L67:** `xff` means: X-Forwarded-For header value (client IP when behind a proxy).
+- **L70:** `comma` means: Index of the first comma in a string (split helper).
+- **L75:** Handle/log exception.
+- **L79:** Brute-force lockout tracking.
+- **L82:** `key` means: HMAC key bytes or dictionary key.
+- **L90:** `remain` means: Holds “remain” for this scope.
+- **L91:** `mins` means: Often a collection related to mins (plural name). (integer)
+- **L103:** Brute-force lockout tracking.
+- **L105:** `key` means: HMAC key bytes or dictionary key.
+- **L106:** `now` means: Current time (usually UTC or server local).
+- **L129:** `key` means: HMAC key bytes or dictionary key.
+>>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 
