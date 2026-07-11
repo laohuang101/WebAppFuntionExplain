@@ -1,10 +1,6 @@
 # AuthSchema.cs
 **Source:** `Data/Security/AuthSchema.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -76,11 +72,7 @@ public static void Ensure()
   43 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L21:** Error handling block.
 - **L23:** Import namespace/types.
@@ -145,11 +137,7 @@ private static void EnsureAuditTable(SqlConnection conn)
   71 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L45:** Database access (pure SQL).
 - **L47:** Error handling block.
@@ -202,11 +190,7 @@ Action NVARCHAR(80) NOT NULL,
   68 |                 }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L67:** Run SQL; return table / rows / scalar.
 
@@ -273,11 +257,7 @@ private static void EnsureColumn(SqlConnection conn, string table, string column
  107 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L73:** Database access (pure SQL).
 - **L75:** Import namespace/types.
@@ -288,10 +268,7 @@ private static void EnsureColumn(SqlConnection conn, string table, string column
 - **L86:** Import namespace/types.
 - **L89:** Run SQL; return table / rows / scalar.
 - **L92:** Handle/log exception.
-<<<<<<< HEAD
-=======
 - **L94:** `simple` means: Holds “simple” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L97:** Error handling block.
 - **L99:** Import namespace/types.
 - **L102:** Run SQL; return table / rows / scalar.
@@ -301,11 +278,7 @@ private static void EnsureColumn(SqlConnection conn, string table, string column
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -419,7 +392,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  109 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -454,10 +427,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L86:** Import namespace/types.
 - **L89:** Run SQL; return table / rows / scalar.
 - **L92:** Handle/log exception.
-<<<<<<< HEAD
-=======
 - **L94:** `simple` means: Holds “simple” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L97:** Error handling block.
 - **L99:** Import namespace/types.
 - **L102:** Run SQL; return table / rows / scalar.

@@ -1,10 +1,6 @@
 # AuthService.cs
 **Source:** `Data/Security/AuthService.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -177,14 +173,6 @@ public static AuthResult StartRegistration(HttpContext ctx, string name, string 
  114 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L52:** Pending registration in Session until MFA confirmed.
-- **L78:** Import namespace/types.
-- **L82:** Parameterized SQL — prevents classic SQL injection.
-- **L86:** TOTP / authenticator (RFC 6238) helper.
-=======
 **Line notes** (what code + variables mean)
 
 - **L52:** Pending registration in Session until MFA confirmed.
@@ -193,7 +181,6 @@ public static AuthResult StartRegistration(HttpContext ctx, string name, string 
 - **L80:** `exists` means: Count > 0 check (email/user/row already exists).
 - **L82:** Parameterized SQL — prevents classic SQL injection.
 - **L86:** TOTP / authenticator (RFC 6238) helper. | `mfaSecret` means: Authenticator secret stored for the user.  New random MFA secret.
->>>>>>> eb8ce01 (update)
 - **L89:** Server session for logged-in user.
 - **L90:** Server session for logged-in user.
 - **L91:** Server session for logged-in user.
@@ -378,11 +365,7 @@ public static AuthResult FinishRegistration(HttpContext ctx, string totpCode)
  267 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L120:** Pending registration in Session until MFA confirmed.
 - **L127:** Pending registration in Session until MFA confirmed.
@@ -392,16 +375,11 @@ public static AuthResult FinishRegistration(HttpContext ctx, string totpCode)
 - **L142:** Pending registration in Session until MFA confirmed.
 - **L146:** TOTP / authenticator (RFC 6238) helper.
 - **L150:** Import namespace/types.
-<<<<<<< HEAD
-- **L154:** Parameterized SQL — prevents classic SQL injection.
-- **L157:** Pending registration in Session until MFA confirmed.
-=======
 - **L152:** `exists` means: Count > 0 check (email/user/row already exists).
 - **L154:** Parameterized SQL — prevents classic SQL injection.
 - **L157:** Pending registration in Session until MFA confirmed.
 - **L161:** `mfaSecret` means: Authenticator secret stored for the user.
 - **L162:** `mfaOn` means: 1/0 flag written to Users.MfaEnabled.  Literal number `1`.
->>>>>>> eb8ce01 (update)
 - **L165:** Error handling block.
 - **L169:** Return new identity/UID after INSERT.
 - **L171:** Parameterized SQL — prevents classic SQL injection.
@@ -421,11 +399,7 @@ public static AuthResult FinishRegistration(HttpContext ctx, string totpCode)
 - **L191:** Parameterized SQL — prevents classic SQL injection.
 - **L193:** Handle/log exception.
 - **L199:** Error handling block.
-<<<<<<< HEAD
-- **L201:** Parameterized SQL — prevents classic SQL injection.
-=======
 - **L201:** Parameterized SQL — prevents classic SQL injection. | `byEmail` means: Email address.
->>>>>>> eb8ce01 (update)
 - **L202:** Null-safe read from database values.
 - **L205:** Handle/log exception.
 - **L210:** Error handling block.
@@ -439,13 +413,8 @@ public static AuthResult FinishRegistration(HttpContext ctx, string totpCode)
 - **L225:** Parameterized SQL — prevents classic SQL injection.
 - **L227:** Handle/log exception.
 - **L230:** Error handling block.
-<<<<<<< HEAD
-- **L232:** Parameterized SQL — prevents classic SQL injection.
-- **L233:** Null-safe read from database values.
-=======
 - **L232:** Parameterized SQL — prevents classic SQL injection. | `stored` means: Holds “stored” for this scope.
 - **L233:** Null-safe read from database values. | `storedSecret` means: Secret key material (MFA Base32 or crypto secret). (text)
->>>>>>> eb8ce01 (update)
 - **L235:** TOTP / authenticator (RFC 6238) helper.
 - **L238:** Parameterized SQL — prevents classic SQL injection.
 - **L242:** Handle/log exception.
@@ -478,11 +447,7 @@ public static bool HasPendingRegistration(HttpContext ctx)
  275 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L270:** Pending registration in Session until MFA confirmed.
 - **L274:** Pending registration in Session until MFA confirmed.
@@ -514,11 +479,7 @@ public static bool TryGetPendingMfaSetup(HttpContext ctx, out string email, out 
  283 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L282:** Pending registration in Session until MFA confirmed.
 
@@ -559,11 +520,7 @@ public static void ClearPendingRegistration(HttpContext ctx)
  299 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L285:** Pending registration in Session until MFA confirmed.
 - **L287:** Error handling block.
@@ -635,11 +592,7 @@ private static bool TryReadPendingRegistration(
  328 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L301:** Pending registration in Session until MFA confirmed.
 - **L309:** Error handling block.
@@ -680,11 +633,7 @@ public static AuthResult Register(string name, string email, string password, bo
  334 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L333:** Pending registration in Session until MFA confirmed.
 
@@ -807,14 +756,6 @@ public static AuthResult LoginPassword(string email, string password)
  430 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L350:** Brute-force lockout tracking.
-- **L353:** Import namespace/types.
-- **L358:** Brute-force lockout tracking.
-- **L359:** Write/read security audit events.
-=======
 **Line notes** (what code + variables mean)
 
 - **L344:** `ctx` means: Current HTTP request context (Request, Response, Session).
@@ -824,17 +765,12 @@ public static AuthResult LoginPassword(string email, string password)
 - **L358:** Brute-force lockout tracking.
 - **L359:** Write/read security audit events.
 - **L363:** `stored` means: Holds “stored” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L367:** Password hashing (PBKDF2).
 - **L369:** Brute-force lockout tracking.
 - **L370:** Write/read security audit events.
 - **L374:** Brute-force lockout tracking.
 - **L377:** Password hashing (PBKDF2).
-<<<<<<< HEAD
-- **L379:** Password hashing (PBKDF2).
-=======
 - **L379:** Password hashing (PBKDF2). | `newHash` means: Cryptographic hash string. (text)  Assigned from password hash function.
->>>>>>> eb8ce01 (update)
 - **L380:** Error handling block.
 - **L383:** Parameterized SQL — prevents classic SQL injection.
 - **L385:** Handle/log exception.
@@ -842,11 +778,7 @@ public static AuthResult LoginPassword(string email, string password)
 - **L390:** Parameterized SQL — prevents classic SQL injection.
 - **L392:** Handle/log exception.
 - **L396:** Map role codes/names to Admin/Student/Lecturer.
-<<<<<<< HEAD
-- **L401:** JWT cookie create/validate/clear.
-=======
 - **L401:** JWT cookie create/validate/clear. | `adminToken` means: Security token (JWT or CSRF). (text)
->>>>>>> eb8ce01 (update)
 - **L402:** Write/read security audit events.
 
 ---
@@ -950,45 +882,26 @@ public static AuthResult VerifyMfa(int uid, string code, string method)
  500 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L432:** Verify multi-factor / TOTP code.
-- **L439:** Import namespace/types.
-=======
 **Line notes** (what code + variables mean)
 
 - **L432:** Verify multi-factor / TOTP code.
 - **L439:** Import namespace/types.
 - **L441:** `user` means: AuthUser or user row (UID, Email, Role, MfaSecret, …).
 - **L444:** `ok` means: Boolean success flag.
->>>>>>> eb8ce01 (update)
 - **L447:** Error handling block.
 - **L449:** Import namespace/types.
 - **L452:** Parameterized SQL — prevents classic SQL injection.
 - **L453:** Import namespace/types.
-<<<<<<< HEAD
-- **L457:** Null-safe read from database values.
-- **L458:** Null-safe read from database values.
-- **L469:** Parameterized SQL — prevents classic SQL injection.
-- **L472:** Handle/log exception.
-- **L477:** TOTP / authenticator (RFC 6238) helper.
-=======
 - **L457:** Null-safe read from database values. | `otp` means: Holds “otp” for this scope. (text)
 - **L458:** Null-safe read from database values. | `exp` means: Expiry DateTime.
 - **L469:** Parameterized SQL — prevents classic SQL injection.
 - **L472:** Handle/log exception.
 - **L477:** TOTP / authenticator (RFC 6238) helper. | `secret` means: MFA TOTP Base32 secret for authenticator apps.
->>>>>>> eb8ce01 (update)
 - **L480:** TOTP / authenticator (RFC 6238) helper.
 - **L485:** Brute-force lockout tracking.
 - **L489:** Brute-force lockout tracking.
 - **L490:** Map role codes/names to Admin/Student/Lecturer.
-<<<<<<< HEAD
-- **L491:** JWT cookie create/validate/clear.
-=======
 - **L491:** JWT cookie create/validate/clear. | `token` means: JWT or CSRF token string.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1027,11 +940,7 @@ public static void CompleteLogin(HttpContext ctx, AuthUser user, string token)
  513 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L502:** Issue Session + JWT after successful auth.
 - **L506:** Server session for logged-in user.
@@ -1086,14 +995,9 @@ public static void Logout(HttpContext ctx)
  535 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-=======
 **Line notes** (what code + variables mean)
 
 - **L519:** `email` means: Account email address (usually lowercased).
->>>>>>> eb8ce01 (update)
 - **L520:** Error handling block.
 - **L522:** Server session for logged-in user.
 - **L523:** Server session for logged-in user.
@@ -1222,39 +1126,24 @@ public static AuthResult VerifyMfaForPasswordReset(string email, string totpCode
  630 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L541:** Verify multi-factor / TOTP code.
 - **L553:** Brute-force lockout tracking.
 - **L556:** Import namespace/types.
-<<<<<<< HEAD
-- **L562:** Brute-force lockout tracking.
-- **L563:** Write/read security audit events.
-- **L567:** TOTP / authenticator (RFC 6238) helper.
-=======
 - **L558:** `user` means: AuthUser or user row (UID, Email, Role, MfaSecret, …).
 - **L559:** `bad` means: Holds “bad” for this scope. (text)  Literal text string.
 - **L562:** Brute-force lockout tracking.
 - **L563:** Write/read security audit events.
 - **L567:** TOTP / authenticator (RFC 6238) helper. | `secret` means: MFA TOTP Base32 secret for authenticator apps.
->>>>>>> eb8ce01 (update)
 - **L570:** Write/read security audit events.
 - **L576:** TOTP / authenticator (RFC 6238) helper.
 - **L578:** Brute-force lockout tracking.
 - **L579:** Write/read security audit events.
 - **L587:** Debug-only TOTP leak switch (must stay false for demos).
 - **L589:** Error handling block.
-<<<<<<< HEAD
-- **L591:** TOTP / authenticator (RFC 6238) helper.
-- **L592:** TOTP / authenticator (RFC 6238) helper.
-=======
 - **L591:** TOTP / authenticator (RFC 6238) helper. | `expected` means: Holds “expected” for this scope. (text)  TOTP related value.
 - **L592:** TOTP / authenticator (RFC 6238) helper. | `you` means: Holds “you” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L597:** Encode text to reduce XSS risk.
 - **L605:** Handle/log exception.
 - **L620:** Brute-force lockout tracking.
@@ -1331,20 +1220,12 @@ public static AuthResult CompletePasswordReset(int uid, string newPassword)
  679 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L635:** Password-reset MFA then update password hash.
-- **L643:** Import namespace/types.
-- **L648:** Password hashing (PBKDF2).
-=======
 **Line notes** (what code + variables mean)
 
 - **L635:** Password-reset MFA then update password hash.
 - **L643:** Import namespace/types.
 - **L645:** `user` means: AuthUser or user row (UID, Email, Role, MfaSecret, …).
 - **L648:** Password hashing (PBKDF2). | `newHash` means: Cryptographic hash string. (text)  Assigned from password hash function.
->>>>>>> eb8ce01 (update)
 - **L649:** Error handling block.
 - **L654:** Parameterized SQL — prevents classic SQL injection.
 - **L656:** Handle/log exception.
@@ -1384,15 +1265,9 @@ public static AuthResult ResetPasswordWithTotp(string email, string totpCode, st
  687 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L684:** Verify multi-factor / TOTP code.
-=======
 **Line notes** (what code + variables mean)
 
 - **L684:** Verify multi-factor / TOTP code. | `v` means: Generic value (version flag in JSON, or loop value).  Assigned from verification boolean/result.
->>>>>>> eb8ce01 (update)
 - **L686:** Password-reset MFA then update password hash.
 
 ---
@@ -1485,19 +1360,11 @@ public static bool UserExists(int uid)
  721 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L709:** Error handling block.
-- **L711:** Import namespace/types.
-- **L713:** Parameterized SQL — prevents classic SQL injection.
-=======
 **Line notes** (what code + variables mean)
 
 - **L709:** Error handling block.
 - **L711:** Import namespace/types.
 - **L713:** Parameterized SQL — prevents classic SQL injection. | `o` means: Holds “o” for this scope.
->>>>>>> eb8ce01 (update)
 - **L717:** Handle/log exception.
 
 ---
@@ -1547,11 +1414,7 @@ public static int GetValidatedUserId(HttpContext ctx)
  752 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L727:** Restore/validate user from Session or JWT; reject stale UIDs.
 - **L731:** Restore/validate user from Session or JWT; reject stale UIDs.
@@ -1652,11 +1515,7 @@ public static bool TryRestoreSessionFromJwt(HttpContext ctx)
  820 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L755:** Restore/validate user from Session or JWT; reject stale UIDs.
 - **L760:** Server session for logged-in user.
@@ -1664,11 +1523,7 @@ public static bool TryRestoreSessionFromJwt(HttpContext ctx)
 - **L764:** Handle/log exception.
 - **L768:** Error handling block.
 - **L774:** Handle/log exception.
-<<<<<<< HEAD
-- **L777:** JWT cookie create/validate/clear.
-=======
 - **L777:** JWT cookie create/validate/clear. | `token` means: JWT or CSRF token string.
->>>>>>> eb8ce01 (update)
 - **L780:** JWT cookie create/validate/clear.
 - **L782:** JWT cookie create/validate/clear.
 - **L789:** JWT cookie create/validate/clear.
@@ -1715,16 +1570,10 @@ public static string NormalizeRole(string role)
  829 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L822:** Map role codes/names to Admin/Student/Lecturer.
-=======
 **Line notes** (what code + variables mean)
 
 - **L822:** Map role codes/names to Admin/Student/Lecturer.
 - **L825:** `r` means: Usually one database row (DataRow) in query loops.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1758,13 +1607,10 @@ private static bool HasComplexity(string password)
  839 |             return letter && digit;
  840 |         }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L833:** `letter` means: Holds “letter” for this scope. (true/false)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1831,11 +1677,7 @@ private static AuthUser LoadUserByEmail(SqlConnection conn, string email)
  880 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L842:** Database access (pure SQL).
 - **L845:** Error handling block.
@@ -1915,11 +1757,7 @@ private static AuthUser LoadUserById(SqlConnection conn, int uid)
  919 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L882:** Database access (pure SQL).
 - **L884:** Error handling block.
@@ -1981,14 +1819,9 @@ private static AuthUser MapUser(SqlDataReader r)
  947 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-=======
 **Line notes** (what code + variables mean)
 
 - **L923:** `mfa` means: Holds “mfa” for this scope. (true/false)
->>>>>>> eb8ce01 (update)
 - **L924:** Error handling block.
 - **L926:** Null-safe read from database values.
 - **L929:** Handle/log exception.
@@ -2059,16 +1892,10 @@ private static string Safe(SqlDataReader r, string col)
  965 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L959:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L959:** Error handling block.
 - **L961:** `i` means: Loop index (0-based counter in for-loops).
->>>>>>> eb8ce01 (update)
 - **L962:** Null-safe read from database values.
 - **L964:** Handle/log exception.
 
@@ -2124,19 +1951,11 @@ private static bool IsMfaDebugEnabled()
  984 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L976:** Debug-only TOTP leak switch (must stay false for demos).
-- **L978:** Error handling block.
-- **L980:** Debug-only TOTP leak switch (must stay false for demos).
-=======
 **Line notes** (what code + variables mean)
 
 - **L976:** Debug-only TOTP leak switch (must stay false for demos).
 - **L978:** Error handling block.
 - **L980:** Debug-only TOTP leak switch (must stay false for demos). | `flag` means: Holds “flag” for this scope. (text)  Read from Web.config.
->>>>>>> eb8ce01 (update)
 - **L983:** Handle/log exception.
 
 ---
@@ -2176,18 +1995,11 @@ public static string GetStoredMfaSecretByEmail(string email)
 1002 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L993:** Error handling block.
-- **L995:** Import namespace/types.
-=======
 **Line notes** (what code + variables mean)
 
 - **L993:** Error handling block.
 - **L995:** Import namespace/types.
 - **L997:** `u` means: Holds “u” for this scope. (user DTO)
->>>>>>> eb8ce01 (update)
 - **L998:** TOTP / authenticator (RFC 6238) helper.
 - **L1001:** Handle/log exception.
 
@@ -2217,11 +2029,7 @@ private static SqlParameter P(string n, object v)
 1007 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L1004:** Parameterized SQL — prevents classic SQL injection.
 - **L1006:** Parameterized SQL — prevents classic SQL injection.
@@ -2259,11 +2067,7 @@ private static object Scalar(SqlConnection conn, string sql, params SqlParameter
 1016 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L1009:** Database access (pure SQL).
 - **L1011:** Import namespace/types.
@@ -2302,11 +2106,7 @@ private static void Exec(SqlConnection conn, string sql, params SqlParameter[] p
 1025 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L1018:** Database access (pure SQL).
 - **L1020:** Import namespace/types.
@@ -2316,11 +2116,7 @@ private static void Exec(SqlConnection conn, string sql, params SqlParameter[] p
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -3225,7 +3021,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  900 |                 using (var cmd = new SqlCommand(
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -3244,17 +3040,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L45:** Pending registration in Session until MFA confirmed.
 - **L46:** Pending registration in Session until MFA confirmed.
 - **L52:** Pending registration in Session until MFA confirmed.
-<<<<<<< HEAD
-- **L78:** Import namespace/types.
-- **L82:** Parameterized SQL — prevents classic SQL injection.
-- **L86:** TOTP / authenticator (RFC 6238) helper.
-=======
 - **L66:** `rc` means: Holds “rc” for this scope. (text)
 - **L78:** Import namespace/types.
 - **L80:** `exists` means: Count > 0 check (email/user/row already exists).
 - **L82:** Parameterized SQL — prevents classic SQL injection.
 - **L86:** TOTP / authenticator (RFC 6238) helper. | `mfaSecret` means: Authenticator secret stored for the user.  New random MFA secret.
->>>>>>> eb8ce01 (update)
 - **L89:** Server session for logged-in user.
 - **L90:** Server session for logged-in user.
 - **L91:** Server session for logged-in user.
@@ -3270,16 +3060,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L142:** Pending registration in Session until MFA confirmed.
 - **L146:** TOTP / authenticator (RFC 6238) helper.
 - **L150:** Import namespace/types.
-<<<<<<< HEAD
-- **L154:** Parameterized SQL — prevents classic SQL injection.
-- **L157:** Pending registration in Session until MFA confirmed.
-=======
 - **L152:** `exists` means: Count > 0 check (email/user/row already exists).
 - **L154:** Parameterized SQL — prevents classic SQL injection.
 - **L157:** Pending registration in Session until MFA confirmed.
 - **L161:** `mfaSecret` means: Authenticator secret stored for the user.
 - **L162:** `mfaOn` means: 1/0 flag written to Users.MfaEnabled.  Literal number `1`.
->>>>>>> eb8ce01 (update)
 - **L165:** Error handling block.
 - **L169:** Return new identity/UID after INSERT.
 - **L171:** Parameterized SQL — prevents classic SQL injection.
@@ -3299,11 +3084,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L191:** Parameterized SQL — prevents classic SQL injection.
 - **L193:** Handle/log exception.
 - **L199:** Error handling block.
-<<<<<<< HEAD
-- **L201:** Parameterized SQL — prevents classic SQL injection.
-=======
 - **L201:** Parameterized SQL — prevents classic SQL injection. | `byEmail` means: Email address.
->>>>>>> eb8ce01 (update)
 - **L202:** Null-safe read from database values.
 - **L205:** Handle/log exception.
 - **L210:** Error handling block.
@@ -3317,13 +3098,8 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L225:** Parameterized SQL — prevents classic SQL injection.
 - **L227:** Handle/log exception.
 - **L230:** Error handling block.
-<<<<<<< HEAD
-- **L232:** Parameterized SQL — prevents classic SQL injection.
-- **L233:** Null-safe read from database values.
-=======
 - **L232:** Parameterized SQL — prevents classic SQL injection. | `stored` means: Holds “stored” for this scope.
 - **L233:** Null-safe read from database values. | `storedSecret` means: Secret key material (MFA Base32 or crypto secret). (text)
->>>>>>> eb8ce01 (update)
 - **L235:** TOTP / authenticator (RFC 6238) helper.
 - **L238:** Parameterized SQL — prevents classic SQL injection.
 - **L242:** Handle/log exception.
@@ -3355,12 +3131,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L318:** Server session for logged-in user.
 - **L327:** Handle/log exception.
 - **L333:** Pending registration in Session until MFA confirmed.
-<<<<<<< HEAD
-- **L350:** Brute-force lockout tracking.
-- **L353:** Import namespace/types.
-- **L358:** Brute-force lockout tracking.
-- **L359:** Write/read security audit events.
-=======
 - **L344:** `ctx` means: Current HTTP request context (Request, Response, Session).
 - **L350:** Brute-force lockout tracking.
 - **L353:** Import namespace/types.
@@ -3368,17 +3138,12 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L358:** Brute-force lockout tracking.
 - **L359:** Write/read security audit events.
 - **L363:** `stored` means: Holds “stored” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L367:** Password hashing (PBKDF2).
 - **L369:** Brute-force lockout tracking.
 - **L370:** Write/read security audit events.
 - **L374:** Brute-force lockout tracking.
 - **L377:** Password hashing (PBKDF2).
-<<<<<<< HEAD
-- **L379:** Password hashing (PBKDF2).
-=======
 - **L379:** Password hashing (PBKDF2). | `newHash` means: Cryptographic hash string. (text)  Assigned from password hash function.
->>>>>>> eb8ce01 (update)
 - **L380:** Error handling block.
 - **L383:** Parameterized SQL — prevents classic SQL injection.
 - **L385:** Handle/log exception.
@@ -3386,45 +3151,26 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L390:** Parameterized SQL — prevents classic SQL injection.
 - **L392:** Handle/log exception.
 - **L396:** Map role codes/names to Admin/Student/Lecturer.
-<<<<<<< HEAD
-- **L401:** JWT cookie create/validate/clear.
-- **L402:** Write/read security audit events.
-- **L432:** Verify multi-factor / TOTP code.
-- **L439:** Import namespace/types.
-=======
 - **L401:** JWT cookie create/validate/clear. | `adminToken` means: Security token (JWT or CSRF). (text)
 - **L402:** Write/read security audit events.
 - **L432:** Verify multi-factor / TOTP code.
 - **L439:** Import namespace/types.
 - **L441:** `user` means: AuthUser or user row (UID, Email, Role, MfaSecret, …).
 - **L444:** `ok` means: Boolean success flag.
->>>>>>> eb8ce01 (update)
 - **L447:** Error handling block.
 - **L449:** Import namespace/types.
 - **L452:** Parameterized SQL — prevents classic SQL injection.
 - **L453:** Import namespace/types.
-<<<<<<< HEAD
-- **L457:** Null-safe read from database values.
-- **L458:** Null-safe read from database values.
-- **L469:** Parameterized SQL — prevents classic SQL injection.
-- **L472:** Handle/log exception.
-- **L477:** TOTP / authenticator (RFC 6238) helper.
-=======
 - **L457:** Null-safe read from database values. | `otp` means: Holds “otp” for this scope. (text)
 - **L458:** Null-safe read from database values. | `exp` means: Expiry DateTime.
 - **L469:** Parameterized SQL — prevents classic SQL injection.
 - **L472:** Handle/log exception.
 - **L477:** TOTP / authenticator (RFC 6238) helper. | `secret` means: MFA TOTP Base32 secret for authenticator apps.
->>>>>>> eb8ce01 (update)
 - **L480:** TOTP / authenticator (RFC 6238) helper.
 - **L485:** Brute-force lockout tracking.
 - **L489:** Brute-force lockout tracking.
 - **L490:** Map role codes/names to Admin/Student/Lecturer.
-<<<<<<< HEAD
-- **L491:** JWT cookie create/validate/clear.
-=======
 - **L491:** JWT cookie create/validate/clear. | `token` means: JWT or CSRF token string.
->>>>>>> eb8ce01 (update)
 - **L502:** Issue Session + JWT after successful auth.
 - **L506:** Server session for logged-in user.
 - **L507:** Server session for logged-in user.
@@ -3433,10 +3179,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L510:** JWT cookie create/validate/clear.
 - **L511:** CSRF anti-forgery protection.
 - **L512:** Map role codes/names to Admin/Student/Lecturer.
-<<<<<<< HEAD
-=======
 - **L519:** `email` means: Account email address (usually lowercased).
->>>>>>> eb8ce01 (update)
 - **L520:** Error handling block.
 - **L522:** Server session for logged-in user.
 - **L523:** Server session for logged-in user.
@@ -3449,30 +3192,19 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L541:** Verify multi-factor / TOTP code.
 - **L553:** Brute-force lockout tracking.
 - **L556:** Import namespace/types.
-<<<<<<< HEAD
-- **L562:** Brute-force lockout tracking.
-- **L563:** Write/read security audit events.
-- **L567:** TOTP / authenticator (RFC 6238) helper.
-=======
 - **L558:** `user` means: AuthUser or user row (UID, Email, Role, MfaSecret, …).
 - **L559:** `bad` means: Holds “bad” for this scope. (text)  Literal text string.
 - **L562:** Brute-force lockout tracking.
 - **L563:** Write/read security audit events.
 - **L567:** TOTP / authenticator (RFC 6238) helper. | `secret` means: MFA TOTP Base32 secret for authenticator apps.
->>>>>>> eb8ce01 (update)
 - **L570:** Write/read security audit events.
 - **L576:** TOTP / authenticator (RFC 6238) helper.
 - **L578:** Brute-force lockout tracking.
 - **L579:** Write/read security audit events.
 - **L587:** Debug-only TOTP leak switch (must stay false for demos).
 - **L589:** Error handling block.
-<<<<<<< HEAD
-- **L591:** TOTP / authenticator (RFC 6238) helper.
-- **L592:** TOTP / authenticator (RFC 6238) helper.
-=======
 - **L591:** TOTP / authenticator (RFC 6238) helper. | `expected` means: Holds “expected” for this scope. (text)  TOTP related value.
 - **L592:** TOTP / authenticator (RFC 6238) helper. | `you` means: Holds “you” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L597:** Encode text to reduce XSS risk.
 - **L605:** Handle/log exception.
 - **L620:** Brute-force lockout tracking.
@@ -3480,12 +3212,8 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L622:** Map role codes/names to Admin/Student/Lecturer.
 - **L635:** Password-reset MFA then update password hash.
 - **L643:** Import namespace/types.
-<<<<<<< HEAD
-- **L648:** Password hashing (PBKDF2).
-=======
 - **L645:** `user` means: AuthUser or user row (UID, Email, Role, MfaSecret, …).
 - **L648:** Password hashing (PBKDF2). | `newHash` means: Cryptographic hash string. (text)  Assigned from password hash function.
->>>>>>> eb8ce01 (update)
 - **L649:** Error handling block.
 - **L654:** Parameterized SQL — prevents classic SQL injection.
 - **L656:** Handle/log exception.
@@ -3495,19 +3223,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L669:** Parameterized SQL — prevents classic SQL injection.
 - **L670:** Handle/log exception.
 - **L672:** Write/read security audit events.
-<<<<<<< HEAD
-- **L684:** Verify multi-factor / TOTP code.
-- **L686:** Password-reset MFA then update password hash.
-- **L709:** Error handling block.
-- **L711:** Import namespace/types.
-- **L713:** Parameterized SQL — prevents classic SQL injection.
-=======
 - **L684:** Verify multi-factor / TOTP code. | `v` means: Generic value (version flag in JSON, or loop value).  Assigned from verification boolean/result.
 - **L686:** Password-reset MFA then update password hash.
 - **L709:** Error handling block.
 - **L711:** Import namespace/types.
 - **L713:** Parameterized SQL — prevents classic SQL injection. | `o` means: Holds “o” for this scope.
->>>>>>> eb8ce01 (update)
 - **L717:** Handle/log exception.
 - **L727:** Restore/validate user from Session or JWT; reject stale UIDs.
 - **L731:** Restore/validate user from Session or JWT; reject stale UIDs.
@@ -3523,11 +3243,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L764:** Handle/log exception.
 - **L768:** Error handling block.
 - **L774:** Handle/log exception.
-<<<<<<< HEAD
-- **L777:** JWT cookie create/validate/clear.
-=======
 - **L777:** JWT cookie create/validate/clear. | `token` means: JWT or CSRF token string.
->>>>>>> eb8ce01 (update)
 - **L780:** JWT cookie create/validate/clear.
 - **L782:** JWT cookie create/validate/clear.
 - **L789:** JWT cookie create/validate/clear.
@@ -3544,11 +3260,8 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L817:** Server session for logged-in user.
 - **L818:** Server session for logged-in user.
 - **L822:** Map role codes/names to Admin/Student/Lecturer.
-<<<<<<< HEAD
-=======
 - **L825:** `r` means: Usually one database row (DataRow) in query loops.
 - **L833:** `letter` means: Holds “letter” for this scope. (true/false)
->>>>>>> eb8ce01 (update)
 - **L842:** Database access (pure SQL).
 - **L845:** Error handling block.
 - **L847:** Import namespace/types.

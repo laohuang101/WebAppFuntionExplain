@@ -1,10 +1,6 @@
 # Students.aspx
 **Source:** `Pages/Lecturer/Students.aspx`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -29,11 +25,7 @@ _No methods matched the scanner (markup-only or unconventional structure). See f
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```html
    1 | <%@ Page Title="Student Performance" Language="C#" MasterPageFile="~/Shared/Header&Footer.Master" AutoEventWireup="true" CodeBehind="Students.aspx.cs" Inherits="WebAppAssignment.Pages.Lecturer.Students" %>
@@ -123,7 +115,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   85 | </asp:Content>
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L62:** Dashboard chart/visualization.
 - **L83:** Dashboard chart/visualization.

@@ -1,10 +1,6 @@
 # CoursePreview.aspx
 **Source:** `Pages/Lecturer/CoursePreview.aspx`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -29,11 +25,7 @@ _No methods matched the scanner (markup-only or unconventional structure). See f
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```html
    1 | <%@ Page Title="Course Preview" Language="C#" MasterPageFile="~/Shared/Header&Footer.Master" AutoEventWireup="true" CodeBehind="CoursePreview.aspx.cs" Inherits="WebAppAssignment.Pages.Lecturer.CoursePreview" %>
@@ -483,55 +475,26 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  445 | </asp:Content>
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
-<<<<<<< HEAD
-=======
 - **L77:** `cid` means: Course ID (Courses.CID).  Comes from HTTP request.
 - **L78:** `course` means: Holds “course” for this scope.
 - **L79:** `chapters` means: Often a collection related to chapters (plural name).
 - **L80:** `active` means: Holds “active” for this scope.
 - **L83:** `x` means: Generic temporary / coordinate / exception alias.
->>>>>>> eb8ce01 (update)
 - **L91:** HTTP request to server WebMethod/ashx.
 - **L94:** JS object ↔ JSON text.
 - **L98:** HTTP request to server WebMethod/ashx.
 - **L101:** JS object ↔ JSON text.
 - **L110:** Get HTML element by id.
-<<<<<<< HEAD
-- **L111:** Get HTML element by id.
-=======
 - **L111:** Get HTML element by id. | `el` means: Generic DOM element.  DOM element from the page.
 - **L124:** `coursesRes` means: Often a collection related to courses Res (plural name).
 - **L125:** `currRes` means: Often a collection related to curr Res (plural name).
 - **L131:** `list` means: In-memory collection being built for JSON return.
->>>>>>> eb8ce01 (update)
 - **L153:** Get HTML element by id.
 - **L154:** Get HTML element by id.
 - **L156:** Get HTML element by id.
 - **L157:** Get HTML element by id.
-<<<<<<< HEAD
-- **L160:** Get HTML element by id.
-- **L166:** Get HTML element by id.
-- **L170:** Get HTML element by id.
-- **L171:** Get HTML element by id.
-- **L173:** Get HTML element by id.
-- **L191:** Get HTML element by id.
-- **L193:** Update page HTML.
-- **L221:** Update page HTML.
-- **L224:** DOM event handler.
-- **L230:** DOM event handler.
-- **L268:** Error handling block.
-- **L276:** Error handling block.
-- **L349:** Get HTML element by id.
-- **L350:** Get HTML element by id.
-- **L352:** Get HTML element by id.
-- **L399:** Get HTML element by id.
-- **L403:** Get HTML element by id.
-- **L434:** Update page HTML.
-- **L437:** DOM event handler.
-- **L438:** Get HTML element by id.
-=======
 - **L160:** Get HTML element by id. | `hero` means: Holds “hero” for this scope.  DOM element from the page.
 - **L164:** `totalLessons` means: Often a collection related to total Lessons (plural name).  Literal number `0`.
 - **L166:** Get HTML element by id.
@@ -591,7 +554,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L434:** Update page HTML.
 - **L437:** DOM event handler.
 - **L438:** Get HTML element by id. | `panel` means: Holds “panel” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

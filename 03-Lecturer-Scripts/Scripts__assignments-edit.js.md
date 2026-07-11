@@ -1,10 +1,6 @@
 # assignments-edit.js
 **Source:** `Pages/Lecturer/Scripts/assignments-edit.js`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -81,35 +77,22 @@ function loadAssignmentDetails(cwid)
   31 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L4:** HTTP request to server WebMethod/ashx.
-=======
 **Line notes** (what code + variables mean)
 
 - **L4:** HTTP request to server WebMethod/ashx.
 - **L6:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
->>>>>>> eb8ce01 (update)
 - **L9:** Get HTML element by id.
 - **L10:** Get HTML element by id.
 - **L11:** Assignment deadline; submissions close after due day.
 - **L12:** Get HTML element by id.
 - **L13:** Get HTML element by id.
-<<<<<<< HEAD
-=======
 - **L22:** `opts` means: Often a collection related to opts (plural name).
->>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | // Helper to load assignment details into the builder for editing
@@ -145,22 +128,16 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   31 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L4:** HTTP request to server WebMethod/ashx.
-<<<<<<< HEAD
-=======
 - **L6:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
->>>>>>> eb8ce01 (update)
 - **L9:** Get HTML element by id.
 - **L10:** Get HTML element by id.
 - **L11:** Assignment deadline; submissions close after due day.
 - **L12:** Get HTML element by id.
 - **L13:** Get HTML element by id.
-<<<<<<< HEAD
-=======
 - **L22:** `opts` means: Often a collection related to opts (plural name).
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

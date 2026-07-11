@@ -1,10 +1,6 @@
 # DbIndexes.cs
 **Source:** `Data/DbIndexes.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -94,11 +90,7 @@ public static void Ensure()
   57 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L21:** Error handling block.
 - **L23:** Import namespace/types.
@@ -174,23 +166,16 @@ private static void EnsureIndex(SqlConnection conn, string indexName, string cre
   89 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L59:** Database access (pure SQL).
 - **L61:** Error handling block.
 - **L63:** Import namespace/types.
 - **L64:** Inspect live database catalog for existing columns/tables.
-<<<<<<< HEAD
-=======
 - **L67:** `table` means: DataTable or HTML table container.
 - **L68:** `on` means: Holds “on” for this scope. (integer)
 - **L71:** `rest` means: Holds “rest” for this scope. (text)
 - **L72:** `sp` means: Holds “sp” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 - **L77:** Parameterized SQL — prevents classic SQL injection.
 - **L78:** Parameterized SQL — prevents classic SQL injection.
 - **L79:** Run SQL; return table / rows / scalar.
@@ -202,11 +187,7 @@ private static void EnsureIndex(SqlConnection conn, string indexName, string cre
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -302,7 +283,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   91 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -324,13 +305,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L61:** Error handling block.
 - **L63:** Import namespace/types.
 - **L64:** Inspect live database catalog for existing columns/tables.
-<<<<<<< HEAD
-=======
 - **L67:** `table` means: DataTable or HTML table container.
 - **L68:** `on` means: Holds “on” for this scope. (integer)
 - **L71:** `rest` means: Holds “rest” for this scope. (text)
 - **L72:** `sp` means: Holds “sp” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 - **L77:** Parameterized SQL — prevents classic SQL injection.
 - **L78:** Parameterized SQL — prevents classic SQL injection.
 - **L79:** Run SQL; return table / rows / scalar.

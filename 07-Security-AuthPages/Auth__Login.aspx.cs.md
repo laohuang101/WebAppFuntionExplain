@@ -1,10 +1,6 @@
 # Login.aspx.cs
 **Source:** `Pages/Authentication/Login.aspx.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -64,17 +60,10 @@ protected void Page_Load(object sender, EventArgs e)
   21 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L10:** Page load entry (GET or postback).
-- **L14:** Restore/validate user from Session or JWT; reject stale UIDs.
-=======
 **Line notes** (what code + variables mean)
 
 - **L10:** Page load entry (GET or postback).
 - **L14:** Restore/validate user from Session or JWT; reject stale UIDs. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
->>>>>>> eb8ce01 (update)
 - **L16:** False on first open; true after postback.
 - **L18:** Server session for logged-in user.
 - **L19:** Server session for logged-in user.
@@ -150,18 +139,12 @@ protected void btnLogin_Click(object sender, EventArgs e)
   66 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L34:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L25:** `email` means: Account email address (usually lowercased).
 - **L26:** `password` means: Plain password from the form (never log this).
 - **L34:** Error handling block.
 - **L37:** `result` means: AuthResult or API result { success, message, … }.
->>>>>>> eb8ce01 (update)
 - **L48:** Server session for logged-in user.
 - **L49:** Server session for logged-in user.
 - **L51:** Server session for logged-in user.
@@ -203,15 +186,9 @@ private void RedirectUser(string role)
   78 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L70:** Map role codes/names to Admin/Student/Lecturer.
-=======
 **Line notes** (what code + variables mean)
 
 - **L70:** Map role codes/names to Admin/Student/Lecturer. | `normalizedRole` means: Holds “normalized Role” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L73:** Navigate browser to another URL.
 - **L75:** Navigate browser to another URL.
 - **L77:** Navigate browser to another URL.
@@ -220,11 +197,7 @@ private void RedirectUser(string role)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -309,7 +282,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   80 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -317,13 +290,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L4:** Import namespace/types.
 - **L6:** C# namespace grouping.
 - **L10:** Page load entry (GET or postback).
-<<<<<<< HEAD
-- **L14:** Restore/validate user from Session or JWT; reject stale UIDs.
-- **L16:** False on first open; true after postback.
-- **L18:** Server session for logged-in user.
-- **L19:** Server session for logged-in user.
-- **L34:** Error handling block.
-=======
 - **L14:** Restore/validate user from Session or JWT; reject stale UIDs. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
 - **L16:** False on first open; true after postback.
 - **L18:** Server session for logged-in user.
@@ -332,18 +298,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L26:** `password` means: Plain password from the form (never log this).
 - **L34:** Error handling block.
 - **L37:** `result` means: AuthResult or API result { success, message, … }.
->>>>>>> eb8ce01 (update)
 - **L48:** Server session for logged-in user.
 - **L49:** Server session for logged-in user.
 - **L51:** Server session for logged-in user.
 - **L52:** Navigate browser to another URL.
 - **L57:** Issue Session + JWT after successful auth.
 - **L61:** Handle/log exception.
-<<<<<<< HEAD
-- **L70:** Map role codes/names to Admin/Student/Lecturer.
-=======
 - **L70:** Map role codes/names to Admin/Student/Lecturer. | `normalizedRole` means: Holds “normalized Role” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L73:** Navigate browser to another URL.
 - **L75:** Navigate browser to another URL.
 - **L77:** Navigate browser to another URL.

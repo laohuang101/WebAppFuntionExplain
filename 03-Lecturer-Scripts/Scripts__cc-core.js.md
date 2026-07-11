@@ -1,10 +1,6 @@
 # cc-core.js
 **Source:** `Pages/Lecturer/Scripts/cc-core.js`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -64,13 +60,10 @@ function unwrap(data)
   20 |     return x;
   21 | }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L17:** `x` means: Generic temporary / coordinate / exception alias.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -120,13 +113,6 @@ function postJson(url, body)
   43 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L25:** HTTP request to server WebMethod/ashx.
-- **L28:** JS object ↔ JSON text.
-- **L33:** JS object ↔ JSON text.
-=======
 **Line notes** (what code + variables mean)
 
 - **L25:** HTTP request to server WebMethod/ashx.
@@ -134,7 +120,6 @@ function postJson(url, body)
 - **L32:** `parsed` means: Holds “parsed” for this scope.
 - **L33:** JS object ↔ JSON text.
 - **L37:** `msg` means: Human-readable message (error or success).
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -163,13 +148,10 @@ function curriculumApi(action, payload)
   48 |     return postJson('CurriculumApi.ashx', body);
   49 | }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L47:** `body` means: HTTP request body.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -201,16 +183,10 @@ function hideModal(id)
   58 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L53:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L53:** Get HTML element by id. | `el` means: Generic DOM element.  DOM element from the page.
 - **L55:** `inst` means: Holds “inst” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -241,25 +217,15 @@ function showModal(id)
   65 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L61:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L61:** Get HTML element by id. | `el` means: Generic DOM element.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | // Course Creation — core helpers (API, modals)
@@ -338,16 +304,8 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   74 | 
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
-<<<<<<< HEAD
-- **L25:** HTTP request to server WebMethod/ashx.
-- **L28:** JS object ↔ JSON text.
-- **L33:** JS object ↔ JSON text.
-- **L53:** Get HTML element by id.
-- **L61:** Get HTML element by id.
-- **L68:** DOM event handler.
-=======
 - **L5:** `courses` means: Often a collection related to courses (plural name).
 - **L6:** `currentCourseId` means: Holds “current Course Id” for this scope.
 - **L7:** `activeWizardStep` means: Holds “active Wizard Step” for this scope.  Literal number `1`.
@@ -366,7 +324,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L61:** Get HTML element by id. | `el` means: Generic DOM element.  DOM element from the page.
 - **L68:** DOM event handler.
 - **L69:** `open` means: Holds “open” for this scope.
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

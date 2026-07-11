@@ -1,10 +1,6 @@
 # Logout.aspx.cs
 **Source:** `Pages/Authentication/Logout.aspx.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -50,11 +46,7 @@ protected void Page_Load(object sender, EventArgs e)
   13 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L9:** Page load entry (GET or postback).
 - **L12:** Navigate browser to another URL.
@@ -63,11 +55,7 @@ protected void Page_Load(object sender, EventArgs e)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -87,7 +75,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   15 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.

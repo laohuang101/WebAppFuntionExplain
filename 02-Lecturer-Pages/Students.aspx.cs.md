@@ -1,10 +1,6 @@
 # Students.aspx.cs
 **Source:** `Pages/Lecturer/Students.aspx.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -53,11 +49,7 @@ protected void Page_Load(object sender, EventArgs e)
   16 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L12:** Page load entry (GET or postback).
 - **L14:** Authorization — block wrong role / anonymous.
@@ -85,11 +77,7 @@ private static int CurrentUid()
   21 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L20:** Authorization — block wrong role / anonymous.
 
@@ -132,19 +120,12 @@ public static object GetStudents(string search)
   38 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L27:** Error handling block.
-- **L30:** Authorization — block wrong role / anonymous.
-=======
 **Line notes** (what code + variables mean)
 
 - **L27:** Error handling block.
 - **L29:** `uid` means: User ID (Users.UID) of the logged-in or target user.
 - **L30:** Authorization — block wrong role / anonymous.
 - **L31:** `list` means: In-memory collection being built for JSON return.
->>>>>>> eb8ce01 (update)
 - **L34:** Handle/log exception.
 
 ---
@@ -188,30 +169,19 @@ public static object GetStudentDetail(int studentUid, int cid)
   56 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L44:** Error handling block.
-- **L47:** Authorization — block wrong role / anonymous.
-=======
 **Line notes** (what code + variables mean)
 
 - **L44:** Error handling block.
 - **L46:** `uid` means: User ID (Users.UID) of the logged-in or target user.
 - **L47:** Authorization — block wrong role / anonymous.
 - **L48:** `detail` means: Holds “detail” for this scope.
->>>>>>> eb8ce01 (update)
 - **L52:** Handle/log exception.
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -274,7 +244,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   58 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -288,13 +258,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L20:** Authorization — block wrong role / anonymous.
 - **L23:** Expose method to AJAX JSON calls.
 - **L27:** Error handling block.
-<<<<<<< HEAD
-- **L30:** Authorization — block wrong role / anonymous.
-- **L34:** Handle/log exception.
-- **L40:** Expose method to AJAX JSON calls.
-- **L44:** Error handling block.
-- **L47:** Authorization — block wrong role / anonymous.
-=======
 - **L29:** `uid` means: User ID (Users.UID) of the logged-in or target user.
 - **L30:** Authorization — block wrong role / anonymous.
 - **L31:** `list` means: In-memory collection being built for JSON return.
@@ -304,7 +267,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L46:** `uid` means: User ID (Users.UID) of the logged-in or target user.
 - **L47:** Authorization — block wrong role / anonymous.
 - **L48:** `detail` means: Holds “detail” for this scope.
->>>>>>> eb8ce01 (update)
 - **L52:** Handle/log exception.
 
 ## Source snapshot (raw)

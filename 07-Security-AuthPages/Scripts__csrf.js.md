@@ -1,10 +1,6 @@
 # csrf.js
 **Source:** `Shared/Scripts/csrf.js`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -55,13 +51,10 @@ function readCookie(name)
   10 |         return m ? decodeURIComponent(m[1]) : '';
   11 |     }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L9:** `m` means: Holds “m” for this scope.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -91,15 +84,9 @@ function getToken()
   17 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L14:** CSRF anti-forgery protection.
-=======
 **Line notes** (what code + variables mean)
 
 - **L14:** CSRF anti-forgery protection. | `meta` means: Extra settings packed as JSON (dueDate, requireFile, …).
->>>>>>> eb8ce01 (update)
 - **L16:** CSRF anti-forgery protection.
 
 ---
@@ -138,27 +125,17 @@ function applyHeaders(headers, token)
   29 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L23:** CSRF token ensure/validate.
-=======
 **Line notes** (what code + variables mean)
 
 - **L23:** CSRF token ensure/validate.
 - **L26:** `h` means: Holds “h” for this scope.
->>>>>>> eb8ce01 (update)
 - **L27:** CSRF anti-forgery protection.
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | /**
@@ -228,17 +205,8 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   65 | })(window);
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
-<<<<<<< HEAD
-- **L14:** CSRF anti-forgery protection.
-- **L16:** CSRF anti-forgery protection.
-- **L23:** CSRF token ensure/validate.
-- **L27:** CSRF anti-forgery protection.
-- **L50:** CSRF anti-forgery protection.
-- **L54:** Error handling block.
-- **L55:** CSRF anti-forgery protection.
-=======
 - **L9:** `m` means: Holds “m” for this scope.  Newly constructed object.
 - **L14:** CSRF anti-forgery protection. | `meta` means: Extra settings packed as JSON (dueDate, requireFile, …).
 - **L16:** CSRF anti-forgery protection.
@@ -252,7 +220,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L50:** CSRF anti-forgery protection.
 - **L54:** Error handling block.
 - **L55:** CSRF anti-forgery protection. | `m` means: Holds “m” for this scope.
->>>>>>> eb8ce01 (update)
 - **L57:** CSRF token ensure/validate.
 - **L64:** CSRF anti-forgery protection.
 

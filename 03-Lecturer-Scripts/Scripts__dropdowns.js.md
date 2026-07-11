@@ -1,10 +1,6 @@
 # dropdowns.js
 **Source:** `Pages/Lecturer/Scripts/dropdowns.js`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -86,28 +82,17 @@ function populateSelect(id, items)
   43 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L33:** Get HTML element by id.
-- **L36:** Update page HTML.
-=======
 **Line notes** (what code + variables mean)
 
 - **L33:** Get HTML element by id. | `sel` means: Holds “sel” for this scope.  DOM element from the page.
 - **L36:** Update page HTML.
 - **L38:** `o` means: Holds “o” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | // dropdowns.js - provides JSON-driven dropdown population for CourseCreation page
@@ -173,18 +158,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   61 | })();
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
-<<<<<<< HEAD
-- **L33:** Get HTML element by id.
-- **L36:** Update page HTML.
-=======
 - **L4:** `defaultData` means: Holds “default Data” for this scope.
 - **L33:** Get HTML element by id. | `sel` means: Holds “sel” for this scope.  DOM element from the page.
 - **L36:** Update page HTML.
 - **L38:** `o` means: Holds “o” for this scope.
 - **L46:** `data` means: Holds “data” for this scope.
->>>>>>> eb8ce01 (update)
 - **L54:** HTTP request to server WebMethod/ashx.
 
 ## Source snapshot (raw)

@@ -1,10 +1,6 @@
 # UploadMedia.ashx
 **Source:** `Pages/Lecturer/UploadMedia.ashx`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -271,14 +267,6 @@ public void ProcessRequest(HttpContext context)
  222 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L17:** IHttpHandler entry for ashx.
-- **L22:** Error handling block.
-- **L30:** Authorization — block wrong role / anonymous.
-- **L34:** Authorization — block wrong role / anonymous.
-=======
 **Line notes** (what code + variables mean)
 
 - **L17:** IHttpHandler entry for ashx.
@@ -289,17 +277,10 @@ public void ProcessRequest(HttpContext context)
 - **L34:** Authorization — block wrong role / anonymous.
 - **L47:** `originalName` means: Holds “original Name” for this scope.
 - **L48:** `ext` means: File extension (.pdf, .mp4, …).
->>>>>>> eb8ce01 (update)
 - **L55:** File magic-byte validation on upload.
 - **L56:** Validate upload by file signature.
 - **L58:** Write/read security audit events.
 - **L59:** File magic-byte validation on upload.
-<<<<<<< HEAD
-- **L138:** Error handling block.
-- **L165:** Error handling block.
-- **L169:** Handle/log exception.
-- **L181:** Error handling block.
-=======
 - **L63:** `videoExts` means: Often a collection related to video Exts (plural name).
 - **L64:** `materialExts` means: Often a collection related to material Exts (plural name).
 - **L65:** `imageExts` means: Often a collection related to image Exts (plural name).
@@ -320,15 +301,11 @@ public void ProcessRequest(HttpContext context)
 - **L179:** `absUrl` means: URL string. (text)
 - **L181:** Error handling block.
 - **L183:** `logDir` means: Filesystem or URL path. (text)
->>>>>>> eb8ce01 (update)
 - **L189:** Handle/log exception.
 - **L191:** Error handling block.
 - **L209:** Handle/log exception.
 - **L211:** Error handling block.
-<<<<<<< HEAD
-=======
 - **L213:** `logDir` means: Filesystem or URL path. (text)
->>>>>>> eb8ce01 (update)
 - **L218:** Handle/log exception.
 
 ---
@@ -359,23 +336,16 @@ private void WriteJson(HttpContext context, object obj)
  227 |         context.Response.Write(js.Serialize(obj));
  228 |     }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L226:** `js` means: Holds “js” for this scope.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```html
    1 | <%@ WebHandler Language="C#" Class="UploadMedia" %>
@@ -611,7 +581,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  231 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L3:** Import namespace/types.
 - **L4:** Import namespace/types.
@@ -623,27 +593,16 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L15:** Class declaration for this page/service.
 - **L17:** IHttpHandler entry for ashx.
 - **L22:** Error handling block.
-<<<<<<< HEAD
-- **L30:** Authorization — block wrong role / anonymous.
-- **L34:** Authorization — block wrong role / anonymous.
-=======
 - **L24:** `kind` means: Upload kind (material/video/thumbnail/submission).  Comes from HTTP request.
 - **L25:** `isSubmission` means: Boolean flag: is Submission. (true/false)
 - **L30:** Authorization — block wrong role / anonymous.
 - **L34:** Authorization — block wrong role / anonymous.
 - **L47:** `originalName` means: Holds “original Name” for this scope.
 - **L48:** `ext` means: File extension (.pdf, .mp4, …).
->>>>>>> eb8ce01 (update)
 - **L55:** File magic-byte validation on upload.
 - **L56:** Validate upload by file signature.
 - **L58:** Write/read security audit events.
 - **L59:** File magic-byte validation on upload.
-<<<<<<< HEAD
-- **L138:** Error handling block.
-- **L165:** Error handling block.
-- **L169:** Handle/log exception.
-- **L181:** Error handling block.
-=======
 - **L63:** `videoExts` means: Often a collection related to video Exts (plural name).
 - **L64:** `materialExts` means: Often a collection related to material Exts (plural name).
 - **L65:** `imageExts` means: Often a collection related to image Exts (plural name).
@@ -664,18 +623,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L179:** `absUrl` means: URL string. (text)
 - **L181:** Error handling block.
 - **L183:** `logDir` means: Filesystem or URL path. (text)
->>>>>>> eb8ce01 (update)
 - **L189:** Handle/log exception.
 - **L191:** Error handling block.
 - **L209:** Handle/log exception.
 - **L211:** Error handling block.
-<<<<<<< HEAD
-- **L218:** Handle/log exception.
-=======
 - **L213:** `logDir` means: Filesystem or URL path. (text)
 - **L218:** Handle/log exception.
 - **L226:** `js` means: Holds “js” for this scope.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

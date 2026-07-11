@@ -1,10 +1,6 @@
 # editor.js
 **Source:** `Pages/Lecturer/Scripts/editor.js`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -59,13 +55,10 @@ function execCmd(cmd, value)
   10 |         document.execCommand(cmd, false, value || null);
   11 |     }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L5:** `url` means: HTTP URL to media or page.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -91,26 +84,16 @@ function sync()
   21 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L19:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L19:** Get HTML element by id. | `hidden` means: Holds “hidden” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 - **L20:** Update page HTML.
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | // editor.js: small helpers for lesson editor
@@ -156,17 +139,8 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   41 | })();
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
-<<<<<<< HEAD
-- **L14:** Get HTML element by id.
-- **L19:** Get HTML element by id.
-- **L20:** Update page HTML.
-- **L23:** DOM event handler.
-- **L24:** DOM event handler.
-- **L27:** Get HTML element by id.
-- **L29:** DOM event handler.
-=======
 - **L5:** `url` means: HTTP URL to media or page.
 - **L14:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
 - **L19:** Get HTML element by id. | `hidden` means: Holds “hidden” for this scope.  DOM element from the page.
@@ -177,7 +151,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L29:** DOM event handler.
 - **L30:** `btn` means: Button DOM element.
 - **L32:** `cmd` means: SqlCommand — the SQL statement + parameters object.
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

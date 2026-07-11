@@ -1,10 +1,6 @@
 # CourseCreation.aspx.cs
 **Source:** `Pages/Lecturer/CourseCreation.aspx.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -76,11 +72,7 @@ protected void Page_Load(object sender, EventArgs e)
   16 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L12:** Page load entry (GET or postback).
 - **L14:** Authorization — block wrong role / anonymous.
@@ -109,11 +101,7 @@ private static int CurrentUid()
   22 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L21:** Authorization — block wrong role / anonymous.
 
@@ -178,19 +166,12 @@ public static object GetCoursesData()
   44 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L33:** Error handling block.
-- **L36:** Authorization — block wrong role / anonymous.
-=======
 **Line notes** (what code + variables mean)
 
 - **L33:** Error handling block.
 - **L35:** `uid` means: User ID (Users.UID) of the logged-in or target user.
 - **L36:** Authorization — block wrong role / anonymous.
 - **L37:** `courses` means: Often a collection related to courses (plural name).
->>>>>>> eb8ce01 (update)
 - **L40:** Handle/log exception.
 
 ---
@@ -242,19 +223,12 @@ public static object SaveCourseInfo(string name, string desc, string category, s
   66 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L50:** Error handling block.
-- **L54:** Authorization — block wrong role / anonymous.
-=======
 **Line notes** (what code + variables mean)
 
 - **L50:** Error handling block.
 - **L52:** `uid` means: User ID (Users.UID) of the logged-in or target user.
 - **L54:** Authorization — block wrong role / anonymous.
 - **L58:** `newCid` means: Identifier (`newCid`) — database primary/foreign key. (integer)
->>>>>>> eb8ce01 (update)
 - **L62:** Handle/log exception.
 
 ---
@@ -303,19 +277,12 @@ public static object SetCoursePublished(int cid, bool published)
   88 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L72:** Error handling block.
-- **L75:** Authorization — block wrong role / anonymous.
-=======
 **Line notes** (what code + variables mean)
 
 - **L72:** Error handling block.
 - **L74:** `uid` means: User ID (Users.UID) of the logged-in or target user.
 - **L75:** Authorization — block wrong role / anonymous.
 - **L77:** `state` means: Holds “state” for this scope. (true/false)
->>>>>>> eb8ce01 (update)
 - **L80:** Handle/log exception.
 - **L82:** Authorization — block wrong role / anonymous.
 - **L84:** Handle/log exception.
@@ -359,19 +326,12 @@ public static object GetCourseCurriculum(int cid)
  105 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L94:** Error handling block.
-- **L97:** Authorization — block wrong role / anonymous.
-=======
 **Line notes** (what code + variables mean)
 
 - **L94:** Error handling block.
 - **L96:** `uid` means: User ID (Users.UID) of the logged-in or target user.
 - **L97:** Authorization — block wrong role / anonymous.
 - **L98:** `chapters` means: Often a collection related to chapters (plural name).
->>>>>>> eb8ce01 (update)
 - **L101:** Handle/log exception.
 
 ---
@@ -419,19 +379,12 @@ public static object SaveChapter(int chid, int cid, string title)
  126 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L111:** Error handling block.
-- **L114:** Authorization — block wrong role / anonymous.
-=======
 **Line notes** (what code + variables mean)
 
 - **L111:** Error handling block.
 - **L113:** `uid` means: User ID (Users.UID) of the logged-in or target user.
 - **L114:** Authorization — block wrong role / anonymous.
 - **L119:** `id` means: Generic primary key / identifier.
->>>>>>> eb8ce01 (update)
 - **L122:** Handle/log exception.
 
 ---
@@ -472,16 +425,10 @@ public static object DeleteChapter(int chid)
  143 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L132:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L132:** Error handling block.
 - **L134:** `uid` means: User ID (Users.UID) of the logged-in or target user.
->>>>>>> eb8ce01 (update)
 - **L135:** Authorization — block wrong role / anonymous.
 - **L139:** Handle/log exception.
 
@@ -547,12 +494,6 @@ public static object SaveSubChapter(int schid, int chid, string title, string ty
  175 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L149:** Error handling block.
-- **L152:** Authorization — block wrong role / anonymous.
-=======
 **Line notes** (what code + variables mean)
 
 - **L149:** Error handling block.
@@ -562,7 +503,6 @@ public static object SaveSubChapter(int schid, int chid, string title, string ty
 - **L158:** `materialsJson` means: Holds “materials Json” for this scope. (text)
 - **L160:** `idx` means: Holds “idx” for this scope. (integer)
 - **L168:** `id` means: Generic primary key / identifier.
->>>>>>> eb8ce01 (update)
 - **L171:** Handle/log exception.
 
 ---
@@ -603,16 +543,10 @@ public static object DeleteSubChapter(int schid)
  192 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L181:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L181:** Error handling block.
 - **L183:** `uid` means: User ID (Users.UID) of the logged-in or target user.
->>>>>>> eb8ce01 (update)
 - **L184:** Authorization — block wrong role / anonymous.
 - **L188:** Handle/log exception.
 
@@ -654,16 +588,10 @@ public static object DeleteCourse(int cid)
  209 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L198:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L198:** Error handling block.
 - **L200:** `uid` means: User ID (Users.UID) of the logged-in or target user.
->>>>>>> eb8ce01 (update)
 - **L201:** Authorization — block wrong role / anonymous.
 - **L205:** Handle/log exception.
 
@@ -734,16 +662,6 @@ public static object GetLessonDetails(int schid)
  249 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L215:** Error handling block.
-- **L218:** Authorization — block wrong role / anonymous.
-- **L221:** Database access (pure SQL).
-- **L223:** Database access (pure SQL).
-- **L224:** Null-safe read from database values.
-- **L231:** Database access (pure SQL).
-=======
 **Line notes** (what code + variables mean)
 
 - **L215:** Error handling block.
@@ -756,7 +674,6 @@ public static object GetLessonDetails(int schid)
 - **L228:** `type` means: Holds “type” for this scope. (text)  Literal text string.
 - **L229:** `content` means: Submission body text or JSON payload in CWSubmissions.  Literal text string.
 - **L231:** Database access (pure SQL). | `mats` means: Often a collection related to mats (plural name).  Assigned from SQL SELECT result set.
->>>>>>> eb8ce01 (update)
 - **L233:** Database access (pure SQL).
 - **L236:** Database access (pure SQL).
 - **L238:** Database access (pure SQL).
@@ -768,11 +685,7 @@ public static object GetLessonDetails(int schid)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -1028,7 +941,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  251 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -1042,17 +955,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L21:** Authorization — block wrong role / anonymous.
 - **L29:** Expose method to AJAX JSON calls.
 - **L33:** Error handling block.
-<<<<<<< HEAD
-- **L36:** Authorization — block wrong role / anonymous.
-- **L40:** Handle/log exception.
-- **L46:** Expose method to AJAX JSON calls.
-- **L50:** Error handling block.
-- **L54:** Authorization — block wrong role / anonymous.
-- **L62:** Handle/log exception.
-- **L68:** Expose method to AJAX JSON calls.
-- **L72:** Error handling block.
-- **L75:** Authorization — block wrong role / anonymous.
-=======
 - **L35:** `uid` means: User ID (Users.UID) of the logged-in or target user.
 - **L36:** Authorization — block wrong role / anonymous.
 - **L37:** `courses` means: Often a collection related to courses (plural name).
@@ -1068,22 +970,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L74:** `uid` means: User ID (Users.UID) of the logged-in or target user.
 - **L75:** Authorization — block wrong role / anonymous.
 - **L77:** `state` means: Holds “state” for this scope. (true/false)
->>>>>>> eb8ce01 (update)
 - **L80:** Handle/log exception.
 - **L82:** Authorization — block wrong role / anonymous.
 - **L84:** Handle/log exception.
 - **L90:** Expose method to AJAX JSON calls.
 - **L94:** Error handling block.
-<<<<<<< HEAD
-- **L97:** Authorization — block wrong role / anonymous.
-- **L101:** Handle/log exception.
-- **L107:** Expose method to AJAX JSON calls.
-- **L111:** Error handling block.
-- **L114:** Authorization — block wrong role / anonymous.
-- **L122:** Handle/log exception.
-- **L128:** Expose method to AJAX JSON calls.
-- **L132:** Error handling block.
-=======
 - **L96:** `uid` means: User ID (Users.UID) of the logged-in or target user.
 - **L97:** Authorization — block wrong role / anonymous.
 - **L98:** `chapters` means: Often a collection related to chapters (plural name).
@@ -1097,17 +988,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L128:** Expose method to AJAX JSON calls.
 - **L132:** Error handling block.
 - **L134:** `uid` means: User ID (Users.UID) of the logged-in or target user.
->>>>>>> eb8ce01 (update)
 - **L135:** Authorization — block wrong role / anonymous.
 - **L139:** Handle/log exception.
 - **L145:** Expose method to AJAX JSON calls.
 - **L149:** Error handling block.
-<<<<<<< HEAD
-- **L152:** Authorization — block wrong role / anonymous.
-- **L171:** Handle/log exception.
-- **L177:** Expose method to AJAX JSON calls.
-- **L181:** Error handling block.
-=======
 - **L151:** `uid` means: User ID (Users.UID) of the logged-in or target user.
 - **L152:** Authorization — block wrong role / anonymous.
 - **L157:** `body` means: HTTP request body.
@@ -1118,26 +1002,15 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L177:** Expose method to AJAX JSON calls.
 - **L181:** Error handling block.
 - **L183:** `uid` means: User ID (Users.UID) of the logged-in or target user.
->>>>>>> eb8ce01 (update)
 - **L184:** Authorization — block wrong role / anonymous.
 - **L188:** Handle/log exception.
 - **L194:** Expose method to AJAX JSON calls.
 - **L198:** Error handling block.
-<<<<<<< HEAD
-=======
 - **L200:** `uid` means: User ID (Users.UID) of the logged-in or target user.
->>>>>>> eb8ce01 (update)
 - **L201:** Authorization — block wrong role / anonymous.
 - **L205:** Handle/log exception.
 - **L211:** Expose method to AJAX JSON calls.
 - **L215:** Error handling block.
-<<<<<<< HEAD
-- **L218:** Authorization — block wrong role / anonymous.
-- **L221:** Database access (pure SQL).
-- **L223:** Database access (pure SQL).
-- **L224:** Null-safe read from database values.
-- **L231:** Database access (pure SQL).
-=======
 - **L217:** `uid` means: User ID (Users.UID) of the logged-in or target user.
 - **L218:** Authorization — block wrong role / anonymous.
 - **L221:** Database access (pure SQL). | `titleObj` means: Holds “title Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
@@ -1147,7 +1020,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L228:** `type` means: Holds “type” for this scope. (text)  Literal text string.
 - **L229:** `content` means: Submission body text or JSON payload in CWSubmissions.  Literal text string.
 - **L231:** Database access (pure SQL). | `mats` means: Often a collection related to mats (plural name).  Assigned from SQL SELECT result set.
->>>>>>> eb8ce01 (update)
 - **L233:** Database access (pure SQL).
 - **L236:** Database access (pure SQL).
 - **L238:** Database access (pure SQL).

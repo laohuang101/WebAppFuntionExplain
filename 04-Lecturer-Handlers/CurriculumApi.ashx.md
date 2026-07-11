@@ -1,10 +1,6 @@
 # CurriculumApi.ashx
 **Source:** `Pages/Lecturer/CurriculumApi.ashx`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -123,15 +119,6 @@ public void ProcessRequest(HttpContext context)
   94 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L23:** IHttpHandler entry for ashx.
-- **L28:** Error handling block.
-- **L30:** Authorization — block wrong role / anonymous.
-- **L33:** Authorization — block wrong role / anonymous.
-- **L44:** Import namespace/types.
-=======
 **Line notes** (what code + variables mean)
 
 - **L23:** IHttpHandler entry for ashx.
@@ -142,7 +129,6 @@ public void ProcessRequest(HttpContext context)
 - **L40:** `body` means: HTTP request body.
 - **L44:** Import namespace/types.
 - **L48:** `data` means: Holds “data” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L51:** Error handling block.
 - **L90:** Handle/log exception.
 
@@ -369,14 +355,6 @@ private object GetCurriculum(int lecturerUid, int cid)
  276 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L105:** Import namespace/types.
-- **L107:** Ownership check — prevent IDOR.
-- **L123:** Parameterized SQL — prevents classic SQL injection.
-- **L125:** In-memory result set from ADO.NET.
-=======
 **Line notes** (what code + variables mean)
 
 - **L104:** `chapters` means: Often a collection related to chapters (plural name).  Newly constructed object.
@@ -386,22 +364,11 @@ private object GetCurriculum(int lecturerUid, int cid)
 - **L125:** In-memory result set from ADO.NET.
 - **L127:** `chid` means: Chapter ID (Chapters.ChID).
 - **L128:** `lessons` means: Often a collection related to lessons (plural name).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L147:** In-memory result set from ADO.NET.
 - **L148:** Error handling block.
 - **L150:** Parameterized SQL — prevents classic SQL injection.
 - **L152:** Handle/log exception.
 - **L163:** In-memory result set from ADO.NET.
-<<<<<<< HEAD
-- **L176:** Error handling block.
-- **L179:** Parameterized SQL — prevents classic SQL injection.
-- **L184:** In-memory result set from ADO.NET.
-- **L201:** Error handling block.
-- **L205:** Handle/log exception.
-- **L221:** Error handling block.
-- **L224:** Parameterized SQL — prevents classic SQL injection.
-- **L226:** In-memory result set from ADO.NET.
-=======
 - **L165:** `schid` means: SubChapter / lesson ID.
 - **L168:** `materials` means: Often a collection related to materials (plural name).
 - **L176:** Error handling block.
@@ -427,7 +394,6 @@ private object GetCurriculum(int lecturerUid, int cid)
 - **L234:** `lessonTitle` means: Holds “lesson Title” for this scope. (text)  Literal text string.
 - **L237:** `p` means: Parameter, path, or password fragment depending on context.
 - **L250:** `smid` means: Identifier (`smid`) — database primary/foreign key. (integer)  Literal number `0`.
->>>>>>> eb8ce01 (update)
 - **L251:** Error handling block.
 - **L263:** Handle/log exception.
 
@@ -626,14 +592,6 @@ private List<object> LoadMats(SqlConnection conn, int parentId, out string type,
  426 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L278:** Database access (pure SQL).
-- **L283:** Error handling block.
-- **L285:** In-memory result set from ADO.NET.
-- **L287:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L278:** Database access (pure SQL).
@@ -643,7 +601,6 @@ private List<object> LoadMats(SqlConnection conn, int parentId, out string type,
 - **L287:** Error handling block.
 - **L291:** `orderBy` means: Holds “order By” for this scope. (text)
 - **L294:** `sql` means: SQL query text (should use parameters, not raw user input).
->>>>>>> eb8ce01 (update)
 - **L296:** Parameterized SQL — prevents classic SQL injection.
 - **L299:** Handle/log exception.
 - **L303:** Error handling block.
@@ -652,16 +609,6 @@ private List<object> LoadMats(SqlConnection conn, int parentId, out string type,
 - **L311:** Error handling block.
 - **L315:** Parameterized SQL — prevents classic SQL injection.
 - **L317:** In-memory result set from ADO.NET.
-<<<<<<< HEAD
-- **L324:** In-memory result set from ADO.NET.
-- **L325:** In-memory result set from ADO.NET.
-- **L326:** In-memory result set from ADO.NET.
-- **L340:** In-memory result set from ADO.NET.
-- **L370:** In-memory result set from ADO.NET.
-- **L373:** Error handling block.
-- **L396:** Error handling block.
-- **L404:** Handle/log exception.
-=======
 - **L324:** In-memory result set from ADO.NET. | `bodyRow` means: Holds “body Row” for this scope. (`DataRow` = one SQL row)
 - **L325:** In-memory result set from ADO.NET. | `fileRow` means: Holds “file Row” for this scope. (`DataRow` = one SQL row)
 - **L326:** In-memory result set from ADO.NET.
@@ -684,7 +631,6 @@ private List<object> LoadMats(SqlConnection conn, int parentId, out string type,
 - **L398:** `rel` means: Holds “rel” for this scope. (text)
 - **L404:** Handle/log exception.
 - **L408:** `linkOut` means: Holds “link Out” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L424:** Handle/log exception.
 
 ---
@@ -723,15 +669,12 @@ private static string BuildMatSelect()
  441 |                "FROM " + Q(SchemaMap.MatTable);
  442 |     }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L430:** `typeExpr` means: Holds “type Expr” for this scope. (text)
 - **L432:** `textExpr` means: Holds “text Expr” for this scope. (text)
 - **L434:** `mediaExpr` means: Holds “media Expr” for this scope. (text)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -801,13 +744,6 @@ private object SaveSection(int lecturerUid, int chid, int cid, string title)
  485 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L453:** Import namespace/types.
-- **L455:** Ownership check — prevent IDOR.
-- **L460:** Parameterized SQL — prevents classic SQL injection.
-=======
 **Line notes** (what code + variables mean)
 
 - **L453:** Import namespace/types.
@@ -815,7 +751,6 @@ private object SaveSection(int lecturerUid, int chid, int cid, string title)
 - **L458:** `sql` means: SQL query text (should use parameters, not raw user input).
 - **L460:** Parameterized SQL — prevents classic SQL injection.
 - **L467:** `next` means: Holds “next” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 - **L470:** Parameterized SQL — prevents classic SQL injection.
 - **L472:** Return new identity/UID after INSERT.
 - **L474:** Parameterized SQL — prevents classic SQL injection.
@@ -892,16 +827,10 @@ private object DeleteSection(int lecturerUid, int chid)
  531 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L490:** Import namespace/types.
-=======
 **Line notes** (what code + variables mean)
 
 - **L490:** Import namespace/types.
 - **L492:** `cid` means: Course ID (Courses.CID).
->>>>>>> eb8ce01 (update)
 - **L495:** Parameterized SQL — prevents classic SQL injection.
 - **L497:** Ownership check — prevent IDOR.
 - **L502:** Error handling block.
@@ -1110,13 +1039,6 @@ private object SaveLesson(int lecturerUid, int schid, int chid, string title, st
  690 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L542:** Import namespace/types.
-- **L547:** Parameterized SQL — prevents classic SQL injection.
-- **L549:** Ownership check — prevent IDOR.
-=======
 **Line notes** (what code + variables mean)
 
 - **L542:** Import namespace/types.
@@ -1125,7 +1047,6 @@ private object SaveLesson(int lecturerUid, int schid, int chid, string title, st
 - **L549:** Ownership check — prevent IDOR.
 - **L551:** `matType` means: Holds “mat Type” for this scope. (text)
 - **L563:** `n` means: Integer count (rows, items, or length).
->>>>>>> eb8ce01 (update)
 - **L566:** Parameterized SQL — prevents classic SQL injection.
 - **L572:** Error handling block.
 - **L575:** Parameterized SQL — prevents classic SQL injection.
@@ -1133,18 +1054,13 @@ private object SaveLesson(int lecturerUid, int schid, int chid, string title, st
 - **L579:** Parameterized SQL — prevents classic SQL injection.
 - **L580:** Parameterized SQL — prevents classic SQL injection.
 - **L584:** Error handling block.
-<<<<<<< HEAD
-=======
 - **L588:** `next` means: Holds “next” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 - **L591:** Parameterized SQL — prevents classic SQL injection.
 - **L593:** Return new identity/UID after INSERT.
 - **L595:** Parameterized SQL — prevents classic SQL injection.
 - **L600:** Return new identity/UID after INSERT.
 - **L602:** Parameterized SQL — prevents classic SQL injection.
 - **L605:** Handle/log exception.
-<<<<<<< HEAD
-=======
 - **L620:** `matParent` means: Holds “mat Parent” for this scope. (integer)
 - **L622:** `storeText` means: Holds “store Text” for this scope. (text)
 - **L633:** `warn` means: Holds “warn” for this scope. (text)
@@ -1154,7 +1070,6 @@ private object SaveLesson(int lecturerUid, int schid, int chid, string title, st
 - **L662:** `matParent` means: Holds “mat Parent” for this scope. (integer)
 - **L666:** `updErr` means: Holds “upd Err” for this scope. (text)
 - **L672:** `warn` means: Holds “warn” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L676:** Parameterized SQL — prevents classic SQL injection.
 
 ---
@@ -1228,32 +1143,21 @@ private object DeleteLesson(int lecturerUid, int schid)
  735 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L695:** Import namespace/types.
-- **L702:** Parameterized SQL — prevents classic SQL injection.
-=======
 **Line notes** (what code + variables mean)
 
 - **L695:** Import namespace/types.
 - **L699:** `chid` means: Chapter ID (Chapters.ChID).
 - **L702:** Parameterized SQL — prevents classic SQL injection.
 - **L703:** `cid` means: Course ID (Courses.CID).
->>>>>>> eb8ce01 (update)
 - **L706:** Parameterized SQL — prevents classic SQL injection.
 - **L708:** Ownership check — prevent IDOR.
 - **L709:** Error handling block.
 - **L712:** Parameterized SQL — prevents classic SQL injection.
 - **L714:** Handle/log exception.
 - **L716:** Parameterized SQL — prevents classic SQL injection.
-<<<<<<< HEAD
-- **L724:** Parameterized SQL — prevents classic SQL injection.
-=======
 - **L721:** `chid` means: Chapter ID (Chapters.ChID).
 - **L724:** Parameterized SQL — prevents classic SQL injection.
 - **L725:** `cid` means: Course ID (Courses.CID).
->>>>>>> eb8ce01 (update)
 - **L728:** Parameterized SQL — prevents classic SQL injection.
 - **L729:** Ownership check — prevent IDOR.
 - **L731:** Parameterized SQL — prevents classic SQL injection.
@@ -1344,15 +1248,6 @@ private object GetLesson(int lecturerUid, int schid)
  789 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L739:** Import namespace/types.
-- **L746:** Parameterized SQL — prevents classic SQL injection.
-- **L752:** Parameterized SQL — prevents classic SQL injection.
-- **L753:** Ownership check — prevent IDOR.
-- **L771:** Parameterized SQL — prevents classic SQL injection.
-=======
 **Line notes** (what code + variables mean)
 
 - **L739:** Import namespace/types.
@@ -1368,7 +1263,6 @@ private object GetLesson(int lecturerUid, int schid)
 - **L773:** `type2` means: Holds “type2” for this scope. (text)
 - **L775:** `media2` means: Holds “media2” for this scope.
 - **L776:** `text2` means: Holds “text2” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1444,11 +1338,6 @@ private static List<object> FilterFileMaterials(List<object> materials)
  834 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L820:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L794:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
@@ -1462,7 +1351,6 @@ private static List<object> FilterFileMaterials(List<object> materials)
 - **L815:** `pId` means: Identifier (`pId`) — database primary/foreign key.
 - **L820:** Error handling block.
 - **L823:** `fn` means: Holds “fn” for this scope. (text)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1518,13 +1406,10 @@ private static string GuessTypeFromUrl(string url)
  848 |         return "File";
  849 |     }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L844:** `low` means: Holds “low” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1641,16 +1526,10 @@ private string InsertMat(SqlConnection conn, int parentId, string type, string t
  936 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L855:** Database access (pure SQL).
-=======
 **Line notes** (what code + variables mean)
 
 - **L855:** Database access (pure SQL).
 - **L861:** `errors` means: Often a collection related to errors (plural name).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L873:** Error handling block.
 - **L876:** Parameterized SQL — prevents classic SQL injection.
 - **L877:** Parameterized SQL — prevents classic SQL injection.
@@ -1659,22 +1538,15 @@ private string InsertMat(SqlConnection conn, int parentId, string type, string t
 - **L880:** Parameterized SQL — prevents classic SQL injection.
 - **L883:** Handle/log exception.
 - **L887:** Error handling block.
-<<<<<<< HEAD
-- **L893:** Parameterized SQL — prevents classic SQL injection.
-=======
 - **L891:** `cols` means: Often a collection related to cols (plural name).  Newly constructed object.
 - **L892:** `vals` means: Often a collection related to vals (plural name).  Newly constructed object.
 - **L893:** Parameterized SQL — prevents classic SQL injection. | `pars` means: Often a collection related to pars (plural name).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L897:** Parameterized SQL — prevents classic SQL injection.
 - **L903:** Parameterized SQL — prevents classic SQL injection.
 - **L909:** Parameterized SQL — prevents classic SQL injection.
 - **L915:** Parameterized SQL — prevents classic SQL injection.
 - **L921:** Parameterized SQL — prevents classic SQL injection.
-<<<<<<< HEAD
-=======
 - **L926:** `sql` means: SQL query text (should use parameters, not raw user input).  Literal text string.
->>>>>>> eb8ce01 (update)
 - **L933:** Handle/log exception.
 
 ---
@@ -1741,11 +1613,6 @@ private static void PromotePrimaryFromMaterials(
  970 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L950:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L943:** `hasMedia` means: Boolean flag: has Media. (true/false)
@@ -1754,7 +1621,6 @@ private static void PromotePrimaryFromMaterials(
 - **L954:** `m` means: Holds “m” for this scope.
 - **L955:** `url` means: HTTP URL to media or page.  Literal text string.
 - **L961:** `fn` means: Holds “fn” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L969:** Handle/log exception.
 
 ---
@@ -1820,28 +1686,17 @@ private string UpdateMat(SqlConnection conn, int id, string type, string text, s
 1004 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L972:** Database access (pure SQL).
-- **L974:** Error handling block.
-- **L977:** Parameterized SQL — prevents classic SQL injection.
-=======
 **Line notes** (what code + variables mean)
 
 - **L972:** Database access (pure SQL).
 - **L974:** Error handling block.
 - **L976:** `sets` means: Often a collection related to sets (plural name).  Newly constructed object.
 - **L977:** Parameterized SQL — prevents classic SQL injection. | `pars` means: Often a collection related to pars (plural name).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L981:** Parameterized SQL — prevents classic SQL injection.
 - **L986:** Parameterized SQL — prevents classic SQL injection.
 - **L991:** Parameterized SQL — prevents classic SQL injection.
 - **L994:** Parameterized SQL — prevents classic SQL injection.
-<<<<<<< HEAD
-=======
 - **L995:** `sql` means: SQL query text (should use parameters, not raw user input).  Literal text string.
->>>>>>> eb8ce01 (update)
 - **L1000:** Handle/log exception.
 
 ---
@@ -1924,11 +1779,6 @@ private int InsertExtraMaterials(SqlConnection conn, int parentId, string materi
 1052 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L1007:** Database access (pure SQL).
-=======
 **Line notes** (what code + variables mean)
 
 - **L1007:** Database access (pure SQL).
@@ -1940,7 +1790,6 @@ private int InsertExtraMaterials(SqlConnection conn, int parentId, string materi
 - **L1037:** `t` means: Temporary string/token/time value.
 - **L1040:** `low` means: Holds “low” for this scope.
 - **L1047:** `warn` means: Holds “warn” for this scope. (text)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1988,14 +1837,11 @@ private static bool IsStoredMediaPath(string s)
 1079 |         return false;
 1080 |     }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L1069:** `name` means: Display name of user/course/criterion.
 - **L1074:** `hex` means: Holds “hex” for this scope. (true/false)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -2078,13 +1924,6 @@ private static string NormalizeStoredMediaPath(string url)
 1137 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L1087:** Error handling block.
-- **L1101:** Handle/log exception.
-- **L1116:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L1087:** Error handling block.
@@ -2096,7 +1935,6 @@ private static string NormalizeStoredMediaPath(string url)
 - **L1114:** `amp` means: Holds “amp” for this scope. (integer)
 - **L1116:** Error handling block.
 - **L1124:** `up` means: Holds “up” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -2232,17 +2070,10 @@ private static void AssertOwner(SqlConnection conn, int lecturerUid, int cid)
 1189 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L1184:** Database access (pure SQL).
-- **L1186:** Parameterized SQL — prevents classic SQL injection.
-=======
 **Line notes** (what code + variables mean)
 
 - **L1184:** Database access (pure SQL).
 - **L1186:** Parameterized SQL — prevents classic SQL injection. | `owner` means: LecturerUID looked up for ownership check.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -2271,17 +2102,10 @@ private static SqlConnection Open()
 1201 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L1196:** Database access (pure SQL).
-- **L1198:** Database access (pure SQL).
-=======
 **Line notes** (what code + variables mean)
 
 - **L1196:** Database access (pure SQL).
 - **L1198:** Database access (pure SQL). | `c` means: Temporary value (character, course, or counter depending on loop).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -2309,11 +2133,7 @@ private static SqlParameter P(string n, object v)
 1206 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L1203:** Parameterized SQL — prevents classic SQL injection.
 - **L1205:** Parameterized SQL — prevents classic SQL injection.
@@ -2357,20 +2177,12 @@ private static DataTable Query(SqlConnection conn, string sql, params SqlParamet
 1220 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L1208:** Database access (pure SQL).
 - **L1210:** Import namespace/types.
 - **L1213:** Import namespace/types.
-<<<<<<< HEAD
-- **L1215:** In-memory result set from ADO.NET.
-=======
 - **L1215:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -2405,11 +2217,7 @@ private static int Exec(SqlConnection conn, string sql, params SqlParameter[] ps
 1229 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L1222:** Database access (pure SQL).
 - **L1224:** Import namespace/types.
@@ -2451,19 +2259,11 @@ private static int ScalarInt(SqlConnection conn, string sql, params SqlParameter
 1240 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L1231:** Database access (pure SQL).
-- **L1233:** Import namespace/types.
-- **L1236:** Run SQL; return table / rows / scalar.
-=======
 **Line notes** (what code + variables mean)
 
 - **L1231:** Database access (pure SQL).
 - **L1233:** Import namespace/types.
 - **L1236:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
->>>>>>> eb8ce01 (update)
 - **L1237:** Null-safe read from database values.
 
 ---
@@ -2491,11 +2291,7 @@ private static string Safe(object o)
 1246 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L1244:** Null-safe read from database values.
 
@@ -2532,11 +2328,7 @@ private static string Col(DataRow r, params string[] names)
 1257 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L1248:** In-memory result set from ADO.NET.
 - **L1253:** Null-safe read from database values.
@@ -2634,11 +2426,7 @@ private static void Write(HttpContext ctx, object obj)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```html
    1 | <%@ WebHandler Language="C#" Class="CurriculumApi" %>
@@ -3543,7 +3331,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  900 |                 {
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L3:** Import namespace/types.
 - **L4:** Import namespace/types.
@@ -3559,17 +3347,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L19:** Class declaration for this page/service.
 - **L23:** IHttpHandler entry for ashx.
 - **L28:** Error handling block.
-<<<<<<< HEAD
-- **L30:** Authorization — block wrong role / anonymous.
-- **L33:** Authorization — block wrong role / anonymous.
-- **L44:** Import namespace/types.
-- **L51:** Error handling block.
-- **L90:** Handle/log exception.
-- **L105:** Import namespace/types.
-- **L107:** Ownership check — prevent IDOR.
-- **L123:** Parameterized SQL — prevents classic SQL injection.
-- **L125:** In-memory result set from ADO.NET.
-=======
 - **L30:** Authorization — block wrong role / anonymous. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
 - **L33:** Authorization — block wrong role / anonymous.
 - **L39:** `action` means: Holds “action” for this scope. (text)  Comes from HTTP request.
@@ -3585,28 +3362,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L125:** In-memory result set from ADO.NET.
 - **L127:** `chid` means: Chapter ID (Chapters.ChID).
 - **L128:** `lessons` means: Often a collection related to lessons (plural name).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L147:** In-memory result set from ADO.NET.
 - **L148:** Error handling block.
 - **L150:** Parameterized SQL — prevents classic SQL injection.
 - **L152:** Handle/log exception.
 - **L163:** In-memory result set from ADO.NET.
-<<<<<<< HEAD
-- **L176:** Error handling block.
-- **L179:** Parameterized SQL — prevents classic SQL injection.
-- **L184:** In-memory result set from ADO.NET.
-- **L201:** Error handling block.
-- **L205:** Handle/log exception.
-- **L221:** Error handling block.
-- **L224:** Parameterized SQL — prevents classic SQL injection.
-- **L226:** In-memory result set from ADO.NET.
-- **L251:** Error handling block.
-- **L263:** Handle/log exception.
-- **L278:** Database access (pure SQL).
-- **L283:** Error handling block.
-- **L285:** In-memory result set from ADO.NET.
-- **L287:** Error handling block.
-=======
 - **L165:** `schid` means: SubChapter / lesson ID.
 - **L168:** `materials` means: Often a collection related to materials (plural name).
 - **L176:** Error handling block.
@@ -3641,7 +3401,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L287:** Error handling block.
 - **L291:** `orderBy` means: Holds “order By” for this scope. (text)
 - **L294:** `sql` means: SQL query text (should use parameters, not raw user input).
->>>>>>> eb8ce01 (update)
 - **L296:** Parameterized SQL — prevents classic SQL injection.
 - **L299:** Handle/log exception.
 - **L303:** Error handling block.
@@ -3650,20 +3409,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L311:** Error handling block.
 - **L315:** Parameterized SQL — prevents classic SQL injection.
 - **L317:** In-memory result set from ADO.NET.
-<<<<<<< HEAD
-- **L324:** In-memory result set from ADO.NET.
-- **L325:** In-memory result set from ADO.NET.
-- **L326:** In-memory result set from ADO.NET.
-- **L340:** In-memory result set from ADO.NET.
-- **L370:** In-memory result set from ADO.NET.
-- **L373:** Error handling block.
-- **L396:** Error handling block.
-- **L404:** Handle/log exception.
-- **L424:** Handle/log exception.
-- **L453:** Import namespace/types.
-- **L455:** Ownership check — prevent IDOR.
-- **L460:** Parameterized SQL — prevents classic SQL injection.
-=======
 - **L324:** In-memory result set from ADO.NET. | `bodyRow` means: Holds “body Row” for this scope. (`DataRow` = one SQL row)
 - **L325:** In-memory result set from ADO.NET. | `fileRow` means: Holds “file Row” for this scope. (`DataRow` = one SQL row)
 - **L326:** In-memory result set from ADO.NET.
@@ -3695,17 +3440,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L458:** `sql` means: SQL query text (should use parameters, not raw user input).
 - **L460:** Parameterized SQL — prevents classic SQL injection.
 - **L467:** `next` means: Holds “next” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 - **L470:** Parameterized SQL — prevents classic SQL injection.
 - **L472:** Return new identity/UID after INSERT.
 - **L474:** Parameterized SQL — prevents classic SQL injection.
 - **L479:** Return new identity/UID after INSERT.
 - **L481:** Parameterized SQL — prevents classic SQL injection.
 - **L490:** Import namespace/types.
-<<<<<<< HEAD
-=======
 - **L492:** `cid` means: Course ID (Courses.CID).
->>>>>>> eb8ce01 (update)
 - **L495:** Parameterized SQL — prevents classic SQL injection.
 - **L497:** Ownership check — prevent IDOR.
 - **L502:** Error handling block.
@@ -3720,16 +3461,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L524:** Handle/log exception.
 - **L528:** Parameterized SQL — prevents classic SQL injection.
 - **L542:** Import namespace/types.
-<<<<<<< HEAD
-- **L547:** Parameterized SQL — prevents classic SQL injection.
-- **L549:** Ownership check — prevent IDOR.
-=======
 - **L544:** `cid` means: Course ID (Courses.CID).
 - **L547:** Parameterized SQL — prevents classic SQL injection.
 - **L549:** Ownership check — prevent IDOR.
 - **L551:** `matType` means: Holds “mat Type” for this scope. (text)
 - **L563:** `n` means: Integer count (rows, items, or length).
->>>>>>> eb8ce01 (update)
 - **L566:** Parameterized SQL — prevents classic SQL injection.
 - **L572:** Error handling block.
 - **L575:** Parameterized SQL — prevents classic SQL injection.
@@ -3737,21 +3473,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L579:** Parameterized SQL — prevents classic SQL injection.
 - **L580:** Parameterized SQL — prevents classic SQL injection.
 - **L584:** Error handling block.
-<<<<<<< HEAD
-=======
 - **L588:** `next` means: Holds “next” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 - **L591:** Parameterized SQL — prevents classic SQL injection.
 - **L593:** Return new identity/UID after INSERT.
 - **L595:** Parameterized SQL — prevents classic SQL injection.
 - **L600:** Return new identity/UID after INSERT.
 - **L602:** Parameterized SQL — prevents classic SQL injection.
 - **L605:** Handle/log exception.
-<<<<<<< HEAD
-- **L676:** Parameterized SQL — prevents classic SQL injection.
-- **L695:** Import namespace/types.
-- **L702:** Parameterized SQL — prevents classic SQL injection.
-=======
 - **L620:** `matParent` means: Holds “mat Parent” for this scope. (integer)
 - **L622:** `storeText` means: Holds “store Text” for this scope. (text)
 - **L633:** `warn` means: Holds “warn” for this scope. (text)
@@ -3766,32 +3494,19 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L699:** `chid` means: Chapter ID (Chapters.ChID).
 - **L702:** Parameterized SQL — prevents classic SQL injection.
 - **L703:** `cid` means: Course ID (Courses.CID).
->>>>>>> eb8ce01 (update)
 - **L706:** Parameterized SQL — prevents classic SQL injection.
 - **L708:** Ownership check — prevent IDOR.
 - **L709:** Error handling block.
 - **L712:** Parameterized SQL — prevents classic SQL injection.
 - **L714:** Handle/log exception.
 - **L716:** Parameterized SQL — prevents classic SQL injection.
-<<<<<<< HEAD
-- **L724:** Parameterized SQL — prevents classic SQL injection.
-=======
 - **L721:** `chid` means: Chapter ID (Chapters.ChID).
 - **L724:** Parameterized SQL — prevents classic SQL injection.
 - **L725:** `cid` means: Course ID (Courses.CID).
->>>>>>> eb8ce01 (update)
 - **L728:** Parameterized SQL — prevents classic SQL injection.
 - **L729:** Ownership check — prevent IDOR.
 - **L731:** Parameterized SQL — prevents classic SQL injection.
 - **L739:** Import namespace/types.
-<<<<<<< HEAD
-- **L746:** Parameterized SQL — prevents classic SQL injection.
-- **L752:** Parameterized SQL — prevents classic SQL injection.
-- **L753:** Ownership check — prevent IDOR.
-- **L771:** Parameterized SQL — prevents classic SQL injection.
-- **L820:** Error handling block.
-- **L855:** Database access (pure SQL).
-=======
 - **L743:** `dt` means: DataTable — full result set from SQL (many rows/columns).
 - **L746:** Parameterized SQL — prevents classic SQL injection.
 - **L748:** `chid` means: Chapter ID (Chapters.ChID).
@@ -3818,7 +3533,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L844:** `low` means: Holds “low” for this scope.
 - **L855:** Database access (pure SQL).
 - **L861:** `errors` means: Often a collection related to errors (plural name).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L873:** Error handling block.
 - **L876:** Parameterized SQL — prevents classic SQL injection.
 - **L877:** Parameterized SQL — prevents classic SQL injection.
@@ -3827,13 +3541,9 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L880:** Parameterized SQL — prevents classic SQL injection.
 - **L883:** Handle/log exception.
 - **L887:** Error handling block.
-<<<<<<< HEAD
-- **L893:** Parameterized SQL — prevents classic SQL injection.
-=======
 - **L891:** `cols` means: Often a collection related to cols (plural name).  Newly constructed object.
 - **L892:** `vals` means: Often a collection related to vals (plural name).  Newly constructed object.
 - **L893:** Parameterized SQL — prevents classic SQL injection. | `pars` means: Often a collection related to pars (plural name).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L897:** Parameterized SQL — prevents classic SQL injection.
 
 _… truncated: 384 more lines in source. Open the original file for the rest._

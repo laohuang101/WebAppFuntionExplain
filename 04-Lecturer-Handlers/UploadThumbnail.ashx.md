@@ -1,10 +1,6 @@
 # UploadThumbnail.ashx
 **Source:** `Pages/Lecturer/UploadThumbnail.ashx`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -134,27 +130,18 @@ public void ProcessRequest(HttpContext context)
   92 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L15:** IHttpHandler entry for ashx.
 - **L20:** Error handling block.
 - **L23:** Authorization — block wrong role / anonymous.
-<<<<<<< HEAD
-=======
 - **L32:** `file` means: Uploaded file object or file name.
 - **L39:** `ext` means: File extension (.pdf, .mp4, …).
->>>>>>> eb8ce01 (update)
 - **L40:** Sandbox path under ~/Uploads.
 - **L52:** File magic-byte validation on upload.
 - **L53:** Validate upload by file signature.
 - **L55:** Write/read security audit events.
 - **L56:** File magic-byte validation on upload.
-<<<<<<< HEAD
-=======
 - **L60:** `uploadsFolder` means: Filesystem or URL path.
 - **L63:** `fileName` means: Original file name for display/download.
 - **L64:** `savePath` means: Filesystem or URL path.
@@ -163,7 +150,6 @@ public void ProcessRequest(HttpContext context)
 - **L76:** `under` means: Holds “under” for this scope. (text)  Literal text string.
 - **L77:** `mediaUrl` means: URL string. (text)
 - **L78:** `staticUrl` means: URL string. (text)
->>>>>>> eb8ce01 (update)
 - **L88:** Handle/log exception.
 
 ---
@@ -194,23 +180,16 @@ private void WriteJson(HttpContext context, object obj)
   97 |         context.Response.Write(js.Serialize(obj));
   98 |     }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L96:** `js` means: Holds “js” for this scope.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```html
    1 | <%@ WebHandler Language="C#" Class="UploadThumbnail" %>
@@ -316,7 +295,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  101 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L3:** Import namespace/types.
 - **L4:** Import namespace/types.
@@ -328,19 +307,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L15:** IHttpHandler entry for ashx.
 - **L20:** Error handling block.
 - **L23:** Authorization — block wrong role / anonymous.
-<<<<<<< HEAD
-=======
 - **L32:** `file` means: Uploaded file object or file name.
 - **L39:** `ext` means: File extension (.pdf, .mp4, …).
->>>>>>> eb8ce01 (update)
 - **L40:** Sandbox path under ~/Uploads.
 - **L52:** File magic-byte validation on upload.
 - **L53:** Validate upload by file signature.
 - **L55:** Write/read security audit events.
 - **L56:** File magic-byte validation on upload.
-<<<<<<< HEAD
-- **L88:** Handle/log exception.
-=======
 - **L60:** `uploadsFolder` means: Filesystem or URL path.
 - **L63:** `fileName` means: Original file name for display/download.
 - **L64:** `savePath` means: Filesystem or URL path.
@@ -351,7 +324,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L78:** `staticUrl` means: URL string. (text)
 - **L88:** Handle/log exception.
 - **L96:** `js` means: Holds “js” for this scope.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

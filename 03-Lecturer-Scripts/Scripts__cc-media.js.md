@@ -1,10 +1,6 @@
 # cc-media.js
 **Source:** `Pages/Lecturer/Scripts/cc-media.js`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -166,20 +162,6 @@ function initDropzone()
   77 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L4:** Get HTML element by id.
-- **L14:** Get HTML element by id.
-- **L15:** Get HTML element by id.
-- **L16:** Get HTML element by id.
-- **L31:** HTTP request to server WebMethod/ashx.
-- **L57:** DOM event handler.
-- **L59:** DOM event handler.
-- **L64:** DOM event handler.
-- **L68:** DOM event handler.
-- **L71:** DOM event handler.
-=======
 **Line notes** (what code + variables mean)
 
 - **L4:** Get HTML element by id. | `dz` means: Holds “dz” for this scope.  DOM element from the page.
@@ -196,7 +178,6 @@ function initDropzone()
 - **L68:** DOM event handler.
 - **L71:** DOM event handler.
 - **L74:** `file` means: Uploaded file object or file name.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -261,14 +242,9 @@ function uploadFile(file)
   55 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-=======
 **Line notes** (what code + variables mean)
 
 - **L25:** `formData` means: Holds “form Data” for this scope.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L31:** HTTP request to server WebMethod/ashx.
 
 ---
@@ -313,14 +289,9 @@ function uploadLessonFile(file)
   99 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-=======
 **Line notes** (what code + variables mean)
 
 - **L83:** `fd` means: Holds “fd” for this scope.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L85:** HTTP request to server WebMethod/ashx.
 - **L91:** Error handling block.
 - **L92:** JS object ↔ JSON text.
@@ -354,15 +325,12 @@ function mediaAppRoot()
  108 |     return '';
  109 | }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L103:** `p` means: Parameter, path, or password fragment depending on context.
 - **L104:** `lower` means: Holds “lower” for this scope.
 - **L105:** `i` means: Loop index (0-based counter in for-loops).
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -419,12 +387,6 @@ function resolveMediaUrl(raw, forDownload)
  143 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L128:** Error handling block.
-- **L137:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L117:** `u` means: Holds “u” for this scope.
@@ -433,7 +395,6 @@ function resolveMediaUrl(raw, forDownload)
 - **L131:** `q` means: Search query text, or SQL command text.
 - **L137:** Error handling block.
 - **L139:** `a` means: Holds “a” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -465,13 +426,10 @@ function mediaKind(urlOrName)
  169 |     return 'file';
  170 | }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L164:** `s` means: String value or submission-related object.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -519,17 +477,10 @@ function buildMaterialPreviewHtml(viewUrl, kind, fileName)
  191 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L173:** Encode text to reduce XSS risk.
-- **L174:** Encode text to reduce XSS risk.
-=======
 **Line notes** (what code + variables mean)
 
 - **L173:** Encode text to reduce XSS risk. | `safeView` means: Holds “safe View” for this scope.
 - **L174:** Encode text to reduce XSS risk. | `safeName` means: Holds “safe Name” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -643,16 +594,6 @@ function initMediaDropzone()
  275 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L194:** Get HTML element by id.
-- **L196:** Get HTML element by id.
-- **L231:** Get HTML element by id.
-- **L237:** Update page HTML.
-- **L238:** Encode text to reduce XSS risk.
-- **L239:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L194:** Get HTML element by id. | `area` means: Holds “area” for this scope.  DOM element from the page.
@@ -666,7 +607,6 @@ function initMediaDropzone()
 - **L237:** Update page HTML.
 - **L238:** Encode text to reduce XSS risk.
 - **L239:** Get HTML element by id. | `prev` means: Holds “prev” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 - **L241:** Update page HTML.
 - **L242:** Encode text to reduce XSS risk.
 - **L243:** Encode text to reduce XSS risk.
@@ -750,14 +690,6 @@ function uploadVideo(file)
  257 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L231:** Get HTML element by id.
-- **L237:** Update page HTML.
-- **L238:** Encode text to reduce XSS risk.
-- **L239:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L215:** `ext` means: File extension (.pdf, .mp4, …).
@@ -768,7 +700,6 @@ function uploadVideo(file)
 - **L237:** Update page HTML.
 - **L238:** Encode text to reduce XSS risk.
 - **L239:** Get HTML element by id. | `prev` means: Holds “prev” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 - **L241:** Update page HTML.
 - **L242:** Encode text to reduce XSS risk.
 - **L243:** Encode text to reduce XSS risk.
@@ -885,14 +816,6 @@ function initMaterialDropzone()
  358 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L278:** Get HTML element by id.
-- **L280:** Get HTML element by id.
-- **L314:** Get HTML element by id.
-- **L316:** JS object ↔ JSON text.
-=======
 **Line notes** (what code + variables mean)
 
 - **L278:** Get HTML element by id. | `area` means: Holds “area” for this scope.  DOM element from the page.
@@ -905,7 +828,6 @@ function initMaterialDropzone()
 - **L315:** `materials` means: Often a collection related to materials (plural name).
 - **L316:** JS object ↔ JSON text.
 - **L317:** `store` means: Holds “store” for this scope.
->>>>>>> eb8ce01 (update)
 - **L326:** JS object ↔ JSON text.
 - **L328:** Update page HTML.
 - **L329:** Encode text to reduce XSS risk.
@@ -988,12 +910,6 @@ function uploadMaterial(file)
  340 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L314:** Get HTML element by id.
-- **L316:** JS object ↔ JSON text.
-=======
 **Line notes** (what code + variables mean)
 
 - **L299:** `allowed` means: Boolean — path/role is permitted.
@@ -1003,7 +919,6 @@ function uploadMaterial(file)
 - **L315:** `materials` means: Often a collection related to materials (plural name).
 - **L316:** JS object ↔ JSON text.
 - **L317:** `store` means: Holds “store” for this scope.
->>>>>>> eb8ce01 (update)
 - **L326:** JS object ↔ JSON text.
 - **L328:** Update page HTML.
 - **L329:** Encode text to reduce XSS risk.
@@ -1078,14 +993,6 @@ function renderAttachmentsList()
  398 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L361:** Get HTML element by id.
-- **L362:** Get HTML element by id.
-- **L364:** Update page HTML.
-- **L366:** JS object ↔ JSON text.
-=======
 **Line notes** (what code + variables mean)
 
 - **L361:** Get HTML element by id. | `attachments` means: Often a collection related to attachments (plural name).  DOM element from the page.
@@ -1100,7 +1007,6 @@ function renderAttachmentsList()
 - **L378:** `name` means: Display name of user/course/criterion.
 - **L379:** `kind` means: Upload kind (material/video/thumbnail/submission).
 - **L381:** `card` means: Holds “card” for this scope.
->>>>>>> eb8ce01 (update)
 - **L383:** Update page HTML.
 - **L386:** Encode text to reduce XSS risk.
 - **L387:** Encode text to reduce XSS risk.
@@ -1144,16 +1050,10 @@ function removeAttachment(url)
  410 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L401:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L401:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
 - **L403:** `materials` means: Often a collection related to materials (plural name).
->>>>>>> eb8ce01 (update)
 - **L404:** JS object ↔ JSON text.
 - **L408:** JS object ↔ JSON text.
 
@@ -1161,11 +1061,7 @@ function removeAttachment(url)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | // Course Creation — media / materials dropzones
@@ -1581,33 +1477,8 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  411 | 
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
-<<<<<<< HEAD
-- **L4:** Get HTML element by id.
-- **L14:** Get HTML element by id.
-- **L15:** Get HTML element by id.
-- **L16:** Get HTML element by id.
-- **L31:** HTTP request to server WebMethod/ashx.
-- **L57:** DOM event handler.
-- **L59:** DOM event handler.
-- **L64:** DOM event handler.
-- **L68:** DOM event handler.
-- **L71:** DOM event handler.
-- **L85:** HTTP request to server WebMethod/ashx.
-- **L91:** Error handling block.
-- **L92:** JS object ↔ JSON text.
-- **L128:** Error handling block.
-- **L137:** Error handling block.
-- **L173:** Encode text to reduce XSS risk.
-- **L174:** Encode text to reduce XSS risk.
-- **L194:** Get HTML element by id.
-- **L196:** Get HTML element by id.
-- **L231:** Get HTML element by id.
-- **L237:** Update page HTML.
-- **L238:** Encode text to reduce XSS risk.
-- **L239:** Get HTML element by id.
-=======
 - **L4:** Get HTML element by id. | `dz` means: Holds “dz” for this scope.  DOM element from the page.
 - **L8:** `fileInput` means: Holds “file Input” for this scope.
 - **L14:** Get HTML element by id. | `preview` means: Holds “preview” for this scope.  DOM element from the page.
@@ -1653,7 +1524,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L237:** Update page HTML.
 - **L238:** Encode text to reduce XSS risk.
 - **L239:** Get HTML element by id. | `prev` means: Holds “prev” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 - **L241:** Update page HTML.
 - **L242:** Encode text to reduce XSS risk.
 - **L243:** Encode text to reduce XSS risk.
@@ -1663,12 +1533,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L268:** DOM event handler.
 - **L269:** DOM event handler.
 - **L270:** DOM event handler.
-<<<<<<< HEAD
-- **L278:** Get HTML element by id.
-- **L280:** Get HTML element by id.
-- **L314:** Get HTML element by id.
-- **L316:** JS object ↔ JSON text.
-=======
 - **L278:** Get HTML element by id. | `area` means: Holds “area” for this scope.  DOM element from the page.
 - **L280:** Get HTML element by id. | `input` means: Holds “input” for this scope.  DOM element from the page.
 - **L289:** `msg` means: Human-readable message (error or success).
@@ -1679,7 +1543,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L315:** `materials` means: Often a collection related to materials (plural name).
 - **L316:** JS object ↔ JSON text.
 - **L317:** `store` means: Holds “store” for this scope.
->>>>>>> eb8ce01 (update)
 - **L326:** JS object ↔ JSON text.
 - **L328:** Update page HTML.
 - **L329:** Encode text to reduce XSS risk.
@@ -1688,12 +1551,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L351:** DOM event handler.
 - **L352:** DOM event handler.
 - **L353:** DOM event handler.
-<<<<<<< HEAD
-- **L361:** Get HTML element by id.
-- **L362:** Get HTML element by id.
-- **L364:** Update page HTML.
-- **L366:** JS object ↔ JSON text.
-=======
 - **L361:** Get HTML element by id. | `attachments` means: Often a collection related to attachments (plural name).  DOM element from the page.
 - **L362:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
 - **L364:** Update page HTML.
@@ -1706,18 +1563,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L378:** `name` means: Display name of user/course/criterion.
 - **L379:** `kind` means: Upload kind (material/video/thumbnail/submission).
 - **L381:** `card` means: Holds “card” for this scope.
->>>>>>> eb8ce01 (update)
 - **L383:** Update page HTML.
 - **L386:** Encode text to reduce XSS risk.
 - **L387:** Encode text to reduce XSS risk.
 - **L388:** Encode text to reduce XSS risk.
 - **L393:** DOM event handler.
-<<<<<<< HEAD
-- **L401:** Get HTML element by id.
-=======
 - **L401:** Get HTML element by id. | `materialsField` means: Holds “materials Field” for this scope.  DOM element from the page.
 - **L403:** `materials` means: Often a collection related to materials (plural name).
->>>>>>> eb8ce01 (update)
 - **L404:** JS object ↔ JSON text.
 - **L408:** JS object ↔ JSON text.
 

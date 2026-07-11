@@ -1,10 +1,6 @@
 # DbHelper.cs
 **Source:** `Data/DbHelper.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -56,17 +52,10 @@ public static SqlConnection OpenConnection()
   29 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L24:** Database access (pure SQL).
-- **L26:** Database access (pure SQL).
-=======
 **Line notes** (what code + variables mean)
 
 - **L24:** Database access (pure SQL).
 - **L26:** Database access (pure SQL). | `conn` means: SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -108,21 +97,13 @@ public static DataTable ExecuteQuery(string sql, params SqlParameter[] parameter
   45 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L31:** Run SQL; return table / rows / scalar.
 - **L33:** Import namespace/types.
 - **L34:** Import namespace/types.
 - **L38:** Import namespace/types.
-<<<<<<< HEAD
-- **L40:** In-memory result set from ADO.NET.
-=======
 - **L40:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -158,11 +139,7 @@ public static int ExecuteNonQuery(string sql, params SqlParameter[] parameters)
   56 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L47:** Run SQL; return table / rows / scalar.
 - **L49:** Import namespace/types.
@@ -203,11 +180,7 @@ public static object ExecuteScalar(string sql, params SqlParameter[] parameters)
   67 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L58:** Run SQL; return table / rows / scalar.
 - **L60:** Import namespace/types.
@@ -244,17 +217,10 @@ public static int ExecuteScalarInt(string sql, params SqlParameter[] parameters)
   74 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L69:** Run SQL; return table / rows / scalar.
-- **L71:** Run SQL; return table / rows / scalar.
-=======
 **Line notes** (what code + variables mean)
 
 - **L69:** Run SQL; return table / rows / scalar.
 - **L71:** Run SQL; return table / rows / scalar. | `result` means: AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY).
->>>>>>> eb8ce01 (update)
 - **L72:** Null-safe read from database values.
 
 ---
@@ -287,17 +253,10 @@ public static decimal ExecuteScalarDecimal(string sql, params SqlParameter[] par
   81 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L76:** Run SQL; return table / rows / scalar.
-- **L78:** Run SQL; return table / rows / scalar.
-=======
 **Line notes** (what code + variables mean)
 
 - **L76:** Run SQL; return table / rows / scalar.
 - **L78:** Run SQL; return table / rows / scalar. | `result` means: AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY).
->>>>>>> eb8ce01 (update)
 - **L79:** Null-safe read from database values.
 
 ---
@@ -326,11 +285,7 @@ public static SqlParameter P(string name, object value)
   86 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L83:** Parameterized SQL — prevents classic SQL injection.
 - **L85:** Parameterized SQL — prevents classic SQL injection.
@@ -360,11 +315,7 @@ public static string SafeString(object value)
   92 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L88:** Null-safe read from database values.
 - **L90:** Null-safe read from database values.
@@ -394,11 +345,7 @@ public static int? SafeInt(object value)
   98 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L96:** Null-safe read from database values.
 
@@ -427,11 +374,7 @@ public static decimal? SafeDecimal(object value)
  104 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L102:** Null-safe read from database values.
 
@@ -460,11 +403,7 @@ public static DateTime? SafeDate(object value)
  110 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L108:** Null-safe read from database values.
 
@@ -472,11 +411,7 @@ public static DateTime? SafeDate(object value)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -593,7 +528,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  112 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -601,23 +536,14 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L4:** Import namespace/types.
 - **L6:** C# namespace grouping.
 - **L11:** Database access (pure SQL).
-<<<<<<< HEAD
-- **L24:** Database access (pure SQL).
-- **L26:** Database access (pure SQL).
-=======
 - **L17:** `cs` means: Connection string text.  Read from Web.config.
 - **L24:** Database access (pure SQL).
 - **L26:** Database access (pure SQL). | `conn` means: SqlConnection — open link to LocalDB/SQL Server.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L31:** Run SQL; return table / rows / scalar.
 - **L33:** Import namespace/types.
 - **L34:** Import namespace/types.
 - **L38:** Import namespace/types.
-<<<<<<< HEAD
-- **L40:** In-memory result set from ADO.NET.
-=======
 - **L40:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L47:** Run SQL; return table / rows / scalar.
 - **L49:** Import namespace/types.
 - **L50:** Import namespace/types.
@@ -627,17 +553,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L61:** Import namespace/types.
 - **L65:** Run SQL; return table / rows / scalar.
 - **L69:** Run SQL; return table / rows / scalar.
-<<<<<<< HEAD
-- **L71:** Run SQL; return table / rows / scalar.
-- **L72:** Null-safe read from database values.
-- **L76:** Run SQL; return table / rows / scalar.
-- **L78:** Run SQL; return table / rows / scalar.
-=======
 - **L71:** Run SQL; return table / rows / scalar. | `result` means: AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY).
 - **L72:** Null-safe read from database values.
 - **L76:** Run SQL; return table / rows / scalar.
 - **L78:** Run SQL; return table / rows / scalar. | `result` means: AuthResult or API result { success, message, … }.  Assigned from single SQL scalar (COUNT/IDENTITY).
->>>>>>> eb8ce01 (update)
 - **L79:** Null-safe read from database values.
 - **L83:** Parameterized SQL — prevents classic SQL injection.
 - **L85:** Parameterized SQL — prevents classic SQL injection.

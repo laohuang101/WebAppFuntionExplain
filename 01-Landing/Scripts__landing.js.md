@@ -1,10 +1,6 @@
 # landing.js
 **Source:** `Pages/Landing/Scripts/landing.js`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -140,14 +136,11 @@ function goTo(i, pushHash)
   52 |             window.setTimeout(function () { locked = false; }, DURATION);
   53 |         }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L16:** `prev` means: Holds “prev” for this scope.
 - **L44:** `hash` means: Password hash (PBKDF2) stored in DB.  Literal text string.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -182,14 +175,11 @@ function updateChrome(i)
   62 |             });
   63 |         }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L56:** `id` means: Generic primary key / identifier.
 - **L58:** `g` means: Holds “g” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -244,13 +234,10 @@ function visibleCap()
   85 |                 return 5;
   86 |             }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L80:** `w` means: Holds “w” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -283,15 +270,12 @@ function layout()
   95 |                 if (nextBtn) nextBtn.style.visibility = hideArrows ? 'hidden' : 'visible';
   96 |             }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L89:** `n` means: Integer count (rows, items, or length).
 - **L90:** `show` means: Holds “show” for this scope.
 - **L93:** `hideArrows` means: Collection / list related to hide Arrows.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -324,13 +308,10 @@ function step(dir)
  105 |                 }
  106 |             }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L99:** `cards` means: Often a collection related to cards (plural name).
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -358,24 +339,17 @@ function fromHash()
  191 |             goTo(i, false);
  192 |         }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L188:** `h` means: Holds “h” for this scope.
 - **L189:** `i` means: Loop index (0-based counter in for-loops).
->>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```javascript
    1 |     (function () {
@@ -584,21 +558,8 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  204 |     })();
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
-<<<<<<< HEAD
-- **L3:** Get HTML element by id.
-- **L72:** Get HTML element by id.
-- **L73:** Get HTML element by id.
-- **L108:** DOM event handler.
-- **L113:** DOM event handler.
-- **L120:** DOM event handler.
-- **L126:** DOM event handler.
-- **L145:** DOM event handler.
-- **L164:** DOM event handler.
-- **L167:** DOM event handler.
-- **L176:** DOM event handler.
-=======
 - **L2:** `sections` means: Often a collection related to sections (plural name).
 - **L3:** Get HTML element by id. | `track` means: Holds “track” for this scope.  DOM element from the page.
 - **L4:** `ids` means: Holds “ids” for this scope.
@@ -639,7 +600,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L180:** `i` means: Loop index (0-based counter in for-loops).
 - **L188:** `h` means: Holds “h” for this scope.
 - **L189:** `i` means: Loop index (0-based counter in for-loops).
->>>>>>> eb8ce01 (update)
 - **L193:** DOM event handler.
 - **L197:** DOM event handler.
 

@@ -1,10 +1,6 @@
 # CourseSchema.cs
 **Source:** `Data/CourseSchema.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -72,11 +68,7 @@ public static void Ensure()
   36 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L18:** Error handling block.
 - **L20:** Import namespace/types.
@@ -133,11 +125,7 @@ private static void EnsureColumn(SqlConnection conn, string table, string column
   55 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L38:** Database access (pure SQL).
 - **L40:** Import namespace/types.
@@ -180,11 +168,7 @@ public static bool HasIsPublished()
   67 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L57:** Course publish flag for Landing catalog.
 - **L60:** Error handling block.
@@ -196,11 +180,7 @@ public static bool HasIsPublished()
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -274,7 +254,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   69 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.

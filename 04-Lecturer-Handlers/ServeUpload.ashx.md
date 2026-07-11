@@ -1,10 +1,6 @@
 # ServeUpload.ashx
 **Source:** `Pages/Lecturer/ServeUpload.ashx`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -78,12 +74,6 @@ public void ProcessRequest(HttpContext context)
   47 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L18:** IHttpHandler entry for ashx.
-- **L21:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L18:** IHttpHandler entry for ashx.
@@ -91,7 +81,6 @@ public void ProcessRequest(HttpContext context)
 - **L23:** `path` means: File path under Uploads or URL path.  Comes from HTTP request.
 - **L32:** `media` means: Holds “media” for this scope. (text)
 - **L33:** `qs` means: Holds “qs” for this scope. (text)  Literal text string.
->>>>>>> eb8ce01 (update)
 - **L35:** Navigate browser to another URL.
 - **L38:** Handle/log exception.
 - **L43:** Handle/log exception.
@@ -344,11 +333,6 @@ private static void Serve(HttpContext context)
  248 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L59:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L53:** `path` means: File path under Uploads or URL path.  Comes from HTTP request.
@@ -356,17 +340,10 @@ private static void Serve(HttpContext context)
 - **L76:** `parts` means: Split path or name segments.
 - **L83:** `allowed` means: Boolean — path/role is permitted.
 - **L107:** `relativeUnderUploads` means: Often a collection related to relative Under Uploads (plural name). (text)
->>>>>>> eb8ce01 (update)
 - **L109:** Error handling block.
 - **L113:** Handle/log exception.
 - **L128:** Error handling block.
 - **L133:** Handle/log exception.
-<<<<<<< HEAD
-- **L158:** Error handling block.
-- **L159:** Handle/log exception.
-- **L195:** Error handling block.
-- **L220:** Import namespace/types.
-=======
 - **L140:** `rootWithSep` means: Holds “root With Sep” for this scope. (text)
 - **L149:** `fileName` means: Original file name for display/download.
 - **L150:** `ext` means: File extension (.pdf, .mp4, …).
@@ -391,7 +368,6 @@ private static void Serve(HttpContext context)
 - **L224:** `remaining` means: Holds “remaining” for this scope. (integer)
 - **L228:** `toRead` means: Holds “to Read” for this scope. (integer)
 - **L229:** `read` means: Holds “read” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 - **L235:** Error handling block.
 - **L237:** Handle/log exception.
 - **L241:** Error handling block.
@@ -433,11 +409,7 @@ private static void SafeError(HttpContext context, int code, string message)
  263 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L252:** Error handling block.
 - **L262:** Handle/log exception.
@@ -475,13 +447,10 @@ private static bool IsClientAbort(Exception ex)
  275 |         return false;
  276 |     }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L268:** `m` means: Holds “m” for this scope. (text)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -567,13 +536,6 @@ public static string NormalizeToUploadsRelative(string path, HttpContext context
  336 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L289:** Error handling block.
-- **L295:** Handle/log exception.
-- **L308:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L289:** Error handling block.
@@ -586,7 +548,6 @@ public static string NormalizeToUploadsRelative(string path, HttpContext context
 - **L308:** Error handling block.
 - **L316:** `app` means: Holds “app” for this scope. (text)
 - **L325:** `up` means: Holds “up” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -633,11 +594,7 @@ private static string MimeFromExt(string ext)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```html
    1 | <%@ WebHandler Language="C#" Class="ServeUpload" %>
@@ -1003,7 +960,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  361 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L3:** Import namespace/types.
 - **L4:** Import namespace/types.
@@ -1012,12 +969,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L14:** Class declaration for this page/service.
 - **L18:** IHttpHandler entry for ashx.
 - **L21:** Error handling block.
-<<<<<<< HEAD
-- **L35:** Navigate browser to another URL.
-- **L38:** Handle/log exception.
-- **L43:** Handle/log exception.
-- **L59:** Error handling block.
-=======
 - **L23:** `path` means: File path under Uploads or URL path.  Comes from HTTP request.
 - **L32:** `media` means: Holds “media” for this scope. (text)
 - **L33:** `qs` means: Holds “qs” for this scope. (text)  Literal text string.
@@ -1029,17 +980,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L76:** `parts` means: Split path or name segments.
 - **L83:** `allowed` means: Boolean — path/role is permitted.
 - **L107:** `relativeUnderUploads` means: Often a collection related to relative Under Uploads (plural name). (text)
->>>>>>> eb8ce01 (update)
 - **L109:** Error handling block.
 - **L113:** Handle/log exception.
 - **L128:** Error handling block.
 - **L133:** Handle/log exception.
-<<<<<<< HEAD
-- **L158:** Error handling block.
-- **L159:** Handle/log exception.
-- **L195:** Error handling block.
-- **L220:** Import namespace/types.
-=======
 - **L140:** `rootWithSep` means: Holds “root With Sep” for this scope. (text)
 - **L149:** `fileName` means: Original file name for display/download.
 - **L150:** `ext` means: File extension (.pdf, .mp4, …).
@@ -1064,18 +1008,12 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L224:** `remaining` means: Holds “remaining” for this scope. (integer)
 - **L228:** `toRead` means: Holds “to Read” for this scope. (integer)
 - **L229:** `read` means: Holds “read” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 - **L235:** Error handling block.
 - **L237:** Handle/log exception.
 - **L241:** Error handling block.
 - **L246:** Handle/log exception.
 - **L252:** Error handling block.
 - **L262:** Handle/log exception.
-<<<<<<< HEAD
-- **L289:** Error handling block.
-- **L295:** Handle/log exception.
-- **L308:** Error handling block.
-=======
 - **L268:** `m` means: Holds “m” for this scope. (text)
 - **L289:** Error handling block.
 - **L291:** `uri` means: otpauth:// or other URI string.  Newly constructed object.
@@ -1087,7 +1025,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L308:** Error handling block.
 - **L316:** `app` means: Holds “app” for this scope. (text)
 - **L325:** `up` means: Holds “up” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

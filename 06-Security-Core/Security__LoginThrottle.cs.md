@@ -1,10 +1,6 @@
 # LoginThrottle.cs
 **Source:** `Data/Security/LoginThrottle.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -96,11 +92,6 @@ public static string ClientKey(string email, HttpContext ctx)
   77 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L61:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L59:** `e` means: Normalized email string (trimmed/lowercased).
@@ -108,7 +99,6 @@ public static string ClientKey(string email, HttpContext ctx)
 - **L61:** Error handling block.
 - **L67:** `xff` means: X-Forwarded-For header value (client IP when behind a proxy).
 - **L70:** `comma` means: Index of the first comma in a string (split helper).
->>>>>>> eb8ce01 (update)
 - **L75:** Handle/log exception.
 
 ---
@@ -160,18 +150,12 @@ public static bool IsLocked(string email, HttpContext ctx, out string message)
  101 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L79:** Brute-force lockout tracking.
-=======
 **Line notes** (what code + variables mean)
 
 - **L79:** Brute-force lockout tracking.
 - **L82:** `key` means: HMAC key bytes or dictionary key.
 - **L90:** `remain` means: Holds “remain” for this scope.
 - **L91:** `mins` means: Often a collection related to mins (plural name). (integer)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -220,17 +204,11 @@ public static void RegisterFailure(string email, HttpContext ctx)
  125 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L103:** Brute-force lockout tracking.
-=======
 **Line notes** (what code + variables mean)
 
 - **L103:** Brute-force lockout tracking.
 - **L105:** `key` means: HMAC key bytes or dictionary key.
 - **L106:** `now` means: Current time (usually UTC or server local).
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -260,23 +238,16 @@ public static void RegisterSuccess(string email, HttpContext ctx)
  131 |             Map.TryRemove(key, out removed);
  132 |         }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L129:** `key` means: HMAC key bytes or dictionary key.
->>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -415,7 +386,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  134 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -424,12 +395,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L6:** C# namespace grouping.
 - **L12:** Brute-force lockout tracking.
 - **L14:** Class declaration for this page/service.
-<<<<<<< HEAD
-- **L61:** Error handling block.
-- **L75:** Handle/log exception.
-- **L79:** Brute-force lockout tracking.
-- **L103:** Brute-force lockout tracking.
-=======
 - **L59:** `e` means: Normalized email string (trimmed/lowercased).
 - **L60:** `ip` means: Client IP address for throttle/audit.  Literal text string.
 - **L61:** Error handling block.
@@ -444,7 +409,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L105:** `key` means: HMAC key bytes or dictionary key.
 - **L106:** `now` means: Current time (usually UTC or server local).
 - **L129:** `key` means: HMAC key bytes or dictionary key.
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

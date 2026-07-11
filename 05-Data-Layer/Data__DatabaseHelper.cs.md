@@ -1,10 +1,6 @@
 # DatabaseHelper.cs
 **Source:** `Data/DatabaseHelper.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -69,21 +65,13 @@ public static DataTable ExecuteQuery(string query, SqlParameter[] parameters = n
   30 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L12:** Run SQL; return table / rows / scalar.
 - **L14:** Import namespace/types.
 - **L16:** Import namespace/types.
 - **L22:** Import namespace/types.
-<<<<<<< HEAD
-- **L24:** In-memory result set from ADO.NET.
-=======
 - **L24:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -124,11 +112,7 @@ public static int ExecuteNonQuery(string query, SqlParameter[] parameters = null
   46 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L32:** Run SQL; return table / rows / scalar.
 - **L34:** Import namespace/types.
@@ -174,11 +158,7 @@ public static object ExecuteScalar(string query, SqlParameter[] parameters = nul
   62 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L48:** Run SQL; return table / rows / scalar.
 - **L50:** Import namespace/types.
@@ -189,11 +169,7 @@ public static object ExecuteScalar(string query, SqlParameter[] parameters = nul
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -262,7 +238,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   64 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -273,11 +249,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L14:** Import namespace/types.
 - **L16:** Import namespace/types.
 - **L22:** Import namespace/types.
-<<<<<<< HEAD
-- **L24:** In-memory result set from ADO.NET.
-=======
 - **L24:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L32:** Run SQL; return table / rows / scalar.
 - **L34:** Import namespace/types.
 - **L36:** Import namespace/types.

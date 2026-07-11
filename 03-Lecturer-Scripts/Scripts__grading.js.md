@@ -1,10 +1,6 @@
 # grading.js
 **Source:** `Pages/Lecturer/Scripts/grading.js`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -94,14 +90,11 @@ function mediaAppRoot()
   31 |     return '';
   32 | }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L28:** `p` means: Parameter, path, or password fragment depending on context.
 - **L29:** `i` means: Loop index (0-based counter in for-loops).
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -144,17 +137,11 @@ function resolveMediaUrl(raw, forDownload)
   49 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L43:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L36:** `u` means: Holds “u” for this scope.
 - **L43:** Error handling block.
 - **L45:** `a` means: Holds “a” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -238,12 +225,6 @@ function parseAnswerContent(raw)
   99 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L78:** Error handling block.
-- **L79:** JS object ↔ JSON text.
-=======
 **Line notes** (what code + variables mean)
 
 - **L73:** `out` means: Holds “out” for this scope.
@@ -251,7 +232,6 @@ function parseAnswerContent(raw)
 - **L78:** Error handling block.
 - **L79:** JS object ↔ JSON text. | `o` means: Holds “o” for this scope.  JSON serialize/parse result.
 - **L88:** `m` means: Holds “m” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -318,14 +298,6 @@ function loadSubmissions()
  140 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L105:** HTTP request to server WebMethod/ashx.
-- **L116:** Get HTML element by id.
-- **L117:** Encode text to reduce XSS risk.
-- **L125:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L105:** HTTP request to server WebMethod/ashx.
@@ -336,7 +308,6 @@ function loadSubmissions()
 - **L122:** `total` means: Sum of points or total items.
 - **L123:** `pending` means: Holds “pending” for this scope.  Literal number `0`.
 - **L125:** Get HTML element by id. | `bp` means: Holds “bp” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 - **L132:** Get HTML element by id.
 - **L138:** Get HTML element by id.
 
@@ -370,16 +341,10 @@ function updateProgress(graded, total)
  146 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L143:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L143:** Get HTML element by id.
 - **L144:** `pct` means: Holds “pct” for this scope.
->>>>>>> eb8ce01 (update)
 - **L145:** Get HTML element by id.
 
 ---
@@ -448,15 +413,9 @@ function filterStudents()
  170 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L160:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L160:** Get HTML element by id. | `q` means: Search query text, or SQL command text.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -515,24 +474,15 @@ function exportGradesCsv()
  202 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L172:** CSV export.
 - **L173:** HTTP request to server WebMethod/ashx.
 - **L176:** JS object ↔ JSON text.
-<<<<<<< HEAD
-- **L182:** CSRF anti-forgery protection.
-- **L190:** CSV export.
-=======
 - **L181:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
 - **L182:** CSRF anti-forgery protection.
 - **L190:** CSV export. | `blob` means: Holds “blob” for this scope.  Newly constructed object.
 - **L191:** `a` means: Holds “a” for this scope.
->>>>>>> eb8ce01 (update)
 - **L193:** CSV export.
 
 ---
@@ -590,13 +540,6 @@ function renderStudentList()
  232 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L205:** Get HTML element by id.
-- **L206:** Update page HTML.
-- **L208:** Update page HTML.
-=======
 **Line notes** (what code + variables mean)
 
 - **L205:** Get HTML element by id. | `box` means: Container element for lists/tables.  DOM element from the page.
@@ -607,7 +550,6 @@ function renderStudentList()
 - **L216:** `parsed` means: Holds “parsed” for this scope.
 - **L217:** `fileIcon` means: Holds “file Icon” for this scope.
 - **L220:** `scoreHtml` means: Holds “score Html” for this scope.
->>>>>>> eb8ce01 (update)
 - **L223:** Update page HTML.
 - **L225:** Encode text to reduce XSS risk.
 - **L227:** Encode text to reduce XSS risk.
@@ -721,25 +663,13 @@ function selectStudent(index)
  308 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-=======
 **Line notes** (what code + variables mean)
 
 - **L237:** `s` means: String value or submission-related object.
->>>>>>> eb8ce01 (update)
 - **L240:** Get HTML element by id.
 - **L241:** Get HTML element by id.
 - **L245:** Get HTML element by id.
 - **L246:** Get HTML element by id.
-<<<<<<< HEAD
-- **L255:** Get HTML element by id.
-- **L256:** Get HTML element by id.
-- **L267:** Encode text to reduce XSS risk.
-- **L292:** Encode text to reduce XSS risk.
-- **L299:** Update page HTML.
-=======
 - **L248:** `raw` means: Raw bytes or unprocessed input string.
 - **L249:** `parsed` means: Holds “parsed” for this scope.
 - **L255:** Get HTML element by id. | `preview` means: Holds “preview” for this scope.  DOM element from the page.
@@ -753,7 +683,6 @@ function selectStudent(index)
 - **L292:** Encode text to reduce XSS risk.
 - **L299:** Update page HTML.
 - **L301:** `max` means: Holds “max” for this scope.
->>>>>>> eb8ce01 (update)
 - **L302:** Get HTML element by id.
 - **L303:** Get HTML element by id.
 - **L304:** Get HTML element by id.
@@ -788,16 +717,10 @@ function updateTotalDisplay()
  314 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L312:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L311:** `max` means: Holds “max” for this scope.
 - **L312:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 - **L313:** Get HTML element by id.
 
 ---
@@ -829,13 +752,10 @@ function navStudent(delta)
  321 |     selectStudent(next);
  322 | }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L318:** `next` means: Holds “next” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -899,15 +819,6 @@ function submitGrade()
  358 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L327:** Get HTML element by id.
-- **L328:** Get HTML element by id.
-- **L329:** Get HTML element by id.
-- **L338:** HTTP request to server WebMethod/ashx.
-- **L341:** JS object ↔ JSON text.
-=======
 **Line notes** (what code + variables mean)
 
 - **L326:** `s` means: String value or submission-related object.
@@ -917,7 +828,6 @@ function submitGrade()
 - **L338:** HTTP request to server WebMethod/ashx.
 - **L341:** JS object ↔ JSON text.
 - **L346:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -947,11 +857,7 @@ function escapeHtml(str)
  366 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L360:** Encode text to reduce XSS risk.
 - **L365:** Encode text to reduce XSS risk.
@@ -979,11 +885,7 @@ function escapeAttr(str)
  366 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L365:** Encode text to reduce XSS risk.
 
@@ -991,11 +893,7 @@ function escapeAttr(str)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | /* Grading page - CWSubmissions + CWMarkings; PDF/image/video preview for file answers */
@@ -1366,33 +1264,8 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  366 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
-<<<<<<< HEAD
-- **L8:** DOM event handler.
-- **L10:** Error handling block.
-- **L43:** Error handling block.
-- **L78:** Error handling block.
-- **L79:** JS object ↔ JSON text.
-- **L105:** HTTP request to server WebMethod/ashx.
-- **L116:** Get HTML element by id.
-- **L117:** Encode text to reduce XSS risk.
-- **L125:** Get HTML element by id.
-- **L132:** Get HTML element by id.
-- **L138:** Get HTML element by id.
-- **L143:** Get HTML element by id.
-- **L145:** Get HTML element by id.
-- **L160:** Get HTML element by id.
-- **L172:** CSV export.
-- **L173:** HTTP request to server WebMethod/ashx.
-- **L176:** JS object ↔ JSON text.
-- **L182:** CSRF anti-forgery protection.
-- **L190:** CSV export.
-- **L193:** CSV export.
-- **L205:** Get HTML element by id.
-- **L206:** Update page HTML.
-- **L208:** Update page HTML.
-=======
 - **L3:** `submissions` means: Often a collection related to submissions (plural name).
 - **L4:** `filtered` means: Holds “filtered” for this scope.
 - **L5:** `currentIndex` means: Holds “current Index” for this scope.
@@ -1445,26 +1318,15 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L216:** `parsed` means: Holds “parsed” for this scope.
 - **L217:** `fileIcon` means: Holds “file Icon” for this scope.
 - **L220:** `scoreHtml` means: Holds “score Html” for this scope.
->>>>>>> eb8ce01 (update)
 - **L223:** Update page HTML.
 - **L225:** Encode text to reduce XSS risk.
 - **L227:** Encode text to reduce XSS risk.
 - **L229:** Encode text to reduce XSS risk.
-<<<<<<< HEAD
-=======
 - **L237:** `s` means: String value or submission-related object.
->>>>>>> eb8ce01 (update)
 - **L240:** Get HTML element by id.
 - **L241:** Get HTML element by id.
 - **L245:** Get HTML element by id.
 - **L246:** Get HTML element by id.
-<<<<<<< HEAD
-- **L255:** Get HTML element by id.
-- **L256:** Get HTML element by id.
-- **L267:** Encode text to reduce XSS risk.
-- **L292:** Encode text to reduce XSS risk.
-- **L299:** Update page HTML.
-=======
 - **L248:** `raw` means: Raw bytes or unprocessed input string.
 - **L249:** `parsed` means: Holds “parsed” for this scope.
 - **L255:** Get HTML element by id. | `preview` means: Holds “preview” for this scope.  DOM element from the page.
@@ -1478,21 +1340,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L292:** Encode text to reduce XSS risk.
 - **L299:** Update page HTML.
 - **L301:** `max` means: Holds “max” for this scope.
->>>>>>> eb8ce01 (update)
 - **L302:** Get HTML element by id.
 - **L303:** Get HTML element by id.
 - **L304:** Get HTML element by id.
 - **L305:** Get HTML element by id.
 - **L307:** Get HTML element by id.
-<<<<<<< HEAD
-- **L312:** Get HTML element by id.
-- **L313:** Get HTML element by id.
-- **L327:** Get HTML element by id.
-- **L328:** Get HTML element by id.
-- **L329:** Get HTML element by id.
-- **L338:** HTTP request to server WebMethod/ashx.
-- **L341:** JS object ↔ JSON text.
-=======
 - **L311:** `max` means: Holds “max” for this scope.
 - **L312:** Get HTML element by id. | `score` means: Points earned or max points depending on context.  DOM element from the page.
 - **L313:** Get HTML element by id.
@@ -1504,7 +1356,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L338:** HTTP request to server WebMethod/ashx.
 - **L341:** JS object ↔ JSON text.
 - **L346:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
->>>>>>> eb8ce01 (update)
 - **L360:** Encode text to reduce XSS risk.
 - **L365:** Encode text to reduce XSS risk.
 

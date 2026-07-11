@@ -1,10 +1,6 @@
 # EduLMS — Landing & Lecturer Function Explain (Markdown)
 
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 **Project root:** `/home/loke/Documents/WebappAss/WebAppAssignment`  
 **This pack:** `/home/loke/Documents/WebAppFuntionExplain`  
 

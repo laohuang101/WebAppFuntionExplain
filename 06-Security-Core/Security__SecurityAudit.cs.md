@@ -1,10 +1,6 @@
 # SecurityAudit.cs
 **Source:** `Data/Security/SecurityAudit.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -101,12 +97,6 @@ public static void Log(string action, int? userId = null, string detail = null, 
   53 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L15:** Error handling block.
-- **L20:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L15:** Error handling block.
@@ -114,7 +104,6 @@ public static void Log(string action, int? userId = null, string detail = null, 
 - **L19:** `path` means: File path under Uploads or URL path.
 - **L20:** Error handling block.
 - **L22:** `ctx` means: Current HTTP request context (Request, Response, Session).
->>>>>>> eb8ce01 (update)
 - **L27:** Server session for logged-in user.
 - **L28:** Server session for logged-in user.
 - **L31:** Handle/log exception.
@@ -183,27 +172,17 @@ public static DataTable Query(int take = 100, string actionFilter = null)
   79 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L55:** In-memory result set from ADO.NET.
-=======
 **Line notes** (what code + variables mean)
 
 - **L55:** In-memory result set from ADO.NET.
 - **L59:** `sql` means: SQL query text (should use parameters, not raw user input).
->>>>>>> eb8ce01 (update)
 - **L61:** Write/read security audit events.
 - **L66:** Import namespace/types.
 - **L67:** Import namespace/types.
 - **L69:** Parameterized SQL — prevents classic SQL injection.
 - **L71:** Parameterized SQL — prevents classic SQL injection.
 - **L72:** Import namespace/types.
-<<<<<<< HEAD
-- **L74:** In-memory result set from ADO.NET.
-=======
 - **L74:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -250,15 +229,10 @@ public static List<object> QueryObjects(int take = 100, string actionFilter = nu
  100 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-=======
 **Line notes** (what code + variables mean)
 
 - **L83:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
 - **L84:** `dt` means: DataTable — full result set from SQL (many rows/columns).
->>>>>>> eb8ce01 (update)
 - **L85:** In-memory result set from ADO.NET.
 - **L91:** Null-safe read from database values.
 - **L92:** Null-safe read from database values.
@@ -297,11 +271,7 @@ private static string Truncate(string s, int max)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -414,7 +384,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  108 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -425,14 +395,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L8:** C# namespace grouping.
 - **L11:** Write/read security audit events.
 - **L15:** Error handling block.
-<<<<<<< HEAD
-- **L20:** Error handling block.
-=======
 - **L18:** `ip` means: Client IP address for throttle/audit.
 - **L19:** `path` means: File path under Uploads or URL path.
 - **L20:** Error handling block.
 - **L22:** `ctx` means: Current HTTP request context (Request, Response, Session).
->>>>>>> eb8ce01 (update)
 - **L27:** Server session for logged-in user.
 - **L28:** Server session for logged-in user.
 - **L31:** Handle/log exception.
@@ -449,23 +415,16 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L46:** Run SQL; return table / rows / scalar.
 - **L49:** Handle/log exception.
 - **L55:** In-memory result set from ADO.NET.
-<<<<<<< HEAD
-=======
 - **L59:** `sql` means: SQL query text (should use parameters, not raw user input).
->>>>>>> eb8ce01 (update)
 - **L61:** Write/read security audit events.
 - **L66:** Import namespace/types.
 - **L67:** Import namespace/types.
 - **L69:** Parameterized SQL — prevents classic SQL injection.
 - **L71:** Parameterized SQL — prevents classic SQL injection.
 - **L72:** Import namespace/types.
-<<<<<<< HEAD
-- **L74:** In-memory result set from ADO.NET.
-=======
 - **L74:** In-memory result set from ADO.NET. | `dt` means: DataTable — full result set from SQL (many rows/columns).  Newly constructed object.
 - **L83:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
 - **L84:** `dt` means: DataTable — full result set from SQL (many rows/columns).
->>>>>>> eb8ce01 (update)
 - **L85:** In-memory result set from ADO.NET.
 - **L91:** Null-safe read from database values.
 - **L92:** Null-safe read from database values.

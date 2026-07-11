@@ -1,10 +1,6 @@
 # PasswordHasher.cs
 **Source:** `Data/Security/PasswordHasher.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -67,17 +63,11 @@ public static string Hash(string password)
   31 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L22:** Import namespace/types.
-=======
 **Line notes** (what code + variables mean)
 
 - **L21:** `salt` means: Random salt for PBKDF2.  Newly constructed object.
 - **L22:** Import namespace/types.
 - **L25:** `hash` means: Password hash (PBKDF2) stored in DB.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -129,19 +119,12 @@ public static bool Verify(string password, string stored)
   58 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L45:** Error handling block.
-- **L50:** Handle/log exception.
-=======
 **Line notes** (what code + variables mean)
 
 - **L40:** `parts` means: Split path or name segments.
 - **L45:** Error handling block.
 - **L50:** Handle/log exception.
 - **L52:** `actual` means: Holds “actual” for this scope.
->>>>>>> eb8ce01 (update)
 - **L53:** Constant-time string compare (reduce timing leaks).
 
 ---
@@ -199,11 +182,7 @@ private static byte[] Pbkdf2(string password, byte[] salt, int iterations, int l
   70 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L68:** Import namespace/types.
 
@@ -239,26 +218,16 @@ private static bool FixedTimeEquals(byte[] a, byte[] b)
   79 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L72:** Constant-time string compare (reduce timing leaks).
-=======
 **Line notes** (what code + variables mean)
 
 - **L72:** Constant-time string compare (reduce timing leaks).
 - **L75:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
->>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -344,21 +313,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   81 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
 - **L3:** Import namespace/types.
 - **L5:** C# namespace grouping.
 - **L11:** Password hashing (PBKDF2).
-<<<<<<< HEAD
-- **L22:** Import namespace/types.
-- **L45:** Error handling block.
-- **L50:** Handle/log exception.
-- **L53:** Constant-time string compare (reduce timing leaks).
-- **L68:** Import namespace/types.
-- **L72:** Constant-time string compare (reduce timing leaks).
-=======
 - **L21:** `salt` means: Random salt for PBKDF2.  Newly constructed object.
 - **L22:** Import namespace/types.
 - **L25:** `hash` means: Password hash (PBKDF2) stored in DB.
@@ -370,7 +331,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L68:** Import namespace/types.
 - **L72:** Constant-time string compare (reduce timing leaks).
 - **L75:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

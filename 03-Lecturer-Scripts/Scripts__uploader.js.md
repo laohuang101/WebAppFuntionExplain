@@ -1,10 +1,6 @@
 # uploader.js
 **Source:** `Pages/Lecturer/Scripts/uploader.js`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -71,30 +67,18 @@ function uploadThumbnailFile(file)
   19 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L6:** HTTP request to server WebMethod/ashx.
-- **L10:** Get HTML element by id.
-- **L12:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L4:** `fd` means: Holds “fd” for this scope.  Newly constructed object.
 - **L6:** HTTP request to server WebMethod/ashx.
 - **L10:** Get HTML element by id. | `bgInput` means: Holds “bg Input” for this scope.  DOM element from the page.
 - **L12:** Get HTML element by id. | `preview` means: Holds “preview” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | // uploader.js: Handles thumbnail and media uploads via existing ASHX endpoints
@@ -153,33 +137,21 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   54 | })();
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
-<<<<<<< HEAD
-- **L6:** HTTP request to server WebMethod/ashx.
-- **L10:** Get HTML element by id.
-- **L12:** Get HTML element by id.
-- **L22:** Get HTML element by id.
-- **L25:** Get HTML element by id.
-=======
 - **L4:** `fd` means: Holds “fd” for this scope.  Newly constructed object.
 - **L6:** HTTP request to server WebMethod/ashx.
 - **L10:** Get HTML element by id. | `bgInput` means: Holds “bg Input” for this scope.  DOM element from the page.
 - **L12:** Get HTML element by id. | `preview` means: Holds “preview” for this scope.  DOM element from the page.
 - **L22:** Get HTML element by id. | `drop` means: Holds “drop” for this scope.  DOM element from the page.
 - **L25:** Get HTML element by id. | `fileInput` means: Holds “file Input” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 - **L35:** DOM event handler.
 - **L37:** DOM event handler.
 - **L38:** DOM event handler.
 - **L39:** DOM event handler.
-<<<<<<< HEAD
-- **L46:** DOM event handler.
-=======
 - **L42:** `f` means: Holds “f” for this scope.
 - **L46:** DOM event handler.
 - **L47:** `f` means: Holds “f” for this scope.
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

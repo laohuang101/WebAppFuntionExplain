@@ -1,10 +1,6 @@
 # TotpHelper.cs
 **Source:** `Data/Security/TotpHelper.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -94,16 +90,10 @@ public static string GenerateSecret(int bytes = 20)
   25 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L19:** Create new authenticator secret (Base32).
-=======
 **Line notes** (what code + variables mean)
 
 - **L19:** Create new authenticator secret (Base32).
 - **L21:** `raw` means: Raw bytes or unprocessed input string.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L22:** Import namespace/types.
 - **L24:** TOTP / authenticator (RFC 6238) helper.
 
@@ -139,16 +129,10 @@ public static string GenerateCode(string base32Secret, DateTime? utcNow = null)
   34 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L29:** TOTP / authenticator (RFC 6238) helper.
-=======
 **Line notes** (what code + variables mean)
 
 - **L29:** TOTP / authenticator (RFC 6238) helper.
 - **L32:** `timestep` means: Date/time value. (integer)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -195,18 +179,11 @@ public static bool VerifyCode(string base32Secret, string code, int window = 4)
   58 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L39:** Verify multi-factor / TOTP code.
-- **L47:** TOTP / authenticator (RFC 6238) helper.
-=======
 **Line notes** (what code + variables mean)
 
 - **L39:** Verify multi-factor / TOTP code.
 - **L47:** TOTP / authenticator (RFC 6238) helper.
 - **L51:** `step` means: TOTP 30-second time step counter.
->>>>>>> eb8ce01 (update)
 - **L54:** Constant-time string compare (reduce timing leaks).
 
 ---
@@ -249,14 +226,11 @@ public static string NormalizeCode(string code)
   77 |             return cleaned.ToString();
   78 |         }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L64:** `cleaned` means: Holds “cleaned” for this scope.  Newly constructed object.
 - **L73:** `nv` means: Holds “nv” for this scope. (number/score)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -304,18 +278,12 @@ public static string BuildOtpAuthUri(string email, string base32Secret, string i
  105 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L85:** Build otpauth:// URI for QR code.
-=======
 **Line notes** (what code + variables mean)
 
 - **L85:** Build otpauth:// URI for QR code.
 - **L92:** `secret` means: MFA TOTP Base32 secret for authenticator apps.
 - **L95:** `label` means: otpauth account label (issuer:email).
 - **L97:** `qs` means: Holds “qs” for this scope.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L104:** TOTP / authenticator (RFC 6238) helper.
 
 ---
@@ -352,14 +320,11 @@ public static string FormatSecretForDisplay(string base32Secret)
  118 |             return sb.ToString();
  119 |         }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L110:** `s` means: String being cleaned or built.
 - **L112:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -396,13 +361,10 @@ public static string NormalizeSecret(string base32Secret)
  132 |             return sb.ToString();
  133 |         }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L124:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -435,17 +397,11 @@ public static string GenerateEmailOtp(int length = 6)
  143 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L139:** Import namespace/types.
-=======
 **Line notes** (what code + variables mean)
 
 - **L138:** `bytes` means: Byte array (hash, random, file content).  Newly constructed object.
 - **L139:** Import namespace/types.
 - **L141:** `n` means: Integer count (rows, items, or length).
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -507,15 +463,12 @@ private static long GetTimeStep(DateTime when)
  160 |             return unix / StepSeconds;
  161 |         }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L154:** `utc` means: Date/time value. (date/time)
 - **L157:** `epoch` means: Holds “epoch” for this scope. (date/time)  Newly constructed object.
 - **L158:** `unix` means: Holds “unix” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -571,17 +524,11 @@ private static string ComputeTotp(byte[] key, long timestep)
  189 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L177:** Import namespace/types.
-=======
 **Line notes** (what code + variables mean)
 
 - **L177:** Import namespace/types.
 - **L180:** `offset` means: Holds “offset” for this scope. (integer)
 - **L186:** `otp` means: Holds “otp” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -615,16 +562,10 @@ private static bool FixedTimeEquals(string a, string b)
  198 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L191:** Constant-time string compare (reduce timing leaks).
-=======
 **Line notes** (what code + variables mean)
 
 - **L191:** Constant-time string compare (reduce timing leaks).
 - **L194:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -683,11 +624,6 @@ private static string Base32Encode(byte[] data)
  229 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L200:** TOTP / authenticator (RFC 6238) helper.
-=======
 **Line notes** (what code + variables mean)
 
 - **L200:** TOTP / authenticator (RFC 6238) helper.
@@ -697,7 +633,6 @@ private static string Base32Encode(byte[] data)
 - **L206:** `bitsLeft` means: Holds “bits Left” for this scope. (integer)  Literal number `8`.
 - **L219:** `pad` means: Holds “pad” for this scope. (integer)
 - **L224:** `index` means: Holds “index” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -753,11 +688,6 @@ private static byte[] Base32Decode(string input)
  257 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L231:** TOTP / authenticator (RFC 6238) helper.
-=======
 **Line notes** (what code + variables mean)
 
 - **L231:** TOTP / authenticator (RFC 6238) helper.
@@ -766,17 +696,12 @@ private static byte[] Base32Decode(string input)
 - **L237:** `buffer` means: Holds “buffer” for this scope. (integer)
 - **L240:** `val` means: Holds “val” for this scope. (integer)
 - **L252:** `trimmed` means: Holds “trimmed” for this scope.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -1040,7 +965,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  259 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -1050,21 +975,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L7:** C# namespace grouping.
 - **L13:** TOTP / authenticator (RFC 6238) helper.
 - **L19:** Create new authenticator secret (Base32).
-<<<<<<< HEAD
-- **L22:** Import namespace/types.
-- **L24:** TOTP / authenticator (RFC 6238) helper.
-- **L29:** TOTP / authenticator (RFC 6238) helper.
-- **L39:** Verify multi-factor / TOTP code.
-- **L47:** TOTP / authenticator (RFC 6238) helper.
-- **L54:** Constant-time string compare (reduce timing leaks).
-- **L85:** Build otpauth:// URI for QR code.
-- **L104:** TOTP / authenticator (RFC 6238) helper.
-- **L139:** Import namespace/types.
-- **L177:** Import namespace/types.
-- **L191:** Constant-time string compare (reduce timing leaks).
-- **L200:** TOTP / authenticator (RFC 6238) helper.
-- **L231:** TOTP / authenticator (RFC 6238) helper.
-=======
 - **L21:** `raw` means: Raw bytes or unprocessed input string.  Newly constructed object.
 - **L22:** Import namespace/types.
 - **L24:** TOTP / authenticator (RFC 6238) helper.
@@ -1108,7 +1018,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L237:** `buffer` means: Holds “buffer” for this scope. (integer)
 - **L240:** `val` means: Holds “val” for this scope. (integer)
 - **L252:** `trimmed` means: Holds “trimmed” for this scope.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

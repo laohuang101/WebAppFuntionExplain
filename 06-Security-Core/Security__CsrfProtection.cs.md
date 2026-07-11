@@ -1,10 +1,6 @@
 # CsrfProtection.cs
 **Source:** `Data/Security/CsrfProtection.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -91,15 +87,6 @@ public static string EnsureToken(HttpContext ctx)
   47 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L18:** CSRF token ensure/validate.
-- **L21:** Server session for logged-in user.
-- **L25:** Import namespace/types.
-- **L29:** Server session for logged-in user.
-- **L33:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L18:** CSRF token ensure/validate.
@@ -109,7 +96,6 @@ public static string EnsureToken(HttpContext ctx)
 - **L29:** Server session for logged-in user.
 - **L33:** Error handling block.
 - **L35:** `cookie` means: HTTP cookie (JWT or CSRF).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L41:** Error handling block.
 - **L44:** Handle/log exception.
 
@@ -196,19 +182,12 @@ public static bool Validate(HttpContext ctx)
   89 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L64:** Server session for logged-in user.
-- **L68:** CSRF token ensure/validate.
-=======
 **Line notes** (what code + variables mean)
 
 - **L64:** Server session for logged-in user. | `sessionToken` means: Security token (JWT or CSRF). (text)  Read from ASP.NET Session.
 - **L68:** CSRF token ensure/validate.
 - **L72:** `provided` means: Holds “provided” for this scope. (text)
 - **L83:** `c` means: Temporary value (character, course, or counter depending on loop).
->>>>>>> eb8ce01 (update)
 - **L88:** Constant-time string compare (reduce timing leaks).
 
 ---
@@ -253,11 +232,7 @@ public static bool ValidateOrReject(HttpContext ctx, bool writeJsonError = true)
  107 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L96:** Error handling block.
 - **L102:** CSRF anti-forgery protection.
@@ -295,16 +270,10 @@ private static bool FixedTimeEquals(string a, string b)
  116 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L109:** Constant-time string compare (reduce timing leaks).
-=======
 **Line notes** (what code + variables mean)
 
 - **L109:** Constant-time string compare (reduce timing leaks).
 - **L112:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -334,26 +303,16 @@ public static string MetaTag(HttpContext ctx)
  122 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L120:** CSRF token ensure/validate.
-=======
 **Line notes** (what code + variables mean)
 
 - **L120:** CSRF token ensure/validate. | `t` means: Temporary string/token/time value.
->>>>>>> eb8ce01 (update)
 - **L121:** CSRF anti-forgery protection.
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -482,7 +441,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  124 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -494,16 +453,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L15:** CSRF anti-forgery protection.
 - **L16:** CSRF anti-forgery protection.
 - **L18:** CSRF token ensure/validate.
-<<<<<<< HEAD
-- **L21:** Server session for logged-in user.
-- **L25:** Import namespace/types.
-- **L29:** Server session for logged-in user.
-- **L33:** Error handling block.
-- **L41:** Error handling block.
-- **L44:** Handle/log exception.
-- **L64:** Server session for logged-in user.
-- **L68:** CSRF token ensure/validate.
-=======
 - **L21:** Server session for logged-in user. | `token` means: JWT or CSRF token string.  Read from ASP.NET Session.
 - **L24:** `bytes` means: Byte array (hash, random, file content).  Newly constructed object.
 - **L25:** Import namespace/types.
@@ -516,18 +465,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L68:** CSRF token ensure/validate.
 - **L72:** `provided` means: Holds “provided” for this scope. (text)
 - **L83:** `c` means: Temporary value (character, course, or counter depending on loop).
->>>>>>> eb8ce01 (update)
 - **L88:** Constant-time string compare (reduce timing leaks).
 - **L96:** Error handling block.
 - **L102:** CSRF anti-forgery protection.
 - **L104:** Handle/log exception.
 - **L109:** Constant-time string compare (reduce timing leaks).
-<<<<<<< HEAD
-- **L120:** CSRF token ensure/validate.
-=======
 - **L112:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
 - **L120:** CSRF token ensure/validate. | `t` means: Temporary string/token/time value.
->>>>>>> eb8ce01 (update)
 - **L121:** CSRF anti-forgery protection.
 
 ## Source snapshot (raw)

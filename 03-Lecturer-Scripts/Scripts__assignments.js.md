@@ -1,10 +1,6 @@
 # assignments.js
 **Source:** `Pages/Lecturer/Scripts/assignments.js`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -95,11 +91,7 @@ function setBuilderType(type)
   33 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L23:** Get HTML element by id.
 - **L24:** Get HTML element by id.
@@ -156,13 +148,6 @@ function loadCourses()
   56 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L36:** HTTP request to server WebMethod/ashx.
-- **L44:** Get HTML element by id.
-- **L45:** Update page HTML.
-=======
 **Line notes** (what code + variables mean)
 
 - **L36:** HTTP request to server WebMethod/ashx.
@@ -170,7 +155,6 @@ function loadCourses()
 - **L44:** Get HTML element by id. | `ddl` means: Drop-down list (select) element.  DOM element from the page.
 - **L45:** Update page HTML.
 - **L48:** `opt` means: Option element or optional label.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -270,13 +254,6 @@ function loadExisting()
  129 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L61:** HTTP request to server WebMethod/ashx.
-- **L70:** Get HTML element by id.
-- **L73:** Update page HTML.
-=======
 **Line notes** (what code + variables mean)
 
 - **L61:** HTTP request to server WebMethod/ashx.
@@ -284,7 +261,6 @@ function loadExisting()
 - **L70:** Get HTML element by id. | `box` means: Container element for lists/tables.  DOM element from the page.
 - **L73:** Update page HTML.
 - **L76:** `items` means: Array of rows for UI tables.
->>>>>>> eb8ce01 (update)
 - **L77:** In-memory result set from ADO.NET.
 - **L78:** Update page HTML.
 - **L80:** Update page HTML.
@@ -292,12 +268,8 @@ function loadExisting()
 - **L96:** Encode text to reduce XSS risk.
 - **L102:** Assignment deadline; submissions close after due day.
 - **L104:** Assignment deadline; submissions close after due day.
-<<<<<<< HEAD
-- **L105:** Assignment deadline; submissions close after due day.
-=======
 - **L105:** Assignment deadline; submissions close after due day. | `closed` means: Holds “closed” for this scope.
 - **L106:** `badge` means: Holds “badge” for this scope.
->>>>>>> eb8ce01 (update)
 - **L109:** Assignment deadline; submissions close after due day.
 
 ---
@@ -322,11 +294,7 @@ function render(item)
   97 |                     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L96:** Encode text to reduce XSS risk.
 
@@ -361,18 +329,11 @@ function render(item)
  110 |                     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L104:** Assignment deadline; submissions close after due day.
-- **L105:** Assignment deadline; submissions close after due day.
-=======
 **Line notes** (what code + variables mean)
 
 - **L104:** Assignment deadline; submissions close after due day.
 - **L105:** Assignment deadline; submissions close after due day. | `closed` means: Holds “closed” for this scope.
 - **L106:** `badge` means: Holds “badge” for this scope.
->>>>>>> eb8ce01 (update)
 - **L109:** Assignment deadline; submissions close after due day.
 
 ---
@@ -533,18 +494,11 @@ function renderRubric()
  164 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L147:** Get HTML element by id.
-- **L148:** Update page HTML.
-=======
 **Line notes** (what code + variables mean)
 
 - **L147:** Get HTML element by id. | `list` means: In-memory collection being built for JSON return.  DOM element from the page.
 - **L148:** Update page HTML.
 - **L150:** `div` means: Holds “div” for this scope.
->>>>>>> eb8ce01 (update)
 - **L152:** Update page HTML.
 
 ---
@@ -589,18 +543,11 @@ function updateRubricTotal()
  183 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L168:** Get HTML element by id.
-- **L178:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L167:** `total` means: Sum of points or total items.
 - **L168:** Get HTML element by id. | `el` means: Generic DOM element.  DOM element from the page.
 - **L178:** Get HTML element by id. | `hint` means: Holds “hint” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -688,15 +635,12 @@ function addOption(qi)
  206 |     renderQuestions();
  207 | }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L202:** `opts` means: Often a collection related to opts (plural name).
 - **L203:** `keys` means: Often a collection related to keys (plural name).
 - **L204:** `next` means: Holds “next” for this scope.  Literal text string.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -793,19 +737,12 @@ function renderQuestions()
  258 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L215:** Get HTML element by id.
-- **L216:** Update page HTML.
-=======
 **Line notes** (what code + variables mean)
 
 - **L215:** Get HTML element by id. | `list` means: In-memory collection being built for JSON return.  DOM element from the page.
 - **L216:** Update page HTML.
 - **L218:** `card` means: Holds “card” for this scope.
 - **L220:** `optionsHtml` means: Holds “options Html” for this scope.  Literal text string.
->>>>>>> eb8ce01 (update)
 - **L234:** Update page HTML.
 - **L254:** Encode text to reduce XSS risk.
 
@@ -840,20 +777,12 @@ function isDueClosed(dueDateStr)
  267 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L261:** Assignment deadline; submissions close after due day.
-- **L262:** Assignment deadline; submissions close after due day.
-- **L263:** Assignment deadline; submissions close after due day.
-=======
 **Line notes** (what code + variables mean)
 
 - **L261:** Assignment deadline; submissions close after due day.
 - **L262:** Assignment deadline; submissions close after due day.
 - **L263:** Assignment deadline; submissions close after due day. | `m` means: Holds “m” for this scope.
 - **L265:** `end` means: Range end or string end index.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -991,20 +920,6 @@ function saveAssignment(publish)
  363 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L270:** Get HTML element by id.
-- **L271:** Get HTML element by id.
-- **L275:** Get HTML element by id.
-- **L276:** Get HTML element by id.
-- **L277:** Get HTML element by id.
-- **L278:** Get HTML element by id.
-- **L280:** Assignment deadline; submissions close after due day.
-- **L285:** Assignment deadline; submissions close after due day.
-- **L304:** JS object ↔ JSON text.
-- **L318:** JS object ↔ JSON text.
-=======
 **Line notes** (what code + variables mean)
 
 - **L270:** Get HTML element by id. | `err` means: Error message string or error element.  DOM element from the page.
@@ -1024,17 +939,13 @@ function saveAssignment(publish)
 - **L313:** `perQ` means: Holds “per Q” for this scope.
 - **L318:** JS object ↔ JSON text.
 - **L322:** `extra` means: Dictionary of optional fields inside META.
->>>>>>> eb8ce01 (update)
 - **L323:** Assignment deadline; submissions close after due day.
 - **L324:** Get HTML element by id.
 - **L325:** Get HTML element by id.
 - **L329:** HTTP request to server WebMethod/ashx.
 - **L332:** JS object ↔ JSON text.
 - **L341:** JS object ↔ JSON text.
-<<<<<<< HEAD
-=======
 - **L347:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
->>>>>>> eb8ce01 (update)
 - **L349:** Get HTML element by id.
 
 ---
@@ -1078,18 +989,11 @@ function deleteWork(cwid)
  379 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L367:** HTTP request to server WebMethod/ashx.
-- **L370:** JS object ↔ JSON text.
-=======
 **Line notes** (what code + variables mean)
 
 - **L367:** HTTP request to server WebMethod/ashx.
 - **L370:** JS object ↔ JSON text.
 - **L374:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -1119,11 +1023,7 @@ function escapeHtml(str)
  387 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L381:** Encode text to reduce XSS risk.
 - **L386:** Encode text to reduce XSS risk.
@@ -1151,11 +1051,7 @@ function escapeAttr(str)
  387 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L386:** Encode text to reduce XSS risk.
 
@@ -1163,11 +1059,7 @@ function escapeAttr(str)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | /* Assignment Builder - pure-SQL CourseWorks / ObjectiveQuestions UI */
@@ -1559,15 +1451,12 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  387 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
-<<<<<<< HEAD
-=======
 - **L3:** `builderType` means: Assignment builder mode: Text vs Objective.  Literal text string.
 - **L4:** `rubricRows` means: UI state: grading rubric criteria rows.
 - **L5:** `objectiveQuestions` means: UI state: quiz questions being edited.
 - **L7:** `ASSIGNMENT_TOTAL_PTS` means: Often a collection related to ASSIGNMENT TOTAL PTS (plural name).  Literal number `100`.
->>>>>>> eb8ce01 (update)
 - **L9:** DOM event handler.
 - **L23:** Get HTML element by id.
 - **L24:** Get HTML element by id.
@@ -1576,13 +1465,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L27:** Get HTML element by id.
 - **L28:** Get HTML element by id.
 - **L36:** HTTP request to server WebMethod/ashx.
-<<<<<<< HEAD
-- **L44:** Get HTML element by id.
-- **L45:** Update page HTML.
-- **L61:** HTTP request to server WebMethod/ashx.
-- **L70:** Get HTML element by id.
-- **L73:** Update page HTML.
-=======
 - **L43:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
 - **L44:** Get HTML element by id. | `ddl` means: Drop-down list (select) element.  DOM element from the page.
 - **L45:** Update page HTML.
@@ -1593,7 +1475,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L70:** Get HTML element by id. | `box` means: Container element for lists/tables.  DOM element from the page.
 - **L73:** Update page HTML.
 - **L76:** `items` means: Array of rows for UI tables.
->>>>>>> eb8ce01 (update)
 - **L77:** In-memory result set from ADO.NET.
 - **L78:** Update page HTML.
 - **L80:** Update page HTML.
@@ -1601,17 +1482,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L96:** Encode text to reduce XSS risk.
 - **L102:** Assignment deadline; submissions close after due day.
 - **L104:** Assignment deadline; submissions close after due day.
-<<<<<<< HEAD
-- **L105:** Assignment deadline; submissions close after due day.
-- **L109:** Assignment deadline; submissions close after due day.
-- **L147:** Get HTML element by id.
-- **L148:** Update page HTML.
-- **L152:** Update page HTML.
-- **L168:** Get HTML element by id.
-- **L178:** Get HTML element by id.
-- **L215:** Get HTML element by id.
-- **L216:** Update page HTML.
-=======
 - **L105:** Assignment deadline; submissions close after due day. | `closed` means: Holds “closed” for this scope.
 - **L106:** `badge` means: Holds “badge” for this scope.
 - **L109:** Assignment deadline; submissions close after due day.
@@ -1629,24 +1499,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L216:** Update page HTML.
 - **L218:** `card` means: Holds “card” for this scope.
 - **L220:** `optionsHtml` means: Holds “options Html” for this scope.  Literal text string.
->>>>>>> eb8ce01 (update)
 - **L234:** Update page HTML.
 - **L254:** Encode text to reduce XSS risk.
 - **L261:** Assignment deadline; submissions close after due day.
 - **L262:** Assignment deadline; submissions close after due day.
-<<<<<<< HEAD
-- **L263:** Assignment deadline; submissions close after due day.
-- **L270:** Get HTML element by id.
-- **L271:** Get HTML element by id.
-- **L275:** Get HTML element by id.
-- **L276:** Get HTML element by id.
-- **L277:** Get HTML element by id.
-- **L278:** Get HTML element by id.
-- **L280:** Assignment deadline; submissions close after due day.
-- **L285:** Assignment deadline; submissions close after due day.
-- **L304:** JS object ↔ JSON text.
-- **L318:** JS object ↔ JSON text.
-=======
 - **L263:** Assignment deadline; submissions close after due day. | `m` means: Holds “m” for this scope.
 - **L265:** `end` means: Range end or string end index.  Newly constructed object.
 - **L270:** Get HTML element by id. | `err` means: Error message string or error element.  DOM element from the page.
@@ -1666,24 +1522,17 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L313:** `perQ` means: Holds “per Q” for this scope.
 - **L318:** JS object ↔ JSON text.
 - **L322:** `extra` means: Dictionary of optional fields inside META.
->>>>>>> eb8ce01 (update)
 - **L323:** Assignment deadline; submissions close after due day.
 - **L324:** Get HTML element by id.
 - **L325:** Get HTML element by id.
 - **L329:** HTTP request to server WebMethod/ashx.
 - **L332:** JS object ↔ JSON text.
 - **L341:** JS object ↔ JSON text.
-<<<<<<< HEAD
-- **L349:** Get HTML element by id.
-- **L367:** HTTP request to server WebMethod/ashx.
-- **L370:** JS object ↔ JSON text.
-=======
 - **L347:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
 - **L349:** Get HTML element by id.
 - **L367:** HTTP request to server WebMethod/ashx.
 - **L370:** JS object ↔ JSON text.
 - **L374:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
->>>>>>> eb8ce01 (update)
 - **L381:** Encode text to reduce XSS risk.
 - **L386:** Encode text to reduce XSS risk.
 

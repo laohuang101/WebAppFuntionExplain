@@ -1,10 +1,6 @@
 # ResetPassword.aspx.cs
 **Source:** `Pages/Authentication/ResetPassword.aspx.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -61,19 +57,12 @@ protected void Page_Load(object sender, EventArgs e)
   19 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L9:** Page load entry (GET or postback).
 - **L12:** CSRF anti-forgery protection.
 - **L13:** False on first open; true after postback.
-<<<<<<< HEAD
-=======
 - **L15:** `email` means: Account email address (usually lowercased).  Comes from HTTP request.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -122,25 +111,18 @@ protected void btnReset_Click(object sender, EventArgs e)
   41 |             Response.AddHeader("Refresh", "2;url=" + ResolveUrl("~/Pages/Authentication/Login.aspx"));
   42 |         }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L24:** `p1` means: New password field (first entry).
 - **L25:** `p2` means: Confirm password field (must match p1).
 - **L32:** `result` means: AuthResult or API result { success, message, … }.
->>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -189,7 +171,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
   44 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -198,13 +180,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L9:** Page load entry (GET or postback).
 - **L12:** CSRF anti-forgery protection.
 - **L13:** False on first open; true after postback.
-<<<<<<< HEAD
-=======
 - **L15:** `email` means: Account email address (usually lowercased).  Comes from HTTP request.
 - **L24:** `p1` means: New password field (first entry).
 - **L25:** `p2` means: Confirm password field (must match p1).
 - **L32:** `result` means: AuthResult or API result { success, message, … }.
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

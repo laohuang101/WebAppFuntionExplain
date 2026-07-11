@@ -1,10 +1,6 @@
 # cc-curriculum.js
 **Source:** `Pages/Lecturer/Scripts/cc-curriculum.js`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -184,23 +180,13 @@ function loadCurriculumView()
  101 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L4:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L4:** Get HTML element by id. | `view` means: Holds “view” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 - **L8:** Update page HTML.
 - **L12:** Update page HTML.
 - **L17:** Update page HTML.
 - **L18:** Encode text to reduce XSS risk.
-<<<<<<< HEAD
-- **L24:** Update page HTML.
-- **L28:** Update page HTML.
-=======
 - **L22:** `chapters` means: Often a collection related to chapters (plural name).
 - **L24:** Update page HTML.
 - **L28:** Update page HTML.
@@ -209,7 +195,6 @@ function loadCurriculumView()
 - **L35:** `lessons` means: Often a collection related to lessons (plural name).
 - **L38:** `type` means: Holds “type” for this scope.
 - **L39:** `typeClass` means: Often a collection related to type Class (plural name).  Literal text string.
->>>>>>> eb8ce01 (update)
 - **L44:** Encode text to reduce XSS risk.
 - **L45:** Encode text to reduce XSS risk.
 - **L56:** Update page HTML.
@@ -248,11 +233,7 @@ function showAddSectionModal()
  109 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L105:** Get HTML element by id.
 - **L106:** Get HTML element by id.
@@ -287,11 +268,7 @@ function editSection(chid, title)
  117 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L113:** Get HTML element by id.
 - **L114:** Get HTML element by id.
@@ -368,19 +345,12 @@ function saveSection()
  163 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L120:** Get HTML element by id.
-- **L121:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L120:** Get HTML element by id. | `title` means: Title of course work / page heading.  DOM element from the page.
 - **L121:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
 - **L136:** `chid` means: Chapter ID (Chapters.ChID).
 - **L138:** `saveBtn` means: Holds “save Btn” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -464,11 +434,7 @@ function showAddLessonModal(chid)
  199 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L179:** Get HTML element by id.
 - **L180:** Get HTML element by id.
@@ -476,14 +442,6 @@ function showAddLessonModal(chid)
 - **L182:** Get HTML element by id.
 - **L183:** Get HTML element by id.
 - **L184:** Get HTML element by id.
-<<<<<<< HEAD
-- **L186:** Get HTML element by id.
-- **L187:** Update page HTML.
-- **L188:** Get HTML element by id.
-- **L189:** Get HTML element by id.
-- **L190:** Update page HTML.
-- **L192:** Update page HTML.
-=======
 - **L186:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
 - **L187:** Update page HTML.
 - **L188:** Get HTML element by id.
@@ -492,7 +450,6 @@ function showAddLessonModal(chid)
 - **L191:** `mediaMsg` means: Holds “media Msg” for this scope.
 - **L192:** Update page HTML.
 - **L193:** `matMsg` means: Holds “mat Msg” for this scope.
->>>>>>> eb8ce01 (update)
 - **L194:** Update page HTML.
 
 ---
@@ -572,23 +529,11 @@ function editLesson(schid, chid)
  248 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L204:** Get HTML element by id.
 - **L205:** Get HTML element by id.
 - **L210:** Get HTML element by id.
-<<<<<<< HEAD
-- **L214:** Get HTML element by id.
-- **L215:** Get HTML element by id.
-- **L216:** Get HTML element by id.
-- **L218:** Update page HTML.
-- **L231:** Get HTML element by id.
-- **L232:** Get HTML element by id.
-=======
 - **L211:** `lessonType` means: Holds “lesson Type” for this scope.
 - **L214:** Get HTML element by id.
 - **L215:** Get HTML element by id.
@@ -599,7 +544,6 @@ function editLesson(schid, chid)
 - **L231:** Get HTML element by id.
 - **L232:** Get HTML element by id. | `mediaPrev` means: Holds “media Prev” for this scope.  DOM element from the page.
 - **L234:** `vUrl` means: URL string.
->>>>>>> eb8ce01 (update)
 - **L235:** Update page HTML.
 - **L236:** Encode text to reduce XSS risk.
 - **L237:** Encode text to reduce XSS risk.
@@ -673,18 +617,6 @@ function toggleLessonContentFields()
  290 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L251:** Get HTML element by id.
-- **L252:** Get HTML element by id.
-- **L253:** Get HTML element by id.
-- **L255:** Get HTML element by id.
-- **L256:** Get HTML element by id.
-- **L257:** Get HTML element by id.
-- **L258:** Get HTML element by id.
-- **L259:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L251:** Get HTML element by id. | `type` means: Holds “type” for this scope.  DOM element from the page.
@@ -695,7 +627,6 @@ function toggleLessonContentFields()
 - **L257:** Get HTML element by id. | `mediaDZ` means: Holds “media DZ” for this scope.  DOM element from the page.
 - **L258:** Get HTML element by id. | `materialDZ` means: Holds “material DZ” for this scope.  DOM element from the page.
 - **L259:** Get HTML element by id. | `attachments` means: Often a collection related to attachments (plural name).  DOM element from the page.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -851,20 +782,6 @@ function saveLesson()
  408 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L293:** Get HTML element by id.
-- **L294:** Get HTML element by id.
-- **L295:** Get HTML element by id.
-- **L312:** Get HTML element by id.
-- **L314:** Get HTML element by id.
-- **L316:** Get HTML element by id.
-- **L317:** Get HTML element by id.
-- **L322:** Get HTML element by id.
-- **L325:** JS object ↔ JSON text.
-- **L376:** JS object ↔ JSON text.
-=======
 **Line notes** (what code + variables mean)
 
 - **L293:** Get HTML element by id. | `title` means: Title of course work / page heading.  DOM element from the page.
@@ -887,7 +804,6 @@ function saveLesson()
 - **L372:** `schid` means: SubChapter / lesson ID.
 - **L373:** `saveBtn` means: Holds “save Btn” for this scope.
 - **L376:** JS object ↔ JSON text. | `matsJson` means: Holds “mats Json” for this scope.  JSON serialize/parse result.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -925,11 +841,7 @@ function deleteLesson(schid)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | // Course Creation — sections & lessons
@@ -1354,21 +1266,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  420 | 
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
-<<<<<<< HEAD
-- **L4:** Get HTML element by id.
-=======
 - **L4:** Get HTML element by id. | `view` means: Holds “view” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 - **L8:** Update page HTML.
 - **L12:** Update page HTML.
 - **L17:** Update page HTML.
 - **L18:** Encode text to reduce XSS risk.
-<<<<<<< HEAD
-- **L24:** Update page HTML.
-- **L28:** Update page HTML.
-=======
 - **L22:** `chapters` means: Often a collection related to chapters (plural name).
 - **L24:** Update page HTML.
 - **L28:** Update page HTML.
@@ -1377,7 +1281,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L35:** `lessons` means: Often a collection related to lessons (plural name).
 - **L38:** `type` means: Holds “type” for this scope.
 - **L39:** `typeClass` means: Often a collection related to type Class (plural name).  Literal text string.
->>>>>>> eb8ce01 (update)
 - **L44:** Encode text to reduce XSS risk.
 - **L45:** Encode text to reduce XSS risk.
 - **L56:** Update page HTML.
@@ -1395,29 +1298,16 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L113:** Get HTML element by id.
 - **L114:** Get HTML element by id.
 - **L115:** Get HTML element by id.
-<<<<<<< HEAD
-- **L120:** Get HTML element by id.
-- **L121:** Get HTML element by id.
-=======
 - **L120:** Get HTML element by id. | `title` means: Title of course work / page heading.  DOM element from the page.
 - **L121:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
 - **L136:** `chid` means: Chapter ID (Chapters.ChID).
 - **L138:** `saveBtn` means: Holds “save Btn” for this scope.
->>>>>>> eb8ce01 (update)
 - **L179:** Get HTML element by id.
 - **L180:** Get HTML element by id.
 - **L181:** Get HTML element by id.
 - **L182:** Get HTML element by id.
 - **L183:** Get HTML element by id.
 - **L184:** Get HTML element by id.
-<<<<<<< HEAD
-- **L186:** Get HTML element by id.
-- **L187:** Update page HTML.
-- **L188:** Get HTML element by id.
-- **L189:** Get HTML element by id.
-- **L190:** Update page HTML.
-- **L192:** Update page HTML.
-=======
 - **L186:** Get HTML element by id. | `htmlEditor` means: Holds “html Editor” for this scope.  DOM element from the page.
 - **L187:** Update page HTML.
 - **L188:** Get HTML element by id.
@@ -1426,40 +1316,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L191:** `mediaMsg` means: Holds “media Msg” for this scope.
 - **L192:** Update page HTML.
 - **L193:** `matMsg` means: Holds “mat Msg” for this scope.
->>>>>>> eb8ce01 (update)
 - **L194:** Update page HTML.
 - **L204:** Get HTML element by id.
 - **L205:** Get HTML element by id.
 - **L210:** Get HTML element by id.
-<<<<<<< HEAD
-- **L214:** Get HTML element by id.
-- **L215:** Get HTML element by id.
-- **L216:** Get HTML element by id.
-- **L218:** Update page HTML.
-- **L231:** Get HTML element by id.
-- **L232:** Get HTML element by id.
-- **L235:** Update page HTML.
-- **L236:** Encode text to reduce XSS risk.
-- **L237:** Encode text to reduce XSS risk.
-- **L251:** Get HTML element by id.
-- **L252:** Get HTML element by id.
-- **L253:** Get HTML element by id.
-- **L255:** Get HTML element by id.
-- **L256:** Get HTML element by id.
-- **L257:** Get HTML element by id.
-- **L258:** Get HTML element by id.
-- **L259:** Get HTML element by id.
-- **L293:** Get HTML element by id.
-- **L294:** Get HTML element by id.
-- **L295:** Get HTML element by id.
-- **L312:** Get HTML element by id.
-- **L314:** Get HTML element by id.
-- **L316:** Get HTML element by id.
-- **L317:** Get HTML element by id.
-- **L322:** Get HTML element by id.
-- **L325:** JS object ↔ JSON text.
-- **L376:** JS object ↔ JSON text.
-=======
 - **L211:** `lessonType` means: Holds “lesson Type” for this scope.
 - **L214:** Get HTML element by id.
 - **L215:** Get HTML element by id.
@@ -1501,7 +1361,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L372:** `schid` means: SubChapter / lesson ID.
 - **L373:** `saveBtn` means: Holds “save Btn” for this scope.
 - **L376:** JS object ↔ JSON text. | `matsJson` means: Holds “mats Json” for this scope.  JSON serialize/parse result.
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

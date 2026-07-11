@@ -1,10 +1,6 @@
 # ForgotPassword.aspx.cs
 **Source:** `Pages/Authentication/ForgotPassword.aspx.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -79,11 +75,7 @@ protected void Page_Load(object sender, EventArgs e)
   36 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L14:** Page load entry (GET or postback).
 - **L17:** CSRF anti-forgery protection.
@@ -138,15 +130,9 @@ protected void btnVerify_Click(object sender, EventArgs e)
   62 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L44:** Verify multi-factor / TOTP code.
-=======
 **Line notes** (what code + variables mean)
 
 - **L44:** Verify multi-factor / TOTP code. | `result` means: AuthResult or API result { success, message, … }.  Assigned from verification boolean/result.
->>>>>>> eb8ce01 (update)
 - **L53:** Server session for logged-in user.
 - **L54:** Server session for logged-in user.
 - **L56:** Server session for logged-in user.
@@ -215,19 +201,12 @@ protected void btnReset_Click(object sender, EventArgs e)
  102 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L87:** Server session for logged-in user.
-- **L88:** Password-reset MFA then update password hash.
-=======
 **Line notes** (what code + variables mean)
 
 - **L78:** `p1` means: New password field (first entry).
 - **L79:** `p2` means: Confirm password field (must match p1).
 - **L87:** Server session for logged-in user. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Read from ASP.NET Session.
 - **L88:** Password-reset MFA then update password hash. | `result` means: AuthResult or API result { success, message, … }.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -292,19 +271,11 @@ private bool HasValidResetSession()
  124 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L115:** Server session for logged-in user.
-- **L116:** Error handling block.
-- **L118:** Server session for logged-in user.
-=======
 **Line notes** (what code + variables mean)
 
 - **L115:** Server session for logged-in user.
 - **L116:** Error handling block.
 - **L118:** Server session for logged-in user. | `at` means: Timestamp (CreatedUtc / PwdResetAt).  Read from ASP.NET Session.
->>>>>>> eb8ce01 (update)
 - **L120:** Server session for logged-in user.
 - **L123:** Handle/log exception.
 
@@ -384,11 +355,7 @@ private void ShowStep2()
  146 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L144:** Server session for logged-in user.
 
@@ -418,23 +385,16 @@ private void UpdatePills()
  152 |             pill2.Attributes["class"] = "step-pill" + (on2 ? " active" : "");
  153 |         }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L150:** `on2` means: Holds “on2” for this scope. (true/false)
->>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -594,7 +554,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  155 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -605,20 +565,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L19:** False on first open; true after postback.
 - **L21:** Navigate browser to another URL.
 - **L25:** False on first open; true after postback.
-<<<<<<< HEAD
-- **L44:** Verify multi-factor / TOTP code.
-- **L53:** Server session for logged-in user.
-- **L54:** Server session for logged-in user.
-- **L56:** Server session for logged-in user.
-- **L87:** Server session for logged-in user.
-- **L88:** Password-reset MFA then update password hash.
-- **L115:** Server session for logged-in user.
-- **L116:** Error handling block.
-- **L118:** Server session for logged-in user.
-- **L120:** Server session for logged-in user.
-- **L123:** Handle/log exception.
-- **L144:** Server session for logged-in user.
-=======
 - **L44:** Verify multi-factor / TOTP code. | `result` means: AuthResult or API result { success, message, … }.  Assigned from verification boolean/result.
 - **L53:** Server session for logged-in user.
 - **L54:** Server session for logged-in user.
@@ -634,7 +580,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L123:** Handle/log exception.
 - **L144:** Server session for logged-in user.
 - **L150:** `on2` means: Holds “on2” for this scope. (true/false)
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

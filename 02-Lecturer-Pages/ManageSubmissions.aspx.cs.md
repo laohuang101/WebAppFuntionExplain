@@ -1,10 +1,6 @@
 # ManageSubmissions.aspx.cs
 **Source:** `Pages/Lecturer/ManageSubmissions.aspx.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -68,11 +64,7 @@ protected void Page_Load(object sender, EventArgs e)
   23 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L18:** Page load entry (GET or postback).
 - **L20:** Authorization — block wrong role / anonymous.
@@ -144,18 +136,6 @@ public static object GetAssignments()
   62 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L29:** Error handling block.
-- **L31:** Authorization — block wrong role / anonymous.
-- **L32:** Authorization — block wrong role / anonymous.
-- **L34:** Import namespace/types.
-- **L35:** Import namespace/types.
-- **L40:** Import namespace/types.
-- **L41:** Owner lecturer foreign key.
-- **L48:** Parameterized SQL — prevents classic SQL injection.
-=======
 **Line notes** (what code + variables mean)
 
 - **L29:** Error handling block.
@@ -168,7 +148,6 @@ public static object GetAssignments()
 - **L41:** Owner lecturer foreign key. | `ownerCol` means: Holds “owner Col” for this scope. (text)
 - **L48:** Parameterized SQL — prevents classic SQL injection.
 - **L49:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L50:** Import namespace/types.
 - **L52:** Null-safe read from database values.
 - **L57:** Handle/log exception.
@@ -251,33 +230,16 @@ public static object GetSubmissions(int cwid)
  108 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L68:** Error handling block.
-- **L70:** Authorization — block wrong role / anonymous.
-=======
 **Line notes** (what code + variables mean)
 
 - **L68:** Error handling block.
 - **L70:** Authorization — block wrong role / anonymous. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
->>>>>>> eb8ce01 (update)
 - **L71:** Authorization — block wrong role / anonymous.
 - **L73:** Import namespace/types.
 - **L74:** Import namespace/types.
 - **L80:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L81:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L84:** Parameterized SQL — prevents classic SQL injection.
-<<<<<<< HEAD
-- **L86:** Import namespace/types.
-- **L90:** Null-safe read from database values.
-- **L91:** Null-safe read from database values.
-- **L92:** Null-safe read from database values.
-- **L93:** Null-safe read from database values.
-- **L94:** Null-safe read from database values.
-- **L95:** Null-safe read from database values.
-- **L96:** Null-safe read from database values.
-=======
 - **L85:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
 - **L86:** Import namespace/types.
 - **L90:** Null-safe read from database values. | `sid` means: Submission ID (CWSubmissions.SID).
@@ -287,7 +249,6 @@ public static object GetSubmissions(int cwid)
 - **L94:** Null-safe read from database values. | `time` means: Date/time value. (text)
 - **L95:** Null-safe read from database values. | `score` means: Points earned or max points depending on context.
 - **L96:** Null-safe read from database values. | `review` means: Holds “review” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L103:** Handle/log exception.
 - **L105:** Error handling block.
 
@@ -334,20 +295,12 @@ public static object GradeSubmission(int sid, int score, string review)
  128 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L114:** Error handling block.
-- **L116:** Authorization — block wrong role / anonymous.
-- **L117:** Authorization — block wrong role / anonymous.
-=======
 **Line notes** (what code + variables mean)
 
 - **L114:** Error handling block.
 - **L116:** Authorization — block wrong role / anonymous. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
 - **L117:** Authorization — block wrong role / anonymous.
 - **L120:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
->>>>>>> eb8ce01 (update)
 - **L123:** Handle/log exception.
 - **L125:** Error handling block.
 
@@ -355,11 +308,7 @@ public static object GradeSubmission(int sid, int score, string review)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -494,7 +443,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  130 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -511,15 +460,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L20:** Authorization — block wrong role / anonymous.
 - **L25:** Expose method to AJAX JSON calls.
 - **L29:** Error handling block.
-<<<<<<< HEAD
-- **L31:** Authorization — block wrong role / anonymous.
-- **L32:** Authorization — block wrong role / anonymous.
-- **L34:** Import namespace/types.
-- **L35:** Import namespace/types.
-- **L40:** Import namespace/types.
-- **L41:** Owner lecturer foreign key.
-- **L48:** Parameterized SQL — prevents classic SQL injection.
-=======
 - **L31:** Authorization — block wrong role / anonymous. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
 - **L32:** Authorization — block wrong role / anonymous.
 - **L34:** Import namespace/types.
@@ -529,34 +469,19 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L41:** Owner lecturer foreign key. | `ownerCol` means: Holds “owner Col” for this scope. (text)
 - **L48:** Parameterized SQL — prevents classic SQL injection.
 - **L49:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L50:** Import namespace/types.
 - **L52:** Null-safe read from database values.
 - **L57:** Handle/log exception.
 - **L59:** Error handling block.
 - **L64:** Expose method to AJAX JSON calls.
 - **L68:** Error handling block.
-<<<<<<< HEAD
-- **L70:** Authorization — block wrong role / anonymous.
-=======
 - **L70:** Authorization — block wrong role / anonymous. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
->>>>>>> eb8ce01 (update)
 - **L71:** Authorization — block wrong role / anonymous.
 - **L73:** Import namespace/types.
 - **L74:** Import namespace/types.
 - **L80:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L81:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L84:** Parameterized SQL — prevents classic SQL injection.
-<<<<<<< HEAD
-- **L86:** Import namespace/types.
-- **L90:** Null-safe read from database values.
-- **L91:** Null-safe read from database values.
-- **L92:** Null-safe read from database values.
-- **L93:** Null-safe read from database values.
-- **L94:** Null-safe read from database values.
-- **L95:** Null-safe read from database values.
-- **L96:** Null-safe read from database values.
-=======
 - **L85:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
 - **L86:** Import namespace/types.
 - **L90:** Null-safe read from database values. | `sid` means: Submission ID (CWSubmissions.SID).
@@ -566,19 +491,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L94:** Null-safe read from database values. | `time` means: Date/time value. (text)
 - **L95:** Null-safe read from database values. | `score` means: Points earned or max points depending on context.
 - **L96:** Null-safe read from database values. | `review` means: Holds “review” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L103:** Handle/log exception.
 - **L105:** Error handling block.
 - **L110:** Expose method to AJAX JSON calls.
 - **L114:** Error handling block.
-<<<<<<< HEAD
-- **L116:** Authorization — block wrong role / anonymous.
-- **L117:** Authorization — block wrong role / anonymous.
-=======
 - **L116:** Authorization — block wrong role / anonymous. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
 - **L117:** Authorization — block wrong role / anonymous.
 - **L120:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
->>>>>>> eb8ce01 (update)
 - **L123:** Handle/log exception.
 - **L125:** Error handling block.
 

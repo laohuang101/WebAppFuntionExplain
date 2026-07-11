@@ -1,10 +1,6 @@
 # Assignments.aspx.cs
 **Source:** `Pages/Lecturer/Assignments.aspx.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -54,11 +50,7 @@ protected void Page_Load(object sender, EventArgs e)
   16 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L12:** Page load entry (GET or postback).
 - **L14:** Authorization — block wrong role / anonymous.
@@ -86,11 +78,7 @@ private static int CurrentUid()
   21 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L20:** Authorization — block wrong role / anonymous.
 
@@ -129,16 +117,10 @@ public static object GetCourses()
   37 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L27:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L27:** Error handling block.
 - **L29:** `uid` means: User ID (Users.UID) of the logged-in or target user.
->>>>>>> eb8ce01 (update)
 - **L30:** Authorization — block wrong role / anonymous.
 - **L33:** Handle/log exception.
 
@@ -177,16 +159,10 @@ public static object GetCourseWorks()
   53 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L43:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L43:** Error handling block.
 - **L45:** `uid` means: User ID (Users.UID) of the logged-in or target user.
->>>>>>> eb8ce01 (update)
 - **L46:** Authorization — block wrong role / anonymous.
 - **L49:** Handle/log exception.
 
@@ -268,19 +244,12 @@ public static object SaveCourseWork(
   94 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L73:** Error handling block.
-- **L76:** Authorization — block wrong role / anonymous.
-=======
 **Line notes** (what code + variables mean)
 
 - **L73:** Error handling block.
 - **L75:** `uid` means: User ID (Users.UID) of the logged-in or target user.
 - **L76:** Authorization — block wrong role / anonymous.
 - **L84:** `id` means: Generic primary key / identifier.
->>>>>>> eb8ce01 (update)
 - **L90:** Handle/log exception.
 
 ---
@@ -321,16 +290,10 @@ public static object DeleteCourseWork(int cwid)
  111 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L100:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L100:** Error handling block.
 - **L102:** `uid` means: User ID (Users.UID) of the logged-in or target user.
->>>>>>> eb8ce01 (update)
 - **L103:** Authorization — block wrong role / anonymous.
 - **L107:** Handle/log exception.
 
@@ -338,11 +301,7 @@ public static object DeleteCourseWork(int cwid)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -460,7 +419,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  113 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -474,28 +433,16 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L20:** Authorization — block wrong role / anonymous.
 - **L23:** Expose method to AJAX JSON calls.
 - **L27:** Error handling block.
-<<<<<<< HEAD
-=======
 - **L29:** `uid` means: User ID (Users.UID) of the logged-in or target user.
->>>>>>> eb8ce01 (update)
 - **L30:** Authorization — block wrong role / anonymous.
 - **L33:** Handle/log exception.
 - **L39:** Expose method to AJAX JSON calls.
 - **L43:** Error handling block.
-<<<<<<< HEAD
-=======
 - **L45:** `uid` means: User ID (Users.UID) of the logged-in or target user.
->>>>>>> eb8ce01 (update)
 - **L46:** Authorization — block wrong role / anonymous.
 - **L49:** Handle/log exception.
 - **L59:** Expose method to AJAX JSON calls.
 - **L73:** Error handling block.
-<<<<<<< HEAD
-- **L76:** Authorization — block wrong role / anonymous.
-- **L90:** Handle/log exception.
-- **L96:** Expose method to AJAX JSON calls.
-- **L100:** Error handling block.
-=======
 - **L75:** `uid` means: User ID (Users.UID) of the logged-in or target user.
 - **L76:** Authorization — block wrong role / anonymous.
 - **L84:** `id` means: Generic primary key / identifier.
@@ -503,7 +450,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L96:** Expose method to AJAX JSON calls.
 - **L100:** Error handling block.
 - **L102:** `uid` means: User ID (Users.UID) of the logged-in or target user.
->>>>>>> eb8ce01 (update)
 - **L103:** Authorization — block wrong role / anonymous.
 - **L107:** Handle/log exception.
 

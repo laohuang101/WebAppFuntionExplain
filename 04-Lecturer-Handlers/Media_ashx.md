@@ -1,10 +1,6 @@
 # Media.ashx
 **Source:** `Media.ashx`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -154,14 +150,6 @@ public void ProcessRequest(HttpContext context)
  116 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L20:** IHttpHandler entry for ashx.
-- **L22:** Error handling block.
-- **L43:** Sandbox path under ~/Uploads.
-- **L71:** Sandbox path under ~/Uploads.
-=======
 **Line notes** (what code + variables mean)
 
 - **L20:** IHttpHandler entry for ashx.
@@ -179,7 +167,6 @@ public void ProcessRequest(HttpContext context)
 - **L87:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
 - **L99:** `rootFull` means: Holds “root Full” for this scope. (text)
 - **L102:** `full` means: Fully resolved absolute path.
->>>>>>> eb8ce01 (update)
 - **L111:** Handle/log exception.
 - **L114:** Error handling block.
 
@@ -250,17 +237,10 @@ private static bool AuthorizeFolder(HttpContext context, string folder)
  166 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L137:** Restore/validate user from Session or JWT; reject stale UIDs.
-- **L144:** Map role codes/names to Admin/Student/Lecturer.
-=======
 **Line notes** (what code + variables mean)
 
 - **L137:** Restore/validate user from Session or JWT; reject stale UIDs. | `uid` means: User ID (Users.UID) of the logged-in or target user.  Assigned from logged-in user id (0 if anonymous).
 - **L144:** Map role codes/names to Admin/Student/Lecturer. | `role` means: User role code or name (Admin/Student/Lecturer).
->>>>>>> eb8ce01 (update)
 - **L145:** Server session for logged-in user.
 
 ---
@@ -290,13 +270,10 @@ private static string FirstFolder(string relative)
  172 |         return slash < 0 ? relative : relative.Substring(0, slash);
  173 |     }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L171:** `slash` means: Holds “slash” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -335,17 +312,11 @@ private static string ToRelativeUnderUploads(HttpContext context, string physica
  187 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L177:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L177:** Error handling block.
 - **L179:** `root` means: Root directory path (Uploads).
 - **L182:** `full` means: Fully resolved absolute path.
->>>>>>> eb8ce01 (update)
 - **L186:** Handle/log exception.
 
 ---
@@ -458,13 +429,6 @@ private static string FindByOriginalName(HttpContext context, string folderOrNul
  263 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L213:** Error handling block.
-- **L222:** Handle/log exception.
-- **L227:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L196:** `uploads` means: Often a collection related to uploads (plural name). (text)
@@ -483,7 +447,6 @@ private static string FindByOriginalName(HttpContext context, string folderOrNul
 - **L244:** `under` means: Holds “under” for this scope. (text)
 - **L245:** `sp2` means: Holds “sp2” for this scope. (integer)
 - **L250:** `phys` means: Often a collection related to phys (plural name). (text)
->>>>>>> eb8ce01 (update)
 - **L254:** Error handling block.
 - **L260:** Handle/log exception.
 
@@ -543,10 +506,6 @@ private static string NormalizeRequestPath(string f)
  294 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-=======
 **Line notes** (what code + variables mean)
 
 - **L272:** `up` means: Holds “up” for this scope. (integer)
@@ -554,7 +513,6 @@ private static string NormalizeRequestPath(string f)
 - **L282:** `rest` means: Holds “rest” for this scope. (text)
 - **L283:** `eq` means: Holds “eq” for this scope. (integer)
 - **L285:** `amp` means: Holds “amp” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 - **L287:** Error handling block.
 
 ---
@@ -689,13 +647,6 @@ private static void StreamFile(HttpContext context, string physical)
  383 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L304:** Error handling block.
-- **L309:** Handle/log exception.
-- **L367:** Import namespace/types.
-=======
 **Line notes** (what code + variables mean)
 
 - **L298:** `fileName` means: Original file name for display/download.
@@ -722,7 +673,6 @@ private static void StreamFile(HttpContext context, string physical)
 - **L371:** `remaining` means: Holds “remaining” for this scope. (integer)
 - **L375:** `toRead` means: Holds “to Read” for this scope. (integer)
 - **L376:** `read` means: Holds “read” for this scope. (integer)
->>>>>>> eb8ce01 (update)
 - **L382:** Error handling block.
 
 ---
@@ -791,10 +741,6 @@ private static void WriteDiag(HttpContext context)
  420 |     }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-=======
 **Line notes** (what code + variables mean)
 
 - **L387:** `sb` means: StringBuilder — efficient string concatenation.  Newly constructed object.
@@ -804,7 +750,6 @@ private static void WriteDiag(HttpContext context)
 - **L403:** `n` means: Integer count (rows, items, or length).  Literal number `0`.
 - **L406:** `fi` means: Holds “fi” for this scope.  Newly constructed object.
 - **L407:** `note` means: Holds “note” for this scope. (text)  Literal text string.
->>>>>>> eb8ce01 (update)
 - **L410:** Error handling block.
 
 ---
@@ -866,13 +811,10 @@ private static bool IsClientAbort(Exception ex)
  437 |         return ex.InnerException != null && IsClientAbort(ex.InnerException);
  438 |     }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L433:** `m` means: Holds “m” for this scope. (text)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -919,11 +861,7 @@ private static string MimeFromExt(string ext)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```html
    1 | <%@ WebHandler Language="C#" Class="MediaHandler" %>
@@ -1391,7 +1329,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  463 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L3:** Import namespace/types.
 - **L4:** Import namespace/types.
@@ -1403,28 +1341,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L18:** Sandbox path under ~/Uploads.
 - **L20:** IHttpHandler entry for ashx.
 - **L22:** Error handling block.
-<<<<<<< HEAD
-- **L43:** Sandbox path under ~/Uploads.
-- **L71:** Sandbox path under ~/Uploads.
-- **L111:** Handle/log exception.
-- **L114:** Error handling block.
-- **L137:** Restore/validate user from Session or JWT; reject stale UIDs.
-- **L144:** Map role codes/names to Admin/Student/Lecturer.
-- **L145:** Server session for logged-in user.
-- **L177:** Error handling block.
-- **L186:** Handle/log exception.
-- **L213:** Error handling block.
-- **L222:** Handle/log exception.
-- **L227:** Error handling block.
-- **L254:** Error handling block.
-- **L260:** Handle/log exception.
-- **L287:** Error handling block.
-- **L304:** Error handling block.
-- **L309:** Handle/log exception.
-- **L367:** Import namespace/types.
-- **L382:** Error handling block.
-- **L410:** Error handling block.
-=======
 - **L38:** `f` means: Holds “f” for this scope. (text)  Comes from HTTP request.
 - **L43:** Sandbox path under ~/Uploads. | `relative` means: Path relative to Uploads root.
 - **L47:** `bare` means: Holds “bare” for this scope. (text)
@@ -1506,7 +1422,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L407:** `note` means: Holds “note” for this scope. (text)  Literal text string.
 - **L410:** Error handling block.
 - **L433:** `m` means: Holds “m” for this scope. (text)
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

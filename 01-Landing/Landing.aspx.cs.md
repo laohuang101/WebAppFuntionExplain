@@ -1,10 +1,6 @@
 # Landing.aspx.cs
 **Source:** `Pages/Landing/Landing.aspx.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -69,11 +65,7 @@ protected void Page_Load(object sender, EventArgs e)
   31 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L23:** Page load entry (GET or postback).
 - **L25:** False on first open; true after postback.
@@ -123,20 +115,12 @@ private void BindAuthChrome()
   55 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L35:** Server session for logged-in user.
-- **L39:** Server session for logged-in user.
-- **L41:** Server session for logged-in user.
-=======
 **Line notes** (what code + variables mean)
 
 - **L35:** Server session for logged-in user.
 - **L39:** Server session for logged-in user.
 - **L41:** Server session for logged-in user. | `role` means: User role code or name (Admin/Student/Lecturer).  Read from ASP.NET Session.
 - **L42:** `dash` means: Holds “dash” for this scope. (text)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -201,11 +185,7 @@ private void LoadStats()
   96 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L59:** Error handling block.
 - **L61:** Import namespace/types.
@@ -349,31 +329,19 @@ private void LoadCourses()
  196 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L101:** Error handling block.
 - **L103:** Error handling block.
 - **L105:** Import namespace/types.
-<<<<<<< HEAD
-- **L111:** Course publish flag for Landing catalog.
-- **L114:** Database access (pure SQL).
-=======
 - **L108:** `sql` means: SQL query text (should use parameters, not raw user input).
 - **L111:** Course publish flag for Landing catalog.
 - **L114:** Database access (pure SQL). | `cmd` means: SqlCommand — the SQL statement + parameters object.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L115:** Error handling block.
 - **L119:** Handle/log exception.
 - **L122:** Database access (pure SQL).
 - **L129:** Import namespace/types.
 - **L130:** Import namespace/types.
-<<<<<<< HEAD
-- **L146:** Null-safe read from database values.
-=======
 - **L132:** `grid` means: Identifier (`grid`) — database primary/foreign key.  Newly constructed object.
 - **L137:** `count` means: Number of matching records.  Literal number `0`.
 - **L141:** `name` means: Display name of user/course/criterion.
@@ -383,7 +351,6 @@ private void LoadCourses()
 - **L145:** `level` means: Holds “level” for this scope. (text)
 - **L146:** Null-safe read from database values. | `rating` means: Holds “rating” for this scope. (number/score)
 - **L148:** `img` means: Image element or image path.
->>>>>>> eb8ce01 (update)
 - **L159:** Encode text to reduce XSS risk.
 - **L161:** Encode text to reduce XSS risk.
 - **L163:** Encode text to reduce XSS risk.
@@ -423,19 +390,11 @@ private static int ScalarInt(SqlConnection conn, string sql)
  206 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L198:** Database access (pure SQL).
-- **L200:** Import namespace/types.
-- **L202:** Run SQL; return table / rows / scalar.
-=======
 **Line notes** (what code + variables mean)
 
 - **L198:** Database access (pure SQL).
 - **L200:** Import namespace/types.
 - **L202:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
->>>>>>> eb8ce01 (update)
 - **L203:** Null-safe read from database values.
 
 ---
@@ -463,11 +422,7 @@ private static string Safe(object o)
  212 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L210:** Null-safe read from database values.
 
@@ -475,11 +430,7 @@ private static string Safe(object o)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -698,7 +649,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  214 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -709,20 +660,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L7:** Import namespace/types.
 - **L8:** Import namespace/types.
 - **L10:** C# namespace grouping.
-<<<<<<< HEAD
-=======
 - **L18:** `cs` means: Connection string text.  Read from Web.config.
->>>>>>> eb8ce01 (update)
 - **L23:** Page load entry (GET or postback).
 - **L25:** False on first open; true after postback.
 - **L35:** Server session for logged-in user.
 - **L39:** Server session for logged-in user.
-<<<<<<< HEAD
-- **L41:** Server session for logged-in user.
-=======
 - **L41:** Server session for logged-in user. | `role` means: User role code or name (Admin/Student/Lecturer).  Read from ASP.NET Session.
 - **L42:** `dash` means: Holds “dash” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L59:** Error handling block.
 - **L61:** Import namespace/types.
 - **L68:** Error handling block.
@@ -734,22 +678,14 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L101:** Error handling block.
 - **L103:** Error handling block.
 - **L105:** Import namespace/types.
-<<<<<<< HEAD
-- **L111:** Course publish flag for Landing catalog.
-- **L114:** Database access (pure SQL).
-=======
 - **L108:** `sql` means: SQL query text (should use parameters, not raw user input).
 - **L111:** Course publish flag for Landing catalog.
 - **L114:** Database access (pure SQL). | `cmd` means: SqlCommand — the SQL statement + parameters object.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L115:** Error handling block.
 - **L119:** Handle/log exception.
 - **L122:** Database access (pure SQL).
 - **L129:** Import namespace/types.
 - **L130:** Import namespace/types.
-<<<<<<< HEAD
-- **L146:** Null-safe read from database values.
-=======
 - **L132:** `grid` means: Identifier (`grid`) — database primary/foreign key.  Newly constructed object.
 - **L137:** `count` means: Number of matching records.  Literal number `0`.
 - **L141:** `name` means: Display name of user/course/criterion.
@@ -759,7 +695,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L145:** `level` means: Holds “level” for this scope. (text)
 - **L146:** Null-safe read from database values. | `rating` means: Holds “rating” for this scope. (number/score)
 - **L148:** `img` means: Image element or image path.
->>>>>>> eb8ce01 (update)
 - **L159:** Encode text to reduce XSS risk.
 - **L161:** Encode text to reduce XSS risk.
 - **L163:** Encode text to reduce XSS risk.
@@ -767,11 +702,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L192:** Handle/log exception.
 - **L198:** Database access (pure SQL).
 - **L200:** Import namespace/types.
-<<<<<<< HEAD
-- **L202:** Run SQL; return table / rows / scalar.
-=======
 - **L202:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
->>>>>>> eb8ce01 (update)
 - **L203:** Null-safe read from database values.
 - **L210:** Null-safe read from database values.
 

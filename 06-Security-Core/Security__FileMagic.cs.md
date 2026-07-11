@@ -1,10 +1,6 @@
 # FileMagic.cs
 **Source:** `Data/Security/FileMagic.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -211,15 +207,10 @@ public static bool LooksValid(Stream stream, string extension, out string messag
  132 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-=======
 **Line notes** (what code + variables mean)
 
 - **L32:** `ext` means: File extension (.pdf, .mp4, …).
 - **L35:** `pos` means: Holds “pos” for this scope. (integer)  Literal number `0`.
->>>>>>> eb8ce01 (update)
 - **L36:** Error handling block.
 - **L40:** Error handling block.
 - **L44:** Handle/log exception.
@@ -258,23 +249,16 @@ private static bool StartsWith(byte[] buf, int len, string ascii)
  140 |             return true;
  141 |         }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L136:** `bytes` means: Byte array (hash, random, file content).
->>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System.IO;
@@ -422,27 +406,21 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  143 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
 - **L3:** Import namespace/types.
 - **L5:** C# namespace grouping.
 - **L10:** Validate upload by file signature.
-<<<<<<< HEAD
-=======
 - **L32:** `ext` means: File extension (.pdf, .mp4, …).
 - **L35:** `pos` means: Holds “pos” for this scope. (integer)  Literal number `0`.
->>>>>>> eb8ce01 (update)
 - **L36:** Error handling block.
 - **L40:** Error handling block.
 - **L44:** Handle/log exception.
 - **L51:** Error handling block.
 - **L64:** File magic-byte validation on upload.
-<<<<<<< HEAD
-=======
 - **L136:** `bytes` means: Byte array (hash, random, file content).
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

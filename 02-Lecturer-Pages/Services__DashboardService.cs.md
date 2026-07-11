@@ -1,10 +1,6 @@
 # DashboardService.cs
 **Source:** `Pages/Lecturer/Services/DashboardService.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -85,16 +81,10 @@ private static string DetectOwnerColumn(SqlConnection conn)
   24 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L15:** Database access (pure SQL).
-=======
 **Line notes** (what code + variables mean)
 
 - **L15:** Database access (pure SQL).
 - **L17:** `cols` means: Often a collection related to cols (plural name).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L18:** Import namespace/types.
 - **L21:** Import namespace/types.
 - **L23:** Owner lecturer foreign key.
@@ -286,26 +276,11 @@ public static object GetDashboardData(int uid)
  168 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L28:** Error handling block.
 - **L32:** Import namespace/types.
 - **L33:** Import namespace/types.
-<<<<<<< HEAD
-- **L40:** Parameterized SQL — prevents classic SQL injection.
-- **L41:** Run SQL; return table / rows / scalar.
-- **L48:** Parameterized SQL — prevents classic SQL injection.
-- **L49:** Run SQL; return table / rows / scalar.
-- **L58:** Join related tables (courses ↔ chapters ↔ works ↔ users).
-- **L60:** Parameterized SQL — prevents classic SQL injection.
-- **L61:** Run SQL; return table / rows / scalar.
-- **L72:** Parameterized SQL — prevents classic SQL injection.
-- **L73:** Run SQL; return table / rows / scalar.
-=======
 - **L36:** `ownerCol` means: Holds “owner Col” for this scope. (text)
 - **L40:** Parameterized SQL — prevents classic SQL injection.
 - **L41:** Run SQL; return table / rows / scalar. | `activeCourses` means: Often a collection related to active Courses (plural name). (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
@@ -317,25 +292,10 @@ public static object GetDashboardData(int uid)
 - **L72:** Parameterized SQL — prevents classic SQL injection.
 - **L73:** Run SQL; return table / rows / scalar. | `avgObj` means: Holds “avg Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
 - **L74:** `avg` means: Holds “avg” for this scope. (number/score)
->>>>>>> eb8ce01 (update)
 - **L75:** Null-safe read from database values.
 - **L87:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L88:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L91:** Parameterized SQL — prevents classic SQL injection.
-<<<<<<< HEAD
-- **L93:** Import namespace/types.
-- **L97:** Null-safe read from database values.
-- **L98:** Null-safe read from database values.
-- **L99:** Null-safe read from database values.
-- **L100:** Null-safe read from database values.
-- **L101:** Null-safe read from database values.
-- **L102:** Null-safe read from database values.
-- **L103:** Null-safe read from database values.
-- **L104:** Null-safe read from database values.
-- **L132:** Parameterized SQL — prevents classic SQL injection.
-- **L134:** Import namespace/types.
-- **L150:** Parameterized SQL — prevents classic SQL injection.
-=======
 - **L92:** `submissions` means: Often a collection related to submissions (plural name).  Newly constructed object.
 - **L93:** Import namespace/types.
 - **L97:** Null-safe read from database values. | `sid` means: Submission ID (CWSubmissions.SID).
@@ -353,7 +313,6 @@ public static object GetDashboardData(int uid)
 - **L134:** Import namespace/types.
 - **L150:** Parameterized SQL — prevents classic SQL injection.
 - **L151:** `enrollTrend` means: Holds “enroll Trend” for this scope.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L152:** Import namespace/types.
 - **L163:** Handle/log exception.
 - **L165:** Error handling block.
@@ -445,29 +404,17 @@ public static object SaveGrade(int uid, int sid, int score, string review)
  226 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L172:** Error handling block.
 - **L176:** Import namespace/types.
 - **L177:** Import namespace/types.
-<<<<<<< HEAD
-- **L189:** Parameterized SQL — prevents classic SQL injection.
-- **L190:** Parameterized SQL — prevents classic SQL injection.
-- **L191:** Run SQL; return table / rows / scalar.
-- **L197:** Parameterized SQL — prevents classic SQL injection.
-- **L198:** Run SQL; return table / rows / scalar.
-=======
 - **L180:** `ownerCol` means: Holds “owner Col” for this scope. (text)
 - **L189:** Parameterized SQL — prevents classic SQL injection.
 - **L190:** Parameterized SQL — prevents classic SQL injection.
 - **L191:** Run SQL; return table / rows / scalar. | `cnt` means: Holds “cnt” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
 - **L197:** Parameterized SQL — prevents classic SQL injection.
 - **L198:** Run SQL; return table / rows / scalar. | `exist` means: Holds “exist” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
->>>>>>> eb8ce01 (update)
 - **L204:** Parameterized SQL — prevents classic SQL injection.
 - **L205:** Parameterized SQL — prevents classic SQL injection.
 - **L206:** Parameterized SQL — prevents classic SQL injection.
@@ -532,19 +479,12 @@ public static bool DeleteCourse(int uid, int courseId)
  254 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L230:** Error handling block.
 - **L233:** Import namespace/types.
 - **L234:** Import namespace/types.
-<<<<<<< HEAD
-=======
 - **L237:** `ownerCol` means: Holds “owner Col” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L243:** Parameterized SQL — prevents classic SQL injection.
 - **L244:** Parameterized SQL — prevents classic SQL injection.
 - **L245:** Run SQL; return table / rows / scalar.
@@ -555,11 +495,7 @@ public static bool DeleteCourse(int uid, int courseId)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -820,7 +756,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  256 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -831,27 +767,13 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L7:** Import namespace/types.
 - **L9:** C# namespace grouping.
 - **L15:** Database access (pure SQL).
-<<<<<<< HEAD
-=======
 - **L17:** `cols` means: Often a collection related to cols (plural name).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L18:** Import namespace/types.
 - **L21:** Import namespace/types.
 - **L23:** Owner lecturer foreign key.
 - **L28:** Error handling block.
 - **L32:** Import namespace/types.
 - **L33:** Import namespace/types.
-<<<<<<< HEAD
-- **L40:** Parameterized SQL — prevents classic SQL injection.
-- **L41:** Run SQL; return table / rows / scalar.
-- **L48:** Parameterized SQL — prevents classic SQL injection.
-- **L49:** Run SQL; return table / rows / scalar.
-- **L58:** Join related tables (courses ↔ chapters ↔ works ↔ users).
-- **L60:** Parameterized SQL — prevents classic SQL injection.
-- **L61:** Run SQL; return table / rows / scalar.
-- **L72:** Parameterized SQL — prevents classic SQL injection.
-- **L73:** Run SQL; return table / rows / scalar.
-=======
 - **L36:** `ownerCol` means: Holds “owner Col” for this scope. (text)
 - **L40:** Parameterized SQL — prevents classic SQL injection.
 - **L41:** Run SQL; return table / rows / scalar. | `activeCourses` means: Often a collection related to active Courses (plural name). (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
@@ -863,25 +785,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L72:** Parameterized SQL — prevents classic SQL injection.
 - **L73:** Run SQL; return table / rows / scalar. | `avgObj` means: Holds “avg Obj” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
 - **L74:** `avg` means: Holds “avg” for this scope. (number/score)
->>>>>>> eb8ce01 (update)
 - **L75:** Null-safe read from database values.
 - **L87:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L88:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L91:** Parameterized SQL — prevents classic SQL injection.
-<<<<<<< HEAD
-- **L93:** Import namespace/types.
-- **L97:** Null-safe read from database values.
-- **L98:** Null-safe read from database values.
-- **L99:** Null-safe read from database values.
-- **L100:** Null-safe read from database values.
-- **L101:** Null-safe read from database values.
-- **L102:** Null-safe read from database values.
-- **L103:** Null-safe read from database values.
-- **L104:** Null-safe read from database values.
-- **L132:** Parameterized SQL — prevents classic SQL injection.
-- **L134:** Import namespace/types.
-- **L150:** Parameterized SQL — prevents classic SQL injection.
-=======
 - **L92:** `submissions` means: Often a collection related to submissions (plural name).  Newly constructed object.
 - **L93:** Import namespace/types.
 - **L97:** Null-safe read from database values. | `sid` means: Submission ID (CWSubmissions.SID).
@@ -899,27 +806,18 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L134:** Import namespace/types.
 - **L150:** Parameterized SQL — prevents classic SQL injection.
 - **L151:** `enrollTrend` means: Holds “enroll Trend” for this scope.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L152:** Import namespace/types.
 - **L163:** Handle/log exception.
 - **L165:** Error handling block.
 - **L172:** Error handling block.
 - **L176:** Import namespace/types.
 - **L177:** Import namespace/types.
-<<<<<<< HEAD
-- **L189:** Parameterized SQL — prevents classic SQL injection.
-- **L190:** Parameterized SQL — prevents classic SQL injection.
-- **L191:** Run SQL; return table / rows / scalar.
-- **L197:** Parameterized SQL — prevents classic SQL injection.
-- **L198:** Run SQL; return table / rows / scalar.
-=======
 - **L180:** `ownerCol` means: Holds “owner Col” for this scope. (text)
 - **L189:** Parameterized SQL — prevents classic SQL injection.
 - **L190:** Parameterized SQL — prevents classic SQL injection.
 - **L191:** Run SQL; return table / rows / scalar. | `cnt` means: Holds “cnt” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
 - **L197:** Parameterized SQL — prevents classic SQL injection.
 - **L198:** Run SQL; return table / rows / scalar. | `exist` means: Holds “exist” for this scope. (integer)  Assigned from single SQL scalar (COUNT/IDENTITY).
->>>>>>> eb8ce01 (update)
 - **L204:** Parameterized SQL — prevents classic SQL injection.
 - **L205:** Parameterized SQL — prevents classic SQL injection.
 - **L206:** Parameterized SQL — prevents classic SQL injection.
@@ -933,10 +831,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L230:** Error handling block.
 - **L233:** Import namespace/types.
 - **L234:** Import namespace/types.
-<<<<<<< HEAD
-=======
 - **L237:** `ownerCol` means: Holds “owner Col” for this scope. (text)
->>>>>>> eb8ce01 (update)
 - **L243:** Parameterized SQL — prevents classic SQL injection.
 - **L244:** Parameterized SQL — prevents classic SQL injection.
 - **L245:** Run SQL; return table / rows / scalar.

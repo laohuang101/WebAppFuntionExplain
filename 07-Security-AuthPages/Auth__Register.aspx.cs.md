@@ -1,10 +1,6 @@
 # Register.aspx.cs
 **Source:** `Pages/Authentication/Register.aspx.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -76,11 +72,7 @@ protected void Page_Load(object sender, EventArgs e)
   28 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L10:** Page load entry (GET or postback).
 - **L12:** Server session for logged-in user.
@@ -150,11 +142,6 @@ protected void btnRegister_Click(object sender, EventArgs e)
   65 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L46:** Pending registration in Session until MFA confirmed.
-=======
 **Line notes** (what code + variables mean)
 
 - **L34:** `name` means: Display name of user/course/criterion.
@@ -164,7 +151,6 @@ protected void btnRegister_Click(object sender, EventArgs e)
 - **L38:** `role` means: User role code or name (Admin/Student/Lecturer).
 - **L46:** Pending registration in Session until MFA confirmed. | `result` means: AuthResult or API result { success, message, … }.
 - **L55:** `secret` means: MFA TOTP Base32 secret for authenticator apps.
->>>>>>> eb8ce01 (update)
 - **L58:** Pending registration in Session until MFA confirmed.
 
 ---
@@ -233,16 +219,10 @@ protected void btnConfirmMfa_Click(object sender, EventArgs e)
  109 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L90:** Pending registration in Session until MFA confirmed.
-=======
 **Line notes** (what code + variables mean)
 
 - **L71:** `code` means: 6-digit TOTP / OTP the user typed.
 - **L90:** Pending registration in Session until MFA confirmed. | `result` means: AuthResult or API result { success, message, … }.
->>>>>>> eb8ce01 (update)
 - **L94:** Pending registration in Session until MFA confirmed.
 
 ---
@@ -277,11 +257,7 @@ protected void lnkCancelMfa_Click(object sender, EventArgs e)
  121 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L113:** Pending registration in Session until MFA confirmed.
 
@@ -324,30 +300,18 @@ private void ShowMfaSetup(string email, string secret)
  136 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L126:** TOTP / authenticator (RFC 6238) helper.
-- **L127:** TOTP / authenticator (RFC 6238) helper.
-- **L131:** TOTP / authenticator (RFC 6238) helper.
-=======
 **Line notes** (what code + variables mean)
 
 - **L126:** TOTP / authenticator (RFC 6238) helper. | `normalized` means: Cleaned secret/code (spaces removed, uppercased).
 - **L127:** TOTP / authenticator (RFC 6238) helper.
 - **L131:** TOTP / authenticator (RFC 6238) helper. | `uri` means: otpauth:// or other URI string.
 - **L132:** `qrUrl` means: URL of QR image for authenticator setup.  Literal text string.
->>>>>>> eb8ce01 (update)
 
 ---
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -490,7 +454,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  138 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -501,16 +465,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L12:** Server session for logged-in user.
 - **L14:** Navigate browser to another URL.
 - **L18:** False on first open; true after postback.
-<<<<<<< HEAD
-- **L46:** Pending registration in Session until MFA confirmed.
-- **L58:** Pending registration in Session until MFA confirmed.
-- **L90:** Pending registration in Session until MFA confirmed.
-- **L94:** Pending registration in Session until MFA confirmed.
-- **L113:** Pending registration in Session until MFA confirmed.
-- **L126:** TOTP / authenticator (RFC 6238) helper.
-- **L127:** TOTP / authenticator (RFC 6238) helper.
-- **L131:** TOTP / authenticator (RFC 6238) helper.
-=======
 - **L34:** `name` means: Display name of user/course/criterion.
 - **L35:** `email` means: Account email address (usually lowercased).
 - **L36:** `pass` means: Password from a form field.
@@ -527,7 +481,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L127:** TOTP / authenticator (RFC 6238) helper.
 - **L131:** TOTP / authenticator (RFC 6238) helper. | `uri` means: otpauth:// or other URI string.
 - **L132:** `qrUrl` means: URL of QR image for authenticator setup.  Literal text string.
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

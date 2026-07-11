@@ -1,10 +1,6 @@
 # cc-wizard.js
 **Source:** `Pages/Lecturer/Scripts/cc-wizard.js`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -86,24 +82,15 @@ function showCreateCourseModal()
   26 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L9:** Get HTML element by id.
 - **L10:** Get HTML element by id.
 - **L11:** Get HTML element by id.
 - **L12:** Get HTML element by id.
 - **L13:** Get HTML element by id.
-<<<<<<< HEAD
-- **L14:** Get HTML element by id.
-- **L16:** Get HTML element by id.
-=======
 - **L14:** Get HTML element by id. | `prev` means: Holds “prev” for this scope.  DOM element from the page.
 - **L16:** Get HTML element by id. | `dzMsg` means: Holds “dz Msg” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 - **L17:** Update page HTML.
 - **L19:** Get HTML element by id.
 - **L21:** Get HTML element by id.
@@ -154,24 +141,15 @@ function editCourseBasicInfo(cid)
   73 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-=======
 **Line notes** (what code + variables mean)
 
 - **L53:** `c` means: Course object/row.
->>>>>>> eb8ce01 (update)
 - **L57:** Get HTML element by id.
 - **L58:** Get HTML element by id.
 - **L59:** Get HTML element by id.
 - **L60:** Get HTML element by id.
 - **L61:** Get HTML element by id.
-<<<<<<< HEAD
-- **L62:** Get HTML element by id.
-=======
 - **L62:** Get HTML element by id. | `prevEdit` means: Holds “prev Edit” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 - **L68:** Get HTML element by id.
 - **L69:** Get HTML element by id.
 
@@ -241,19 +219,11 @@ function setWizardStep(step)
  114 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L77:** Get HTML element by id.
-- **L78:** Get HTML element by id.
-- **L79:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L77:** Get HTML element by id. | `step1` means: Holds “step1” for this scope.  DOM element from the page.
 - **L78:** Get HTML element by id. | `step2` means: Holds “step2” for this scope.  DOM element from the page.
 - **L79:** Get HTML element by id. | `stepLine` means: Holds “step Line” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 - **L90:** Get HTML element by id.
 - **L91:** Get HTML element by id.
 - **L94:** Get HTML element by id.
@@ -330,16 +300,6 @@ function nextWizardStep()
  155 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L118:** Get HTML element by id.
-- **L119:** Get HTML element by id.
-- **L120:** Get HTML element by id.
-- **L121:** Get HTML element by id.
-- **L122:** Get HTML element by id.
-- **L123:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L118:** Get HTML element by id. | `name` means: Display name of user/course/criterion.  DOM element from the page.
@@ -348,7 +308,6 @@ function nextWizardStep()
 - **L121:** Get HTML element by id. | `level` means: Holds “level” for this scope.  DOM element from the page.
 - **L122:** Get HTML element by id. | `bgImg` means: Holds “bg Img” for this scope.  DOM element from the page.
 - **L123:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -400,16 +359,10 @@ function completeWizard()
  166 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L162:** Get HTML element by id.
-=======
 **Line notes** (what code + variables mean)
 
 - **L162:** Get HTML element by id. | `modalEl` means: Holds “modal El” for this scope.  DOM element from the page.
 - **L163:** `modal` means: Holds “modal” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -440,11 +393,7 @@ function confirmCloseWizard(e)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | // Course Creation — wizard create/edit course
@@ -621,53 +570,36 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  172 | 
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L9:** Get HTML element by id.
 - **L10:** Get HTML element by id.
 - **L11:** Get HTML element by id.
 - **L12:** Get HTML element by id.
 - **L13:** Get HTML element by id.
-<<<<<<< HEAD
-- **L14:** Get HTML element by id.
-- **L16:** Get HTML element by id.
-=======
 - **L14:** Get HTML element by id. | `prev` means: Holds “prev” for this scope.  DOM element from the page.
 - **L16:** Get HTML element by id. | `dzMsg` means: Holds “dz Msg” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 - **L17:** Update page HTML.
 - **L19:** Get HTML element by id.
 - **L21:** Get HTML element by id.
 - **L29:** DOM event handler.
 - **L30:** Error handling block.
-<<<<<<< HEAD
-=======
 - **L31:** `params` means: Often a collection related to params (plural name).  Newly constructed object.
 - **L32:** `editId` means: Identifier (`editId`) — database primary/foreign key.
 - **L36:** `tries` means: Often a collection related to tries (plural name).  Literal number `0`.
 - **L37:** `t` means: Temporary string/token/time value.
 - **L53:** `c` means: Course object/row.
->>>>>>> eb8ce01 (update)
 - **L57:** Get HTML element by id.
 - **L58:** Get HTML element by id.
 - **L59:** Get HTML element by id.
 - **L60:** Get HTML element by id.
 - **L61:** Get HTML element by id.
-<<<<<<< HEAD
-- **L62:** Get HTML element by id.
-- **L68:** Get HTML element by id.
-- **L69:** Get HTML element by id.
-- **L77:** Get HTML element by id.
-- **L78:** Get HTML element by id.
-- **L79:** Get HTML element by id.
-=======
 - **L62:** Get HTML element by id. | `prevEdit` means: Holds “prev Edit” for this scope.  DOM element from the page.
 - **L68:** Get HTML element by id.
 - **L69:** Get HTML element by id.
 - **L77:** Get HTML element by id. | `step1` means: Holds “step1” for this scope.  DOM element from the page.
 - **L78:** Get HTML element by id. | `step2` means: Holds “step2” for this scope.  DOM element from the page.
 - **L79:** Get HTML element by id. | `stepLine` means: Holds “step Line” for this scope.  DOM element from the page.
->>>>>>> eb8ce01 (update)
 - **L90:** Get HTML element by id.
 - **L91:** Get HTML element by id.
 - **L94:** Get HTML element by id.
@@ -676,15 +608,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L105:** Get HTML element by id.
 - **L108:** Get HTML element by id.
 - **L109:** Get HTML element by id.
-<<<<<<< HEAD
-- **L118:** Get HTML element by id.
-- **L119:** Get HTML element by id.
-- **L120:** Get HTML element by id.
-- **L121:** Get HTML element by id.
-- **L122:** Get HTML element by id.
-- **L123:** Get HTML element by id.
-- **L162:** Get HTML element by id.
-=======
 - **L118:** Get HTML element by id. | `name` means: Display name of user/course/criterion.  DOM element from the page.
 - **L119:** Get HTML element by id. | `desc` means: Description text (may embed <<<META>>> JSON).  DOM element from the page.
 - **L120:** Get HTML element by id. | `category` means: Holds “category” for this scope.  DOM element from the page.
@@ -693,7 +616,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L123:** Get HTML element by id. | `errDiv` means: Holds “err Div” for this scope.  DOM element from the page.
 - **L162:** Get HTML element by id. | `modalEl` means: Holds “modal El” for this scope.  DOM element from the page.
 - **L163:** `modal` means: Holds “modal” for this scope.
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

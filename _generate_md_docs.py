@@ -1007,17 +1007,6 @@ def format_numbered_code(body_lines: list[str], start_line: int, fence_lang: str
     return md_fence("\n".join(rows), fence_lang)
 
 
-<<<<<<< HEAD
-def format_line_notes(body_lines: list[str], start_line: int, max_lines: int = 250) -> list[str]:
-    """Bullet notes keyed by absolute line number (only lines with a recognized pattern)."""
-    out = []
-    for i, raw in enumerate(body_lines[:max_lines]):
-        n = line_note(raw)
-        if not n:
-            continue
-        abs_ln = start_line + i
-        out.append(f"- **L{abs_ln}:** {n}\n")
-=======
 def format_line_notes(body_lines: list[str], start_line: int, max_lines: int = 250, lang: str = "cs") -> list[str]:
     """Bullet notes keyed by absolute line number (patterns + assignment variable meanings)."""
     out = []
@@ -1044,7 +1033,6 @@ def format_line_notes(body_lines: list[str], start_line: int, max_lines: int = 2
             bits.append(f"`{vname}` means: {meaning}")
         if bits:
             out.append(f"- **L{abs_ln}:** " + " | ".join(bits) + "\n")
->>>>>>> eb8ce01 (update)
     return out
 
 
@@ -1154,15 +1142,9 @@ def write_file_md(path: Path, out_md: Path, title: str, feature_blurb: str, rel:
         body_lines = meth["body"].splitlines()
         max_fn = 250
         lines_out.append(format_numbered_code(body_lines, meth["start"], fence_lang, max_fn))
-<<<<<<< HEAD
-        notes = format_line_notes(body_lines, meth["start"], max_fn)
-        if notes:
-            lines_out.append("\n**Line notes**\n\n")
-=======
         notes = format_line_notes(body_lines, meth["start"], max_fn, lang)
         if notes:
             lines_out.append("\n**Line notes** (what code + variables mean)\n\n")
->>>>>>> eb8ce01 (update)
             lines_out.extend(notes)
         if len(body_lines) > max_fn:
             lines_out.append(
@@ -1173,21 +1155,13 @@ def write_file_md(path: Path, out_md: Path, title: str, feature_blurb: str, rel:
     lines_out.append("## Full file listing with line notes\n\n")
     lines_out.append(
         "Source is shown as a single fenced code block with line numbers. "
-<<<<<<< HEAD
-        "Recognized patterns are listed under **Line notes** after the block.\n\n"
-    )
-    max_full = min(len(lines), 900)
-    lines_out.append(format_numbered_code(lines[:max_full], 1, fence_lang, max_full))
-    full_notes = format_line_notes(lines[:max_full], 1, max_full)
-=======
         "Recognized patterns and **variable meanings** are listed under **Line notes**.\n\n"
     )
     max_full = min(len(lines), 900)
     lines_out.append(format_numbered_code(lines[:max_full], 1, fence_lang, max_full))
     full_notes = format_line_notes(lines[:max_full], 1, max_full, lang)
->>>>>>> eb8ce01 (update)
     if full_notes:
-        lines_out.append("\n**Line notes**\n\n")
+        lines_out.append("\n**Line notes** (what code + variables mean)\n\n")
         lines_out.extend(full_notes)
     if len(lines) > max_full:
         lines_out.append(

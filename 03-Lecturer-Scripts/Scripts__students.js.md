@@ -1,10 +1,6 @@
 # students.js
 **Source:** `Pages/Lecturer/Scripts/students.js`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -64,14 +60,9 @@ function render(s, i)
   32 |             }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-=======
 **Line notes** (what code + variables mean)
 
 - **L27:** `bg` means: Holds “bg” for this scope.
->>>>>>> eb8ce01 (update)
 - **L29:** Encode text to reduce XSS risk.
 - **L30:** Encode text to reduce XSS risk.
 - **L31:** Encode text to reduce XSS risk.
@@ -123,13 +114,10 @@ function render(s)
   52 |                 '<span class="small text-muted">' + pct + '%</span></div>';
   53 |             }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L48:** `pct` means: Holds “pct” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -156,14 +144,9 @@ function render(s)
   64 |             }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-=======
 **Line notes** (what code + variables mean)
 
 - **L62:** `g` means: Holds “g” for this scope.
->>>>>>> eb8ce01 (update)
 - **L63:** Encode text to reduce XSS risk.
 
 ---
@@ -238,18 +221,11 @@ function loadStudents()
  113 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L91:** HTTP request to server WebMethod/ashx.
-- **L94:** JS object ↔ JSON text.
-=======
 **Line notes** (what code + variables mean)
 
 - **L91:** HTTP request to server WebMethod/ashx.
 - **L94:** JS object ↔ JSON text.
 - **L99:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
->>>>>>> eb8ce01 (update)
 - **L102:** Get HTML element by id.
 - **L103:** Encode text to reduce XSS risk.
 - **L110:** Get HTML element by id.
@@ -321,33 +297,21 @@ function openDetail(uid, cid)
  152 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L116:** HTTP request to server WebMethod/ashx.
-- **L119:** JS object ↔ JSON text.
-=======
 **Line notes** (what code + variables mean)
 
 - **L116:** HTTP request to server WebMethod/ashx.
 - **L119:** JS object ↔ JSON text.
 - **L124:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
 - **L126:** `d` means: Often a dictionary payload or date value.
->>>>>>> eb8ce01 (update)
 - **L127:** Get HTML element by id.
 - **L128:** Get HTML element by id.
 - **L129:** Get HTML element by id.
 - **L130:** Get HTML element by id.
 - **L131:** Get HTML element by id.
 - **L132:** Get HTML element by id.
-<<<<<<< HEAD
-- **L134:** Get HTML element by id.
-- **L135:** Update page HTML.
-=======
 - **L134:** Get HTML element by id. | `tbody` means: Holds “tbody” for this scope.  DOM element from the page.
 - **L135:** Update page HTML.
 - **L137:** `tr` means: Holds “tr” for this scope.
->>>>>>> eb8ce01 (update)
 - **L138:** Update page HTML.
 - **L139:** Encode text to reduce XSS risk.
 - **L140:** Encode text to reduce XSS risk.
@@ -406,13 +370,6 @@ function renderTrend(data)
  179 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L155:** Get HTML element by id.
-- **L156:** Dashboard chart/visualization.
-- **L157:** Dashboard chart/visualization.
-=======
 **Line notes** (what code + variables mean)
 
 - **L155:** Get HTML element by id. | `ctx` means: Current HTTP request context (Request, Response, Session).  DOM element from the page.
@@ -420,7 +377,6 @@ function renderTrend(data)
 - **L157:** Dashboard chart/visualization.
 - **L158:** `labels` means: Often a collection related to labels (plural name).
 - **L159:** `values` means: Often a collection related to values (plural name).
->>>>>>> eb8ce01 (update)
 - **L160:** Dashboard chart/visualization.
 
 ---
@@ -477,11 +433,7 @@ function escapeHtml(str)
  193 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L190:** Encode text to reduce XSS risk.
 
@@ -489,11 +441,7 @@ function escapeHtml(str)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | /* Student Performance - EduDataTable (search / sort / filter / pagination) */
@@ -691,28 +639,16 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  193 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
-<<<<<<< HEAD
-- **L3:** Dashboard chart/visualization.
-=======
 - **L3:** Dashboard chart/visualization. | `trendChart` means: Holds “trend Chart” for this scope.
 - **L4:** `studentsDt` means: Holds “students Dt” for this scope.
 - **L5:** `colors` means: Often a collection related to colors (plural name).
->>>>>>> eb8ce01 (update)
 - **L7:** DOM event handler.
 - **L8:** In-memory result set from ADO.NET.
 - **L9:** Get HTML element by id.
 - **L10:** In-memory result set from ADO.NET.
 - **L14:** In-memory result set from ADO.NET.
-<<<<<<< HEAD
-- **L29:** Encode text to reduce XSS risk.
-- **L30:** Encode text to reduce XSS risk.
-- **L31:** Encode text to reduce XSS risk.
-- **L63:** Encode text to reduce XSS risk.
-- **L91:** HTTP request to server WebMethod/ashx.
-- **L94:** JS object ↔ JSON text.
-=======
 - **L27:** `bg` means: Holds “bg” for this scope.
 - **L29:** Encode text to reduce XSS risk.
 - **L30:** Encode text to reduce XSS risk.
@@ -723,48 +659,33 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L91:** HTTP request to server WebMethod/ashx.
 - **L94:** JS object ↔ JSON text.
 - **L99:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
->>>>>>> eb8ce01 (update)
 - **L102:** Get HTML element by id.
 - **L103:** Encode text to reduce XSS risk.
 - **L110:** Get HTML element by id.
 - **L116:** HTTP request to server WebMethod/ashx.
 - **L119:** JS object ↔ JSON text.
-<<<<<<< HEAD
-=======
 - **L124:** `res` means: Result object returned from fetch/WebMethod (`data.d` unwrapped).
 - **L126:** `d` means: Often a dictionary payload or date value.
->>>>>>> eb8ce01 (update)
 - **L127:** Get HTML element by id.
 - **L128:** Get HTML element by id.
 - **L129:** Get HTML element by id.
 - **L130:** Get HTML element by id.
 - **L131:** Get HTML element by id.
 - **L132:** Get HTML element by id.
-<<<<<<< HEAD
-- **L134:** Get HTML element by id.
-- **L135:** Update page HTML.
-=======
 - **L134:** Get HTML element by id. | `tbody` means: Holds “tbody” for this scope.  DOM element from the page.
 - **L135:** Update page HTML.
 - **L137:** `tr` means: Holds “tr” for this scope.
->>>>>>> eb8ce01 (update)
 - **L138:** Update page HTML.
 - **L139:** Encode text to reduce XSS risk.
 - **L140:** Encode text to reduce XSS risk.
 - **L141:** Encode text to reduce XSS risk.
 - **L145:** Update page HTML.
 - **L149:** Get HTML element by id.
-<<<<<<< HEAD
-- **L155:** Get HTML element by id.
-- **L156:** Dashboard chart/visualization.
-- **L157:** Dashboard chart/visualization.
-=======
 - **L155:** Get HTML element by id. | `ctx` means: Current HTTP request context (Request, Response, Session).  DOM element from the page.
 - **L156:** Dashboard chart/visualization.
 - **L157:** Dashboard chart/visualization.
 - **L158:** `labels` means: Often a collection related to labels (plural name).
 - **L159:** `values` means: Often a collection related to values (plural name).
->>>>>>> eb8ce01 (update)
 - **L160:** Dashboard chart/visualization.
 - **L190:** Encode text to reduce XSS risk.
 

@@ -1,10 +1,6 @@
 # SchemaMap.cs
 **Source:** `Data/SchemaMap.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -94,11 +90,7 @@ public static void Ensure()
   62 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L51:** Error handling block.
 - **L56:** Handle/log exception.
@@ -235,11 +227,6 @@ private static void Discover()
  149 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L71:** Import namespace/types.
-=======
 **Line notes** (what code + variables mean)
 
 - **L71:** Import namespace/types.
@@ -251,7 +238,6 @@ private static void Discover()
 - **L107:** `matTable` means: Holds “mat Table” for this scope. (text)
 - **L115:** `mc` means: Holds “mc” for this scope.
 - **L116:** `mPk` means: Holds “m Pk” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -286,11 +272,7 @@ private static bool TableExists(SqlConnection conn, string name)
  159 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L151:** Database access (pure SQL).
 - **L153:** Import namespace/types.
@@ -337,16 +319,10 @@ private static List<string> Cols(SqlConnection conn, string table)
  174 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L161:** Database access (pure SQL).
-=======
 **Line notes** (what code + variables mean)
 
 - **L161:** Database access (pure SQL).
 - **L163:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L164:** Import namespace/types.
 - **L167:** Parameterized SQL — prevents classic SQL injection.
 - **L168:** Import namespace/types.
@@ -416,21 +392,13 @@ private static string PrimaryKey(SqlConnection conn, string table)
  195 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L181:** Database access (pure SQL).
 - **L183:** Import namespace/types.
 - **L186:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L191:** Parameterized SQL — prevents classic SQL injection.
-<<<<<<< HEAD
-- **L192:** Run SQL; return table / rows / scalar.
-=======
 - **L192:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
->>>>>>> eb8ce01 (update)
 - **L193:** Null-safe read from database values.
 
 ---
@@ -467,13 +435,10 @@ private static string Pick(List<string> cols, params string[] candidates)
  206 |             throw new InvalidOperationException("No columns found; candidates: " + string.Join(",", candidates));
  207 |         }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L201:** `hit` means: Holds “hit” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -507,13 +472,10 @@ private static string PickOptional(List<string> cols, params string[] candidates
  216 |             return null;
  217 |         }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L213:** `hit` means: Holds “hit” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -574,11 +536,7 @@ public static object DebugInfo()
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -821,7 +779,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  238 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -832,8 +790,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L51:** Error handling block.
 - **L56:** Handle/log exception.
 - **L71:** Import namespace/types.
-<<<<<<< HEAD
-=======
 - **L74:** `chCols` means: Often a collection related to ch Cols (plural name).
 - **L79:** `chPk` means: Holds “ch Pk” for this scope.
 - **L87:** `subTable` means: Holds “sub Table” for this scope. (text)
@@ -842,16 +798,12 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L107:** `matTable` means: Holds “mat Table” for this scope. (text)
 - **L115:** `mc` means: Holds “mc” for this scope.
 - **L116:** `mPk` means: Holds “m Pk” for this scope.
->>>>>>> eb8ce01 (update)
 - **L151:** Database access (pure SQL).
 - **L153:** Import namespace/types.
 - **L156:** Parameterized SQL — prevents classic SQL injection.
 - **L157:** Run SQL; return table / rows / scalar.
 - **L161:** Database access (pure SQL).
-<<<<<<< HEAD
-=======
 - **L163:** `list` means: In-memory collection being built for JSON return.  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L164:** Import namespace/types.
 - **L167:** Parameterized SQL — prevents classic SQL injection.
 - **L168:** Import namespace/types.
@@ -859,15 +811,10 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L183:** Import namespace/types.
 - **L186:** Join related tables (courses ↔ chapters ↔ works ↔ users).
 - **L191:** Parameterized SQL — prevents classic SQL injection.
-<<<<<<< HEAD
-- **L192:** Run SQL; return table / rows / scalar.
-- **L193:** Null-safe read from database values.
-=======
 - **L192:** Run SQL; return table / rows / scalar. | `o` means: Holds “o” for this scope.  Assigned from single SQL scalar (COUNT/IDENTITY).
 - **L193:** Null-safe read from database values.
 - **L201:** `hit` means: Holds “hit” for this scope.
 - **L213:** `hit` means: Holds “hit” for this scope.
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

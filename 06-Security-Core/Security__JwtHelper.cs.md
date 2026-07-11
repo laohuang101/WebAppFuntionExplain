@@ -1,10 +1,6 @@
 # JwtHelper.cs
 **Source:** `Data/Security/JwtHelper.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -102,11 +98,6 @@ public static string CreateToken(int uid, string name, string role)
   63 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L46:** JWT cookie create/validate/clear.
-=======
 **Line notes** (what code + variables mean)
 
 - **L44:** `header` means: Holds “header” for this scope.  Newly constructed object.
@@ -116,7 +107,6 @@ public static string CreateToken(int uid, string name, string role)
 - **L59:** `h` means: Holds “h” for this scope. (text)  JSON serialize/parse result.
 - **L60:** `p` means: Parameter, path, or password fragment depending on context.  JSON serialize/parse result.
 - **L61:** `sig` means: Holds “sig” for this scope. (text)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -182,12 +172,6 @@ public static bool TryValidate(string token, out int uid, out string name, out s
   97 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L77:** Constant-time string compare (reduce timing leaks).
-- **L79:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L72:** `parts` means: Split path or name segments.
@@ -198,7 +182,6 @@ public static bool TryValidate(string token, out int uid, out string name, out s
 - **L81:** `json` means: JSON string (to parse or serialize).
 - **L82:** `payload` means: Object about to be JSON-serialized or sent over network.  JSON serialize/parse result.
 - **L85:** `exp` means: Expiry DateTime.
->>>>>>> eb8ce01 (update)
 - **L93:** Handle/log exception.
 
 ---
@@ -243,14 +226,9 @@ public static void SetAuthCookie(HttpResponse response, string token)
  133 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-=======
 **Line notes** (what code + variables mean)
 
 - **L119:** `cookie` means: HTTP cookie (JWT or CSRF).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L126:** Error handling block.
 - **L131:** Handle/log exception.
 
@@ -290,14 +268,9 @@ public static void ClearAuthCookie(HttpResponse response)
  147 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-=======
 **Line notes** (what code + variables mean)
 
 - **L138:** `cookie` means: HTTP cookie (JWT or CSRF).  Newly constructed object.
->>>>>>> eb8ce01 (update)
 - **L145:** Error handling block.
 
 ---
@@ -327,13 +300,10 @@ public static string ReadToken(HttpRequest request)
  153 |             return c != null ? c.Value : null;
  154 |         }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L152:** `c` means: Temporary value (character, course, or counter depending on loop).
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -365,16 +335,10 @@ private static string Sign(string data)
  163 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L158:** Import namespace/types.
-=======
 **Line notes** (what code + variables mean)
 
 - **L158:** Import namespace/types.
 - **L160:** `hash` means: Password hash (PBKDF2) stored in DB.  Assigned from password hash function.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -431,13 +395,10 @@ private static byte[] Base64UrlDecode(string input)
  178 |             return Convert.FromBase64String(s);
  179 |         }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L172:** `s` means: String being cleaned or built.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -471,16 +432,10 @@ private static bool FixedTimeEquals(string a, string b)
  188 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L181:** Constant-time string compare (reduce timing leaks).
-=======
 **Line notes** (what code + variables mean)
 
 - **L181:** Constant-time string compare (reduce timing leaks).
 - **L184:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -508,11 +463,7 @@ private static long UnixNow()
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -712,7 +663,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  195 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -724,19 +675,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L9:** C# namespace grouping.
 - **L15:** JWT cookie create/validate/clear.
 - **L17:** JWT cookie create/validate/clear.
-<<<<<<< HEAD
-- **L46:** JWT cookie create/validate/clear.
-- **L77:** Constant-time string compare (reduce timing leaks).
-- **L79:** Error handling block.
-- **L93:** Handle/log exception.
-- **L107:** Error handling block.
-- **L112:** Handle/log exception.
-- **L126:** Error handling block.
-- **L131:** Handle/log exception.
-- **L145:** Error handling block.
-- **L158:** Import namespace/types.
-- **L181:** Constant-time string compare (reduce timing leaks).
-=======
 - **L24:** `s` means: String value or submission-related object.  Read from Web.config.
 - **L44:** `header` means: Holds “header” for this scope.  Newly constructed object.
 - **L46:** JWT cookie create/validate/clear.
@@ -769,7 +707,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L172:** `s` means: String being cleaned or built.
 - **L181:** Constant-time string compare (reduce timing leaks).
 - **L184:** `diff` means: Holds “diff” for this scope. (integer)  Literal number `0`.
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

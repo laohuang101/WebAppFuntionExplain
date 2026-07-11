@@ -1,10 +1,6 @@
 # UploadPathGuard.cs
 **Source:** `Data/Security/UploadPathGuard.cs`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -104,12 +100,6 @@ public static string NormalizeRelative(string raw)
   64 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L21:** Path sandbox under Uploads.
-- **L27:** Error handling block.
-=======
 **Line notes** (what code + variables mean)
 
 - **L21:** Path sandbox under Uploads.
@@ -117,7 +107,6 @@ public static string NormalizeRelative(string raw)
 - **L27:** Error handling block.
 - **L41:** `parts` means: Split path or name segments.
 - **L51:** `allowed` means: Boolean — path/role is permitted.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -168,13 +157,6 @@ public static string ToPhysical(HttpContext ctx, string relativeUnderUploads)
   92 |         }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L72:** Path sandbox under Uploads.
-- **L76:** Error handling block.
-- **L77:** Handle/log exception.
-=======
 **Line notes** (what code + variables mean)
 
 - **L72:** Path sandbox under Uploads. | `rel` means: Holds “rel” for this scope. (text)
@@ -183,7 +165,6 @@ public static string ToPhysical(HttpContext ctx, string relativeUnderUploads)
 - **L80:** `full` means: Fully resolved absolute path.
 - **L81:** `rootFull` means: Holds “root Full” for this scope. (text)
 - **L84:** `rootWithSep` means: Holds “root With Sep” for this scope. (text)
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -220,11 +201,7 @@ public static bool IsAllowedExtension(string ext, string[] allow)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```csharp
    1 | using System;
@@ -332,7 +309,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  103 | }
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L1:** Import namespace/types.
 - **L2:** Import namespace/types.
@@ -340,12 +317,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L5:** C# namespace grouping.
 - **L11:** Sandbox path under ~/Uploads.
 - **L21:** Path sandbox under Uploads.
-<<<<<<< HEAD
-- **L27:** Error handling block.
-- **L72:** Path sandbox under Uploads.
-- **L76:** Error handling block.
-- **L77:** Handle/log exception.
-=======
 - **L24:** `f` means: Holds “f” for this scope. (text)
 - **L27:** Error handling block.
 - **L41:** `parts` means: Split path or name segments.
@@ -356,7 +327,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L80:** `full` means: Fully resolved absolute path.
 - **L81:** `rootFull` means: Holds “root Full” for this scope. (text)
 - **L84:** `rootWithSep` means: Holds “root With Sep” for this scope. (text)
->>>>>>> eb8ce01 (update)
 
 ## Source snapshot (raw)
 

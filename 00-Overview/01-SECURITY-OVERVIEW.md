@@ -1,7 +1,6 @@
 # Security overview — EduLMS
 
-**Generated for:** `/home/loke/Documents/WebAppFuntionExplain`  
-**Source:** `Data/Security/*` + `Pages/Authentication/*` + `Shared/Scripts/csrf.js`
+**Docs:** `06-Security-Core/` + `07-Security-AuthPages/`
 
 ---
 
@@ -64,9 +63,6 @@ AuthService.LoginPassword
               │
               ▼
          CompleteLogin (Session + JWT cookie)
-              │
-              ▼
-         Redirect by role (Admin / Lecturer / Student Landing)
 ```
 
 ### Forgot password (two steps)
@@ -78,19 +74,16 @@ Step 1: email + TOTP
 
 Step 2: new password + confirm
   → AuthService.CompletePasswordReset(uid, password)
-  → update Password + PasswordHash; clear reset session
 ```
 
-Admin accounts typically have no MFA secret → use Manage Users / known admin password for recovery demos (login bypasses MFA).
-
-### Protected page / API request
+### Protected page / API
 
 ```
 Request
   → AuthService.TryRestoreSessionFromJwt (if Session empty)
   → AuthGate.EnsurePage / EnsureHandlerRole
   → if POST/AJAX: CsrfProtection.Validate
-  → business logic (often LecturerUID ownership)
+  → business logic
   → SecurityAudit.Log on sensitive actions
 ```
 
@@ -98,78 +91,33 @@ Request
 
 ## Component map
 
-| File | Responsibility |
-|------|----------------|
-| [Security__AuthService.cs.md](../06-Security-Core/Security__AuthService.cs.md) | Register, login, MFA, reset, session/JWT complete |
-| [Security__AuthGate.cs.md](../06-Security-Core/Security__AuthGate.cs.md) | Role gate for pages + handlers + CSRF |
-| [Security__PasswordHasher.cs.md](../06-Security-Core/Security__PasswordHasher.cs.md) | PBKDF2 hash/verify |
-| [Security__JwtHelper.cs.md](../06-Security-Core/Security__JwtHelper.cs.md) | HS256 JWT + cookie |
-| [Security__TotpHelper.cs.md](../06-Security-Core/Security__TotpHelper.cs.md) | TOTP generate/verify/QR URI |
-| [Security__CsrfProtection.cs.md](../06-Security-Core/Security__CsrfProtection.cs.md) | Token + validation |
-| [Security__LoginThrottle.cs.md](../06-Security-Core/Security__LoginThrottle.cs.md) | Brute-force lockout |
-| [Security__SecurityAudit.cs.md](../06-Security-Core/Security__SecurityAudit.cs.md) | Audit log table + query |
-| [Security__FileMagic.cs.md](../06-Security-Core/Security__FileMagic.cs.md) | Upload magic bytes |
-| [Security__UploadPathGuard.cs.md](../06-Security-Core/Security__UploadPathGuard.cs.md) | Uploads path sandbox |
-| [Security__AuthSchema.cs.md](../06-Security-Core/Security__AuthSchema.cs.md) | Ensure MFA/hash columns |
-
-### Auth pages
-
-| Page | Doc |
+| File | Doc |
 |------|-----|
-| Login | [Auth__Login.aspx.cs.md](../07-Security-AuthPages/Auth__Login.aspx.cs.md) |
-| Register | [Auth__Register.aspx.cs.md](../07-Security-AuthPages/Auth__Register.aspx.cs.md) |
-| MFA verify | [Auth__MfaVerify.aspx.cs.md](../07-Security-AuthPages/Auth__MfaVerify.aspx.cs.md) |
+| AuthService | [Security__AuthService.cs.md](../06-Security-Core/Security__AuthService.cs.md) |
+| AuthGate | [Security__AuthGate.cs.md](../06-Security-Core/Security__AuthGate.cs.md) |
+| PasswordHasher | [Security__PasswordHasher.cs.md](../06-Security-Core/Security__PasswordHasher.cs.md) |
+| JwtHelper | [Security__JwtHelper.cs.md](../06-Security-Core/Security__JwtHelper.cs.md) |
+| TotpHelper | [Security__TotpHelper.cs.md](../06-Security-Core/Security__TotpHelper.cs.md) |
+| CsrfProtection | [Security__CsrfProtection.cs.md](../06-Security-Core/Security__CsrfProtection.cs.md) |
+| LoginThrottle | [Security__LoginThrottle.cs.md](../06-Security-Core/Security__LoginThrottle.cs.md) |
+| SecurityAudit | [Security__SecurityAudit.cs.md](../06-Security-Core/Security__SecurityAudit.cs.md) |
+| FileMagic | [Security__FileMagic.cs.md](../06-Security-Core/Security__FileMagic.cs.md) |
+| UploadPathGuard | [Security__UploadPathGuard.cs.md](../06-Security-Core/Security__UploadPathGuard.cs.md) |
+| Login page | [Auth__Login.aspx.cs.md](../07-Security-AuthPages/Auth__Login.aspx.cs.md) |
+| Register page | [Auth__Register.aspx.cs.md](../07-Security-AuthPages/Auth__Register.aspx.cs.md) |
 | Forgot password | [Auth__ForgotPassword.aspx.cs.md](../07-Security-AuthPages/Auth__ForgotPassword.aspx.cs.md) |
-| Reset password | [Auth__ResetPassword.aspx.cs.md](../07-Security-AuthPages/Auth__ResetPassword.aspx.cs.md) |
-| Logout | [Auth__Logout.aspx.cs.md](../07-Security-AuthPages/Auth__Logout.aspx.cs.md) |
-| csrf.js | [Scripts__csrf.js.md](../07-Security-AuthPages/Scripts__csrf.js.md) |
 
 ---
 
-## Web.config security keys
+## Web.config keys
 
 | Key | Purpose |
 |-----|---------|
-| `JwtSecret` | HS256 signing key (must be long random) |
-| `JwtExpiryHours` | Token lifetime |
-| `JwtCookieSecure` | `auto` / HTTPS Secure flag |
-| `LoginMaxFailures` | Failures before lockout (default 5) |
-| `LoginLockoutMinutes` | Lock duration |
-| `LoginWindowMinutes` | Failure window |
-| `AllowSeedMockData` | Seed ashx on/off |
-| `MfaDebug` | **Keep false** — never show server TOTP in demos |
+| `JwtSecret` | HS256 signing key |
+| `LoginMaxFailures` | Failures before lockout |
+| `AllowSeedMockData` | Seed endpoint on/off |
+| `MfaDebug` | **Keep false** in demos |
 
 ---
 
-## Role behaviour
-
-| Role | Register | Login MFA | Notes |
-|------|----------|-----------|--------|
-| Student | Self-register + TOTP | Required | Landing after login |
-| Lecturer | Self-register + TOTP | Required | Lecturer dashboard |
-| Admin | Not self-register | **Bypassed** | Password only |
-
----
-
-## Demo checklist (security)
-
-1. Register Student/Lecturer → cancel before MFA → email must **not** exist in Users  
-2. Complete MFA → login with password + **new** authenticator code  
-3. Admin login without MFA page  
-4. 5 wrong passwords → lockout message  
-5. Forgot password: MFA step then new password  
-6. DevTools: WebMethod POST has `X-CSRF-Token`  
-7. Admin → Audit Log shows login/register/reset events  
-
----
-
-## Related media security
-
-Also documented under handlers:
-
-- [Media_ashx.md](../04-Lecturer-Handlers/Media_ashx.md) — folder auth policy  
-- [UploadMedia.ashx.md](../04-Lecturer-Handlers/UploadMedia.ashx.md) — authenticated uploads  
-
----
-
-[← Back to full index](00-INDEX.md)
+[← Full index](00-INDEX.md)

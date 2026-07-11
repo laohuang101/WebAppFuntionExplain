@@ -1,10 +1,6 @@
 # CourseCreation.aspx
 **Source:** `Pages/Lecturer/CourseCreation.aspx`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -29,11 +25,7 @@ _No methods matched the scanner (markup-only or unconventional structure). See f
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```html
    1 | <%@ Page Title="Course Manager" Language="C#" MasterPageFile="~/Shared/Header&Footer.Master" AutoEventWireup="true" CodeBehind="CourseCreation.aspx.cs" Inherits="WebAppAssignment.Pages.Lecturer.Course_Creation" %>
@@ -296,7 +288,7 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  258 | </asp:Content>
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L248:** DOM event handler.
 

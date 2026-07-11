@@ -1,10 +1,6 @@
 # cc-grid.js
 **Source:** `Pages/Lecturer/Scripts/cc-grid.js`  
-<<<<<<< HEAD
-**Generated:** 2026-07-11 21:33  
-=======
-**Generated:** 2026-07-11 21:40  
->>>>>>> eb8ce01 (update)
+**Generated:** 2026-07-11 21:47  
 
 ---
 
@@ -74,11 +70,7 @@ function loadCourses()
   22 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L12:** Get HTML element by id.
 - **L14:** Encode text to reduce XSS risk.
@@ -199,17 +191,6 @@ function renderCourseGrid()
  105 | }
 ```
 
-<<<<<<< HEAD
-**Line notes**
-
-- **L25:** Get HTML element by id.
-- **L26:** Update page HTML.
-- **L29:** Update page HTML.
-- **L54:** Update page HTML.
-- **L57:** Encode text to reduce XSS risk.
-- **L63:** Encode text to reduce XSS risk.
-- **L89:** DOM event handler.
-=======
 **Line notes** (what code + variables mean)
 
 - **L25:** Get HTML element by id. | `container` means: Holds “container” for this scope.  DOM element from the page.
@@ -230,7 +211,6 @@ function renderCourseGrid()
 - **L89:** DOM event handler.
 - **L90:** `btn` means: Button DOM element.
 - **L94:** `action` means: Holds “action” for this scope.
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -278,13 +258,10 @@ function toggleCoursePublished(cid, publish)
  126 |         });
  127 | }
 ```
-<<<<<<< HEAD
-=======
 
 **Line notes** (what code + variables mean)
 
 - **L108:** `msg` means: Human-readable message (error or success).
->>>>>>> eb8ce01 (update)
 
 ---
 
@@ -349,11 +326,7 @@ function escapeHtml(str)
  149 | 
 ```
 
-<<<<<<< HEAD
-**Line notes**
-=======
 **Line notes** (what code + variables mean)
->>>>>>> eb8ce01 (update)
 
 - **L133:** Encode text to reduce XSS risk.
 
@@ -395,11 +368,7 @@ function deleteCourse(cid)
 
 ## Full file listing with line notes
 
-<<<<<<< HEAD
-Source is shown as a single fenced code block with line numbers. Recognized patterns are listed under **Line notes** after the block.
-=======
 Source is shown as a single fenced code block with line numbers. Recognized patterns and **variable meanings** are listed under **Line notes**.
->>>>>>> eb8ce01 (update)
 
 ```javascript
    1 | // Course Creation — course grid, publish, delete
@@ -553,20 +522,11 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
  149 | 
 ```
 
-**Line notes**
+**Line notes** (what code + variables mean)
 
 - **L12:** Get HTML element by id.
 - **L14:** Encode text to reduce XSS risk.
 - **L19:** Get HTML element by id.
-<<<<<<< HEAD
-- **L25:** Get HTML element by id.
-- **L26:** Update page HTML.
-- **L29:** Update page HTML.
-- **L54:** Update page HTML.
-- **L57:** Encode text to reduce XSS risk.
-- **L63:** Encode text to reduce XSS risk.
-- **L89:** DOM event handler.
-=======
 - **L25:** Get HTML element by id. | `container` means: Holds “container” for this scope.  DOM element from the page.
 - **L26:** Update page HTML.
 - **L29:** Update page HTML.
@@ -586,7 +546,6 @@ Source is shown as a single fenced code block with line numbers. Recognized patt
 - **L90:** `btn` means: Button DOM element.
 - **L94:** `action` means: Holds “action” for this scope.
 - **L108:** `msg` means: Human-readable message (error or success).
->>>>>>> eb8ce01 (update)
 - **L133:** Encode text to reduce XSS risk.
 
 ## Source snapshot (raw)
